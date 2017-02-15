@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BletcShop/BankListViewController.m"
+            timestampString = "500888126.667091"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "-getAllbankList:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[BankListViewController getAllbankList:]"
+                  moduleName = "BletcShop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wuzhengdong/Desktop/MyBlect_%E6%96%B0%E7%9A%84%E6%8E%A5%E5%8F%A3/BletcShop/BankListViewController.m"
+                  timestampString = "500887354.451469"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "232"
+                  endingLineNumber = "232"
+                  offsetFromSymbolStart = "394">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41-[BankListViewController getAllbankList:]_block_invoke"
+                  moduleName = "BletcShop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wuzhengdong/Desktop/MyBlect_%E6%96%B0%E7%9A%84%E6%8E%A5%E5%8F%A3/BletcShop/BankListViewController.m"
+                  timestampString = "500887354.457052"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "232"
+                  endingLineNumber = "232"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

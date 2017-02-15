@@ -1,0 +1,183 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><p>在新发布的iOS10系统上围绕用户数据的安全性和体验新增了一些安全特性，同时也影响了应用的实现以及集成方式，为了保证良好的稳定性和体验，需要做如下处理：</p>
+<h1>1.  HTTPS传输安全</h1>
+<blockquote>
+<p>Apple将从2017年开始执行ATS(App Transport Security)，所有进行审核的应用中网络请求全部支持HTTPS，届时以下配置将会失效，请提前做好准备。</p>
+</blockquote>
+<p>以iOS10 SDK编译的工程会默认以SSL安全协议进行网络传输，即HTTPS，如果依然使用HTTP协议请求网络会报系统异常并中断请求。目前可用如下两种方式保持用HTTP进行网络连接：</p>
+<p>在info.plist中加入安全域名白名单(右键info.plist用source code打开)</p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+    &lt;!-- 配置允许 http的任意网络End--&gt;
+   &lt;key&gt;NSExceptionDomains&lt;/key&gt;
+   &lt;dict&gt;
+       &lt;!-- 集成新浪微博对应的HTTP白名单--&gt;
+       &lt;key&gt;sina.com.cn&lt;/key&gt;
+       &lt;dict&gt;
+           &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionRequiresForwardSecrecy&lt;/key&gt;
+           &lt;false/&gt;
+       &lt;/dict&gt;
+       &lt;key&gt;sinaimg.cn&lt;/key&gt;
+       &lt;dict&gt;
+           &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionRequiresForwardSecrecy&lt;/key&gt;
+           &lt;false/&gt;
+       &lt;/dict&gt;
+       &lt;key&gt;sinajs.cn&lt;/key&gt;
+       &lt;dict&gt;
+           &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionRequiresForwardSecrecy&lt;/key&gt;
+           &lt;false/&gt;
+       &lt;/dict&gt;
+       &lt;key&gt;sina.cn&lt;/key&gt;
+       &lt;dict&gt;
+           &lt;!-- 适配iOS10 --&gt;
+           &lt;key&gt;NSExceptionMinimumTLSVersion&lt;/key&gt;
+           &lt;string&gt;TLSv1.0&lt;/string&gt;
+           &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionRequiresForwardSecrecy&lt;/key&gt;
+           &lt;false/&gt;
+       &lt;/dict&gt;
+       &lt;key&gt;weibo.cn&lt;/key&gt;
+       &lt;dict&gt;
+           &lt;!-- 适配iOS10 --&gt;
+           &lt;key&gt;NSExceptionMinimumTLSVersion&lt;/key&gt;
+           &lt;string&gt;TLSv1.0&lt;/string&gt;
+           &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionRequiresForwardSecrecy&lt;/key&gt;
+           &lt;false/&gt;
+       &lt;/dict&gt;
+       &lt;key&gt;weibo.com&lt;/key&gt;
+       &lt;dict&gt;
+           &lt;!-- 适配iOS10 --&gt;
+           &lt;key&gt;NSExceptionMinimumTLSVersion&lt;/key&gt;
+           &lt;string&gt;TLSv1.0&lt;/string&gt;
+           &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionRequiresForwardSecrecy&lt;/key&gt;
+           &lt;false/&gt;
+       &lt;/dict&gt;
+       &lt;!-- 新浪微博--&gt;
+
+       &lt;!-- 集成人人授权对应的HTTP白名单--&gt;
+       &lt;key&gt;renren.com&lt;/key&gt;
+       &lt;dict&gt;
+           &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+           &lt;true/&gt;
+           &lt;key&gt;NSThirdPartyExceptionRequiresForwardSecrecy&lt;/key&gt;
+           &lt;false/&gt;
+       &lt;/dict&gt;
+       &lt;!-- 人人授权--&gt;
+   &lt;/dict&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<ul>
+<li>若新版Xcode控制台输出“[] tcp_connection_xxx“等内容，可以在运行按钮旁的选择target选项内的 Edit Scheme - Run - Arguments - Enviroment variables中增加OS_ACTIVITY_MODE=disable，可将相关日志关闭。</li>
+</ul>
+<h1>2.  配置ApplicationQueriesSchemes(应用间跳转)</h1>
+<p>如果你的应用使用了如SSO授权登录或跳转到第三方分享功能，在iOS9/10下就需要增加一个可跳转的白名单，即<code>LSApplicationQueriesSchemes</code>，否则将在SDK判断是否跳转时用到的canOpenURL时返回NO，进而只进行webview授权或授权/分享失败。
+在项目中的info.plist中加入应用白名单，右键info.plist选择source code打开(具体设置在Build Setting -&gt; Packaging -&gt; Info.plist File可获取plist路径)</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+    &lt;!-- 微信 URL Scheme 白名单--&gt;
+    &lt;string&gt;wechat&lt;/string&gt;
+    &lt;string&gt;weixin&lt;/string&gt;
+
+    &lt;!-- 新浪微博 URL Scheme 白名单--&gt;
+    &lt;string&gt;sinaweibohd&lt;/string&gt;
+    &lt;string&gt;sinaweibo&lt;/string&gt;
+    &lt;string&gt;sinaweibosso&lt;/string&gt;
+    &lt;string&gt;weibosdk&lt;/string&gt;
+    &lt;string&gt;weibosdk2.5&lt;/string&gt;
+
+    &lt;!-- QQ、Qzone URL Scheme 白名单--&gt;
+    &lt;string&gt;mqqapi&lt;/string&gt;
+    &lt;string&gt;mqq&lt;/string&gt;
+    &lt;string&gt;mqqOpensdkSSoLogin&lt;/string&gt;
+    &lt;string&gt;mqqconnect&lt;/string&gt;
+    &lt;string&gt;mqqopensdkdataline&lt;/string&gt;
+    &lt;string&gt;mqqopensdkgrouptribeshare&lt;/string&gt;
+    &lt;string&gt;mqqopensdkfriend&lt;/string&gt;
+    &lt;string&gt;mqqopensdkapi&lt;/string&gt;
+    &lt;string&gt;mqqopensdkapiV2&lt;/string&gt;
+    &lt;string&gt;mqqopensdkapiV3&lt;/string&gt;
+    &lt;string&gt;mqqopensdkapiV4&lt;/string&gt;
+    &lt;string&gt;mqzoneopensdk&lt;/string&gt;
+    &lt;string&gt;wtloginmqq&lt;/string&gt;
+    &lt;string&gt;wtloginmqq2&lt;/string&gt;
+    &lt;string&gt;mqqwpa&lt;/string&gt;
+    &lt;string&gt;mqzone&lt;/string&gt;
+    &lt;string&gt;mqzonev2&lt;/string&gt;
+    &lt;string&gt;mqzoneshare&lt;/string&gt;
+    &lt;string&gt;wtloginqzone&lt;/string&gt;
+    &lt;string&gt;mqzonewx&lt;/string&gt;
+    &lt;string&gt;mqzoneopensdkapiV2&lt;/string&gt;
+    &lt;string&gt;mqzoneopensdkapi19&lt;/string&gt;
+    &lt;string&gt;mqzoneopensdkapi&lt;/string&gt;
+    &lt;string&gt;mqqbrowser&lt;/string&gt;
+    &lt;string&gt;mttbrowser&lt;/string&gt;
+
+    &lt;!-- 支付宝 URL Scheme 白名单--&gt;
+    &lt;string&gt;alipay&lt;/string&gt;
+    &lt;string&gt;alipayshare&lt;/string&gt;
+
+    &lt;!-- 人人 URL Scheme 白名单--&gt;
+    &lt;string&gt;renrenios&lt;/string&gt;
+    &lt;string&gt;renrenapi&lt;/string&gt;
+    &lt;string&gt;renren&lt;/string&gt;
+    &lt;string&gt;renreniphone&lt;/string&gt;
+
+    &lt;!-- 来往 URL Scheme 白名单--&gt;
+    &lt;string&gt;laiwangsso&lt;/string&gt;
+
+    &lt;!-- 易信 URL Scheme 白名单--&gt;
+    &lt;string&gt;yixin&lt;/string&gt;
+    &lt;string&gt;yixinopenapi&lt;/string&gt;
+
+    &lt;!-- instagram URL Scheme 白名单--&gt;
+    &lt;string&gt;instagram&lt;/string&gt;
+
+    &lt;!-- whatsapp URL Scheme 白名单--&gt;
+    &lt;string&gt;whatsapp&lt;/string&gt;
+
+    &lt;!-- line URL Scheme 白名单--&gt;
+    &lt;string&gt;line&lt;/string&gt;
+
+    &lt;!-- Facebook URL Scheme 白名单--&gt;
+    &lt;string&gt;fbapi&lt;/string&gt;
+    &lt;string&gt;fb-messenger-api&lt;/string&gt;
+    &lt;string&gt;fbauth2&lt;/string&gt;
+    &lt;string&gt;fbshareextension&lt;/string&gt;
+
+    &lt;!-- Kakao URL Scheme 白名单--&gt;  
+    &lt;!-- 注：以下第一个参数需替换为自己的kakao appkey--&gt; 
+    &lt;!-- 格式为 kakao + &quot;kakao appkey&quot;--&gt;    
+    &lt;string&gt;kakaofa63a0b2356e923f3edd6512d531f546&lt;/string&gt;
+    &lt;string&gt;kakaokompassauth&lt;/string&gt;
+    &lt;string&gt;storykompassauth&lt;/string&gt;
+    &lt;string&gt;kakaolink&lt;/string&gt;
+    &lt;string&gt;kakaotalk-4.5.0&lt;/string&gt;
+    &lt;string&gt;kakaostory-2.9.0&lt;/string&gt;
+
+   &lt;!-- pinterest URL Scheme 白名单--&gt;  
+    &lt;string&gt;pinterestsdk.v1&lt;/string&gt;
+&lt;/array&gt;
+
+</code></pre>

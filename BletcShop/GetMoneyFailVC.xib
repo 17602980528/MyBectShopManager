@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GetMoneyFailVC">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXv-Nw-JEU">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易失败" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gB4-lm-0SV">
+                            <rect key="frame" x="168" y="65" width="80" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="LKG-i5-Qcw"/>
+                                <constraint firstAttribute="width" constant="80" id="Qn3-0J-yNc"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LSJ-LI-TAu">
+                            <rect key="frame" x="138" y="65" width="20" height="20"/>
+                            <color key="backgroundColor" red="0.98719618060000003" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="0hy-hz-8gu"/>
+                                <constraint firstAttribute="width" constant="20" id="tRH-3z-pfW"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="Eqb-On-ptL"/>
+                        <constraint firstItem="gB4-lm-0SV" firstAttribute="top" secondItem="CXv-Nw-JEU" secondAttribute="top" constant="65" id="fZp-UH-oYS"/>
+                        <constraint firstItem="gB4-lm-0SV" firstAttribute="centerX" secondItem="CXv-Nw-JEU" secondAttribute="centerX" constant="20" id="jMN-Yv-Bgo"/>
+                        <constraint firstItem="gB4-lm-0SV" firstAttribute="leading" secondItem="LSJ-LI-TAu" secondAttribute="trailing" constant="10" id="ko5-Og-8L5"/>
+                        <constraint firstItem="LSJ-LI-TAu" firstAttribute="centerY" secondItem="CXv-Nw-JEU" secondAttribute="centerY" id="le8-DT-7Js"/>
+                        <constraint firstItem="gB4-lm-0SV" firstAttribute="centerY" secondItem="CXv-Nw-JEU" secondAttribute="centerY" id="lj5-DP-a7K"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请查看本次提现是否超出您的账户余额，或您的银行卡信息是否填写正确。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Up-51-zpP">
+                    <rect key="frame" x="16" y="167" width="343" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="dEq-Bo-O1E"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CXv-Nw-JEU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3s0-It-XcD"/>
+                <constraint firstItem="4Up-51-zpP" firstAttribute="top" secondItem="CXv-Nw-JEU" secondAttribute="bottom" constant="17" id="5ax-c2-CBm"/>
+                <constraint firstItem="4Up-51-zpP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="TXp-34-Kmo"/>
+                <constraint firstAttribute="trailing" secondItem="4Up-51-zpP" secondAttribute="trailing" constant="16" id="g4v-rV-T9o"/>
+                <constraint firstItem="CXv-Nw-JEU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lCA-ds-hKc"/>
+                <constraint firstAttribute="trailing" secondItem="CXv-Nw-JEU" secondAttribute="trailing" id="lQT-f6-6F9"/>
+            </constraints>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
+        </view>
+    </objects>
+</document>

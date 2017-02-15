@@ -1,0 +1,231 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><blockquote>
+<p>反馈问题可邮件至social-support@umeng.com。</p>
+</blockquote>
+<h1>U-Share返回错误码</h1>
+<pre><code>//平台的失败错误码
+/**
+ *  U-Share返回错误类型
+ */
+typedef NS_ENUM(NSInteger, UMSocialPlatformErrorType) {
+    UMSocialPlatformErrorType_Unknow            = 2000,            // 未知错误
+    UMSocialPlatformErrorType_NotSupport        = 2001,            // 不支持（url scheme 没配置，或者没有配置-ObjC， 或则SDK版本不支持或则客户端版本不支持）
+    UMSocialPlatformErrorType_AuthorizeFailed   = 2002,            // 授权失败
+    UMSocialPlatformErrorType_ShareFailed       = 2003,            // 分享失败
+    UMSocialPlatformErrorType_RequestForUserProfileFailed = 2004,  // 请求用户信息失败
+    UMSocialPlatformErrorType_ShareDataNil      = 2005,             // 分享内容为空
+    UMSocialPlatformErrorType_ShareDataTypeIllegal = 2006,          // 分享内容不支持
+    UMSocialPlatformErrorType_CheckUrlSchemaFail = 2007,            // schemaurl fail
+    UMSocialPlatformErrorType_NotInstall        = 2008,             // 应用未安装
+    UMSocialPlatformErrorType_Cancel            = 2009,             // 取消操作
+    UMSocialPlatformErrorType_NotNetWork        = 2010,             // 网络异常
+    UMSocialPlatformErrorType_SourceError       = 2011,             // 第三方错误
+
+    UMSocialPlatformErrorType_ProtocolNotOverride = 2013,   // 对应的  UMSocialPlatformProvider的方法没有实现
+    UMSocialPlatformErrorType_NotUsingHttps      = 2014,   // 没有用https的请求,@see UMSocialGlobal isUsingHttpsWhenShareContent
+
+};
+</code></pre>
+
+<h1>集成SDK问题</h1>
+<h2>用了U-Share v5.x版本，现在加入6.x编译链接报错</h2>
+<p>U-Share SDK 5.x和6.x版本不相兼容，v6.x是完全重构的一个版本，升级到6.x时请完全移除v5.x或更早版本。</p>
+<h2>分享面板很多平台没显示</h2>
+<p>这是U-Share SDK内部处理，对于模拟器以及在设备上未安装或不支持授权/分享的平台应用进行了隐藏，以增强分享体验及解决审核App时可能被拒的问题。</p>
+<h1>授权/分享跳转与回调问题</h1>
+<h2>授权或分享未跳到目标App</h2>
+<p>可能在工程中配置iOS9以上白名单缺少对应平台参数，参考<a href="http://dev.umeng.com/social/ios/ios9#2">iOS9+ 应用跳转</a>。</p>
+<h2>在目标App授权或分享后未跳转回原App</h2>
+<p>未配置URL Types，参考<a href="http://dev.umeng.com/social/ios/quick-integration#2_1">添加URL Types</a>。</p>
+<h2>授权或分享结束后未回调数据</h2>
+<p>检查系统回调函数，参考<a href="http://dev.umeng.com/social/ios/quick-integration#3_1_2">设置系统回调</a>。</p>
+<h2>跳转收到UIKeyboardWillShow消息</h2>
+<p>在分享到第三方平台，如QQ、微信，在某些情况下可能会收到UIKeyboardWillShowNotification消息，U-Share SDK内部并无此消息发出。
+发生的情况可能在跳转到第三方平台编辑页面弹出键盘后或跳回App后收到，可参考以下两种方式解决：</p>
+<ul>
+<li>在viewDidDisappear中移除此消息的注册。</li>
+<li>用下列代码过滤非本控件触发的消息</li>
+</ul>
+<pre><code>- (void)keyboardWillShowNotification:(NSNotification *)note
+{
+    if (!myTextField.isFirstResponder) {
+        return;
+    }
+    // code
+}
+</code></pre>
+
+<h1>苹果审核(ATS)及HTTPS</h1>
+<h2>HTTP图片发送失败</h2>
+<p>由于ATS的原因，所有HTTP链接在SDK内都被禁止，并提示错误告知非https图片不可分享，请使用https图片，保证ATS环境下可以顺畅的进行分享操作。分享图片方式如下：
+1. 分享图片仅适用本地图片加载，如UIImage或NSData数据传输。
+2. 如需使用网络图片，确保URL为HTTPS图片链接，以便于U-Share SDK下载并进行分享，否则会分享失败。</p>
+<h2>关于ATS(审核时强制应用支持HTTPS)的问答</h2>
+<p><strong>问：</strong>友盟分享和第三方登录的SDK，现在要升级HTTPS，是否所有的都需要必须换成最新的sdk才可以？如果不升级而用原来的SDK，可以设置吗？HTTPS协议与SDK的版本号有没有关系？
+<strong>答：</strong>这可能是多数开发者的疑惑，ATS的支持需要本地SDK将访问地址由http调整为https前缀的链接才可以，无法设置，所以从U-Share 6.1开始已经支持全部HTTPS访问。
+但目前有一个例外新浪微博的官方SDK还未全部支持ATS，在通过网页进行授权依然是HTTP请求导致页面加载失败，请关注<a href="http://dev.umeng.com/social/ios/sdk-download">官方U-Share iOS SDK</a>后续会保持跟进。</p>
+<ul>
+<li>
+<p>上线的应用是否有影响 <br />
+在AppStore的应用不会有影响，也不会下架。这个变化是针对新提交审核的，也就是说，只要更新应用，就需要支持ATS。</p>
+</li>
+<li>
+<p>在苹果执行ATS后友盟分享SDK4.x版和5.x版本分享是否可用 <br />
+跟上面的问题一样，只要在线上的应用均不会受到影响。但如果需要更新应用提交审核，则需要更新SDK到6.1以上版本，即现在全新的U-Share SDK已支持ATS。</p>
+</li>
+<li>
+<p>微博SDK设置redirectURL为HTTP的，是否影响审核，以及安卓是否需要同步修改 <br />
+官方建议修改为前缀是https的redirectURL，并且http和https前缀的redirectURL互相兼容，不会导致不匹配而授权失败的问题。由于微博后台的设置无需修改，安卓客户端也不会有影响。</p>
+</li>
+<li>
+<p>微信、新浪微博和QQ头像是HTTP URL <br />
+目前第三方平台返回的头像链接依然是HTTP地址，不过U-Share SDK已经做了兼容处理，升级到6.1.2以上版本SDK使用，开发者无需担心获取头像因为ATS的原因而失败。</p>
+</li>
+</ul>
+<h1>分享参数问题</h1>
+<h2>网页类型发送失败</h2>
+<p>发送网页link card形式的分享，需要设置缩略图，如demo中的示例：</p>
+<pre><code>UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@&quot;分享标题&quot; descr:@&quot;分享内容描述&quot; thumImage:[UIImage imageNamed:@&quot;icon&quot;]];
+</code></pre>
+
+<p>其中需要设定thumImage。</p>
+<h1>分享面板UI</h1>
+<h2>更新6.1后UI编译错误</h2>
+<p>由于6.1版开始更新了全新的分享面板，所以导入形式也略有改变</p>
+<ul>
+<li>导入文件</li>
+</ul>
+<pre><code>#import &quot;UMSocialUIManager.h&quot;
+</code></pre>
+
+<p>改为</p>
+<pre><code>#import &lt;UShareUI/UShareUI.h&gt;
+</code></pre>
+
+<ul>
+<li>回调block</li>
+</ul>
+<pre><code>    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMShareMenuSelectionView *shareSelectionView, UMSocialPlatformType platformType) {
+
+    }];
+</code></pre>
+
+<p>接口没变，回调参数调整为</p>
+<pre><code>
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+    }];
+</code></pre>
+
+<h2>分享面板无法弹出</h2>
+<p>由于
+1. 创建Xcode项目会默认添加<code>Main.storyboard</code>作为<code>Main Interface</code>(General - Deployment Info)，也就是项目的主Window。
+2. 如果没使用Main.storyboard而又另外在AppDelegate中创建了UIWindow对象，如</p>
+<pre><code>self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds]
+</code></pre>
+
+<p>如果项目中同时出现<code>Main Interface</code>以及代码创建<code>UIWindow</code>会导致分享面板无法正常弹出，解决方法是移除其一即可。如果移除了<code>Main.storyboard</code>，需要clean工程后再重新运行。</p>
+<h1>更新Cocoapods问题</h1>
+<h2>找不到UMengUShare</h2>
+<p>如果通过Cocoapods集成U-Share SDK(<a href="http://dev.umeng.com/social/ios/quick-integration#1_2">Cocoapods集成</a>)出现更新失败或查找失败，如：</p>
+<pre><code>Unable to find a pod with name matching 'UMengUShare/Social/Wechat'
+</code></pre>
+
+<p>原因可能是未更新Cocoapods库，使用<code>pod update</code>进行更新远端数据库，切记不要使用<code>--no-repo-update</code>参数，更新Cocoapods库时间较长，请耐心等待。</p>
+<h2>从4.x或5.x版本升级U-Share 6.0报错library not found for xxx</h2>
+<p>由于老版本通过cocoapods集成下载接入全量的平台，包括APOpenSDK、facebook、twitter等。在新版U-Share通过cocoapods集成可以灵活的单选平台，没有加入Podfile配置文件的不会下载。
+可以到项目 - Build Setting - Other linker flag 查看是否有多余的库依赖，确认后删除即可。</p>
+<h2>cocoapods library not found for -lPods</h2>
+<p>新版cocoapods1.0链接库名称为<code>libPods-[target_name].a</code>，不再是<code>libPods.a</code>，删除<code>libPods.a</code>即可。</p>
+<h2>报错"not used in any concrete target"</h2>
+<p>Cocoapods1.0版本语法问题，需改为</p>
+<pre><code>target '工程target名称' do
+    pod ‘cocoapods库名'
+end
+</code></pre>
+
+<blockquote>
+<p>以上<code>工程target名称</code>需改为开发者工程内对应的target名。</p>
+</blockquote>
+<h2>通过cocoapods集成Linkedin领英</h2>
+<p>linkedin会和Cocoapods产生链接时冲突</p>
+<pre><code>duplicate symbol _OBJC_CLASS_$_PodsDummy_Pods
+</code></pre>
+
+<p>可将Pod中的PodsDummy_Pods类名修改为_PodsDummy_Podsxx</p>
+<h1>微博</h1>
+<h2>微博授权页显示sso package error</h2>
+<p>微博SSO错误是项目的<code>bundle id</code>和在微博平台<code>bundle id</code>设置的不一致导致的，必须保证字符完全匹配。</p>
+<h2>提示redirect_uri_mismatch</h2>
+<p>项目中设置的<code>redirectURL</code>和授权Request传递的回调地址（WBAuthorizeRequest.redirectURI-微博后台设置）不一致导致的，必须保证字符完全匹配。
+如</p>
+<pre><code>    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@&quot;3921700954&quot;  appSecret:@&quot;04b48b094faeb16683c32669824ebdad&quot; redirectURL:@&quot;http://sns.whalecloud.com/sina2/callback&quot;];
+</code></pre>
+
+<p>以上redirectURL必须和微博后台设置一致。</p>
+<h2>弹出授权窗口后瞬间消失</h2>
+<p>两个可能 
+1. bundle id不一致导致 
+2. 检查info.plist文件里有没添加加URL Types，在URL Schemes里填上<code>wb</code>+<code>APPKEY</code></p>
+<h2>微博 LinkCard（网页分享）</h2>
+<ul>
+<li>
+<p>什么是LinkCard
+在微博消息流内,分享一条链接,该链接将解析为包含一个对象数据的特殊短链,且该对象数据可以在微博消息流内显示并交互,这种形态就是微博消息流LinkCard解析。 参考<a href="http://open.weibo.com/wiki/%E7%A7%BB%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5">微博-移动客户端接入</a></p>
+</li>
+<li>
+<p>分享网页类型数据之后不显示缩略图 是什么原因
+这属于微博的移动应用商务合作,移动SDK中的LinkCard和附件栏集成分享权限需要合作申请，对接请联系微博商务：yinle@staff.weibo.com</p>
+</li>
+</ul>
+<h2>授权后没有返回应用</h2>
+<p>检查info.plist里设置的URL Scheme是否正确，需要是<code>wb</code>+<code>appkey</code>的形式。</p>
+<h2>未安装微博客户端分享网页的显示问题</h2>
+<p>目前微博官方SDK不支持在未安装微博客户端时分享网页链接、音乐、视频类型的内容。已安装客户端可在微博客户端编辑页正常显示，发送后显示状态可参考上面的<code>微博 LinkCard</code>问题。</p>
+<h2>新浪客户端webview回调的崩溃</h2>
+<p>新浪webview分享后回调会直接调用以下函数:</p>
+<ul>
+<li>(BOOL)application:(UIApplication <em>)application openURL:(NSURL </em>)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation</li>
+</ul>
+<p><strong><em>如果用户没有重载此函数的话，会导致新浪客户端webview的回调的崩溃。</em></strong></p>
+<p><strong>ushareDemo里面已经把所有的ios版本的回调都加载了，用户可以直接拷贝Demo里面的三个版本的回调函数，以兼容目前所有的平台</strong></p>
+<h1>QQ</h1>
+<h2>集成QQ，链接时报i386错误</h2>
+<p>QQ平台TencentOpenApi.framework对模拟器不支持i386 CPU架构，仅提供x86_64 CPU架构支持，可在项目Target-<code>Build Settings</code>-<code>Architectures</code>中移除i386参数。</p>
+<h2>腾讯开放平台注册有appID和appKey，该用哪个设置</h2>
+<p>U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
+例如Demo中的示例代码：</p>
+<pre><code>    //设置分享到QQ互联的appKey
+    NSString *qqAppID = @&quot;100424468&quot;;
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:qqAppID  appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+</code></pre>
+
+<h1>支付宝</h1>
+<h2>支付宝返回“-4”“鉴权失败”</h2>
+<p>检查<code>bundle id</code>是否和支付宝后台配置的<code>bundle id</code>一致。</p>
+<h1>Twitter</h1>
+<h2>Twitter设置Appkey后闪退</h2>
+<ul>
+<li>检查bundle资源</li>
+</ul>
+<p>将附带Twitter SDK的U-Share SDK加入工程后，还需导入Twitter的资源文件
+    1. 在Xcode项目中，右键U-Share SDK下的Twitter目录 
+    2. 找到TwitterKitResources.bundle并导入，其路径为</p>
+<pre><code>Twitter/TwitterKit.framework/Resources/TwitterKitResources.bundle
+</code></pre>
+
+<h2>Twitter获取access_token_secret</h2>
+<p>twitter获取access_token_secret可通过以下方式</p>
+<pre><code>#import &lt;TwitterKit/TwitterKit.h&gt;
+
+[[UMSocialManager defaultManager]  authWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
+  if (result) {
+      if ([result isKindOfClass:[UMSocialAuthResponse class]]) {
+          UMSocialAuthResponse *resp = result;
+
+          TWTRSession *session = resp.originalResponse;
+          NSLog(@&quot;authTokenSecret = %@&quot;, session.authTokenSecret);
+
+      }
+  }
+}];
+</code></pre>

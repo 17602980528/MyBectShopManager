@@ -1,0 +1,3431 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>U-Share SDK通用集成说明</h1>
+<h2>选择社交平台进行下载</h2>
+<p>通过iOS社会化组件<a href="http://dev.umeng.com/social/ios/sdk-download">下载页面</a>选择所需的社交平台后进行下载。</p>
+<h2>下载目录简介</h2>
+<pre><code>1. Document     - U-Share SDK文档
+2. UMSocialDemo - U-Share SDK Demo（如点选下载）
+3. UMSocial     - U-Share SDK核心目录
+    UMSocialSDK       - U-Share SDK核心framework
+    UMSocialUI        - U-Share 分享UI资源、分享面板framework
+    SocialLibraries   - 所选择下载的第三方平台SDK及U-Share链接库
+</code></pre>
+
+<h2>加入下载解压后的SDK</h2>
+<ul>
+<li>将U-Share SDK添加到工程  </li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjIvMThfMjBfMzdfMjRfNDE0NzQ1MzkwOTJfLnBpY19oZC5qcGciXV0/41474539092_.pic_hd.jpg" width="550" height="330">  </p>
+<ul>
+<li>添加项目配置 <br />
+在Other Linker Flags加入-ObjC   </li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjIvMThfMjBfNTBfNjQ0XzUxNDc0NTM5MjY5Xy5waWNfaGQuanBnIl1d/51474539269_.pic_hd.jpg" width="580" height="150"> </p>
+<ul>
+<li>加入依赖系统库</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </p>
+<ul>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>libsqlite3.tbd
+CoreGraphics.framework(6.2版本加入图片水印功能需要加入此库)
+</code></pre>
+
+<ul>
+<li>iOS9/10适配</li>
+</ul>
+<p>iOS9系统后Apple对HTTP请求及访问外部应用做了更加严格的要求，包括HTTP白名单、跳转第三方应用白名单等，具体设置第三方平台参数请参照<a href="http://dev.umeng.com/social/ios/ios9">适配iOS9/10系统</a>。</p>
+<h1>第三方平台SDK详细集成</h1>
+<h2>微信</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>SystemConfiguration.framework
+CoreTelephony.framework
+libsqlite3.tbd
+libc++.tbd
+libz.tbd 
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+直接设置微信appkey即可，如wxdc1e388c3822c80b</li>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如微信appkey为wxdc1e388c3822c80b <br />
+以下示例仅替换URL Scheme的参数appkey即可，identifier的参数都使用<code>weixin</code></li>
+</ul>
+<pre><code>identifier: weixin
+URL Schemes: wxdc1e388c3822c80b
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置微信的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@&quot;wxdc1e388c3822c80b&quot; appSecret:@&quot;3baf1193c85774b3fd9d18447d76cab0&quot; redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    // 如果不想显示平台下的某些类型，可用以下接口设置
+//    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformTypes:@[@(UMSocialPlatformType_WechatFavorite)]];
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h4>备注</h4>
+<p>分享微信朋友圈和微信收藏的操作和微信session一样，Platform类型为 <code>UMSocialPlatformType_WechatSession</code>和<code>UMSocialPlatformType_WechatFavorite</code></p>
+<h3>4.x/5.x版本升级(授权信息变化)</h3>
+<p>如果是老版本升级到6.0以上版本，注意以下几点： <br />
+1. 老版本从微信平台授权获取的<code>usid</code>与<code>openId</code>相同。 <br />
+2. 升级到6.0以上版本后，微信平台获取的<code>usid</code>调整为通用名<code>uid</code>，并提供了用以打通QQ互联下应用的通用<code>unionId</code>，与<code>openId</code>不同。<br />
+3. 如果老版本下通过微信授权获取了usid作为用户id存储，升级后可从授权信息UMSocialUserInfoResponse结果中获取<code>openid</code>延续之前的用户id。若需获取打通所有QQ互联应用的通用id，可以直接获取授权结果UMSocialUserInfoResponse中的uid(即微信的unionId)进行处理。</p>
+<blockquote>
+<p>unionId简介：开发者在QQ互联平台下拥有的多个移动应用、网站应用，获取的用户unionId是相同的，详情参考<a href="https://mp.weixin.qq.com/wiki/14/bb5031008f1494a59c6f71fa0f319c66.html">微信获取用户基本信息(UnionID机制)</a>。</p>
+</blockquote>
+<hr />
+<h2>新浪微博</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>SystemConfiguration.framework
+CoreTelephony.framework
+ImageIO.framework
+libsqlite3.tbd
+libz.tbd
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+“wb”+新浪appKey，如新浪微博appkey为3921700954，则实际设置参数为wb3921700954。</li>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如参照上面的参数wb3921700954。</li>
+</ul>
+<pre><code>URL Schemes: wb3921700954
+</code></pre>
+
+<p>注：其他输入框可不填，如identifier等。</p>
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置新浪的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@&quot;3921700954&quot;  appSecret:@&quot;04b48b094faeb16683c32669824ebdad&quot; redirectURL:@&quot;http://sns.whalecloud.com/sina2/callback&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<blockquote>
+<p>新浪平台仅支持此回调，务必加入</p>
+</blockquote>
+<h2>QQ</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>SystemConfiguration.framework
+libc++.tbd
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<blockquote>
+<p>QQ需增加两个URL Scheme</p>
+</blockquote>
+<ul>
+<li>
+<p>URL Scheme格式 </p>
+<ol>
+<li>"tencent"+腾讯QQ互联应用appID</li>
+<li>“QQ”+腾讯QQ互联应用appID转换成十六进制（不足8位前面补0）</li>
+</ol>
+</li>
+<li>
+<p>URL Scheme举例
+    如appID为：100424468</p>
+<ol>
+<li>tencent100424468</li>
+<li>QQ05fc5b14 <br />
+说明：100424468转十六进制为5fc5b14，因不足8位向前补0，结果为05fc5b14，加"QQ"前缀QQ05fc5b14</li>
+</ol>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例appID<ul>
+<li>添加第一个URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: tencent100424468
+</code></pre>
+
+<pre><code>+ 添加第二个URL Types
+</code></pre>
+<pre><code>    URL Schemes: QQ05fc5b14
+</code></pre>
+
+<p>注：以上两项必须添加。其他输入框可不填，如identifier等。</p>
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置分享到QQ互联的appKey和appSecret
+    // U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
+     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@&quot;100424468&quot;  appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h4>备注</h4>
+<p>QZone 操作和QQ一样，Platform类型为 <code>UMSocialPlatformType_Qzone</code></p>
+<h2>支付宝</h2>
+<h3>配置info.plist</h3>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>iOS 9以后的系统需要添加支付宝分享的scheme到白名单中。</p>
+<p>按如下形式添加即可：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+&lt;string&gt;alipay&lt;/string&gt;
+&lt;string&gt;alipayshare&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式   <ol>
+<li>identifier必须为 <code>alipayShare</code></li>
+<li>URL Schemes 命名规则：<code>ap+AppID</code> </li>
+</ol>
+</li>
+<li>
+<p>URL Scheme举例
+    如在支付宝开发者网站<a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.0JiOTg&amp;treeId=215&amp;articleId=105276&amp;docType=1#s1">https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.0JiOTg&amp;treeId=215&amp;articleId=105276&amp;docType=1#s1</a>的申请的AppID为：<code>2015111700822536</code></p>
+<p>实际参数:<code>ap2015111700822536</code></p>
+<p><strong>支付宝分享的URL Schemes 命名identifier为：<code>alipayshare</code></strong></p>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例App ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: ap2015111700822536
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //支付宝的appKey
+    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_AlipaySession appKey:@&quot;2015111700822536&quot; appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h2>钉钉</h2>
+<h3>配置info.plist</h3>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>iOS 9以后的系统需要添加钉钉分享的scheme到白名单中。</p>
+<p>按如下形式添加即可：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+        &lt;string&gt;dingtalk&lt;/string&gt;
+        &lt;string&gt;dingtalk-open&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+直接设置钉钉appkey即可，如dingoalmlnohc0wggfedpk</li>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如钉钉appkey为dingoalmlnohc0wggfedpk <br />
+以下示例仅替换URL Scheme的参数appkey即可，identifier的参数都使用<code>dingtalk</code></li>
+</ul>
+<pre><code>identifier: dingtalk
+URL Schemes: dingoalmlnohc0wggfedpk
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //钉钉的appKey
+    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_DingDing appKey:@&quot;dingoalmlnohc0wggfedpk&quot; appSecret:nil redirectURL:nil];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h2>领英</h2>
+<h3>配置info.plist</h3>
+<ul>
+<li>领英 SDK要求在info.plist文件中加入一项参数分别是：<ul>
+<li>LIAppId</li>
+</ul>
+</li>
+<li>以上参数值在<a href="https://developer.linkedin.com/docs/ios-sdk">https://developer.linkedin.com/docs/ios-sdk</a>linkedin开发者平台设置的获取的<code>AppId</code></li>
+<li>如U-Share Demo的测试AppID为4768945<ul>
+<li>LIAppId : 4768945</li>
+</ul>
+</li>
+</ul>
+<p>上面的例子如下：</p>
+<pre><code>&lt;key&gt;LIAppId&lt;/key&gt;
+&lt;string&gt;4768945&lt;/string&gt;
+
+</code></pre>
+
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;linkedin&lt;/string&gt;
+    &lt;string&gt;linkedin-sdk2&lt;/string&gt;
+    &lt;string&gt;linkedin-sdk&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<p>在ios9上苹果公司强制要求 https的网络请求，如果需要 http的请求，就需要配置一下请求。</p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+    &lt;key&gt;NSExceptionDomains&lt;/key&gt;
+    &lt;dict&gt;
+        &lt;key&gt;linkedin.com&lt;/key&gt;
+        &lt;dict&gt;
+            &lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+            &lt;true/&gt;
+            &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+            &lt;true/&gt;                
+            &lt;key&gt;NSExceptionRequiresForwardSecrecy&lt;/key&gt;
+            &lt;false/&gt;
+        &lt;/dict&gt;
+    &lt;/dict&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<p><strong>特别提醒:如果领英需要分享网络图片的 url的地址不是 https的时候，也需要配置 http的请求，以防止领英sdk下载图片崩溃。</strong></p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+ &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+ &lt;true/&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式   </li>
+<li>URL Schemes 命名规则：<code>li+AppID</code> </li>
+<li>
+<p>URL Scheme举例:</p>
+<p>如申请的AppID为：<code>4768945</code></p>
+<p>实际参数:<code>li4768945</code></p>
+</li>
+</ul>
+<p>上面的例子如下：</p>
+<pre><code>&lt;key&gt;CFBundleURLTypes&lt;/key&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+        &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
+        &lt;array&gt;
+            &lt;string&gt;li4768945&lt;/string&gt;
+        &lt;/array&gt;
+    &lt;/dict&gt;
+&lt;/array&gt;
+</code></pre>
+
+<ul>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例App ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: li4768945
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置领英的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Linkedin appKey:@&quot;81t5eiem37d2sc&quot;  appSecret:@&quot;7dgUXPLH8kA8WHMV&quot; redirectURL:@&quot;https://api.linkedin.com/v1/people&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h2>易信</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>UIKit.framework
+Foundation.framework
+CoreGraphics.framework
+</code></pre>
+
+<h3>配置info.plist</h3>
+<p>使用易信帐号登录开放平台，转到应用管理页面,填写你的应用资料，完成后保存，你会获得一个AppID。
+例子如下：</p>
+<p>bundleID: com.Umeng.UMSocial</p>
+<p>Application ID:yx35664bdff4db42c2b7be1e29390c1a06</p>
+<p><strong> iOS平台可立即用该AppID进行开发。审核通过的应用将在内容来源处显示你填写的应用名称，否则显示“未审核应用”。</strong></p>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<p>近期苹果公司iOS 9系统策略更新，应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。受此影响，当你的应用在iOS 9中需要使用易信SDK的相关能力（分享、收藏、登录等）时，需要在“Info.plist”里增加如下代码：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+   &lt;string&gt;yixin&lt;/string&gt;
+   &lt;string&gt;yixinopenapi&lt;/string&gt;
+   &lt;string&gt;yixinoauth&lt;/string&gt;
+   &lt;string&gt;yixinfav&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<p>完成后需使用Xcode 7编译。</p>
+<h4>iOS9上info.plist的网络配置</h4>
+<p><strong>特别提醒:如果需要分享网络图片的 url的地址不是 https的时候，也需要配置 http的请求。</strong></p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+ &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+ &lt;true/&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式   </li>
+<li>URL Schemes 命名规则：<code>AppID</code> </li>
+<li>
+<p>URL Scheme举例:</p>
+<p>如申请的AppID为：<code>yx35664bdff4db42c2b7be1e29390c1a06</code></p>
+<p>实际参数:<code>yx35664bdff4db42c2b7be1e29390c1a06</code></p>
+</li>
+</ul>
+<p>上面的例子如下：</p>
+<pre><code>&lt;key&gt;CFBundleURLTypes&lt;/key&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+    &lt;key&gt;CFBundleTypeRole&lt;/key&gt;
+            &lt;string&gt;Editor&lt;/string&gt;
+            &lt;key&gt;CFBundleURLName&lt;/key&gt;
+            &lt;string&gt;yixinSocialSDK&lt;/string&gt;
+            &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
+            &lt;array&gt;
+            &lt;string&gt;yx35664bdff4db42c2b7be1e29390c1a06&lt;/string&gt;
+            &lt;/array&gt;
+    &lt;/dict&gt;
+&lt;/array&gt;
+</code></pre>
+
+<ul>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例App ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: yx35664bdff4db42c2b7be1e29390c1a06
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置易信的appKey
+    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_YixinSession appKey:@&quot;yx35664bdff4db42c2b7be1e29390c1a06&quot; appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h2>点点虫(来往)</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>UIKit.framework
+Foundation.framework
+</code></pre>
+
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<p>近期苹果公司iOS 9系统策略更新，应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。受此影响，当你的应用在iOS 9中需要使用易信SDK的相关能力（分享、收藏、登录等）时，需要在“Info.plist”里增加如下代码：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+   &lt;string&gt;laiwangsso&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<p><strong>特别提醒:如果需要分享网络图片的 url的地址不是 https的时候，也需要配置 http的请求。</strong></p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+ &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+ &lt;true/&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式   <ol>
+<li>identifier必须为 <code>Laiwang</code></li>
+<li>URL Schemes 命名规则：<code>AppID</code> </li>
+</ol>
+</li>
+<li>
+<p>URL Scheme举例
+    如AppID为：<code>8112117817424282305</code></p>
+<p>实际参数:<code>8112117817424282305</code></p>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例App ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: 8112117817424282305
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置点点虫（原来往）的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_LaiWangSession appKey:@&quot;8112117817424282305&quot; appSecret:@&quot;9996ed5039e641658de7b83345fee6c9&quot; redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h2>Facebook</h2>
+<h3>配置info.plist</h3>
+<ul>
+<li>Facebook SDK要求在info.plist文件中加入两项参数分别是：<ul>
+<li>FacebookAppID</li>
+<li>FacebookDisplayName</li>
+</ul>
+</li>
+<li>以上参数值在<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>Facebook开发者平台设置的获取的<code>AppID</code>和<code>Display Name</code></li>
+<li>如U-Share Demo的测试AppID为506027402887373， Display Name为UmengShare。则加入两项参数为<ul>
+<li>FacebookAppID : 506027402887373</li>
+<li>FacebookDisplayName : UmengShare</li>
+</ul>
+</li>
+</ul>
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+    fb + <code>Facebook ID</code>    </li>
+<li>
+<p>URL Scheme举例
+    如Facebook ID为：506027402887373
+    实际参数：fb506027402887373</p>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例Facebook ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: fb506027402887373
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置Facebook的appKey和UrlString
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Facebook appKey:@&quot;506027402887373&quot;  appSecret:nil redirectURL:@&quot;http://www.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h3>登录授权流程说明</h3>
+<ul>
+<li>登录
+Facebook SDK授权流程：<ol>
+<li>弹出Safari网页，显示登录页面</li>
+<li>页面中可选通过Facebook APP授权，或输入账号密码授权</li>
+<li>通过Facebook APP授权可通过SSO跳转到Facebook APP面输账号进行登录</li>
+<li>通过账号密码形式进行登录后下次授权会默认在Safari中登录</li>
+</ol>
+</li>
+<li>登出（取消授权） <br />
+通过U-Share SDK执行取消Facebook平台授权仅移除APP内登录数据，若希望下次切换其他账号，需要在Safari中登录www.facebook.com，在页面内进行登出操作</li>
+</ul>
+<h2>Twitter</h2>
+<h3>加入Twitter bundle文件</h3>
+<p>将附带Twitter SDK的U-Share SDK加入工程后，还需导入Twitter的资源文件
+1. 在Xcode项目中，右键U-Share SDK下的Twitter目录
+2. 找到TwitterKitResources.bundle并导入，其路径为</p>
+<pre><code>Twitter/TwitterKit.framework/Resources/TwitterKitResources.bundle
+</code></pre>
+
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置Twitter的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Twitter appKey:@&quot;fB5tvRpna1CKK97xZUslbxiet&quot;  appSecret:@&quot;YcbSvseLIwZ4hZg9YmgJPP5uWzd4zr6BpBKGZhf07zzh3oj62K&quot; redirectURL:nil];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h3>登录授权流程说明</h3>
+<ul>
+<li>登录
+Twitter SDK授权流程：<ol>
+<li>检测iOS系统内以及安装的Twitter APP有无登录Twitter账号</li>
+<li>已在系统及APP登录则直接使用登录账号</li>
+<li>未在系统登录则弹出授权页面进行登录，登录成功后同时同步账号到系统Twitter账号</li>
+</ol>
+</li>
+<li>登出（取消授权） <br />
+通过U-Share SDK执行取消Twitter平台授权仅移除APP内登录数据，若希望下次切换其他账号，需要在系统或Twitter APP内进行登出操作</li>
+</ul>
+<h2>Pinterest</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>SafariServices.framework
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+    pdk + <code>Pinterest App ID</code>    </li>
+<li>
+<p>URL Scheme举例
+    如Pinterest ID为：4864546872699668063
+    实际参数：pdk4864546872699668063</p>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例Pinterest ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: pdk4864546872699668063
+</code></pre>
+
+<h3>配置iOS9以上系统白名单</h3>
+<p>在info.plist中加入安全域名白名单(右键info.plist用source code打开)</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;pinterestsdk.v1&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<blockquote>
+<p>添加以上配置代码前请检查是否已存在LSApplicationQueriesSchemes配置，如果已经存在则直接加入pinterestsdk.v1即可</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置Pinterest的appKey
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Pinterest appKey:@&quot;4864546872699668063&quot;  appSecret:nil redirectURL:nil];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<blockquote>
+<p>当前Pinterest是单向跳转，即从开发者App跳转向Pinterest App。</p>
+</blockquote>
+<h4>备注</h4>
+<p>Pinterest当前仅可分享在线图片</p>
+<h2>Kakao</h2>
+<h3>配置info.plist</h3>
+<ul>
+<li>Kakao SDK要求在info.plist文件中加入两项参数分别是：<ul>
+<li>KAKAO_APP_KEY</li>
+<li>KAKAO_SECURE_MODE</li>
+</ul>
+</li>
+<li>以上参数值在<a href="https://developers.kakao.com/apps">https://developers.kakao.com/apps</a>Kakao开发者平台设置的获取的<code>AppKey</code></li>
+<li>如U-Share Demo的测试AppKey为6d5e4ca98ba3b944020c2c90953318e9。则加入两项参数为<ul>
+<li>KAKAO_APP_KEY : 6d5e4ca98ba3b944020c2c90953318e9</li>
+<li>KAKAO_SECURE_MODE : NO （注：布尔类型）</li>
+</ul>
+</li>
+</ul>
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+    kakao + <code>Kakao AppKey</code>    </li>
+<li>
+<p>URL Scheme举例
+    如Kakao AppKey为：6d5e4ca98ba3b944020c2c90953318e9
+    实际参数：kakao6d5e4ca98ba3b944020c2c90953318e9</p>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例Facebook ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: kakao6d5e4ca98ba3b944020c2c90953318e9
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>配置iOS9+系统白名单</h3>
+<p>参考<a href="http://dev.umeng.com/social/ios/ios9#2">适配iOS9/10系统</a>设置Kakao白名单，需要添加以下代码</p>
+<pre><code>        &lt;string&gt;kakao6d5e4ca98ba3b944020c2c90953318e9&lt;/string&gt;
+        &lt;string&gt;kakaokompassauth&lt;/string&gt;
+        &lt;string&gt;storykompassauth&lt;/string&gt;
+        &lt;string&gt;kakaolink&lt;/string&gt;
+        &lt;string&gt;kakaotalk-4.5.0&lt;/string&gt;
+        &lt;string&gt;kakaostory-2.9.0&lt;/string
+</code></pre>
+
+<p>注：上述<code>kakao6d5e4ca98ba3b944020c2c90953318e9</code>值需要根据以上<code>配置URL Scheme</code>一样改成开发者获取的AppKey，加上前缀<code>kakao</code>。</p>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<p>Kakao Open SDK无需代码设置AppKey，根据以上<code>配置info.plist</code>内容配置即可。</p>
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<ul>
+<li>注：还有以下两种系统回调函数，如开发者选中下面的系统回调，也需要补充如上的函数体代码：</li>
+</ul>
+<pre><code>// 支持目前所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+
+// 仅支持iOS9以上系统，iOS8及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options;
+
+</code></pre>
+
+<h2>有道云笔记</h2>
+<h3>依赖系统库</h3>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<p>近期苹果公司iOS 9系统策略更新，应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。受此影响，当你的应用在iOS 9中需要使用易信SDK的相关能力（分享、收藏、登录等）时，需要在“Info.plist”里增加如下代码：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+        &lt;string&gt;youdaonote&lt;/string&gt;
+        &lt;string&gt;ynotedictfav&lt;/string&gt;
+        &lt;string&gt;com.youdao.note.todayViewNote&lt;/string&gt;
+        &lt;string&gt;ynotesharesdk&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<h3>配置URL Scheme</h3>
+<h3>代码设置</h3>
+<h2>印象笔记</h2>
+<h3>依赖系统库</h3>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<p>近期苹果公司iOS 9系统策略更新，应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。受此影响，当你的应用在iOS 9中需要使用易信SDK的相关能力（分享、收藏、登录等）时，需要在“Info.plist”里增加如下代码：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+        &lt;string&gt;evernote&lt;/string&gt;
+        &lt;string&gt;en&lt;/string&gt;
+        &lt;string&gt;enx&lt;/string&gt;
+        &lt;string&gt;evernotecid&lt;/string&gt;
+        &lt;string&gt;evernotemsg&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<h3>配置URL Scheme</h3>
+<h3>代码设置</h3>
+<h2>Google+</h2>
+<h3>依赖系统库</h3>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<p>近期苹果公司iOS 9系统策略更新，应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。受此影响，当你的应用在iOS 9中需要使用易信SDK的相关能力（分享、收藏、登录等）时，需要在“Info.plist”里增加如下代码：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;gplus&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<h3>配置URL Scheme</h3>
+<h3>代码设置</h3>
+<h2>Pocket</h2>
+<h3>依赖系统库</h3>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<p>近期苹果公司iOS 9系统策略更新，应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。受此影响，当你的应用在iOS 9中需要使用易信SDK的相关能力（分享、收藏、登录等）时，需要在“Info.plist”里增加如下代码：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+        &lt;string&gt;pocket&lt;/string&gt;
+        &lt;string&gt;readitlater&lt;/string&gt;
+        &lt;string&gt;pocket-oauth-v1&lt;/string&gt;
+        &lt;string&gt;fb131450656879143&lt;/string&gt;
+        &lt;string&gt;en-readitlater-5776&lt;/string&gt;
+        &lt;string&gt;com.ideashower.ReadItLaterPro3&lt;/string&gt;
+        &lt;string&gt;com.ideashower.ReadItLaterPro&lt;/string&gt;
+        &lt;string&gt;com.ideashower.ReadItLaterProAlpha&lt;/string&gt;
+        &lt;string&gt;com.ideashower.ReadItLaterProEnterprise&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<h3>配置URL Scheme</h3>
+<h3>代码设置</h3>
+<h2>dropbox</h2>
+<h3>依赖系统库</h3>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<h4>iOS9上info.plist的网络配置</h4>
+<h3>配置URL Scheme</h3>
+<h3>代码设置</h3>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+        //dropbox的appKey
+    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_DropBox appKey:@&quot;k4pn9gdwygpy4av&quot; appSecret:@&quot;td28zkbyb9p49xu&quot; redirectURL:@&quot;https://mobile.umeng.com/social&quot;];
+
+    return YES;
+}
+
+</code></pre>
+
+<p><strong> 一定要设置appKey，appSecret，和 redirectURL（https的回调），不然授权会出问题</strong></p>
+<h2>VKontakte</h2>
+<h3>依赖系统库</h3>
+<pre><code>    CoreGraphics.framework
+    Security.framework
+
+</code></pre>
+
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<p>近期苹果公司iOS 9系统策略更新，应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。受此影响，当你的应用在iOS 9中需要使用易信SDK的相关能力（分享、收藏、登录等）时，需要在“Info.plist”里增加如下代码：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+        &lt;string&gt;vk&lt;/string&gt;
+        &lt;string&gt;vk-share&lt;/string&gt;
+        &lt;string&gt;vkauthorize&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+    fb + <code>App_ID</code>  分别设置 Identifier和 URL Schemes 的field</li>
+<li>URL Scheme举例
+    如Facebook ID为：5786123
+    实际参数：vk5786123</li>
+</ul>
+<pre><code>            &lt;dict&gt;
+            &lt;key&gt;CFBundleTypeRole&lt;/key&gt;
+            &lt;string&gt;Editor&lt;/string&gt;
+            &lt;key&gt;CFBundleURLName&lt;/key&gt;
+            &lt;string&gt;vk5786123&lt;/string&gt;
+            &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
+            &lt;array&gt;
+                &lt;string&gt;vk5786123&lt;/string&gt;
+            &lt;/array&gt;
+        &lt;/dict&gt;
+
+</code></pre>
+
+<h3>代码设置</h3>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+        //vk的appkey
+    [[UMSocialManager defaultManager]  setPlaform:UMSocialPlatformType_VKontakte appKey:@&quot;5786123&quot; appSecret:nil redirectURL:nil];
+
+    return YES;
+}
+
+</code></pre>
+
+<h2>其他平台</h2>
+<p>腾讯微博、豆瓣、人人、Instagram、Flickr、Line、Tumblr、Pinterest、WhatsApp以及短信和邮件，直接将下载的库文件加入工程即可，无需额外配置。</p>
+<h1>获取授权</h1>
+<h2>微信</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token及用户名等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromWechat
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Wechat uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Wechat openid: %@&quot;, resp.openid);
+            NSLog(@&quot;Wechat accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Wechat refreshToken: %@&quot;, resp.refreshToken);
+            NSLog(@&quot;Wechat expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;Wechat name: %@&quot;, resp.name);
+            NSLog(@&quot;Wechat iconurl: %@&quot;, resp.iconurl);
+            NSLog(@&quot;Wechat gender: %@&quot;, resp.gender);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Wechat originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>新浪微博</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token及用户名等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromSina
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Sina currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Sina uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Sina accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Sina refreshToken: %@&quot;, resp.refreshToken);
+            NSLog(@&quot;Sina expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;Sina name: %@&quot;, resp.name);
+            NSLog(@&quot;Sina iconurl: %@&quot;, resp.iconurl);
+            NSLog(@&quot;Sina gender: %@&quot;, resp.gender);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Sina originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>QQ</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token及用户名等)</li>
+</ul>
+<pre><code>- (void)getAuthWithUserInfoFromQQ
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;QQ uid: %@&quot;, resp.uid);
+            NSLog(@&quot;QQ openid: %@&quot;, resp.openid);
+            NSLog(@&quot;QQ accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;QQ expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;QQ name: %@&quot;, resp.name);
+            NSLog(@&quot;QQ iconurl: %@&quot;, resp.iconurl);
+            NSLog(@&quot;QQ gender: %@&quot;, resp.gender);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;QQ originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>Linkedin(领英)</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token及用户名等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromLinkedin
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Linkedin currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Linkedin uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Linkedin accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Linkedin expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;Linkedin name: %@&quot;, resp.name);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Linkedin originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>Facebook</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token及用户名等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromFacebook
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Facebook currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Facebook uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Facebook accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Facebook expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;Facebook name: %@&quot;, resp.name);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Facebook originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>Twitter</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token及用户名等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromTwitter
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Twitter currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Twitter uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Twitter accessToken: %@&quot;, resp.accessToken);
+
+            // 用户信息
+            NSLog(@&quot;Twitter name: %@&quot;, resp.name);
+            NSLog(@&quot;Twitter iconurl: %@&quot;, resp.iconurl);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Twitter originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>腾讯微博</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromTencentWeibo
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_TencentWb currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;TencentWeibo uid: %@&quot;, resp.uid);
+            NSLog(@&quot;TencentWeibo accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;TencentWeibo expiration: %@&quot;, resp.expiration);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;TencentWeibo originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>豆瓣</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromDouban
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Douban currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Douban uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Douban accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Douban expiration: %@&quot;, resp.expiration);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Douban originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>人人</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromRenren
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Renren currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Renren uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Renren accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Renren expiration: %@&quot;, resp.expiration);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Renren originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>Kakao</h2>
+<ul>
+<li>授权并获取用户信息(获取uid、access token及用户名等)</li>
+</ul>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthWithUserInfoFromKakao
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_KakaoTalk currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Kakao uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Kakao accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Kakao refreshToken: %@&quot;, resp.refreshToken);
+
+            // 用户信息
+            NSLog(@&quot;Kakao name: %@&quot;, resp.name);
+            NSLog(@&quot;Kakao iconurl: %@&quot;, resp.iconurl);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Kakao originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h2>授权仅获取token及uid</h2>
+<ul>
+<li>若只需获取第三方平台token和uid，不获取用户名等用户信息，可以调用以下接口，如微信：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getAuthInfoFromWechat
+{
+    [[UMSocialManager defaultManager] authWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialAuthResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Wechat uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Wechat openid: %@&quot;, resp.openid);
+            NSLog(@&quot;Wechat accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Wechat refreshToken: %@&quot;, resp.refreshToken);
+            NSLog(@&quot;Wechat expiration: %@&quot;, resp.expiration);
+
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Wechat originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h1>分享内容</h1>
+<h2>第三方平台支持的分享类型总览</h2>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>文本</th>
+<th>图片</th>
+<th>图文</th>
+<th>Web链接</th>
+<th>视频链接</th>
+<th>音乐链接</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微信好友</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>gif表情及文件</td>
+</tr>
+<tr>
+<td>微信朋友圈</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>微信收藏</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>新浪微博</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>QQ空间</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>支付宝</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>钉钉</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>点点虫</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>易信</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>豆瓣</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>人人</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>腾讯微博</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>有道云笔记</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>印象笔记</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>有道云笔记</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Linkedin(领英)</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>图片链接必须为网络链接，不支持本地图片</td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Twitter</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Instagram</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Kakao</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Line</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Tumblr</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pinterest</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>图片必须为网络链接</td>
+</tr>
+<tr>
+<td>WhatsApp</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Flickr</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Google+</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pocket</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>图片为网络链接</td>
+</tr>
+<tr>
+<td>VKontakte</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>DropBox</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>短信</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>邮件</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>## 示例</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>+ 分享文本到微信：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareTextToWechat
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_WechatSession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<blockquote>
+<p>更多分享类型数据结构及示例详见下一节的UShare API文档</p>
+</blockquote>
+<h1>分享面板UI</h1>
+<h2>分享面板注意事项</h2>
+<p>由于
+1. 创建Xcode项目会默认添加<code>Main.storyboard</code>作为<code>Main Interface</code>(General - Deployment Info)，也就是项目的主Window。
+2. 如果没使用Main.storyboard而又另外在AppDelegate中创建了UIWindow对象，如</p>
+<pre><code>self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds]
+</code></pre>
+
+<p>如果项目中同时出现<code>Main Interface</code>以及代码创建<code>UIWindow</code>会导致分享面板无法正常弹出，解决方法是移除其一即可。</p>
+<h2>UMSocialUIManager</h2>
+<pre><code>#import &lt;UShareUI/UShareUI.h&gt;
+
+@interface UMSocialUIManager : NSObject
+
++ (void)showShareMenuViewInWindowWithPlatformSelectionBlock:(UMSocialSharePlatformSelectionBlock)sharePlatformSelectionBlock;
+
+@end
+
+</code></pre>
+
+<h2>调用分享面板</h2>
+<pre><code>#import &lt;UShareUI/UShareUI.h&gt;
+//显示分享面板
+[UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+    // 根据获取的platformType确定所选平台进行下一步操作
+}];
+</code></pre>
+
+<h2>定制自己的分享面板预定义平台</h2>
+<pre><code>#import &lt;UShareUI/UShareUI.h&gt;
+ [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_WechatSession)]];
+ [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+    // 根据获取的platformType确定所选平台进行下一步操作
+}];
+</code></pre>
+
+<ul>
+<li><strong>此函数需要在showShareMenuViewInWindowWithPlatformSelectionBlock之前调用</strong></li>
+<li><strong>传入的平台必须是合法并且是core模块已经检测到的已经存在的平台，不然会被过滤掉(此条款是上线appStore审核的条件，开发者必须注意)</strong></li>
+</ul>
+<h2>定制自己的分享面板</h2>
+<p>目前分享面板已经模块，用户可以根据自己的需求来自定义自己需要的面板。
+该面板分有四个主体控件组成。</p>
+<ul>
+<li><strong>UMSocialShareTitleView title控件</strong></li>
+<li><strong>UMSocialSharePageScrollView 分页控件</strong></li>
+<li><strong>UMSocialSharePageControl PageControl控件</strong></li>
+<li><strong>UMSocialShareCancelControl CancelControl控件</strong></li>
+</ul>
+<p>每个对应的控件对应相应的配置类，方便用户自己通过配置参数来控制控件的外观。
+每个控件对应相应的配置类，如下:</p>
+<pre><code>UMSocialShareTitleView  --&gt; UMSocialShareTitleViewConfig
+UMSocialSharePageScrollView --&gt; UMSocialSharePageScrollViewConfig
+UMSocialSharePageControl --&gt; UMSocialSharePageControlConfig
+UMSocialShareCancelControl --&gt; UMSocialShareCancelControlConfig
+</code></pre>
+
+<p>UMSocialShareTitleViewConfig 的参数如下:</p>
+<pre><code>BOOL isShow;//是否显示
+NSString* shareTitleViewTitleString;//标题的文字
+UIFont* shareTitleViewFont;//字体
+UIColor* shareTitleViewTitleColor;//文字颜色
+UIColor* shareTitleViewBackgroundColor;//背景颜色
+CGFloat shareTitleViewPaddingTop;//title的内边距top
+CGFloat shareTitleViewPaddingBottom;//title的内边距Bottom
+</code></pre>
+
+<p>UMSocialSharePageScrollViewConfig 的参数如下:</p>
+<pre><code>CGFloat shareScrollViewPageMaxItemWidth; //每页Items的最大宽度
+CGFloat shareScrollViewPageMaxItemHeight; //每页Items的最大高度
+UMSocialPlatformItemViewBackgroudType shareScrollViewPageItemStyleType;//每个Item的背景类型
+CGFloat shareScrollViewPageMaxRowCountForPortraitAndBottom; //每页显示最大的行(在底部显示手机处于肖像模式)
+CGFloat shareScrollViewPageMaxColumnCountForPortraitAndBottom; //每页显示最大的列(在底部显示手机处于肖像模式)
+....
+</code></pre>
+
+<p>UMSocialSharePageControlConfig 的参数如下:</p>
+<pre><code>BOOL isShow;//是否显示
+UIColor*  sharePageControlPageIndicatorTintColor;//指示器颜色
+UIColor*  sharePageControlCurrentPageIndicatorTintColor;//当前的页的颜色
+BOOL      sharePageControlHidesForSinglePage;//为一页是会隐藏
+UIColor*  sharePageControlBackgroundColor;//背景色
+</code></pre>
+
+<p>UMSocialShareCancelControlConfig的参数如下:</p>
+<pre><code>BOOL isShow;//是否显示
+NSString* shareCancelControlText;//相对父view的左边距
+UIColor* shareCancelControlTextColor;//文字颜色
+UIFont* shareCancelControlTextFont;//文字字体
+UIColor* shareCancelControlBackgroundColor;//背景颜色;
+</code></pre>
+
+<p>示例代码如下：
+要修改当前分享面板为:无titleview,面板显示再中间，肖像模式下的2行3列，风景模式2行6列，没有取消控件。</p>
+<pre><code>
+    //配置上面需求的参数
+    [UMSocialShareUIConfig shareInstance].shareTitleViewConfig.isShow = NO;
+    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Middle;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageMaxRowCountForPortraitAndMid = 2;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageMaxColumnCountForPortraitAndMid = 3;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageMaxRowCountForLandscapeAndMid = 2;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageMaxColumnCountForLandscapeAndMid = 6;
+    [UMSocialShareUIConfig shareInstance].shareCancelControlConfig.isShow = NO;
+
+    //调用分享面板
+     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+    // 根据获取的platformType确定所选平台进行下一步操作
+}];
+</code></pre>
+
+<p>示例代码如下：</p>
+<p>要修改当前分享面板为:分享面板的滑动的区域的背景色为红色，每页的背景色为黄色，去掉毛玻璃效果。</p>
+<pre><code>    //配置上面需求的参数
+        //shareScrollView背景色为红色
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewBackgroundColor = [UIColor redColor];
+    //每页的背景颜色为黄色
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageBGColor = [UIColor yellowColor];
+    //去掉毛玻璃效果
+    [UMSocialShareUIConfig shareInstance].shareContainerConfig.isShareContainerHaveGradient = NO;
+    //调用分享面板
+     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+    // 根据获取的platformType确定所选平台进行下一步操作
+}];
+</code></pre>
+
+<p><strong>该分享面板已经适配了ios和ipad，具体的参数已经设置完成，用户可以在此基础上微调一些参数，来定制自己特有风格的分享面板。</strong></p>
+<p><strong>每个对应的控件都可以独立设置，并且用户可以自己定义自己风格的控件外观。</strong></p>
+<p><strong>友情提示:每个控件的配置信息需要再合理的范围内。</strong></p>
+<h2>在分享面板定制自己的icon的操作</h2>
+<p><strong>（此版本在6.1.1版本上新加入的接口）</strong></p>
+<p>在有些时候，用户希望在分享面板上加入一个属于自己特有的图标，用户自己在回调的时候控制点击该平台需要做的事。</p>
+<p>比如用户希望在分享面板后面加一个“copy”功能。（注意每个在分享面板上显示的icon对应一个平台以UMSocialPlatformType类型作为标记）
+假定“copy”功能需要设置一个UMSocialPlatformType类型为:UMSocialPlatformType_UserDefine_Begin+2</p>
+<p>代码如下：</p>
+<pre><code>    //加入copy的操作
+    //@see http://dev.umeng.com/social/ios/进阶文档#6
+    [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_UserDefine_Begin+2
+                                     withPlatformIcon:[UIImage imageNamed:@&quot;auth_icon&quot;]
+                                     withPlatformName:@&quot;copy&quot;];
+
+    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_None;
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        //在回调里面获得点击的
+        if (platformType == UMSocialPlatformType_UserDefine_Begin+2) {
+            NSLog(@&quot;do your operation for copy&quot;);
+        }
+        else{
+            [self runShareWithType:platformType];
+        }
+    }];
+
+</code></pre>
+
+<p><strong> 用户设置图标时，需要和保持预定于的图标大小一样，以保持美观 </strong></p>
+<h1>用户自定义平台</h1>
+<h2>自定义的平台类型的选取</h2>
+<p>UShareSDK已经为用户提供了主流的预定义平台，对这些平台已经做了优化和封装，比如：新浪，微信，QQ等。</p>
+<p>详细的平台类型可以查看<strong>UMSocialPlatformType</strong>的枚举类型，方便用户直接导入后使用。</p>
+<p><strong>如果用户还需要定于自己自定义平台的话，首先就需要考虑用户自定义平台的取值，不能和预定义平台的类型重复。</strong></p>
+<p><strong>用户自定义平台类型取值范围在UMSocialPlatformType_UserDefine_Begin到UMSocialPlatformType_UserDefine_End之间，不包括边界。</strong></p>
+<pre><code>例如：
+
+用户自定义平台的取值为: UMSocialPlatformType_UserDefine_Begin+1
+</code></pre>
+
+<h2>平台基类UMSocialHandler的功能介绍</h2>
+<p>UMSocialHandler是实现每个平台的基础类，其功能如下:</p>
+<ul>
+<li>实现了最基础的平台协议<strong>UMSocialPlatformProvider</strong>. </li>
+</ul>
+<pre><code>    请查看
+    **UMSocialPlatformProvider**的协议内容
+
+</code></pre>
+
+<ul>
+<li>检查平台的前缀 </li>
+</ul>
+<pre><code>    查找URLScheme前缀的功能
+    -(BOOL)searchForURLSchemeWithPrefix:(NSString *)prefix;
+
+</code></pre>
+
+<ul>
+<li>缓存对应的appkey,appSecret,redirectURL </li>
+</ul>
+<pre><code>
+    -(void)setAppId:(NSString *)appID appSecret:(NSString *)secret url:(NSString *)url;
+
+</code></pre>
+
+<ul>
+<li>保存用户的授权信息。 </li>
+</ul>
+<pre><code>
+    -(void)saveuid:(NSString *)uid openid:(NSString *)openid accesstoken:(NSString *)token refreshtoken:(NSString *)retoken expiration:(id )expiration;
+
+</code></pre>
+
+<ul>
+<li>增加了平台的配置项用来限制分享内容(对超过的文本截断和超大图片的裁剪) </li>
+</ul>
+<pre><code>    请查看
+    **UMSocialHandlerConfig**的class
+
+</code></pre>
+
+<h2>创建自定义平台的类</h2>
+<p>用户需要继承UShareSDK的基类<strong>UMSocialHandler</strong>,该基类提供了基础框架功能，方便用户使用其功能。</p>
+<p>用户自定义的类以UMSocialTemplateHandler为例子给用户示例：</p>
+<p>用户继承UMSocialHandler类后，需要实现最基本的三个基础函数，</p>
+<ul>
+<li>单例的类函数，函数名如下:+ (UMSocialTemplateHandler *)defaultManager;</li>
+<li>重载load方法。</li>
+<li>当前平台对应的平台类型。</li>
+</ul>
+<p><strong><em>单例类的函数名必须要defaultManager，此规则必须注意</em></strong></p>
+<p>代码如下:</p>
+<pre><code>+(void)load
+{
+    [super load];
+}
+
++(NSArray*) socialPlatformTypes
+{
+    return @[@(UMSocialPlatformType_UserDefine_Begin+1)];
+}
+
+
++ (UMSocialTemplateHandler *)defaultManager
+{
+    static UMSocialTemplateHandler *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        if (!instance) {
+            instance = [[self alloc] init];
+        }
+    });
+    return instance;
+}
+</code></pre>
+
+<p><strong>这些方法调用都是固定的，用户可以自行拷贝代码，替换成自己的类名(UMSocialTemplateHandler)和平台类型(UMSocialPlatformType_UserDefine_Begin+1)</strong></p>
+<h2>实现自定义平台类的协议</h2>
+<p>接下来需要实现<strong>UMSocialPlatformProvider</strong>定义的协议
+在UMSocialTemplateHandler类中重写协议如下:</p>
+<ul>
+<li>初始化sdk的appKey，appSecret，redirectURL。</li>
+</ul>
+<pre><code>
+     -(void)umSocial_setAppKey:(NSString*)appKey 
+                withAppSecret:(NSString *)appSecret 
+                    withRedirectURL:(NSString *)redirectURL
+
+</code></pre>
+
+<ul>
+<li>删除缓存授权数据。</li>
+</ul>
+<pre><code>
+   -(void)umSocial_clearCacheData
+
+</code></pre>
+
+<ul>
+<li>授权</li>
+</ul>
+<pre><code>
+    -(void)umSocial_AuthorizeWithUserInfo:(NSDictionary *)userInfo
+                   withViewController:(UIViewController*)viewController
+                withCompletionHandler:(UMSocialRequestCompletionHandler)completionHandler
+
+</code></pre>
+
+<ul>
+<li>取消授权</li>
+</ul>
+<pre><code>
+    -(void)umSocial_cancelAuthWithCompletionHandler:(UMSocialRequestCompletionHandler)completionHandler
+
+</code></pre>
+
+<ul>
+<li>分享</li>
+</ul>
+<pre><code>
+    -(void)umSocial_ShareWithObject:(UMSocialMessageObject *)messageObject withCompletionHandler:(UMSocialRequestCompletionHandler)completionHandler
+
+</code></pre>
+
+<ul>
+<li>获得用户信息</li>
+</ul>
+<pre><code>
+    -(void)umSocial_RequestForUserProfileWithCompletionHandler:(UMSocialRequestCompletionHandler)completionHandler
+
+</code></pre>
+
+<ul>
+<li>获得从sso或者web端回调到本app的回调</li>
+</ul>
+<pre><code>
+    -(BOOL)umSocial_handleOpenURL:(NSURL *)url
+
+</code></pre>
+
+<ul>
+<li>返回平台的版本</li>
+</ul>
+<pre><code>
+    -(NSString *)umSocial_PlatformSDKVersion
+
+</code></pre>
+
+<ul>
+<li>当前平台app是否安装</li>
+</ul>
+<pre><code>
+    -(BOOL)umSocial_isInstall
+
+</code></pre>
+
+<ul>
+<li>当前平台是否可以分享</li>
+</ul>
+<pre><code>
+    -(BOOL)umSocial_isSupport
+
+</code></pre>
+
+<ul>
+<li>检查urlschema</li>
+</ul>
+<pre><code>
+    -(BOOL)checkUrlSchema
+
+</code></pre>
+
+<h2>自定义平台的代码模板</h2>
+<p>只要按照上面的文档给出的步凑来实现就可以实现该用户自定义的平台类，UShare给出了用户自定义的类的模板类:</p>
+<p><strong>UMSocialTemplateHandler.h</strong>,</p>
+<p><strong>UMSocialTemplateHandler.m</strong>,</p>
+<p>用户可以下载模板文件修改成自己的类名和平台类型，在对应的函数调用处实现自己的方法。
+至此用户自定义的平台类已经实现完毕。</p>
+<h1>U-Share API说明</h1>
+<h2>引用头文件</h2>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+</code></pre>
+
+<h2>接口类UMSocialManager</h2>
+<h3>获取类实例</h3>
+<pre><code>[UMSocialManager defaultManager]
+</code></pre>
+
+<h3>打开日志</h3>
+<pre><code>/**
+ *  打开日志
+ *
+ *  @param isOpen YES代表打开，No代表关闭
+ */
+- (void)openLog:(BOOL)isOpen;
+</code></pre>
+
+<h3>设置平台的appkey</h3>
+<pre><code>/**
+ *  设置平台的appkey
+ *
+ *  @param platformType 平台类型 @see UMSocialPlatformType
+ *  @param appKey       appKey 
+ *  @param appSecret    appSecret （有些平台没有，可以不传）
+ *  @param redirectURL  redirectURL （回调地址）
+ */
+- (BOOL)setPlaform:(UMSocialPlatformType)platformType
+            appKey:(NSString *)appKey
+         appSecret:(NSString *)appSecret
+       redirectURL:(NSString *)redirectURL;
+
+</code></pre>
+
+<h3>分享接口</h3>
+<pre><code>/**
+ *  分享接口
+ *
+ *  @param platformType @see UMSocialPlatformType
+ *  @param shareObject
+ *  @param currentViewController 用于弹出类似邮件分享、短信分享等这样的系统页面
+ *  @param completion   回调
+ *  @discuss currentViewController 只正对sms,email等平台需要传入viewcontroller的平台，其他不需要的平台可以传入nil
+ */
+- (void)shareToPlatform:(UMSocialPlatformType)platformType
+          messageObject:(UMSocialMessageObject *)messageObject
+  currentViewController:(id)currentViewController
+             completion:(UMSocialRequestCompletionHandler)completion;
+</code></pre>
+
+<h3>授权并获取用户信息接口</h3>
+<pre><code>/**
+ *  授权并获取用户信息
+ *  @param currentViewController 用于弹出类似邮件分享、短信分享等这样的系统页面
+ *  @param completion   回调
+ */
+- (void)getUserInfoWithPlatform:(UMSocialPlatformType)platformType
+          currentViewController:(id)currentViewController
+                     completion:(UMSocialRequestCompletionHandler)completion;
+</code></pre>
+
+<pre><code>/**
+ *  获得从sso或者web端回调到本app的回调
+ *
+ *  @param url 第三方sdk的打开本app的回调的url
+ *
+ *  @return 是否处理  YES代表处理成功，NO代表不处理
+ */
+-(BOOL)handleOpenURL:(NSURL *)url;
+</code></pre>
+
+<pre><code>/**
+ *  动态的增加用户自定义的PlatformProvider
+ *
+ *  @param userDefinePlatformProvider 用户自定义的userDefinePlatformProvider必须实现UMSocialPlatformProvider
+ *  @param platformType               @see platformType platformType的有效范围在 （UMSocialPlatformType_UserDefine_Begin,UMSocialPlatformType_UserDefine_End)之间
+ *
+ *  @return YES代表返回成功,NO代表失败
+ *  @disuss 在调用此函数前，必须先设置对应的平台的配置信息 @see - (BOOL)setPlaform:(UMSocialPlatformType)platformType appKey:(NSString *)appKey appSecret:(NSString *)appSecret redirectURL:(NSString *)redirectURL;
+ */
+-(BOOL)addAddUserDefinePlatformProvider:(id&lt;UMSocialPlatformProvider&gt;)userDefinePlatformProvider
+             withUserDefinePlatformType:(UMSocialPlatformType)platformType;
+</code></pre>
+
+<h3>取消授权接口</h3>
+<pre><code>/**
+ *  取消授权
+ *
+ *  @param platformType @see UMSocialPlatformType
+ *  @param completion   回调
+ */
+- (void)cancelAuthWithPlatform:(UMSocialPlatformType)platformType
+                    completion:(UMSocialRequestCompletionHandler)completion;
+
+</code></pre>
+
+<h3>动态的删除PlatformProvider，不管是预定义还是用户自定义的</h3>
+<pre><code>/**
+ *  动态的删除不想显示的平台，不管是预定义还是用户自定义的
+ *
+ *  @param platformTypeArray 平台类型数组
+ */
+-(void) removePlatformProviderWithPlatformTypes:(NSArray *)platformTypeArray;
+/**
+ *  动态的删除PlatformProvider，不管是预定义还是用户自定义的
+ *
+ *  @param platformType @see UMSocialPlatformType
+ */
+-(void) removePlatformProviderWithPlatformType:(UMSocialPlatformType)platformType;
+
+/**
+ *  获得对应的平台类型platformType的PlatformProvider
+ *
+ *  @param platformType @see platformType
+ *
+ *  @return 返回继承UMSocialPlatformProvider的handle
+ */
+-(id&lt;UMSocialPlatformProvider&gt;)platformProviderWithPlatformType:(UMSocialPlatformType)platformType;
+</code></pre>
+
+<h2>分享内容类</h2>
+<h3>第三方SDK支持的分享数据类型</h3>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>文本</th>
+<th>图片</th>
+<th>图文</th>
+<th>Web链接</th>
+<th>视频链接</th>
+<th>音乐链接</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微信好友</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>gif表情及文件</td>
+</tr>
+<tr>
+<td>微信朋友圈</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>微信收藏</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>新浪微博</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>QQ空间</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>支付宝</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>点点虫</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>易信</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>豆瓣</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>人人</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>腾讯微博</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Linkedin(领英)</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>图片链接必须为网络链接，不支持本地图片</td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Twitter</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Instagram</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Kakao</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Line</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Tumblr</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pinterest</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>图片必须为网络链接，详见平台文档说明</td>
+</tr>
+<tr>
+<td>WhatsApp</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Flickr</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+</tr>
+<tr>
+<td>短信</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>邮件</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>分享消息类UMSocialMessageObject</h3>
+<pre><code>@interface UMSocialMessageObject : NSObject
+
+
+/**
+ * @param text 文本内容
+ * @note 非纯文本分享文本
+ */
+@property (nonatomic, copy) NSString  *text;
+
+/**
+ * 分享的所媒体内容对象
+ */
+@property (nonatomic, strong) UMShareObject *shareObject;
+
+/**
+ * 其他相关参数，见相应平台说明
+ */
+@property (nonatomic, strong) NSDictionary *moreInfo;
+
++ (UMSocialMessageObject *)messageObject;
+
++ (UMSocialMessageObject *)messageObjectWithMediaObject:(id)mediaObject;
+
+
+@end
+</code></pre>
+
+<h3>基本分享类型UMShareObject</h3>
+<p>UMShareObject是所有多媒体内容的基类，多媒体内容包括图片、音乐、视频、网页等。纯文本分享不属于多媒体，只需要设置UMSocialMessageObject的text属性就可以。</p>
+<pre><code>@interface UMShareObject : NSObject
+/**
+ * 标题
+ * @note 标题的长度依各个平台的要求而定
+ */
+@property (nonatomic, copy) NSString *title;
+
+/**
+ * 描述
+ * @note 描述内容的长度依各个平台的要求而定
+ */
+@property (nonatomic, copy) NSString *descr;
+
+/**
+ * 缩略图 UIImage或者NSData类型或者NSString类型（图片url）
+ */
+@property (nonatomic, strong) id thumbImage;
+
+
+/**
+ * @param title 标题
+ * @param descr 描述
+ * @param thumImage 缩略图（UIImage或者NSData类型，或者image_url）
+ *
+ */
++ (id)shareObjectWithTitle:(NSString *)title
+                     descr:(NSString *)descr
+                 thumImage:(id)thumImage;
++ (void)um_imageDataWithImage:(id)image completion:(void (^)(NSData *image))completion;
+@end
+</code></pre>
+
+<h3>分享图片类（参考父类UMShareObject）</h3>
+<pre><code>@interface UMShareImageObject : UMShareObject
+
+/** 图片内容 （可以是UIImage类对象，也可以是NSdata类对象，也可以是图片链接imageUrl NSString类对象）
+ * @note 图片大小根据各个平台限制而定
+ */
+@property (nonatomic, retain) id shareImage;
+
+@end
+</code></pre>
+
+<h3>分享音乐数据结构（参考父类UMShareObject）</h3>
+<pre><code>@interface UMShareMusicObject : UMShareObject
+
+/** 音乐网页的url地址
+ * @note 长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *musicUrl;
+/** 音乐lowband网页的url地址
+ * @note 长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *musicLowBandUrl;
+/** 音乐数据url地址
+ * @note 长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *musicDataUrl;
+
+/**音乐lowband数据url地址
+ * @note 长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *musicLowBandDataUrl;
+
+@end
+</code></pre>
+
+<h3>分享视频数据结构（参考父类UMShareObject）</h3>
+<pre><code>@interface UMShareVideoObject : UMShareObject
+
+/**
+ 视频网页的url
+
+ @warning 不能为空且长度不能超过255
+ */
+@property (nonatomic, strong) NSString *videoUrl;
+
+/**
+ 视频lowband网页的url
+
+ @warning 长度不能超过255
+ */
+@property (nonatomic, strong) NSString *videoLowBandUrl;
+
+/**
+ 视频数据流url
+
+ @warning 长度不能超过255
+ */
+@property (nonatomic, strong) NSString *videoStreamUrl;
+
+/**
+ 视频lowband数据流url
+
+ @warning 长度不能超过255
+ */
+@property (nonatomic, strong) NSString *videoLowBandStreamUrl;
+
+@end
+</code></pre>
+
+<h3>分享网页数据结构（参考父类UMShareObject）</h3>
+<pre><code>@interface UMShareWebpageObject : UMShareObject
+
+/** 网页的url地址
+ * @note 不能为空且长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *webpageUrl;
+
+@end
+</code></pre>
+
+<h3>邮件分享数据结构（参考父类UMShareObject）</h3>
+<pre><code>/*! @brief 分享消息中的邮件分享对象
+ *
+ * @see UMShareObject
+ */
+@interface UMShareEmailObject : UMShareObject
+
+/**
+ * 接收人
+ */
+@property (nonatomic, strong) NSArray *toRecipients;
+
+/**
+ * 抄送人
+ */
+@property (nonatomic, strong) NSArray *ccRecipients;
+
+/**
+ * 密送人
+ */
+@property (nonatomic, strong) NSArray *bccRecipients;
+
+/**
+ * 文本内容
+ */
+@property (nonatomic, copy) NSString *emailContent;
+
+/**
+ * 图片
+ */
+@property (nonatomic, strong) id emailImage;
+
+/**
+ * 文件（NSData）
+ */
+@property (nonatomic, strong) NSData *emailSendData;
+
+/**
+ * 文件格式
+ */
+@property (nonatomic, copy) NSString *fileType;
+
+/**
+ * 文件名
+ */
+@property (nonatomic, copy) NSString *fileName;
+
+@end
+</code></pre>
+
+<h3>短信分享数据结构（参考父类UMShareObject）</h3>
+<pre><code>/*! @brief 分享消息中的短信分享对象
+ *
+ * @see UMSocialMessageObject
+ */
+@interface UMShareSmsObject : UMShareObject
+
+/**
+ * 接收人
+ */
+@property (nonatomic, strong) NSArray *recipients;
+
+/**
+ * 文本内容
+ */
+@property (nonatomic, copy) NSString *smsContent;
+
+/**
+ * 图片
+ */
+@property (nonatomic, strong) id smsImage;
+
+/**
+ * 文件数据（NSData）
+ */
+@property (nonatomic, strong) NSData *smsSendData;
+
+/**
+ * 文件格式
+ */
+@property (nonatomic, copy) NSString *fileType;
+
+/**
+ * 文件名称
+ */
+@property (nonatomic, copy) NSString *fileName;
+
+/**
+ * 文件地址url
+ */
+@property (nonatomic, copy) NSString *fileUrl;
+
+@end
+</code></pre>
+
+<h2>分享回调类</h2>
+<h3>接口返回数据结构基类</h3>
+<pre><code>@interface UMSocialResponse : NSObject
+
+@property (nonatomic, copy) NSString  *uid;//用户id
+@property (nonatomic, copy) NSString  *openid;//QQ，微信用户openid，其他平台没有
+@property (nonatomic, copy) NSString  *refreshToken;//
+@property (nonatomic, copy) NSDate    *expiration;//授权token（accessToken）过期时间
+@property (nonatomic, copy) NSString  *accessToken;
+
+@property (nonatomic, assign) UMSocialPlatformType  platformType;//对应的平台类型
+/**
+ * 第三方原始数据
+ */
+@property (nonatomic, strong) id  originalResponse;
+
+@end
+</code></pre>
+
+<h3>分享结果数据结构</h3>
+<pre><code>@interface UMSocialShareResponse : UMSocialResponse
+
+@property (nonatomic, copy) NSString  *message;//分享结果提示信息
+
++ (UMSocialShareResponse *)shareResponseWithMessage:(NSString *)message;
+
+@end
+</code></pre>
+
+<h3>授权结果数据结构</h3>
+<pre><code>@interface UMSocialAuthResponse : UMSocialResponse
+
+@end
+</code></pre>
+
+<h3>获取用户信息结果数据结构</h3>
+<pre><code>@interface UMSocialUserInfoResponse : UMSocialResponse
+@property (nonatomic, copy) NSString  *name;//用户名
+@property (nonatomic, copy) NSString  *iconurl;//头像地址
+@property (nonatomic, copy) NSString  *gender;//性别（m表示男，w表示女）
+
+@end
+</code></pre>
+
+<h2>全局配置类</h2>
+<h3>第三方平台参数限制相关配置</h3>
+<p>从6.0.3版本后，增加了对分享类型的限制，比如对文本的截断，对图片的裁剪，以便用户能够不用考虑平台的限制而成功的分享出去。
+目前已经对新浪、微信、QQ及Facebook和Twitter平台做了分享参数处理。</p>
+<h4>配置类</h4>
+<p>其类别如下（请查看UMSocialHandler.h文件）：</p>
+<pre><code>@interface UMSocialHandler (UMSocialLimit)
+-(BOOL) checkText:(NSString*)text withTextLimit:(NSUInteger)textLimit;
+
+-(BOOL) checkData:(NSData*)data withDataLimit:(NSUInteger)dataLimit;
+
+-(NSString*)truncationText:(NSString*)text withTextLimit:(NSUInteger)textLimit;
+
+-(NSData*)compressImageData:(NSData*)imageData withImageLimit:(NSUInteger)imageLimit;
+
+@end
+
+</code></pre>
+
+<h4>每个分享类型对应相关的分享配置类：</h4>
+<pre><code>
+UMSocialShareTextObject ---&gt; UMSocialShareTextObjectConfig
+
+UMSocialShareImageObject ---&gt; UMSocialShareImageObjectConfig
+
+UMSocialShareMusicObject ---&gt;UMSocialShareMusicObjectConfig
+
+UMSocialShareVideoObject ---&gt; UMSocialShareVideoObjectConfig
+
+UMSocialShareWebpageObject ---&gt; UMSocialShareVideoObjectConfig
+
+UMSocialShareEmailObject ---&gt; UMSocialShareEmailObjectConfig
+
+UMSocialShareSmsObject ---&gt; UMSocialShareSmsObjectConfig
+
+UMSocialShareEmotionObject ---&gt; UMSocialShareEmotionObjectConfig
+
+UMSocialShareFileObject ---&gt; UMSocialShareFileObjectConfig
+
+</code></pre>
+
+<h4>操作设置</h4>
+<p>增加了UMSocialGlobal的全局设置字段 ：</p>
+<p>thumblr_Tag thumblr平台需要作为标示的字段 tag</p>
+<p>isTruncateShareText 对平台的分享文本的时候，做规定的截断，默认开启</p>
+<blockquote>
+<p>简言之，开发者可以通过调用
+[UMSocialGlobal shareInstance].isTruncateShareText = NO;
+设置不进行文本截断等额外处理，但在文本过长时会收到第三方平台SDK返回的错误。</p>
+</blockquote>
+<p><strong>isUsingHttpsWhenShareContent</strong> 当前网络请求是否用https</p>
+<ul>
+<li>
+<p>针对ios9系统以后强制使用https的网络请求，针对分享的网络图片都必须是https的网络图片(此为苹果官方要求)</p>
+</li>
+<li>
+<p>该函数默认开启https请求</p>
+</li>
+<li>
+<p>如果开启ios9的请求后，自动会过滤ios的http的请求，并返回错误</p>
+</li>
+</ul>
+<p><strong>isClearCacheWhenGetUserInfo</strong>
+是否清除缓存在获得用户资料的时候，此需求存在用户切换账号的时候，获得用户信息的时候用缓存的数据申请导致用户信息错误。
+*默认设置为YES,代表请求用户的时候需要请求缓存
+NO,代表不清楚缓存，用缓存的数据请求用户数据</p>
+<p><strong>isUsingWaterMark</strong>
+是否分享图片的时候，加入水印功能。如果开启的话，可以通过图片的水印配置类warterMarkConfig来配置水印。</p>
+<p>目前水印只提供图片水印功能。
+设置图片水印的配置类为:
+<em>  UMSocialWarterMarkConfig 水印配置类,方便以后扩展其他的水印形式
+</em>  UMSocialImageWarterMarkConfig 图片配置类</p>
+<p>用户可以通过以下两种方式来配置用户自定义的水印</p>
+<ul>
+<li>如果用户用默认的参数,只想换水印图片的情况。</li>
+</ul>
+<p>step1:
+可以直接把路径<strong>UMSocialSDKResources.bundle/UMSocialWaterMark/umsocial_defaultwatermark.png</strong>下的图片换成自己的水印图片.</p>
+<p><strong>注意图片的名字和后缀必须一样</strong></p>
+<p>step2:
+在分享前设置开启水印。</p>
+<pre><code>    [UMSocialGlobal shareInstance].isUsingWaterMark = YES;
+
+</code></pre>
+
+<ul>
+<li>如果用户用自己自定义的参数和水印图片的情况。</li>
+</ul>
+<p>step1:
+在分享前设置开启水印。</p>
+<pre><code>    [UMSocialGlobal shareInstance].isUsingWaterMark = YES;
+
+</code></pre>
+
+<p>step2:创建配置水印类，并赋值给warterMarkConfig</p>
+<pre><code>    //创建图片水印配置类
+    UMSocialImageWarterMarkConfig* imageWarterMarkConfig= [[UMSocialImageWarterMarkConfig alloc] init];
+    imageWarterMarkConfig.warterMarkImage = [UIImage imageNamed:@&quot;auth_icon&quot;];
+    imageWarterMarkConfig.warterMarkImageAlpha = 0.7;
+    imageWarterMarkConfig.warterMarkImageScale = 0.4;
+    imageWarterMarkConfig.paddingToHorizontalParentBorder = 20;
+    imageWarterMarkConfig.paddingToVerticalParentBorder = 20;
+
+    //创建水印配置类
+    UMSocialWarterMarkConfig* warterMarkConfig = [[UMSocialWarterMarkConfig alloc] init];
+    warterMarkConfig.stringAndImageWarterMarkPositon = UMSocialOnlyImageWarterMarkTopRight;
+    [warterMarkConfig setUserDefinedImageWarterMarkConfig:imageWarterMarkConfig];
+
+    //设置水印配置类
+    [UMSocialGlobal shareInstance].warterMarkConfig = warterMarkConfig;
+
+</code></pre>
+
+<h3>豆瓣、人人、腾讯微博授权编辑页面配置</h3>
+<h1>import <UMSocialCore/UMSocialPlatformConfig.h></h1>
+<p>/*<em>
+ * 云端授权/分享编辑页面配置类
+ * 云端授权/分享页面目前适用于腾讯微博、豆瓣、人人的授权和分享编辑页面的自定义配置
+ </em>/
+@interface UMSocialCloudViewConfig : NSObject</p>
+<p>/<em><em>
+ 授权页面
+ </em>/
+@property (nonatomic, strong) NSString </em>authViewTitle;
+@property (nonatomic, strong) UIColor <em>authViewTitleColor;
+@property( nonatomic, strong) UIColor </em>authViewNavBarColor;
+// button仅需改动title或image即可，touch事件内部触发
+@property (nonatomic, strong) UIButton *authViewCloseButton;</p>
+<p>@property (nonatomic, strong) NSString <em>editViewTitle;
+@property (nonatomic, strong) UIColor </em>editViewTitleColor;
+@property( nonatomic, strong) UIColor <em>editViewNavBarColor;
+// button仅需改动title或image即可，touch事件内部触发
+@property (nonatomic, strong) UIButton </em>editViewCloseButton;
+@property (nonatomic, strong) UIButton *editViewShareButton;</p>
+<pre><code>
+## 代码示例
+### 分享文本
+
+</code></pre>
+
+<ul>
+<li>
+<p>(void)shareTextToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //设置文本
+    messageObject.text = @"社会化组件UShare将各大社交平台接入您的应用，快速武装App。";</p>
+<p>//调用分享接口
+[[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+    if (error) {
+        NSLog(@"<strong><em>*</em></strong><strong><em>*</em>Share fail with error %@</strong><strong><em>*</em></strong>",error);
+    }else{
+        NSLog(@"response data is %@",data);
+    }
+}];
+}</p>
+</li>
+</ul>
+<pre><code>### 分享图片
+
+</code></pre>
+
+<ul>
+<li>
+<p>(void)shareImageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];</p>
+<p>//创建图片内容对象
+UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+//如果有缩略图，则设置缩略图
+shareObject.thumbImage = [UIImage imageNamed:@"icon"];
+[shareObject setShareImage:@"https://mobile.umeng.com/images/pic/home/social/img-1.png"];</p>
+<p>//分享消息对象设置分享内容对象
+messageObject.shareObject = shareObject;</p>
+<p>//调用分享接口
+[[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+    if (error) {
+        NSLog(@"<strong><em>*</em></strong><strong><em>*</em>Share fail with error %@</strong><strong><em>*</em></strong>",error);
+    }else{
+        NSLog(@"response data is %@",data);
+    }
+}];
+}</p>
+</li>
+</ul>
+<pre><code>### 分享图文（新浪支持，微信/QQ仅支持图或文本分享）
+
+</code></pre>
+
+<ul>
+<li>
+<p>(void)shareImageAndTextToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];</p>
+<p>//设置文本
+messageObject.text = @"社会化组件UShare将各大社交平台接入您的应用，快速武装App。";</p>
+<p>//创建图片内容对象
+UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+//如果有缩略图，则设置缩略图
+shareObject.thumbImage = [UIImage imageNamed:@"icon"];
+[shareObject setShareImage:@"https://www.umeng.com/img/index/demo/1104.4b2f7dfe614bea70eea4c6071c72d7f5.jpg"];</p>
+<p>//分享消息对象设置分享内容对象
+messageObject.shareObject = shareObject;</p>
+<p>//调用分享接口
+[[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+    if (error) {
+        NSLog(@"<strong><em>*</em></strong><strong><em>*</em>Share fail with error %@</strong><strong><em>*</em></strong>",error);
+    }else{
+        NSLog(@"response data is %@",data);
+    }
+}];
+}</p>
+</li>
+</ul>
+<pre><code>### 分享网页
+
+</code></pre>
+
+<ul>
+<li>
+<p>(void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];</p>
+<p>//创建网页内容对象
+UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"icon"]];
+//设置网页地址
+shareObject.webpageUrl =@"http://mobile.umeng.com/social";</p>
+<p>//分享消息对象设置分享内容对象
+messageObject.shareObject = shareObject;</p>
+<p>//调用分享接口
+[[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+    if (error) {
+        NSLog(@"<strong><em>*</em></strong><strong><em>*</em>Share fail with error %@</strong><strong><em>*</em></strong>",error);
+    }else{
+        NSLog(@"response data is %@",data);
+    }
+}];
+}</p>
+</li>
+</ul>
+<pre><code>### 分享音乐
+
+</code></pre>
+
+<ul>
+<li>
+<p>(void)shareMusicToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];</p>
+<p>//创建音乐内容对象
+UMShareMusicObject *shareObject = [UMShareMusicObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"icon"]];
+//设置音乐网页播放地址
+shareObject.musicUrl = @"http://c.y.qq.com/v8/playsong.html?songid=108782194&amp;source=yqq#wechat_redirect";
+//            shareObject.musicDataUrl = @"这里设置音乐数据流地址（如果有的话，而且也要看所分享的平台支不支持）";
+//分享消息对象设置分享内容对象
+messageObject.shareObject = shareObject;</p>
+<p>//调用分享接口
+[[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+    if (error) {
+        NSLog(@"<strong><em>*</em></strong><strong><em>*</em>Share fail with error %@</strong><strong><em>*</em></strong>",error);
+    }else{
+        NSLog(@"response data is %@",data);
+    }
+}];
+}</p>
+</li>
+</ul>
+<pre><code>### 分享视频
+
+</code></pre>
+
+<ul>
+<li>
+<p>(void)shareVedioToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];</p>
+<p>//创建视频内容对象
+UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"icon"]];
+//设置视频网页播放地址
+shareObject.videoUrl = @"http://video.sina.com.cn/p/sports/cba/v/2013-10-22/144463050817.html";
+//            shareObject.videoStreamUrl = @"这里设置视频数据流地址（如果有的话，而且也要看所分享的平台支不支持）";</p>
+<p>//分享消息对象设置分享内容对象
+messageObject.shareObject = shareObject;</p>
+<p>//调用分享接口
+[[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+    if (error) {
+        NSLog(@"<strong><em>*</em></strong><strong><em>*</em>Share fail with error %@</strong><strong><em>*</em></strong>",error);
+    }else{
+        NSLog(@"response data is %@",data);
+    }
+}];
+}</p>
+</li>
+</ul>
+<pre><code>
+### 调用分享面板分享文本到所选平台
+
+</code></pre>
+
+<h1>import <UShareUI/UShareUI.h></h1>
+<h1>import <UMSocialCore/UMSocialCore.h></h1>
+<ul>
+<li>
+<p>(void)shareWithUI {</p>
+<p>//显示分享面板
+[UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+    // 根据获取的platformType确定所选平台进行下一步操作</p>
+<pre><code>//创建分享消息对象
+UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+//设置文本
+messageObject.text = @"社会化组件UShare将各大社交平台接入您的应用，快速武装App。";
+
+//调用分享接口
+[[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+    if (error) {
+        NSLog(@"************Share fail with error %@*********",error);
+    }else{
+        NSLog(@"response data is %@",data);
+    }
+}];
+</code></pre>
+<p>}];
+}</p>
+</li>
+</ul>
+<p>```</p>

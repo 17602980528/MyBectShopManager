@@ -1,0 +1,6 @@
+framework module CIA_SDK {
+  umbrella header "CIA_SDK.h"
+
+  export *
+  module * { export * }
+}

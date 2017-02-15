@@ -1,0 +1,206 @@
+//
+//  MyPch.pch
+//  BletcShop
+//
+//  Created by wuzhengdong on 16/1/25.
+//  Copyright © 2016年 bletc. All rights reserved.
+//
+
+#ifndef MyPch_pch
+#define MyPch_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+//宏定义
+#define IOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 ? YES : NO)
+#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
+#define LZDScale ([UIScreen mainScreen].bounds.size.width/375)
+
+#define SOCKETHOST @"101.201.100.191"//@"192.168.0.117"
+
+
+
+/*************************************************************/
+
+#define kQIYIAppKey @"3cebded02e884b1a98c42046ad4fb996"
+#define kQIYIAppSecret @"d50834895639cdf46a98e0efd427b9a1"
+
+//新的接口
+#define BASEURL @"http://101.201.100.191/cnconsum/App/"
+
+//头像
+#define ICONIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/iconImage/"
+
+
+//图片前缀
+#define IMG_URL @"http://101.201.100.191/cnconsum/Public/Uploads/"
+
+//商家图文详情下边的图片
+#define SHOPIMAGE_New @"http://101.201.100.191/cnconsum/Public/Uploads/merchantInfoImage/"
+
+//商家图文详情顶部图片
+#define SHOPIMAGE_ADDIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/addImage/"
+
+//头像
+#define HEADIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/headImage/"
+
+//一级广告位图片
+#define ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advertImage/"
+
+//二级广告位图片(四个广告)
+#define FOURADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/"
+
+//长条插入广告
+#define LONGADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/insert/"
+//弹出广告
+#define POPADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/popUp/"
+
+//活动一图片
+#define ONE_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert01/"
+
+//活动二图片
+#define TWO_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert02/"
+
+//活动三图片
+#define THIER_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert03/"
+
+//活动四图片
+#define FOUR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert04/"
+//启动后广告页面
+#define STAR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/lead/"
+
+
+//商家选择会员卡图片
+
+#define SOURCECARD @"http://101.201.100.191/cnconsum/Public/Uploads/cardImage/"
+//type==0
+//#define SHOPCARD  @"http://101.201.100.191/VipCard/upload/MerchantImage/cardImage/"
+
+ /*************************************************************/
+
+
+//#define SHOPIMAGE @"http://101.201.100.191/VipCard/upload/MerchantImage/storeImage/"
+
+
+
+#define SHOPINFOIMAGE @"http://101.201.100.191/VipCard/upload/MerchantImage/infoImage/"
+
+
+#define REQUESTURL @"http://101.201.100.191/VipCard/merchant_login.php"
+#define REQUEST_FIRSTADV @"http://101.201.100.191/VipCard/advert_lay1_get.php"
+#define REQUEST_SECENDADV   @"http://101.201.100.191/VipCard/advert_lay2_get.php"
+#define REQUEST_VIPCARD @"http://101.201.100.191/VipCard/user_card_get02.php"//会员卡
+#define DUOBAOIMAGE @"http:101.201.100.191/VipCard/upload/SourceImage/commodityImage/"
+
+#define iOS7 ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0)
+#define tableViewBackgroundColor   [UIColor colorWithRed:225.0/255.0 green:229.0/255.0 blue:237.0/255.0 alpha:1]
+#define ButtonGreenColor  [UIColor colorWithRed:82.0f/255.0f green:206.0f/255.0f blue:165.f/255.0f alpha:1.0f]
+
+//#define NavBackGroundColor  [UIColor colorWithRed:226.0f/255.0f green:102.0f/255.0f blue:102.0f/255.0f alpha:1.0f]
+
+#define NavBackGroundColor  [UIColor colorWithRed:225/255.0f green:32/255.0f blue:49/255.0f alpha:1.0f]
+
+#define CancelBackGroundColor [UIColor colorWithRed:224.0f/255.0f green:108.0f/255.0f blue:7.0f/255.0f alpha:1.0f]
+//添加全局引用头文件
+#define kAlipayPartner  @"2088221757537814"
+#define kAlipaySeller   @"13488199837@163.com"
+#define kAlipayCallBackURL @"http://101.201.100.191/alipay/tp_notify_url.php"
+#define kAlipayPrivateKey @"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAM9uBE4B3+2CHF0wKgQ7fyU09Ar6pFNRQoKrKIX7xE8cHckkO099HExpKhjiaM2FKsAvR8eYxoPIYQ6WzJ0U3OchPO5OqlxyIMjIVcboxuClk5NAiXUPA7QiLy/dNHOi2Dcr3p5ArKVezTVCynjtpDpSMJn3ZCuuAl7nZwKYngKXAgMBAAECgYAfEYNji7RWhp5o9sXUTHUGxZ+n5VKniAxGNgyjxMnqb3OmpN6dUUfjyfycLY00+zUkA/DkXGWfZ2viG4QaIv3S+33asF6y+FJ0SVLyqYvI4jjXE5fGo2od4onO33GEhKdsXp1tUBrA1Yra5C8MhU17tQ8SjFdEtBdhJEBs3OWzgQJBAO5EWF7Ry3FzMSb+ijBX07nsj0GypIgPX3l1f2nheLP2PlXz1RHv5UUAI3W5VtZUMWHgmxhkBvpZit7SlRd+jZkCQQDe3iLQg5AxkRjjSmgACZasmTYpbm/YGGQvg51ug+g0DEyNDibtA6nEye27SDIK8191JJvjID8cf5cEKFLeUU+vAkEA2Ljr1JtpPHE1pS1jzqMkX3oPuAdg5q1s/1JjqZA/tRlnC9F03hLh7Mg6eMszdFIydL/S8vWQ70hhK1pJ6IvhCQJBAJdXkZy3OrvuJFB0vpsH5+HdSQJplFnSdnYtkkLyIET39SP0cEqTKj4QQffj1tfI3RHXgmSCCVl46zxPhbai0NECQEQN7n0pkhQ2P9hCfH5EfBuV/uw6fAGjGTm8y2LoL2VGssK91F28nRWkj+5zbBl4DtJ3D+Y6pyvSs+7PGYFJMpo="
+#import "CGCommont.h"
+#import "KKRequestDataService.h"
+#import "MBProgressHUD.h"
+#import "UIViewExt.h"
+#import "NSString+Addition.h"
+#import "SDRefresh.h"
+#import "UIViewController+HUD.h"
+#import "EMSDK.h"
+#import <UIKit/UIKit.h>
+#import "LZDButton.h"
+#import "TKAlertCenter.h"
+#import "ConvertToCommonEmoticonsHelper.h"
+#import "UIColor+Hex.h"
+#import "SoundPaly.h"
+#import "UILabel+extension.h"
+#import "NSDictionary+Log.h"
+#import "ToolManager.h"
+
+
+#import "Database.h"
+#define kWeChatPadding 10
+#define kWeChatScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kWeChatScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kWeChatAllSubviewHeight 44
+
+#define RGB(a,b,c) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:1]
+
+#define  ORDER_PAY_NOTIFICATION @"order_pay_result"
+
+
+
+#endif /* MyPch_pch */
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "DebugLog.h"
+#endif
+
+
+
+
+//定义分割字符
+#define MSG_ROUND @"△△"
+#define USER_ROUND @"▽▽"
+#define LOGIN_SUCCESS @"○○"
+#define NAME_REP @"◇◇"
+#define PRIVATE_ROUND @"□□"
+#define SPLIT_SIGN @"☆☆"
+#define SEGMENT_U @"▲▲";
+#define SEGMENT_M @"▼▼"
+/*	String MSG_ROUND = "aa";
+	String USER_ROUND = "uu";
+	String LOGIN_SUCCESS = "1";
+	String NAME_REP = "-1";
+	String PRIVATE_ROUND = "pp";
+	String SPLIT_SIGN = "tt";
+	String SEGMENT_U = "su";
+	String SEGMENT_M = "sm";
+ */
+
+
+#define PAY_ROUND @"●●"   //支付协议头尾
+#define PAY_TYPE @"◆◆"    //支付类型字段分隔符
+#define PAY_USCS @"■■"     //用户集合分隔符
+#define PAY_UORC @"★★"     //支付内容 集合分隔符
+#define PAY_NP @"♥♥"        //内容详情分隔符
+
+/*
+	String PAY_ROUND = "pp";		//支付协议头尾
+	String PAY_TYPE = "ye";			//支付类型字段分隔符
+	String PAY_USCS = "tt";			//用户集合分隔符
+	String PAY_UORC = "su";			//支付内容 集合分隔符
+	String PAY_NP = "sm";			//内容详情分隔符
+ */
+
+
+
+typedef NS_ENUM(NSInteger, ActionType)
+{
+    ActionTypeUploadVideo = 101,//上传视频
+    ActionTypePauseUpload,//102  暂停上传
+    ActionTypeCancelUpload,//103 取消上传
+    ActionTypeDeleteUpload,//104  删除某个上传纪录
+    ActionTypeQueryVideoInfo,//105  请求视频信息
+    ActionTypeQueryVideoPlayUrl,//106 请求视频url
+    ActionTypeSetMetaInfo,//107 设置视频meta
+    ActionTypeSDKVersion, // 108 SDK版本号
+    ActionTypeAuthorize,  //109  认证登陆
+    ActionTypeLogOut,   //110  登出
+    ActionTypeQueryVideoCountUploaded,//111 查询已上传视频的个数
+    ActionTypeQueryVideoList//查询视频列表
+};
+
