@@ -66,6 +66,7 @@
     _sectionMutableArray = [NSMutableArray array];
     
     if ([KCURRENTCITYINFODEFAULTS objectForKey:@"cityData"]) {
+        
         self.characterMutableArray = [NSKeyedUnarchiver unarchiveObjectWithData:[KCURRENTCITYINFODEFAULTS objectForKey:@"cityData"]];
         _sectionMutableArray = [NSKeyedUnarchiver unarchiveObjectWithData:[KCURRENTCITYINFODEFAULTS objectForKey:@"sectionData"]];
         [_rootTableView reloadData];
@@ -103,7 +104,7 @@
     if ([[cityDic valueForKey:@"cityName"] isEqualToString:@"全城"]) {
         __weak typeof(self) weakSelf = self;
         [_manager currentCity:[KCURRENTCITYINFODEFAULTS objectForKey:@"cityNumber"] currentCityName:^(NSString *name) {
-            [KCURRENTCITYINFODEFAULTS setObject:name forKey:@"currentCity"];
+            [KCURRENTCITYINFODEFAULTS setObject:name forKey:@"currentcity"];
             weakSelf.headerView.cityName = name;
             if (weakSelf.choseCityBlock) {
                 weakSelf.choseCityBlock(name);
@@ -112,7 +113,7 @@
     }else {
         cityName = [cityDic valueForKey:@"cityName"];
         _headerView.cityName = cityName;
-        [KCURRENTCITYINFODEFAULTS setObject:[cityDic valueForKey:@"cityName"] forKey:@"currentCity"];
+        [KCURRENTCITYINFODEFAULTS setObject:[cityDic valueForKey:@"cityName"] forKey:@"currentcity"];
         
         if (self.choseCityBlock) {
             self.choseCityBlock(cityName);
@@ -145,7 +146,7 @@
         _headerView = [[JFCityHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 80)];
         _headerView.backgroundColor = [UIColor whiteColor];
         _headerView.buttonTitle = @"选择区县";
-        _headerView.cityName = [KCURRENTCITYINFODEFAULTS objectForKey:@"currentCity"] ? [KCURRENTCITYINFODEFAULTS objectForKey:@"currentCity"] : [KCURRENTCITYINFODEFAULTS objectForKey:@"locationCity"];
+        _headerView.cityName = [KCURRENTCITYINFODEFAULTS objectForKey:@"currentcity"] ? [KCURRENTCITYINFODEFAULTS objectForKey:@"currentcity"] : [KCURRENTCITYINFODEFAULTS objectForKey:@"locationCity"];
         
         self.manager = [JFAreaDataManager shareManager];
         
@@ -216,7 +217,7 @@
         
         __weak typeof(self) weakSelf = self;
         [_searchView resultBlock:^(NSDictionary *cityData) {
-            [KCURRENTCITYINFODEFAULTS setObject:[cityData valueForKey:@"city"] forKey:@"currentCity"];
+            [KCURRENTCITYINFODEFAULTS setObject:[cityData valueForKey:@"city"] forKey:@"currentcity"];
             [KCURRENTCITYINFODEFAULTS setObject:[cityData valueForKey:@"city_number"] forKey:@"cityNumber"];
             
             if (weakSelf.choseCityBlock) {
@@ -390,6 +391,8 @@
     return _cell;
     }else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cityNameCell" forIndexPath:indexPath];
+        
+       
         NSArray *currentArray = _sectionMutableArray[0][_characterMutableArray[indexPath.section]];
         cell.textLabel.text = currentArray[indexPath.row];
         cell.textLabel.textColor = [UIColor grayColor];
@@ -456,7 +459,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     _headerView.cityName = cell.textLabel.text;
-    [KCURRENTCITYINFODEFAULTS setObject:cell.textLabel.text forKey:@"currentCity"];
+    [KCURRENTCITYINFODEFAULTS setObject:cell.textLabel.text forKey:@"currentcity"];
     [_manager cityNumberWithCity:cell.textLabel.text cityNumber:^(NSString *cityNumber) {
         [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
     }];

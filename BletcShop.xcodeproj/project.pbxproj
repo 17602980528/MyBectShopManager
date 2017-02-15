@@ -3631,7 +3631,6 @@
 		1CF283661C586AC600F3952A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D999602B1E5431AC006C202E /* JFCityViewController */,
 				D9501DD11DD024450090A911 /* home首页 */,
 				D9501DD21DD04A7A0090A911 /* 广告专区 */,
 				189411421D8052FE00314E11 /* playvedio.jpg */,
@@ -5304,6 +5303,7 @@
 		D9DEECF51CACEC5300ACDD00 /* otherSDK */ = {
 			isa = PBXGroup;
 			children = (
+				D999602B1E5431AC006C202E /* JFCityViewController */,
 				D981FCD51E2616080026E4B2 /* umeng_ios_social_sdk */,
 				D98582411DF95FFD00A94DD6 /* paymentcontrol */,
 				D9E802D61DD16C1400758C00 /* GYChangeTextView */,

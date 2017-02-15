@@ -1411,48 +1411,48 @@
 -(void)dingweiClick:(UIButton*)btn{
     NSLog(@"定位");
     
-//    {
-//        btn.selected =! btn.selected;
-//        self.ifOpen = !self.ifOpen;
-//        if (btn.selected==NO) {
-//            [self.areaView removeFromSuperview];
-//        }else
-//            [self choiceArea];
-//        //    加动画旋转
-//        [UIView beginAnimations:nil context:nil];
-//        [UIView setAnimationDuration:0.3];
-//        CGAffineTransform transform;
-//        if (btn.selected) {
-//            transform = CGAffineTransformRotate(dingwei_img.transform, M_PI);
-//        } else {
-//            transform = CGAffineTransformRotate(dingwei_img.transform, -270*M_PI/90);
-//        }
+    {
+        btn.selected =! btn.selected;
+        self.ifOpen = !self.ifOpen;
+        if (btn.selected==NO) {
+            [self.areaView removeFromSuperview];
+        }else
+            [self choiceArea];
+        //    加动画旋转
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.3];
+        CGAffineTransform transform;
+        if (btn.selected) {
+            transform = CGAffineTransformRotate(dingwei_img.transform, M_PI);
+        } else {
+            transform = CGAffineTransformRotate(dingwei_img.transform, -270*M_PI/90);
+        }
+        
+        dingwei_img.transform = transform;
+        
+        [UIView commitAnimations];
+        
+    }
+    
+    
+//    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
+//    
+//    cityViewController.title = @"城市";
+//    __weak typeof(self) weakSelf = self;
+//    [cityViewController choseCityBlock:^(NSString *cityName){
 //        
-//        dingwei_img.transform = transform;
 //        
-//        [UIView commitAnimations];
+//        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+//        appdelegate.districtString= cityName;;
 //        
-//    }
-    
-    
-    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
-    
-    cityViewController.title = @"城市";
-    __weak typeof(self) weakSelf = self;
-    [cityViewController choseCityBlock:^(NSString *cityName){
-        
-        
-        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-        appdelegate.districtString= cityName;;
-        
-        [dingweiBtn setTitle:cityName forState:UIControlStateNormal];
-
-        
-    }];
-    BaseNavigationController *navigationController = [[BaseNavigationController alloc]initWithRootViewController:cityViewController];
-    
-    [self presentViewController:navigationController animated:YES completion:nil];
-    
+//        [dingweiBtn setTitle:cityName forState:UIControlStateNormal];
+//
+//        
+//    }];
+//    BaseNavigationController *navigationController = [[BaseNavigationController alloc]initWithRootViewController:cityViewController];
+//    
+//    [self presentViewController:navigationController animated:YES completion:nil];
+//    
     
 
 
