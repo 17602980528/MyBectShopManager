@@ -428,7 +428,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section==0) {
         
-        return 2*(SCREENWIDTH/5+10)+66-10+189*LZDScale;
+        return 2*(SCREENWIDTH/5+10)+66-10+150*LZDScale;
     }else if(section==1){
         return 30;
     }else
@@ -582,7 +582,7 @@
 -(UIView*)creatHeaderView{
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH/2+50)];
     
-    UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 410*LZDScale)];
+    UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, (410-39)*LZDScale)];
     backImg.backgroundColor =[UIColor whiteColor];
 //    backImg.image = [UIImage imageNamed:@"chunjie"];
     [view addSubview:backImg];
@@ -591,14 +591,14 @@
     //广告轮播
     UIView *slipBackView=[[UIView alloc]init];
     
-    slipBackView.frame = CGRectMake(0, 0, SCREENWIDTH, 189*LZDScale);
+    slipBackView.frame = CGRectMake(0, 0, SCREENWIDTH, 150*LZDScale);
 
     slipBackView.backgroundColor=RGB(240, 240, 240);
     [view addSubview:slipBackView];
 
     UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, slipBackView.height)];
     
-    _topAdverImages = @[[UIImage imageNamed:@"-2-01.jpg"], [UIImage imageNamed:@"-2-02.jpg"], [UIImage imageNamed:@"-2-03.jpg"]];
+    _topAdverImages = @[[UIImage imageNamed:@"Active_top4.jpg"], [UIImage imageNamed:@"Active_top2.jpg"], [UIImage imageNamed:@"Active_top1.jpg"]];
     //只创建 3 张图片。
     for (NSInteger i = 0; i < _topAdverImages.count; i++) {
         UIImageView *adversImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH * i, 0, self.view.frame.size.width, scrollView.height)];
@@ -692,13 +692,13 @@
 
 
     
-    _pc=[[UIPageControl alloc]initWithFrame:CGRectMake(SCREENWIDTH*0.2, 10+ 2*(SCREENWIDTH/5+10)+189*LZDScale, SCREENWIDTH*0.6, 10)];
+    _pc=[[UIPageControl alloc]initWithFrame:CGRectMake(SCREENWIDTH*0.2, 10+ 2*(SCREENWIDTH/5+10)+150*LZDScale, SCREENWIDTH*0.6, 10)];
     _pc.currentPageIndicatorTintColor=NavBackGroundColor;
     _pc.pageIndicatorTintColor = [UIColor lightGrayColor];
     [_pc addTarget:self action:@selector(pcClick:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:_pc];
     
-    _smallSV.frame  = CGRectMake(0, 5+189*LZDScale, SCREENWIDTH, 10+ 2*(SCREENWIDTH/5+10)+10);
+    _smallSV.frame  = CGRectMake(0, 5+150*LZDScale, SCREENWIDTH, 10+ 2*(SCREENWIDTH/5+10)+10);
     if (self.icon_A.count%10==0) {
         _smallSV.contentSize = CGSizeMake(SCREENWIDTH*self.icon_A.count/10, 0);
         _pc.numberOfPages = self.icon_A.count/10;
