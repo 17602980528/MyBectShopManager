@@ -39,6 +39,7 @@
 
 - (IBAction)logionBtnClick:(UIButton *)sender {
     
+    
     NSString *url = [NSString stringWithFormat:@"%@Extra/login/accountVertify",BASEURL];
     
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];

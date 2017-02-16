@@ -94,7 +94,7 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="dzz-LH-1u8"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="下一步">
+                    <state key="normal" title="完成">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>

@@ -70,6 +70,10 @@
     UIView *landView = [[UIView alloc]initWithFrame:CGRectMake(0, 95, SCREENHEIGHT, 150)];
     [self.view addSubview:landView];
     
+    if (SCREENHEIGHT<667) {
+        landView.frame = CGRectMake(0, 95-30, SCREENHEIGHT, 150);
+    }
+    
     UserText = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, SCREENWIDTH-20, 50)];
     UserText.placeholder = @"手机号";
     UserText.keyboardType = UIKeyboardTypeNumberPad;
@@ -182,7 +186,7 @@
     [forgetBtn addTarget:self action:@selector(changePassword) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UIView *degistView=[[UIView alloc]initWithFrame:CGRectMake((SCREENWIDTH-180)/2, LandBtn.bottom+80, 180, 30)];
+    UIView *degistView=[[UIView alloc]initWithFrame:CGRectMake((SCREENWIDTH-180)/2, LandBtn.bottom+50, 180, 30)];
     [self.view addSubview:degistView];
     
     
