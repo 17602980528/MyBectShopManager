@@ -7,7 +7,7 @@
 //
 
 #import "ResetPhoneNextVC.h"
-
+#import "BindCustomView.h"
 @interface ResetPhoneNextVC ()
 @property (weak, nonatomic) IBOutlet UILabel *topLab;
 @property (weak, nonatomic) IBOutlet UITextField *codeTF;
@@ -17,6 +17,9 @@
 @end
 
 @implementation ResetPhoneNextVC
+{
+     BindCustomView *alertView;
+}
 -(NSArray *)array_code{
     if (!_array_code) {
         _array_code = [[NSArray alloc]init];
@@ -28,12 +31,17 @@
     [super viewDidLoad];
     self.navigationItem.title = @"更换手机号";
     self.topLab.text = [NSString stringWithFormat:@"请输入%@收到的短信验证码",self.phone];
-    [self getCodeNumber];
+    //[self getCodeNumber];
     
     
    
 }
-
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if (alertView) {
+        [alertView removeFromSuperview];
+    }
+}
 - (IBAction)sendBtnClick:(UIButton *)sender {
     
     [self getCodeNumber];
@@ -42,6 +50,14 @@
     
     [self.codeTF resignFirstResponder];
     
+    alertView=[[BindCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    [alertView.completeBtn addTarget:self action:@selector(removeAlertViewFromCurrentVC:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:alertView];
+    
+}
+-(void)removeAlertViewFromCurrentVC:(UIButton *)sender{
+    [alertView removeFromSuperview];
+    //pop到需要的页面
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
