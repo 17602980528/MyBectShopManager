@@ -16,6 +16,7 @@
 
 #import "ResetPhoneViewController.h"
 
+#import "ValuePickerView.h"
 @interface UserInfoViewController ()
 {
     
@@ -45,17 +46,53 @@
     NSData *imageData2;
     
     NSArray *labelStringArray;
+    NSArray *section2_A;
+    
 }
+
+@property (nonatomic, strong) ValuePickerView *pickerView;
+@property (nonatomic, strong) NSArray *marray_A;
+@property (nonatomic, strong) NSArray *education_A;
+@property (nonatomic, strong) NSArray *profession_A;
+
 
 @end
 
+
 @implementation UserInfoViewController
 
+-(NSArray *)marray_A{
+    if (!_marray_A) {
+        _marray_A = @[@"已婚",@"单身"];
+    }
+    return _marray_A;
+}
+-(NSArray *)education_A{
+    if (!_education_A) {
+        _education_A = @[@"小学",@"初中",@"高中",@"大专",@"本科",@"硕士",@"博士",@"其他"];
+    }
+    return _education_A;
+}
+-(NSArray *)profession_A{
+    if (!_profession_A) {
+        _profession_A = @[@"教师",@"软件工程师",@"科学家"];
+    }
+    return _profession_A;
+}
+-(ValuePickerView *)pickerView{
+    if (!_pickerView) {
+        _pickerView = [[ValuePickerView alloc]init];
+        
+    }
+    return _pickerView;
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //       labelStringArray =@[@"昵称",@"地址",@"手机号",@"邮箱",@"性别",@"生日",@"修改密码",@"个性签名"];
+   
      labelStringArray =@[@"昵称",@"地址",@"手机号",@"邮箱",@"性别",@"生日",@"修改密码"];
+    section2_A = @[@"职业",@"教育状况",@"婚姻状况",@"个人爱好"];
     self.view.backgroundColor = [UIColor whiteColor];
     self.selectRow = 99;
     self.navigationController.navigationBarHidden=YES;
@@ -222,7 +259,7 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 2;
+    return 3;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -233,6 +270,8 @@
     
     if (section == 0) {
         return labelStringArray.count;
+    } if( section ==1){
+        return section2_A.count;
     }
     else
         return 1;
@@ -244,22 +283,40 @@
     if (section==0) {
         return 0.01;
     }
-    else
+    else if(section==1){
+        return 30;
+    }else
         return 11;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section==0) {
-        return 0.01;
+    if (section==2) {
+        return 10;
     }
     else
-        return 10;
+        return 0.01;
     
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 20)];
     view.backgroundColor = tableViewBackgroundColor;
+    
+    if (section==1) {
+        view.frame = CGRectMake(0, 0, SCREENWIDTH, 30);
+        
+        for (UIView *v in view.subviews) {
+            [v removeFromSuperview];
+        }
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, SCREENWIDTH-12, view.height)];
+        lab.font = [UIFont systemFontOfSize:14];
+        lab.textColor = RGB(51, 51, 51);
+        lab.text = @"完成以下信息可获赠更多积分";
+        [view addSubview:lab];
+        
+    }else{
+        view.frame = CGRectMake(0, 0, SCREENWIDTH, 11);
+    }
     return view;
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -279,7 +336,7 @@
     }
     //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.section==0) {
+    if (indexPath.section==0 || (indexPath.section==1)) {
 
 
         UILabel *nameLabel = [[UILabel alloc]init];
@@ -288,7 +345,6 @@
         nameLabel.textAlignment = NSTextAlignmentLeft;
         nameLabel.font = [UIFont systemFontOfSize:16];
         nameLabel.tag = 1000;
-        nameLabel.text = [labelStringArray objectAtIndex:indexPath.row];
         [cell addSubview:nameLabel];
         
         UILabel *descripLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 0, SCREENWIDTH-110, 44)];
@@ -297,45 +353,68 @@
         descripLabel.font = [UIFont systemFontOfSize:16];
         descripLabel.tag = 1000;
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-        if (indexPath.row==0) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            descripLabel.text = appdelegate.userInfoDic[@"nickname"];
-        }else if (indexPath.row==1) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            descripLabel.text = appdelegate.userInfoDic[@"address"];
-        }else if (indexPath.row==2) {
-            
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if (indexPath.section==0) {
+            nameLabel.text = [labelStringArray objectAtIndex:indexPath.row];
 
-            descripLabel.text = appdelegate.userInfoDic[@"phone"];
-        }else if (indexPath.row==3) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if (indexPath.row==0) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                descripLabel.text = appdelegate.userInfoDic[@"nickname"];
+            }else if (indexPath.row==1) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                descripLabel.text = appdelegate.userInfoDic[@"address"];
+            }else if (indexPath.row==2) {
+                
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
+                descripLabel.text = appdelegate.userInfoDic[@"phone"];
+            }else if (indexPath.row==3) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
+                descripLabel.text = [NSString getTheNoNullStr:appdelegate.userInfoDic[@"mail"] andRepalceStr:@"未设置"];
+            }else if (indexPath.row==4) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                descripLabel.text = [NSString getTheNoNullStr:appdelegate.userInfoDic[@"sex"] andRepalceStr:@"未设置"];
+                
+            }else if (indexPath.row==5)
+            {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
+                descripLabel.text = [NSString getTheNoNullStr:appdelegate.userInfoDic[@"age"] andRepalceStr:@"未设置"];
+            }else
+                if (indexPath.row==6) {
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    
+                    descripLabel.text =@"";
+                    
+                }else{
+                    //            if (indexPath.row==7){
+                    //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    //
+                    //            descripLabel.text =@"";
+                    //        }
+                    //        else
+                    
+                    descripLabel.text =@"未设置";
+                    
+                }
+        }else{
+            nameLabel.text = [section2_A objectAtIndex:indexPath.row];
+
             
-            descripLabel.text = [NSString getTheNoNullStr:appdelegate.userInfoDic[@"mail"] andRepalceStr:@"未设置"];
-        }else if (indexPath.row==4) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            descripLabel.text = [NSString getTheNoNullStr:appdelegate.userInfoDic[@"sex"] andRepalceStr:@"未设置"];
-            
-        }else if (indexPath.row==5)
-        {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
-            descripLabel.text = [NSString getTheNoNullStr:appdelegate.userInfoDic[@"age"] andRepalceStr:@"未设置"];
-        }else
-            if (indexPath.row==6) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
-            descripLabel.text =@"";
-            
-        }else
-//            if (indexPath.row==7){
-//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//            
-//            descripLabel.text =@"";
-//        }
-//        else
-            
-            descripLabel.text =@"未设置";
+            if (indexPath.row==0) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                descripLabel.text = appdelegate.userInfoDic[@""];
+            }else if (indexPath.row==1) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                descripLabel.text = appdelegate.userInfoDic[@""];
+            }else{
+                
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
+                descripLabel.text = appdelegate.userInfoDic[@""];
+            }
+        }
+
         
         
         [cell addSubview:descripLabel];
@@ -636,7 +715,34 @@
             [self.navigationController pushViewController:signVC animated:YES];
         }
         
-    }else {
+    } if (indexPath.section==1) {
+        
+        if (indexPath.row == 0) {
+            self.pickerView.dataSource = self.profession_A;
+        }
+        if (indexPath.row == 1) {
+            self.pickerView.dataSource = self.education_A;
+        }
+        if (indexPath.row == 2) {
+            self.pickerView.dataSource = self.marray_A;
+        }
+        
+        if (indexPath.row == 3) {
+            self.pickerView.dataSource = self.marray_A;
+        }
+        __weak typeof(self) weakSelf = self;
+        
+        self.pickerView.valueDidSelect = ^(NSString * value){
+            
+            NSLog(@"======%@",[[value componentsSeparatedByString:@"/"] firstObject]);
+        };
+        
+        [self.pickerView show];
+        
+    }
+    else {
+        
+       
         
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         

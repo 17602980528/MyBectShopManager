@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="106.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwd-A6-8xt">
@@ -30,10 +30,10 @@
                                     <constraint firstAttribute="height" constant="83" id="ZBM-g9-pRb"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="134公里" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="55" translatesAutoresizingMaskIntoConstraints="NO" id="rAm-ua-Nk3">
-                                <rect key="frame" x="238" y="11" width="50" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="134公里" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="55" translatesAutoresizingMaskIntoConstraints="NO" id="rAm-ua-Nk3">
+                                <rect key="frame" x="200" y="11" width="88" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="TKf-bx-Suh"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="TKf-bx-Suh"/>
                                     <constraint firstAttribute="height" constant="16" id="Tmu-AN-DG8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="弗伦斯美发" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rm3-58-vEY">
-                                <rect key="frame" x="123" y="11" width="120" height="16"/>
+                                <rect key="frame" x="123" y="11" width="82" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="7iC-9Z-hdj"/>
                                 </constraints>
