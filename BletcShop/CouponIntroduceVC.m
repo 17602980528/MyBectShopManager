@@ -133,10 +133,27 @@
     NSLog(@"goBuyCard");
 }
 -(void)notice{
-    NSLog(@"notice");
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = NSLocalizedString(@"无相关信息", @"HUD message title");
+    hud.label.font = [UIFont systemFontOfSize:13];
+    //    [hud setColor:[UIColor blackColor]];
+    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+    hud.userInteractionEnabled = YES;
+    
+    [hud hideAnimated:YES afterDelay:2.f];
 }
 -(void)adjustShop{
-     NSLog(@"adjustShop");
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = NSLocalizedString(@"限本店使用", @"HUD message title");
+    hud.label.font = [UIFont systemFontOfSize:13];
+    //    [hud setColor:[UIColor blackColor]];
+    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+    hud.userInteractionEnabled = YES;
+    
+    [hud hideAnimated:YES afterDelay:2.f];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

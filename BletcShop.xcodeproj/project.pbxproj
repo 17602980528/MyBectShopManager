@@ -24,6 +24,8 @@
 		079387101C561FBA0021B385 /* Mygroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0793870F1C561FBA0021B385 /* Mygroup.m */; };
 		079387131C5620290021B385 /* Mycell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079387121C5620290021B385 /* Mycell.m */; };
 		180B53681D4F401F00DE6641 /* MerchantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180B53671D4F401F00DE6641 /* MerchantDetailViewController.m */; };
+		180D872A1E5AB9C600E7FFB4 /* AddCouponHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */; };
+		180D872D1E5ABBBF00E7FFB4 /* AddCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */; };
 		1817FF591D405BE100AFC965 /* mhead_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1817FF581D405BE100AFC965 /* mhead_default.png */; };
 		1817FF5C1D40665900AFC965 /* MemberDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */; };
 		1828C7E51E272D4A00480DB9 /* CardEricShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1828C7E41E272D4A00480DB9 /* CardEricShareViewController.m */; };
@@ -1032,6 +1034,10 @@
 		079387121C5620290021B385 /* Mycell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mycell.m; sourceTree = "<group>"; };
 		180B53661D4F401F00DE6641 /* MerchantDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantDetailViewController.h; sourceTree = "<group>"; };
 		180B53671D4F401F00DE6641 /* MerchantDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantDetailViewController.m; sourceTree = "<group>"; };
+		180D87281E5AB9C600E7FFB4 /* AddCouponHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCouponHomeVC.h; sourceTree = "<group>"; };
+		180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponHomeVC.m; sourceTree = "<group>"; };
+		180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCouponVC.h; sourceTree = "<group>"; };
+		180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponVC.m; sourceTree = "<group>"; };
 		1817FF581D405BE100AFC965 /* mhead_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mhead_default.png; sourceTree = "<group>"; };
 		1817FF5A1D40665900AFC965 /* MemberDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberDetailViewController.h; sourceTree = "<group>"; };
 		1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberDetailViewController.m; sourceTree = "<group>"; };
@@ -3553,6 +3559,10 @@
 				D99292631D8FF5E600103914 /* CashListCell.h */,
 				D99292641D8FF5E600103914 /* CashListCell.m */,
 				D99292651D8FF5E600103914 /* CashListCell.xib */,
+				180D87281E5AB9C600E7FFB4 /* AddCouponHomeVC.h */,
+				180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */,
+				180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */,
+				180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */,
 				18E095321D878A51002A44C0 /* 数据统计界面 */,
 				18E9E1421D88E72B007981B6 /* 数据统计订单详情 */,
 				185ABD671D80224600BD8097 /* 爱奇艺 */,
@@ -6317,6 +6327,7 @@
 				1C0BEF8A1C7DA14400519481 /* SuccessController.m in Sources */,
 				D947E4861D7D710200F9FEE8 /* FMDatabaseQueue.m in Sources */,
 				D9CDFBB51CC4CE5B0054EBE3 /* CustomIOSAlertView.m in Sources */,
+				180D872A1E5AB9C600E7FFB4 /* AddCouponHomeVC.m in Sources */,
 				1C54234D1C9803E60028DC30 /* ShopLandController.m in Sources */,
 				18E9E1451D88E8EF007981B6 /* PersonDetailViewController.m in Sources */,
 				D9CF3FA71D76730300D9D0EC /* GroupViewController.m in Sources */,
@@ -6328,6 +6339,7 @@
 				D992925C1D8FB89500103914 /* ChargeToAccountVC.m in Sources */,
 				D9853F7E1DD477A00028BF94 /* ActivityModel.m in Sources */,
 				1CDA9E171C5A15B000DFE518 /* MyProtuctsController.m in Sources */,
+				180D872D1E5ABBBF00E7FFB4 /* AddCouponVC.m in Sources */,
 				D98E5C261E5156D7009D56BF /* LoginQuestionViewController.m in Sources */,
 				1828C7E51E272D4A00480DB9 /* CardEricShareViewController.m in Sources */,
 				18CB32DA1D6C2B2B005A9D64 /* UIImage+Extends.m in Sources */,

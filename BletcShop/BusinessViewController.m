@@ -30,6 +30,7 @@
 #import "NewShopManagerViewController.h"
 
 #import "CreditThanViewController.h"
+#import "AddCouponHomeVC.h"
 @interface BusinessViewController ()<UIAlertViewDelegate>
 {
     NSArray *arr_imgS;
@@ -57,7 +58,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title = @"业务中心";
-    arr_imgS = @[@"广告推送",@"店铺管理",@"资金提现",@"管理员设置",@"商家介绍",@"会员卡管理",@"授信额度",@"数据报表"];
+    arr_imgS = @[@"广告推送",@"店铺管理",@"资金提现",@"管理员设置",@"商家介绍",@"会员卡管理",@"授信额度",@"数据报表",@"优惠券"];
     
     UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 64)];
     topView.backgroundColor =NavBackGroundColor;
@@ -409,15 +410,17 @@
             
         }
             break;
-//        case 8:
-//        {
-//
+        case 8:
+        {
+
 //            ChargeToAccountVC *VC = [[ChargeToAccountVC alloc]init];
 //            [self.navigationController pushViewController:VC animated:YES];
-// 
-//            
-//        }
-//            break;
+            AddCouponHomeVC *couponHomeVC=[[AddCouponHomeVC alloc]init];
+            [self.navigationController pushViewController:couponHomeVC animated:YES];
+ 
+            
+        }
+            break;
 
             
         default:

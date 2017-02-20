@@ -186,7 +186,7 @@
 //        hud.userInteractionEnabled = YES;
 //        
 //        [hud hideAnimated:YES afterDelay:4.f];
-//        
+//
 //    }
 
     // Set the annular determinate mode to show task progress.

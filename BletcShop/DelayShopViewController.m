@@ -139,8 +139,8 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
-        [params setObject:@"null" forKey:@"state"];
+    [params setValue:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
+    [params setObject:@"null" forKey:@"state"];
    
     
 //    NSLog(@"----%@===url==%@",params,url);
