@@ -12,6 +12,9 @@
 #import "AddVipTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "MemberDetailViewController.h"
+
+#import "GoToPayForAdvertistTableVC.h"
+
 @interface ShopVipController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,weak)UIScrollView *listView;
 @property(nonatomic,strong)NSArray *data;
@@ -34,6 +37,11 @@
     }
     return _shopInfo_dic;
 }
+-(void)gotopayFor{
+    
+    GoToPayForAdvertistTableVC *VC=[[GoToPayForAdvertistTableVC alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -43,6 +51,9 @@
     self.editTag = 0;
     self.typeArray= @[@"普卡",@"银卡",@"金卡",@"白金卡",@"钻卡",@"黑金卡"];;
 
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"去支付" style:UIBarButtonItemStylePlain target:self action:@selector(gotopayFor)];
+    
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     self.shopInfo_dic = appdelegate.shopInfoDic;
     self.array = [[NSMutableArray alloc]initWithObjects:@"按姓名查询",@"按年龄查询",@"按分类查询",@"按XX查询", nil];//@[@"按姓名查询",@"按年龄查询",@"按分类查询",@"按XX查询"];
