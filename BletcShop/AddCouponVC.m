@@ -54,6 +54,7 @@
     self.navigationItem.title=@"优惠券";
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
     _scrollView.scrollEnabled=YES;
+    _scrollView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
     _scrollView.contentSize=CGSizeMake(SCREENWIDTH, SCREENHEIGHT);
     [self.view addSubview:_scrollView];
     
