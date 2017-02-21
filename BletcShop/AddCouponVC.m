@@ -8,7 +8,7 @@
 
 #import "AddCouponVC.h"
 
-@interface AddCouponVC ()<UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface AddCouponVC ()<UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate>
 {
     UIScrollView *_scrollView;
     NSMutableArray *yearArray;
@@ -35,6 +35,7 @@
     UITextField *couponMoneyTF;
     UITextField *useLimitTF;
     UITextField *couponRemainTF;
+    UITextView *_textView;
 
 }
 @property(nonatomic,strong)UITextField *startText;
@@ -52,6 +53,8 @@
     self.view.backgroundColor=RGB(234,234,234);
     self.navigationItem.title=@"优惠券";
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
+    _scrollView.scrollEnabled=YES;
+    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, SCREENHEIGHT);
     [self.view addSubview:_scrollView];
     
     UITapGestureRecognizer *tapBgView=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tfDismiss:)];
@@ -98,7 +101,7 @@
     
     UIView *section2=[[UIView alloc]initWithFrame:CGRectMake(0, 131, SCREENWIDTH, 40)];
     section2.backgroundColor=[UIColor whiteColor];
-    [self.view addSubview:section2];
+    [_scrollView addSubview:section2];
     //券的库存
     UILabel *couponRemain=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 80, 40)];
     couponRemain.text=@"券的库存: ";
@@ -157,9 +160,33 @@
     endBtn.frame=CGRectMake(0, 41, SCREENWIDTH, 40);
     [endBtn addTarget:self action:@selector(showEndTime) forControlEvents:UIControlEventTouchUpInside];
     [section3 addSubview:endBtn];
+    //优惠券说明
+    UILabel *couponInstrate=[[UILabel alloc]initWithFrame:CGRectMake(10, section3.bottom, SCREENWIDTH-10, 40)];
+    couponInstrate.text=@"优惠券说明";
+    couponInstrate.font=[UIFont systemFontOfSize:13.0f];
+    couponInstrate.textColor=[UIColor grayColor];
+    couponInstrate.backgroundColor=RGB(234,234,234);
+    [_scrollView addSubview:couponInstrate];
+    
+    
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, couponInstrate.bottom, SCREENWIDTH, 150)];
+    view.backgroundColor=[UIColor whiteColor];
+    [_scrollView addSubview:view];
+    
+    _textView=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 135)];
+    _textView.delegate=self;
+    [view addSubview:_textView];
+    
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-80, 135, 67, 13)];
+    label.font=[UIFont systemFontOfSize:13.0f];
+    label.textAlignment=NSTextAlignmentLeft;
+    label.textColor=RGB(153, 153, 153);
+    label.text=@"限500字";
+    _textView.returnKeyType=UIReturnKeyDone;
+    [view addSubview:label];
     
     UIButton *completeAddAction=[UIButton buttonWithType:UIButtonTypeCustom];
-    completeAddAction.frame=CGRectMake(15, section3.bottom+20, SCREENWIDTH-30, 44);
+    completeAddAction.frame=CGRectMake(15, view.bottom+20, SCREENWIDTH-30, 44);
     completeAddAction.backgroundColor=NavBackGroundColor;
     [completeAddAction setTitle:@"添加完成" forState:UIControlStateNormal];
     [completeAddAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -167,9 +194,8 @@
     completeAddAction.layer.cornerRadius=5.0f;
     completeAddAction.clipsToBounds=YES;
     [completeAddAction addTarget:self action:@selector(completeAddActionEvents) forControlEvents:UIControlEventTouchUpInside];
+    
     [self _inittable];
-    
-    
 
 }
 #pragma mark 完成添加按钮点击事件
@@ -228,10 +254,18 @@
 }
 #pragma mark 显示时间选取器页面
 -(void)showBeginTime{
+    [couponMoneyTF resignFirstResponder];
+    [couponRemainTF resignFirstResponder];
+    [useLimitTF resignFirstResponder];
+    [_textView resignFirstResponder];
     index_=0;
     [self show];
 }
 -(void)showEndTime{
+    [couponMoneyTF resignFirstResponder];
+    [couponRemainTF resignFirstResponder];
+    [useLimitTF resignFirstResponder];
+    [_textView resignFirstResponder];
     index_=1;
     [self show];
 }
@@ -590,6 +624,23 @@
     [self removeSelfFromSupView];
     
     
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        [textView resignFirstResponder];
+        return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    
+    return YES;
+}
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    _scrollView.frame=CGRectMake(0, -216, SCREENWIDTH, SCREENHEIGHT-64);
+    return YES;
+}
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    _scrollView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64);
+    return YES;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

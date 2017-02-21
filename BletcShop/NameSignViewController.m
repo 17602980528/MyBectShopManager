@@ -37,9 +37,7 @@
     label.font=[UIFont systemFontOfSize:13.0f];
     label.textAlignment=NSTextAlignmentLeft;
     label.textColor=RGB(153, 153, 153);
-    label.text=@"限30字";
-    [view addSubview:label];
-    
+    label.text=@"限30字";    
     [view addSubview:label];
     [view addSubview:textView];
 }
