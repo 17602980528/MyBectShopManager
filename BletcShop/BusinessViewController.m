@@ -31,6 +31,7 @@
 
 #import "CreditThanViewController.h"
 #import "AddCouponHomeVC.h"
+#import "AdvertisementHomeVC.h"
 @interface BusinessViewController ()<UIAlertViewDelegate>
 {
     NSArray *arr_imgS;
@@ -348,7 +349,10 @@
     switch (sender.tag) {
         case 0:
         {
-            [self advertView];
+//            [self advertView];
+            AdvertisementHomeVC *advertisementHomeVC=[[AdvertisementHomeVC alloc]init];
+            [self.navigationController pushViewController:advertisementHomeVC animated:YES];
+            
         }
             break;
         case 1:
