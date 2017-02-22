@@ -42,6 +42,7 @@
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text=adverKindArr[indexPath.row];
     if (indexPath.row==selectedRow) {

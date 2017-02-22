@@ -7,7 +7,7 @@
 //
 
 #import "PublishTopScrollAdvertVC.h"
-
+#import "GoToPayForAdvertistTableVC.h"
 @interface PublishTopScrollAdvertVC ()<UITextViewDelegate,UITextFieldDelegate>
 {
     UILabel *limitDataLength;
@@ -140,6 +140,8 @@
 }
 -(void)goNextVC{
     
+    GoToPayForAdvertistTableVC *VC=[[GoToPayForAdvertistTableVC alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 -(void)addPicture{
     NSLog(@"点击上传图片");
