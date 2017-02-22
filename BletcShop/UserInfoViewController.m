@@ -740,7 +740,7 @@
         [self.pickerView show];
         
     }
-    else {
+    else  if(indexPath.section==2){
         
        
         

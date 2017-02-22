@@ -534,6 +534,7 @@
 		D94DF2661CAE6C7A000D5B69 /* CIA_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D94DF2651CAE6C7A000D5B69 /* CIA_SDK.framework */; };
 		D94F3DC51CBCDBB5003E762D /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D94F3DC41CBCDBB5003E762D /* UserInfoViewController.m */; };
 		D9501DD51DD04B000090A911 /* AdvertiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9501DD41DD04B000090A911 /* AdvertiseViewController.m */; };
+		D95353D11E5C27680004E42C /* GoToPayForAdvertistTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D95353D01E5C27670004E42C /* GoToPayForAdvertistTableVC.m */; };
 		D953B7741D3F1B7100C5D5A9 /* 小标-24.png in Resources */ = {isa = PBXBuildFile; fileRef = D953B7731D3F1B7100C5D5A9 /* 小标-24.png */; };
 		D9541E9D1E1F65B1003022E5 /* 登陆-02.png in Resources */ = {isa = PBXBuildFile; fileRef = D9541E991E1F65B1003022E5 /* 登陆-02.png */; };
 		D9541E9E1E1F65B1003022E5 /* 登陆-03.png in Resources */ = {isa = PBXBuildFile; fileRef = D9541E9A1E1F65B1003022E5 /* 登陆-03.png */; };
@@ -1844,6 +1845,8 @@
 		D94F3DC41CBCDBB5003E762D /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		D9501DD31DD04B000090A911 /* AdvertiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertiseViewController.h; sourceTree = "<group>"; };
 		D9501DD41DD04B000090A911 /* AdvertiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertiseViewController.m; sourceTree = "<group>"; };
+		D95353CF1E5C27670004E42C /* GoToPayForAdvertistTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoToPayForAdvertistTableVC.h; sourceTree = "<group>"; };
+		D95353D01E5C27670004E42C /* GoToPayForAdvertistTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoToPayForAdvertistTableVC.m; sourceTree = "<group>"; };
 		D953B7731D3F1B7100C5D5A9 /* 小标-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小标-24.png"; sourceTree = "<group>"; };
 		D9541E991E1F65B1003022E5 /* 登陆-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登陆-02.png"; sourceTree = "<group>"; };
 		D9541E9A1E1F65B1003022E5 /* 登陆-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登陆-03.png"; sourceTree = "<group>"; };
@@ -3632,8 +3635,17 @@
 				D99292631D8FF5E600103914 /* CashListCell.h */,
 				D99292641D8FF5E600103914 /* CashListCell.m */,
 				D99292651D8FF5E600103914 /* CashListCell.xib */,
+<<<<<<< HEAD
 				18E000501E5C269E004884CC /* 发布优惠券 */,
 				18E000511E5C26BE004884CC /* 发布广告 */,
+=======
+				180D87281E5AB9C600E7FFB4 /* AddCouponHomeVC.h */,
+				180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */,
+				180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */,
+				180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */,
+				D95353CF1E5C27670004E42C /* GoToPayForAdvertistTableVC.h */,
+				D95353D01E5C27670004E42C /* GoToPayForAdvertistTableVC.m */,
+>>>>>>> c70d69f998bb41af0c5df68d5db502b006606640
 				18E095321D878A51002A44C0 /* 数据统计界面 */,
 				18E9E1421D88E72B007981B6 /* 数据统计订单详情 */,
 				185ABD671D80224600BD8097 /* 爱奇艺 */,
@@ -6602,6 +6614,7 @@
 				D9B3A5BE1D74255700F3F27E /* PSTCollectionViewController.m in Sources */,
 				D932F3E31CCDB6B800B33505 /* VPImageCropperViewController.m in Sources */,
 				1CDCCD1E1C7594040094E70D /* AFURLResponseSerialization.m in Sources */,
+				D95353D11E5C27680004E42C /* GoToPayForAdvertistTableVC.m in Sources */,
 				D9B3A5B81D74255700F3F27E /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				1A4173AE1D78717E00A70601 /* LZDTextView.m in Sources */,
 				D9B3A5AA1D74255700F3F27E /* DACircularProgressView.m in Sources */,
