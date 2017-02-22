@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="新年首页.png" translatesAutoresizingMaskIntoConstraints="NO" id="mCF-LN-2xd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="商消乐001.png" translatesAutoresizingMaskIntoConstraints="NO" id="mCF-LN-2xd">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                         </subviews>
@@ -44,6 +44,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="新年首页.png" width="1417" height="2387"/>
+        <image name="商消乐001.png" width="750" height="1334"/>
     </resources>
 </document>

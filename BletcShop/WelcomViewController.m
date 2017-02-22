@@ -43,8 +43,8 @@
     [appdelegate _initChose];
 }
 -(void)makeBannerView{
-//     imageArray = @[@"便捷",@"很多",@"安全"];
-    imageArray = @[@"引导页-01",@"引导页-02",@"引导页-03-01"];
+     imageArray = @[@"便捷",@"很多",@"安全"];
+//    imageArray = @[@"引导页-01",@"引导页-02",@"引导页-03-01"];
 
     _scrollView.contentSize = CGSizeMake(SCREENWIDTH*imageArray.count,_scrollView.frame.size.height);
     _scrollView.pagingEnabled = YES;
@@ -84,7 +84,7 @@
     pageControl.userInteractionEnabled = NO;
     pageControl.tag = 200;
     
-    [self.view addSubview:pageControl];
+//    [self.view addSubview:pageControl];
 }
 
 #pragma ScrollView delegate

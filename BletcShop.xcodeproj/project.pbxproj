@@ -748,6 +748,8 @@
 		D99627461DE67953007B7B34 /* NewRechargeSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D99627441DE67953007B7B34 /* NewRechargeSuccessVC.m */; };
 		D99627471DE67953007B7B34 /* NewRechargeSuccessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99627451DE67953007B7B34 /* NewRechargeSuccessVC.xib */; };
 		D9962F6F1D98F60600E63218 /* langch.png in Resources */ = {isa = PBXBuildFile; fileRef = D9962F6E1D98F60600E63218 /* langch.png */; };
+		D996AE511E5D8A98000A5E89 /* 登陆  头像-01.png in Resources */ = {isa = PBXBuildFile; fileRef = D996AE4F1E5D8A98000A5E89 /* 登陆  头像-01.png */; };
+		D996AE521E5D8A98000A5E89 /* 登陆  头像-02.png in Resources */ = {isa = PBXBuildFile; fileRef = D996AE501E5D8A98000A5E89 /* 登陆  头像-02.png */; };
 		D99960421E5431AD006C202E /* JFAreaDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D999602E1E5431AC006C202E /* JFAreaDataManager.m */; };
 		D99960431E5431AD006C202E /* shop_area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D99960301E5431AD006C202E /* shop_area.sqlite */; };
 		D99960441E5431AD006C202E /* JFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D99960321E5431AD006C202E /* JFButton.m */; };
@@ -2146,6 +2148,8 @@
 		D99627441DE67953007B7B34 /* NewRechargeSuccessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRechargeSuccessVC.m; sourceTree = "<group>"; };
 		D99627451DE67953007B7B34 /* NewRechargeSuccessVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewRechargeSuccessVC.xib; sourceTree = "<group>"; };
 		D9962F6E1D98F60600E63218 /* langch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = langch.png; sourceTree = "<group>"; };
+		D996AE4F1E5D8A98000A5E89 /* 登陆  头像-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登陆  头像-01.png"; sourceTree = "<group>"; };
+		D996AE501E5D8A98000A5E89 /* 登陆  头像-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登陆  头像-02.png"; sourceTree = "<group>"; };
 		D999602D1E5431AC006C202E /* JFAreaDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAreaDataManager.h; sourceTree = "<group>"; };
 		D999602E1E5431AC006C202E /* JFAreaDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAreaDataManager.m; sourceTree = "<group>"; };
 		D99960301E5431AD006C202E /* shop_area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shop_area.sqlite; sourceTree = "<group>"; };
@@ -3080,10 +3084,6 @@
 		18E000501E5C269E004884CC /* 发布优惠券 */ = {
 			isa = PBXGroup;
 			children = (
-				180D87281E5AB9C600E7FFB4 /* AddCouponHomeVC.h */,
-				180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */,
-				180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */,
-				180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */,
 			);
 			name = "发布优惠券";
 			sourceTree = "<group>";
@@ -3635,17 +3635,14 @@
 				D99292631D8FF5E600103914 /* CashListCell.h */,
 				D99292641D8FF5E600103914 /* CashListCell.m */,
 				D99292651D8FF5E600103914 /* CashListCell.xib */,
-
 				18E000501E5C269E004884CC /* 发布优惠券 */,
 				18E000511E5C26BE004884CC /* 发布广告 */,
-
 				180D87281E5AB9C600E7FFB4 /* AddCouponHomeVC.h */,
 				180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */,
 				180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */,
 				180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */,
 				D95353CF1E5C27670004E42C /* GoToPayForAdvertistTableVC.h */,
 				D95353D01E5C27670004E42C /* GoToPayForAdvertistTableVC.m */,
-
 				18E095321D878A51002A44C0 /* 数据统计界面 */,
 				18E9E1421D88E72B007981B6 /* 数据统计订单详情 */,
 				185ABD671D80224600BD8097 /* 爱奇艺 */,
@@ -4355,6 +4352,8 @@
 		D9541E981E1F6593003022E5 /* 用户和商户 */ = {
 			isa = PBXGroup;
 			children = (
+				D996AE4F1E5D8A98000A5E89 /* 登陆  头像-01.png */,
+				D996AE501E5D8A98000A5E89 /* 登陆  头像-02.png */,
 				D9541E991E1F65B1003022E5 /* 登陆-02.png */,
 				D9541E9A1E1F65B1003022E5 /* 登陆-03.png */,
 				D9541E9B1E1F65B1003022E5 /* 登陆-04.png */,
@@ -6034,6 +6033,7 @@
 				D95BAE571D542FD500ED0CDC /* award_13.png in Resources */,
 				1CF6E4811C61E4350001159C /* huiyuan@2x.png in Resources */,
 				18A4B6F21D33933B00EFBCC1 /* 椭圆-02.png in Resources */,
+				D996AE521E5D8A98000A5E89 /* 登陆  头像-02.png in Resources */,
 				D947E4721D7D4CB000F9FEE8 /* sdRefeshView_arrow@2x.png in Resources */,
 				D9541EA01E1F65B1003022E5 /* 登陆-05.png in Resources */,
 				D9FF0D981D53304C00443312 /* 图标-10new.png in Resources */,
@@ -6156,6 +6156,7 @@
 				D9764E881DD5B3F700B088DE /* dfg.png in Resources */,
 				18F27F011D640E84002DD03A /* 头像-25.png in Resources */,
 				D93C0D5E1D251E7B001A1AC1 /* 小标-13.png in Resources */,
+				D996AE511E5D8A98000A5E89 /* 登陆  头像-01.png in Resources */,
 				D993137C1E333F550053D9B6 /* home_icon_niu@2x.png in Resources */,
 				D9DEED371CACFCA100ACDD00 /* ShopImageTableViewCell.xib in Resources */,
 				D986A1BE1DE5436B007B798B /* GetMoneySuccessVC.xib in Resources */,

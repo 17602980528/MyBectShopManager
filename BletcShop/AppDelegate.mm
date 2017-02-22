@@ -843,9 +843,9 @@
     [self.window addSubview:choseView];
     self.choseView = choseView;
     
-    UIImageView *backImg =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    backImg.image = [UIImage imageNamed:@"登陆-01(2)"];
-    [choseView addSubview:backImg];
+    //    UIImageView *backImg =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    //    backImg.image = [UIImage imageNamed:@"登陆-01(2)"];
+    //    [choseView addSubview:backImg];
     
     
     
@@ -859,8 +859,8 @@
     label.textAlignment=NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     [topView addSubview:label];
-
-   
+    
+    
     UIButton *interBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     interBtn.frame = CGRectMake(92, SCREENHEIGHT-44-20, SCREENWIDTH-92*2, 44);
     interBtn.backgroundColor = NavBackGroundColor;
@@ -873,10 +873,10 @@
     
     CGFloat height_v = (interBtn.top-(topView.bottom+25.5))/2;
     
-//    if (SCREENWIDTH ==320) {
-//        height_v= 207.25;
-//    }
-//    
+    //    if (SCREENWIDTH ==320) {
+    //        height_v= 207.25;
+    //    }
+    //
     whichInter = 0;
     
     for (int i = 0; i <2; i ++) {
@@ -884,14 +884,14 @@
         view_two.tag = i;
         
         [choseView addSubview:view_two];
-
+        
         //用户
-// 320 ---140
+        // 320 ---140
         CGFloat weithImg = height_v-36-20;
         
-//        if (SCREENWIDTH ==320) {
-//            weithImg= 148;
-//        }
+        //        if (SCREENWIDTH ==320) {
+        //            weithImg= 148;
+        //        }
         NSLog(@"SCREENWIDTH,weithImg-height_v--%lf---%lf===%lf",SCREENWIDTH,weithImg,height_v);
         UIImageView *userImg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-weithImg)/2, 0, weithImg, weithImg)];
         userImg.layer.cornerRadius = userImg.width/2;
@@ -906,31 +906,31 @@
         select_img.layer.cornerRadius = select_img.width/2;
         [view_two addSubview:select_img];
         
-
+        
         if (i==0) {
-            userImg.image = [UIImage imageNamed:@"登陆-02(2)"];
+            userImg.image = [UIImage imageNamed:@"登陆  头像-01"];
             name_lab.text = @"我是消费者";
-            select_img.image = [UIImage imageNamed:@"登陆-04(2)"];
+            select_img.image = [UIImage imageNamed:@"登陆-04"];
             upImg = select_img;
-
+            
         }else{
-            userImg.image = [UIImage imageNamed:@"登陆-03(2)"];
+            userImg.image = [UIImage imageNamed:@"登陆  头像-02"];
             name_lab.text = @"我是商户";
-            select_img.image = [UIImage imageNamed:@"登陆-05(2)"];
+            select_img.image = [UIImage imageNamed:@"登陆-05"];
             downImg = select_img;
-
+            
         }
         
         
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(choiceWhichTag:)];
         [view_two addGestureRecognizer:tap];
-   
+        
         
     }
     
     
-
+    
     
 }
 
@@ -940,12 +940,12 @@
     whichInter = view.tag;
     
     if (view.tag==0) {
-        upImg.image = [UIImage imageNamed:@"登陆-04(2)"];
-        downImg.image = [UIImage imageNamed:@"登陆-05(2)"];
+        upImg.image = [UIImage imageNamed:@"登陆-04"];
+        downImg.image = [UIImage imageNamed:@"登陆-05"];
 
     }else{
-        upImg.image = [UIImage imageNamed:@"登陆-05(2)"];
-        downImg.image = [UIImage imageNamed:@"登陆-04(2)"];
+        upImg.image = [UIImage imageNamed:@"登陆-05"];
+        downImg.image = [UIImage imageNamed:@"登陆-04"];
 
     }
     

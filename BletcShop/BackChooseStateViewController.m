@@ -31,12 +31,12 @@
     UIView *choseView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
     choseView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:choseView];
-//    self.choseView = choseView;
-    
-    UIImageView *backImg =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    backImg.image = [UIImage imageNamed:@"登陆-01(2)"];
-    [choseView addSubview:backImg];
-    
+    //    self.choseView = choseView;
+    //
+    //    UIImageView *backImg =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    //    backImg.image = [UIImage imageNamed:@"登陆-01(2)"];
+    //    [choseView addSubview:backImg];
+    //
     
     UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 64)];
     topView.backgroundColor =NavBackGroundColor;
@@ -58,12 +58,12 @@
     interBtn.layer.cornerRadius =interBtn.height/2;
     interBtn.layer.masksToBounds = YES;
     
-//    [interBtn addTarget:self action:@selector(interClick) forControlEvents:UIControlEventTouchUpInside];
+    //    [interBtn addTarget:self action:@selector(interClick) forControlEvents:UIControlEventTouchUpInside];
     [choseView addSubview:interBtn];
     
     CGFloat height_v = (interBtn.top-(topView.bottom+25.5))/2;
     
-//    whichInter = 0;
+    //    whichInter = 0;
     
     for (int i = 0; i <2; i ++) {
         UIView *view_two = [[UIView alloc]initWithFrame:CGRectMake(0, topView.bottom+25.5+height_v*i, SCREENWIDTH, height_v)];
@@ -71,12 +71,12 @@
         [choseView addSubview:view_two];
         
         //用户
-//        CGFloat weithImg = height_v/3*2;
-
-        CGFloat weithImg = height_v-36-20;
-
+        //        CGFloat weithImg = height_v/3*2;
         
-//        CGFloat weithImg = 148*SCREENWIDTH/320;
+        CGFloat weithImg = height_v-36-20;
+        
+        
+        //        CGFloat weithImg = 148*SCREENWIDTH/320;
         UIImageView *userImg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-weithImg)/2, 0, weithImg, weithImg)];
         userImg.layer.cornerRadius = userImg.width/2;
         userImg.layer.masksToBounds = YES;
@@ -92,22 +92,22 @@
         
         
         if (i==0) {
-            userImg.image = [UIImage imageNamed:@"登陆-02(2)"];
+            userImg.image = [UIImage imageNamed:@"登陆  头像-01"];
             name_lab.text = @"我是消费者";
-            select_img.image = [UIImage imageNamed:@"登陆-04(2)"];
-//            upImg = select_img;
+            select_img.image = [UIImage imageNamed:@"登陆-04"];
+            //            upImg = select_img;
             
         }else{
-            userImg.image = [UIImage imageNamed:@"登陆-03(2)"];
+            userImg.image = [UIImage imageNamed:@"登陆  头像-02"];
             name_lab.text = @"我是商户";
-            select_img.image = [UIImage imageNamed:@"登陆-05(2)"];
-//            downImg = select_img;
+            select_img.image = [UIImage imageNamed:@"登陆-05"];
+            //            downImg = select_img;
             
         }
         
         
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(choiceWhichTag:)];
-//        [view_two addGestureRecognizer:tap];
+        //        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(choiceWhichTag:)];
+        //        [view_two addGestureRecognizer:tap];
         
         
     }
@@ -129,13 +129,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

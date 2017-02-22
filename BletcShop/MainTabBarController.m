@@ -35,29 +35,29 @@
 //添加子控制器
 -(void)addchildVc
 {
-//    UIEdgeInsets Insets=UIEdgeInsetsMake(-10, 0, 10, 0);
+    //    UIEdgeInsets Insets=UIEdgeInsetsMake(-10, 0, 10, 0);
     
     HomeViewController *firstVc = [[HomeViewController alloc]init];
-
     
-//    FirstViewController *firstVc = [[FirstViewController alloc]init];
-    [self addOneChindVC:firstVc title:@"首页" imageName:@"home_icon_jin" selectedImageName:@"home_icon_jin"];
+    
+    //    FirstViewController *firstVc = [[FirstViewController alloc]init];
+    [self addOneChindVC:firstVc title:@"首页" imageName:@"mine_home_n" selectedImageName:@"mine_home_s"];
     
     ShoppingViewController *shopVC = [[ShoppingViewController alloc]init];
-    [self addOneChindVC:shopVC title:@"周边" imageName:@"home_icon_ji" selectedImageName:@"home_icon_ji"];
+    [self addOneChindVC:shopVC title:@"周边" imageName:@"mine_side_n" selectedImageName:@"mine_side_s"];
     
     
     CardMarketViewController *cardmarketVC= [[CardMarketViewController alloc]init];
     
     
-    [self addOneChindVC:cardmarketVC title:@"卡市" imageName:@"home_icon_ying" selectedImageName:@"home_icon_ying"];
-//    cardmarketVC.tabBarItem.imageInsets=Insets;
+    [self addOneChindVC:cardmarketVC title:@"卡市" imageName:@"mine_card_n" selectedImageName:@"mine_card_s"];
+    //    cardmarketVC.tabBarItem.imageInsets=Insets;
     
     MineViewController *mineVC = [[MineViewController alloc]init];
-    [self addOneChindVC:mineVC title:@"我的" imageName:@"home_icon_xin" selectedImageName:@"home_icon_xin"];
+    [self addOneChindVC:mineVC title:@"我的" imageName:@"mine_my_n" selectedImageName:@"mine_my_s"];
     
     MoreViewController *moreVC = [[MoreViewController alloc]init];
-    [self addOneChindVC:moreVC title:@"更多" imageName:@"home_icon_chun" selectedImageName:@"home_icon_chun"];
+    [self addOneChindVC:moreVC title:@"更多" imageName:@"mine_more_n" selectedImageName:@"mine_more_s"];
     
     //self.viewControllers = @[firstVc,shopVC,mineVC,moreVC];
 }
