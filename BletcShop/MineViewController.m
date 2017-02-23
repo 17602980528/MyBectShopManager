@@ -12,7 +12,6 @@
 #import "Mycell.h"
 #import "CardVipController.h"
 #import "MyOderController.h"
-#import "MyPointController.h"
 #import "MyMoneybagController.h"
 #import "NoEvaluateController.h"
 #import "FriendController.h"

@@ -11,6 +11,9 @@
 #import "LandingController.h"
 #import "UIImageView+WebCache.h"
 #import "GetDiscountCouponVC.h"
+#import "PointRuleViewController.h"
+#import "ConvertRecordVC.h"//兑换记录
+#import "PointAllGetAndCostsVC.h"//积分明细
 @interface PointConvertViewController ()<UIScrollViewDelegate>
 
 @end
@@ -52,22 +55,23 @@
     convertLabel.text=@"0积分";
     [self.view addSubview:convertLabel];
     //累计签到天数
-    UILabel *dayCountLable=[[UILabel alloc]initWithFrame:CGRectMake(76, 40, 120, 13)];
-    dayCountLable.font=[UIFont systemFontOfSize:13.0f];
-    dayCountLable.textAlignment=NSTextAlignmentLeft;
-    dayCountLable.textColor=[UIColor grayColor];
-    dayCountLable.text=@"已累计签到2天";
-    [self.view addSubview:dayCountLable];
+//    UILabel *dayCountLable=[[UILabel alloc]initWithFrame:CGRectMake(76, 40, 120, 13)];
+//    dayCountLable.font=[UIFont systemFontOfSize:13.0f];
+//    dayCountLable.textAlignment=NSTextAlignmentLeft;
+//    dayCountLable.textColor=[UIColor grayColor];
+//    dayCountLable.text=@"已累计签到2天";
+//    [self.view addSubview:dayCountLable];
     //签到按钮
     UIButton *signBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     signBtn.frame=CGRectMake(SCREENWIDTH-128, 15, 120, 30);
     signBtn.backgroundColor=NavBackGroundColor;//RGB(66, 170, 250);
-    [signBtn setTitle:@"签到" forState:UIControlStateNormal];
+    [signBtn setTitle:@"积分规则" forState:UIControlStateNormal];
     [signBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     signBtn.titleLabel.font=[UIFont systemFontOfSize:13.0f];
     signBtn.layer.cornerRadius=15;
     signBtn.clipsToBounds=YES;
     [self.view addSubview:signBtn];
+    [signBtn addTarget:self action:@selector(pointUseRule) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 63, SCREENWIDTH, 1)];
     lineView.backgroundColor=RGB(234, 234, 234);
@@ -85,6 +89,11 @@
     detailConvert.text=@"积分明细";
     [self.view addSubview:detailConvert];
     
+    UIButton *detailCvBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    detailCvBtn.frame=CGRectMake(50, 118-44-8, SCREENWIDTH/2-85+35, 30);
+    [detailCvBtn addTarget:self action:@selector(pointAllUseInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:detailCvBtn];
+    
     UIImageView *recordImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/2+50, 118-44-8, 30, 30)];
     recordImageView.image=[UIImage imageNamed:@"vip_integral_n"];
     [self.view addSubview:recordImageView];
@@ -95,6 +104,11 @@
     recordConvert.textAlignment=NSTextAlignmentLeft;
     recordConvert.text=@"兑换记录";
     [self.view addSubview:recordConvert];
+    
+    UIButton *recordCvBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    recordCvBtn.frame=CGRectMake(SCREENWIDTH/2+50, 118-44-8, SCREENWIDTH-SCREENWIDTH/2-85+35, 30);
+    [recordCvBtn addTarget:self action:@selector(exchangeRecord) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:recordCvBtn];
     
     UIView *slipBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 191-94, SCREENWIDTH, 94)];
     slipBackView.backgroundColor=RGB(240, 240, 240);
@@ -380,6 +394,22 @@
         [self.navigationController pushViewController:landVc animated:YES];
     }
     
+}
+//积分使用规
+-(void)pointUseRule{
+    PointRuleViewController *pointRuleVC=[[PointRuleViewController alloc]init];
+    pointRuleVC.type=99;
+    [self.navigationController pushViewController:pointRuleVC animated:YES];
+}
+//积分明细
+-(void)pointAllUseInfo{
+    PointAllGetAndCostsVC *recordVC=[[PointAllGetAndCostsVC alloc]init];
+    [self.navigationController pushViewController:recordVC animated:YES];
+}
+//兑换记录
+-(void)exchangeRecord{
+    ConvertRecordVC *recordVC=[[ConvertRecordVC alloc]init];
+    [self.navigationController pushViewController:recordVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

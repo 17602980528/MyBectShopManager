@@ -152,6 +152,8 @@
 		18F031E81E5E8DC100ACD261 /* coupon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 18F031DB1E5E8DC100ACD261 /* coupon.jpeg */; };
 		18F031E91E5E8DC100ACD261 /* points.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F031DC1E5E8DC100ACD261 /* points.jpg */; };
 		18F031EA1E5E8DC100ACD261 /* points2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F031DD1E5E8DC100ACD261 /* points2.jpg */; };
+		18F031F11E5EB8C100ACD261 /* ConvertRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F031F01E5EB8C100ACD261 /* ConvertRecordVC.m */; };
+		18F031F41E5ED34300ACD261 /* PointAllGetAndCostsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F031F31E5ED34300ACD261 /* PointAllGetAndCostsVC.m */; };
 		18F05E671E2626BD002E4C10 /* TransferOwnershipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F05E661E2626BD002E4C10 /* TransferOwnershipViewController.m */; };
 		18F05E6A1E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F05E691E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m */; };
 		18F27EC91D640C21002DD03A /* NewModelImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F27EC81D640C21002DD03A /* NewModelImageViewController.m */; };
@@ -275,7 +277,6 @@
 		1C9E82591C60AD530007BF02 /* 2-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C9E82581C60AD530007BF02 /* 2-01.png */; };
 		1C9E825B1C60AD5A0007BF02 /* 3-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C9E825A1C60AD5A0007BF02 /* 3-01.png */; };
 		1C9E825D1C60AD610007BF02 /* 1-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C9E825C1C60AD610007BF02 /* 1-01.png */; };
-		1CB53C031C571F98002B6CC1 /* MyPointController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB53C021C571F98002B6CC1 /* MyPointController.m */; };
 		1CB53C061C571FB1002B6CC1 /* MyOderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB53C051C571FB1002B6CC1 /* MyOderController.m */; };
 		1CB53C091C571FC8002B6CC1 /* MyMoneybagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB53C081C571FC8002B6CC1 /* MyMoneybagController.m */; };
 		1CB53C0C1C571FE1002B6CC1 /* NoEvaluateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB53C0B1C571FE1002B6CC1 /* NoEvaluateController.m */; };
@@ -1228,6 +1229,10 @@
 		18F031DB1E5E8DC100ACD261 /* coupon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coupon.jpeg; sourceTree = "<group>"; };
 		18F031DC1E5E8DC100ACD261 /* points.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = points.jpg; sourceTree = "<group>"; };
 		18F031DD1E5E8DC100ACD261 /* points2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = points2.jpg; sourceTree = "<group>"; };
+		18F031EF1E5EB8C100ACD261 /* ConvertRecordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertRecordVC.h; sourceTree = "<group>"; };
+		18F031F01E5EB8C100ACD261 /* ConvertRecordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertRecordVC.m; sourceTree = "<group>"; };
+		18F031F21E5ED34300ACD261 /* PointAllGetAndCostsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointAllGetAndCostsVC.h; sourceTree = "<group>"; };
+		18F031F31E5ED34300ACD261 /* PointAllGetAndCostsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointAllGetAndCostsVC.m; sourceTree = "<group>"; };
 		18F05E651E2626BD002E4C10 /* TransferOwnershipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferOwnershipViewController.h; sourceTree = "<group>"; };
 		18F05E661E2626BD002E4C10 /* TransferOwnershipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferOwnershipViewController.m; sourceTree = "<group>"; };
 		18F05E681E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckTransferStateAndEditOrRemoveCardViewController.h; sourceTree = "<group>"; };
@@ -1415,8 +1420,6 @@
 		1C9E82581C60AD530007BF02 /* 2-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-01.png"; sourceTree = "<group>"; };
 		1C9E825A1C60AD5A0007BF02 /* 3-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-01.png"; sourceTree = "<group>"; };
 		1C9E825C1C60AD610007BF02 /* 1-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-01.png"; sourceTree = "<group>"; };
-		1CB53C011C571F98002B6CC1 /* MyPointController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPointController.h; sourceTree = "<group>"; };
-		1CB53C021C571F98002B6CC1 /* MyPointController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPointController.m; sourceTree = "<group>"; };
 		1CB53C041C571FB1002B6CC1 /* MyOderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOderController.h; sourceTree = "<group>"; };
 		1CB53C051C571FB1002B6CC1 /* MyOderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOderController.m; sourceTree = "<group>"; };
 		1CB53C071C571FC8002B6CC1 /* MyMoneybagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMoneybagController.h; sourceTree = "<group>"; };
@@ -2843,7 +2846,7 @@
 				D9A00A031CA22F790018B7A4 /* 注册 */,
 				D9A00A021CA22F6E0018B7A4 /* 登录 */,
 				1CB53BE21C570714002B6CC1 /* 我的会员卡 */,
-				1CB53BE61C57076A002B6CC1 /* 我的积分 */,
+				1CB53BE61C57076A002B6CC1 /* 我的积分&优惠券 */,
 				1CB53BE71C57077F002B6CC1 /* 我的消费 */,
 				1CB53BE81C570787002B6CC1 /* 我的钱包 */,
 				D936F5801D473C4B00424B22 /* 我的代金券 */,
@@ -3190,7 +3193,7 @@
 			path = "动画效果";
 			sourceTree = "<group>";
 		};
-		18F031D01E5E8D8F00ACD261 /* tempPictures */ = {
+		18F031D01E5E8D8F00ACD261 /* tempPictures(临时图片) */ = {
 			isa = PBXGroup;
 			children = (
 				18F031D11E5E8DC100ACD261 /* tempProducts_01.jpeg */,
@@ -3207,7 +3210,45 @@
 				18F031DC1E5E8DC100ACD261 /* points.jpg */,
 				18F031DD1E5E8DC100ACD261 /* points2.jpg */,
 			);
-			name = tempPictures;
+			name = "tempPictures(临时图片)";
+			sourceTree = "<group>";
+		};
+		18F031EB1E5EB41F00ACD261 /* 积分使用规则 */ = {
+			isa = PBXGroup;
+			children = (
+				D94B52561D4B434500C067B3 /* PointRuleViewController.h */,
+				D94B52571D4B434500C067B3 /* PointRuleViewController.m */,
+			);
+			name = "积分使用规则";
+			sourceTree = "<group>";
+		};
+		18F031EC1E5EB48000ACD261 /* 积分商城首页 */ = {
+			isa = PBXGroup;
+			children = (
+				D9764E8B1DD5B62100B088DE /* PointConvertViewController.h */,
+				D9764E8C1DD5B62100B088DE /* PointConvertViewController.m */,
+				D9764E8D1DD5B62100B088DE /* THProgressView.h */,
+				D9764E8E1DD5B62100B088DE /* THProgressView.m */,
+			);
+			name = "积分商城首页";
+			sourceTree = "<group>";
+		};
+		18F031ED1E5EB4A200ACD261 /* 积分兑换记录 */ = {
+			isa = PBXGroup;
+			children = (
+				18F031EF1E5EB8C100ACD261 /* ConvertRecordVC.h */,
+				18F031F01E5EB8C100ACD261 /* ConvertRecordVC.m */,
+			);
+			name = "积分兑换记录";
+			sourceTree = "<group>";
+		};
+		18F031EE1E5EB4F600ACD261 /* 积分明细 */ = {
+			isa = PBXGroup;
+			children = (
+				18F031F21E5ED34300ACD261 /* PointAllGetAndCostsVC.h */,
+				18F031F31E5ED34300ACD261 /* PointAllGetAndCostsVC.m */,
+			);
+			name = "积分明细";
 			sourceTree = "<group>";
 		};
 		18F27ECA1D640E84002DD03A /* 头像  选择 */ = {
@@ -3475,22 +3516,18 @@
 			name = "我的会员卡";
 			sourceTree = "<group>";
 		};
-		1CB53BE61C57076A002B6CC1 /* 我的积分 */ = {
+		1CB53BE61C57076A002B6CC1 /* 我的积分&优惠券 */ = {
 			isa = PBXGroup;
 			children = (
-				18F031D01E5E8D8F00ACD261 /* tempPictures */,
-				D9764E8B1DD5B62100B088DE /* PointConvertViewController.h */,
-				D9764E8C1DD5B62100B088DE /* PointConvertViewController.m */,
-				D9764E8D1DD5B62100B088DE /* THProgressView.h */,
-				D9764E8E1DD5B62100B088DE /* THProgressView.m */,
-				1CB53C011C571F98002B6CC1 /* MyPointController.h */,
-				1CB53C021C571F98002B6CC1 /* MyPointController.m */,
-				D94B52561D4B434500C067B3 /* PointRuleViewController.h */,
-				D94B52571D4B434500C067B3 /* PointRuleViewController.m */,
+				18F031D01E5E8D8F00ACD261 /* tempPictures(临时图片) */,
+				18F031EC1E5EB48000ACD261 /* 积分商城首页 */,
+				18F031EB1E5EB41F00ACD261 /* 积分使用规则 */,
+				18F031ED1E5EB4A200ACD261 /* 积分兑换记录 */,
+				18F031EE1E5EB4F600ACD261 /* 积分明细 */,
 				180C3D601E514E8100BC9177 /* 领取优惠券 */,
 				180C3D631E514E8100BC9177 /* 优惠券介绍 */,
 			);
-			name = "我的积分";
+			name = "我的积分&优惠券";
 			sourceTree = "<group>";
 		};
 		1CB53BE71C57077F002B6CC1 /* 我的消费 */ = {
@@ -6315,6 +6352,7 @@
 				D9222B041D13C8EC00C82683 /* CreditThanViewController.m in Sources */,
 				1CB53C121C572019002B6CC1 /* LookAgoController.m in Sources */,
 				D97B70301E2C90FE00CEAFC1 /* CardMarketModel.m in Sources */,
+				18F031F41E5ED34300ACD261 /* PointAllGetAndCostsVC.m in Sources */,
 				1CDCCD201C7594040094E70D /* KKRequestDataService.m in Sources */,
 				D99960471E5431AD006C202E /* JFCityHeaderView.m in Sources */,
 				D9EE55621DC9B1D20024C830 /* ShareCardViewController.m in Sources */,
@@ -6337,7 +6375,6 @@
 				18F05E671E2626BD002E4C10 /* TransferOwnershipViewController.m in Sources */,
 				185ABD861D80227900BD8097 /* VCOPViewController.m in Sources */,
 				D94040441CBE353700EC98EA /* DelayViewController.m in Sources */,
-				1CB53C031C571F98002B6CC1 /* MyPointController.m in Sources */,
 				D98787291E27229000C7A828 /* ComplaintVC.m in Sources */,
 				D9AB25191D88E482000E9288 /* EaseRecordView.m in Sources */,
 				D9222B071D13DE3400C82683 /* BindBankCardViewController.m in Sources */,
@@ -6440,6 +6477,7 @@
 				D98ECBC91D9CC52200BEDD57 /* LZDAddVipCell.m in Sources */,
 				D9ACF1AF1E24CB4200BCC877 /* thirdlogVC.m in Sources */,
 				D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */,
+				18F031F11E5EB8C100ACD261 /* ConvertRecordVC.m in Sources */,
 				D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */,
 				D9B3A5A11D74255700F3F27E /* AdView.m in Sources */,
 				0793870D1C561D5E0021B385 /* Myitem.m in Sources */,
