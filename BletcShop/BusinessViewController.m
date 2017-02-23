@@ -31,7 +31,12 @@
 
 #import "CreditThanViewController.h"
 #import "AddCouponHomeVC.h"
-#import "AdvertisementHomeVC.h"
+//#import "AdvertisementHomeVC.h"
+
+
+#import "PushAdverViewController.h"
+
+
 @interface BusinessViewController ()<UIAlertViewDelegate>
 {
     NSArray *arr_imgS;
@@ -350,7 +355,7 @@
         case 0:
         {
 //            [self advertView];
-            AdvertisementHomeVC *advertisementHomeVC=[[AdvertisementHomeVC alloc]init];
+            PushAdverViewController *advertisementHomeVC=[[PushAdverViewController alloc]init];
             [self.navigationController pushViewController:advertisementHomeVC animated:YES];
             
         }

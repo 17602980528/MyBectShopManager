@@ -41,12 +41,8 @@
     headImageView.image=[UIImage imageNamed:@"3.1-02"];
     headImageView.layer.cornerRadius=22.0f;
     headImageView.clipsToBounds=YES;
-    headImageView.userInteractionEnabled=YES;
     [self.view addSubview:headImageView];
     headImageView.contentMode = UIViewContentModeScaleAspectFill;
-    
-    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goLandingOrNot)];
-    [headImageView addGestureRecognizer:tapGesture];
     //积分
     convertLabel=[[UILabel alloc]initWithFrame:CGRectMake(76, 20, 120, 13)];
     convertLabel.textAlignment=NSTextAlignmentLeft;
@@ -116,8 +112,7 @@
     
     UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 9, SCREENWIDTH, 76)];
     
-    _adverImages = @[[UIImage imageNamed:@"points.jpg"], [UIImage imageNamed:@"coupon.jpeg"], [UIImage imageNamed:@"points2.jpg"]];
-    
+    _adverImages = @[[UIImage imageNamed:@"-2-01.jpg"], [UIImage imageNamed:@"-2-02.jpg"], [UIImage imageNamed:@"-2-03.jpg"]];
     //只创建 3 张图片。
     for (NSInteger i = 0; i < 3; i++) {
         UIImageView *adversImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH * i, 0, self.view.frame.size.width, 76)];
@@ -172,8 +167,7 @@
     bottomLabel.textColor=[UIColor grayColor];
     bottomLabel.text=@"我是有底线的";
     [goodsScrollView addSubview:bottomLabel];
-    NSArray*_imageNameArray=@[@"tempProducts_01.jpeg",@"tempProducts_02.jpg",@"tempProducts_03.jpg",@"tempProducts_04.jpg",@"tempProducts_05.jpg",@"tempProducts_06.jpg",@"tempProducts_07.jpg",@"tempProducts_08.png",@"tempProducts_09.jpg"];
-    NSArray *productNameArray=@[@"爱国者Mini移动电源",@"懒人手机支架",@"时尚拉杆箱",@"日本印象保温杯",@"陶瓷水具七件套",@"荣事达加湿器",@"罗马假日四件套",@"R9s杨幂定制版",@"小米平衡车"];
+    
     for (int i=0; i<9; i++) {
         UIView *rewardView=[[UIView alloc]initWithFrame:CGRectMake(i%2*SCREENWIDTH/2, i/2*(SCREENWIDTH/2), SCREENWIDTH/2, SCREENWIDTH/2)];
         
@@ -182,13 +176,13 @@
         [goodsScrollView addSubview:rewardView];
         
         UIImageView *rewardImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/4-40, 10, 80, 80)];
-        rewardImageView.image=[UIImage imageNamed:_imageNameArray[i]];
+        rewardImageView.image=[UIImage imageNamed:@"头像-26"];
         [rewardView addSubview:rewardImageView];
         
         UILabel *rewardNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 99, SCREENWIDTH/2, 13)];
         rewardNameLabel.textAlignment=NSTextAlignmentCenter;
         rewardNameLabel.font=[UIFont systemFontOfSize:13.0f];
-        rewardNameLabel.text=productNameArray[i];
+        rewardNameLabel.text=@"爱国者Mini移动电源";
         [rewardView addSubview:rewardNameLabel];
         
         UIView *progressBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 120, SCREENWIDTH/2, 10)];
@@ -352,7 +346,12 @@
         [headImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"3.1-02.png"] options:SDWebImageRetryFailed];
         
     }else{
-        //去登录页
+        //去登录页／／
+        //        if (!delegate.IsLogin)
+        //        {
+        //        LandingController *landVc = [[LandingController alloc]init];
+        //        [self.navigationController pushViewController:landVc animated:YES];
+        //        }
         
     }
     
@@ -386,6 +385,7 @@
     [self.navigationController pushViewController:disctountCounponVC animated:YES];
     
 }
+<<<<<<< HEAD
 -(void)goLandingOrNot{
     AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
     if (!delegate.IsLogin)
@@ -411,6 +411,8 @@
     ConvertRecordVC *recordVC=[[ConvertRecordVC alloc]init];
     [self.navigationController pushViewController:recordVC animated:YES];
 }
+=======
+>>>>>>> bafb55a270e4e8c0eb2bc22a669c0b98f8c92c2f
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
