@@ -54,7 +54,7 @@
     [view addSubview:button2];
     
     lineView=[[UIView alloc]init];
-    lineView.bounds=CGRectMake(0, 48, SCREENWIDTH/2, 2);
+    lineView.bounds=CGRectMake(0, 48, SCREENWIDTH/4, 2);
     lineView.center=CGPointMake(button1.center.x, 49);
     lineView.backgroundColor=[UIColor redColor];
     [view addSubview:lineView];

@@ -24,7 +24,7 @@
 #import "NewMessageVC.h"
 
 #import "ScanViewController.h"
-
+#import "HolidayActivertyVC.h"
 #import "JFCityViewController.h"
 
 
@@ -1479,7 +1479,12 @@
         if (sender.tag ==2) {
            
             
-            [self showHint:@"暂未开通!"];
+            NSDictionary *dic = self.data_A2[1];
+            //            [self showHint:@"暂未开通!"];
+            HolidayActivertyVC *holidayVC=[[HolidayActivertyVC alloc]init];
+            holidayVC.activityId=dic[@"id"];
+            holidayVC.title = @"节日活动";//dic[@"theme"];
+            [self.navigationController pushViewController:holidayVC animated:YES];
             
         }
 

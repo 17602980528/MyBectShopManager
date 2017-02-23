@@ -154,6 +154,7 @@
 		18F0320C1E5ED79300ACD261 /* tempProducts_07.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F031FF1E5ED79300ACD261 /* tempProducts_07.jpg */; };
 		18F0320D1E5ED79300ACD261 /* tempProducts_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F032001E5ED79300ACD261 /* tempProducts_08.png */; };
 		18F0320E1E5ED79300ACD261 /* tempProducts_09.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F032011E5ED79300ACD261 /* tempProducts_09.jpg */; };
+		18F032111E5EE02700ACD261 /* HolidayActivertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F032101E5EE02700ACD261 /* HolidayActivertyVC.m */; };
 		18F05E671E2626BD002E4C10 /* TransferOwnershipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F05E661E2626BD002E4C10 /* TransferOwnershipViewController.m */; };
 		18F05E6A1E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F05E691E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m */; };
 		18F27EC91D640C21002DD03A /* NewModelImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F27EC81D640C21002DD03A /* NewModelImageViewController.m */; };
@@ -1237,6 +1238,8 @@
 		18F031FF1E5ED79300ACD261 /* tempProducts_07.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tempProducts_07.jpg; sourceTree = "<group>"; };
 		18F032001E5ED79300ACD261 /* tempProducts_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tempProducts_08.png; sourceTree = "<group>"; };
 		18F032011E5ED79300ACD261 /* tempProducts_09.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tempProducts_09.jpg; sourceTree = "<group>"; };
+		18F0320F1E5EE02700ACD261 /* HolidayActivertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HolidayActivertyVC.h; sourceTree = "<group>"; };
+		18F032101E5EE02700ACD261 /* HolidayActivertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HolidayActivertyVC.m; sourceTree = "<group>"; };
 		18F05E651E2626BD002E4C10 /* TransferOwnershipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferOwnershipViewController.h; sourceTree = "<group>"; };
 		18F05E661E2626BD002E4C10 /* TransferOwnershipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferOwnershipViewController.m; sourceTree = "<group>"; };
 		18F05E681E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckTransferStateAndEditOrRemoveCardViewController.h; sourceTree = "<group>"; };
@@ -3236,6 +3239,8 @@
 		18F031EC1E5EB48000ACD261 /* 积分商城首页 */ = {
 			isa = PBXGroup;
 			children = (
+				D9764E8B1DD5B62100B088DE /* PointConvertViewController.h */,
+				D9764E8C1DD5B62100B088DE /* PointConvertViewController.m */,
 			);
 			name = "积分商城首页";
 			sourceTree = "<group>";
@@ -3531,8 +3536,6 @@
 				18F031EB1E5EB41F00ACD261 /* 积分使用规则 */,
 				18F031ED1E5EB4A200ACD261 /* 积分兑换记录 */,
 				18F031EE1E5EB4F600ACD261 /* 积分明细 */,
-				D9764E8B1DD5B62100B088DE /* PointConvertViewController.h */,
-				D9764E8C1DD5B62100B088DE /* PointConvertViewController.m */,
 				D9764E8D1DD5B62100B088DE /* THProgressView.h */,
 				D9764E8E1DD5B62100B088DE /* THProgressView.m */,
 				D94B52561D4B434500C067B3 /* PointRuleViewController.h */,
@@ -3871,6 +3874,8 @@
 				D9C0E95A1DCC81DD00FD1199 /* ShaperView.m */,
 				D985332F1DDE9A86004E1E6F /* NewBuyCardViewController.h */,
 				D98533301DDE9A86004E1E6F /* NewBuyCardViewController.m */,
+				18F0320F1E5EE02700ACD261 /* HolidayActivertyVC.h */,
+				18F032101E5EE02700ACD261 /* HolidayActivertyVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -6743,6 +6748,7 @@
 				185ABD851D80227900BD8097 /* QYPlayBackView.m in Sources */,
 				D947E4751D7D4CB000F9FEE8 /* SDRefreshView.m in Sources */,
 				D96643741E0B821E0048EFDB /* BonusCashViewController.m in Sources */,
+				18F032111E5EE02700ACD261 /* HolidayActivertyVC.m in Sources */,
 				D95869381E4DA4EE00E91A47 /* ResetPhoneNextVC.m in Sources */,
 				D9A8ABED1E02954200D4597F /* ContentDetailViewController.m in Sources */,
 				D9937D7F1DDFF22C0001B575 /* PayMentController.m in Sources */,

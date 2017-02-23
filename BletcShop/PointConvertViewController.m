@@ -175,6 +175,7 @@
     
     NSArray*_imageNameArray=@[@"tempProducts_01.jpeg",@"tempProducts_02.jpg",@"tempProducts_03.jpg",@"tempProducts_04.jpg",@"tempProducts_05.jpg",@"tempProducts_06.jpg",@"tempProducts_07.jpg",@"tempProducts_08.png",@"tempProducts_09.jpg"];
     NSArray *productNameArray=@[@"爱国者Mini移动电源",@"懒人手机支架",@"时尚拉杆箱",@"日本印象保温杯",@"陶瓷水具七件套",@"荣事达加湿器",@"罗马假日四件套",@"R9s杨幂定制版",@"小米平衡车"];
+    NSArray *pointNeedArray=@[@"500",@"200",@"1500",@"300",@"1280",@"2000",@"2500",@"28000",@"30000"];
     for (int i=0; i<9; i++) {
         UIView *rewardView=[[UIView alloc]initWithFrame:CGRectMake(i%2*SCREENWIDTH/2, i/2*(SCREENWIDTH/2), SCREENWIDTH/2, SCREENWIDTH/2)];
         
@@ -215,7 +216,7 @@
         UILabel *priceLabel=[[UILabel alloc]initWithFrame:CGRectMake(65, 135, SCREENWIDTH/2-65, 15)];
         priceLabel.textAlignment=NSTextAlignmentLeft;
         priceLabel.font=[UIFont systemFontOfSize:13.0f];
-        priceLabel.text=@"2500";
+        priceLabel.text=pointNeedArray[i];
         [rewardView addSubview:priceLabel];
         priceLabel.textColor=RGB(226, 47, 50);
         
@@ -403,19 +404,37 @@
 }
 //积分使用规
 -(void)pointUseRule{
+    
     PointRuleViewController *pointRuleVC=[[PointRuleViewController alloc]init];
     pointRuleVC.type=99;
     [self.navigationController pushViewController:pointRuleVC animated:YES];
 }
 //积分明细
 -(void)pointAllUseInfo{
-    PointAllGetAndCostsVC *recordVC=[[PointAllGetAndCostsVC alloc]init];
-    [self.navigationController pushViewController:recordVC animated:YES];
+    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (!delegate.IsLogin)
+    {
+        LandingController *landVc = [[LandingController alloc]init];
+        [self.navigationController pushViewController:landVc animated:YES];
+    }else{
+        PointAllGetAndCostsVC *recordVC=[[PointAllGetAndCostsVC alloc]init];
+        [self.navigationController pushViewController:recordVC animated:YES];
+    }
+   
 }
 //兑换记录
 -(void)exchangeRecord{
-    ConvertRecordVC *recordVC=[[ConvertRecordVC alloc]init];
-    [self.navigationController pushViewController:recordVC animated:YES];
+    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (!delegate.IsLogin)
+    {
+        LandingController *landVc = [[LandingController alloc]init];
+        [self.navigationController pushViewController:landVc animated:YES];
+    }else{
+        ConvertRecordVC *recordVC=[[ConvertRecordVC alloc]init];
+        [self.navigationController pushViewController:recordVC animated:YES];
+
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
