@@ -13,6 +13,9 @@
 #import "AdverShowViewController.h"
 
 @interface PushAdverViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *shuomingBtn;
+@property (weak, nonatomic) IBOutlet UIButton *listBtn;
+@property (weak, nonatomic) IBOutlet UIButton *pushBtn;
 
 @end
 

@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PushAdverViewController">
             <connections>
+                <outlet property="listBtn" destination="X50-nD-1dZ" id="tqH-0O-Qj0"/>
+                <outlet property="pushBtn" destination="ZLM-58-iq4" id="3Wf-gQ-5Uf"/>
+                <outlet property="shuomingBtn" destination="l1t-11-s5Y" id="8Ho-B2-V9a"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,13 +22,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X50-nD-1dZ">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X50-nD-1dZ">
                     <rect key="frame" x="63" y="110" width="250" height="150"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="250" id="4qv-Mo-8DZ"/>
                         <constraint firstAttribute="height" constant="150" id="vmL-yL-W72"/>
                     </constraints>
+                    <state key="normal" image="AD_ad_tb" backgroundImage="AD_ad_tb"/>
                     <connections>
                         <action selector="adverListBtn:" destination="-1" eventType="touchUpInside" id="w0j-M9-cuo"/>
                     </connections>
@@ -40,18 +44,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1t-11-s5Y">
-                    <rect key="frame" x="320" y="15" width="21" height="24"/>
-                    <color key="backgroundColor" red="1" green="0.42555507740239829" blue="0.47903602100678944" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1t-11-s5Y">
+                    <rect key="frame" x="317" y="15" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="MEE-zN-SMb"/>
-                        <constraint firstAttribute="width" constant="21" id="XRz-cZ-R0f"/>
+                        <constraint firstAttribute="width" constant="24" id="XRz-cZ-R0f"/>
                     </constraints>
+                    <state key="normal" image="AD_ad_qs" backgroundImage="AD_ad_qs"/>
                     <connections>
                         <action selector="adverconfuse:" destination="-1" eventType="touchUpInside" id="Xdc-ho-v8P"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZLM-58-iq4">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZLM-58-iq4">
                     <rect key="frame" x="62" y="280" width="250" height="150"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -60,6 +64,7 @@
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="WHe-oh-5vL"/>
                         <constraint firstAttribute="height" constant="150" id="kPT-Wx-xDd"/>
                     </constraints>
+                    <state key="normal" image="AD_ad_is" backgroundImage="AD_ad_is"/>
                     <connections>
                         <action selector="pushAdverBtn:" destination="-1" eventType="touchUpInside" id="98x-4k-oVN"/>
                     </connections>
@@ -74,22 +79,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Btr-Yn-3jv">
-                    <rect key="frame" x="153" y="138" width="70" height="74"/>
-                    <color key="backgroundColor" red="1" green="0.37576248388723743" blue="0.2804630259625982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="74" id="34T-Gm-ZhF"/>
-                        <constraint firstAttribute="width" constant="70" id="etK-B4-wvL"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lpY-LA-WYO">
-                    <rect key="frame" x="153" y="308" width="70" height="74"/>
-                    <color key="backgroundColor" red="0.26955084700354059" green="1" blue="0.24362622297091463" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="PwS-Vh-WLX"/>
-                        <constraint firstAttribute="height" constant="74" id="ibs-nl-fax"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -101,14 +90,15 @@
                 <constraint firstItem="CfD-ao-7zs" firstAttribute="bottom" secondItem="X50-nD-1dZ" secondAttribute="bottom" id="FRI-hF-rXd"/>
                 <constraint firstItem="CfD-ao-7zs" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KnZ-j3-HCC"/>
                 <constraint firstItem="ZLM-58-iq4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Q0K-eh-VHd"/>
-                <constraint firstItem="Btr-Yn-3jv" firstAttribute="centerY" secondItem="X50-nD-1dZ" secondAttribute="centerY" constant="-10" id="a5C-fe-lp0"/>
-                <constraint firstItem="Btr-Yn-3jv" firstAttribute="centerX" secondItem="X50-nD-1dZ" secondAttribute="centerX" id="ctE-Tp-G4F"/>
                 <constraint firstItem="l1t-11-s5Y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="g62-yK-su7"/>
-                <constraint firstItem="lpY-LA-WYO" firstAttribute="leading" secondItem="Btr-Yn-3jv" secondAttribute="leading" id="haM-1R-x4i"/>
                 <constraint firstItem="X50-nD-1dZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="110" id="ljk-tJ-mPJ"/>
-                <constraint firstItem="lpY-LA-WYO" firstAttribute="centerY" secondItem="ZLM-58-iq4" secondAttribute="centerY" constant="-10" id="wDf-RC-66z"/>
             </constraints>
-            <point key="canvasLocation" x="106.5" y="-398.5"/>
+            <point key="canvasLocation" x="-46" y="-696"/>
         </view>
     </objects>
+    <resources>
+        <image name="AD_ad_is" width="250" height="150"/>
+        <image name="AD_ad_qs" width="24" height="24"/>
+        <image name="AD_ad_tb" width="250" height="150"/>
+    </resources>
 </document>
