@@ -200,6 +200,10 @@
                 //,记住密码用户登录
                 
                     if ([[defaults objectForKey:@"remeber"] isEqualToString:@"yes"]) {
+                        
+//                        MainTabBarController *mainTB = [[MainTabBarController alloc]init];
+//                        self.window.rootViewController = mainTB;
+                        
                         if ([defaults objectForKey:@"userID"]&&[defaults objectForKey:@"userpwd"])
                         {
                             NSString *userID = [defaults valueForKey:@"userID"];
@@ -989,6 +993,8 @@
                     NSString *userPassWordString = [defaults valueForKey:@"passwd"];
                     NSString *log_type = [defaults valueForKey:@"log_type"];
                     
+//                    ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
+//                    self.window.rootViewController = tabBarVC;
                     
                     [self postRequestSeller:phone andPassWord:userPassWordString andState:log_type];
                 }else
@@ -1086,18 +1092,17 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if ([[defaults objectForKey:@"remeber"] isEqualToString:@"yes"]) {
+        //
         MainTabBarController *mainTB = [[MainTabBarController alloc]init];
         self.window.rootViewController = mainTB;
+    }else if ([[defaults objectForKey:@"remeberShop"] isEqualToString:@"yes"]){
+        //
+        ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
+        self.window.rootViewController = tabBarVC;
     }else{
-        if ([defaults objectForKey:@"passwd"]) {
-            
-            ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
-            self.window.rootViewController = tabBarVC;
-        }
-       
-       
+        //
+        [self _initChose];
     }
-    
     
     //获得版本号
     //倒计时结束，关闭
