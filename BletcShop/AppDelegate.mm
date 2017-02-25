@@ -201,8 +201,7 @@
                 
                     if ([[defaults objectForKey:@"remeber"] isEqualToString:@"yes"]) {
                         
-//                        MainTabBarController *mainTB = [[MainTabBarController alloc]init];
-//                        self.window.rootViewController = mainTB;
+
                         
                         if ([defaults objectForKey:@"userID"]&&[defaults objectForKey:@"userpwd"])
                         {
@@ -1090,19 +1089,20 @@
 -(void)jumpClick{
     [advise_back removeFromSuperview];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
+
     if ([[defaults objectForKey:@"remeber"] isEqualToString:@"yes"]) {
-        //
         MainTabBarController *mainTB = [[MainTabBarController alloc]init];
         self.window.rootViewController = mainTB;
-    }else if ([[defaults objectForKey:@"remeberShop"] isEqualToString:@"yes"]){
-        //
-        ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
-        self.window.rootViewController = tabBarVC;
-    }else{
-        //
-        [self _initChose];
     }
+    
+//    else if ([[defaults objectForKey:@"remeberShop"] isEqualToString:@"yes"]){
+//        //
+//        ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
+//        self.window.rootViewController = tabBarVC;
+//    }else{
+//        //
+//        [self _initChose];
+//    }
     
     //获得版本号
     //倒计时结束，关闭
@@ -1740,11 +1740,11 @@
 {
 //    [self socketConnectHostShop];
     
-//    ShopTabBarController *shopvc = [[ShopTabBarController alloc]init];
+    ShopTabBarController *shopvc = [[ShopTabBarController alloc]init];
     NSLog(@"-mut_dic-----%@",mut_dic);
     self.shopInfoDic = mut_dic;
     self.shopIsLogin= YES;
-//    self.window.rootViewController = shopvc;
+    self.window.rootViewController = shopvc;
     [self repeatLoadAPI];
 
     
