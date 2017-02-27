@@ -1857,6 +1857,9 @@
                      });
                      
                  }else{
+                     
+                     ShopLandController *shopvc = [[ShopLandController alloc]init];
+                     self.window.rootViewController = shopvc;
                      NSLog(@"商户登录失败==%@",aError.errorDescription);
                                     }
              }];
@@ -1864,6 +1867,8 @@
              
          }else if ([result[@"result_code"] isEqualToString:@"passwd_wrong"])
          {
+             ShopLandController *shopvc = [[ShopLandController alloc]init];
+             self.window.rootViewController = shopvc;
              
          }else
          {
