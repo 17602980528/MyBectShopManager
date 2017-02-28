@@ -10,6 +10,9 @@
 #import "CommenDataViewController.h"
 #import "CashListViewController.h"
 #import "UIButton+WebCache.h"
+
+#import "JHChartHeader.h"
+
 @interface CheckDataViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *title_array;
@@ -28,33 +31,33 @@
     
      title_array=@[@"办卡",@"续卡",@"升级",@"消费",@"现金支付"];
      img_A = @[@"Ǯ",@"未消费",@"银行卡",@"续费",@"升级"];
-//    for (int i=0; i<array.count; i++) {
-//        int X= i %5;
-//        int Y = i/5;
-//        UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-//        button.frame = CGRectMake(10+X*(SCREENWIDTH-20)/5, 10+Y*((SCREENWIDTH-20)/5+10), (SCREENWIDTH-20)/5, (SCREENWIDTH-20)/5);
-//        button.tag=i+1;
-//        [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [self.view addSubview:button];
-//        
-//        [button setBackgroundImage:[UIImage imageNamed:@"LLL"] forState:UIControlStateNormal];
-//        [button setBackgroundImage:[UIImage imageNamed:@"bbbLL"] forState:UIControlStateHighlighted];
-//
-//        UIImageView *imgV = [[UIImageView alloc]init];
-//        imgV.center = CGPointMake(button.width/2, button.width/2-10);
-//        imgV.bounds = CGRectMake(0, 0, button.width/3, button.width/3);
-//        imgV.image = [UIImage imageNamed:img_A[i]];
-//        [button addSubview:imgV];
-//        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, imgV.bottom, button.width, 20)];
-//        lab.text =array[i];
-//        lab.font =[UIFont systemFontOfSize:12];
-//        lab.textAlignment= NSTextAlignmentCenter;
-//        lab.textColor = [UIColor colorWithHexString:@"#333333"];
-//        [button addSubview:lab];
-//        
-//    }
     
-    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 10, SCREENWIDTH, SCREENHEIGHT-64-10) style:UITableViewStylePlain];
+    JHColumnChart *column = [[JHColumnChart alloc] initWithFrame:CGRectMake(0, 0, kWeChatScreenWidth, SCREENHEIGHT/2)];
+    
+    column.valueArr = @[
+                        @[@12],
+                        @[@22],
+                        @[@1],
+                        @[@21],
+                        @[@19],
+                        
+                        ];
+    column.originSize = CGPointMake(30, 20);
+    column.drawFromOriginX = 20;
+    column.typeSpace = 20;
+    column.isShowYLine = NO;
+    column.columnWidth = 35;
+    column.bgVewBackgoundColor = [UIColor whiteColor];
+    column.drawTextColorForX_Y = [UIColor blackColor];
+    column.colorForXYLine = [UIColor darkGrayColor];
+    column.columnBGcolorsArr = @[[UIColor colorWithRed:72/256.0 green:200.0/256 blue:255.0/256 alpha:1],[UIColor greenColor],[UIColor orangeColor]];
+    column.xShowInfoText = title_array;
+    column.xDescTextFontSize = 9;
+    [column showAnimation];
+    [self.view addSubview:column];
+
+    
+    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 10+SCREENHEIGHT/2, SCREENWIDTH, SCREENHEIGHT-(10+SCREENHEIGHT/2)) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.bounces = NO;
@@ -98,19 +101,7 @@
 }
 
 
-//-(void)btnClick:(UIButton *)sender{
-//    
-//    if (sender.tag ==5) {
-//        CashListViewController *VC=[[CashListViewController alloc]init];
-//        [self.navigationController pushViewController:VC animated:YES];
-//
-//    }else{
-//        CommenDataViewController *commenDataVC=[[CommenDataViewController alloc]init];
-//        commenDataVC.tag = sender.tag;
-//        [self.navigationController pushViewController:commenDataVC animated:YES];
-//    }
-//    
-//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
