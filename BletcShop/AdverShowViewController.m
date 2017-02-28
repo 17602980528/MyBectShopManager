@@ -18,6 +18,16 @@
     [super viewDidLoad];
     self.navigationItem.title = @"广告说明";
     self.view.backgroundColor = RGB(240,240 , 240);
+//    UIWebView *_webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
+//    _webView.scalesPageToFit=YES;
+//    [self.view addSubview:_webView];
+    UIScrollView *_scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
+    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, SCREENWIDTH*3600/750.0);
+    [self.view addSubview:_scrollView];
+    
+    UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"收费标准.png"]];
+    [_scrollView addSubview:imageView];
+    imageView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*3600/750.0);
 }
 
 - (void)didReceiveMemoryWarning {
