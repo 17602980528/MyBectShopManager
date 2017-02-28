@@ -9,12 +9,17 @@
 #import "CommenDataViewController.h"
 #import "UIImageView+WebCache.h"
 #import "PersonDetailViewController.h"
+#import "JHChartHeader.h"
 @interface CommenDataViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
     UIButton *today_btn;
     NSString *type_date;
     int page;
     NSArray *record_type_A;
+    UIScrollView *scroll_View;
+    
+    UIButton *detailBtn;
+    UIButton *checkBtn;
 }
 
 
@@ -25,7 +30,7 @@
 @property(nonatomic,strong)UIView *btnView;
 @property(nonatomic)BOOL isOpen;
 @property(nonatomic,strong)NSArray *dateArray;
-
+@property(nonatomic,strong)UIView *tongjiView;
 @end
 
 @implementation CommenDataViewController
@@ -84,31 +89,40 @@
     _totalCount.text=@"0";
     [backView addSubview:_totalCount];
     
-    UIButton *detailBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+     detailBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [detailBtn setTitle:@"明细" forState:UIControlStateNormal];
     [detailBtn setBackgroundColor:[UIColor whiteColor]];
     [detailBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     detailBtn.frame=CGRectMake(0, 100, SCREENWIDTH/2, 40);
     [self.view addSubview:detailBtn];
-    [detailBtn addTarget:self action:@selector(detailBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [detailBtn addTarget:self action:@selector(detailBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *checkBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    checkBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [checkBtn setTitle:@"统计" forState:UIControlStateNormal];
     [checkBtn setBackgroundColor:[UIColor colorWithRed:242/255.0 green:243/255.0 blue:247/255.0 alpha:1.0]];
     [checkBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     checkBtn.frame=CGRectMake(SCREENWIDTH/2, 100, SCREENWIDTH/2, 40);
     [self.view addSubview:checkBtn];
-    [detailBtn addTarget:self action:@selector(checkBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    UIScrollView *scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 140, SCREENWIDTH, SCREENHEIGHT-140-64)];
-    scrollView.pagingEnabled=YES;
-    scrollView.bounces=NO;
-    scrollView.contentSize=CGSizeMake(SCREENWIDTH, SCREENHEIGHT-140-64);
-    [self.view addSubview:scrollView];
+    [checkBtn addTarget:self action:@selector(checkBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+     scroll_View=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 140, SCREENWIDTH, SCREENHEIGHT-140-64)];
+    scroll_View.pagingEnabled=YES;
+    scroll_View.bounces=NO;
+    scroll_View.delegate = self;
+    scroll_View.contentSize=CGSizeMake(SCREENWIDTH*2, SCREENHEIGHT-140-64);
+    [self.view addSubview:scroll_View];
+    
+    
+    self.tongjiView=[[UIView alloc]initWithFrame:CGRectMake(SCREENWIDTH, 0, SCREENWIDTH, SCREENHEIGHT-140-64)];
+    [scroll_View addSubview:self.tongjiView];
+
+    
+    [self initlineChart];
+    
     
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-140-64)];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    [scrollView addSubview:self.tableView];
+    [scroll_View addSubview:self.tableView];
     
     self.mutableArray=[[NSMutableArray alloc]initWithCapacity:0];
     
@@ -141,11 +155,25 @@
     [self.view addSubview:_btnView];
     
 }
--(void)detailBtnClick{
+-(void)detailBtnClick:(UIButton*)sender{
+    NSLog(@"=====明细");
+    
+    checkBtn.backgroundColor = [UIColor colorWithRed:242/255.0 green:243/255.0 blue:247/255.0 alpha:1.0];
+    sender.backgroundColor =[UIColor whiteColor];
+
+    
+   
+    scroll_View.contentOffset = CGPointMake(0, 0);
     
 }
--(void)checkBtnClick{
+-(void)checkBtnClick:(UIButton*)sender{
+    detailBtn.backgroundColor = [UIColor colorWithRed:242/255.0 green:243/255.0 blue:247/255.0 alpha:1.0];
+    sender.backgroundColor =[UIColor whiteColor];
     
+    scroll_View.contentOffset = CGPointMake(SCREENWIDTH, 0);
+
+    NSLog(@"=====统计");
+
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _mutableArray.count;
@@ -415,6 +443,60 @@
         PDVC.totalMoney=self.mutableArray[indexPath.row][@"sum"];
         [self.navigationController pushViewController:PDVC animated:YES];
     }
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.x==0) {
+        
+        checkBtn.backgroundColor = [UIColor colorWithRed:242/255.0 green:243/255.0 blue:247/255.0 alpha:1.0];
+        detailBtn.backgroundColor =[UIColor whiteColor];
+    }else{
+        
+        detailBtn.backgroundColor = [UIColor colorWithRed:242/255.0 green:243/255.0 blue:247/255.0 alpha:1.0];
+        checkBtn.backgroundColor =[UIColor whiteColor];
+    }
+}
+
+-(void)initlineChart{
+    
+    /*     Create object        */
+    JHLineChart *lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10, 40, kWeChatScreenWidth-20, 300) andLineChartType:JHChartLineValueNotForEveryX];
+    
+    /* The scale value of the X axis can be passed into the NSString or NSNumber type and the data structure changes with the change of the line chart type. The details look at the document or other quadrant X axis data source sample.*/
+    
+    lineChart.xLineDataArr = @[@"一月份",@"二月份",@"三月份",@"四月份",@"五月份",@"六月份",@"七月份",@"八月份"];
+    lineChart.contentInsets = UIEdgeInsetsMake(0, 25, 20, 10);
+    /* The different types of the broken line chart, according to the quadrant division, different quadrant correspond to different X axis scale data source and different value data source. */
+    
+    lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
+    
+    lineChart.valueArr = @[@[@"1",@"12",@"1",@"6",@"4",@"9",@"6",@"7"],@[@"3",@"1",@"2",@"16",@"2",@"3",@"25",@"10"]];
+    lineChart.showYLevelLine = YES;
+    lineChart.showYLine = NO;
+    lineChart.showValueLeadingLine = NO;
+    lineChart.valueFontSize = 9.0;
+    lineChart.backgroundColor = [UIColor whiteColor];
+    /* Line Chart colors */
+    lineChart.valueLineColorArr =@[ [UIColor greenColor], [UIColor orangeColor]];
+    /* Colors for every line chart*/
+    lineChart.pointColorArr = @[[UIColor orangeColor],[UIColor yellowColor]];
+    /* color for XY axis */
+    lineChart.xAndYLineColor = [UIColor blackColor];
+    /* XY axis scale color */
+    lineChart.xAndYNumberColor = [UIColor darkGrayColor];
+    /* Dotted line color of the coordinate point */
+    lineChart.positionLineColorArr = @[[UIColor blueColor],[UIColor greenColor]];
+    /*        Set whether to fill the content, the default is False         */
+    lineChart.contentFill = NO;
+    /*        Set whether the curve path         */
+    lineChart.pathCurve = YES;
+    /*        Set fill color array         */
+    lineChart.contentFillColorArr = @[[UIColor colorWithRed:0 green:1 blue:0 alpha:0.468],[UIColor colorWithRed:1 green:0 blue:0 alpha:0.468]];
+    [self.tongjiView addSubview:lineChart];
+    /*       Start animation        */
+    [lineChart showAnimation];
+    
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
