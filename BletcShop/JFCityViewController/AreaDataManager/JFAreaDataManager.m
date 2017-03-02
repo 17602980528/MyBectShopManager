@@ -65,6 +65,16 @@ static JFAreaDataManager *manager = nil;
     }
 }
 
+
+-(BOOL)deleteData:(NSString *)area_name{
+    
+    
+    
+    [self.db executeUpdateWithFormat:@"delete from shop_area where area_name = %@",area_name];
+    
+    
+    return [self.db executeUpdateWithFormat:@"delete from shop_area where area_name = %@",area_name];
+}
 /// 所有市区的名称
 - (void)cityData:(void (^)(NSMutableArray *dataArray))cityData {
     NSMutableArray *resultArray = [[NSMutableArray alloc] init];

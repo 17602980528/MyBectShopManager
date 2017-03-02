@@ -122,7 +122,8 @@
     self.socketPort = 30002;
     self.socketHost = @"101.201.100.191";
     
-    self.cityChoice = @"西安";
+    self.cityChoice = @"西安市";
+    self.districtString = @"雁塔区";
     self.shopArray = [[NSMutableArray alloc]init];
     self.areaListArray = [[NSArray alloc]init];
     self.shopPersonInfo = [[NSMutableArray alloc]init];
@@ -706,14 +707,14 @@
         self.addressDistrite = result.addressDetail.district;
         self.province =result.addressDetail.province;
         self.city =result.addressDetail.city;
-        self.districtString =result.addressDetail.city;
+        self.districtString =result.addressDetail.district;
         NSLog(@"cbcbcbc%@", result.addressDetail.district);
-        if([result.addressDetail.city rangeOfString:@"市"].location !=NSNotFound)//_roaldSearchText
-        {
-            NSRange range = [result.addressDetail.city rangeOfString:@"市"];
-            
-            self.cityChoice = [result.addressDetail.city substringToIndex:range.location];;
-        }else
+//        if([result.addressDetail.city rangeOfString:@"市"].location !=NSNotFound)//_roaldSearchText
+//        {
+//            NSRange range = [result.addressDetail.city rangeOfString:@"市"];
+//            
+//            self.cityChoice = [result.addressDetail.city substringToIndex:range.location];;
+//        }else
             self.cityChoice = result.addressDetail.city;
         NSLog(@"self.cityChoice=======%@",self.cityChoice);
         

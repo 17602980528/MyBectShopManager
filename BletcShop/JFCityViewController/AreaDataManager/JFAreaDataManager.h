@@ -14,6 +14,7 @@
 
 - (void)areaSqliteDBData;
 
+-(BOOL)deleteData:(NSString *)area_name;
 
 /**
  从shop_area.sqlite获取所有市

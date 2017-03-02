@@ -66,7 +66,7 @@ static NSString *ID = @"cityCollectionViewCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cityName = _cityNameArray[indexPath.row];
-    NSDictionary *cityNameDic = @{@"cityName":cityName};
+    NSDictionary *cityNameDic = @{@"cityName":cityName,@"arrayClass":_cityNameArray};
     [[NSNotificationCenter defaultCenter] postNotificationName:JFCityTableViewCellDidChangeCityNotification object:self userInfo:cityNameDic];
 }
 

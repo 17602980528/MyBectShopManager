@@ -18,6 +18,9 @@
 #import "ShopListTableViewCell.h"
 #import "DLStarRatingControl.h"
 #import "ShaperView.h"
+
+#import "JFAreaDataManager.h"
+
 @interface ShoppingViewController ()<UITableViewDataSource,UITableViewDelegate,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate,BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
     BMKMapView* _mapView;
@@ -33,14 +36,15 @@
 @property(nonatomic,weak)UITableView *shopTabel;//商户的列表
 //
 @property(nonatomic,strong)NSMutableArray *data1;
-@property (nonatomic, strong) NSMutableArray *classifys;
 @property (nonatomic, strong) NSArray *cates;
 @property (nonatomic, strong) NSArray *footsArray;
 @property (nonatomic, strong) NSArray *movices;
 @property (nonatomic, strong) NSArray *hostels;
-@property (nonatomic, strong) NSMutableArray *areas;
-@property (nonatomic, strong) NSArray *sorts;
+@property (nonatomic, strong) NSMutableArray *areas;// 区列表
+@property (nonatomic, strong) NSArray *sorts;//智能排序
 @property (nonatomic, weak) DOPDropDownMenu *menu;//下拉列表
+@property (nonatomic, strong) NSMutableArray *classifys;// 分类数组
+
 @property(nonatomic,weak)UIButton *AllBtn;
 @property(nonatomic,weak)UIButton *prefBtn;
 
@@ -54,6 +58,16 @@
     [super viewWillAppear:animated];
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    
+    [[JFAreaDataManager shareManager] areaData:[[NSUserDefaults standardUserDefaults] objectForKey:@"cityNumber"] areaData:^(NSMutableArray *areaData) {
+        
+        
+        appdelegate.areaListArray =areaData;
+        
+        
+    }];
+
     self.classifyString = [[NSString alloc]init];
     self.ereaString = [[NSString alloc]init];
     if ([appdelegate.menuString isEqualToString:@""]) {
@@ -64,7 +78,7 @@
         self.ereaString = appdelegate.cityChoice;
     }else
         
-        self.ereaString = [NSString stringWithFormat:@"%@市%@",appdelegate.cityChoice,appdelegate.addressDistrite];
+        self.ereaString = [NSString stringWithFormat:@"%@%@",appdelegate.cityChoice,appdelegate.addressDistrite];
     
     self.navigationController.navigationBarHidden = YES;
     [_mapView viewWillAppear];
@@ -272,7 +286,6 @@
         self.GpsLabel.text = [NSString stringWithFormat:@"%@%@",@"当前:",showmeg];
     }
 }
-
 //顶部分类按钮事件
 -(void)allBtnAction:(UIButton *)btn
 {
@@ -289,6 +302,9 @@
 {
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
+    NSLog(@"appdelegate.addressDistrite===%@",appdelegate.addressDistrite);
+
+    
     if([appdelegate.addressDistrite isEqualToString:@"全城"]){
         self.ereaString =appdelegate.cityChoice;
     }
@@ -304,19 +320,22 @@
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"postRequestShop-----%@",result);
-        if (self.indexss==1) {
-            
-            self.data1=[NSMutableArray arrayWithArray:result];
-            
-        }else{
-            for (int i=0; i<[result count]; i++) {
-                [self.data1 addObject:result[i]];
+        if ([result isKindOfClass:[NSArray class]]) {
+            if (self.indexss==1) {
+                
+                self.data1=[NSMutableArray arrayWithArray:result];
+                
+            }else{
+                for (int i=0; i<[result count]; i++) {
+                    [self.data1 addObject:result[i]];
+                }
             }
+            [_refreshheader endRefreshing];
+            [_refreshFooter endRefreshing];
+            
+            [self.shopTabel reloadData];
         }
-        [_refreshheader endRefreshing];
-        [_refreshFooter endRefreshing];
-        
-        [self.shopTabel reloadData];
+       
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_refreshheader endRefreshing];
         [_refreshFooter endRefreshing];
@@ -440,39 +459,24 @@
 - (NSString *)menu:(DOPDropDownMenu *)menu detailTextForItemsInRowAtIndexPath:(DOPIndexPath *)indexPath
 {
     //    return [@(arc4random()%1000) stringValue];
-    return @"1";
+    return nil;
 }
 
 - (NSInteger)menu:(DOPDropDownMenu *)menu numberOfItemsInRow:(NSInteger)row column:(NSInteger)column
 {
-    if (column == 0) {
-        if (row == 0) {
-            return self.cates.count;
-        }else if (row == 1){
-            return self.footsArray.count;
-        } else if (row == 2){
-            return self.movices.count;
-        } else if (row == 3){
-            return self.hostels.count;
-        }
-    }
-    return 0;
+   
+    if (column==1) {
+        return self.classifys.count;
+    }else return 0;
+    
 }
 
 - (NSString *)menu:(DOPDropDownMenu *)menu titleForItemsInRowAtIndexPath:(DOPIndexPath *)indexPath
 {
-    if (indexPath.column == 0) {
-        if (indexPath.row == 0) {
-            
-            return self.cates[indexPath.item];
-        }else if (indexPath.row == 1){
-            return self.footsArray[indexPath.item];
-        }  else if (indexPath.row == 2){
-            return self.movices[indexPath.item];
-        } else if (indexPath.row == 3){
-            return self.hostels[indexPath.item];
-        }
-    }
+    if (indexPath.column == 1) {
+       
+        return self.classifys[indexPath.item];
+    }else
     
     return nil;
 }

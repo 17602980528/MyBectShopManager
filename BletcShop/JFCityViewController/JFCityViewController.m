@@ -45,6 +45,8 @@
 
 @implementation JFCityViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -56,9 +58,13 @@
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [leftButton addTarget:self action:@selector(backrootTableViewController) forControlEvents:UIControlEventTouchUpInside];
-    [leftButton setTitle:@"<返回" forState:UIControlStateNormal];
-    [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [leftButton setTitle:@"<返回" forState:UIControlStateNormal];
+    [leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    [leftButton setImage:[UIImage imageNamed:@"leftArrow"] forState:0];
+    
+    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 29+4)];
+
     
     [self initWithJFAreaDataManaager];
     
@@ -66,7 +72,6 @@
     _sectionMutableArray = [NSMutableArray array];
     
     if ([KCURRENTCITYINFODEFAULTS objectForKey:@"cityData"]) {
-        
         self.characterMutableArray = [NSKeyedUnarchiver unarchiveObjectWithData:[KCURRENTCITYINFODEFAULTS objectForKey:@"cityData"]];
         _sectionMutableArray = [NSKeyedUnarchiver unarchiveObjectWithData:[KCURRENTCITYINFODEFAULTS objectForKey:@"sectionData"]];
         [_rootTableView reloadData];
@@ -107,22 +112,39 @@
             [KCURRENTCITYINFODEFAULTS setObject:name forKey:@"currentcity"];
             weakSelf.headerView.cityName = name;
             if (weakSelf.choseCityBlock) {
-                weakSelf.choseCityBlock(name);
+                weakSelf.choseCityBlock(name,@"");
             }
         }];
     }else {
         cityName = [cityDic valueForKey:@"cityName"];
+        
+        
         _headerView.cityName = cityName;
         [KCURRENTCITYINFODEFAULTS setObject:[cityDic valueForKey:@"cityName"] forKey:@"currentcity"];
         
-        if (self.choseCityBlock) {
-            self.choseCityBlock(cityName);
-        }
+        
         [_manager cityNumberWithCity:[cityDic valueForKey:@"cityName"] cityNumber:^(NSString *cityNumber) {
             [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
         }];
         
-        [self historyCity:cityName];
+        
+        [_manager currentCity:[KCURRENTCITYINFODEFAULTS objectForKey:@"cityNumber"] currentCityName:^(NSString *name) {
+            
+            if (self.choseCityBlock) {
+                self.choseCityBlock(name,([name isEqualToString:cityName] ? @"" :cityName));
+            }
+            NSLog(@"市-%@---区-%@======+%@+",name,cityName,([name isEqualToString:cityName] ? @"" :cityName));
+        }];
+        
+        
+            NSLog(@"%@===%@==%lu",cityDic[@"arrayClass"],self.areaMutableArray,(unsigned long)self.areaMutableArray.count);
+        
+        if (cityDic[@"arrayClass"] != _areaMutableArray && self.areaMutableArray.count!=1) {
+            NSLog(@"--++++++++++++++++++++---");
+            [self historyCity:cityName];
+            
+        }
+        
     }
     
     //销毁通知
@@ -143,6 +165,7 @@
 
 - (JFCityHeaderView *)headerView {
     if (!_headerView) {
+        
         _headerView = [[JFCityHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 80)];
         _headerView.backgroundColor = [UIColor whiteColor];
         _headerView.buttonTitle = @"选择区县";
@@ -150,8 +173,11 @@
         
         self.manager = [JFAreaDataManager shareManager];
         
-#pragma mark-- headerView的JFCityHeaderViewSearchBlock
+      
+          #pragma mark-- headerView的JFCityHeaderViewSearchBlock
         //获取当前城市的所有辖区
+    
+        
         [_headerView cityNameBlock:^(BOOL selected) {
             if (selected) {
                 [_manager areaData:[KCURRENTCITYINFODEFAULTS objectForKey:@"cityNumber"] areaData:^(NSMutableArray *areaData) {
@@ -186,7 +212,7 @@
                 [_rootTableView endUpdates];
             }
         }];
-
+        
         __weak typeof(self) weakSelf = self;
         [_headerView beginSearchBlock:^{
             
@@ -212,16 +238,19 @@
 - (JFSearchView *)searchView {
     if (!_searchView) {
         CGRect frame = [UIScreen mainScreen].bounds;
-        _searchView = [[JFSearchView alloc] initWithFrame:CGRectMake(0, 104, frame.size.width, frame.size.height  - 104)];
+        _searchView = [[JFSearchView alloc] initWithFrame:CGRectMake(0, 44, frame.size.width, frame.size.height  - 44)];
         _searchView.backgroundColor = [UIColor colorWithRed:155 / 255.0 green:155 / 255.0 blue:155 / 255.0 alpha:0.5];
         
         __weak typeof(self) weakSelf = self;
         [_searchView resultBlock:^(NSDictionary *cityData) {
+            
             [KCURRENTCITYINFODEFAULTS setObject:[cityData valueForKey:@"city"] forKey:@"currentcity"];
+            
+            
             [KCURRENTCITYINFODEFAULTS setObject:[cityData valueForKey:@"city_number"] forKey:@"cityNumber"];
             
             if (weakSelf.choseCityBlock) {
-                weakSelf.choseCityBlock([cityData valueForKey:@"city"]);
+                weakSelf.choseCityBlock(cityData[@"super"],[cityData valueForKey:@"city"]);
             }
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
             [self historyCity:[cityData valueForKey:@"city"]];
@@ -388,11 +417,9 @@
         if (indexPath.section == _HeaderSectionTotal - 1) {
             _cell.cityNameArray = self.hotCityArray;
         }
-    return _cell;
+        return _cell;
     }else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cityNameCell" forIndexPath:indexPath];
-        
-       
         NSArray *currentArray = _sectionMutableArray[0][_characterMutableArray[indexPath.section]];
         cell.textLabel.text = currentArray[indexPath.row];
         cell.textLabel.textColor = [UIColor grayColor];
@@ -463,8 +490,9 @@
     [_manager cityNumberWithCity:cell.textLabel.text cityNumber:^(NSString *cityNumber) {
         [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
     }];
+    
     if (self.choseCityBlock) {
-        self.choseCityBlock(cell.textLabel.text);
+        self.choseCityBlock(cell.textLabel.text,@"");
     }
     [self historyCity:cell.textLabel.text];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -478,7 +506,9 @@
 //定位成功
 - (void)currentLocation:(NSDictionary *)locationDictionary {
     NSString *city = [locationDictionary valueForKey:@"City"];
-    [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
+    [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"]
+    ;
+
     [_manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
         [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
     }];

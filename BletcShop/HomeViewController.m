@@ -5,6 +5,7 @@
 //  Created by Bletc on 2016/11/4.
 //  Copyright © 2016年 bletc. All rights reserved.
 //
+#define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 
 
 #import "HomeViewController.h"
@@ -27,9 +28,11 @@
 #import "HolidayActivertyVC.h"
 #import "JFCityViewController.h"
 
+#import "JFLocation.h"
+#import "JFAreaDataManager.h"
 
 
-@interface HomeViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GYChangeTextViewDelegate,SelectCityDelegate>
+@interface HomeViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GYChangeTextViewDelegate,SelectCityDelegate,JFLocationDelegate>
 {
     
     int currentIndex3;//请求页码
@@ -100,11 +103,20 @@
 
 
 @property(nonatomic,strong)NSMutableArray *shopData_A;//保存所有数据
+@property (nonatomic, strong) JFLocation *locationManager;
+@property (nonatomic, strong) JFAreaDataManager *manager;
 
 
 @end
 
 @implementation HomeViewController
+- (JFAreaDataManager *)manager {
+    if (!_manager) {
+        _manager = [JFAreaDataManager shareManager];
+        [_manager areaSqliteDBData];
+    }
+    return _manager;
+}
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -115,7 +127,10 @@
         [self.tView startAnimation];
     }
     self.cityChoice = appdelegate.cityChoice;
-    printf("viewWillAppear ==%s\n",[self.cityChoice UTF8String]);
+    
+    self.city_district = [NSString stringWithFormat:@"%@%@",appdelegate.cityChoice,[appdelegate.districtString isEqualToString:appdelegate.cityChoice] ? @"":appdelegate.districtString];
+    
+    printf("viewWillAppear ==%s\n %s",[self.cityChoice UTF8String] ,[self.city_district UTF8String]);
 
     self.ifOpen =NO;
     
@@ -158,6 +173,24 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.locationManager = [[JFLocation alloc] init];
+    _locationManager.delegate = self;
+
+#if TARGET_IPHONE_SIMULATOR
+    
+    [KCURRENTCITYINFODEFAULTS setObject:@"西安市" forKey:@"locationCity"];
+    [KCURRENTCITYINFODEFAULTS setObject:@"西安市" forKey:@"currentcity"];
+    [KCURRENTCITYINFODEFAULTS setObject:@"610100" forKey:@"cityNumber"];
+    
+    
+    
+#elif TARGET_OS_IPHONE
+    
+    
+#endif
+    
+    
+  [self.manager deleteData:@"市辖区"];
     
     currentIndex3= 1;
     currentIndex1=1;
@@ -194,31 +227,31 @@
     
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//    self.city_district = [appdelegate.city stringByAppendingString:appdelegate.addressDistrite];
+    //    self.city_district = [appdelegate.city stringByAppendingString:appdelegate.addressDistrite];
     
     NSLog(@"initTopView=====%@",self.city_district);
     if (!self.city_district) {
         self.city_district = @"西安市雁塔区";
     }
-      appdelegate.areaListArray = self.areaListArray;
-
+    appdelegate.areaListArray = self.areaListArray;
+    
     
     topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 64)];
     topView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:topView];
     
     
-        UIColor *color=NavBackGroundColor;
-        CGFloat offset=table_View.contentOffset.y;
-        //        NSLog(@"================%lf",offset);
-        if (offset<0) {
-            topView.backgroundColor = [color colorWithAlphaComponent:0];
-        }else {
-            CGFloat alpha=1-((100-offset)/100);
-            topView.backgroundColor=[color colorWithAlphaComponent:alpha];
-        }
-        
-
+    UIColor *color=NavBackGroundColor;
+    CGFloat offset=table_View.contentOffset.y;
+    //        NSLog(@"================%lf",offset);
+    if (offset<0) {
+        topView.backgroundColor = [color colorWithAlphaComponent:0];
+    }else {
+        CGFloat alpha=1-((100-offset)/100);
+        topView.backgroundColor=[color colorWithAlphaComponent:alpha];
+    }
+    
+    
     
     
     
@@ -226,13 +259,12 @@
     dingweiBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 20, 43, 44)];
     [dingweiBtn addTarget:self action:@selector(dingweiClick:) forControlEvents:UIControlEventTouchUpInside];
     
-
-    [dingweiBtn setTitle:self.cityChoice forState:UIControlStateNormal];
+    
+    [dingweiBtn setTitle:appdelegate.districtString.length>0?appdelegate.districtString:appdelegate.cityChoice forState:UIControlStateNormal];
     [dingweiBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     dingweiBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [topView addSubview:dingweiBtn];
-
-    self.cityChoice = dingweiBtn.titleLabel.text;
+    
     
     CGFloat ww = [dingweiBtn.titleLabel.text boundingRectWithSize:CGSizeMake(200, 44) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:dingweiBtn.titleLabel.font} context:nil].size.width;
     
@@ -243,7 +275,7 @@
     dingweiBtn.frame = btn_frame;
     
     
-     dingwei_img = [[UIImageView alloc]initWithFrame:CGRectMake(dingweiBtn.right, 20+(44-12)/2, 12, 12)];
+    dingwei_img = [[UIImageView alloc]initWithFrame:CGRectMake(dingweiBtn.right, 20+(44-12)/2, 12, 12)];
     dingwei_img.image = [UIImage imageNamed:@"首页最上面"];
     [topView addSubview:dingwei_img];
     
@@ -254,7 +286,7 @@
     searchView.layer.cornerRadius=3;
     searchView.alpha = 0.8;
     [topView addSubview:searchView];
-
+    
     
     UIImageView *search1= [[UIImageView alloc]initWithFrame:CGRectMake(11, 17/2, 13, 13)];
     search1.image = [UIImage imageNamed:@"sousuo"];
@@ -283,7 +315,7 @@
         minePageBtn.tag = i;
         minePageBtn.frame = CGRectMake(CGRectGetMaxX(searchView.frame)+i*35, CGRectGetMinY(searchView.frame), 35, 35);
         [minePageBtn addTarget:self action:@selector(goMineCenter:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [topView addSubview:minePageBtn];
         
         UIImageView *img_mine = [[UIImageView alloc]initWithFrame:CGRectMake(7.5, 7.5, 20, 20)];
@@ -293,19 +325,20 @@
             img_mine.frame =CGRectMake(2.5, 5.5, 24, 24);
             img_mine.image = [UIImage imageNamed:@"home_adress_choose_n"];
             
-//            UIImageView *whitePoint = [[UIImageView alloc]initWithFrame:CGRectMake(img_mine.width-6-2, 0, 6, 6)];
-//            whitePoint.backgroundColor = [UIColor greenColor];
-//            
-//            whitePoint.layer.cornerRadius = whitePoint.width/2;
-//            [img_mine addSubview:whitePoint];
-
+            //            UIImageView *whitePoint = [[UIImageView alloc]initWithFrame:CGRectMake(img_mine.width-6-2, 0, 6, 6)];
+            //            whitePoint.backgroundColor = [UIColor greenColor];
+            //
+            //            whitePoint.layer.cornerRadius = whitePoint.width/2;
+            //            [img_mine addSubview:whitePoint];
+            
         }
-
-
+        
+        
     }
     
     
-
+    [self getIcons:@""];
+    
     
     
 }
@@ -1169,7 +1202,7 @@
 {
     NSLog(@"------self.cityChoice-------%@-----%@==more=%@",self.cityChoice,self.city_district,more);
     if (![self.city_district containsString:self.cityChoice]) {
-        self.city_district =[self.cityChoice stringByAppendingString:@"市"];
+        self.city_district =self.cityChoice;
     }
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advert/insertGet",BASEURL];
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
@@ -1411,51 +1444,63 @@
 -(void)dingweiClick:(UIButton*)btn{
     NSLog(@"定位");
     
-    {
-        btn.selected =! btn.selected;
-        self.ifOpen = !self.ifOpen;
-        if (btn.selected==NO) {
-            [self.areaView removeFromSuperview];
-        }else
-            [self choiceArea];
-        //    加动画旋转
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        CGAffineTransform transform;
-        if (btn.selected) {
-            transform = CGAffineTransformRotate(dingwei_img.transform, M_PI);
-        } else {
-            transform = CGAffineTransformRotate(dingwei_img.transform, -270*M_PI/90);
-        }
-        
-        dingwei_img.transform = transform;
-        
-        [UIView commitAnimations];
-        
-    }
+    //    {
+    //        btn.selected =! btn.selected;
+    //        self.ifOpen = !self.ifOpen;
+    //        if (btn.selected==NO) {
+    //            [self.areaView removeFromSuperview];
+    //        }else
+    //            [self choiceArea];
+    //        //    加动画旋转
+    //        [UIView beginAnimations:nil context:nil];
+    //        [UIView setAnimationDuration:0.3];
+    //        CGAffineTransform transform;
+    //        if (btn.selected) {
+    //            transform = CGAffineTransformRotate(dingwei_img.transform, M_PI);
+    //        } else {
+    //            transform = CGAffineTransformRotate(dingwei_img.transform, -270*M_PI/90);
+    //        }
+    //
+    //        dingwei_img.transform = transform;
+    //
+    //        [UIView commitAnimations];
+    //
+    //    }
     
     
-//    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
-//    
-//    cityViewController.title = @"城市";
-//    __weak typeof(self) weakSelf = self;
-//    [cityViewController choseCityBlock:^(NSString *cityName){
-//        
-//        
-//        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//        appdelegate.districtString= cityName;;
-//        
-//        [dingweiBtn setTitle:cityName forState:UIControlStateNormal];
-//
-//        
-//    }];
-//    BaseNavigationController *navigationController = [[BaseNavigationController alloc]initWithRootViewController:cityViewController];
-//    
-//    [self presentViewController:navigationController animated:YES completion:nil];
-//    
+    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
     
-
-
+    cityViewController.title = @"城市";
+    __weak typeof(self) weakSelf = self;
+    [cityViewController choseCityBlock:^(NSString *cityName,NSString *eareName){
+        
+        
+        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        appdelegate.cityChoice= cityName;
+        appdelegate.districtString = eareName.length>0 ? eareName:cityName;
+        
+        NSLog(@"-----%@====%@\\\\",cityName,eareName);
+        
+        
+        [dingweiBtn setTitle:eareName.length>0 ? eareName:cityName forState:UIControlStateNormal];
+        
+        
+        weakSelf.city_district = [NSString stringWithFormat:@"%@%@",cityName,eareName];
+        
+        [weakSelf resetFrame];
+        
+        //        [self getIcons:@""];
+        
+        
+        
+    }];
+    BaseNavigationController *navigationController = [[BaseNavigationController alloc]initWithRootViewController:cityViewController];
+    
+    [self presentViewController:navigationController animated:YES completion:nil];
+    
+    
+    
+    
     
 }
 
@@ -1736,6 +1781,44 @@
         topPageControl.currentPage = _pageID;
 
 }
+
+
+//定位中...
+- (void)locating {
+    NSLog(@"定位中...");
+}
+
+//定位成功
+- (void)currentLocation:(NSDictionary *)locationDictionary {
+    NSString *city = [locationDictionary valueForKey:@"City"];
+    //    if (![_resultLabel.text isEqualToString:city]) {
+    //        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
+    //        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    //        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //            _resultLabel.text = city;
+    [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
+    [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentcity"];
+    [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
+        printf("cityNumber===%s",[cityNumber UTF8String]);
+        [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
+    }];
+    //        }];
+    //        [alertController addAction:cancelAction];
+    //        [alertController addAction:okAction];
+    //        [self presentViewController:alertController animated:YES completion:nil];
+    //    }
+}
+
+/// 拒绝定位
+- (void)refuseToUsePositioningSystem:(NSString *)message {
+    NSLog(@"%@",message);
+}
+
+/// 定位失败
+- (void)locateFailure:(NSString *)message {
+    NSLog(@"%@",message);
+}
+
 
 
 #pragma mark 懒加载

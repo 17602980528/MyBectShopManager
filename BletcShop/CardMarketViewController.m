@@ -6,6 +6,7 @@
 //  Copyright © 2017年 bletc. All rights reserved.
 //
 
+
 #import "CardMarketViewController.h"
 #import "AddressPickerDemo.h"
 #import "CardmarketDetailVC.h"
@@ -15,9 +16,10 @@
 
 #import "CardMarketSearchVC.h"
 
-
 #import "JFCityViewController.h"
 #import "BaseNavigationController.h"
+
+
 @interface CardMarketViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SelectCityDelegate>
 
 {
@@ -34,7 +36,7 @@
     SDRefreshFooterView *_refreshFooter;
     SDRefreshHeaderView *_refreshheader;
     int currentIndex1;//请求页码
-
+    
     
 }
 @property(nonatomic,copy)NSString *cityChoice;//选择的地点
@@ -46,9 +48,11 @@
 @property (nonatomic,strong)UICollectionView *collectionView;
 
 
+
 @end
 
 @implementation CardMarketViewController
+
 
 -(NSMutableArray *)data_A{
     if (!_data_A) {
@@ -59,49 +63,42 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden= YES;
-    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-   
-    self.cityChoice = appdelegate.cityChoice;
-    printf("viewWillAppear ==%s\n",[self.cityChoice UTF8String]);
     
-    self.ifOpen =NO;
+    [self initTopView];
     
-    if (self.ifOpen==NO)
-    {
-        [self.areaView removeFromSuperview];
-        [self initTopView];
-    }
-   
-   
-
     
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden= NO;
-
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.view.backgroundColor = RGB(240, 240, 240);
+    
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     self.city_district = [appdelegate.city stringByAppendingString:appdelegate.addressDistrite];
+    
+    
+    self.cityChoice = appdelegate.cityChoice;
+    
+    
     
     NSLog(@"viewDidLoad===%@",self.city_district);
     if (!self.city_district) {
         self.city_district = @"西安市雁塔区";
     }
-
     
-       [self initTableView];
     
-    [self getDataWithMore:@""];
-
-
+    [self initTableView];
+    
+    
+    
 }
 
 
@@ -143,12 +140,11 @@
     [dingweiBtn addTarget:self action:@selector(dingweiClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [dingweiBtn setTitle:self.cityChoice forState:UIControlStateNormal];
+    [dingweiBtn setTitle:appdelegate.districtString.length>0?appdelegate.districtString:appdelegate.cityChoice forState:UIControlStateNormal];
     [dingweiBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     dingweiBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [topView addSubview:dingweiBtn];
     
-    self.cityChoice = dingweiBtn.titleLabel.text;
     
     CGFloat ww = [dingweiBtn.titleLabel.text boundingRectWithSize:CGSizeMake(200, 44) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:dingweiBtn.titleLabel.font} context:nil].size.width;
     
@@ -191,30 +187,33 @@
     [topView addSubview:search_btn];
     
     
-//    for (int i =0; i<1; i ++) {
-//        
-//        
-//        UIButton *minePageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        minePageBtn.tag = i;
-//        minePageBtn.frame = CGRectMake(CGRectGetMaxX(searchView.frame)+i*35, CGRectGetMinY(searchView.frame), 35, 35);
-//        [minePageBtn addTarget:self action:@selector(goMineCenter:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        [topView addSubview:minePageBtn];
-//        
-//        UIImageView *img_mine = [[UIImageView alloc]initWithFrame:CGRectMake(7.5, 7.5, 20, 20)];
-////        img_mine.image = [UIImage imageNamed:@"扫描二维码"];
-//        [minePageBtn addSubview:img_mine];
-////        if (i==1) {
-//            img_mine.frame =CGRectMake(2.5, 5.5, 24, 24);
-//            img_mine.image = [UIImage imageNamed:@"home_adress_choose_n"];
-//            
-//            
-////        }
-//        
-//        
-//    }
+    //    for (int i =0; i<1; i ++) {
+    //
+    //
+    //        UIButton *minePageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //        minePageBtn.tag = i;
+    //        minePageBtn.frame = CGRectMake(CGRectGetMaxX(searchView.frame)+i*35, CGRectGetMinY(searchView.frame), 35, 35);
+    //        [minePageBtn addTarget:self action:@selector(goMineCenter:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //        [topView addSubview:minePageBtn];
+    //
+    //        UIImageView *img_mine = [[UIImageView alloc]initWithFrame:CGRectMake(7.5, 7.5, 20, 20)];
+    ////        img_mine.image = [UIImage imageNamed:@"扫描二维码"];
+    //        [minePageBtn addSubview:img_mine];
+    ////        if (i==1) {
+    //            img_mine.frame =CGRectMake(2.5, 5.5, 24, 24);
+    //            img_mine.image = [UIImage imageNamed:@"home_adress_choose_n"];
+    //
+    //
+    ////        }
+    //
+    //
+    //    }
     
+    self.cityChoice = appdelegate.cityChoice;
+    self.city_district = [NSString stringWithFormat:@"%@%@",appdelegate.cityChoice,[appdelegate.districtString isEqualToString:appdelegate.cityChoice] ? @"":appdelegate.districtString];
     
+    [self getDataWithMore:@""];
     
     
     
@@ -368,7 +367,7 @@
     
     
     
-    self.city_district = [NSString stringWithFormat:@"%@%@%@",appdelegate.cityChoice,@"市",appdelegate.districtString];
+    self.city_district = [NSString stringWithFormat:@"%@%@",appdelegate.cityChoice,appdelegate.districtString];
     if (!self.city_district) {
         self.city_district = @"西安市雁塔区";
     }
@@ -413,7 +412,7 @@
         
         if (i == 0) {
             oldBtn = button;
-             move_line = [[UIView alloc]init];
+            move_line = [[UIView alloc]init];
             move_line.bounds = CGRectMake(0, 0, 51, 1);
             move_line.center = CGPointMake(button.center.x, button.bottom-1);
             move_line.backgroundColor = RGB(17,141,240);
@@ -425,13 +424,13 @@
     
     table_View = [[UITableView alloc]initWithFrame:CGRectMake(0, selectView.bottom+1, SCREENWIDTH, SCREENHEIGHT-(selectView.bottom+1)-self.tabBarController.tabBar.frame.size.height) style:UITableViewStyleGrouped];
     
-//    table_View = [[UITableView alloc]initWithFrame:CGRectMake(0, selectView.bottom+1, SCREENWIDTH, 180) style:UITableViewStyleGrouped];
-
+    //    table_View = [[UITableView alloc]initWithFrame:CGRectMake(0, selectView.bottom+1, SCREENWIDTH, 180) style:UITableViewStyleGrouped];
+    
     table_View.dataSource = self;
     table_View.delegate = self;
     table_View.separatorStyle= UITableViewCellSeparatorStyleNone;
     table_View.estimatedRowHeight = 92;
-
+    
     [self.view addSubview: table_View];
     
     
@@ -477,20 +476,20 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CGFloat cellH = 0.1;
-
+    
     if (self.data_A.count!=0) {
         CardMarketModel *m = self.data_A[indexPath.row];
         cellH = m.cellHight;
     }
     return cellH;
-
+    
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CardMarketCell *cell = [CardMarketCell creatCellWithTableView:tableView];
     
     if (self.data_A.count !=0) {
         cell.model = self.data_A[indexPath.row];
-
+        
     }
     
     return cell;
@@ -518,8 +517,8 @@
 -(void)goMineCenter:(UIButton*)sender{
     NSLog(@"闹铃");
     if (sender.tag==0) {
-//        ScanViewController *VC = [[ScanViewController alloc]init];
-//        [self.navigationController pushViewController:VC animated:YES];
+        //        ScanViewController *VC = [[ScanViewController alloc]init];
+        //        [self.navigationController pushViewController:VC animated:YES];
         
     }else{
         
@@ -534,50 +533,64 @@
 -(void)dingweiClick:(UIButton*)btn{
     NSLog(@"定位");
     
-    {
-        btn.selected =! btn.selected;
-        self.ifOpen = !self.ifOpen;
-        if (btn.selected==NO) {
-            [self.areaView removeFromSuperview];
-        }else
-            [self choiceArea];
-        //    加动画旋转
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        CGAffineTransform transform;
-        if (btn.selected) {
-            transform = CGAffineTransformRotate(dingwei_img.transform, M_PI);
-        } else {
-            transform = CGAffineTransformRotate(dingwei_img.transform, -270*M_PI/90);
-        }
+    //    {
+    //        btn.selected =! btn.selected;
+    //        self.ifOpen = !self.ifOpen;
+    //        if (btn.selected==NO) {
+    //            [self.areaView removeFromSuperview];
+    //        }else
+    //            [self choiceArea];
+    //        //    加动画旋转
+    //        [UIView beginAnimations:nil context:nil];
+    //        [UIView setAnimationDuration:0.3];
+    //        CGAffineTransform transform;
+    //        if (btn.selected) {
+    //            transform = CGAffineTransformRotate(dingwei_img.transform, M_PI);
+    //        } else {
+    //            transform = CGAffineTransformRotate(dingwei_img.transform, -270*M_PI/90);
+    //        }
+    //
+    //        dingwei_img.transform = transform;
+    //
+    //        [UIView commitAnimations];
+    //
+    //    }
+    
+    
+    
+    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
+    
+    cityViewController.title = @"城市";
+    __block typeof(self) weakSelf = self;
+    [cityViewController choseCityBlock:^(NSString *cityName,NSString *eareName){
         
-        dingwei_img.transform = transform;
         
-        [UIView commitAnimations];
+        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        appdelegate.cityChoice= cityName;
+        appdelegate.districtString = eareName.length>0 ? eareName:cityName;
         
-    }
+        NSLog(@"-----%@====%@\\\\",cityName,eareName);
+        
+        
+        [dingweiBtn setTitle:eareName.length>0 ? eareName:cityName forState:UIControlStateNormal];
+        
+        
+        weakSelf.city_district = [NSString stringWithFormat:@"%@%@",cityName,eareName];
+        
+        [weakSelf resetFrame];
+        
+        
+        //        [self getDataWithMore:@""];
+        
+        
+        
+        
+    }];
+    BaseNavigationController *navigationController = [[BaseNavigationController alloc]initWithRootViewController:cityViewController];
+    
+    [self presentViewController:navigationController animated:YES completion:nil];
     
     
-    
-//    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
-//    
-//    cityViewController.title = @"城市";
-//    __weak typeof(self) weakSelf = self;
-//    [cityViewController choseCityBlock:^(NSString *cityName){
-//        
-//        
-//        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//        appdelegate.districtString= cityName;;
-//        
-//        [dingweiBtn setTitle:cityName forState:UIControlStateNormal];
-//        
-//        
-//    }];
-//    BaseNavigationController *navigationController = [[BaseNavigationController alloc]initWithRootViewController:cityViewController];
-//    
-//    [self presentViewController:navigationController animated:YES completion:nil];
-    
-
 }
 #pragma mark 选则城市delegate
 -(void)senderSelectCity:(NSString *)selectCity{
@@ -599,13 +612,25 @@
         }];
         
         [self getDataWithMore:@""];
-
+        
     }
     
-   
+    
 }
 
 -(void)resetFrame{
+    
+    CGFloat ww = [dingweiBtn.titleLabel.text boundingRectWithSize:CGSizeMake(200, 44) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:dingweiBtn.titleLabel.font} context:nil].size.width;
+    
+    
+    
+    
+    NSLog(@"--------------%f",ww);
+    
+    CGRect btn_frame = dingweiBtn.frame;
+    btn_frame.size.width =  ww<43 ? 43:58;
+    dingweiBtn.frame = btn_frame;
+    
     
     dingwei_img.frame = CGRectMake(dingweiBtn.right, 20+(44-12)/2, 12, 12);
     searchView.frame=CGRectMake(dingwei_img.right+5, 28, SCREENWIDTH-dingwei_img.right-5-30, 30);
@@ -627,20 +652,20 @@
     switch (oldBtn.tag) {
         case 0:
             [paramer setValue:@"transfer" forKey:@"method"];
-
+            
             break;
         case 1:
             [paramer setValue:@"share" forKey:@"method"];
             
             break;
-
+            
             
         default:
             break;
     }
     
     [paramer setValue:self.city_district forKey:@"address"];
-
+    
     
     if ([more isEqualToString:@"more"]) {
         [paramer setValue:[NSString stringWithFormat:@"%d",++currentIndex1] forKey:@"page"];
@@ -648,12 +673,12 @@
     }else{
         
         [self.data_A removeAllObjects];
-
+        
         currentIndex1 = 1;
         [paramer setValue:@"1" forKey:@"page"];
         
     }
-
+    
     
     NSLog(@"CardMarket===%@",paramer);
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
@@ -664,23 +689,27 @@
         
         NSArray *arr = (NSArray *)result;
         
-            for (int i = 0; i <arr.count; i ++) {
-                
-                CardMarketModel *M = [[CardMarketModel alloc]intiWithDictionary:arr[i]];
-                [self.data_A addObject:M];
-            }
- 
+        for (int i = 0; i <arr.count; i ++) {
+            
+            CardMarketModel *M = [[CardMarketModel alloc]intiWithDictionary:arr[i]];
+            [self.data_A addObject:M];
+        }
         
         
-       
+        
+        
         
         [table_View reloadData];
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_refreshheader endRefreshing];
         [_refreshFooter endRefreshing];
-
+        
     }];
     
 }
+
+
+
+
 @end

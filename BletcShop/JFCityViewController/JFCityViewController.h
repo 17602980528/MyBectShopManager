@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^JFCityViewControllerBlock)(NSString *cityName);
+typedef void(^JFCityViewControllerBlock)(NSString *cityName, NSString *eareName);
 
 @interface JFCityViewController : UIViewController
 
