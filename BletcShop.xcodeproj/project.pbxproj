@@ -90,6 +90,8 @@
 		18BCCDCD1D3C9EE8005E145D /* user_ed1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC71D3C9EE8005E145D /* user_ed1.png */; };
 		18BCCDCE1D3C9EE8005E145D /* user_es1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC81D3C9EE8005E145D /* user_es1.png */; };
 		18BCCDCF1D3C9EE8005E145D /* welcome_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC91D3C9EE8005E145D /* welcome_logo.png */; };
+		18BE63BB1E681F1D001563C6 /* ConvertCostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BE63BA1E681F1D001563C6 /* ConvertCostVC.m */; };
+		18BE63BD1E681F3D001563C6 /* timg-3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 18BE63BC1E681F3D001563C6 /* timg-3.jpeg */; };
 		18CB32D61D6C2B2B005A9D64 /* HKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32C91D6C2B2B005A9D64 /* HKViewController.m */; };
 		18CB32D71D6C2B2B005A9D64 /* HKClipperVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32CB1D6C2B2B005A9D64 /* HKClipperVeiw.m */; };
 		18CB32D81D6C2B2B005A9D64 /* HKImageClipperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32CD1D6C2B2B005A9D64 /* HKImageClipperViewController.m */; };
@@ -1171,6 +1173,9 @@
 		18BCCDC71D3C9EE8005E145D /* user_ed1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_ed1.png; sourceTree = "<group>"; };
 		18BCCDC81D3C9EE8005E145D /* user_es1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_es1.png; sourceTree = "<group>"; };
 		18BCCDC91D3C9EE8005E145D /* welcome_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_logo.png; sourceTree = "<group>"; };
+		18BE63B91E681F1D001563C6 /* ConvertCostVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertCostVC.h; sourceTree = "<group>"; };
+		18BE63BA1E681F1D001563C6 /* ConvertCostVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertCostVC.m; sourceTree = "<group>"; };
+		18BE63BC1E681F3D001563C6 /* timg-3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "timg-3.jpeg"; sourceTree = "<group>"; };
 		18CB32C81D6C2B2B005A9D64 /* HKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKViewController.h; sourceTree = "<group>"; };
 		18CB32C91D6C2B2B005A9D64 /* HKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKViewController.m; sourceTree = "<group>"; };
 		18CB32CA1D6C2B2B005A9D64 /* HKClipperVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKClipperVeiw.h; sourceTree = "<group>"; };
@@ -3295,6 +3300,9 @@
 			children = (
 				D9764E8B1DD5B62100B088DE /* PointConvertViewController.h */,
 				D9764E8C1DD5B62100B088DE /* PointConvertViewController.m */,
+				18BE63B91E681F1D001563C6 /* ConvertCostVC.h */,
+				18BE63BA1E681F1D001563C6 /* ConvertCostVC.m */,
+				18BE63BC1E681F3D001563C6 /* timg-3.jpeg */,
 			);
 			name = "积分商城首页";
 			sourceTree = "<group>";
@@ -6401,6 +6409,7 @@
 				D95BAE4C1D542FD500ED0CDC /* award_02.png in Resources */,
 				D93C0D571D251E7B001A1AC1 /* 小标-04.png in Resources */,
 				D9BB4DE41E051DB800971BCC /* 关闭.png in Resources */,
+				18BE63BD1E681F3D001563C6 /* timg-3.jpeg in Resources */,
 				1C9E822E1C603B7A0007BF02 /* jiantou.png in Resources */,
 				D92302511D14E5A8008FB9A9 /* welcom_3.jpg in Resources */,
 				D98FDF871E601C280057C206 /* AD_ad_tb@3x.png in Resources */,
@@ -6575,6 +6584,7 @@
 				18CB32D61D6C2B2B005A9D64 /* HKViewController.m in Sources */,
 				1CB53C091C571FC8002B6CC1 /* MyMoneybagController.m in Sources */,
 				D9B3A5A51D74255700F3F27E /* MWPhoto.m in Sources */,
+				18BE63BB1E681F1D001563C6 /* ConvertCostVC.m in Sources */,
 				18E3DA1A1D8287450089597B /* ChangePasswordViewController.m in Sources */,
 				D92C632B1CC8C8D4006768C6 /* AdminViewController.m in Sources */,
 				D958AD691E654CF200B0776F /* JHPieItemsView.m in Sources */,

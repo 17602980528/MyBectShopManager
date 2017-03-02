@@ -14,6 +14,7 @@
 #import "PointRuleViewController.h"
 #import "ConvertRecordVC.h"//兑换记录
 #import "PointAllGetAndCostsVC.h"//积分明细
+#import "ConvertCostVC.h"
 @interface PointConvertViewController ()<UIScrollViewDelegate>
 
 @end
@@ -31,11 +32,16 @@
     
     UILabel *convertLabel;
     UIImageView *headImageView;
+    NSArray*_imageNameArray;
+    NSArray *productNameArray;
+    NSArray *pointNeedArray;
+    NSString *pointInt;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title=@"积分商城";
+    pointInt=@"0";
     //图像
     headImageView=[[UIImageView alloc]initWithFrame:CGRectMake(22, 10, 44, 44)];
     headImageView.image=[UIImage imageNamed:@"3.1-02"];
@@ -173,9 +179,9 @@
     bottomLabel.text=@"我是有底线的";
     [goodsScrollView addSubview:bottomLabel];
     
-    NSArray*_imageNameArray=@[@"tempProducts_01.jpeg",@"tempProducts_02.jpg",@"tempProducts_03.jpg",@"tempProducts_04.jpg",@"tempProducts_05.jpg",@"tempProducts_06.jpg",@"tempProducts_07.jpg",@"tempProducts_08.png",@"tempProducts_09.jpg"];
-    NSArray *productNameArray=@[@"爱国者Mini移动电源",@"懒人手机支架",@"时尚拉杆箱",@"日本印象保温杯",@"陶瓷水具七件套",@"荣事达加湿器",@"罗马假日四件套",@"R9s杨幂定制版",@"小米平衡车"];
-    NSArray *pointNeedArray=@[@"500",@"200",@"1500",@"300",@"1280",@"2000",@"2500",@"28000",@"30000"];
+    _imageNameArray=@[@"tempProducts_01.jpeg",@"tempProducts_02.jpg",@"tempProducts_03.jpg",@"tempProducts_04.jpg",@"tempProducts_05.jpg",@"tempProducts_06.jpg",@"tempProducts_07.jpg",@"tempProducts_08.png",@"tempProducts_09.jpg"];
+    productNameArray=@[@"爱国者Mini移动电源",@"懒人手机支架",@"时尚拉杆箱",@"日本印象保温杯",@"陶瓷水具七件套",@"荣事达加湿器",@"罗马假日四件套",@"R9s杨幂定制版",@"小米平衡车"];
+    pointNeedArray=@[@"500",@"200",@"1500",@"300",@"1280",@"2000",@"2500",@"28000",@"30000"];
     for (int i=0; i<9; i++) {
         UIView *rewardView=[[UIView alloc]initWithFrame:CGRectMake(i%2*SCREENWIDTH/2, i/2*(SCREENWIDTH/2), SCREENWIDTH/2, SCREENWIDTH/2)];
         
@@ -184,8 +190,13 @@
         [goodsScrollView addSubview:rewardView];
         
         UIImageView *rewardImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/4-40, 10, 80, 80)];
+        rewardImageView.userInteractionEnabled=YES;
+        rewardImageView.tag=i;
         rewardImageView.image=[UIImage imageNamed:_imageNameArray[i]];
         [rewardView addSubview:rewardImageView];
+        
+        UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goShopConvertVC:)];
+        [rewardImageView addGestureRecognizer:tapGesture];
         
         UILabel *rewardNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 99, SCREENWIDTH/2, 13)];
         rewardNameLabel.textAlignment=NSTextAlignmentCenter;
@@ -221,6 +232,15 @@
         priceLabel.textColor=RGB(226, 47, 50);
         
     }
+}
+-(void)goShopConvertVC:(UITapGestureRecognizer *)tap{
+    UIImageView *imageView=(UIImageView *)[tap view];
+    ConvertCostVC *pointCostVC=[[ConvertCostVC alloc]init];
+    pointCostVC.imageNameString=_imageNameArray[imageView.tag];
+    pointCostVC.shopNameString=productNameArray[imageView.tag];
+    pointCostVC.shopNeedPoint=pointNeedArray[imageView.tag];
+    pointCostVC.totalPoint=pointInt;
+    [self.navigationController pushViewController:pointCostVC animated:YES];
 }
 - (void)setContentInScrollView:(UIScrollView* )scrollView {
     UIImageView * view = [scrollView viewWithTag:1];
@@ -378,6 +398,7 @@
         NSLog(@"result==%@", result);
         if (result) {
             convertLabel.text=[NSString getTheNoNullStr:[NSString stringWithFormat:@"%@ 积分",result[@"integral"]] andRepalceStr:@"0积分"];
+            pointInt=[NSString getTheNoNullStr:[NSString stringWithFormat:@"%@",result[@"integral"]] andRepalceStr:@"0"];
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {

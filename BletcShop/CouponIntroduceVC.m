@@ -8,8 +8,11 @@
 
 #import "CouponIntroduceVC.h"
 #import "ShaperView.h"
+//#import "BindCustomView.h"
 @interface CouponIntroduceVC ()
-
+//{
+//    BindCustomView *alertView;
+//}
 @end
 
 @implementation CouponIntroduceVC
@@ -28,18 +31,17 @@
     UIImageView *shopHead=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-25, 35, 50, 50)];
     shopHead.layer.cornerRadius=25.0f;
     shopHead.clipsToBounds=YES;
-    shopHead.image=[UIImage imageNamed:@"5-01.png"];
     [self.view addSubview:shopHead];
     
     UILabel *shopNameLable=[[UILabel alloc]initWithFrame:CGRectMake(0, 35, SCREENWIDTH-20, 15)];
-    shopNameLable.text=@"三人行";
+    
     shopNameLable.textColor=[UIColor lightGrayColor];
     shopNameLable.textAlignment=1;
     shopNameLable.font=[UIFont systemFontOfSize:13.0f];
     [bgView addSubview:shopNameLable];
     
     UILabel *couponFaceValue=[[UILabel alloc]initWithFrame:CGRectMake(0, shopNameLable.bottom+15, SCREENWIDTH-20, 30)];
-    couponFaceValue.text=@"30元代金券";
+    
     couponFaceValue.textAlignment=1;
     couponFaceValue.font=[UIFont systemFontOfSize:24.0f];
     [bgView addSubview:couponFaceValue];
@@ -59,7 +61,6 @@
     [bgView addSubview:viewt];
     
     UILabel *deadTime=[[UILabel alloc]initWithFrame:CGRectMake((SCREENWIDTH-20)/2-90, buyCardBtn.bottom+5, 180, 40)];
-    deadTime.text=@"有效期2017-02-10 14:21:19至2017-04-10 23:59:59";
     deadTime.textColor=[UIColor lightGrayColor];
     deadTime.numberOfLines=0;
     deadTime.textAlignment=1;
@@ -69,7 +70,7 @@
     UIView *noticeView=[[UIView alloc]initWithFrame:CGRectMake(0, bgView.height/2+1, SCREENWIDTH-20, bgView.height/4)];
     noticeView.backgroundColor=[UIColor whiteColor];
     [bgView addSubview:noticeView];
-    NSArray *noticeArray=@[@"仅限线上办理会员卡时可用",@"订单每满100元可用，最高优惠30元",@"每周一、二、三、四、五、六、日00:00-23:59可用"];
+    NSArray *noticeArray=@[@"不可与单品优惠叠加使用",@"订单每满100元可用，最高优惠30元",@"每周一、二、三、四、五、六、日00:00-23:59可用"];
     for (int i=0; i<3; i++) {
         UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(23, i*bgView.height/12, SCREENWIDTH-20-23, bgView.height/12)];
         noticeLable.font=[UIFont systemFontOfSize:11.0f];
@@ -127,47 +128,48 @@
     [useNoticeView addSubview:adjustShopButton];
     [adjustShopButton addTarget:self action:@selector(adjustShop) forControlEvents:UIControlEventTouchUpInside];
     
+    if (self.index==0) {
+        shopHead.image=[UIImage imageNamed:self.infoDic[@"image"]];
+        shopNameLable.text=self.infoDic[@"shop"];
+        couponFaceValue.text=self.infoDic[@"money"];
+        deadTime.text=self.infoDic[@"deadTime"];
+    }else if(self.index==1){
+        shopHead.image=[UIImage imageNamed:@"5-01.png"];
+        shopNameLable.text=@"三人行";
+        couponFaceValue.text=@"30元代金券";
+        deadTime.text=@"有效期2017-02-10 14:21:19至2017-04-10 23:59:59";
+    }
+    
     
 }
 -(void)buyCardBtnClick:(UIButton *)sender{
     NSLog(@"goBuyCard");
 }
 -(void)notice{
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"无相关信息", @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    //    [hud setColor:[UIColor blackColor]];
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    hud.userInteractionEnabled = YES;
-    
-    [hud hideAnimated:YES afterDelay:2.f];
+    NSLog(@"notice");
 }
 -(void)adjustShop{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"限本店使用", @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    //    [hud setColor:[UIColor blackColor]];
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    hud.userInteractionEnabled = YES;
-    
-    [hud hideAnimated:YES afterDelay:2.f];
+    //    alertView=[[BindCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    //    [alertView.completeBtn addTarget:self action:@selector(removeAlertViewFromCurrentVC:) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.view addSubview:alertView];
 }
+//-(void)removeAlertViewFromCurrentVC:(UIButton *)sender{
+//    [alertView removeFromSuperview];
+//    //pop到需要的页面
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

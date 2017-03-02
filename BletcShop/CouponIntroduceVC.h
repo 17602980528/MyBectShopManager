@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CouponIntroduceVC : UIViewController
-
+@property(nonatomic,strong)NSDictionary *infoDic;
+@property(nonatomic)NSInteger index;//从我的代金券进入是0；从领取界面进入是1；
 @end
