@@ -797,6 +797,8 @@
 		D9962F6F1D98F60600E63218 /* langch.png in Resources */ = {isa = PBXBuildFile; fileRef = D9962F6E1D98F60600E63218 /* langch.png */; };
 		D996AE511E5D8A98000A5E89 /* 登陆  头像-01.png in Resources */ = {isa = PBXBuildFile; fileRef = D996AE4F1E5D8A98000A5E89 /* 登陆  头像-01.png */; };
 		D996AE521E5D8A98000A5E89 /* 登陆  头像-02.png in Resources */ = {isa = PBXBuildFile; fileRef = D996AE501E5D8A98000A5E89 /* 登陆  头像-02.png */; };
+		D99760EC1E68FFE6008E21FE /* CouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760EB1E68FFE6008E21FE /* CouponCell.m */; };
+		D99760EF1E690575008E21FE /* SawtoothView.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760EE1E690575008E21FE /* SawtoothView.m */; };
 		D99A5DB61DD5754A006FF158 /* GetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D99A5DB51DD5754A006FF158 /* GetMoneyViewController.m */; };
 		D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D99C11A31DE28CF100E45B64 /* UPgradeVC.m */; };
 		D99C11A61DE28CF100E45B64 /* UPgradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99C11A41DE28CF100E45B64 /* UPgradeVC.xib */; };
@@ -2264,6 +2266,10 @@
 		D9962F6E1D98F60600E63218 /* langch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = langch.png; sourceTree = "<group>"; };
 		D996AE4F1E5D8A98000A5E89 /* 登陆  头像-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登陆  头像-01.png"; sourceTree = "<group>"; };
 		D996AE501E5D8A98000A5E89 /* 登陆  头像-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登陆  头像-02.png"; sourceTree = "<group>"; };
+		D99760EA1E68FFE6008E21FE /* CouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponCell.h; sourceTree = "<group>"; };
+		D99760EB1E68FFE6008E21FE /* CouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponCell.m; sourceTree = "<group>"; };
+		D99760ED1E690575008E21FE /* SawtoothView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SawtoothView.h; sourceTree = "<group>"; };
+		D99760EE1E690575008E21FE /* SawtoothView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SawtoothView.m; sourceTree = "<group>"; };
 		D99A5DB41DD5754A006FF158 /* GetMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyViewController.h; sourceTree = "<group>"; };
 		D99A5DB51DD5754A006FF158 /* GetMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyViewController.m; sourceTree = "<group>"; };
 		D99C11A21DE28CF100E45B64 /* UPgradeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPgradeVC.h; sourceTree = "<group>"; };
@@ -2839,6 +2845,8 @@
 		079386BD1C55BB670021B385 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				D99760ED1E690575008E21FE /* SawtoothView.h */,
+				D99760EE1E690575008E21FE /* SawtoothView.m */,
 				D9C4CDEB1DE44587009C76C1 /* ValuePickerView.h */,
 				D9C4CDEC1DE44587009C76C1 /* ValuePickerView.m */,
 				D97F60061D62DCAA000EE794 /* NSArray+Log.h */,
@@ -3806,6 +3814,8 @@
 				180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */,
 				180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */,
 				180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */,
+				D99760EA1E68FFE6008E21FE /* CouponCell.h */,
+				D99760EB1E68FFE6008E21FE /* CouponCell.m */,
 				D95353CF1E5C27670004E42C /* GoToPayForAdvertistTableVC.h */,
 				D95353D01E5C27670004E42C /* GoToPayForAdvertistTableVC.m */,
 				18E095321D878A51002A44C0 /* 数据统计界面 */,
@@ -6832,6 +6842,7 @@
 				D9DEED211CACED7C00ACDD00 /* SDWebImageManager+MJ.m in Sources */,
 				D9B3A5B21D74255700F3F27E /* MKAnnotationView+EMWebCache.m in Sources */,
 				D9BB4DE21E050EA200971BCC /* AppointStateViewController.m in Sources */,
+				D99760EC1E68FFE6008E21FE /* CouponCell.m in Sources */,
 				D941135D1CE9A3D7008E231F /* openssl_wrapper.m in Sources */,
 				D9B3A5BC1D74255700F3F27E /* PSTCollectionView.m in Sources */,
 				18E3CA8D1D532C6000789065 /* EndOrBeginningViewController.m in Sources */,
@@ -6881,6 +6892,7 @@
 				1CDCCD1A1C7594040094E70D /* AFNetworkReachabilityManager.m in Sources */,
 				D9B3A5BE1D74255700F3F27E /* PSTCollectionViewController.m in Sources */,
 				D932F3E31CCDB6B800B33505 /* VPImageCropperViewController.m in Sources */,
+				D99760EF1E690575008E21FE /* SawtoothView.m in Sources */,
 				1CDCCD1E1C7594040094E70D /* AFURLResponseSerialization.m in Sources */,
 				D95353D11E5C27680004E42C /* GoToPayForAdvertistTableVC.m in Sources */,
 				D9B3A5B81D74255700F3F27E /* UIImageView+EMHighlightedWebCache.m in Sources */,
