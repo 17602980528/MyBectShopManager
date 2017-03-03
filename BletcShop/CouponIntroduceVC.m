@@ -70,7 +70,7 @@
     UIView *noticeView=[[UIView alloc]initWithFrame:CGRectMake(0, bgView.height/2+1, SCREENWIDTH-20, bgView.height/4)];
     noticeView.backgroundColor=[UIColor whiteColor];
     [bgView addSubview:noticeView];
-    NSArray *noticeArray=@[@"不可与单品优惠叠加使用",@"订单每满100元可用，最高优惠30元",@"每周一、二、三、四、五、六、日00:00-23:59可用"];
+    NSArray *noticeArray=@[@"可在线上办理本店会员卡时使用",@"订单每满100元可用，最高优惠30元",@"每周一、二、三、四、五、六、日00:00-23:59可用"];
     for (int i=0; i<3; i++) {
         UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(23, i*bgView.height/12, SCREENWIDTH-20-23, bgView.height/12)];
         noticeLable.font=[UIFont systemFontOfSize:11.0f];

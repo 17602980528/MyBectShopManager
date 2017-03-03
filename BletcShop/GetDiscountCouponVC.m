@@ -108,6 +108,7 @@
     NSLog(@"%@",indexPath);
     if ([sender.titleLabel.text isEqualToString:@"立即使用"]) {
         CouponIntroduceVC *couponVC=[[CouponIntroduceVC alloc]init];
+        couponVC.index=1;
         [self.navigationController pushViewController:couponVC animated:YES];
     }
     [sender setTitle:@"立即使用" forState:UIControlStateNormal];
@@ -122,13 +123,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
