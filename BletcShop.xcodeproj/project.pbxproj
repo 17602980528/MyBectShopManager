@@ -92,6 +92,7 @@
 		18BCCDCF1D3C9EE8005E145D /* welcome_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC91D3C9EE8005E145D /* welcome_logo.png */; };
 		18BE63BB1E681F1D001563C6 /* ConvertCostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BE63BA1E681F1D001563C6 /* ConvertCostVC.m */; };
 		18BE63BD1E681F3D001563C6 /* timg-3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 18BE63BC1E681F3D001563C6 /* timg-3.jpeg */; };
+		18C0389B1E693C8B005F7AA9 /* HotNewsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C0389A1E693C8B005F7AA9 /* HotNewsVC.m */; };
 		18CB32D61D6C2B2B005A9D64 /* HKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32C91D6C2B2B005A9D64 /* HKViewController.m */; };
 		18CB32D71D6C2B2B005A9D64 /* HKClipperVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32CB1D6C2B2B005A9D64 /* HKClipperVeiw.m */; };
 		18CB32D81D6C2B2B005A9D64 /* HKImageClipperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32CD1D6C2B2B005A9D64 /* HKImageClipperViewController.m */; };
@@ -1178,6 +1179,8 @@
 		18BE63B91E681F1D001563C6 /* ConvertCostVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertCostVC.h; sourceTree = "<group>"; };
 		18BE63BA1E681F1D001563C6 /* ConvertCostVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertCostVC.m; sourceTree = "<group>"; };
 		18BE63BC1E681F3D001563C6 /* timg-3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "timg-3.jpeg"; sourceTree = "<group>"; };
+		18C038991E693C8B005F7AA9 /* HotNewsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotNewsVC.h; sourceTree = "<group>"; };
+		18C0389A1E693C8B005F7AA9 /* HotNewsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotNewsVC.m; sourceTree = "<group>"; };
 		18CB32C81D6C2B2B005A9D64 /* HKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKViewController.h; sourceTree = "<group>"; };
 		18CB32C91D6C2B2B005A9D64 /* HKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKViewController.m; sourceTree = "<group>"; };
 		18CB32CA1D6C2B2B005A9D64 /* HKClipperVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKClipperVeiw.h; sourceTree = "<group>"; };
@@ -4512,6 +4515,8 @@
 				D9C0E95D1DCC886D00FD1199 /* HomeViewCell.m */,
 				D9C0E95F1DCC891500FD1199 /* HomeShopModel.h */,
 				D9C0E9601DCC891500FD1199 /* HomeShopModel.m */,
+				18C038991E693C8B005F7AA9 /* HotNewsVC.h */,
+				18C0389A1E693C8B005F7AA9 /* HotNewsVC.m */,
 			);
 			name = "home首页";
 			sourceTree = "<group>";
@@ -6626,6 +6631,7 @@
 				D94F3DC51CBCDBB5003E762D /* UserInfoViewController.m in Sources */,
 				D9B3A49D1D73D5BF00F3F27E /* LZDChartCell.m in Sources */,
 				D9853F7B1DD463FA0028BF94 /* UILabel+extension.m in Sources */,
+				18C0389B1E693C8B005F7AA9 /* HotNewsVC.m in Sources */,
 				18D89C641D51CE1000717B11 /* GoShopViewController.m in Sources */,
 				1CF283641C5862A200F3952A /* UIViewExt.m in Sources */,
 				D9A06B5C1D8679C30037795B /* EMCDDeviceManager+Media.m in Sources */,

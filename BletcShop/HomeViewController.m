@@ -30,7 +30,7 @@
 
 #import "JFLocation.h"
 #import "JFAreaDataManager.h"
-
+#import "HotNewsVC.h"
 
 @interface HomeViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GYChangeTextViewDelegate,SelectCityDelegate,JFLocationDelegate>
 {
@@ -1552,6 +1552,8 @@
 
 - (void)gyChangeTextView:(GYChangeTextView *)textView didTapedAtIndex:(NSInteger)index {
     NSLog(@"%ld",index);
+    HotNewsVC *vc=[[HotNewsVC alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
