@@ -472,7 +472,7 @@
             NSLog(@"%@",url);
             NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
             self.date = (long long int)time;
-            NSString *nameValue = [[[NSString alloc]initWithFormat:@"%@_%@_%lld",[appdelegate.shopInfoDic objectForKey:@"name"],[appdelegate.shopInfoDic objectForKey:@"phone"],self.date ]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *nameValue = [[NSString alloc]initWithFormat:@"%@_%@_%lld",[appdelegate.shopInfoDic objectForKey:@"name"],[appdelegate.shopInfoDic objectForKey:@"phone"],self.date ];
             NSData *img_Data = [NSData dataWithContentsOfFile:fullPath];
             NSMutableDictionary *parmer = [NSMutableDictionary dictionary];
             [parmer setValue:nameValue forKey:@"name"];
@@ -565,7 +565,7 @@
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         [params setObject:[appdelegate.shopInfoDic objectForKey:@"muid"] forKey:@"muid"];
-        NSString *nameValue = [[[NSString alloc]initWithFormat:@"%@_%@_%lld.png",[appdelegate.shopInfoDic objectForKey:@"name"],[appdelegate.shopInfoDic objectForKey:@"phone"],self.date ]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *nameValue = [[NSString alloc]initWithFormat:@"%@_%@_%lld.png",[appdelegate.shopInfoDic objectForKey:@"name"],[appdelegate.shopInfoDic objectForKey:@"phone"],self.date ];
         [params setObject:nameValue forKey:@"image_url"];
         [params setObject:self.contentText.text forKey:@"content"];
         [params setObject:stateNum forKey:@"type"];
@@ -602,7 +602,7 @@
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         [params setObject:[appdelegate.shopInfoDic objectForKey:@"muid"] forKey:@"muid"];
-        NSString *nameValue = [[[NSString alloc]initWithFormat:@"%@_%@_%lld.png",[appdelegate.shopInfoDic objectForKey:@"name"],[appdelegate.shopInfoDic objectForKey:@"phone"],self.date ]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *nameValue = [[NSString alloc]initWithFormat:@"%@_%@_%lld.png",[appdelegate.shopInfoDic objectForKey:@"name"],[appdelegate.shopInfoDic objectForKey:@"phone"],self.date ];
         [params setObject:nameValue forKey:@"image_url"];
         [params setObject:self.contentText.text forKey:@"content"];
         [params setObject:dataArr[indexNum][@"datetime"] forKey:@"datetime"];
