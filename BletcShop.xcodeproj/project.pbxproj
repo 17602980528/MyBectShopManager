@@ -289,8 +289,6 @@
 		1CB53C121C572019002B6CC1 /* LookAgoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB53C111C572019002B6CC1 /* LookAgoController.m */; };
 		1CB53C191C573BA7002B6CC1 /* CardVipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB53C171C573BA7002B6CC1 /* CardVipCell.m */; };
 		1CB53C1A1C573BA7002B6CC1 /* CardVipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CB53C181C573BA7002B6CC1 /* CardVipCell.xib */; };
-		1CB53C211C5761BE002B6CC1 /* ShoppingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB53C1F1C5761BE002B6CC1 /* ShoppingCell.m */; };
-		1CB53C221C5761BE002B6CC1 /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CB53C201C5761BE002B6CC1 /* ShoppingCell.xib */; };
 		1CBE67CE1C5828CD00706AE9 /* DOPDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBE67CA1C5828CD00706AE9 /* DOPDropDownMenu.m */; };
 		1CBE67CF1C5828CD00706AE9 /* icon_chose_arrow_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CBE67CB1C5828CD00706AE9 /* icon_chose_arrow_nor@2x.png */; };
 		1CBE67D01C5828CD00706AE9 /* icon_chose_arrow_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CBE67CC1C5828CD00706AE9 /* icon_chose_arrow_sel@2x.png */; };
@@ -800,6 +798,8 @@
 		D996AE521E5D8A98000A5E89 /* 登陆  头像-02.png in Resources */ = {isa = PBXBuildFile; fileRef = D996AE501E5D8A98000A5E89 /* 登陆  头像-02.png */; };
 		D99760EC1E68FFE6008E21FE /* CouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760EB1E68FFE6008E21FE /* CouponCell.m */; };
 		D99760EF1E690575008E21FE /* SawtoothView.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760EE1E690575008E21FE /* SawtoothView.m */; };
+		D99760F41E695CFD008E21FE /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760F11E695CFD008E21FE /* CityModel.m */; };
+		D99760F51E695CFD008E21FE /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760F31E695CFD008E21FE /* ProvinceModel.m */; };
 		D99A5DB61DD5754A006FF158 /* GetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D99A5DB51DD5754A006FF158 /* GetMoneyViewController.m */; };
 		D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D99C11A31DE28CF100E45B64 /* UPgradeVC.m */; };
 		D99C11A61DE28CF100E45B64 /* UPgradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99C11A41DE28CF100E45B64 /* UPgradeVC.xib */; };
@@ -1471,9 +1471,6 @@
 		1CB53C161C573BA7002B6CC1 /* CardVipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardVipCell.h; sourceTree = "<group>"; };
 		1CB53C171C573BA7002B6CC1 /* CardVipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardVipCell.m; sourceTree = "<group>"; };
 		1CB53C181C573BA7002B6CC1 /* CardVipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardVipCell.xib; sourceTree = "<group>"; };
-		1CB53C1E1C5761BE002B6CC1 /* ShoppingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCell.h; sourceTree = "<group>"; };
-		1CB53C1F1C5761BE002B6CC1 /* ShoppingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCell.m; sourceTree = "<group>"; };
-		1CB53C201C5761BE002B6CC1 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCell.xib; sourceTree = "<group>"; };
 		1CBE67C91C5828CD00706AE9 /* DOPDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOPDropDownMenu.h; sourceTree = "<group>"; };
 		1CBE67CA1C5828CD00706AE9 /* DOPDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOPDropDownMenu.m; sourceTree = "<group>"; };
 		1CBE67CB1C5828CD00706AE9 /* icon_chose_arrow_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_chose_arrow_nor@2x.png"; sourceTree = "<group>"; };
@@ -2273,6 +2270,10 @@
 		D99760EB1E68FFE6008E21FE /* CouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponCell.m; sourceTree = "<group>"; };
 		D99760ED1E690575008E21FE /* SawtoothView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SawtoothView.h; sourceTree = "<group>"; };
 		D99760EE1E690575008E21FE /* SawtoothView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SawtoothView.m; sourceTree = "<group>"; };
+		D99760F01E695CFD008E21FE /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		D99760F11E695CFD008E21FE /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
+		D99760F21E695CFD008E21FE /* ProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceModel.h; sourceTree = "<group>"; };
+		D99760F31E695CFD008E21FE /* ProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceModel.m; sourceTree = "<group>"; };
 		D99A5DB41DD5754A006FF158 /* GetMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyViewController.h; sourceTree = "<group>"; };
 		D99A5DB51DD5754A006FF158 /* GetMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyViewController.m; sourceTree = "<group>"; };
 		D99C11A21DE28CF100E45B64 /* UPgradeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPgradeVC.h; sourceTree = "<group>"; };
@@ -3691,9 +3692,10 @@
 		1CB53C1C1C5760C3002B6CC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1CB53C1E1C5761BE002B6CC1 /* ShoppingCell.h */,
-				1CB53C1F1C5761BE002B6CC1 /* ShoppingCell.m */,
-				1CB53C201C5761BE002B6CC1 /* ShoppingCell.xib */,
+				D99760F01E695CFD008E21FE /* CityModel.h */,
+				D99760F11E695CFD008E21FE /* CityModel.m */,
+				D99760F21E695CFD008E21FE /* ProvinceModel.h */,
+				D99760F31E695CFD008E21FE /* ProvinceModel.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -6302,7 +6304,6 @@
 				D9F1301A1D8E8E3700E82F38 /* zhoubianHL@2x.png in Resources */,
 				D94DF23C1CAE08F7000D5B69 /* share.png in Resources */,
 				D92302521D14E5A8008FB9A9 /* welcom_2.jpg in Resources */,
-				1CB53C221C5761BE002B6CC1 /* ShoppingCell.xib in Resources */,
 				D97F601B1D62F770000EE794 /* 注册-06.png in Resources */,
 				1C2ED1241C5B5868003EE93B /* 1-02(1)@2x.png in Resources */,
 				D949C15B1CBF7E4D0091D8FC /* bankcard.png in Resources */,
@@ -6493,6 +6494,7 @@
 				18EDCF701D46039D004C40B7 /* NSString+Addition.m in Sources */,
 				D986A1C71DE57849007B798B /* PaySuccessVc.m in Sources */,
 				D93BE8671CFD6B6300000E0D /* FavorateViewController.m in Sources */,
+				D99760F41E695CFD008E21FE /* CityModel.m in Sources */,
 				D93C0D6E1D251FC1001A1AC1 /* BackChooseStateViewController.m in Sources */,
 				D98E5C1A1E51524D009D56BF /* SRVideoLayerView.m in Sources */,
 				185E51461E5D2E10009F0C01 /* PublishTopScrollAdvertVC.m in Sources */,
@@ -6526,7 +6528,6 @@
 				D9EE55621DC9B1D20024C830 /* ShareCardViewController.m in Sources */,
 				D9A06B621D8679C30037795B /* wav.mm in Sources */,
 				D98ECBDB1D9D1ECC00BEDD57 /* MJXAViewController.m in Sources */,
-				1CB53C211C5761BE002B6CC1 /* ShoppingCell.m in Sources */,
 				D949302B1CD1F58E00E4CBCB /* AddVipTableViewCell.m in Sources */,
 				D9DEED201CACED7C00ACDD00 /* SDWebImageDownloaderOperation.m in Sources */,
 				18FCAD481E56A16800FF57D0 /* BindCustomView.m in Sources */,
@@ -6795,6 +6796,7 @@
 				D98ECBE21D9D1F1200BEDD57 /* SelectShopViewController.m in Sources */,
 				D9B3A5B91D74255700F3F27E /* UIImageView+EMWebCache.m in Sources */,
 				1817FF5C1D40665900AFC965 /* MemberDetailViewController.m in Sources */,
+				D99760F51E695CFD008E21FE /* ProvinceModel.m in Sources */,
 				1CDCCD1F1C7594040094E70D /* AFURLSessionManager.m in Sources */,
 				D9B3A5A41D74255700F3F27E /* MWGridViewController.m in Sources */,
 				D958AD6C1E654CF200B0776F /* JHScatterChart.m in Sources */,

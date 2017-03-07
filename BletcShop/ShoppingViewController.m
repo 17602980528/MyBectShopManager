@@ -7,7 +7,6 @@
 //
 
 #import "ShoppingViewController.h"
-#import "ShoppingCell.h"
 #import "DOPDropDownMenu.h"
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
@@ -20,6 +19,10 @@
 #import "ShaperView.h"
 
 #import "JFAreaDataManager.h"
+
+#import "ProvinceModel.h"
+#import "CityModel.h"
+
 
 @interface ShoppingViewController ()<UITableViewDataSource,UITableViewDelegate,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate,BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
@@ -34,6 +37,9 @@
 
 @property(nonatomic,weak)UILabel *GpsLabel;//地址的lable
 @property(nonatomic,weak)UITableView *shopTabel;//商户的列表
+
+@property(nonatomic, strong)NSMutableArray *dataSourceProvinceArray;
+@property(nonatomic, strong)NSMutableArray *dataSourceCityArray;
 //
 @property(nonatomic,strong)NSMutableArray *data1;
 @property (nonatomic, strong) NSArray *cates;
@@ -53,6 +59,13 @@
 
 @implementation ShoppingViewController
 
+
+-(NSMutableArray *)dataSourceCityArray{
+    if (!_dataSourceCityArray) {
+        _dataSourceCityArray = [NSMutableArray array];
+    }
+    return _dataSourceCityArray;
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -132,10 +145,13 @@
     }
     
     self.sorts = @[@"智能排序",@"好评优先",@"离我最近"];
-    
+    [self getData];
+
     [self _initView];
     [self _initTable];
     [self _initFootTab];
+    
+
     
 }
 -(void)viewDidDisappear:(BOOL)animated
@@ -161,20 +177,15 @@
     DOPDropDownMenu *menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 110-60) andHeight:44];
     menu.delegate = self;
     menu.dataSource = self;
+    menu.isClickHaveItemValid = YES;
     [self.view addSubview:menu];
     _menu = menu;
     
     // 创建menu 第一次显示 不会调用点击代理，可以用这个手动调用
     [menu selectDefalutIndexPath];
-    //    [self menuReloadData];
+
 }
 
-//更新数据
-- (void)menuReloadData
-{
-    self.classifys = [[NSMutableArray alloc]initWithObjects:@[@"美食",@"今日新单",@"电影"], nil];
-    [_menu reloadData];
-}
 
 
 //创建顶部控件;
@@ -319,7 +330,7 @@
     NSLog(@"%@",self.ereaString);
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        NSLog(@"postRequestShop-----%@",result);
+//        NSLog(@"postRequestShop-----%@",result);
         if ([result isKindOfClass:[NSArray class]]) {
             if (self.indexss==1) {
                 
@@ -407,7 +418,9 @@
     if (column == 0) {
         return self.classifys.count;
     }else if (column == 1){
-        return self.areas.count;
+        
+        return self.dataSourceProvinceArray.count;
+//        return self.areas.count;
     }else {
         return self.sorts.count;
     }
@@ -418,7 +431,10 @@
     if (indexPath.column == 0) {
         return self.classifys[indexPath.row];
     } else if (indexPath.column == 1){
-        return self.areas[indexPath.row];
+        
+        ProvinceModel *m = _dataSourceProvinceArray[indexPath.row];
+        return m.fullname;
+//        return self.areas[indexPath.row];
     } else {
         return self.sorts[indexPath.row];
     }
@@ -430,7 +446,7 @@
 {
     if (indexPath.column == 0 || indexPath.column == 1) {
         NSString *str = [NSString stringWithFormat:@"ic_filter_category_%ld",indexPath.row];
-        NSLog(@"ic_filter_category==%@",str);
+//        NSLog(@"ic_filter_category==%@",str);
         return str;
         
     }
@@ -466,38 +482,56 @@
 {
    
     if (column==1) {
-        return self.classifys.count;
-    }else return 0;
+        
+//        NSLog(@"numberOfItemsInRow====%ld===%ld===%ld",self.dataSourceCityArray.count,row,column);
+        
+            return self.dataSourceCityArray.count;
+
+    }else return -1;
     
 }
 
 - (NSString *)menu:(DOPDropDownMenu *)menu titleForItemsInRowAtIndexPath:(DOPIndexPath *)indexPath
 {
     if (indexPath.column == 1) {
-       
-        return self.classifys[indexPath.item];
+        
+//        NSLog(@"-------%ld------%ld--%ld-%ld",self.dataSourceCityArray.count,indexPath.row,indexPath.column,indexPath.item);
+        CityModel *m = self.dataSourceCityArray[indexPath.item];
+        
+        
+        return m.fullname;
+//        return self.classifys[indexPath.item];
     }else
     
     return nil;
 }
 
+
+
 - (void)menu:(DOPDropDownMenu *)menu didSelectRowAtIndexPath:(DOPIndexPath *)indexPath
 {
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     if (indexPath.item >= 0) {
-        NSLog(@"点击了 %ld - %ld - %ld 项目",indexPath.column,indexPath.row,indexPath.item);
+//        NSLog(@"点击了 %ld - %ld - %ld 项目",indexPath.column,indexPath.row,indexPath.item);
     }else {
-        NSLog(@"点击了 %ld - %ld 项目",indexPath.column,indexPath.row);
+//        NSLog(@"点击了 %ld - %ld 项目",indexPath.column,indexPath.row);
         if (indexPath.column == 0) {
             if([[self.classifys objectAtIndex:indexPath.row] isEqualToString:@"全部分类"]){
                 self.classifyString =@"";
             }else
                 self.classifyString = [self.classifys objectAtIndex:indexPath.row];
-        }else if (indexPath.column == 1) {
-            if([[self.areas objectAtIndex:indexPath.row] isEqualToString:@"全城"]){
-                self.ereaString =appdelegate.cityChoice;
-            }else
-                self.ereaString = [self.areas objectAtIndex:indexPath.row];
+        }else if (indexPath.column == 1 ) {
+            
+            
+//            if([[self.areas objectAtIndex:indexPath.row] isEqualToString:@"全城"]){
+//                self.ereaString =appdelegate.cityChoice;
+//            }else
+//            self.ereaString = [self.areas objectAtIndex:indexPath.row];
+            
+            ProvinceModel *m = _dataSourceProvinceArray[indexPath.row];
+            self.ereaString = m.fullname;
+            
+            [self getcityDataById:m.id];
         }
     }
     self.indexss=1;
@@ -678,6 +712,63 @@
     
 }
 
+//getData这个方法里是网络请求数据的解析省份数据信息
+- (void)getData
+{
+    //请求数据并解析
+    NSString *strURL = @"http://apis.map.qq.com/ws/district/v1/list?key=K3VBZ-M6WWV-PPSPY-UVGGC-DRM2Z-PGBMV";
+    NSURL *URL = [NSURL URLWithString:strURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//    NSLog(@"=====%@",dic);
+    //数据源数组:
+    self.dataSourceProvinceArray = [NSMutableArray array];
+    NSArray *arr = [dic valueForKey:@"result"];
+    for (NSDictionary *dic in arr[0])
+    {
+        ProvinceModel *model = [[ProvinceModel alloc] init];
+        [model setValuesForKeysWithDictionary:dic];
+        //        NSLog(@"%@ * %@", model.fullname, model.id);
+        [self.dataSourceProvinceArray addObject:model];
+        
+    }
+    if (self.dataSourceProvinceArray.count!=0) {
+        ProvinceModel *M = [self.dataSourceProvinceArray firstObject];
+        
+        [self getcityDataById:M.id];
+
+    }
+}
+
+//getcityDataById:这个方法里是网络请求数据的解析市数据信息
+- (void)getcityDataById:(NSString *)proID
+{
+    NSString *urlString = [NSString stringWithFormat:@"http://apis.map.qq.com/ws/district/v1/getchildren?&id=%@&key=K3VBZ-M6WWV-PPSPY-UVGGC-DRM2Z-PGBMV", proID];
+    NSURL *URL = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
+    NSArray *allArray = [dic objectForKey:@"result"];
+    NSArray *array = [allArray objectAtIndex:0];
+    //遍历当前数组给madel赋值
+    [self.dataSourceCityArray removeAllObjects];
+    
+    
+        for (NSDictionary *diction in array)
+        {
+            CityModel *model = [[CityModel alloc] init];
+            [model setValuesForKeysWithDictionary:diction];
+            [self.dataSourceCityArray addObject:model];
+        }
+
+
+    NSLog(@"=========%ld",self.dataSourceCityArray.count);
+   
+    
+    
+}
 
 
 //BaiduMap释放

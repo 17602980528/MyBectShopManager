@@ -752,6 +752,8 @@
         
         if (isClickHaveItemValid && _delegate && [_delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {
             [self.delegate menu:self didSelectRowAtIndexPath:[DOPIndexPath indexPathWithCol:_currentSelectedMenudIndex row:indexPath.row]];
+            NSLog(@"=======_leftTableView==");
+            [self.rightTableView reloadData];
         } else {
             //TODO: delegate is nil
         }
@@ -760,6 +762,9 @@
         if (self.delegate && [_delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {
             NSInteger currentSelectedMenudRow = [_currentSelectRowArray[_currentSelectedMenudIndex] integerValue];
             [self.delegate menu:self didSelectRowAtIndexPath:[DOPIndexPath indexPathWithCol:_currentSelectedMenudIndex row:currentSelectedMenudRow item:indexPath.row]];
+            
+            NSLog(@"=======_rightTableView==");
+
         } else {
             //TODO: delegate is nil
             
