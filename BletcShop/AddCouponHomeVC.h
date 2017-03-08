@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AddCouponHomeVC : UIViewController
-
+@property (nonatomic,strong)NSDictionary *delete_dic;//需要编辑的数据
 @end
