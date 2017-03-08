@@ -8,6 +8,7 @@
 
 #import "CouponIntroduceVC.h"
 #import "ShaperView.h"
+#import "UIImageView+WebCache.h"
 //#import "BindCustomView.h"
 @interface CouponIntroduceVC ()
 //{
@@ -70,7 +71,8 @@
     UIView *noticeView=[[UIView alloc]initWithFrame:CGRectMake(0, bgView.height/2+1, SCREENWIDTH-20, bgView.height/4)];
     noticeView.backgroundColor=[UIColor whiteColor];
     [bgView addSubview:noticeView];
-    NSArray *noticeArray=@[@"可在线上办理本店会员卡时使用",@"订单每满100元可用，最高优惠30元",@"每周一、二、三、四、五、六、日00:00-23:59可用"];
+    NSString *useLimit=[NSString stringWithFormat:@"订单每满%@元可用，最高优惠%@元",self.infoDic[@"pri_condition"],self.infoDic[@"sum"]];
+    NSArray *noticeArray=@[@"可在线上办理本店会员卡时使用",useLimit,@"每周一、二、三、四、五、六、日00:00-23:59可用"];
     for (int i=0; i<3; i++) {
         UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(23, i*bgView.height/12, SCREENWIDTH-20-23, bgView.height/12)];
         noticeLable.font=[UIFont systemFontOfSize:11.0f];
@@ -129,15 +131,15 @@
     [adjustShopButton addTarget:self action:@selector(adjustShop) forControlEvents:UIControlEventTouchUpInside];
     
     if (self.index==0) {
-        shopHead.image=[UIImage imageNamed:self.infoDic[@"image"]];
-        shopNameLable.text=self.infoDic[@"shop"];
-        couponFaceValue.text=self.infoDic[@"money"];
-        deadTime.text=self.infoDic[@"deadTime"];
+        [shopHead sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,self.infoDic[@"image_url"]]]];
+        shopNameLable.text=self.infoDic[@"store"];
+        couponFaceValue.text=[NSString stringWithFormat:@"%@元代金券",self.infoDic[@"sum"]];
+        deadTime.text=[NSString stringWithFormat:@"有效期：%@～%@",self.infoDic[@"date_start"],self.infoDic[@"date_end"]];
     }else if(self.index==1){
-        shopHead.image=[UIImage imageNamed:@"5-01.png"];
-        shopNameLable.text=@"三人行";
-        couponFaceValue.text=@"30元代金券";
-        deadTime.text=@"有效期2017-02-10 14:21:19至2017-04-10 23:59:59";
+        [shopHead sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,self.infoDic[@"image_url"]]]];
+        shopNameLable.text=self.infoDic[@"store"];
+        couponFaceValue.text=[NSString stringWithFormat:@"%@元代金券",self.infoDic[@"sum"]];
+        deadTime.text=[NSString stringWithFormat:@"有效期：%@～%@",self.infoDic[@"date_start"],self.infoDic[@"date_end"]];
     }
     
     

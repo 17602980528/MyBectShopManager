@@ -144,7 +144,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CouponIntroduceVC *vc=[[CouponIntroduceVC alloc]init];
-    vc.infoDic=_dataArray[indexPath.row];
+    vc.infoDic=_couponArray[indexPath.row];
     vc.index=0;
     [self.navigationController pushViewController:vc animated:YES];
 }
