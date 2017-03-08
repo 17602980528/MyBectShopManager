@@ -15,9 +15,8 @@
 
 @end
 @interface MyCashCouponViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,weak)UITableView *couponTable;
 @property(nonatomic,strong)NSArray *data;
-@property (nonatomic,retain)NSMutableArray *couponArray;
+@property (nonatomic,strong)NSMutableArray *couponArray;
 
 @property int useCoupon;
 // 委托代理人，代理一般需使用弱引用(weak)

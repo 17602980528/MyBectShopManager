@@ -20,6 +20,7 @@
     
     UIButton *detailBtn;
     UIButton *checkBtn;
+    NSString *lzdunit;
 }
 
 
@@ -38,10 +39,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    _dateArray=@[@"day",@"week",@"month",@"season"];
+    _dateArray=@[@"month",@"year"];
     record_type_A = @[@"buy",@"renew",@"upgrade",@"consum"];
     page = 0;
-    type_date =@"day";
+    type_date =@"month";
+    lzdunit = @"天";
     
     UIView *backView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 100)];
     backView.backgroundColor=NavBackGroundColor;
@@ -51,7 +53,7 @@
     today_btn.frame=CGRectMake(10, 30, 100, 40);
     today_btn.layer.borderWidth=0.5;
     today_btn.layer.borderColor=[[UIColor whiteColor]CGColor];
-    [today_btn setTitle:@"今天" forState:UIControlStateNormal];
+    [today_btn setTitle:@"本月" forState:UIControlStateNormal];
     [today_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [today_btn addTarget:self action:@selector(chooseDate) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:today_btn];
@@ -109,6 +111,7 @@
     scroll_View.bounces=NO;
     scroll_View.delegate = self;
     scroll_View.contentSize=CGSizeMake(SCREENWIDTH*2, SCREENHEIGHT-140-64);
+    scroll_View.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:scroll_View];
     
     
@@ -116,7 +119,6 @@
     [scroll_View addSubview:self.tongjiView];
 
     
-    [self initlineChart];
     
     
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-140-64)];
@@ -139,11 +141,11 @@
     [self totalDataRequest:record_type_A[self.tag-1] dateType:type_date page:@"0"];
     
     //创建一个view，放日，月，年 等
-    NSArray *array=@[@"今天",@"本周",@"本月",@"本季度"];
+    NSArray *array=@[@"本月",@"本年"];
     _btnView=[[UIView alloc]initWithFrame:CGRectMake(10, 70, 100, 0)];
     _btnView.backgroundColor=[UIColor whiteColor];
     _btnView.clipsToBounds=YES;
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<array.count; i++) {
         UIButton *dateBtn=[UIButton buttonWithType:UIButtonTypeCustom];
         dateBtn.tag=i+10;
         dateBtn.frame=CGRectMake(0, i*40, 100, 40);
@@ -153,6 +155,9 @@
         [_btnView addSubview:dateBtn];
     }
     [self.view addSubview:_btnView];
+    
+    [self getReportDataWithDate_type:self.tag-1];
+
     
 }
 -(void)detailBtnClick:(UIButton*)sender{
@@ -246,12 +251,14 @@
      {
 
          NSLog(@"result===%@",result);
+         
          tempSelf.totalCount.text= [NSString getTheNoNullStr:[result objectForKey:@"count"] andRepalceStr:@"0"];
-         NSString *totalMoneyStr=@"0.00元";
-         if (![[result objectForKey:@"sum"] isKindOfClass:[NSNull class]]){
-             totalMoneyStr=[NSString stringWithFormat:@"%.2f元",[[result objectForKey:@"sum"]floatValue]];
-         }
-         tempSelf.totalMoney.text= [NSString getTheNoNullStr:totalMoneyStr andRepalceStr:@"0元"];
+      
+             ;
+
+         tempSelf.totalMoney.text= [NSString stringWithFormat:@"%.2f元",[[NSString getTheNoNullStr:result[@"sum"] andRepalceStr:@"0"]floatValue]];
+         
+         
          if ([[result objectForKey:@"info"] count]>0) {
              
              for (NSDictionary *dic in [result objectForKey:@"info"]) {
@@ -315,7 +322,7 @@
     
     if (!self.isOpen) {
         [UIView animateWithDuration:0.5 animations:^{
-            _btnView.frame=CGRectMake(10, 70, 100, 160);
+            _btnView.frame=CGRectMake(10, 70, 100, 80);
         }];
     }else{
         [UIView animateWithDuration:0.5 animations:^{
@@ -339,6 +346,7 @@
     
     [self totalDataRequest:record_type_A[self.tag-1] dateType:type_date page:@"0"];
     
+    [self getReportDataWithDate_type:self.tag-1];
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -457,46 +465,152 @@
     }
 }
 
--(void)initlineChart{
+-(void)initlineChartWithArray:(NSArray*)vareArr andDateArray:(NSArray*)dateA{
+    
+    for (UIView *view in self.tongjiView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    NSMutableArray *date_a = [NSMutableArray array];
+    
+    for (int i =1; i <=vareArr.count; i ++) {
+        [date_a addObject:[NSString stringWithFormat:@"%d",i]];
+        
+    }
+    
+    
+//    NSLog(@"-----%@===%@",date_a,vareArr);
     
     /*     Create object        */
-    JHLineChart *lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10, 40, kWeChatScreenWidth-20, 300) andLineChartType:JHChartLineValueNotForEveryX];
+    JHLineChart *lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(5, 40, kWeChatScreenWidth-10, self.tongjiView.height-100) andLineChartType:JHChartLineValueNotForEveryX];
     
     /* The scale value of the X axis can be passed into the NSString or NSNumber type and the data structure changes with the change of the line chart type. The details look at the document or other quadrant X axis data source sample.*/
     
-    lineChart.xLineDataArr = @[@"一月份",@"二月份",@"三月份",@"四月份",@"五月份",@"六月份",@"七月份",@"八月份"];
+    lineChart.xLineDataArr = date_a;
     lineChart.contentInsets = UIEdgeInsetsMake(0, 25, 20, 10);
     /* The different types of the broken line chart, according to the quadrant division, different quadrant correspond to different X axis scale data source and different value data source. */
     
     lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
     
-    lineChart.valueArr = @[@[@"1",@"12",@"1",@"6",@"4",@"9",@"6",@"7"],@[@"3",@"1",@"2",@"16",@"2",@"3",@"25",@"10"]];
+    NSMutableArray *d_a = [NSMutableArray array];
+    
+    for (int i =1; i <=vareArr.count; i ++) {
+        [d_a addObject:[NSString stringWithFormat:@"%d",arc4random()%50]];
+        
+    }
+    
+    
+    lineChart.valueArr = @[d_a];
     lineChart.showYLevelLine = YES;
     lineChart.showYLine = NO;
     lineChart.showValueLeadingLine = NO;
     lineChart.valueFontSize = 9.0;
     lineChart.backgroundColor = [UIColor whiteColor];
     /* Line Chart colors */
-    lineChart.valueLineColorArr =@[ [UIColor greenColor], [UIColor orangeColor]];
+    lineChart.valueLineColorArr =@[[UIColor greenColor]];
     /* Colors for every line chart*/
-    lineChart.pointColorArr = @[[UIColor orangeColor],[UIColor yellowColor]];
+    lineChart.pointColorArr = @[[UIColor orangeColor]];
     /* color for XY axis */
     lineChart.xAndYLineColor = [UIColor blackColor];
     /* XY axis scale color */
     lineChart.xAndYNumberColor = [UIColor darkGrayColor];
     /* Dotted line color of the coordinate point */
-    lineChart.positionLineColorArr = @[[UIColor blueColor],[UIColor greenColor]];
+    lineChart.positionLineColorArr = @[[UIColor blueColor]];
     /*        Set whether to fill the content, the default is False         */
     lineChart.contentFill = NO;
     /*        Set whether the curve path         */
     lineChart.pathCurve = YES;
     /*        Set fill color array         */
-    lineChart.contentFillColorArr = @[[UIColor colorWithRed:0 green:1 blue:0 alpha:0.468],[UIColor colorWithRed:1 green:0 blue:0 alpha:0.468]];
+    lineChart.contentFillColorArr = @[[UIColor colorWithRed:0 green:1 blue:0 alpha:0.468]];
     [self.tongjiView addSubview:lineChart];
     /*       Start animation        */
     [lineChart showAnimation];
     
 
+    
+    UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(0, lineChart.bottom-10, lineChart.width-10, 15)];
+    lable.text = [NSString stringWithFormat:@"单位(%@)",lzdunit];
+    lable.textColor = RGB(51, 51, 51);
+    lable.font = [UIFont systemFontOfSize:9];
+    lable.textAlignment = NSTextAlignmentRight;
+    [self.tongjiView addSubview:lable];
+    
+    
+    UILabel *shu_lable = [[UILabel alloc]initWithFrame:CGRectMake(-18, lineChart.top+20, 50, 10)];
+    shu_lable.text = @"单位(元)";
+    shu_lable.textColor = RGB(51, 51, 51);
+    shu_lable.transform =CGAffineTransformMakeRotation(-M_PI_2);
+    
+    shu_lable.font = [UIFont systemFontOfSize:9];
+    [self.tongjiView addSubview:shu_lable];
+
+
+}
+
+-(void)getReportDataWithDate_type:(NSInteger)index{
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/record/getSortChart",BASEURL];
+    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    NSArray *arr = @[@"buy",@"renew",@"upgrade",@"tally"];
+    
+    NSDate *date =[NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+
+    NSDateFormatter *nowDateFormatter = [[NSDateFormatter alloc]init];
+
+    
+    if ([type_date isEqualToString:@"month"]) {
+        [formatter setDateFormat:@"yyyy-MM"];
+        
+        [nowDateFormatter setDateFormat:@"dd"];
+        lzdunit = @"天";
+
+        
+
+    }else{
+        [formatter setDateFormat:@"yyyy"];
+        [nowDateFormatter setDateFormat:@"MM"];
+        lzdunit = @"月";
+
+           }
+    
+    
+    NSString *nowDate = [formatter stringFromDate:date];;
+    
+    //截止几天(含今天)/或截止本月;
+    NSString *jiezhiDate = [nowDateFormatter stringFromDate:date];
+    
+    
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:app.shopInfoDic[@"muid"] forKey:@"muid"];
+    [paramer setValue:arr[index] forKey:@"type"];
+    [paramer setValue:nowDate forKey:@"date"];
+    [paramer setValue:type_date forKey:@"date_type"];
+
+    
+    NSLog(@"----paramer%@",paramer);
+    
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"===%@===%@",[result class],result);
+        
+        
+        if (result){
+            NSMutableArray *mutable_A = [NSMutableArray arrayWithArray:result];
+            
+            NSArray *vule_A =  [mutable_A subarrayWithRange:NSMakeRange(0, [jiezhiDate intValue])];
+            
+            [self initlineChartWithArray:vule_A andDateArray:nil];
+            
+        }else{
+            
+            [self showHint:@"请求失败"];
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        NSLog(@"=====%@",error);
+    }];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

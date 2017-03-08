@@ -802,6 +802,7 @@
 		D99760EF1E690575008E21FE /* SawtoothView.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760EE1E690575008E21FE /* SawtoothView.m */; };
 		D99760F41E695CFD008E21FE /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760F11E695CFD008E21FE /* CityModel.m */; };
 		D99760F51E695CFD008E21FE /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D99760F31E695CFD008E21FE /* ProvinceModel.m */; };
+		D9976F221E6EA8DB004E434D /* DataReoprtVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9976F211E6EA8DB004E434D /* DataReoprtVC.m */; };
 		D99A5DB61DD5754A006FF158 /* GetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D99A5DB51DD5754A006FF158 /* GetMoneyViewController.m */; };
 		D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D99C11A31DE28CF100E45B64 /* UPgradeVC.m */; };
 		D99C11A61DE28CF100E45B64 /* UPgradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99C11A41DE28CF100E45B64 /* UPgradeVC.xib */; };
@@ -2279,6 +2280,8 @@
 		D99760F11E695CFD008E21FE /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		D99760F21E695CFD008E21FE /* ProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceModel.h; sourceTree = "<group>"; };
 		D99760F31E695CFD008E21FE /* ProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceModel.m; sourceTree = "<group>"; };
+		D9976F201E6EA8DB004E434D /* DataReoprtVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataReoprtVC.h; sourceTree = "<group>"; };
+		D9976F211E6EA8DB004E434D /* DataReoprtVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataReoprtVC.m; sourceTree = "<group>"; };
 		D99A5DB41DD5754A006FF158 /* GetMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyViewController.h; sourceTree = "<group>"; };
 		D99A5DB51DD5754A006FF158 /* GetMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyViewController.m; sourceTree = "<group>"; };
 		D99C11A21DE28CF100E45B64 /* UPgradeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPgradeVC.h; sourceTree = "<group>"; };
@@ -3855,6 +3858,8 @@
 				D9E5C3D81E5EBED6006BA2B1 /* PushAdverViewController.xib */,
 				1859E7BF1D86991B00647514 /* CheckDataViewController.h */,
 				1859E7C01D86991B00647514 /* CheckDataViewController.m */,
+				D9976F201E6EA8DB004E434D /* DataReoprtVC.h */,
+				D9976F211E6EA8DB004E434D /* DataReoprtVC.m */,
 				D99292601D8FF44A00103914 /* CashListViewController.h */,
 				D99292611D8FF44A00103914 /* CashListViewController.m */,
 				D99292631D8FF5E600103914 /* CashListCell.h */,
@@ -6829,6 +6834,7 @@
 				D97B70331E2CBBD400CEAFC1 /* CardmarketDetailVC.m in Sources */,
 				D95869331E4D9C9600E91A47 /* ResetPhoneViewController.m in Sources */,
 				D94756841CF82A2B008356C5 /* FeedBackViewController.m in Sources */,
+				D9976F221E6EA8DB004E434D /* DataReoprtVC.m in Sources */,
 				D97F600A1D62DCAA000EE794 /* NSArray+Log.m in Sources */,
 				D94743941CE56A6000D1D3EE /* LNLocationManager.m in Sources */,
 				1CDCCD1C1C7594040094E70D /* AFURLConnectionOperation.m in Sources */,

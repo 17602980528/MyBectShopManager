@@ -85,7 +85,7 @@
         
             [self drawQuartWithColor:colors[i%colors.count] andBeginPoint:P_M(15+self.frame.size.width/2*(i%2), 20*(i/2  )+25+_chartArcLength*2) andContext:contex];
             CGFloat present = [_valueArr[i] floatValue]/_allValueCount*100;
-            [self drawText:[NSString stringWithFormat:@"%@ 数量:% 3ld 占比:%.1f%c",_descArr[i],[_valueArr[i] integerValue],present,'%'] andContext:contex atPoint:P_M(30+self.frame.size.width/2*(i%2), 20*(i/2  )+25+_chartArcLength*2) WithColor:[UIColor blackColor] andTextFontSize:8];
+            [self drawText:[NSString stringWithFormat:@"%@ % 3ld 占比:%.1f%c",_descArr[i],[_valueArr[i] integerValue],present,'%'] andContext:contex atPoint:P_M(30+self.frame.size.width/2*(i%2), 20*(i/2  )+25+_chartArcLength*2) WithColor:[UIColor blackColor] andTextFontSize:8];
         }
        
         
@@ -97,7 +97,6 @@
     
     
     [[NSString stringWithFormat:@"%@",text] drawAtPoint:rect withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CourierNewPSMT" size:fontSize],NSForegroundColorAttributeName:color}];
-    
     
     [color setFill];
     CGContextDrawPath(context, kCGPathFill);
@@ -283,8 +282,8 @@
                     if (saveItems.center.x==self.frame.size.width/2) {
                         weakself.showInfoView.hidden = NO;
                         itemsView.center = CGPointMake(weakself.frame.size.width/2+xSpa, 10+wid/2+spa);
-                        [weakself.showInfoView updateFrameTo:CGRectMake(p.x, p.y, weakself.showInfoView.frame.size.width, weakself.showInfoView.frame.size.height) andBGColor:colors[i%colors.count] andShowContentString:[NSString stringWithFormat:@"%@ 数量:% 3ld 占比:%.1f%c",weakself.descArr[i],[weakself.valueArr[i] integerValue],present,'%']];
-//                        _showInfoView.frame = C   GRectMake(p.x, p.y, _showInfoView.frame.size.width, _showInfoView.frame.size.height);
+                        [weakself.showInfoView updateFrameTo:CGRectMake(p.x, p.y, weakself.showInfoView.frame.size.width, weakself.showInfoView.frame.size.height) andBGColor:colors[i%colors.count] andShowContentString:[NSString stringWithFormat:@"%@ % 3ld 占比:%.1f%c",weakself.descArr[i],[weakself.valueArr[i] integerValue],present,'%']];
+                        
                         
                     }else{
                         weakself.showInfoView.hidden = YES;
@@ -296,7 +295,7 @@
                     
                     saveItems.center = CGPointMake(self.frame.size.width/2, 10+wid/2);
                     weakself.showInfoView.hidden = NO;
-                    [weakself.showInfoView updateFrameTo:CGRectMake(p.x, p.y, weakself.showInfoView.frame.size.width, weakself.showInfoView.frame.size.height) andBGColor:colors[i%colors.count] andShowContentString:[NSString stringWithFormat:@"%@ 数量:% 3ld 占比:%.1f%c",weakself.descArr[i],[weakself.valueArr[i] integerValue],present,'%']];
+                    [weakself.showInfoView updateFrameTo:CGRectMake(p.x, p.y, weakself.showInfoView.frame.size.width, weakself.showInfoView.frame.size.height) andBGColor:colors[i%colors.count] andShowContentString:[NSString stringWithFormat:@"%@ % 3ld 占比:%.1f%c",weakself.descArr[i],[weakself.valueArr[i] integerValue],present,'%']];
                     itemsView.center = CGPointMake(weakself.frame.size.width/2+xSpa, 10+wid/2+spa);
                     
                 }
