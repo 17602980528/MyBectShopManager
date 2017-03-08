@@ -40,6 +40,8 @@
 		1836B83D1E559D5600B587A6 /* Active_top2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B83C1E559D5600B587A6 /* Active_top2.jpg */; };
 		1836B83F1E559D5B00B587A6 /* Active_top3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B83E1E559D5B00B587A6 /* Active_top3.jpg */; };
 		1836B8411E559DD700B587A6 /* Active_top4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B8401E559DD700B587A6 /* Active_top4.jpg */; };
+		1843104A1E6F9C39005521BF /* AddCouponDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184310481E6F9C39005521BF /* AddCouponDetailsVC.m */; };
+		1843104B1E6F9C39005521BF /* AddCouponDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184310491E6F9C39005521BF /* AddCouponDetailsVC.xib */; };
 		1852FAD81D557DF2009CF1B2 /* wa-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852FAD61D557DF2009CF1B2 /* wa-01.png */; };
 		1852FAD91D557DF2009CF1B2 /* wa-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852FAD71D557DF2009CF1B2 /* wa-02.png */; };
 		1852FADB1D559319009CF1B2 /* award_ac.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852FADA1D559319009CF1B2 /* award_ac.png */; };
@@ -1109,6 +1111,9 @@
 		1836B83C1E559D5600B587A6 /* Active_top2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top2.jpg; sourceTree = "<group>"; };
 		1836B83E1E559D5B00B587A6 /* Active_top3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top3.jpg; sourceTree = "<group>"; };
 		1836B8401E559DD700B587A6 /* Active_top4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top4.jpg; sourceTree = "<group>"; };
+		184310471E6F9C39005521BF /* AddCouponDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCouponDetailsVC.h; sourceTree = "<group>"; };
+		184310481E6F9C39005521BF /* AddCouponDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponDetailsVC.m; sourceTree = "<group>"; };
+		184310491E6F9C39005521BF /* AddCouponDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCouponDetailsVC.xib; sourceTree = "<group>"; };
 		1852FAD61D557DF2009CF1B2 /* wa-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wa-01.png"; sourceTree = "<group>"; };
 		1852FAD71D557DF2009CF1B2 /* wa-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wa-02.png"; sourceTree = "<group>"; };
 		1852FADA1D559319009CF1B2 /* award_ac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = award_ac.png; sourceTree = "<group>"; };
@@ -3081,6 +3086,36 @@
 			path = ../../../Desktop/MyBlect_2017/BletcShop;
 			sourceTree = "<group>";
 		};
+		184310441E6F9B83005521BF /* 优惠券列表 */ = {
+			isa = PBXGroup;
+			children = (
+				180D87281E5AB9C600E7FFB4 /* AddCouponHomeVC.h */,
+				180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */,
+				D99760EA1E68FFE6008E21FE /* CouponCell.h */,
+				D99760EB1E68FFE6008E21FE /* CouponCell.m */,
+			);
+			name = "优惠券列表";
+			sourceTree = "<group>";
+		};
+		184310451E6F9BA3005521BF /* 优惠券发布 */ = {
+			isa = PBXGroup;
+			children = (
+				180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */,
+				180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */,
+			);
+			name = "优惠券发布";
+			sourceTree = "<group>";
+		};
+		184310461E6F9BDE005521BF /* 优惠券详情 */ = {
+			isa = PBXGroup;
+			children = (
+				184310471E6F9C39005521BF /* AddCouponDetailsVC.h */,
+				184310481E6F9C39005521BF /* AddCouponDetailsVC.m */,
+				184310491E6F9C39005521BF /* AddCouponDetailsVC.xib */,
+			);
+			name = "优惠券详情";
+			sourceTree = "<group>";
+		};
 		1852FADC1D55C51A009CF1B2 /* 代金劵图 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3201,6 +3236,9 @@
 		18E000501E5C269E004884CC /* 发布优惠券 */ = {
 			isa = PBXGroup;
 			children = (
+				184310441E6F9B83005521BF /* 优惠券列表 */,
+				184310461E6F9BDE005521BF /* 优惠券详情 */,
+				184310451E6F9BA3005521BF /* 优惠券发布 */,
 			);
 			name = "发布优惠券";
 			sourceTree = "<group>";
@@ -3281,6 +3319,15 @@
 				18EB36B51D4B4B5B0087CE1A /* 未标题-1-09.png */,
 			);
 			path = "动画效果";
+			sourceTree = "<group>";
+		};
+		18EE1FA81E6EB59E000F27AE /* 管理员设置首页 */ = {
+			isa = PBXGroup;
+			children = (
+				D92C63291CC8C8D4006768C6 /* AdminViewController.h */,
+				D92C632A1CC8C8D4006768C6 /* AdminViewController.m */,
+			);
+			name = "管理员设置首页";
 			sourceTree = "<group>";
 		};
 		18F031D01E5E8D8F00ACD261 /* tempPictures(临时图片) */ = {
@@ -3820,12 +3867,6 @@
 				D99292651D8FF5E600103914 /* CashListCell.xib */,
 				18E000501E5C269E004884CC /* 发布优惠券 */,
 				18E000511E5C26BE004884CC /* 发布广告 */,
-				180D87281E5AB9C600E7FFB4 /* AddCouponHomeVC.h */,
-				180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */,
-				180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */,
-				180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */,
-				D99760EA1E68FFE6008E21FE /* CouponCell.h */,
-				D99760EB1E68FFE6008E21FE /* CouponCell.m */,
 				D95353CF1E5C27670004E42C /* GoToPayForAdvertistTableVC.h */,
 				D95353D01E5C27670004E42C /* GoToPayForAdvertistTableVC.m */,
 				18E095321D878A51002A44C0 /* 数据统计界面 */,
@@ -4184,8 +4225,7 @@
 				D94C5F2F1D90C53B0063EB27 /* GetMoneyVC.m */,
 				D992925D1D8FEE0000103914 /* RJGDetailVC.h */,
 				D992925E1D8FEE0000103914 /* RJGDetailVC.m */,
-				D92C63291CC8C8D4006768C6 /* AdminViewController.h */,
-				D92C632A1CC8C8D4006768C6 /* AdminViewController.m */,
+				18EE1FA81E6EB59E000F27AE /* 管理员设置首页 */,
 				D9F135831DEE66E100D2703D /* AddAdminVC.h */,
 				D9F135841DEE66E100D2703D /* AddAdminVC.m */,
 				D93A3AA91CDC3E090010F72B /* OrderShopViewController.h */,
@@ -6290,6 +6330,7 @@
 				D97DB36B1E30A68E00C1479B /* yanhua.png in Resources */,
 				D9FF0DA71D53304C00443312 /* 图标-25new.png in Resources */,
 				D99627471DE67953007B7B34 /* NewRechargeSuccessVC.xib in Resources */,
+				1843104B1E6F9C39005521BF /* AddCouponDetailsVC.xib in Resources */,
 				18F27EF91D640E84002DD03A /* 头像-17.png in Resources */,
 				1CF2838D1C58C48900F3952A /* car.png in Resources */,
 				D9AB25351D88E4ED000E9288 /* VoiceSearchFeedback007@2x.png in Resources */,
@@ -6489,6 +6530,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D97F5FFB1D62B597000EE794 /* QRcodeUIViewController.m in Sources */,
+				1843104A1E6F9C39005521BF /* AddCouponDetailsVC.m in Sources */,
 				D98ECBD81D9D0A9C00BEDD57 /* LZDCountsViewController.m in Sources */,
 				D9BB4DDA1E04EA8200971BCC /* NewOrderShopViewController.m in Sources */,
 				D9DEED221CACED7C00ACDD00 /* SDWebImageManager.m in Sources */,

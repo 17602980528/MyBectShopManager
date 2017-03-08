@@ -246,12 +246,81 @@
         
         [hud hideAnimated:YES afterDelay:3.f];
     }else{
-        [self postAddCouponRequest];
+        if ([couponMoneyTF.text isEqualToString:@"0"]) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"优惠券金额不能为0", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            //    [hud setColor:[UIColor blackColor]];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            hud.userInteractionEnabled = YES;
+            
+            [hud hideAnimated:YES afterDelay:3.f];
+
+        }else{
+            [self postAddCouponRequest];
+        }
+        
     }
 }
 #pragma mark 调用接口发布优惠券
 -(void)postAddCouponRequest{
-    //
+    /*
+     muid=>商户ID
+     sum => 优惠券金额
+     condition => 优惠条件
+     remain => 发布数量
+     date_start => 开始日期
+     date_end => 结束日期
+     content => 优惠券内容
+     */
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/add",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
+    [params setObject: couponMoneyTF.text forKey:@"sum"];
+    [params setObject: useLimitTF.text forKey:@"condition"];
+    [params setObject: couponRemainTF.text forKey:@"remain"];
+    [params setObject:_startText.text forKey:@"date_start"];
+    [params setObject:_endText.text forKey:@"date_end"];
+    [params setObject:[NSString getTheNoNullStr:_textView.text andRepalceStr:@""]forKey:@"content"];
+    NSLog(@"------%@",params);
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"result===%@",result);
+        
+        if ([result[@"result_code"] intValue]==1)
+            
+        {
+            [self tishiSting:@"发布成功!"];
+    
+        }else if([result[@"result_code"] intValue]==1062)
+        {
+            [self tishiSting:@"发布重复!"];
+            
+    
+        }else{
+            [self tishiSting:@"发布失败!"];
+            
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
+    
+}
+-(void)tishiSting:(NSString*)tishi{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    
+    hud.label.text = NSLocalizedString(tishi, @"HUD message title");
+    hud.label.font = [UIFont systemFontOfSize:13];
+    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+    [hud hideAnimated:YES afterDelay:4.f];
+
 }
 #pragma mark 显示时间选取器页面
 -(void)showBeginTime{
