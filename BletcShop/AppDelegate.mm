@@ -766,74 +766,7 @@
     [hud hideAnimated:YES afterDelay:4.f];
 }
 
-//选择商户还是用户
 
-//-(void)_initChose
-//{
-//    for (UIView *view in self.window.subviews) {
-//        [view removeFromSuperview];
-//    }
-//    
-//    UIView *choseView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-//    UIImageView *bjview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, choseView.width, choseView.height)];
-//    bjview.image = [UIImage imageNamed:@"滑动选择-01"];
-//    [choseView addSubview:bjview];
-//;
-//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, SCREENHEIGHT-100, SCREENWIDTH-20, 50)];
-////    view.backgroundColor = [UIColor redColor];
-//    [choseView addSubview:view];
-//    self.view1 =view;
-//    
-//    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(choseView.bounds.size.width/2 -30, view.frame.origin.y-5, 60, 60)];
-//    imageView.image = [UIImage imageNamed:@"-1-01"];
-//    imageView.clipsToBounds = YES;
-//    imageView.layer.cornerRadius = 30;
-//    [choseView addSubview:imageView];
-//    imageView.userInteractionEnabled = YES;
-//    self.imageView = imageView;
-//    
-//    _leftImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 10, 30, 30)];
-//    _leftImageView.image=[UIImage imageNamed:@"反1-03"];
-//    _leftImageView.hidden=YES;
-//    [self.view1 addSubview:_leftImageView];
-//    
-//    _rightImageView=[[UIImageView alloc]initWithFrame:CGRectMake(self.view1.frame.size.width-30, 10, 30, 30)];
-//    _rightImageView.image=[UIImage imageNamed:@"反1-02"];
-//    _rightImageView.hidden=YES;
-//    [self.view1 addSubview:_rightImageView];
-//    UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(move:)];
-//    //    长按的最短时间
-//    longpress.minimumPressDuration = 0.1;
-//    
-//    [imageView addGestureRecognizer:longpress];
-//    
-//    _leftAnimationView=[[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.center.x-50-89*25/35, 12.5, 89*25/35, 25)];
-//    _leftAnimationView.image=[UIImage imageNamed:@"未标题-1-02"];
-//    [self.view1 addSubview:_leftAnimationView];
-//    _leftAnimationView.animationDuration=0.8f;
-//    _leftAnimationView.animationImages=@[[UIImage imageNamed:@"未标题-1-02"],[UIImage imageNamed:@"未标题-1-03" ],[UIImage imageNamed:@"未标题-1-04" ],[UIImage imageNamed:@"未标题-1-05" ]];
-//    [_leftAnimationView startAnimating];
-//    
-//    _rightAnimationView=[[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.center.x+25, 12.5, 89*25/35, 25)];
-//    _rightAnimationView.image=[UIImage imageNamed:@"未标题-1-09"];
-//    [self.view1 addSubview:_rightAnimationView];
-//    _rightAnimationView.animationDuration=0.8f;
-//    _rightAnimationView.animationImages=@[[UIImage imageNamed:@"未标题-1-09"],[UIImage imageNamed:@"未标题-1-08" ],[UIImage imageNamed:@"未标题-1-07" ],[UIImage imageNamed:@"未标题-1-06" ]];
-//    [_rightAnimationView startAnimating];
-//    
-//    [self.window addSubview:choseView];
-//    self.choseView = choseView;
-//    
-//    
-//    UILabel * LR_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, view.bottom+20, SCREENWIDTH, 20)];
-//    LR_lab.text = @"按住左右滑动";
-//    LR_lab.textColor = [UIColor whiteColor];
-//    LR_lab.textAlignment = NSTextAlignmentCenter;
-//    LR_lab.font =[UIFont systemFontOfSize:15];
-//    [choseView addSubview:LR_lab];
-//    
-//   
-//}
 
 #pragma mark 选择商户还是用户
 -(void)_initChose
@@ -1040,11 +973,13 @@
     [jump_btn setTitleColor:[UIColor whiteColor] forState:0];
     jump_btn.titleLabel.font =[UIFont systemFontOfSize:14];
     jump_btn.backgroundColor=RGBA_COLOR(197, 197, 197, 0.7);
+
     jump_btn.alpha = 0.7;
     jump_btn.layer.cornerRadius= SCREENWIDTH*0.0098;
     jump_btn.clipsToBounds = YES;
     [jump_btn addTarget:self action:@selector(jumpClick) forControlEvents:UIControlEventTouchUpInside];
     [advise_back addSubview:jump_btn];
+    
     self.jump_btn = jump_btn;
     [self TimeNumAction];
     
@@ -1878,7 +1813,10 @@
          }
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
          //[self noIntenet];
-         NSLog(@"%@", error);
+         NSLog(@"postRequestSeller-error%@", error);
+         
+         ShopLandController *shopvc = [[ShopLandController alloc]init];
+         self.window.rootViewController = shopvc;
      }];
     
 }

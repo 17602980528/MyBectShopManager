@@ -10,6 +10,7 @@
 #import "ShaperView.h"
 #import "CouponIntroduceVC.h"
 #import "CouponCell.h"
+#import "UIImageView+WebCache.h"
 @interface MyCashCouponViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -20,10 +21,15 @@
     UITableView *_tableView;
     NSArray *_dataArray;
 }
+
+-(NSMutableArray *)couponArray{
+    if (!_couponArray) {
+        _couponArray = [NSMutableArray array];
+    }
+    return _couponArray;
+}
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.title = @"我的代金券";
-    self.couponArray = [[NSMutableArray alloc]init];
     
     [self postRequestCashCoupon];
     self.navigationController.navigationBarHidden = NO;
@@ -31,8 +37,14 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"我的代金券";
+
     self.view.backgroundColor = [UIColor whiteColor];
     NSLog(@"#######%@",self.couponArray);
+    
+    [self _inittable];
+
 }
 //无活动显示无活动
 -(void)initNoneActiveView{
@@ -53,32 +65,34 @@
 {
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/voucherGet",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/userGet",BASEURL];
     
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
-    __block MyCashCouponViewController *tempSelf=self;
+    
+    NSLog(@"params---%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         [hud hideAnimated:YES];
         
         DebugLog(@"result---%@",result);
         if ([result count]==0) {
-            //            [tempSelf initNoneActiveView];
-            [tempSelf _inittable];
+            
+//          [self initNoneActiveView];
+
         }else{
             NSArray *arr = (NSArray*)result;
+            [self.couponArray removeAllObjects];
             for (NSDictionary *dic in arr) {
-                NSString *count = dic[@"num"];
-                for (int i = 0; i < [count intValue]; i ++) {
+               
                     [self.couponArray addObject:dic];
-                }
             }
-            [tempSelf _inittable];
             
         }
+        
+        [_tableView reloadData];
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud hideAnimated:YES afterDelay:3.f];
@@ -89,20 +103,7 @@
 //创建TableView
 -(void)_inittable
 {
-    //    UITableView *table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStylePlain];
-    //    table.delegate = self;
-    //    table.dataSource = self;
-    //    table.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //    table.showsVerticalScrollIndicator = NO;
-    //    table.rowHeight = 104;
-    //    table.bounces = NO;
-    //    self.couponTable = table;
-    //    [self.view addSubview:table];
-    NSDictionary * dic1 = @{@"shop":@"商消乐", @"money":@"30",@"limit":@"无限制",@"deadTime":@"有效期为:2017-2-20～2017-3-20",@"notice":@"代金券描述",@"image":@"5-01"};
-    NSDictionary * dic2 = @{@"shop":@"尚艺轩", @"money":@"50",@"limit":@"满减",@"deadTime":@"有效期为:2017-2-25～2017-3-25",@"notice":@"代金券描述",@"image":@"6-01"};
-    NSDictionary * dic3 = @{@"shop":@"绝味鸭脖", @"money":@"30",@"limit":@"满减",@"deadTime":@"有效期为:2017-2-28～2017-3-28",@"notice":@"代金券描述",@"image":@"4-011"};
-    
-    _dataArray=@[dic1,dic2,dic3];
+
     
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStyleGrouped];
     _tableView.delegate=self;
@@ -111,72 +112,20 @@
     [self.view addSubview:_tableView];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _dataArray.count;
+    return self.couponArray.count;
 }
-//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-//    if (!cell) {
-//        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-//        UIView *bgView=[[UIView alloc]initWithFrame:CGRectMake(10, 5, SCREENWIDTH-20, 190*(SCREENWIDTH-20)/600.0-10)];
-//        bgView.backgroundColor=[UIColor whiteColor];
-//        bgView.layer.cornerRadius=5.0f;
-//        bgView.clipsToBounds=YES;
-//        [cell addSubview:bgView];
-//        
-//        UIImageView *_headImage=[[UIImageView alloc]initWithFrame:CGRectMake(15, 20, 40, 40)];
-//        //_headImage.image=[UIImage imageNamed:@"5-01"];
-//        _headImage.layer.cornerRadius=20;
-//        _headImage.clipsToBounds=YES;
-//        _headImage.tag=100;
-//        [bgView addSubview:_headImage];
-//        
-//        UILabel *shopNameLable=[[UILabel alloc]initWithFrame:CGRectMake(70, 20, bgView.width-70, 20)];
-//        //shopNameLable.text=@"森林雨火锅";
-//        shopNameLable.font=[UIFont systemFontOfSize:15.0f];
-//        shopNameLable.textColor=[UIColor grayColor];
-//        shopNameLable.tag=200;
-//        [bgView addSubview:shopNameLable];
-//        
-//        UILabel *couponMoney=[[UILabel alloc]initWithFrame:CGRectMake(70, 45, bgView.width-70, 30)];
-//        //couponMoney.text=@"20元代金券";
-//        couponMoney.font=[UIFont systemFontOfSize:20.0f];
-//        couponMoney.tag=300;
-//        [bgView addSubview:couponMoney];
-//        
-//        ShaperView *viewr=[[ShaperView alloc]initWithFrame:CGRectMake(5, _headImage.bottom+20, SCREENWIDTH-20, 1)];
-//        ShaperView *viewt= [viewr drawDashLine:viewr lineLength:3 lineSpacing:3 lineColor:[UIColor colorWithRed:234/255.0f green:234/255.0f blue:234/255.0f alpha:1.0f]];
-//        [bgView addSubview:viewt];
-//        
-//        UILabel *deadTime=[[UILabel alloc]initWithFrame:CGRectMake(10, viewr.bottom, bgView.width-10, 20)];
-//        //deadTime.text=@"有效期为:2017-2-25～2017-3-25";
-//        deadTime.font=[UIFont systemFontOfSize:13.0f];
-//        deadTime.textColor=[UIColor grayColor];
-//        deadTime.tag=400;
-//        [bgView addSubview:deadTime];
-//        
-//        cell.backgroundColor=RGB(238, 238, 238);
-//        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-//    }
-//    UIImageView *image=[cell viewWithTag:100];
-//    image.image=[UIImage imageNamed:_dataArray[indexPath.row][@"image"]];
-//    UILabel *lab1=[cell viewWithTag:200];
-//    lab1.text=_dataArray[indexPath.row][@"shop"];
-//    UILabel *lab2=[cell viewWithTag:300];
-//    lab2.text=_dataArray[indexPath.row][@"money"];
-//    UILabel *lab3=[cell viewWithTag:400];
-//    lab3.text=_dataArray[indexPath.row][@"deadTime"];
-//    return cell;
-//    
-//}
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CouponCell *cell = [CouponCell couponCellWithTableView:tableView];
     
-    if (_dataArray.count!=0) {
-        cell.headImg.image=[UIImage imageNamed:_dataArray[indexPath.row][@"image"]];
-        cell.shopNamelab.text=_dataArray[indexPath.row][@"shop"];
-        cell.couponMoney.text=_dataArray[indexPath.row][@"money"];
-        cell.deadTime.text=_dataArray[indexPath.row][@"deadTime"];
-        cell.limitLab.text=_dataArray[indexPath.row][@"notice"];
+    if (self.couponArray.count!=0) {
+        NSDictionary *dic = self.couponArray[indexPath.row];
+        
+        [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,dic[@"image_url"]]]];
+        cell.shopNamelab.text=dic[@"store"];
+        cell.couponMoney.text=dic[@"pri_condition"];
+        cell.deadTime.text= [NSString stringWithFormat:@"%@~%@",dic[@"date_start"],dic[@"date_end"]];
+        cell.limitLab.text=dic[@"content"];
         
     }
     
@@ -190,7 +139,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 150+11;
-    //    return 190*(SCREENWIDTH-20)/600.0;
+
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -200,96 +149,27 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return self.couponArray.count;
-//}
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 120;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 20;
-//}
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//
-//    static NSString *cellIndentifier = @"cellIndentifier";
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    // 判断为空进行初始化  --（当拉动页面显示超过主页面内容的时候就会重用之前的cell，而不会再次初始化）
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifier];
-//    }
-//    NSDictionary *dic =[self.couponArray objectAtIndex:indexPath.row];
-//
-//    UIImageView *couponImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, SCREENWIDTH-20, 110)];
-//    couponImageView.layer.cornerRadius = 10;
-//    couponImageView.layer.masksToBounds = YES;
-//    //couponImageView.image = [UIImage imageNamed:@"代金券-01.jpg"];
-//    [cell addSubview:couponImageView];
-//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    UILabel *moneyLabel = [[UILabel alloc]init];
-//    moneyLabel.frame = CGRectMake(SCREENWIDTH/2-120, 10, 90, 60);
-//    moneyLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:50];
-//    moneyLabel.textColor = [UIColor whiteColor];
-//    moneyLabel.textAlignment = NSTextAlignmentCenter;
-//    NSRange pend = [dic[@"type"] rangeOfString:@"元"];
-//    //    NSString* Price =[[[self.couponArray objectAtIndex:indexPath.row] objectAtIndex:0] substringToIndex:pend.location];
-//    moneyLabel.text = [dic[@"type"] substringToIndex:pend.location];
-//    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-30, 50, 10, 10)];
-//    //imageView.image = [UIImage imageNamed:@"代金券-03"];
-//    [cell addSubview:imageView];
-//
-//    [couponImageView addSubview:moneyLabel];
-//
-//    //有效期
-//    UILabel *timeLabel = [[UILabel alloc]init];
-//    timeLabel.frame = CGRectMake(0, 80, SCREENWIDTH-80, 30);
-//    timeLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
-//    timeLabel.textColor = [UIColor whiteColor];
-//    timeLabel.textAlignment = NSTextAlignmentCenter;
-//    timeLabel.text = [[NSString alloc]initWithFormat:@"有效期至:%@",dic[@"deadline"]];
-//    [couponImageView addSubview:timeLabel];
-//
-//    UIImageView *forgetImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH-10-110*125/241, 5, 110*125/241, 110)];
-//    [cell addSubview:forgetImageView];
-//    if ([dic[@"type"] isEqualToString:@"100元"]) {
-//        couponImageView.image = [UIImage imageNamed:@"代金券-01"];
-//        imageView.image = [UIImage imageNamed:@"代金券-03"];
-//        forgetImageView.image=[UIImage imageNamed:@"代金券-02.png"];
-//    }else if ([dic[@"type"] isEqualToString:@"50元"]){
-//        couponImageView.image = [UIImage imageNamed:@"代金券-04"];
-//        imageView.image = [UIImage imageNamed:@"代金券-05"];
-//        forgetImageView.image=[UIImage imageNamed:@"代金券-06.png"];
-//    }else if ([dic[@"type"] isEqualToString:@"20元"]){
-//        couponImageView.image = [UIImage imageNamed:@"代金券-07"];
-//        imageView.image = [UIImage imageNamed:@"代金券-08"];
-//        forgetImageView.image=[UIImage imageNamed:@"代金券-09"];
-//    }else if ([dic[@"type"] isEqualToString:@"10元"]){
-//        couponImageView.image = [UIImage imageNamed:@"代金券-10"];
-//        imageView.image = [UIImage imageNamed:@"代金券-11"];
-//        forgetImageView.image=[UIImage imageNamed:@"代金券-12.png"];
-//    }
-//    return cell;
-//}
-//
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (self.useCoupon==100) {
-//        [self.delegate  sendValue:[self.couponArray objectAtIndex:indexPath.row]];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }else
-//    {
-//        PointRuleViewController *PointRuleView = [[PointRuleViewController alloc]init];
-//        PointRuleView.type = 999;
-//        [self.navigationController pushViewController:PointRuleView animated:YES];
-//    }
-//}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+-(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"===删除==");
+        
+    }];
+    action.backgroundColor = [UIColor redColor];
+    return @[action];
+    
 }
 
-
+-(void)deleteCouponWithDic:(NSDictionary*)dic{
+    NSString *url = [NSString stringWithFormat:@"%@",BASEURL];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+}
 @end
