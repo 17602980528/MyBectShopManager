@@ -10,10 +10,21 @@
 #import "CouponIntroduceVC.h"
 #import "LandingController.h"
 #import "UIImageView+WebCache.h"
-@interface GetDiscountCouponVC ()<UITableViewDelegate,UITableViewDataSource>
+#import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
+#import <BaiduMapAPI_Map/BMKMapComponent.h>
+#import <BaiduMapAPI_Search/BMKSearchComponent.h>
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>
+@interface GetDiscountCouponVC ()<UITableViewDelegate,UITableViewDataSource,BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
     UITableView *_tableView;
     NSArray *_dataArray;
+    
+    BMKMapView* _mapView;
+    BMKLocationService* _locService;
+    BMKGeoCodeSearch* _geocodesearch;
+    bool isGeoSearch;
+    SDRefreshFooterView *_refreshFooter;
+    SDRefreshHeaderView *_refreshheader;
 }
 @end
 
@@ -21,7 +32,67 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self postGetCouponRequest];
+    _locService = [[BMKLocationService alloc]init];
+    _geocodesearch = [[BMKGeoCodeSearch alloc]init];
+    [_mapView viewWillAppear];
+    _mapView.delegate = self;
+    _locService.delegate = self;
+    _geocodesearch.delegate = self;
+    [_locService startUserLocationService];
 }
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [_mapView viewWillDisappear];
+    _mapView.delegate = nil;
+    _locService.delegate = nil;
+    _geocodesearch.delegate = nil;
+    [_locService stopUserLocationService];
+    
+}
+/**
+ *用户位置更新后，会调用此函数
+ *@param userLocation 新的用户位置
+ */
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    [_mapView updateLocationData:userLocation];
+    [_locService stopUserLocationService];
+    
+    
+    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){0, 0};
+    pt = (CLLocationCoordinate2D){userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude};
+    BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
+    reverseGeocodeSearchOption.reverseGeoPoint = pt;
+    BOOL flag = [_geocodesearch reverseGeoCode:reverseGeocodeSearchOption];
+    if(flag)
+    {
+        NSLog(@"检索发送成功");
+    }
+    else
+    {
+        NSLog(@"检索发送失败");
+    }
+}
+
+//反向地理编码
+-(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
+{
+    
+    if (error == 0) {
+        BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
+        item.coordinate = result.location;
+        item.title = result.address;
+        [_mapView addAnnotation:item];
+        _mapView.centerCoordinate = result.location;
+        NSString* showmeg;
+        showmeg = [NSString stringWithFormat:@"%@",item.title];
+//        self.GpsLabel.text = [NSString stringWithFormat:@"%@%@",@"当前:",showmeg];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
@@ -106,6 +177,7 @@
     shopNameAndDistant.text=_dataArray[indexPath.row][@"store"];
     shopNameAndDistant.frame=CGRectMake(125, couponMoney.bottom+5, SCREENWIDTH-125, 15);
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    //
     UIButton *sender=[cell viewWithTag:666];
     if ([_dataArray[indexPath.row][@"received"] isEqualToString:@"false"]) {
         sender.backgroundColor=[UIColor colorWithRed:237/255.0f green:71/255.0f blue:59/255.0f alpha:1.0f];
@@ -118,6 +190,20 @@
         sender.layer.borderWidth=1.0f;
         sender.layer.borderColor=[[UIColor redColor]CGColor];
     }
+    //距离
+    CLLocationCoordinate2D c1 = CLLocationCoordinate2DMake([[[_dataArray objectAtIndex:indexPath.row] objectForKey:@"latitude"] doubleValue], [[[_dataArray objectAtIndex:indexPath.row] objectForKey:@"longtitude"] doubleValue]);
+    
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    BMKMapPoint a=BMKMapPointForCoordinate(c1);
+    BMKMapPoint b=BMKMapPointForCoordinate(appdelegate.userLocation.location.coordinate);
+    CLLocationDistance distance = BMKMetersBetweenMapPoints(a,b);
+    
+    int meter = (int)distance;
+    if (meter>1000) {
+        shopNameAndDistant.text = [[NSString alloc]initWithFormat:@"%@ %.1fkm",meter/1000.0,_dataArray[indexPath.row][@"store"]];
+    }else
+        shopNameAndDistant.text = [[NSString alloc]initWithFormat:@"%@ %dm",meter,_dataArray[indexPath.row][@"store"]];
+    
     return cell;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
