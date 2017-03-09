@@ -7,9 +7,13 @@
 //
 
 #import "ConvertCostVC.h"
+<<<<<<< HEAD
 
 #import "OrderDetailViewController.h"
 
+=======
+#import "UIImageView+WebCache.h"
+>>>>>>> f1739cf65bef5be0fff97147c933ac658d698ec8
 @interface ConvertCostVC ()
 
 @end
@@ -29,7 +33,11 @@
     topBgView.backgroundColor=[UIColor whiteColor];
     [_scrollView addSubview:topBgView];
     
-    UIImageView *shopImageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:self.imageNameString]];
+    UIImageView *shopImageView=[[UIImageView alloc]init];
+    //NSLog(@"%@",[NSString stringWithFormat:@"%@%@",POINT_GOODS,self.imageNameString]);
+    NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POINT_GOODS,self.imageNameString]];
+    [shopImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+    
     shopImageView.frame=CGRectMake((SCREENWIDTH-200)/2, 15, 200, 200);
     [topBgView addSubview:shopImageView];
     
@@ -38,12 +46,12 @@
     shopNameLable.font=[UIFont systemFontOfSize:24.0f];
     [topBgView addSubview:shopNameLable];
     
-    UILabel *detailLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 260, SCREENWIDTH-40, 30)];
-    detailLabel.text=@"3款颜色随机发放";
-    detailLabel.backgroundColor=[UIColor whiteColor];
-    detailLabel.textColor=[UIColor grayColor];
-    [topBgView addSubview:detailLabel];
-    detailLabel.font=[UIFont systemFontOfSize:13.0f];
+//    UILabel *detailLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 260, SCREENWIDTH-40, 30)];
+//    detailLabel.text=@"3款颜色随机发放";
+//    detailLabel.backgroundColor=[UIColor whiteColor];
+//    detailLabel.textColor=[UIColor grayColor];
+//    [topBgView addSubview:detailLabel];
+//    detailLabel.font=[UIFont systemFontOfSize:13.0f];
     
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 290, SCREENWIDTH, 1)];
     lineView.backgroundColor=RGB(238, 238, 238);
@@ -57,7 +65,7 @@
     
     UILabel *allConvertCountLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2, 291, SCREENWIDTH/2, 35)];
     allConvertCountLabel.textAlignment=1;
-    allConvertCountLabel.text=[NSString stringWithFormat:@"已兑出:%@件",@"500"];
+    allConvertCountLabel.text=[NSString stringWithFormat:@"已兑出:%@件",self.converRecordCount];
     allConvertCountLabel.font=[UIFont systemFontOfSize:15.0f];
     [topBgView addSubview:allConvertCountLabel];
     //bottom

@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor colorWithRed:(arc4random()%56+180)/255.0f green:(arc4random()%56+180)/255.0f blue:(arc4random()%56+180)/255.0f alpha:1.0f];
+    self.view.backgroundColor=RGB(238, 238, 238);
     self.navigationItem.title=@"代金券";
     
     UIView *bgView=[[UIView alloc]initWithFrame:CGRectMake(10, 60, SCREENWIDTH-20, SCREENHEIGHT*0.6)];
@@ -51,7 +51,7 @@
     buyCardBtn.frame=CGRectMake((SCREENWIDTH-20)/2-75,couponFaceValue.bottom+15 , 150, 40);
     buyCardBtn.layer.cornerRadius=5.0f;
     buyCardBtn.clipsToBounds=YES;
-    buyCardBtn.backgroundColor=self.view.backgroundColor;
+    buyCardBtn.backgroundColor=NavBackGroundColor;
     [buyCardBtn setTitle:@"去办卡" forState:UIControlStateNormal];
     [buyCardBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [bgView addSubview:buyCardBtn];
