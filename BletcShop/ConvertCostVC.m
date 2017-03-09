@@ -8,6 +8,8 @@
 
 #import "ConvertCostVC.h"
 
+#import "OrderDetailViewController.h"
+
 @interface ConvertCostVC ()
 
 @end
@@ -95,6 +97,9 @@
 -(void)costPoint:(UIButton *)sender{
     //
     NSLog(@"积分可用");
+    
+    OrderDetailViewController *VC= [[OrderDetailViewController alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

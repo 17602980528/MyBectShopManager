@@ -396,6 +396,10 @@
 		D924837F1D1A75CA00AE252C /* unionpay_img.png in Resources */ = {isa = PBXBuildFile; fileRef = D924837C1D1A75CA00AE252C /* unionpay_img.png */; };
 		D92483801D1A75CA00AE252C /* alipay_img.png in Resources */ = {isa = PBXBuildFile; fileRef = D924837D1D1A75CA00AE252C /* alipay_img.png */; };
 		D92483861D1A804A00AE252C /* BuyCardChoicePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92483851D1A804A00AE252C /* BuyCardChoicePayViewController.m */; };
+		D925D1801E70F89C0000B8B1 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D925D17E1E70F89C0000B8B1 /* OrderDetailViewController.m */; };
+		D925D1811E70F89C0000B8B1 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D925D17F1E70F89C0000B8B1 /* OrderDetailViewController.xib */; };
+		D925D1851E7106EB0000B8B1 /* SelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D925D1831E7106EB0000B8B1 /* SelectAddressViewController.m */; };
+		D925D1861E7106EB0000B8B1 /* SelectAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D925D1841E7106EB0000B8B1 /* SelectAddressViewController.xib */; };
 		D925E6451CC60F680020CEC7 /* AdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D925E6441CC60F680020CEC7 /* AdvertViewController.m */; };
 		D92C632B1CC8C8D4006768C6 /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92C632A1CC8C8D4006768C6 /* AdminViewController.m */; };
 		D92C632E1CC8DA08006768C6 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D92C632C1CC8DA08006768C6 /* delete.png */; };
@@ -1617,6 +1621,12 @@
 		D924837D1D1A75CA00AE252C /* alipay_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alipay_img.png; path = ../BletcShop/alipay_img.png; sourceTree = "<group>"; };
 		D92483841D1A804A00AE252C /* BuyCardChoicePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyCardChoicePayViewController.h; sourceTree = "<group>"; };
 		D92483851D1A804A00AE252C /* BuyCardChoicePayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyCardChoicePayViewController.m; sourceTree = "<group>"; };
+		D925D17D1E70F89C0000B8B1 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		D925D17E1E70F89C0000B8B1 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		D925D17F1E70F89C0000B8B1 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
+		D925D1821E7106EB0000B8B1 /* SelectAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAddressViewController.h; sourceTree = "<group>"; };
+		D925D1831E7106EB0000B8B1 /* SelectAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAddressViewController.m; sourceTree = "<group>"; };
+		D925D1841E7106EB0000B8B1 /* SelectAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAddressViewController.xib; sourceTree = "<group>"; };
 		D925E6431CC60F680020CEC7 /* AdvertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertViewController.h; sourceTree = "<group>"; };
 		D925E6441CC60F680020CEC7 /* AdvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D92C63291CC8C8D4006768C6 /* AdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminViewController.h; sourceTree = "<group>"; };
@@ -3353,6 +3363,10 @@
 		18F031EB1E5EB41F00ACD261 /* 积分使用规则 */ = {
 			isa = PBXGroup;
 			children = (
+				D9764E8D1DD5B62100B088DE /* THProgressView.h */,
+				D9764E8E1DD5B62100B088DE /* THProgressView.m */,
+				D94B52561D4B434500C067B3 /* PointRuleViewController.h */,
+				D94B52571D4B434500C067B3 /* PointRuleViewController.m */,
 			);
 			name = "积分使用规则";
 			sourceTree = "<group>";
@@ -3655,15 +3669,12 @@
 		1CB53BE61C57076A002B6CC1 /* 我的积分&优惠券 */ = {
 			isa = PBXGroup;
 			children = (
+				D925D17C1E70F6A90000B8B1 /* 积分兑换订单详情 */,
 				18F031D01E5E8D8F00ACD261 /* tempPictures(临时图片) */,
 				18F031EC1E5EB48000ACD261 /* 积分商城首页 */,
 				18F031EB1E5EB41F00ACD261 /* 积分使用规则 */,
 				18F031ED1E5EB4A200ACD261 /* 积分兑换记录 */,
 				18F031EE1E5EB4F600ACD261 /* 积分明细 */,
-				D9764E8D1DD5B62100B088DE /* THProgressView.h */,
-				D9764E8E1DD5B62100B088DE /* THProgressView.m */,
-				D94B52561D4B434500C067B3 /* PointRuleViewController.h */,
-				D94B52571D4B434500C067B3 /* PointRuleViewController.m */,
 				180C3D601E514E8100BC9177 /* 领取优惠券 */,
 				180C3D631E514E8100BC9177 /* 优惠券介绍 */,
 			);
@@ -4204,6 +4215,19 @@
 				D92483851D1A804A00AE252C /* BuyCardChoicePayViewController.m */,
 			);
 			name = "支付方式";
+			sourceTree = "<group>";
+		};
+		D925D17C1E70F6A90000B8B1 /* 积分兑换订单详情 */ = {
+			isa = PBXGroup;
+			children = (
+				D925D17D1E70F89C0000B8B1 /* OrderDetailViewController.h */,
+				D925D17E1E70F89C0000B8B1 /* OrderDetailViewController.m */,
+				D925D17F1E70F89C0000B8B1 /* OrderDetailViewController.xib */,
+				D925D1821E7106EB0000B8B1 /* SelectAddressViewController.h */,
+				D925D1831E7106EB0000B8B1 /* SelectAddressViewController.m */,
+				D925D1841E7106EB0000B8B1 /* SelectAddressViewController.xib */,
+			);
+			name = "积分兑换订单详情";
 			sourceTree = "<group>";
 		};
 		D925E6421CC60EEC0020CEC7 /* 多种业务界面 */ = {
@@ -6236,6 +6260,7 @@
 				D9637DFF1D59BAF900C19D0B /* admin_p.png in Resources */,
 				D95BAE4B1D542FD500ED0CDC /* award_01.png in Resources */,
 				D95C84D91E34602E0028C440 /* 引导页-02.png in Resources */,
+				D925D1861E7106EB0000B8B1 /* SelectAddressViewController.xib in Resources */,
 				D94DF2531CAE0AA4000D5B69 /* star_highlighted@2x.png in Resources */,
 				1817FF591D405BE100AFC965 /* mhead_default.png in Resources */,
 				1C9E825D1C60AD610007BF02 /* 1-01.png in Resources */,
@@ -6449,6 +6474,7 @@
 				D9FF0D741D531E8100443312 /* 图标-001.png in Resources */,
 				D96FBFDF1E6672DB0065D170 /* shop_area.sqlite in Resources */,
 				1CF2839E1C58C48900F3952A /* more_selected.png in Resources */,
+				D925D1811E70F89C0000B8B1 /* OrderDetailViewController.xib in Resources */,
 				D99C11A61DE28CF100E45B64 /* UPgradeVC.xib in Resources */,
 				D920B95E1DD05164001AC7F5 /* AdvertiseCell.xib in Resources */,
 				D980B66C1D7801A600CC6637 /* group_creategroup@2x.png in Resources */,
@@ -6786,6 +6812,7 @@
 				D924837A1D1A72B400AE252C /* ChoicePayTypeViewController.m in Sources */,
 				D9F2E9351E03D89F008F6517 /* NewShopManagerViewController.m in Sources */,
 				1CCD50161C85703000447AB8 /* MBProgressHUD.m in Sources */,
+				D925D1801E70F89C0000B8B1 /* OrderDetailViewController.m in Sources */,
 				D9B3A5A71D74255700F3F27E /* MWTapDetectingImageView.m in Sources */,
 				D9A06B611D8679C30037795B /* amrFileCodec.mm in Sources */,
 				D947E4931D7D729000F9FEE8 /* Person.m in Sources */,
@@ -6797,6 +6824,7 @@
 				D941135A1CE9A3D7008E231F /* DataVerifier.m in Sources */,
 				1CDCCD181C7594040094E70D /* AFHTTPRequestOperationManager.m in Sources */,
 				D98ECBC21D9CB24600BEDD57 /* ChargeCenterVC.m in Sources */,
+				D925D1851E7106EB0000B8B1 /* SelectAddressViewController.m in Sources */,
 				D9699E541D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.m in Sources */,
 				D98E5BFC1E515210009D56BF /* MASConstraint.m in Sources */,
 				1C0BEF871C7D56EF00519481 /* RegisterController.m in Sources */,

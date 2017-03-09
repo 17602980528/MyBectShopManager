@@ -7,18 +7,27 @@
 //
 
 #import "ConvertRecordVC.h"
-
+#import "UIImageView+WebCache.h"
 @interface ConvertRecordVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *imageArr;
     NSArray *shopNameArr;
     NSArray *convertTimeArr;
     NSArray *pointCostArr;
+    
+    UITableView *_tableView;
 }
+
+@property(nonatomic,strong)NSArray *data_array;
 @end
 
 @implementation ConvertRecordVC
-
+-(NSArray *)data_array{
+    if (!_data_array) {
+        _data_array = [NSArray array];
+    }
+    return _data_array;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"已兑换商品";
@@ -28,14 +37,16 @@
     convertTimeArr=@[@"兑换时间:2017-2-23 03:07:31",@"兑换时间:2017-2-22 04:25:21",@"兑换时间:2017-2-21 01:08:34"];
     pointCostArr=@[@"-500",@"-200",@"-300"];
     
-    UITableView *_tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStyleGrouped];
+     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStyleGrouped];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.rowHeight=100;
     [self.view addSubview:_tableView];
+    
+    [self getData];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return self.data_array.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -69,14 +80,21 @@
         
     }
     UIImageView *imageView=[cell viewWithTag:100];
-    imageView.image=[UIImage imageNamed:imageArr[indexPath.row]];
     UILabel *nameLab=[cell viewWithTag:200];
-    nameLab.text=shopNameArr[indexPath.row];
     UILabel *timeLab=[cell viewWithTag:300];
-    timeLab.text=convertTimeArr[indexPath.row];
     UILabel *costLab=[cell viewWithTag:400];
-    costLab.text=pointCostArr[indexPath.row];
-    return cell;
+    
+    if (self.data_array.count != 0) {
+        NSDictionary *dic = self.data_array[indexPath.row];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,dic[@"Image_url"]]]];
+        
+        nameLab.text=dic[@"name"];
+        timeLab.text=dic[@"datetime"];
+        costLab.text=[@"-" stringByAppendingString:dic[@"price"]];
+
+    }
+
+       return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.01;
@@ -84,19 +102,37 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+
+-(void)getData{
+    
+    
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    NSString *url = [NSString stringWithFormat:@"%@Extra/mall/getExchange",BASEURL];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [paramer setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        [hub hideAnimated:YES];
+        
+        NSLog(@"result----%@",result);
+        if (result) {
+            self.data_array = (NSArray*)result;
+            
+            [_tableView reloadData];
+        }
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"getExchange,error----%@",error);
+
+        [hub hideAnimated:YES];
+    }];
+
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
