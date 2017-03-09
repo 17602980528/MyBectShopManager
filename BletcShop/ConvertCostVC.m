@@ -7,13 +7,10 @@
 //
 
 #import "ConvertCostVC.h"
-<<<<<<< HEAD
 
 #import "OrderDetailViewController.h"
 
-=======
 #import "UIImageView+WebCache.h"
->>>>>>> f1739cf65bef5be0fff97147c933ac658d698ec8
 @interface ConvertCostVC ()
 
 @end
