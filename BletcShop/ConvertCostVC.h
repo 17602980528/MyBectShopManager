@@ -13,4 +13,5 @@
 @property(nonatomic,copy)NSString *shopNameString;
 @property(nonatomic,copy)NSString *totalPoint;
 @property(nonatomic,copy)NSString *shopNeedPoint;
+@property(nonatomic,copy)NSString *converRecordCount;
 @end

@@ -70,7 +70,8 @@
 //启动后广告页面
 #define STAR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/lead/"
 
-
+#define POINT_LUNBO @"http://101.201.100.191/cnconsum/Public/Uploads/mall/advertImage/"
+#define POINT_GOODS @"http://101.201.100.191/cnconsum/Public/Uploads/mall/goodsImage/"
 //商家选择会员卡图片
 
 #define SOURCECARD @"http://101.201.100.191/cnconsum/Public/Uploads/cardImage/"

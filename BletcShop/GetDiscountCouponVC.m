@@ -237,6 +237,7 @@
             if ([sender.titleLabel.text isEqualToString:@"立即使用"]) {
                 CouponIntroduceVC *couponVC=[[CouponIntroduceVC alloc]init];
                 couponVC.index=1;
+                couponVC.infoDic=_dataArray[indexPath.row];
                 [self.navigationController pushViewController:couponVC animated:YES];
             }else{
                 [self postReceiveConponRequest:dic];

@@ -23,7 +23,7 @@
 {
     NSTimer* _timer;
     
-    NSArray* _adverImages;
+    NSMutableArray* _adverImages;
     
     UIScrollView* _scrollView;
     
@@ -36,12 +36,16 @@
     NSArray *productNameArray;
     NSArray *pointNeedArray;
     NSString *pointInt;
+    UIView *slipBackView;
+    NSArray *shopInfoArray;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title=@"积分商城";
     pointInt=@"0";
+    shopInfoArray=[[NSArray alloc]init];
+    _adverImages=[[NSMutableArray alloc]initWithCapacity:0];
     //图像
     headImageView=[[UIImageView alloc]initWithFrame:CGRectMake(22, 10, 44, 44)];
     headImageView.image=[UIImage imageNamed:@"3.1-02"];
@@ -117,41 +121,15 @@
     [recordCvBtn addTarget:self action:@selector(exchangeRecord) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:recordCvBtn];
     
-    UIView *slipBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 191-94, SCREENWIDTH, 94)];
+    slipBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 191-94, SCREENWIDTH, 94)];
     slipBackView.backgroundColor=RGB(240, 240, 240);
     [self.view addSubview:slipBackView];
+    [self getLunBoAdvert];
+    [self getShopList];
     
-    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 9, SCREENWIDTH, 76)];
     
-    _adverImages = @[[UIImage imageNamed:@"points.jpg"], [UIImage imageNamed:@"coupon.jpeg"], [UIImage imageNamed:@"points2.jpg"]];
-    //只创建 3 张图片。
-    for (NSInteger i = 0; i < 3; i++) {
-        UIImageView *adversImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH * i, 0, self.view.frame.size.width, 76)];
-        adversImageView.tag=i+1;
-        adversImageView.userInteractionEnabled=YES;
-        [scrollView addSubview:adversImageView];
-        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDiskCountCoupon)];
-        [adversImageView addGestureRecognizer:tap];
-        
-    }
     
-    scrollView.pagingEnabled = YES;
-    
-    scrollView.contentSize = CGSizeMake(SCREENWIDTH * 3, 76);
-    
-    scrollView.bounces = NO;
-    
-    scrollView.showsHorizontalScrollIndicator = NO;
-    
-    scrollView.delegate = self;
-    
-    //显示中间这张图片。
-    scrollView.contentOffset = CGPointMake(SCREENWIDTH, 0);
-    
-    [self setContentInScrollView:scrollView];
-    
-    [slipBackView addSubview:scrollView];
-    _scrollView = scrollView;
+
     
     UILabel *memberLabel=[[UILabel alloc]initWithFrame:CGRectMake(23, 191+11, SCREENWIDTH-23, 15)];
     memberLabel.font=[UIFont systemFontOfSize:15.0f];
@@ -163,94 +141,33 @@
     lineView2.backgroundColor=RGB(234, 234, 234);
     [self.view addSubview:lineView2];
     
-    UIScrollView *goodsScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 191+36+1, SCREENWIDTH, SCREENHEIGHT-191-37-64)];
-    goodsScrollView.contentSize=CGSizeMake(0, SCREENWIDTH*5/2);
-    [self.view addSubview:goodsScrollView];
-    
-    UILabel *noticeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, -80, SCREENWIDTH, 20)];
-    noticeLabel.textAlignment=1;
-    noticeLabel.textColor=[UIColor grayColor];
-    noticeLabel.text=@"没有更多内容了";
-    [goodsScrollView addSubview:noticeLabel];
-    
-    UILabel *bottomLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, SCREENWIDTH*5/2+40, SCREENWIDTH, 20)];
-    bottomLabel.textAlignment=1;
-    bottomLabel.textColor=[UIColor grayColor];
-    bottomLabel.text=@"我是有底线的";
-    [goodsScrollView addSubview:bottomLabel];
-    
-    _imageNameArray=@[@"tempProducts_01.jpeg",@"tempProducts_02.jpg",@"tempProducts_03.jpg",@"tempProducts_04.jpg",@"tempProducts_05.jpg",@"tempProducts_06.jpg",@"tempProducts_07.jpg",@"tempProducts_08.png",@"tempProducts_09.jpg"];
-    productNameArray=@[@"爱国者Mini移动电源",@"懒人手机支架",@"时尚拉杆箱",@"日本印象保温杯",@"陶瓷水具七件套",@"荣事达加湿器",@"罗马假日四件套",@"R9s杨幂定制版",@"小米平衡车"];
-    pointNeedArray=@[@"500",@"200",@"1500",@"300",@"1280",@"2000",@"2500",@"28000",@"30000"];
-    for (int i=0; i<9; i++) {
-        UIView *rewardView=[[UIView alloc]initWithFrame:CGRectMake(i%2*SCREENWIDTH/2, i/2*(SCREENWIDTH/2), SCREENWIDTH/2, SCREENWIDTH/2)];
-        
-        rewardView.layer.borderWidth=0.3;
-        rewardView.layer.borderColor=[RGB(234, 234, 234)CGColor];
-        [goodsScrollView addSubview:rewardView];
-        
-        UIImageView *rewardImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/4-40, 10, 80, 80)];
-        rewardImageView.userInteractionEnabled=YES;
-        rewardImageView.tag=i;
-        rewardImageView.image=[UIImage imageNamed:_imageNameArray[i]];
-        [rewardView addSubview:rewardImageView];
-        
-        UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goShopConvertVC:)];
-        [rewardImageView addGestureRecognizer:tapGesture];
-        
-        UILabel *rewardNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 99, SCREENWIDTH/2, 13)];
-        rewardNameLabel.textAlignment=NSTextAlignmentCenter;
-        rewardNameLabel.font=[UIFont systemFontOfSize:13.0f];
-        rewardNameLabel.text=productNameArray[i];
-        [rewardView addSubview:rewardNameLabel];
-        
-        UIView *progressBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 120, SCREENWIDTH/2, 10)];
-        [rewardView addSubview:progressBackView];
-        
-        THProgressView *ProgressView = [[THProgressView alloc] initWithFrame:CGRectMake(42,122,70,5)];
-        ProgressView.borderTintColor =[UIColor grayColor];
-        ProgressView.progressTintColor = [UIColor redColor];
-        ProgressView.progress= 0.53;
-        [rewardView addSubview:ProgressView];
-        
-        UILabel *overLabel=[[UILabel alloc]initWithFrame:CGRectMake(118, 120, SCREENWIDTH/2-118, 10)];
-        overLabel.textAlignment=NSTextAlignmentLeft;
-        overLabel.font=[UIFont systemFontOfSize:10.0f];
-        overLabel.text=@"剩余47%";
-        overLabel.textColor=[UIColor grayColor];
-        [rewardView addSubview:overLabel];
-        
-        UIImageView *moneyImage=[[UIImageView alloc]initWithFrame:CGRectMake(44, 135, 15, 15)];
-        moneyImage.image=[UIImage imageNamed:@"s_money_n"];
-        [rewardView addSubview:moneyImage];
-        
-        UILabel *priceLabel=[[UILabel alloc]initWithFrame:CGRectMake(65, 135, SCREENWIDTH/2-65, 15)];
-        priceLabel.textAlignment=NSTextAlignmentLeft;
-        priceLabel.font=[UIFont systemFontOfSize:13.0f];
-        priceLabel.text=pointNeedArray[i];
-        [rewardView addSubview:priceLabel];
-        priceLabel.textColor=RGB(226, 47, 50);
-        
-    }
+
 }
 -(void)goShopConvertVC:(UITapGestureRecognizer *)tap{
     UIImageView *imageView=(UIImageView *)[tap view];
     ConvertCostVC *pointCostVC=[[ConvertCostVC alloc]init];
-    pointCostVC.imageNameString=_imageNameArray[imageView.tag];
-    pointCostVC.shopNameString=productNameArray[imageView.tag];
-    pointCostVC.shopNeedPoint=pointNeedArray[imageView.tag];
+    
+    pointCostVC.imageNameString=shopInfoArray[imageView.tag][@"image_url"];//图片名
+    
+    pointCostVC.shopNameString=shopInfoArray[imageView.tag][@"name"];
+    pointCostVC.shopNeedPoint=shopInfoArray[imageView.tag][@"price"];
+    NSInteger sum=[shopInfoArray[imageView.tag][@"sum"] integerValue];
+    NSInteger remain=[shopInfoArray[imageView.tag][@"remain"] integerValue];
+    pointCostVC.converRecordCount=[NSString stringWithFormat:@"%ld",(sum-remain)];
     pointCostVC.totalPoint=pointInt;
     [self.navigationController pushViewController:pointCostVC animated:YES];
 }
 - (void)setContentInScrollView:(UIScrollView* )scrollView {
     UIImageView * view = [scrollView viewWithTag:1];
-    view.image = _adverImages[_pageIndex - 1 < 0 ? _adverImages.count - 1 : _pageIndex - 1];
-    
-    view = [scrollView viewWithTag:2];
-    view.image = _adverImages[_pageIndex];
-    
-    view = [scrollView viewWithTag:3];
-    view.image = _adverImages[_pageIndex + 1 == _adverImages.count ? 0 : _pageIndex + 1];
+    if (_adverImages.count>0) {
+        view.image = _adverImages[_pageIndex - 1 < 0 ? _adverImages.count - 1 : _pageIndex - 1];
+        
+        view = [scrollView viewWithTag:2];
+        view.image = _adverImages[_pageIndex];
+        
+        view = [scrollView viewWithTag:3];
+        view.image = _adverImages[_pageIndex + 1 == _adverImages.count ? 0 : _pageIndex + 1];
+    }
 }
 //timer 要在 viewDidAppear 中创建，viewDidDisappear 中销毁。
 - (void)viewDidAppear:(BOOL)animated {
@@ -371,15 +288,9 @@
         [self postRequestPointWithString:delegate.userInfoDic[@"uuid"] WithKind:@"integral"];
         NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,[delegate.userInfoDic objectForKey:@"headimage"]]];
         
-        [headImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"3.1-02.png"] options:SDWebImageRetryFailed];
+        [headImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
         
     }else{
-        //去登录页／／
-        //        if (!delegate.IsLogin)
-        //        {
-        //        LandingController *landVc = [[LandingController alloc]init];
-        //        [self.navigationController pushViewController:landVc animated:YES];
-        //        }
         
     }
     
@@ -457,7 +368,147 @@
     }
     
 }
+//获取轮播广告接口
+-(void)getLunBoAdvert{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/mall/getAdverts",BASEURL ];
+    PointConvertViewController *tempSelf=self;
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"result==%@", result);//POINT_LUNBO
+        if (result) {
+            UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 9, SCREENWIDTH, 76)];
+            //只创建 3 张图片。
+            for (NSInteger i = 0; i < [result count]; i++) {
+                UIImageView *adversImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH * i, 0, self.view.frame.size.width, 76)];
+                adversImageView.tag=i+1;
+                adversImageView.userInteractionEnabled=YES;
+                [scrollView addSubview:adversImageView];
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDiskCountCoupon)];
+                [adversImageView addGestureRecognizer:tap];
+                
+                NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POINT_LUNBO,result[i][@"image_url"]]];
+                
+                [adversImageView sd_setImageWithURL:nurl1 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                     [_adverImages addObject:image];
+                }];
 
+            }
+            
+            scrollView.pagingEnabled = YES;
+            
+            scrollView.contentSize = CGSizeMake(SCREENWIDTH * 3, 76);
+            
+            scrollView.bounces = NO;
+            
+            scrollView.showsHorizontalScrollIndicator = NO;
+            
+            scrollView.delegate = tempSelf;
+            
+            //显示中间这张图片。
+            scrollView.contentOffset = CGPointMake(SCREENWIDTH, 0);
+            
+            [tempSelf setContentInScrollView:scrollView];
+            
+            [slipBackView addSubview:scrollView];
+            _scrollView = scrollView;
+        
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+-(void)getShopList{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/mall/getGoods",BASEURL ];
+    
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"result==%@", result);//POINT_LUNBO
+        if (result) {
+            shopInfoArray=result;
+            
+            UIScrollView *goodsScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 191+36+1, SCREENWIDTH, SCREENHEIGHT-191-37-64)];
+            goodsScrollView.contentSize=CGSizeMake(0, (SCREENWIDTH/2)*(shopInfoArray.count+1)/2);
+            [self.view addSubview:goodsScrollView];
+            
+            UILabel *noticeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, -80, SCREENWIDTH, 20)];
+            noticeLabel.textAlignment=1;
+            noticeLabel.textColor=[UIColor grayColor];
+            noticeLabel.text=@"没有更多内容了";
+            [goodsScrollView addSubview:noticeLabel];
+            
+            UILabel *bottomLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, SCREENWIDTH*5/2+40, SCREENWIDTH, 20)];
+            bottomLabel.textAlignment=1;
+            bottomLabel.textColor=[UIColor grayColor];
+            bottomLabel.text=@"我是有底线的";
+            [goodsScrollView addSubview:bottomLabel];
+        
+            for (int i=0; i<shopInfoArray.count; i++) {
+                UIView *rewardView=[[UIView alloc]initWithFrame:CGRectMake(i%2*SCREENWIDTH/2, i/2*(SCREENWIDTH/2), SCREENWIDTH/2, SCREENWIDTH/2)];
+                
+                rewardView.layer.borderWidth=0.3;
+                rewardView.layer.borderColor=[RGB(234, 234, 234)CGColor];
+                [goodsScrollView addSubview:rewardView];
+                
+                UIImageView *rewardImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/4-40, 10, 80, 80)];
+                rewardImageView.userInteractionEnabled=YES;
+                rewardImageView.tag=i;
+                rewardImageView.image=[UIImage imageNamed:shopInfoArray[i][@"image_url"]];
+                [rewardView addSubview:rewardImageView];
+                
+                NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POINT_GOODS,shopInfoArray[i][@"image_url"]]];
+                [rewardImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+                
+                UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goShopConvertVC:)];
+                [rewardImageView addGestureRecognizer:tapGesture];
+                
+                UILabel *rewardNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 99, SCREENWIDTH/2, 13)];
+                rewardNameLabel.textAlignment=NSTextAlignmentCenter;
+                rewardNameLabel.font=[UIFont systemFontOfSize:13.0f];
+                rewardNameLabel.text=shopInfoArray[i][@"name"];
+                [rewardView addSubview:rewardNameLabel];
+                
+                UIView *progressBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 120, SCREENWIDTH/2, 10)];
+                [rewardView addSubview:progressBackView];
+                
+                THProgressView *ProgressView = [[THProgressView alloc] initWithFrame:CGRectMake(42,122,70,5)];
+                ProgressView.borderTintColor =[UIColor grayColor];
+                ProgressView.progressTintColor = [UIColor redColor];
+                ProgressView.progress= [shopInfoArray[i][@"remain"]floatValue]/[shopInfoArray[i][@"sum"]floatValue];
+                [rewardView addSubview:ProgressView];
+                
+                UILabel *overLabel=[[UILabel alloc]initWithFrame:CGRectMake(118, 120, SCREENWIDTH/2-118, 10)];
+                overLabel.textAlignment=NSTextAlignmentLeft;
+                overLabel.font=[UIFont systemFontOfSize:10.0f];
+                overLabel.text=[NSString stringWithFormat:@"剩余%.1f%%",ProgressView.progress*100];
+                overLabel.textColor=[UIColor grayColor];
+                [rewardView addSubview:overLabel];
+                
+                UIImageView *moneyImage=[[UIImageView alloc]initWithFrame:CGRectMake(44, 135, 15, 15)];
+                moneyImage.image=[UIImage imageNamed:@"s_money_n"];
+                [rewardView addSubview:moneyImage];
+                
+                UILabel *priceLabel=[[UILabel alloc]initWithFrame:CGRectMake(65, 135, SCREENWIDTH/2-65, 15)];
+                priceLabel.textAlignment=NSTextAlignmentLeft;
+                priceLabel.font=[UIFont systemFontOfSize:13.0f];
+                priceLabel.text=shopInfoArray[i][@"price"];
+                [rewardView addSubview:priceLabel];
+                priceLabel.textColor=RGB(226, 47, 50);
+                
+            }
+
+            
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
