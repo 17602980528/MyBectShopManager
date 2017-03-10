@@ -11,8 +11,10 @@
 #import "OrderDetailViewController.h"
 
 #import "UIImageView+WebCache.h"
-@interface ConvertCostVC ()
-
+@interface ConvertCostVC ()<UIWebViewDelegate>
+{
+    UIScrollView *_scrollView;
+}
 @end
 
 @implementation ConvertCostVC
@@ -21,8 +23,8 @@
     [super viewDidLoad];
     self.view.backgroundColor=RGB(238, 238, 238);
     self.navigationItem.title=@"积分兑换";
-    UIScrollView *_scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-100)];
-    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, 336+SCREENWIDTH*3370/790.0);
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-100)];
+    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, 336+200);
     [self.view addSubview:_scrollView];
     
     //top
@@ -92,10 +94,12 @@
         [convertButton setTitle:@"立即兑换" forState:UIControlStateNormal];
         [convertButton addTarget:self action:@selector(costPoint:) forControlEvents:UIControlEventTouchUpInside];
     }
-    UIImageView *scanImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 336, SCREENWIDTH, SCREENWIDTH*3370/790.0)];
-    scanImageView.image=[UIImage imageNamed:@"timg-3.jpeg"];
-    [_scrollView addSubview:scanImageView];
-    
+//    UIImageView *scanImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 336, SCREENWIDTH, SCREENWIDTH*3370/790.0)];
+//    scanImageView.image=[UIImage imageNamed:@"timg-3.jpeg"];
+    UIWebView *_webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 336, SCREENWIDTH, 200)];
+    _webView.delegate=self;
+    [_scrollView addSubview:_webView];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_infoDic[@"href"]]]];
 //    UIImageView *
     
 }
@@ -106,6 +110,15 @@
     OrderDetailViewController *VC= [[OrderDetailViewController alloc]init];
     VC.product_dic=self.infoDic;
     [self.navigationController pushViewController:VC animated:YES];
+}
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+    CGFloat webViewHeight=[webView.scrollView contentSize].height;
+    CGRect newFrame=webView.frame;
+    newFrame.size.height=webViewHeight;
+    webView.frame=newFrame;
+    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, 336+webViewHeight);
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
