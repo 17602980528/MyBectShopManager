@@ -98,6 +98,7 @@
 //    scanImageView.image=[UIImage imageNamed:@"timg-3.jpeg"];
     UIWebView *_webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 336, SCREENWIDTH, 200)];
     _webView.delegate=self;
+    _webView.scrollView.bounces=NO;
     [_scrollView addSubview:_webView];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_infoDic[@"href"]]]];
 //    UIImageView *

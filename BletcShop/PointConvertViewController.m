@@ -371,7 +371,8 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     NSLog(@"---点击了第%ld张图片", (long)index);
-    
+    GetDiscountCouponVC *disctountCounponVC=[[GetDiscountCouponVC alloc]init];
+    [self.navigationController pushViewController:disctountCounponVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

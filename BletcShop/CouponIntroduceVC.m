@@ -9,6 +9,7 @@
 #import "CouponIntroduceVC.h"
 #import "ShaperView.h"
 #import "UIImageView+WebCache.h"
+#import "SweetNoticeVC.h"
 //#import "BindCustomView.h"
 @interface CouponIntroduceVC ()
 //{
@@ -149,16 +150,14 @@
 }
 -(void)notice{
     NSLog(@"notice");
+    SweetNoticeVC *vc=[[SweetNoticeVC alloc]init];
+    vc.infoDic=self.infoDic;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)adjustShop{
-    //    alertView=[[BindCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    //    [alertView.completeBtn addTarget:self action:@selector(removeAlertViewFromCurrentVC:) forControlEvents:UIControlEventTouchUpInside];
-    //    [self.view addSubview:alertView];
+    
 }
-//-(void)removeAlertViewFromCurrentVC:(UIButton *)sender{
-//    [alertView removeFromSuperview];
-//    //pop到需要的页面
-//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

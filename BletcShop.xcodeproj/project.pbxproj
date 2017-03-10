@@ -37,6 +37,8 @@
 		182988451E723F4200164F32 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1829883C1E723F4200164F32 /* SDCollectionViewCell.m */; };
 		182988461E723F4200164F32 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1829883E1E723F4200164F32 /* SDCycleScrollView.m */; };
 		182988471E723F4200164F32 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 182988401E723F4200164F32 /* UIView+SDExtension.m */; };
+		1829884B1E727DF200164F32 /* SweetNoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182988491E727DF200164F32 /* SweetNoticeVC.m */; };
+		1829884C1E727DF200164F32 /* SweetNoticeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1829884A1E727DF200164F32 /* SweetNoticeVC.xib */; };
 		182FAAA61D502FAD0018F872 /* custom3.png in Resources */ = {isa = PBXBuildFile; fileRef = 182FAAA51D502FAD0018F872 /* custom3.png */; };
 		18302A2A1DAC8AE200E6EF8C /* ShopRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */; };
 		18302A2D1DAC8B0E00E6EF8C /* CanPayCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A2C1DAC8B0E00E6EF8C /* CanPayCardViewController.m */; };
@@ -1124,6 +1126,9 @@
 		1829883E1E723F4200164F32 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		1829883F1E723F4200164F32 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		182988401E723F4200164F32 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		182988481E727DF200164F32 /* SweetNoticeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SweetNoticeVC.h; path = BletcShop/SweetNoticeVC.h; sourceTree = SOURCE_ROOT; };
+		182988491E727DF200164F32 /* SweetNoticeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SweetNoticeVC.m; path = BletcShop/SweetNoticeVC.m; sourceTree = SOURCE_ROOT; };
+		1829884A1E727DF200164F32 /* SweetNoticeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SweetNoticeVC.xib; path = BletcShop/SweetNoticeVC.xib; sourceTree = SOURCE_ROOT; };
 		182FAAA51D502FAD0018F872 /* custom3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom3.png; sourceTree = "<group>"; };
 		18302A281DAC8AE200E6EF8C /* ShopRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopRegisterController.h; sourceTree = "<group>"; };
 		18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopRegisterController.m; sourceTree = "<group>"; };
@@ -3112,6 +3117,7 @@
 			children = (
 				D98E5B951E515142009D56BF /* CouponIntroduceVC.h */,
 				D98E5B961E515142009D56BF /* CouponIntroduceVC.m */,
+				1829884D1E727E0000164F32 /* 使用须see */,
 			);
 			name = "优惠券介绍";
 			path = ../../../Desktop/MyBlect_2017/BletcShop;
@@ -3144,6 +3150,16 @@
 				1829883A1E723F4200164F32 /* TAPageControl.m */,
 			);
 			path = PageControl;
+			sourceTree = "<group>";
+		};
+		1829884D1E727E0000164F32 /* 使用须see */ = {
+			isa = PBXGroup;
+			children = (
+				182988481E727DF200164F32 /* SweetNoticeVC.h */,
+				182988491E727DF200164F32 /* SweetNoticeVC.m */,
+				1829884A1E727DF200164F32 /* SweetNoticeVC.xib */,
+			);
+			name = "使用须see";
 			sourceTree = "<group>";
 		};
 		184310441E6F9B83005521BF /* 优惠券列表 */ = {
@@ -6268,6 +6284,7 @@
 				18F032061E5ED79300ACD261 /* tempProducts_01.jpeg in Resources */,
 				D981FD091E2616080026E4B2 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D9E5C3DA1E5EBED6006BA2B1 /* PushAdverViewController.xib in Resources */,
+				1829884C1E727DF200164F32 /* SweetNoticeVC.xib in Resources */,
 				D9FF0DA01D53304C00443312 /* 图标-18new.png in Resources */,
 				18F27EF81D640E84002DD03A /* 头像-16.png in Resources */,
 				1CF6E46E1C61DD610001159C /* yuyue@2x.png in Resources */,
@@ -6627,6 +6644,7 @@
 				D96FBFE11E6672DB0065D170 /* JFCityCollectionFlowLayout.m in Sources */,
 				D9D50DB71D87DE0E00A5E469 /* ExpressionKeyboardView.m in Sources */,
 				D9CF3FA21D7671D500D9D0EC /* ApplyAndNoticeVC.m in Sources */,
+				1829884B1E727DF200164F32 /* SweetNoticeVC.m in Sources */,
 				1A4173CF1D78809B00A70601 /* RealtimeSearchUtil.m in Sources */,
 				D9B3A5A61D74255700F3F27E /* MWPhotoBrowser.m in Sources */,
 				D9A8ABF01E02959B00D4597F /* RoyTableViewCell.m in Sources */,
