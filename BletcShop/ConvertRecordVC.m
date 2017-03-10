@@ -86,7 +86,7 @@
     
     if (self.data_array.count != 0) {
         NSDictionary *dic = self.data_array[indexPath.row];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,dic[@"Image_url"]]]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POINT_GOODS,dic[@"image_url"]]]];
         
         nameLab.text=dic[@"name"];
         timeLab.text=dic[@"datetime"];
