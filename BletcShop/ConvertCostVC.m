@@ -104,6 +104,7 @@
     NSLog(@"积分可用");
     
     OrderDetailViewController *VC= [[OrderDetailViewController alloc]init];
+    VC.product_dic=self.infoDic;
     [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)didReceiveMemoryWarning {

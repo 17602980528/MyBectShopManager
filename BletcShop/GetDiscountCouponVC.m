@@ -200,10 +200,10 @@
     
     int meter = (int)distance;
     if (meter>1000) {
-        shopNameAndDistant.text = [[NSString alloc]initWithFormat:@"%@ %.1fkm",meter/1000.0,_dataArray[indexPath.row][@"store"]];
-    }else
-        shopNameAndDistant.text = [[NSString alloc]initWithFormat:@"%@ %dm",meter,_dataArray[indexPath.row][@"store"]];
-    
+        shopNameAndDistant.text = [[NSString alloc]initWithFormat:@"%@ %.1fkm",_dataArray[indexPath.row][@"store"],meter/1000.0];
+    }else{
+        shopNameAndDistant.text = [[NSString alloc]initWithFormat:@"%@ %dm",_dataArray[indexPath.row][@"store"],meter];
+    }
     return cell;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

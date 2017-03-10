@@ -15,20 +15,17 @@
 #import "ConvertRecordVC.h"//兑换记录
 #import "PointAllGetAndCostsVC.h"//积分明细
 #import "ConvertCostVC.h"
-@interface PointConvertViewController ()<UIScrollViewDelegate>
+#import "SDCycleScrollView.h"
+@interface PointConvertViewController ()<SDCycleScrollViewDelegate>
 
 @end
 
 @implementation PointConvertViewController
 {
-    NSTimer* _timer;
     
     NSMutableArray* _adverImages;
     
     UIScrollView* _scrollView;
-    
-    //当前展示的页码。
-    NSInteger _pageIndex;
     
     UILabel *convertLabel;
     UIImageView *headImageView;
@@ -127,10 +124,6 @@
     [self getLunBoAdvert];
     [self getShopList];
     
-    
-    
-
-    
     UILabel *memberLabel=[[UILabel alloc]initWithFrame:CGRectMake(23, 191+11, SCREENWIDTH-23, 15)];
     memberLabel.font=[UIFont systemFontOfSize:15.0f];
     memberLabel.text=@"会员兑换专区";
@@ -146,9 +139,9 @@
 -(void)goShopConvertVC:(UITapGestureRecognizer *)tap{
     UIImageView *imageView=(UIImageView *)[tap view];
     ConvertCostVC *pointCostVC=[[ConvertCostVC alloc]init];
+    pointCostVC.infoDic=shopInfoArray[imageView.tag];
     
     pointCostVC.imageNameString=shopInfoArray[imageView.tag][@"image_url"];//图片名
-    
     pointCostVC.shopNameString=shopInfoArray[imageView.tag][@"name"];
     pointCostVC.shopNeedPoint=shopInfoArray[imageView.tag][@"price"];
     NSInteger sum=[shopInfoArray[imageView.tag][@"sum"] integerValue];
@@ -157,125 +150,8 @@
     pointCostVC.totalPoint=pointInt;
     [self.navigationController pushViewController:pointCostVC animated:YES];
 }
-- (void)setContentInScrollView:(UIScrollView* )scrollView {
-    UIImageView * view = [scrollView viewWithTag:1];
-    if (_adverImages.count>0) {
-        view.image = _adverImages[_pageIndex - 1 < 0 ? _adverImages.count - 1 : _pageIndex - 1];
-        
-        view = [scrollView viewWithTag:2];
-        view.image = _adverImages[_pageIndex];
-        
-        view = [scrollView viewWithTag:3];
-        view.image = _adverImages[_pageIndex + 1 == _adverImages.count ? 0 : _pageIndex + 1];
-    }
-}
-//timer 要在 viewDidAppear 中创建，viewDidDisappear 中销毁。
-- (void)viewDidAppear:(BOOL)animated {
-    
-    _timer = [NSTimer timerWithTimeInterval:3.0f target:self selector:@selector(autoScroll:) userInfo:_scrollView repeats:YES];
-    
-    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    
-    //timer 必须在 viewDidDisappear 进行销毁，才能正确的释放 self。
-    [_timer invalidate];
-}
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    if ([scrollView isMemberOfClass:[UIScrollView class]]) {
-        
-        if (scrollView.contentOffset.x == self.view.frame.size.width * 2) {
-            
-            scrollView.contentOffset = CGPointMake(self.view.frame.size.width * 1, 0);
-            
-            _pageIndex++;
-            
-            if (_pageIndex == _adverImages.count) {
-                _pageIndex = 0;
-            }
-            
-            [self setContentInScrollView:scrollView];
-        }else if (scrollView.contentOffset.x == 0) {
-            
-            scrollView.contentOffset = CGPointMake(self.view.frame.size.width * 1, 0);
-            
-            _pageIndex--;
-            
-            if (_pageIndex == -1) {
-                _pageIndex = _adverImages.count - 1;
-            }
-            
-            [self setContentInScrollView:scrollView];
-        }
-    }
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    if ([scrollView isMemberOfClass:[UIScrollView class]]) {
-        
-        if (scrollView.contentOffset.x == self.view.frame.size.width * 2) {
-            
-            scrollView.contentOffset = CGPointMake(self.view.frame.size.width * 1, 0);
-            
-            _pageIndex++;
-            
-            if (_pageIndex == _adverImages.count) {
-                _pageIndex = 0;
-            }
-            
-            [self setContentInScrollView:scrollView];
-        }else if (scrollView.contentOffset.x == 0) {
-            
-            scrollView.contentOffset = CGPointMake(self.view.frame.size.width * 1, 0);
-            
-            _pageIndex--;
-            
-            if (_pageIndex == -1) {
-                _pageIndex = _adverImages.count - 1;
-            }
-            
-            [self setContentInScrollView:scrollView];
-        }
-    }
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    
-    //开始拖动 scrollView。
-    
-    //设置启动时间为很久后的一个时间，永远也到不了的时间。
-    
-    if ([scrollView isMemberOfClass:[UIScrollView class]]) {
-        
-        _timer.fireDate = [NSDate distantFuture];
-    }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
-    //结束拖动 scrollView。
-    
-    //取消暂停。
-    
-    if ([scrollView isMemberOfClass:[UIScrollView class]]) {
-        
-        _timer.fireDate = [NSDate distantPast];
-    }
-}
 
 #pragma mark - action
-
-- (void)autoScroll:(NSTimer* )timer {
-    
-    if (_scrollView.contentOffset.x>=SCREENWIDTH) {
-        [timer.userInfo setContentOffset:CGPointMake(self.view.frame.size.width * 2, 0) animated:YES];
-    }
-    
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -320,7 +196,6 @@
     
 }
 -(void)getDiskCountCoupon{
-    NSLog(@"%ld",(long)_pageIndex);
     GetDiscountCouponVC *disctountCounponVC=[[GetDiscountCouponVC alloc]init];
     [self.navigationController pushViewController:disctountCounponVC animated:YES];
     
@@ -371,48 +246,32 @@
 //获取轮播广告接口
 -(void)getLunBoAdvert{
     NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/mall/getAdverts",BASEURL ];
-    PointConvertViewController *tempSelf=self;
+    
     [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"result==%@", result);//POINT_LUNBO
         if (result) {
-            UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 9, SCREENWIDTH, 76)];
-            //只创建 3 张图片。
-            for (NSInteger i = 0; i < [result count]; i++) {
-                UIImageView *adversImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH * i, 0, self.view.frame.size.width, 76)];
-                adversImageView.tag=i+1;
-                adversImageView.userInteractionEnabled=YES;
-                [scrollView addSubview:adversImageView];
-                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDiskCountCoupon)];
-                [adversImageView addGestureRecognizer:tap];
-                
-                NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POINT_LUNBO,result[i][@"image_url"]]];
-                
-                [adversImageView sd_setImageWithURL:nurl1 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                     [_adverImages addObject:image];
-                }];
+            for (int i=0; i<[result count]; i++) {
+                [_adverImages addObject:[NSString stringWithFormat:@"%@%@",POINT_LUNBO,result[i][@"image_url"]]];
+            }
+            // 网络加载 --- 创建带标题的图片轮播器
+            SDCycleScrollView *cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 9, SCREENWIDTH, 76) delegate:self placeholderImage:[UIImage imageNamed:@""]];
+            
+            cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
+            //    cycleScrollView2.titlesGroup = titles;
+            cycleScrollView2.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
+            [slipBackView addSubview:cycleScrollView2];
+            
+            //         --- 模拟加载延迟
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                cycleScrollView2.imageURLStringsGroup = _adverImages;
+            });
 
+            
             }
             
-            scrollView.pagingEnabled = YES;
-            
-            scrollView.contentSize = CGSizeMake(SCREENWIDTH * 3, 76);
-            
-            scrollView.bounces = NO;
-            
-            scrollView.showsHorizontalScrollIndicator = NO;
-            
-            scrollView.delegate = tempSelf;
-            
-            //显示中间这张图片。
-            scrollView.contentOffset = CGPointMake(SCREENWIDTH, 0);
-            
-            [tempSelf setContentInScrollView:scrollView];
-            
-            [slipBackView addSubview:scrollView];
-            _scrollView = scrollView;
         
-        }
+        
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -509,6 +368,12 @@
     }];
 
 }
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"---点击了第%ld张图片", (long)index);
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

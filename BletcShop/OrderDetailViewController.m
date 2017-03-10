@@ -10,6 +10,7 @@
 
 #import "SelectAddressViewController.h"
 #import "LandingController.h"
+#import "UIImageView+WebCache.h"
 @interface OrderDetailViewController ()<SelectAddressDelegate>
 
 {
@@ -34,21 +35,12 @@
     [super viewDidLoad];
     self.navigationItem.title = @"订单详情";
     
-    self.product_dic = @{ @"id":@"0001",
-                          @"name":@"礼品",
-                          @"image_url":@"33.png",
-                          @"sum":@"100",
-                          @"remain":@"90",
-                          @"price":@"20",
-                          @"href":@"http://192.168.0.1/index.html",
-                          @"state":@"true"
-                          
-                          };
-    
     self.product_name.text = self.product_dic[@"name"];
     self.product_price.text = self.product_dic[@"price"];
     self.acturePrice.text = self.product_dic[@"price"];
-
+    
+    NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POINT_GOODS,_product_dic[@"image_url"]]];
+    [_product_img sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
 
 }
 
