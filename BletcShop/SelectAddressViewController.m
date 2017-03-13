@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *receiveName;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (nonatomic,strong)UIToolbar *toolbarCancelDone;
+@property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
 @end
 
@@ -37,33 +38,71 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"添加收货地址";
-    
-
+    self.sureBtn.backgroundColor = NavBackGroundColor;
 
 }
 - (IBAction)sureBtnClick:(UIButton *)sender {
     
     
     if (self.eareTF.text.length >0&&self.detailTF.text.length >0&&self.receiveName.text.length >0&&self.phoneTF.text.length >0) {
-        if (self.delegate &&[self.delegate respondsToSelector:@selector(senderReceiceInfo:)]) {
-            
-            NSMutableDictionary *muta_d = [NSMutableDictionary dictionary];
-            [muta_d setObject:self.eareTF.text  forKey:@"eare"];
-            [muta_d setObject:self.detailTF.text  forKey:@"detailPlace"];
-            [muta_d setObject:self.receiveName.text  forKey:@"name"];
-            [muta_d setObject:self.phoneTF.text  forKey:@"phone"];
+//        if (self.delegate &&[self.delegate respondsToSelector:@selector(senderReceiceInfo:)]) {
+        
+//            NSMutableDictionary *muta_d = [NSMutableDictionary dictionary];
+//            [muta_d setObject:self.eareTF.text  forKey:@"eare"];
+//            [muta_d setObject:self.detailTF.text  forKey:@"detailPlace"];
+//            [muta_d setObject:self.receiveName.text  forKey:@"name"];
+//            [muta_d setObject:self.phoneTF.text  forKey:@"phone"];
+//
+//            NSDictionary *dic = [NSDictionary dictionaryWithDictionary:muta_d];
+//            
+//            [self.delegate senderReceiceInfo:dic];
+//            
+//            
+//            [self.navigationController popViewControllerAnimated:YES];
+        if ([ToolManager validateMobile:self.phoneTF.text]) {
+            [self getdata];
+        }else{
+            [self showHint:@"请输入正确手机号"];
+ 
+        }
+        
 
-            NSDictionary *dic = [NSDictionary dictionaryWithDictionary:muta_d];
+            }else{
             
-            [self.delegate senderReceiceInfo:dic];
-            
-            
-            [self.navigationController popViewControllerAnimated:YES];
+            [self showHint:@"请完善信息"];
         }
 
-    }
+//    }
     
 }
+
+-(void)getdata{
+    NSString *url = [NSString stringWithFormat:@"%@Extra/mall/addAdd",BASEURL];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSString *address_s = [NSString stringWithFormat:@"%@%@",self.eareTF.text,self.detailTF.text];
+    
+    [paramer setObject:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [paramer setObject:address_s  forKey:@"address"];
+    [paramer setObject:self.receiveName.text  forKey:@"name"];
+    [paramer setObject:self.phoneTF.text  forKey:@"phone"];
+    NSLog(@"------%@",paramer);
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"result----_%@",result);
+        if ([result[@"result_code"] intValue]==1) {
+            [self.navigationController popViewControllerAnimated:YES];
+
+        }else{
+            [self showHint:@"添加出错"];
+        }
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"----error----%@",error);
+    }];
+}
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];

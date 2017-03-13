@@ -119,12 +119,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9F2-gS-ZxN">
                     <rect key="frame" x="0.0" y="195" width="375" height="40"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3hB-46-QHz">
-                            <rect key="frame" x="352" y="14" width="8" height="12"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="3hB-46-QHz">
+                            <rect key="frame" x="354" y="14" width="6" height="12"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="wVj-YL-3dp"/>
-                                <constraint firstAttribute="width" constant="8" id="xNb-aA-mjS"/>
+                                <constraint firstAttribute="width" constant="6" id="xNb-aA-mjS"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="添加收货地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgg-E4-TUC">
@@ -279,8 +279,17 @@
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="qrj-gD-PLt">
+                    <rect key="frame" x="354" y="35.5" width="6" height="12"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="12" id="VAa-Iq-qoG"/>
+                        <constraint firstAttribute="width" constant="6" id="zOb-9H-pK1"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="ZPS-hW-8V5" firstAttribute="height" secondItem="ycg-6E-eiV" secondAttribute="height" id="26N-ke-uUB"/>
                 <constraint firstItem="YlH-Cn-44N" firstAttribute="leading" secondItem="ycg-6E-eiV" secondAttribute="leading" id="3ZD-ui-iqo"/>
@@ -293,21 +302,34 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZPS-hW-8V5" secondAttribute="trailing" constant="15" id="Fom-G9-jxI"/>
                 <constraint firstAttribute="bottom" secondItem="83G-FF-ddT" secondAttribute="bottom" constant="10" id="Hu4-If-r6K"/>
                 <constraint firstItem="Edn-Sx-pYT" firstAttribute="centerY" secondItem="BAO-5p-dXv" secondAttribute="centerY" id="LuI-bX-qHY"/>
+                <constraint firstAttribute="trailing" secondItem="qrj-gD-PLt" secondAttribute="trailing" constant="15" id="Q1x-3u-Igc"/>
                 <constraint firstItem="Edn-Sx-pYT" firstAttribute="height" secondItem="BAO-5p-dXv" secondAttribute="height" id="S7r-W2-vCn"/>
                 <constraint firstItem="ycg-6E-eiV" firstAttribute="leading" secondItem="yGC-PH-beH" secondAttribute="leading" constant="15" id="XNz-rL-68L"/>
                 <constraint firstItem="83G-FF-ddT" firstAttribute="top" secondItem="YlH-Cn-44N" secondAttribute="top" id="Zf3-2t-HRR"/>
                 <constraint firstItem="BAO-5p-dXv" firstAttribute="top" secondItem="ZPS-hW-8V5" secondAttribute="bottom" constant="8" id="c8Y-RH-mek"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="83G-FF-ddT" secondAttribute="trailing" constant="15" id="dBi-bg-Ngq"/>
+                <constraint firstItem="qrj-gD-PLt" firstAttribute="centerY" secondItem="yGC-PH-beH" secondAttribute="centerY" id="ntv-P8-Lj3"/>
                 <constraint firstItem="Edn-Sx-pYT" firstAttribute="leading" secondItem="BAO-5p-dXv" secondAttribute="trailing" constant="5" id="q6U-pP-3Ho"/>
                 <constraint firstItem="YlH-Cn-44N" firstAttribute="height" secondItem="ycg-6E-eiV" secondAttribute="height" id="xx5-os-8Sx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="93.5" y="-307.5"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="aYV-eV-3Ie" appends="YES" id="LZ4-38-uNR"/>
+            </connections>
+            <point key="canvasLocation" x="-184" y="-403"/>
         </view>
         <tapGestureRecognizer id="BEQ-PQ-Z9i">
             <connections>
-                <action selector="selectAddress:" destination="-1" id="ISn-3p-d83"/>
+                <action selector="selectAddressList:" destination="-1" id="4cc-4Z-zh5"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="aYV-eV-3Ie">
+            <connections>
+                <action selector="selectAddressList:" destination="-1" id="qHU-5n-y2Z"/>
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="youjiantou" width="7" height="13"/>
+    </resources>
 </document>

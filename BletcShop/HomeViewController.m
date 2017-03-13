@@ -24,6 +24,10 @@
 #import "PointConvertViewController.h"
 #import "NewMessageVC.h"
 
+#import "LZDCenterViewController.h"
+#import "TopActiveListTableVC.h"
+
+
 #import "ScanViewController.h"
 #import "HolidayActivertyVC.h"
 #import "JFCityViewController.h"
@@ -634,7 +638,9 @@
     for (NSInteger i = 0; i < _topAdverImages.count; i++) {
         UIImageView *adversImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH * i, 0, self.view.frame.size.width, scrollView.height)];
         adversImageView.tag=i+1;
-        
+        adversImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(topActiveClick:)];
+        [adversImageView addGestureRecognizer:tap];
         [scrollView addSubview:adversImageView];
     }
 
@@ -1515,7 +1521,7 @@
             
 //            [self showHint:@"暂未开通!"];
 
-            PointConvertViewController *VC = [[PointConvertViewController alloc]init];
+            LZDCenterViewController *VC = [[LZDCenterViewController alloc]init];
        
             
             [self.navigationController pushViewController:VC animated:YES];
@@ -1760,7 +1766,10 @@
         topPageControl.currentPage = _pageID;
 
 }
-
+-(void)topActiveClick:(UITapGestureRecognizer*)tap{
+    TopActiveListTableVC *VC = [[TopActiveListTableVC alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
+}
 
 //定位中...
 - (void)locating {

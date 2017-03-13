@@ -10,6 +10,8 @@
 
 @protocol SelectAddressDelegate <NSObject>
 
+@optional
+
 -(void)senderReceiceInfo:(NSDictionary*)dic;
 
 

@@ -11,7 +11,10 @@
 #import "SelectAddressViewController.h"
 #import "LandingController.h"
 #import "UIImageView+WebCache.h"
-@interface OrderDetailViewController ()<SelectAddressDelegate>
+
+#import "DefaultAddressVC.h"
+
+@interface OrderDetailViewController ()
 
 {
     NSDictionary *receiceInfo;
@@ -31,6 +34,10 @@
 
 @implementation OrderDetailViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getdata];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"订单详情";
@@ -42,19 +49,41 @@
     NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POINT_GOODS,_product_dic[@"image_url"]]];
     [_product_img sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
 
+    
+    
+}
+-(void)getdata{
+    NSString *url = [NSString stringWithFormat:@"%@Extra/mall/getDefaultAdd",BASEURL];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    [paramer setObject:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"-result----%@",result);
+        if ( result && [result isKindOfClass:[NSDictionary class]]) {
+            [self senderReceiceInfo:result];
+ 
+        }
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"----error----%@",error);
+    }];
 }
 
 
 -(void)senderReceiceInfo:(NSDictionary *)dic{
     
     receiceInfo = dic;
-    CGFloat orginY = self.add_addressView.frame.origin.y;
+    CGFloat orginY = MAX(self.add_addressView.frame.origin.y, self.addressView.frame.origin.y);
     
     [self.add_addressView removeFromSuperview];
     
     self.receive_p_name.text = dic[@"name"];
     self.receive_p_phone.text = dic[@"phone"];
-    self.receive_p_address.text = [dic[@"eare"] stringByAppendingString:dic[@"detailPlace"]];
+    self.receive_p_address.text = dic[@"address"];
 
     self.addressView.frame = CGRectMake(0, orginY, SCREENWIDTH, self.receive_p_address.bottom+10);
     
@@ -64,13 +93,11 @@
     NSLog(@"======%@===",dic);
 }
 
-- (IBAction)selectAddress:(UITapGestureRecognizer *)sender {
+
+- (IBAction)selectAddressList:(UITapGestureRecognizer *)sender {
     
+     DefaultAddressVC*VC= [[DefaultAddressVC alloc]init];
     
-    
-    SelectAddressViewController *VC= [[SelectAddressViewController alloc]init];
-    
-    VC.delegate = self;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
@@ -81,7 +108,8 @@
         
         if (!receiceInfo ) {
             
-            [self showHudInView:self.view hint:@"请添加收货信息!"];
+            [self showHint:@"请添加收货信息!"];
+          
             
         }else{
             NSString *url = [NSString stringWithFormat:@"%@Extra/mall/exchange",BASEURL];
@@ -93,6 +121,10 @@
             [paramer setObject:self.acturePrice.text forKey:@"sum"];
 
             [paramer setObject:self.receive_p_address.text forKey:@"address"];
+            
+            [paramer setObject:self.receive_p_phone.text forKey:@"phone"];
+            [paramer setObject:self.receive_p_name.text forKey:@"name"];
+
             
             
             

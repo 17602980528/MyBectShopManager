@@ -15,6 +15,7 @@
                 <outlet property="eareTF" destination="QGE-77-Mce" id="Xqy-7e-HK4"/>
                 <outlet property="phoneTF" destination="X7p-ja-i9f" id="D0H-Ww-7bY"/>
                 <outlet property="receiveName" destination="xy4-ev-PCO" id="CpX-YL-lGC"/>
+                <outlet property="sureBtn" destination="mHu-VR-7LF" id="n5y-4g-WXL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -65,6 +66,9 @@
                         <constraint firstAttribute="height" constant="44" id="kgt-0F-Em3"/>
                     </constraints>
                     <state key="normal" title="完成"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="sureBtnClick:" destination="-1" eventType="touchUpInside" id="U8i-ec-zod"/>
                     </connections>
@@ -118,7 +122,7 @@
                     <rect key="frame" x="104" y="173" width="259" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="C3j-cI-tv5"/>
                     </connections>
@@ -187,7 +191,7 @@
                 <constraint firstItem="Jbg-pl-KVi" firstAttribute="width" secondItem="1gp-j4-p4h" secondAttribute="width" id="urf-ke-QSw"/>
                 <constraint firstItem="QGE-77-Mce" firstAttribute="leading" secondItem="1gp-j4-p4h" secondAttribute="trailing" constant="8" id="v2X-p7-ZjS"/>
             </constraints>
-            <point key="canvasLocation" x="285" y="248"/>
+            <point key="canvasLocation" x="-168" y="15"/>
         </view>
     </objects>
 </document>

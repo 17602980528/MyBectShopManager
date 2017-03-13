@@ -421,6 +421,15 @@
 		D93027E41CFEBC82007447D2 /* checkbox_ture.png in Resources */ = {isa = PBXBuildFile; fileRef = D93027E31CFEBC82007447D2 /* checkbox_ture.png */; };
 		D9329CD01D49AFFE00BC84F4 /* 代金券.png in Resources */ = {isa = PBXBuildFile; fileRef = D9329CCF1D49AFFE00BC84F4 /* 代金券.png */; };
 		D932F3E31CCDB6B800B33505 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D932F3E21CCDB6B800B33505 /* VPImageCropperViewController.m */; };
+		D9345E5B1E7636C2006B2AC1 /* LZDCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9345E5A1E7636C2006B2AC1 /* LZDCenterViewController.m */; };
+		D9345E5F1E766DDE006B2AC1 /* DefaultAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9345E5D1E766DDE006B2AC1 /* DefaultAddressVC.m */; };
+		D9345E601E766DDE006B2AC1 /* DefaultAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9345E5E1E766DDE006B2AC1 /* DefaultAddressVC.xib */; };
+		D9345E641E766EE6006B2AC1 /* DefaultAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9345E621E766EE6006B2AC1 /* DefaultAddressCell.m */; };
+		D9345E651E766EE6006B2AC1 /* DefaultAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9345E631E766EE6006B2AC1 /* DefaultAddressCell.xib */; };
+		D9345E6A1E769805006B2AC1 /* TopActiveListTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9345E681E769805006B2AC1 /* TopActiveListTableVC.m */; };
+		D9345E6B1E769805006B2AC1 /* TopActiveListTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9345E691E769805006B2AC1 /* TopActiveListTableVC.xib */; };
+		D9345E6F1E76984F006B2AC1 /* TopActiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9345E6D1E76984F006B2AC1 /* TopActiveCell.m */; };
+		D9345E701E76984F006B2AC1 /* TopActiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9345E6E1E76984F006B2AC1 /* TopActiveCell.xib */; };
 		D936F5831D473CBF00424B22 /* MyCashCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D936F5821D473CBF00424B22 /* MyCashCouponViewController.m */; };
 		D93A3AA51CDC3DD60010F72B /* DelayShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93A3AA41CDC3DD60010F72B /* DelayShopViewController.m */; };
 		D93A3AA81CDC3DEC0010F72B /* UpgradeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93A3AA71CDC3DEC0010F72B /* UpgradeShopViewController.m */; };
@@ -1670,6 +1679,20 @@
 		D9329CCF1D49AFFE00BC84F4 /* 代金券.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "代金券.png"; sourceTree = "<group>"; };
 		D932F3E11CCDB6B800B33505 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
 		D932F3E21CCDB6B800B33505 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
+		D9345E591E7636C2006B2AC1 /* LZDCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZDCenterViewController.h; sourceTree = "<group>"; };
+		D9345E5A1E7636C2006B2AC1 /* LZDCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZDCenterViewController.m; sourceTree = "<group>"; };
+		D9345E5C1E766DDE006B2AC1 /* DefaultAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultAddressVC.h; sourceTree = "<group>"; };
+		D9345E5D1E766DDE006B2AC1 /* DefaultAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultAddressVC.m; sourceTree = "<group>"; };
+		D9345E5E1E766DDE006B2AC1 /* DefaultAddressVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultAddressVC.xib; sourceTree = "<group>"; };
+		D9345E611E766EE6006B2AC1 /* DefaultAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultAddressCell.h; sourceTree = "<group>"; };
+		D9345E621E766EE6006B2AC1 /* DefaultAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultAddressCell.m; sourceTree = "<group>"; };
+		D9345E631E766EE6006B2AC1 /* DefaultAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultAddressCell.xib; sourceTree = "<group>"; };
+		D9345E671E769805006B2AC1 /* TopActiveListTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopActiveListTableVC.h; sourceTree = "<group>"; };
+		D9345E681E769805006B2AC1 /* TopActiveListTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopActiveListTableVC.m; sourceTree = "<group>"; };
+		D9345E691E769805006B2AC1 /* TopActiveListTableVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopActiveListTableVC.xib; sourceTree = "<group>"; };
+		D9345E6C1E76984F006B2AC1 /* TopActiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopActiveCell.h; sourceTree = "<group>"; };
+		D9345E6D1E76984F006B2AC1 /* TopActiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopActiveCell.m; sourceTree = "<group>"; };
+		D9345E6E1E76984F006B2AC1 /* TopActiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopActiveCell.xib; sourceTree = "<group>"; };
 		D936F5811D473CBF00424B22 /* MyCashCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCashCouponViewController.h; sourceTree = "<group>"; };
 		D936F5821D473CBF00424B22 /* MyCashCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCashCouponViewController.m; sourceTree = "<group>"; };
 		D93A3AA31CDC3DD60010F72B /* DelayShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayShopViewController.h; sourceTree = "<group>"; };
@@ -3738,6 +3761,7 @@
 		1CB53BE61C57076A002B6CC1 /* 我的积分&优惠券 */ = {
 			isa = PBXGroup;
 			children = (
+				D9345E581E76368A006B2AC1 /* 会员中心新 */,
 				D925D17C1E70F6A90000B8B1 /* 积分兑换订单详情 */,
 				18F031D01E5E8D8F00ACD261 /* tempPictures(临时图片) */,
 				18F031EC1E5EB48000ACD261 /* 积分商城首页 */,
@@ -4295,6 +4319,12 @@
 				D925D1821E7106EB0000B8B1 /* SelectAddressViewController.h */,
 				D925D1831E7106EB0000B8B1 /* SelectAddressViewController.m */,
 				D925D1841E7106EB0000B8B1 /* SelectAddressViewController.xib */,
+				D9345E5C1E766DDE006B2AC1 /* DefaultAddressVC.h */,
+				D9345E5D1E766DDE006B2AC1 /* DefaultAddressVC.m */,
+				D9345E5E1E766DDE006B2AC1 /* DefaultAddressVC.xib */,
+				D9345E611E766EE6006B2AC1 /* DefaultAddressCell.h */,
+				D9345E621E766EE6006B2AC1 /* DefaultAddressCell.m */,
+				D9345E631E766EE6006B2AC1 /* DefaultAddressCell.xib */,
 			);
 			name = "积分兑换订单详情";
 			sourceTree = "<group>";
@@ -4345,6 +4375,28 @@
 				D932F3E21CCDB6B800B33505 /* VPImageCropperViewController.m */,
 			);
 			path = VPImageCropper;
+			sourceTree = "<group>";
+		};
+		D9345E581E76368A006B2AC1 /* 会员中心新 */ = {
+			isa = PBXGroup;
+			children = (
+				D9345E591E7636C2006B2AC1 /* LZDCenterViewController.h */,
+				D9345E5A1E7636C2006B2AC1 /* LZDCenterViewController.m */,
+			);
+			name = "会员中心新";
+			sourceTree = "<group>";
+		};
+		D9345E661E7697C0006B2AC1 /* 顶部轮播广告 */ = {
+			isa = PBXGroup;
+			children = (
+				D9345E671E769805006B2AC1 /* TopActiveListTableVC.h */,
+				D9345E681E769805006B2AC1 /* TopActiveListTableVC.m */,
+				D9345E691E769805006B2AC1 /* TopActiveListTableVC.xib */,
+				D9345E6C1E76984F006B2AC1 /* TopActiveCell.h */,
+				D9345E6D1E76984F006B2AC1 /* TopActiveCell.m */,
+				D9345E6E1E76984F006B2AC1 /* TopActiveCell.xib */,
+			);
+			name = "顶部轮播广告";
 			sourceTree = "<group>";
 		};
 		D936F5801D473C4B00424B22 /* 我的代金券 */ = {
@@ -4636,6 +4688,7 @@
 		D9501DD11DD024450090A911 /* home首页 */ = {
 			isa = PBXGroup;
 			children = (
+				D9345E661E7697C0006B2AC1 /* 顶部轮播广告 */,
 				D993137A1E333F550053D9B6 /* home_icon_niu@2x.png */,
 				D993137B1E333F550053D9B6 /* home_icon_niu@3x.png */,
 				D97DB36C1E30A86900C1479B /* beijing.png */,
@@ -6089,6 +6142,7 @@
 				18F27EF01D640E84002DD03A /* 头像-8.png in Resources */,
 				D9CF3FA91D7687FA00D9D0EC /* danghan.png in Resources */,
 				D9FF0D911D53304C00443312 /* 图标-03new.png in Resources */,
+				D9345E6B1E769805006B2AC1 /* TopActiveListTableVC.xib in Resources */,
 				18F4BF6A1D41BB21003F0F66 /* c_se.png in Resources */,
 				D95BAE511D542FD500ED0CDC /* award_07.png in Resources */,
 				D981FD0C1E2616080026E4B2 /* WeiboSDK.bundle in Resources */,
@@ -6405,6 +6459,7 @@
 				18EB36BB1D4B4B5B0087CE1A /* 未标题-1-06.png in Resources */,
 				D9FF0D951D53304C00443312 /* 图标-07new.png in Resources */,
 				1C2ED1141C5B1827003EE93B /* 1-02@2x.png in Resources */,
+				D9345E701E76984F006B2AC1 /* TopActiveCell.xib in Resources */,
 				1A8312831D88544D001BC3B6 /* chat_sender_audio_playing_002@2x.png in Resources */,
 				18F50E051D1E365800811CD1 /* -2-01.jpg in Resources */,
 				D9962F6F1D98F60600E63218 /* langch.png in Resources */,
@@ -6413,6 +6468,7 @@
 				1A83127B1D885444001BC3B6 /* chat_receiver_audio_playing002@2x.png in Resources */,
 				18F032071E5ED79300ACD261 /* tempProducts_02.jpg in Resources */,
 				1CBE67CF1C5828CD00706AE9 /* icon_chose_arrow_nor@2x.png in Resources */,
+				D9345E601E766DDE006B2AC1 /* DefaultAddressVC.xib in Resources */,
 				1C9E82461C60557E0007BF02 /* 5(3)@2x.png in Resources */,
 				D9AB25421D88E4ED000E9288 /* VoiceSearchFeedback020@2x.png in Resources */,
 				D9699E7B1D34D382001DEC06 /* hair_01.png in Resources */,
@@ -6526,6 +6582,7 @@
 				1CDA9E021C59FAB300DFE518 /* buyer.png in Resources */,
 				18BCCDCD1D3C9EE8005E145D /* user_ed1.png in Resources */,
 				D9D50DB91D87DE2800A5E469 /* d_aini@2x.png in Resources */,
+				D9345E651E766EE6006B2AC1 /* DefaultAddressCell.xib in Resources */,
 				1A8312811D88544D001BC3B6 /* chat_sender_audio_playing_000@2x.png in Resources */,
 				1836B83B1E559D5000B587A6 /* Active_top1.jpg in Resources */,
 				D93C0D561D251E7B001A1AC1 /* 小标-03.png in Resources */,
@@ -6800,6 +6857,7 @@
 				D98E5BFE1E515210009D56BF /* MASConstraintMaker.m in Sources */,
 				D98ECBC91D9CC52200BEDD57 /* LZDAddVipCell.m in Sources */,
 				D9ACF1AF1E24CB4200BCC877 /* thirdlogVC.m in Sources */,
+				D9345E6A1E769805006B2AC1 /* TopActiveListTableVC.m in Sources */,
 				D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */,
 				18F031F11E5EB8C100ACD261 /* ConvertRecordVC.m in Sources */,
 				D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */,
@@ -6819,6 +6877,7 @@
 				D9D50DB61D87DE0E00A5E469 /* ExpressionCL.m in Sources */,
 				18F27EC91D640C21002DD03A /* NewModelImageViewController.m in Sources */,
 				189F4CF71D508EF300461830 /* ActiveMoreRuleViewController.m in Sources */,
+				D9345E641E766EE6006B2AC1 /* DefaultAddressCell.m in Sources */,
 				D9A8ABEC1E02954200D4597F /* CardShowViewController.m in Sources */,
 				D9DEED1B1CACED7C00ACDD00 /* NSData+ImageContentType.m in Sources */,
 				079387131C5620290021B385 /* Mycell.m in Sources */,
@@ -6954,6 +7013,7 @@
 				1817FF5C1D40665900AFC965 /* MemberDetailViewController.m in Sources */,
 				D99760F51E695CFD008E21FE /* ProvinceModel.m in Sources */,
 				1CDCCD1F1C7594040094E70D /* AFURLSessionManager.m in Sources */,
+				D9345E6F1E76984F006B2AC1 /* TopActiveCell.m in Sources */,
 				D9B3A5A41D74255700F3F27E /* MWGridViewController.m in Sources */,
 				D958AD6C1E654CF200B0776F /* JHScatterChart.m in Sources */,
 				D958AD6A1E654CF200B0776F /* JHRadarChart.m in Sources */,
@@ -6964,6 +7024,7 @@
 				D958AD671E654CF200B0776F /* JHPieChart.m in Sources */,
 				D99627461DE67953007B7B34 /* NewRechargeSuccessVC.m in Sources */,
 				D94C5F311D90C53B0063EB27 /* GetMoneyVC.m in Sources */,
+				D9345E5F1E766DDE006B2AC1 /* DefaultAddressVC.m in Sources */,
 				D98E5C0A1E515210009D56BF /* SRVideoPlayer.m in Sources */,
 				182988441E723F4200164F32 /* TAPageControl.m in Sources */,
 				D98E5B971E515142009D56BF /* CouponIntroduceVC.m in Sources */,
@@ -7034,6 +7095,7 @@
 				D95A876C1E728ADF00BDAC75 /* JFButton.m in Sources */,
 				D94040411CBE29F100EC98EA /* UpgradeViewController.m in Sources */,
 				1CDCCD191C7594040094E70D /* AFHTTPSessionManager.m in Sources */,
+				D9345E5B1E7636C2006B2AC1 /* LZDCenterViewController.m in Sources */,
 				D93027DA1CFEA66C007447D2 /* AppraiseViewController.m in Sources */,
 				079386B41C55B8750021B385 /* MainTabBarController.m in Sources */,
 				D98E5C021E515210009D56BF /* MASViewAttribute.m in Sources */,

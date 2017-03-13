@@ -18,7 +18,7 @@
 
 @implementation ResetPhoneNextVC
 {
-     BindCustomView *alertView;
+     BindCustomView *myalertView;
 }
 -(NSArray *)array_code{
     if (!_array_code) {
@@ -31,15 +31,15 @@
     [super viewDidLoad];
     self.navigationItem.title = @"更换手机号";
     self.topLab.text = [NSString stringWithFormat:@"请输入%@收到的短信验证码",self.phone];
-    //[self getCodeNumber];
+    [self getCodeNumber];
     
     
    
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    if (alertView) {
-        [alertView removeFromSuperview];
+    if (myalertView) {
+        [myalertView removeFromSuperview];
     }
 }
 - (IBAction)sendBtnClick:(UIButton *)sender {
@@ -50,13 +50,68 @@
     
     [self.codeTF resignFirstResponder];
     
-    alertView=[[BindCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    [alertView.completeBtn addTarget:self action:@selector(removeAlertViewFromCurrentVC:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:alertView];
+    NSLog(@"----/%@/====/%@/",self.codeTF.text,self.array_code[0]);
+    
+    if ([self.codeTF.text isEqualToString:self.array_code[0]]) {
+        [self postRequest];
+    }else{
+        [self showHint:@"验证码输入错误"];
+    }
+    
+    
+}
+-(void)postRequest{
+    
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountSet",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+        [params setObject:@"phone" forKey:@"type"];
+        [params setObject:self.phone forKey:@"para"];
+    
+    NSLog(@"params===%@",params);
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         NSLog(@"result----%@",result);
+         
+         if ([result[@"result_code"] integerValue]==1) {
+             myalertView=[[BindCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+             
+             myalertView.phoneLable.text = [NSString stringWithFormat:@"您的新手机号：%@",self.phone];
+             [myalertView.completeBtn addTarget:self action:@selector(removeAlertViewFromCurrentVC:) forControlEvents:UIControlEventTouchUpInside];
+             [self.view addSubview:myalertView];
+
+         }else{
+             
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+
+             hud.label.text = NSLocalizedString(@"请求失败 请重试", @"HUD message title");
+             
+             hud.label.font = [UIFont systemFontOfSize:13];
+             //    [hud setColor:[UIColor blackColor]];
+             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+             hud.userInteractionEnabled = YES;
+             
+             [hud hideAnimated:YES afterDelay:2.f];
+
+         }
+         
+         
+         
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         
+         NSLog(@"%@", error);
+         
+     }];
     
 }
 -(void)removeAlertViewFromCurrentVC:(UIButton *)sender{
-    [alertView removeFromSuperview];
+    [myalertView removeFromSuperview];
     //pop到需要的页面
 }
 
