@@ -14,7 +14,6 @@
 
 - (void)areaSqliteDBData;
 
--(BOOL)deleteData:(NSString *)area_name;
 
 /**
  从shop_area.sqlite获取所有市
@@ -57,4 +56,14 @@
  @param result 搜索回调结果
  */
 - (void)searchCityData:(NSString *)searchObject result:(void (^)(NSMutableArray *result))result;
+
+
+/**
+ 根据cityname获取当前城市字典
+ 
+ @param cityName 城市名
+ @param currentCityDic 当前城市字典
+ */
+-(void)currentCityDic:(NSString*)cityName currentCityDic:(void(^)(NSDictionary*dic))currentCityDic;
+
 @end

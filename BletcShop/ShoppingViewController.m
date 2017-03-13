@@ -433,7 +433,7 @@
     } else if (indexPath.column == 1){
         
         ProvinceModel *m = _dataSourceProvinceArray[indexPath.row];
-        return m.fullname;
+        return m.name;
 //        return self.areas[indexPath.row];
     } else {
         return self.sorts[indexPath.row];
@@ -483,7 +483,7 @@
    
     if (column==1) {
         
-//        NSLog(@"numberOfItemsInRow====%ld===%ld===%ld",self.dataSourceCityArray.count,row,column);
+        NSLog(@"numberOfItemsInRow====%ld===%ld===%ld",self.dataSourceCityArray.count,row,column);
         
             return self.dataSourceCityArray.count;
 
@@ -499,7 +499,7 @@
         CityModel *m = self.dataSourceCityArray[indexPath.item];
         
         
-        return m.fullname;
+        return m.name;
 //        return self.classifys[indexPath.item];
     }else
     
@@ -523,15 +523,10 @@
         }else if (indexPath.column == 1 ) {
             
             
-//            if([[self.areas objectAtIndex:indexPath.row] isEqualToString:@"全城"]){
-//                self.ereaString =appdelegate.cityChoice;
-//            }else
-//            self.ereaString = [self.areas objectAtIndex:indexPath.row];
-            
             ProvinceModel *m = _dataSourceProvinceArray[indexPath.row];
-            self.ereaString = m.fullname;
+            self.ereaString = m.name;
             
-            [self getcityDataById:m.id];
+            [self getcityDataById:m.code];
         }
     }
     self.indexss=1;
@@ -539,6 +534,7 @@
     NSLog(@"点击了 %@ - %@",self.classifyString,self.ereaString);
     [self postRequestShop];
 }
+
 
 //店铺列表的代理方法
 
@@ -715,17 +711,24 @@
 //getData这个方法里是网络请求数据的解析省份数据信息
 - (void)getData
 {
-    //请求数据并解析
-    NSString *strURL = @"http://apis.map.qq.com/ws/district/v1/list?key=K3VBZ-M6WWV-PPSPY-UVGGC-DRM2Z-PGBMV";
-    NSURL *URL = [NSURL URLWithString:strURL];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//    //请求数据并解析
+//    NSString *strURL = @"http://apis.map.qq.com/ws/district/v1/list?key=K3VBZ-M6WWV-PPSPY-UVGGC-DRM2Z-PGBMV";
+//    NSURL *URL = [NSURL URLWithString:strURL];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+//    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+//    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 //    NSLog(@"=====%@",dic);
     //数据源数组:
     self.dataSourceProvinceArray = [NSMutableArray array];
-    NSArray *arr = [dic valueForKey:@"result"];
-    for (NSDictionary *dic in arr[0])
+    
+    
+//    self.dataSourceProvinceArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentCityList"];
+
+    NSArray *arr = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEreaList"];
+    
+//    NSLog(@"====%@",arr);
+    
+    for (NSDictionary *dic in arr)
     {
         ProvinceModel *model = [[ProvinceModel alloc] init];
         [model setValuesForKeysWithDictionary:dic];
@@ -733,10 +736,11 @@
         [self.dataSourceProvinceArray addObject:model];
         
     }
+    
     if (self.dataSourceProvinceArray.count!=0) {
         ProvinceModel *M = [self.dataSourceProvinceArray firstObject];
         
-        [self getcityDataById:M.id];
+        [self getcityDataById:M.code];
 
     }
 }
@@ -744,28 +748,70 @@
 //getcityDataById:这个方法里是网络请求数据的解析市数据信息
 - (void)getcityDataById:(NSString *)proID
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://apis.map.qq.com/ws/district/v1/getchildren?&id=%@&key=K3VBZ-M6WWV-PPSPY-UVGGC-DRM2Z-PGBMV", proID];
+
+    
+//    NSString *url = [NSString stringWithFormat:@"%@Extra/address/getStreet",BASEURL];;
+//    
+//    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+//    [parame setValue:proID forKey:@"district_id"];
+    
+//    NSLog(@"url====+%@=====%@",url,parame);
+//    [KKRequestDataService requestWithURL:url params:parame httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+//        
+//        
+////        NSLog(@"----%@",result);
+//        //遍历当前数组给madel赋值
+//        [self.dataSourceCityArray removeAllObjects];
+//        
+//     
+//        
+//        
+//            for (NSDictionary *diction in result)
+//            {
+//                CityModel *model = [[CityModel alloc] init];
+//                [model setValuesForKeysWithDictionary:diction];
+//                [self.dataSourceCityArray addObject:model];
+//            }
+//
+//            
+////        [self.menu reloadData];
+//        
+//        
+//        NSLog(@"=========%ld",self.dataSourceCityArray.count);
+//        
+//        
+//        
+//    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"error-----%@",error);
+//    }];
+
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@Extra/address/getStreet",BASEURL];
+    
     NSURL *URL = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    [request setHTTPMethod:@"POST"];
+    NSString *str = [NSString stringWithFormat:@"district_id=%@",proID];
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSArray *allArray = [dic objectForKey:@"result"];
-    NSArray *array = [allArray objectAtIndex:0];
-    //遍历当前数组给madel赋值
+    [request setHTTPBody:data];
+    
+    NSData *receiced = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:receiced options:NSJSONReadingMutableContainers error:nil];
+   
     [self.dataSourceCityArray removeAllObjects];
     
     
-        for (NSDictionary *diction in array)
-        {
-            CityModel *model = [[CityModel alloc] init];
-            [model setValuesForKeysWithDictionary:diction];
-            [self.dataSourceCityArray addObject:model];
-        }
+    
+    
+    for (NSDictionary *diction in array)
+    {
+        CityModel *model = [[CityModel alloc] init];
+        [model setValuesForKeysWithDictionary:diction];
+        [self.dataSourceCityArray addObject:model];
+    }
+    
 
-
-    NSLog(@"=========%ld",self.dataSourceCityArray.count);
-   
     
     
 }

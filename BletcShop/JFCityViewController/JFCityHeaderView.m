@@ -25,7 +25,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self addSearchBar];
+//        [self addSearchBar];
         [self addLabels];
         [self addJFButton];
     }

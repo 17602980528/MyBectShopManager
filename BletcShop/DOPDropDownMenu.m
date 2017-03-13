@@ -161,6 +161,12 @@
     
 }
 
+-(void)reloadRightData{
+
+
+    
+}
+
 - (void)selectDefalutIndexPath
 {
     [self selectIndexPath:[DOPIndexPath indexPathWithCol:0 row:0]];
@@ -440,6 +446,7 @@
     //calculate index
     NSInteger tapIndex = touchPoint.x / (self.frame.size.width / _numOfMenu);
     
+    NSLog(@"-----%ld",tapIndex);
     for (int i = 0; i < _numOfMenu; i++) {
         if (i != tapIndex) {
             [self animateIndicator:_indicators[i] Forward:NO complete:^{

@@ -65,25 +65,28 @@ static JFAreaDataManager *manager = nil;
     }
 }
 
-
--(BOOL)deleteData:(NSString *)area_name{
-    
-    
-    
-    [self.db executeUpdateWithFormat:@"delete from shop_area where area_name = %@",area_name];
-    
-    
-    return [self.db executeUpdateWithFormat:@"delete from shop_area where area_name = %@",area_name];
-}
 /// 所有市区的名称
 - (void)cityData:(void (^)(NSMutableArray *dataArray))cityData {
-    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
-    FMResultSet *result = [self.db executeQuery:@"SELECT DISTINCT city_name FROM shop_area;"];
-    while ([result next]) {
-        NSString *cityName = [result stringForColumn:@"city_name"];
-        [resultArray addObject:cityName];
-    }
-    cityData(resultArray);
+//    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+//    FMResultSet *result = [self.db executeQuery:@"SELECT DISTINCT city_name FROM shop_area;"];
+//    while ([result next]) {
+//        NSString *cityName = [result stringForColumn:@"city_name"];
+//        [resultArray addObject:cityName];
+//    }
+    
+    NSString *url = [NSString stringWithFormat:@"%@Extra/address/getCity",BASEURL];;
+    
+    NSLog(@"url====+%@",url);
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        cityData(result);
+
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error-----%@",error);
+    }];
+
+    
 }
 
 /// 获取当前市的city_number
@@ -97,14 +100,62 @@ static JFAreaDataManager *manager = nil;
 
 /// 所有区县的名称
 - (void)areaData:(NSString *)cityNumber areaData:(void (^)(NSMutableArray *areaData))areaData {
-    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
-    NSString *sqlString = [NSString stringWithFormat:@"SELECT area_name FROM shop_area WHERE city_number ='%@';",cityNumber];
-    FMResultSet *result = [self.db executeQuery:sqlString];
-    while ([result next]) {
-        NSString *areaName = [result stringForColumn:@"area_name"];
-        [resultArray addObject:areaName];
-    }
-    areaData(resultArray);
+    
+    
+//    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+//    NSString *sqlString = [NSString stringWithFormat:@"SELECT area_name FROM shop_area WHERE city_number ='%@';",cityNumber];
+//    FMResultSet *result = [self.db executeQuery:sqlString];
+//    while ([result next]) {
+//        NSString *areaName = [result stringForColumn:@"area_name"];
+//        [resultArray addObject:areaName];
+//    }
+    
+    NSString *url = [NSString stringWithFormat:@"%@Extra/address/getDistrict",BASEURL];;
+    
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    [parame setValue:cityNumber forKey:@"city_id"];
+
+    NSLog(@"url====+%@=====%@",url,parame);
+    [KKRequestDataService requestWithURL:url params:parame httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        
+        
+        
+        areaData(result);
+        
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error-----%@",error);
+    }];
+
+}
+
+/// 根据city_name获取当前城市字典
+
+-(void)currentCityDic:(NSString*)cityName currentCityDic:(void(^)(NSDictionary*dic))currentCityDic;
+{
+    NSString *url = [NSString stringWithFormat:@"%@Extra/address/getCodeByName",BASEURL];;
+    
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    [parame setValue:cityName forKey:@"name"];
+    
+    NSLog(@"url====+%@=====%@",url,parame);
+    [KKRequestDataService requestWithURL:url params:parame httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        
+        NSArray *arr = (NSArray*)result;
+        
+        
+        currentCityDic([arr firstObject]);
+        
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error-----%@",error);
+    }];
+
+    
 }
 
 /// 根据city_number获取当前城市

@@ -60,13 +60,13 @@ static NSString *ID = @"cityCollectionViewCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JFCityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
-    cell.title = _cityNameArray[indexPath.row];
+    cell.title = _cityNameArray[indexPath.row][@"name"];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cityName = _cityNameArray[indexPath.row];
-    NSDictionary *cityNameDic = @{@"cityName":cityName,@"arrayClass":_cityNameArray};
+    NSDictionary *cityNameDic = _cityNameArray[indexPath.row];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:JFCityTableViewCellDidChangeCityNotification object:self userInfo:cityNameDic];
 }
 

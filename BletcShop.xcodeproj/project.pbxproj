@@ -591,6 +591,17 @@
 		D958AD6E1E654CF200B0776F /* JHTableChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D958AD5F1E654CF200B0776F /* JHTableChart.m */; };
 		D958AD6F1E654CF200B0776F /* JHTableDataRowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D958AD611E654CF200B0776F /* JHTableDataRowModel.m */; };
 		D958AD701E654CF200B0776F /* JHWaveChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D958AD631E654CF200B0776F /* JHWaveChart.m */; };
+		D95A87691E728ADF00BDAC75 /* JFAreaDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A87541E728ADF00BDAC75 /* JFAreaDataManager.m */; };
+		D95A876A1E728ADF00BDAC75 /* hotCitylist.plist in Resources */ = {isa = PBXBuildFile; fileRef = D95A87561E728ADF00BDAC75 /* hotCitylist.plist */; };
+		D95A876B1E728ADF00BDAC75 /* shop_area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D95A87571E728ADF00BDAC75 /* shop_area.sqlite */; };
+		D95A876C1E728ADF00BDAC75 /* JFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A87591E728ADF00BDAC75 /* JFButton.m */; };
+		D95A876D1E728ADF00BDAC75 /* JFCityCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A875B1E728ADF00BDAC75 /* JFCityCollectionFlowLayout.m */; };
+		D95A876E1E728AE000BDAC75 /* JFCityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A875D1E728ADF00BDAC75 /* JFCityCollectionViewCell.m */; };
+		D95A876F1E728AE000BDAC75 /* JFCityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A875F1E728ADF00BDAC75 /* JFCityHeaderView.m */; };
+		D95A87701E728AE000BDAC75 /* JFCityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A87611E728ADF00BDAC75 /* JFCityTableViewCell.m */; };
+		D95A87711E728AE000BDAC75 /* JFCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A87631E728ADF00BDAC75 /* JFCityViewController.m */; };
+		D95A87721E728AE000BDAC75 /* JFSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A87651E728ADF00BDAC75 /* JFSearchView.m */; };
+		D95A87731E728AE000BDAC75 /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D95A87681E728ADF00BDAC75 /* JFLocation.m */; };
 		D95BAE4B1D542FD500ED0CDC /* award_01.png in Resources */ = {isa = PBXBuildFile; fileRef = D95BAE381D542FD500ED0CDC /* award_01.png */; };
 		D95BAE4C1D542FD500ED0CDC /* award_02.png in Resources */ = {isa = PBXBuildFile; fileRef = D95BAE391D542FD500ED0CDC /* award_02.png */; };
 		D95BAE4D1D542FD500ED0CDC /* award_03.png in Resources */ = {isa = PBXBuildFile; fileRef = D95BAE3A1D542FD500ED0CDC /* award_03.png */; };
@@ -641,16 +652,6 @@
 		D9699E541D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9699E531D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.m */; };
 		D9699E7B1D34D382001DEC06 /* hair_01.png in Resources */ = {isa = PBXBuildFile; fileRef = D9699E7A1D34D382001DEC06 /* hair_01.png */; };
 		D96AA13B1CB399CA00F2003B /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = D96AA13A1CB399CA00F2003B /* NIDropDown.m */; };
-		D96FBFDE1E6672DB0065D170 /* JFAreaDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFCA1E6672DB0065D170 /* JFAreaDataManager.m */; };
-		D96FBFDF1E6672DB0065D170 /* shop_area.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D96FBFCC1E6672DB0065D170 /* shop_area.sqlite */; };
-		D96FBFE01E6672DB0065D170 /* JFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFCE1E6672DB0065D170 /* JFButton.m */; };
-		D96FBFE11E6672DB0065D170 /* JFCityCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFD01E6672DB0065D170 /* JFCityCollectionFlowLayout.m */; };
-		D96FBFE21E6672DB0065D170 /* JFCityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFD21E6672DB0065D170 /* JFCityCollectionViewCell.m */; };
-		D96FBFE31E6672DB0065D170 /* JFCityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFD41E6672DB0065D170 /* JFCityHeaderView.m */; };
-		D96FBFE41E6672DB0065D170 /* JFCityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFD61E6672DB0065D170 /* JFCityTableViewCell.m */; };
-		D96FBFE51E6672DB0065D170 /* JFCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFD81E6672DB0065D170 /* JFCityViewController.m */; };
-		D96FBFE61E6672DB0065D170 /* JFSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFDA1E6672DB0065D170 /* JFSearchView.m */; };
-		D96FBFE71E6672DB0065D170 /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D96FBFDD1E6672DB0065D170 /* JFLocation.m */; };
 		D971FABB1E2DE82A00C5387C /* CardMarketSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */; };
 		D973D58C1D9E4588003F82FB /* tanhao.png in Resources */ = {isa = PBXBuildFile; fileRef = D973D58B1D9E4588003F82FB /* tanhao.png */; };
 		D9764E801DD591A500B088DE /* AddBankAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9764E7F1DD591A500B088DE /* AddBankAccountVC.m */; };
@@ -1996,6 +1997,26 @@
 		D958AD611E654CF200B0776F /* JHTableDataRowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHTableDataRowModel.m; sourceTree = "<group>"; };
 		D958AD621E654CF200B0776F /* JHWaveChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHWaveChart.h; sourceTree = "<group>"; };
 		D958AD631E654CF200B0776F /* JHWaveChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHWaveChart.m; sourceTree = "<group>"; };
+		D95A87531E728ADF00BDAC75 /* JFAreaDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAreaDataManager.h; sourceTree = "<group>"; };
+		D95A87541E728ADF00BDAC75 /* JFAreaDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAreaDataManager.m; sourceTree = "<group>"; };
+		D95A87561E728ADF00BDAC75 /* hotCitylist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hotCitylist.plist; sourceTree = "<group>"; };
+		D95A87571E728ADF00BDAC75 /* shop_area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shop_area.sqlite; sourceTree = "<group>"; };
+		D95A87581E728ADF00BDAC75 /* JFButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFButton.h; sourceTree = "<group>"; };
+		D95A87591E728ADF00BDAC75 /* JFButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFButton.m; sourceTree = "<group>"; };
+		D95A875A1E728ADF00BDAC75 /* JFCityCollectionFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityCollectionFlowLayout.h; sourceTree = "<group>"; };
+		D95A875B1E728ADF00BDAC75 /* JFCityCollectionFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityCollectionFlowLayout.m; sourceTree = "<group>"; };
+		D95A875C1E728ADF00BDAC75 /* JFCityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityCollectionViewCell.h; sourceTree = "<group>"; };
+		D95A875D1E728ADF00BDAC75 /* JFCityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityCollectionViewCell.m; sourceTree = "<group>"; };
+		D95A875E1E728ADF00BDAC75 /* JFCityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityHeaderView.h; sourceTree = "<group>"; };
+		D95A875F1E728ADF00BDAC75 /* JFCityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityHeaderView.m; sourceTree = "<group>"; };
+		D95A87601E728ADF00BDAC75 /* JFCityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityTableViewCell.h; sourceTree = "<group>"; };
+		D95A87611E728ADF00BDAC75 /* JFCityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityTableViewCell.m; sourceTree = "<group>"; };
+		D95A87621E728ADF00BDAC75 /* JFCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityViewController.h; sourceTree = "<group>"; };
+		D95A87631E728ADF00BDAC75 /* JFCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityViewController.m; sourceTree = "<group>"; };
+		D95A87641E728ADF00BDAC75 /* JFSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFSearchView.h; sourceTree = "<group>"; };
+		D95A87651E728ADF00BDAC75 /* JFSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFSearchView.m; sourceTree = "<group>"; };
+		D95A87671E728ADF00BDAC75 /* JFLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFLocation.h; sourceTree = "<group>"; };
+		D95A87681E728ADF00BDAC75 /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLocation.m; sourceTree = "<group>"; };
 		D95BAE381D542FD500ED0CDC /* award_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = award_01.png; sourceTree = "<group>"; };
 		D95BAE391D542FD500ED0CDC /* award_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = award_02.png; sourceTree = "<group>"; };
 		D95BAE3A1D542FD500ED0CDC /* award_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = award_03.png; sourceTree = "<group>"; };
@@ -2059,25 +2080,6 @@
 		D9699E7A1D34D382001DEC06 /* hair_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hair_01.png; sourceTree = "<group>"; };
 		D96AA1391CB399CA00F2003B /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
 		D96AA13A1CB399CA00F2003B /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
-		D96FBFC91E6672DB0065D170 /* JFAreaDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAreaDataManager.h; sourceTree = "<group>"; };
-		D96FBFCA1E6672DB0065D170 /* JFAreaDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAreaDataManager.m; sourceTree = "<group>"; };
-		D96FBFCC1E6672DB0065D170 /* shop_area.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shop_area.sqlite; sourceTree = "<group>"; };
-		D96FBFCD1E6672DB0065D170 /* JFButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFButton.h; sourceTree = "<group>"; };
-		D96FBFCE1E6672DB0065D170 /* JFButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFButton.m; sourceTree = "<group>"; };
-		D96FBFCF1E6672DB0065D170 /* JFCityCollectionFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityCollectionFlowLayout.h; sourceTree = "<group>"; };
-		D96FBFD01E6672DB0065D170 /* JFCityCollectionFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityCollectionFlowLayout.m; sourceTree = "<group>"; };
-		D96FBFD11E6672DB0065D170 /* JFCityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityCollectionViewCell.h; sourceTree = "<group>"; };
-		D96FBFD21E6672DB0065D170 /* JFCityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityCollectionViewCell.m; sourceTree = "<group>"; };
-		D96FBFD31E6672DB0065D170 /* JFCityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityHeaderView.h; sourceTree = "<group>"; };
-		D96FBFD41E6672DB0065D170 /* JFCityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityHeaderView.m; sourceTree = "<group>"; };
-		D96FBFD51E6672DB0065D170 /* JFCityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityTableViewCell.h; sourceTree = "<group>"; };
-		D96FBFD61E6672DB0065D170 /* JFCityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityTableViewCell.m; sourceTree = "<group>"; };
-		D96FBFD71E6672DB0065D170 /* JFCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityViewController.h; sourceTree = "<group>"; };
-		D96FBFD81E6672DB0065D170 /* JFCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityViewController.m; sourceTree = "<group>"; };
-		D96FBFD91E6672DB0065D170 /* JFSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFSearchView.h; sourceTree = "<group>"; };
-		D96FBFDA1E6672DB0065D170 /* JFSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFSearchView.m; sourceTree = "<group>"; };
-		D96FBFDC1E6672DB0065D170 /* JFLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFLocation.h; sourceTree = "<group>"; };
-		D96FBFDD1E6672DB0065D170 /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLocation.m; sourceTree = "<group>"; };
 		D971FAB91E2DE82A00C5387C /* CardMarketSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMarketSearchVC.h; sourceTree = "<group>"; };
 		D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMarketSearchVC.m; sourceTree = "<group>"; };
 		D973D58B1D9E4588003F82FB /* tanhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tanhao.png; sourceTree = "<group>"; };
@@ -4722,6 +4724,57 @@
 			path = JHChart;
 			sourceTree = "<group>";
 		};
+		D95A87511E728ADF00BDAC75 /* JFCityViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D95A87521E728ADF00BDAC75 /* AreaDataManager */,
+				D95A87551E728ADF00BDAC75 /* AreaDB */,
+				D95A87581E728ADF00BDAC75 /* JFButton.h */,
+				D95A87591E728ADF00BDAC75 /* JFButton.m */,
+				D95A875A1E728ADF00BDAC75 /* JFCityCollectionFlowLayout.h */,
+				D95A875B1E728ADF00BDAC75 /* JFCityCollectionFlowLayout.m */,
+				D95A875C1E728ADF00BDAC75 /* JFCityCollectionViewCell.h */,
+				D95A875D1E728ADF00BDAC75 /* JFCityCollectionViewCell.m */,
+				D95A875E1E728ADF00BDAC75 /* JFCityHeaderView.h */,
+				D95A875F1E728ADF00BDAC75 /* JFCityHeaderView.m */,
+				D95A87601E728ADF00BDAC75 /* JFCityTableViewCell.h */,
+				D95A87611E728ADF00BDAC75 /* JFCityTableViewCell.m */,
+				D95A87621E728ADF00BDAC75 /* JFCityViewController.h */,
+				D95A87631E728ADF00BDAC75 /* JFCityViewController.m */,
+				D95A87641E728ADF00BDAC75 /* JFSearchView.h */,
+				D95A87651E728ADF00BDAC75 /* JFSearchView.m */,
+				D95A87661E728ADF00BDAC75 /* Location */,
+			);
+			path = JFCityViewController;
+			sourceTree = "<group>";
+		};
+		D95A87521E728ADF00BDAC75 /* AreaDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				D95A87531E728ADF00BDAC75 /* JFAreaDataManager.h */,
+				D95A87541E728ADF00BDAC75 /* JFAreaDataManager.m */,
+			);
+			path = AreaDataManager;
+			sourceTree = "<group>";
+		};
+		D95A87551E728ADF00BDAC75 /* AreaDB */ = {
+			isa = PBXGroup;
+			children = (
+				D95A87561E728ADF00BDAC75 /* hotCitylist.plist */,
+				D95A87571E728ADF00BDAC75 /* shop_area.sqlite */,
+			);
+			path = AreaDB;
+			sourceTree = "<group>";
+		};
+		D95A87661E728ADF00BDAC75 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				D95A87671E728ADF00BDAC75 /* JFLocation.h */,
+				D95A87681E728ADF00BDAC75 /* JFLocation.m */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		D95BAE371D542FBF00ED0CDC /* 活动动画 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4776,56 +4829,6 @@
 				D9F135881DEE696700D2703D /* AddAdminCell.xib */,
 			);
 			name = cell;
-			sourceTree = "<group>";
-		};
-		D96FBFC71E6672DB0065D170 /* JFCityViewController */ = {
-			isa = PBXGroup;
-			children = (
-				D96FBFC81E6672DB0065D170 /* AreaDataManager */,
-				D96FBFCB1E6672DB0065D170 /* AreaDB */,
-				D96FBFCD1E6672DB0065D170 /* JFButton.h */,
-				D96FBFCE1E6672DB0065D170 /* JFButton.m */,
-				D96FBFCF1E6672DB0065D170 /* JFCityCollectionFlowLayout.h */,
-				D96FBFD01E6672DB0065D170 /* JFCityCollectionFlowLayout.m */,
-				D96FBFD11E6672DB0065D170 /* JFCityCollectionViewCell.h */,
-				D96FBFD21E6672DB0065D170 /* JFCityCollectionViewCell.m */,
-				D96FBFD31E6672DB0065D170 /* JFCityHeaderView.h */,
-				D96FBFD41E6672DB0065D170 /* JFCityHeaderView.m */,
-				D96FBFD51E6672DB0065D170 /* JFCityTableViewCell.h */,
-				D96FBFD61E6672DB0065D170 /* JFCityTableViewCell.m */,
-				D96FBFD71E6672DB0065D170 /* JFCityViewController.h */,
-				D96FBFD81E6672DB0065D170 /* JFCityViewController.m */,
-				D96FBFD91E6672DB0065D170 /* JFSearchView.h */,
-				D96FBFDA1E6672DB0065D170 /* JFSearchView.m */,
-				D96FBFDB1E6672DB0065D170 /* Location */,
-			);
-			path = JFCityViewController;
-			sourceTree = "<group>";
-		};
-		D96FBFC81E6672DB0065D170 /* AreaDataManager */ = {
-			isa = PBXGroup;
-			children = (
-				D96FBFC91E6672DB0065D170 /* JFAreaDataManager.h */,
-				D96FBFCA1E6672DB0065D170 /* JFAreaDataManager.m */,
-			);
-			path = AreaDataManager;
-			sourceTree = "<group>";
-		};
-		D96FBFCB1E6672DB0065D170 /* AreaDB */ = {
-			isa = PBXGroup;
-			children = (
-				D96FBFCC1E6672DB0065D170 /* shop_area.sqlite */,
-			);
-			path = AreaDB;
-			sourceTree = "<group>";
-		};
-		D96FBFDB1E6672DB0065D170 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				D96FBFDC1E6672DB0065D170 /* JFLocation.h */,
-				D96FBFDD1E6672DB0065D170 /* JFLocation.m */,
-			);
-			path = Location;
 			sourceTree = "<group>";
 		};
 		D971FAB81E2DE7E900C5387C /* 搜索页面 */ = {
@@ -5781,7 +5784,7 @@
 		D9DEECF51CACEC5300ACDD00 /* otherSDK */ = {
 			isa = PBXGroup;
 			children = (
-				D96FBFC71E6672DB0065D170 /* JFCityViewController */,
+				D95A87511E728ADF00BDAC75 /* JFCityViewController */,
 				D958AD481E654CF200B0776F /* JHChart */,
 				D981FCD51E2616080026E4B2 /* umeng_ios_social_sdk */,
 				D98582411DF95FFD00A94DD6 /* paymentcontrol */,
@@ -6155,6 +6158,7 @@
 				185ABD7F1D80227900BD8097 /* back_root@2x.png in Resources */,
 				D93027DD1CFEB26B007447D2 /* share_grade_star_highlighted.png in Resources */,
 				1836B83D1E559D5600B587A6 /* Active_top2.jpg in Resources */,
+				D95A876A1E728ADF00BDAC75 /* hotCitylist.plist in Resources */,
 				D9637DFC1D59BAF900C19D0B /* register_pp.png in Resources */,
 				D9AB25341D88E4ED000E9288 /* VoiceSearchFeedback006@2x.png in Resources */,
 				D95BAE5C1D542FD500ED0CDC /* award_18.png in Resources */,
@@ -6167,6 +6171,7 @@
 				1CF2839B1C58C48900F3952A /* mine_default.png in Resources */,
 				0793868F1C55B5CA0021B385 /* LaunchScreen.storyboard in Resources */,
 				D93C0D641D251E7B001A1AC1 /* 小标-19.png in Resources */,
+				D95A876B1E728ADF00BDAC75 /* shop_area.sqlite in Resources */,
 				1C2ED1131C5B1827003EE93B /* 2.1-02@2x.png in Resources */,
 				1C9E82431C60557E0007BF02 /* 5(6)@2x.png in Resources */,
 				D93C0D5F1D251E7B001A1AC1 /* 小标-14.png in Resources */,
@@ -6540,7 +6545,6 @@
 				18D7C48A1D5B12BA00AEF545 /* mohu-06.png in Resources */,
 				1CF6E4701C61DDD10001159C /* cheshi.png in Resources */,
 				D9FF0D741D531E8100443312 /* 图标-001.png in Resources */,
-				D96FBFDF1E6672DB0065D170 /* shop_area.sqlite in Resources */,
 				1CF2839E1C58C48900F3952A /* more_selected.png in Resources */,
 				D925D1811E70F89C0000B8B1 /* OrderDetailViewController.xib in Resources */,
 				D99C11A61DE28CF100E45B64 /* UPgradeVC.xib in Resources */,
@@ -6634,6 +6638,7 @@
 				D9637DF71D59B4AB00C19D0B /* ChoiceAdminAlertView.m in Sources */,
 				18EDCF701D46039D004C40B7 /* NSString+Addition.m in Sources */,
 				D986A1C71DE57849007B798B /* PaySuccessVc.m in Sources */,
+				D95A87711E728AE000BDAC75 /* JFCityViewController.m in Sources */,
 				D93BE8671CFD6B6300000E0D /* FavorateViewController.m in Sources */,
 				D99760F41E695CFD008E21FE /* CityModel.m in Sources */,
 				D93C0D6E1D251FC1001A1AC1 /* BackChooseStateViewController.m in Sources */,
@@ -6641,7 +6646,6 @@
 				185E51461E5D2E10009F0C01 /* PublishTopScrollAdvertVC.m in Sources */,
 				D9B3BB9A1DE7E05700CC8B0D /* AddproductVC.m in Sources */,
 				D9A06B601D8679C30037795B /* EMCDDeviceManagerBase.m in Sources */,
-				D96FBFE11E6672DB0065D170 /* JFCityCollectionFlowLayout.m in Sources */,
 				D9D50DB71D87DE0E00A5E469 /* ExpressionKeyboardView.m in Sources */,
 				D9CF3FA21D7671D500D9D0EC /* ApplyAndNoticeVC.m in Sources */,
 				1829884B1E727DF200164F32 /* SweetNoticeVC.m in Sources */,
@@ -6700,6 +6704,7 @@
 				D920B9611DD0695E001AC7F5 /* NewShopViewController.m in Sources */,
 				D9B3A5C41D74255700F3F27E /* PSTGridLayoutInfo.m in Sources */,
 				D94DF24C1CAE0AA4000D5B69 /* DLStarRatingControl.m in Sources */,
+				D95A87691E728ADF00BDAC75 /* JFAreaDataManager.m in Sources */,
 				D947E4871D7D710200F9FEE8 /* FMResultSet.m in Sources */,
 				1CDA9E111C5A142900DFE518 /* ShopVipController.m in Sources */,
 				18F4CD491D6FD6BD008FBAD1 /* MoneyPAYViewController.m in Sources */,
@@ -6757,6 +6762,7 @@
 				D9A6E46C1D4F3BB8008A3C29 /* AddVipCardViewController.m in Sources */,
 				D9B3BB9E1DE7FFEB00CC8B0D /* NewProductTableViewCell.m in Sources */,
 				1CB53C0F1C572004002B6CC1 /* FriendController.m in Sources */,
+				D95A876F1E728AE000BDAC75 /* JFCityHeaderView.m in Sources */,
 				D9DEED3B1CAD0A6100ACDD00 /* ShopInfoTableViewCell.m in Sources */,
 				D93A3AA81CDC3DEC0010F72B /* UpgradeShopViewController.m in Sources */,
 				D98E5C061E515210009D56BF /* NSArray+MASAdditions.m in Sources */,
@@ -6790,21 +6796,19 @@
 				18E000561E5C31B8004884CC /* SurroundingAreaVC.m in Sources */,
 				D9B3A5AE1D74255700F3F27E /* EMSDWebImageDownloader.m in Sources */,
 				D947E4851D7D710200F9FEE8 /* FMDatabasePool.m in Sources */,
-				D96FBFDE1E6672DB0065D170 /* JFAreaDataManager.m in Sources */,
 				D94743931CE56A6000D1D3EE /* LNLocationGeocoder.m in Sources */,
 				D98E5BFE1E515210009D56BF /* MASConstraintMaker.m in Sources */,
 				D98ECBC91D9CC52200BEDD57 /* LZDAddVipCell.m in Sources */,
 				D9ACF1AF1E24CB4200BCC877 /* thirdlogVC.m in Sources */,
-				D96FBFE71E6672DB0065D170 /* JFLocation.m in Sources */,
 				D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */,
 				18F031F11E5EB8C100ACD261 /* ConvertRecordVC.m in Sources */,
 				D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */,
 				D9B3A5A11D74255700F3F27E /* AdView.m in Sources */,
 				0793870D1C561D5E0021B385 /* Myitem.m in Sources */,
+				D95A876D1E728ADF00BDAC75 /* JFCityCollectionFlowLayout.m in Sources */,
 				D96503D91CE02B21006907EF /* AsyncSocket.m in Sources */,
 				1A4173C91D787F8200A70601 /* EMSearchDisplayController.m in Sources */,
 				D9B3A49E1D73D5BF00F3F27E /* LZDChartViewController.m in Sources */,
-				D96FBFE61E6672DB0065D170 /* JFSearchView.m in Sources */,
 				D99292621D8FF44A00103914 /* CashListViewController.m in Sources */,
 				D99A5DB61DD5754A006FF158 /* GetMoneyViewController.m in Sources */,
 				D9B3A5C11D74255700F3F27E /* PSTCollectionViewItemKey.m in Sources */,
@@ -6822,12 +6826,12 @@
 				D9A6E46F1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m in Sources */,
 				D9FF0D721D52D6E900443312 /* ShopListTableViewCell.m in Sources */,
 				D9A06B631D8679C30037795B /* EMVoiceConverter.mm in Sources */,
+				D95A87721E728AE000BDAC75 /* JFSearchView.m in Sources */,
 				D9B3A5BD1D74255700F3F27E /* PSTCollectionViewCell.m in Sources */,
 				D9DEED1A1CACED7C00ACDD00 /* MKAnnotationView+WebCache.m in Sources */,
 				D9F2E9341E03D89F008F6517 /* MineManagerViewController.m in Sources */,
 				D949EC301CE192AE0023B6D6 /* AddressPickerDemo.m in Sources */,
 				18E3DA1B1D8287450089597B /* NewPasswordViewController.m in Sources */,
-				D96FBFE31E6672DB0065D170 /* JFCityHeaderView.m in Sources */,
 				D9B3A4901D73CFE800F3F27E /* LZDButton.m in Sources */,
 				D98B7B691DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.m in Sources */,
 				182988421E723F4200164F32 /* TAAnimatedDotView.m in Sources */,
@@ -6848,7 +6852,6 @@
 				079387101C561FBA0021B385 /* Mygroup.m in Sources */,
 				D992925C1D8FB89500103914 /* ChargeToAccountVC.m in Sources */,
 				D9853F7E1DD477A00028BF94 /* ActivityModel.m in Sources */,
-				D96FBFE41E6672DB0065D170 /* JFCityTableViewCell.m in Sources */,
 				1CDA9E171C5A15B000DFE518 /* MyProtuctsController.m in Sources */,
 				180D872D1E5ABBBF00E7FFB4 /* AddCouponVC.m in Sources */,
 				D98E5C261E5156D7009D56BF /* LoginQuestionViewController.m in Sources */,
@@ -6864,6 +6867,7 @@
 				D9A06B5B1D8679C30037795B /* EMAudioRecorderUtil.m in Sources */,
 				D947E4561D7D263200F9FEE8 /* UIViewController+HUD.m in Sources */,
 				D9DEED401CAD0C7200ACDD00 /* AddressTableViewCell.m in Sources */,
+				D95A87731E728AE000BDAC75 /* JFLocation.m in Sources */,
 				18302A2A1DAC8AE200E6EF8C /* ShopRegisterController.m in Sources */,
 				D98E5C181E51524D009D56BF /* SRVideoBottomBar.m in Sources */,
 				D9B3A5AB1D74255700F3F27E /* EMSDImageCache.m in Sources */,
@@ -6904,13 +6908,13 @@
 				D96503DA1CE02B21006907EF /* AsyncUdpSocket.m in Sources */,
 				18F05E6A1E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m in Sources */,
 				D97B702C1E2C62AC00CEAFC1 /* CardMarketCell.m in Sources */,
+				D95A876E1E728AE000BDAC75 /* JFCityCollectionViewCell.m in Sources */,
 				D9A06B5E1D8679C30037795B /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				D9B3A5AC1D74255700F3F27E /* EMSDWebImageCompat.m in Sources */,
 				D947E44D1D7D0B5400F9FEE8 /* ContactView.m in Sources */,
 				18F4CD4D1D6FD6F2008FBAD1 /* CardVipController.m in Sources */,
 				D95F03241DD95D5600F9DC2F /* GetMoneyNowVC.m in Sources */,
 				D94CB1EE1D1BADFD0054FAB6 /* ShopUserInfoViewController.m in Sources */,
-				D96FBFE01E6672DB0065D170 /* JFButton.m in Sources */,
 				18EDCF6D1D460358004C40B7 /* CustomeAlertView.m in Sources */,
 				D940403E1CBE156100EC98EA /* RechargeViewController.m in Sources */,
 				1CBE67CE1C5828CD00706AE9 /* DOPDropDownMenu.m in Sources */,
@@ -6941,6 +6945,7 @@
 				D97F600A1D62DCAA000EE794 /* NSArray+Log.m in Sources */,
 				D94743941CE56A6000D1D3EE /* LNLocationManager.m in Sources */,
 				1CDCCD1C1C7594040094E70D /* AFURLConnectionOperation.m in Sources */,
+				D95A87701E728AE000BDAC75 /* JFCityTableViewCell.m in Sources */,
 				D958AD6B1E654CF200B0776F /* JHRingChart.m in Sources */,
 				18CB32D91D6C2B2B005A9D64 /* UIBarButtonItem+Extends.m in Sources */,
 				D9F3A3BA1D790FB900F06E0C /* LZDConversationViewController.m in Sources */,
@@ -7008,7 +7013,6 @@
 				18E3CA8D1D532C6000789065 /* EndOrBeginningViewController.m in Sources */,
 				D941135E1CE9A3D7008E231F /* RSADataSigner.m in Sources */,
 				D98E5C0E1E515210009D56BF /* ViewController+MASAdditions.m in Sources */,
-				D96FBFE51E6672DB0065D170 /* JFCityViewController.m in Sources */,
 				D923024D1D14DEDF008FB9A9 /* WelcomViewController.m in Sources */,
 				D9DEED1C1CACED7C00ACDD00 /* SDImageCache.m in Sources */,
 				D98E5C041E515210009D56BF /* MASViewConstraint.m in Sources */,
@@ -7019,7 +7023,6 @@
 				1C07697C1C7C324400F3D29B /* LandingController.m in Sources */,
 				18E0004F1E5C2693004884CC /* AdvertisementHomeVC.m in Sources */,
 				D9B3A4A31D73D6A900F3F27E /* LZDContentView.m in Sources */,
-				D96FBFE21E6672DB0065D170 /* JFCityCollectionViewCell.m in Sources */,
 				D971FABB1E2DE82A00C5387C /* CardMarketSearchVC.m in Sources */,
 				D9B3A5BF1D74255700F3F27E /* PSTCollectionViewData.m in Sources */,
 				D97EE7F21D94D966009BFD77 /* NewMiddleViewController.m in Sources */,
@@ -7028,6 +7031,7 @@
 				D987872E1E272A3200C7A828 /* ComplaintDetailVC.m in Sources */,
 				D9FCAD761D61C0C1007E375D /* ShareViewController.m in Sources */,
 				D93A3AA51CDC3DD60010F72B /* DelayShopViewController.m in Sources */,
+				D95A876C1E728ADF00BDAC75 /* JFButton.m in Sources */,
 				D94040411CBE29F100EC98EA /* UpgradeViewController.m in Sources */,
 				1CDCCD191C7594040094E70D /* AFHTTPSessionManager.m in Sources */,
 				D93027DA1CFEA66C007447D2 /* AppraiseViewController.m in Sources */,

@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface CityModel : NSObject
-@property(nonatomic, copy)NSString *fullname;
+@property(nonatomic, copy)NSString *code;
+@property(nonatomic, copy)NSString *level;
 @property(nonatomic, copy)NSString *name;
+@property(nonatomic, copy)NSString *parentid;
+
 @property(nonatomic, copy)NSString *id;
 @end

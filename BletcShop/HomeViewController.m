@@ -178,11 +178,10 @@
 
 #if TARGET_IPHONE_SIMULATOR
     
-    [KCURRENTCITYINFODEFAULTS setObject:@"西安市" forKey:@"locationCity"];
-    [KCURRENTCITYINFODEFAULTS setObject:@"西安市" forKey:@"currentcity"];
-    [KCURRENTCITYINFODEFAULTS setObject:@"610100" forKey:@"cityNumber"];
-    
-    
+//    [KCURRENTCITYINFODEFAULTS setObject:@"西安市" forKey:@"locationCity"];
+//    [KCURRENTCITYINFODEFAULTS setObject:@"西安市" forKey:@"currentcity"];
+//    
+//    
     
 #elif TARGET_OS_IPHONE
     
@@ -190,7 +189,6 @@
 #endif
     
     
-  [self.manager deleteData:@"市辖区"];
     
     currentIndex3= 1;
     currentIndex1=1;
@@ -1444,29 +1442,6 @@
 -(void)dingweiClick:(UIButton*)btn{
     NSLog(@"定位");
     
-    //    {
-    //        btn.selected =! btn.selected;
-    //        self.ifOpen = !self.ifOpen;
-    //        if (btn.selected==NO) {
-    //            [self.areaView removeFromSuperview];
-    //        }else
-    //            [self choiceArea];
-    //        //    加动画旋转
-    //        [UIView beginAnimations:nil context:nil];
-    //        [UIView setAnimationDuration:0.3];
-    //        CGAffineTransform transform;
-    //        if (btn.selected) {
-    //            transform = CGAffineTransformRotate(dingwei_img.transform, M_PI);
-    //        } else {
-    //            transform = CGAffineTransformRotate(dingwei_img.transform, -270*M_PI/90);
-    //        }
-    //
-    //        dingwei_img.transform = transform;
-    //
-    //        [UIView commitAnimations];
-    //
-    //    }
-    
     
     JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
     
@@ -1480,6 +1455,8 @@
         appdelegate.districtString = eareName.length>0 ? eareName:cityName;
         
         NSLog(@"-----%@====%@\\\\",cityName,eareName);
+        
+        
         
         
         [dingweiBtn setTitle:eareName.length>0 ? eareName:cityName forState:UIControlStateNormal];
@@ -1792,24 +1769,48 @@
 
 //定位成功
 - (void)currentLocation:(NSDictionary *)locationDictionary {
+    
     NSString *city = [locationDictionary valueForKey:@"City"];
     //    if (![_resultLabel.text isEqualToString:city]) {
     //        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
     //        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     //        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     //            _resultLabel.text = city;
-    [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
-    [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentcity"];
-    [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
-        printf("cityNumber===%s",[cityNumber UTF8String]);
-        [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
+//    [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
+//    [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentcity"];
+//    [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
+//        printf("cityNumber===%s",[cityNumber UTF8String]);
+//        [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
+//    }];
+
+    
+    
+    [self.manager currentCityDic:city currentCityDic:^(NSDictionary *dic) {
+        
+        [KCURRENTCITYINFODEFAULTS setObject:dic forKey:@"locationCityDic"];
+        
+        [KCURRENTCITYINFODEFAULTS removeObjectForKey:@"currentEareDic"];
+        
+        [KCURRENTCITYINFODEFAULTS removeObjectForKey:@"currentCityDic"];
+
+        
+        NSLog(@"定位成功------%@",dic);
+        
+        [self.manager areaData:dic[@"code"] areaData:^(NSMutableArray *areaData) {
+            
+            
+            [KCURRENTCITYINFODEFAULTS setObject:areaData forKey:@"currentEreaList"];
+            
+
+            
+        }];
+        
     }];
-    //        }];
-    //        [alertController addAction:cancelAction];
-    //        [alertController addAction:okAction];
-    //        [self presentViewController:alertController animated:YES completion:nil];
-    //    }
-}
+    
+   }
+
+
+
 
 /// 拒绝定位
 - (void)refuseToUsePositioningSystem:(NSString *)message {

@@ -48,6 +48,7 @@ static NSString *ID = @"searchCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
     NSDictionary *dataDic = _resultMutableArray[indexPath.row];
+    
     NSString *text = [NSString stringWithFormat:@"%@，%@",[dataDic valueForKey:@"city"],[dataDic valueForKey:@"super"]];
     cell.textLabel.text = text;
     cell.backgroundColor = [UIColor clearColor];
