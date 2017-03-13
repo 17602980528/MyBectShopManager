@@ -5,11 +5,29 @@
 //  Created by apple on 17/2/22.
 //  Copyright © 2017年 bletc. All rights reserved.
 //
+#define PROVINCE_COMPONENT  0
+#define CITY_COMPONENT      1
+#define DISTRICT_COMPONENT  2
 
 #import "PublishAdvertSecondVC.h"
 #import "PublishTopScrollAdvertVC.h"
-@interface PublishAdvertSecondVC ()
-
+#import "ValuePickerView.h"
+@interface PublishAdvertSecondVC ()<UIPickerViewDelegate, UIPickerViewDataSource>
+{
+    UIPickerView *picker;
+    UIButton *button;
+    NSDictionary *areaDic;
+    NSArray *province;
+    NSArray *city;
+    NSArray *district;
+    NSString *selectedProvince;
+    UILabel *areaLable;//活动地区
+    NSMutableArray *activatyKindsArr;//活动类型数据源
+    UILabel *advertPositionLable;
+}
+@property (nonatomic,strong)UIToolbar *toolbarCancelDone;
+@property (nonatomic, strong) ValuePickerView *pickerView;
+@property (nonatomic,strong)UILabel *advertStyleLable;
 @end
 
 @implementation PublishAdvertSecondVC
@@ -32,10 +50,15 @@
     chooseArea.font=[UIFont systemFontOfSize:16.0f];
     [bgview addSubview:chooseArea];
     
-    UILabel *areaLable=[[UILabel alloc]initWithFrame:CGRectMake(99, 0, SCREENWIDTH-99-27, 49)];
+    areaLable=[[UILabel alloc]initWithFrame:CGRectMake(99, 0, SCREENWIDTH-99-27, 49)];
     areaLable.font=[UIFont systemFontOfSize:16.0f];
-    areaLable.text=@"西安";
+    areaLable.text=@"";
     [bgview addSubview:areaLable];
+    
+    UIButton *chooseAreaButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    chooseAreaButton.frame=CGRectMake(0, 0, SCREENWIDTH, 49);
+    [bgview addSubview:chooseAreaButton];
+    [chooseAreaButton addTarget:self action:@selector(chooseAreaBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *detailImage=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH-27, 16.5, 8, 16)];
     detailImage.image=[UIImage imageNamed:@"arraw_right"];
@@ -51,10 +74,16 @@
     advertStyle.font=[UIFont systemFontOfSize:16.0f];
     [bgview addSubview:advertStyle];
     
-    UILabel *advertStyleLable=[[UILabel alloc]initWithFrame:CGRectMake(99, 50, SCREENWIDTH-99-27, 49)];
-    advertStyleLable.font=[UIFont systemFontOfSize:16.0f];
-    advertStyleLable.text=@"饮食类";
-    [bgview addSubview:advertStyleLable];
+    _advertStyleLable=[[UILabel alloc]initWithFrame:CGRectMake(99, 50, SCREENWIDTH-99-27, 49)];
+    _advertStyleLable.font=[UIFont systemFontOfSize:16.0f];
+    _advertStyleLable.text=@"";
+    [bgview addSubview:_advertStyleLable];
+    
+    
+    UIButton *chooseAcKindButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    chooseAcKindButton.frame=CGRectMake(0, 50, SCREENWIDTH, 49);
+    [bgview addSubview:chooseAcKindButton];
+    [chooseAcKindButton addTarget:self action:@selector(chooseAcKindBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *detailImage2=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH-27,50+16.5, 8, 16)];
     detailImage2.image=[UIImage imageNamed:@"arraw_right"];
@@ -70,7 +99,7 @@
     advertPosition.font=[UIFont systemFontOfSize:16.0f];
     [bgview addSubview:advertPosition];
     
-    UILabel *advertPositionLable=[[UILabel alloc]initWithFrame:CGRectMake(99, 50+50, SCREENWIDTH-99-27, 49)];
+    advertPositionLable=[[UILabel alloc]initWithFrame:CGRectMake(99, 50+50, SCREENWIDTH-99-27, 49)];
     advertPositionLable.font=[UIFont systemFontOfSize:16.0f];
     advertPositionLable.text=@"";
     [bgview addSubview:advertPositionLable];
@@ -82,13 +111,376 @@
     UIView *lineView3=[[UIView alloc]initWithFrame:CGRectMake(13, 49+50+50, SCREENWIDTH-26, 1)];
     lineView3.backgroundColor=RGB(234, 234, 234);
     [bgview addSubview:lineView3];
+    //-----初始化活动
+    activatyKindsArr=[[NSMutableArray alloc]initWithCapacity:0];
+    self.pickerView = [[ValuePickerView alloc]init];
+}
+-(void)chooseAreaBtnClick{
+    [self choiceCity];
+}
+-(void)chooseAcKindBtnClick{
+    __weak PublishAdvertSecondVC *tempSelf=self;
+    if ([areaLable.text isEqualToString:@""]) {
+        //没有选地区，点击没反应
+    }else{
+        if (activatyKindsArr.count>0) {
+            //有地区，并且有活动类型
+            tempSelf.pickerView.valueDidSelect = ^(NSString *value){
+                NSArray * arr =[value componentsSeparatedByString:@"/"];
+                NSString * newValue=arr[0];
+                tempSelf.advertStyleLable.text=newValue;
+                NSString *advertID=[[value componentsSeparatedByString:@"&"] lastObject];
+                //获取广告位
+                [tempSelf accessAdvertPositionById:advertID];
+            };
+            
+            [tempSelf.pickerView show];
+        }
+    }
+        
+}
+-(void)choiceCity{
     
     
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *plistPath = [bundle pathForResource:@"areaAll" ofType:@"plist"];
+    areaDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    NSArray *components = [areaDic allKeys];
+    
+    
+    NSArray *sortedArray = [components sortedArrayUsingComparator: ^(id obj1, id obj2) {
+        
+        if ([obj1 integerValue] > [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        
+        if ([obj1 integerValue] < [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    NSMutableArray *provinceTmp = [[NSMutableArray alloc] init];
+    for (int i=0; i<[sortedArray count]; i++) {
+        NSString *index = [sortedArray objectAtIndex:i];
+        NSArray *tmp = [[areaDic objectForKey: index] allKeys];
+        [provinceTmp addObject: [tmp objectAtIndex:0]];
+    }
+    
+    
+    province = [[NSArray alloc] initWithArray: provinceTmp];
+    
+    NSString *index = [sortedArray objectAtIndex:0];
+    NSString *selected = [province objectAtIndex:0];
+    NSDictionary *dic = [NSDictionary dictionaryWithDictionary: [[areaDic objectForKey:index]objectForKey:selected]];
+    
+    NSArray *cityArray = [dic allKeys];
+    NSDictionary *cityDic = [NSDictionary dictionaryWithDictionary: [dic objectForKey: [cityArray objectAtIndex:0]]];
+    city = [[NSArray alloc] initWithArray: [cityDic allKeys]];
+    
+//    
+//    NSString *selectedCity = [city objectAtIndex: 0];
+//    district = [[NSArray alloc] initWithArray: [cityDic objectForKey: selectedCity]];
+    
+    
+    if (picker==nil) {
+        picker = [[UIPickerView alloc] initWithFrame: CGRectMake(0, SCREENHEIGHT-64-160, SCREENWIDTH, 160)];
+    }
+    
+    picker.backgroundColor = [UIColor whiteColor];//tableViewBackgroundColor;
+    picker.dataSource = self;
+    picker.delegate = self;
+    picker.showsSelectionIndicator = YES;
+    [picker selectRow: 0 inComponent: 0 animated: YES];
+    [self.view addSubview: picker];
+    
+    if (self.toolbarCancelDone==nil) {
+        self.toolbarCancelDone = [[UIToolbar alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT-200-64, SCREENWIDTH, 40)];
+    }
+    
+    UIButton *okBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    okBtn.frame = CGRectMake(SCREENWIDTH-60, 0, 60, 40);
+    [okBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [okBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    okBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [okBtn addTarget:self action:@selector(actionDone) forControlEvents:UIControlEventTouchUpInside];
+    [self.toolbarCancelDone addSubview:okBtn];
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelBtn.frame = CGRectMake(0, 0, 60, 40);
+    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [cancelBtn addTarget:self action:@selector(actionCancel) forControlEvents:UIControlEventTouchUpInside];
+    [self.toolbarCancelDone addSubview:cancelBtn];
+    
+    
+    
+    [self.view addSubview:self.toolbarCancelDone];
+    selectedProvince = [province objectAtIndex: 0];
+    picker.hidden = NO;
+    self.toolbarCancelDone.hidden = NO;
+}
+
+
+- (void)actionCancel
+{
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         
+                         picker.hidden = YES;
+                         self.toolbarCancelDone.hidden = YES;
+                         
+                         
+                         
+                     }
+                     completion:^(BOOL finished){
+                         
+                         
+                     }];
+    
+}
+
+- (void)actionDone
+{
+    
+    areaLable.text = [NSString stringWithFormat:@"%@%@",[province objectAtIndex:[picker selectedRowInComponent:0]],[city objectAtIndex:[picker selectedRowInComponent:1]]];
+    //调用接口，获取当前地区有哪些  活动类型;
+    NSLog(@"%@",areaLable.text);
+    _advertStyleLable.text=@"";
+    advertPositionLable.text=@"";
+    [self accessActivatyAllKinds:areaLable.text];
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         
+                         picker.hidden = YES;
+                         self.toolbarCancelDone.hidden = YES;
+                         
+                         
+                         
+                     }
+                     completion:^(BOOL finished){
+                         
+                         
+                     }];
+    
+    
+    
+}
+//获取某地区可参与活动列表
+-(void)accessActivatyAllKinds:(NSString *)citys{
+    __block PublishAdvertSecondVC *tempSelf=self;
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/get",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:citys forKey:@"address"];
+    if (activatyKindsArr.count>0) {
+        [activatyKindsArr removeAllObjects];
+    }
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"result===%@",result);
+        if (result) {
+            for (int i=0; i<[result count]; i++) {
+                NSString *title = result[i][@"title"];
+                NSString *newTitle=[NSString stringWithFormat:@"%@&%@",title,result[i][@"id"]];
+                [activatyKindsArr addObject:title];
+            }
+            tempSelf.pickerView.dataSource=activatyKindsArr;
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 
 }
+-(void)accessAdvertPositionById:(NSString *)advertID{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/getPosition",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:advertID forKey:@"advert_id"];
+
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"result===%@",result);
+        if (result) {
+            advertPositionLable.text=[NSString stringWithFormat:@"%@",result[@"current_position"]];
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
+}
+#pragma mark- Picker Data Source Methods
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 2;
+}
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    
+    if (component == PROVINCE_COMPONENT) {
+        return [province count];
+    }
+    else if (component == CITY_COMPONENT) {
+        return [city count];
+    }
+//    else {
+//        return [district count];
+//    }
+    return 0;
+    
+}
+
+#pragma mark- Picker Delegate Methods
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if (component == PROVINCE_COMPONENT) {
+        return [province objectAtIndex: row];
+    }
+    else if (component == CITY_COMPONENT) {
+        return [city objectAtIndex: row];
+    }
+//    else {
+//        return [district objectAtIndex: row];
+//    }
+    return @"";
+}
+
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if (component == PROVINCE_COMPONENT) {
+        selectedProvince = [province objectAtIndex: row];
+        NSDictionary *tmp = [NSDictionary dictionaryWithDictionary: [areaDic objectForKey: [NSString stringWithFormat:@"%ld", (long)row]]];
+        NSDictionary *dic = [NSDictionary dictionaryWithDictionary: [tmp objectForKey: selectedProvince]];
+        NSArray *cityArray = [dic allKeys];
+        NSArray *sortedArray = [cityArray sortedArrayUsingComparator: ^(id obj1, id obj2) {
+            
+            if ([obj1 integerValue] > [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedDescending;//递减
+            }
+            
+            if ([obj1 integerValue] < [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedAscending;//上升
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+        
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        for (int i=0; i<[sortedArray count]; i++) {
+            NSString *index = [sortedArray objectAtIndex:i];
+            NSArray *temp = [[dic objectForKey: index] allKeys];
+            [array addObject: [temp objectAtIndex:0]];
+        }
+        
+        
+        city = [[NSArray alloc] initWithArray: array];
+        
+        
+//        NSDictionary *cityDic = [dic objectForKey: [sortedArray objectAtIndex: 0]];
+//        district = [[NSArray alloc] initWithArray: [cityDic objectForKey: [city objectAtIndex: 0]]];
+        [picker selectRow: 0 inComponent: CITY_COMPONENT animated: YES];
+//        [picker selectRow: 0 inComponent: DISTRICT_COMPONENT animated: YES];
+        [picker reloadComponent: CITY_COMPONENT];
+//        [picker reloadComponent: DISTRICT_COMPONENT];
+        
+    }
+    else if (component == CITY_COMPONENT) {
+        NSString *provinceIndex = [NSString stringWithFormat: @"%lu", (unsigned long)[province indexOfObject: selectedProvince]];
+        NSDictionary *tmp = [NSDictionary dictionaryWithDictionary: [areaDic objectForKey: provinceIndex]];
+        NSDictionary *dic = [NSDictionary dictionaryWithDictionary: [tmp objectForKey: selectedProvince]];
+        NSArray *dicKeyArray = [dic allKeys];
+        NSArray *sortedArray = [dicKeyArray sortedArrayUsingComparator: ^(id obj1, id obj2) {
+            
+            if ([obj1 integerValue] > [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            
+            if ([obj1 integerValue] < [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+        
+//        NSDictionary *cityDic = [NSDictionary dictionaryWithDictionary: [dic objectForKey: [sortedArray objectAtIndex: row]]];
+//        NSArray *cityKeyArray = [cityDic allKeys];
+//        
+//        district = [[NSArray alloc] initWithArray: [cityDic objectForKey: [cityKeyArray objectAtIndex:0]]];
+//        [picker selectRow: 0 inComponent: DISTRICT_COMPONENT animated: YES];
+//        [picker reloadComponent: DISTRICT_COMPONENT];
+    }
+    
+}
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+{
+    if (component == PROVINCE_COMPONENT) {
+        return 80;
+    }
+    else if (component == CITY_COMPONENT) {
+        return 100;
+    }
+//    else {
+//        return 115;
+//    }
+    return 0;
+}
+
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel *myView = nil;
+    
+    if (component == PROVINCE_COMPONENT) {
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREENWIDTH/2, 30)];
+        myView.textAlignment = NSTextAlignmentCenter;
+        myView.text = [province objectAtIndex:row];
+        myView.font = [UIFont systemFontOfSize:14];
+        myView.backgroundColor = [UIColor clearColor];
+    }
+    else if (component == CITY_COMPONENT) {
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREENWIDTH/2, 30)];
+        myView.textAlignment = NSTextAlignmentCenter;
+        myView.text = [city objectAtIndex:row];
+        myView.font = [UIFont systemFontOfSize:14];
+        myView.backgroundColor = [UIColor clearColor];
+    }
+//    else {
+//        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 110, 30)];
+//        myView.textAlignment = NSTextAlignmentCenter;
+//        myView.text = [district objectAtIndex:row];
+//        myView.font = [UIFont systemFontOfSize:14];
+//        myView.backgroundColor = [UIColor clearColor];
+//    }
+    
+    return myView;
+}
+
 -(void)goNextVC{
-    PublishTopScrollAdvertVC *nextVC=[[PublishTopScrollAdvertVC alloc]init];
-    [self.navigationController pushViewController:nextVC animated:YES];
+    if ([areaLable.text isEqualToString:@""]||[_advertStyleLable.text isEqualToString:@""]||[advertPositionLable.text isEqualToString:@""]) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text = NSLocalizedString(@"信息不完善，请检查", @"HUD message title");
+        hud.label.font = [UIFont systemFontOfSize:13];
+        //    [hud setColor:[UIColor blackColor]];
+        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+        hud.userInteractionEnabled = YES;
+        
+        [hud hideAnimated:YES afterDelay:2.f];
+    }else{
+        PublishTopScrollAdvertVC *nextVC=[[PublishTopScrollAdvertVC alloc]init];
+        [self.navigationController pushViewController:nextVC animated:YES];
+    }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

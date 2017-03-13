@@ -127,7 +127,12 @@
     }
     
     //设置返回默认值
-    self.stateStr = [NSString stringWithFormat:@"%@/%@",_dataSource[0],@(1)];
+    if (_dataSource.count>0) {
+        self.stateStr = [NSString stringWithFormat:@"%@/%@",_dataSource[0],@(1)];
+    }else{
+        
+    }
+    
     
     //刷新布局
     [self layoutSelfSubviews];
