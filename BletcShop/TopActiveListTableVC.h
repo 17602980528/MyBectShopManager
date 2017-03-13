@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopActiveListTableVC : UITableViewController
+@interface TopActiveListTableVC : UIViewController
 
 @end

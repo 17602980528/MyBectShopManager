@@ -11,19 +11,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopActiveListTableVC">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="tableView" destination="AKa-Rt-0O1" id="0ax-PH-RJ4"/>
+                <outlet property="view" destination="QZV-9F-fCj" id="dPm-fr-qwG"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i5M-Pr-FkT">
+        <view contentMode="scaleToFill" id="QZV-9F-fCj">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <connections>
-                <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
-                <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
-            </connections>
-            <point key="canvasLocation" x="-66" y="19"/>
-        </tableView>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AKa-Rt-0O1">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="E3h-WD-B74"/>
+                        <outlet property="delegate" destination="-1" id="aZk-9j-hGq"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="AKa-Rt-0O1" firstAttribute="top" secondItem="QZV-9F-fCj" secondAttribute="top" id="R8T-lq-GUA"/>
+                <constraint firstItem="AKa-Rt-0O1" firstAttribute="leading" secondItem="QZV-9F-fCj" secondAttribute="leading" id="b1G-7q-Qn2"/>
+                <constraint firstAttribute="trailing" secondItem="AKa-Rt-0O1" secondAttribute="trailing" id="qzb-sD-ICU"/>
+                <constraint firstAttribute="bottom" secondItem="AKa-Rt-0O1" secondAttribute="bottom" id="zac-nA-64e"/>
+            </constraints>
+            <point key="canvasLocation" x="-81" y="-595"/>
+        </view>
     </objects>
 </document>

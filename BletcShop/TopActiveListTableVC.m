@@ -10,6 +10,7 @@
 
 #import "TopActiveCell.h"
 @interface TopActiveListTableVC ()
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
