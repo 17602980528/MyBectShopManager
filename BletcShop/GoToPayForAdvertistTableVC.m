@@ -7,13 +7,13 @@
 //
 
 #import "GoToPayForAdvertistTableVC.h"
-
+#import "SingleModel.h"
 @interface GoToPayForAdvertistTableVC ()
 
 {
     NSArray *dataSourse_A;
     NSArray *data_A;
-
+    SingleModel *model;
 }
 
 @property(nonatomic,strong)NSArray *section1_A;
@@ -26,31 +26,28 @@
 
 -(NSArray *)section1_A{
     if (!_section1_A) {
-        _section1_A = @[@"商家名称",@"广告类型",@"地区",@"活动类型",@"广告位置"];
+        _section1_A = @[@"商家名称",@"广告类型",@"广告地区",@"活动类型",@"广告位置"];
     }
     return _section1_A;
 }
 -(NSArray *)section2_A{
     if (!_section2_A) {
-        _section2_A = @[@"有效日期",@"提交日期",@"商品总额",@"商品金额 ",@"优惠金额",@"实付金额",@"结算状态"];
+        _section2_A = @[@"商品总额",@"优惠金额",@"实付金额"];
     }
     return _section2_A;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
   self.navigationItem.title = @"发布广告";
+    model=[SingleModel sharedManager];
     
     dataSourse_A = @[self.section1_A,self.section2_A];
-    data_A = @[@[@"商消乐",@"顶部活动轮播页面",@"西安市高新区富鱼路",@"XXXXXX",@"1-12"],@[@"2016-12-01至2017-05-07",@"2016-12-08 17:00:05",@"￥299",@"￥299",@"￥0",@"￥299",@"未结算"]];
-    
+    data_A = @[@[model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition],@[@"￥299",@"￥0",@"￥299"]];
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = RGB(240, 240, 240);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight = 35 ;
-    
-    
-    
-    
+
 }
 
 
@@ -77,7 +74,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(25, 20, SCREENWIDTH-50, 44);
         button.backgroundColor = NavBackGroundColor;
-        [button setTitle:@"去支付" forState:0];
+        [button setTitle:@"提交申请" forState:0];
         button.layer.cornerRadius = 4;
         [button addTarget:self action:@selector(gotopay) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:button];
@@ -130,11 +127,71 @@
     }
     return cell;
 }
-
+//提交申请
 -(void)gotopay{
     
-    NSLog(@"去支付");
-}
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/add",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
+    [params setObject:model.advertID forKey:@"advert_id"];
+    [params setObject:model.advertPosition forKey:@"position"];
+    [params setObject:model.advertSmallTitle forKey:@"title"];
+    [params setObject:model.advertDescription forKey:@"info"];
+    [params setObject:model.advertImageUlr forKey:@"image_url"];
+    [params setObject:model.baseOnCountsOrTime forKey:@"pay_type"];
+    [params setObject:model.counts forKey:@"pay_content"];
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"postRequestAddAdmin==%@", result);
+        NSDictionary *result_dic = (NSDictionary*)result;
+        
+        if ([result_dic[@"result_code"]intValue]==1)
+        {
+        //
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"申请成功", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            //    [hud setColor:[UIColor blackColor]];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            hud.userInteractionEnabled = YES;
+            [hud hideAnimated:YES afterDelay:2.f];
+            
+        }
+        else
+        {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"申请成功，请勿重复申请", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            //    [hud setColor:[UIColor blackColor]];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            hud.userInteractionEnabled = YES;
+            [hud hideAnimated:YES afterDelay:2.f];
+            
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 
+}
+/*
+ post参数:
+ advert_id => 广告id
+ muid => 商户注册id
+ position => 广告位置
+ title => 商户广告标题
+ info => 商户广告内容
+ image_url => 商户广告图片
+ pay_type => 付费类型(time|click)
+ pay_content => 日期：天数，点击：次数
+ 
+ 返回参数:
+ result_code =>  [ "1"  (提交成功) ]
+ */
 
 @end

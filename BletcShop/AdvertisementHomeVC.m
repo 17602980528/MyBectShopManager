@@ -76,8 +76,8 @@
     return 0.01;
 }
 -(void)goNextVC{
-    //#import "SurroundingAreaVC.h"
     PublishAdvertSecondVC *publishAdvertSecondVC=[[PublishAdvertSecondVC alloc]init];
+    publishAdvertSecondVC.advertTitle=adverKindArr[selectedRow];
     [self.navigationController pushViewController:publishAdvertSecondVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {

@@ -7,19 +7,28 @@
 //
 
 #import "PublishTopScrollAdvertVC.h"
-#import "GoToPayForAdvertistTableVC.h"
+#import "SingleModel.h"
+#import "PayBaseCountOrTimeVC.h"
 @interface PublishTopScrollAdvertVC ()<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UILabel *limitDataLength;
     NSData *imageData;
     NSData *imageData2;
+    UIImageView *imageView;
+    UITextField *advertTitleTF;
+    UITextView *_textView;
+    NSInteger state;
+    SingleModel *model;
 }
+@property long long int date;//发送图片的时间戳
 @end
 
 @implementation PublishTopScrollAdvertVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    state=-1;
+    model=[SingleModel sharedManager];
     self.navigationItem.title=@"发布广告";
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"下一步" style:UIBarButtonItemStylePlain target:self action:@selector(goNextVC)];
     self.navigationItem.rightBarButtonItem=rightItem;
@@ -34,7 +43,7 @@
     advertTitle.font=[UIFont systemFontOfSize:16.0f];
     [topView addSubview:advertTitle];
     
-    UITextField *advertTitleTF=[[UITextField alloc]initWithFrame:CGRectMake(12, 35, SCREENWIDTH-24, 45)];
+    advertTitleTF=[[UITextField alloc]initWithFrame:CGRectMake(12, 35, SCREENWIDTH-24, 45)];
     advertTitleTF.delegate=self;
     advertTitleTF.backgroundColor=RGB(240, 240, 240);
     advertTitleTF.placeholder=@"  给你的广告起个响亮的名字吧           0/20字";
@@ -51,7 +60,7 @@
     addDescription.font=[UIFont systemFontOfSize:16.0f];
     [middleView addSubview:addDescription];
     
-    UITextView *_textView=[[UITextView alloc]initWithFrame:CGRectMake(12, 31 , SCREENWIDTH-24, 90)];
+    _textView=[[UITextView alloc]initWithFrame:CGRectMake(12, 31 , SCREENWIDTH-24, 90)];
     _textView.backgroundColor=RGB(240, 240, 240);
     _textView.font=[UIFont systemFontOfSize:15.0f];
     _textView.delegate=self;
@@ -69,12 +78,13 @@
     bottomView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:bottomView];
     
-    UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"adver_sample"]];
+    imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"adver_sample"]];
     imageView.frame=CGRectMake(27, 5, 90, 90);
     [bottomView addSubview:imageView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFiledEditChanged:)
                                                 name:@"UITextFieldTextDidChangeNotification" object:advertTitleTF];
+    
     UIButton *addPictureBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     addPictureBtn.frame=imageView.frame;
     [bottomView addSubview:addPictureBtn];
@@ -141,9 +151,26 @@
     }
 }
 -(void)goNextVC{
+    //加条件判断，广告信息－标题－描述－广告图片完善时跳下个页面
+    if ([advertTitleTF.text isEqualToString:@""]||[_textView.text isEqualToString:@""]||state==-1){
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text = NSLocalizedString(@"信息不完善，请检查", @"HUD message title");
+        hud.label.font = [UIFont systemFontOfSize:13];
+        //    [hud setColor:[UIColor blackColor]];
+        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+        hud.userInteractionEnabled = YES;
+        
+        [hud hideAnimated:YES afterDelay:2.f];
+        
+    }else{
+        model.advertSmallTitle=advertTitleTF.text;
+        model.advertDescription=_textView.text;
+        PayBaseCountOrTimeVC *VC=[[PayBaseCountOrTimeVC alloc]init];
+        [self.navigationController pushViewController:VC animated:YES];
+    }
     
-    GoToPayForAdvertistTableVC *VC=[[GoToPayForAdvertistTableVC alloc]init];
-    [self.navigationController pushViewController:VC animated:YES];
 }
 -(void)addPicture{
     NSLog(@"点击上传图片");
@@ -191,6 +218,13 @@
                     sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                     break;
             }
+        } else{
+            if (buttonIndex == 0) {
+                
+                return;
+            }else if (buttonIndex==1){
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
         }
         // 跳转到相机或相册页面
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
@@ -210,54 +244,41 @@
     [picker dismissViewControllerAnimated:YES completion:^{}];
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    /* 此处info 有六个值
-     * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
-     * UIImagePickerControllerOriginalImage;  // a UIImage 原始图片
-     * UIImagePickerControllerEditedImage;    // a UIImage 裁剪后图片
-     * UIImagePickerControllerCropRect;       // an NSValue (CGRect)
-     * UIImagePickerControllerMediaURL;       // an NSURL
-     * UIImagePickerControllerReferenceURL    // an NSURL that references an asset in the AssetsLibrary framework
-     * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
-     */
     // 保存图片至本地，方法见下文
     [self saveImage:image withName:@"currentImage.png"];
     
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
-    
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    [imageView setImage:savedImage];
     
     NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/upload/upload",BASEURL];
-    //[self.imageView setImage:savedImage];
-    
-    //self.backGroundImageView.image = savedImage;
-    
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
-    //self.date = (long long int)time;
+//    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+//    NSLog(@"%f",time);
+//    self.date = (long long int)time;
     
-    //NSString *nameValue = [[NSString alloc]initWithFormat:@"%@_%lld",[appdelegate.userInfoDic objectForKey:@"uuid"],self.date];
-    
-    
+    NSString *nameValue = [[NSString alloc]initWithFormat:@"%@",[appdelegate.shopInfoDic objectForKey:@"muid"]];
     NSData *img_Data = [NSData dataWithContentsOfFile:fullPath];
-    NSMutableDictionary *parmer = [NSMutableDictionary dictionary];
-    //[parmer setValue:nameValue forKey:@"name"];
-    [parmer setValue:@"head_image" forKey:@"type"];
-    [parmer setObject:img_Data forKey:@"file1"];
     
+    NSMutableDictionary *parmer = [NSMutableDictionary dictionary];
+    [parmer setValue:nameValue forKey:@"name"];
+    [parmer setValue:@"advert_top_image" forKey:@"type"];
+    [parmer setObject:img_Data forKey:@"file1"];
     [KKRequestDataService requestWithURL:url params:parmer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
+        NSLog(@"%@",result);
         if ([result[@"result_code"] isEqualToString:@"access"]) {
-            //            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            //            hud.mode = MBProgressHUDModeText;
-            //
-            //            hud.label.text = NSLocalizedString(@"上传成功", @"HUD message title");
-            //            hud.label.font = [UIFont systemFontOfSize:13];
-            //            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-            //            [hud hideAnimated:YES afterDelay:3.f];
-            //[self postUploadImageWithNameValue:nameValue];
+                        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                        hud.mode = MBProgressHUDModeText;
+            
+                        hud.label.text = NSLocalizedString(@"上传成功", @"HUD message title");
+                        hud.label.font = [UIFont systemFontOfSize:13];
+                        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                        [hud hideAnimated:YES afterDelay:3.f];
+            state=1;
+            model.advertImageUlr=[NSString stringWithFormat:@"%@.png",nameValue];
+
         }
         NSLog(@"result===%@", result);
-        
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         //        DebugLog(@"error-----%@",error.description);
@@ -267,53 +288,12 @@
         hud.label.text = NSLocalizedString(@"图片太大,上传失败", @"HUD message title");
         hud.label.font = [UIFont systemFontOfSize:13];
         hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-        [hud hideAnimated:YES afterDelay:4.f];
+        [hud hideAnimated:YES afterDelay:3.f];
         
     }];
-    
-    
+
 }
 
--(void)postUploadImageWithNameValue:(NSString*)nameValue
-{
-    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountSet",BASEURL];
-    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
-    nameValue =[NSString stringWithFormat:@"%@.png",nameValue];
-    [params setObject:@"headImage" forKey:@"type"];
-    [params setObject:nameValue forKey:@"para"];
-    NSLog(@"%@",params);
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
-     {
-         NSLog(@"result===%@", result);
-         
-         if ([result[@"result_code"] intValue]==1) {
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-             hud.mode = MBProgressHUDModeText;
-             
-             hud.label.text = NSLocalizedString(@"图片上传成功", @"HUD message title");
-             hud.label.font = [UIFont systemFontOfSize:13];
-             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-             [hud hideAnimated:YES afterDelay:3.f];
-             AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-             NSMutableDictionary *new_dic = [appdelegate.userInfoDic mutableCopy];
-             [new_dic setValue:result[@"para"] forKey:@"headimage"];
-             appdelegate.userInfoDic = new_dic;
-         }else
-         {
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-             hud.mode = MBProgressHUDModeText;
-             hud.label.text = NSLocalizedString(@"图片上传失败,请重试", @"HUD message title");
-             hud.label.font = [UIFont systemFontOfSize:13];
-             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-             [hud hideAnimated:YES afterDelay:3.f];
-         }
-         
-     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"%@", error);
-     }];
-}
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:^{}];

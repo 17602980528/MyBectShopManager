@@ -12,6 +12,7 @@
 #import "PublishAdvertSecondVC.h"
 #import "PublishTopScrollAdvertVC.h"
 #import "ValuePickerView.h"
+#import "SingleModel.h"
 @interface PublishAdvertSecondVC ()<UIPickerViewDelegate, UIPickerViewDataSource>
 {
     UIPickerView *picker;
@@ -24,18 +25,25 @@
     UILabel *areaLable;//活动地区
     NSMutableArray *activatyKindsArr;//活动类型数据源
     UILabel *advertPositionLable;
+    __block SingleModel *model;
+    
 }
 @property (nonatomic,strong)UIToolbar *toolbarCancelDone;
 @property (nonatomic, strong) ValuePickerView *pickerView;
 @property (nonatomic,strong)UILabel *advertStyleLable;
+@property (nonatomic,copy)NSString *stateStr;
 @end
 
 @implementation PublishAdvertSecondVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _stateStr=@"false";
     self.navigationItem.title=@"发布广告";
     self.view.backgroundColor=RGB(238, 238, 238);
+    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    model=[SingleModel sharedManager];
+    model.shopName=delegate.shopInfoDic[@"store"];
     
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"下一步" style:UIBarButtonItemStylePlain target:self action:@selector(goNextVC)];
     self.navigationItem.rightBarButtonItem=rightItem;
@@ -128,9 +136,13 @@
             tempSelf.pickerView.valueDidSelect = ^(NSString *value){
                 NSArray * arr =[value componentsSeparatedByString:@"/"];
                 NSString * newValue=arr[0];
-                tempSelf.advertStyleLable.text=newValue;
-                NSString *advertID=[[value componentsSeparatedByString:@"&"] lastObject];
+                NSString *realValue=[[newValue componentsSeparatedByString:@"&"]firstObject];
+                tempSelf.advertStyleLable.text=realValue;
+                
+                NSString *advertID=[[newValue componentsSeparatedByString:@"&"] lastObject];
+                NSLog(@"%@",advertID);
                 //获取广告位
+                model.advertID=advertID;
                 [tempSelf accessAdvertPositionById:advertID];
             };
             
@@ -289,7 +301,7 @@
             for (int i=0; i<[result count]; i++) {
                 NSString *title = result[i][@"title"];
                 NSString *newTitle=[NSString stringWithFormat:@"%@&%@",title,result[i][@"id"]];
-                [activatyKindsArr addObject:title];
+                [activatyKindsArr addObject:newTitle];
             }
             tempSelf.pickerView.dataSource=activatyKindsArr;
         }
@@ -302,14 +314,17 @@
 
 }
 -(void)accessAdvertPositionById:(NSString *)advertID{
+    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/getPosition",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:advertID forKey:@"advert_id"];
-
+    [params setObject:delegate.shopInfoDic[@"muid"] forKey:@"muid"];
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"result===%@",result);
         if (result) {
             advertPositionLable.text=[NSString stringWithFormat:@"%@",result[@"current_position"]];
+            _stateStr=result[@"check"];
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -477,8 +492,25 @@
         
         [hud hideAnimated:YES afterDelay:2.f];
     }else{
-        PublishTopScrollAdvertVC *nextVC=[[PublishTopScrollAdvertVC alloc]init];
-        [self.navigationController pushViewController:nextVC animated:YES];
+        model.advertTitle=self.advertTitle;
+        model.advertArea=areaLable.text;
+        model.advertKind=_advertStyleLable.text;
+        model.advertPosition=advertPositionLable.text;
+        if ([_stateStr isEqualToString:@"true"]) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"您暂不能申请该活动广告位", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            //    [hud setColor:[UIColor blackColor]];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            hud.userInteractionEnabled = YES;
+            [hud hideAnimated:YES afterDelay:3.0f];
+            
+        }else{
+            PublishTopScrollAdvertVC *nextVC=[[PublishTopScrollAdvertVC alloc]init];
+            [self.navigationController pushViewController:nextVC animated:YES];
+        }
+        
     }
     
 }
