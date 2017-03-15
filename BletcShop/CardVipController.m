@@ -110,6 +110,12 @@
             [self.Cardtable reloadData];
         }
             break;
+        case 670:
+        {
+            _dataArray=_shareCard_A;
+            [self.Cardtable reloadData];
+        }
+            break;
         default:
             break;
     }

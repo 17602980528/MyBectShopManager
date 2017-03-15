@@ -151,7 +151,7 @@
     }
 }
 -(void)goNextVC{
-    //加条件判断，广告信息－标题－描述－广告图片完善时跳下个页面
+//    //加条件判断，广告信息－标题－描述－广告图片完善时跳下个页面
     if ([advertTitleTF.text isEqualToString:@""]||[_textView.text isEqualToString:@""]||state==-1){
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
