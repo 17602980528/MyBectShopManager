@@ -161,9 +161,16 @@
     
 }
 
--(void)reloadRightData{
+-(void)reloadRightData:(DOPIndexPath*)indexPath{
+    
+    BOOL haveItem = [self confiMenuWithSelectRow:indexPath.row];
 
+    BOOL isClickHaveItemValid = self.isClickHaveItemValid ? YES : haveItem;
 
+    if (isClickHaveItemValid && _delegate && [_delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {
+//        NSLog(@"=======_leftTableView==");
+                   [self.rightTableView reloadData];
+    }
     
 }
 
@@ -760,7 +767,7 @@
         if (isClickHaveItemValid && _delegate && [_delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {
             [self.delegate menu:self didSelectRowAtIndexPath:[DOPIndexPath indexPathWithCol:_currentSelectedMenudIndex row:indexPath.row]];
             NSLog(@"=======_leftTableView==");
-            [self.rightTableView reloadData];
+//            [self.rightTableView reloadData];
         } else {
             //TODO: delegate is nil
         }

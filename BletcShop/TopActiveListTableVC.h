@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TopActiveListTableVC : UIViewController
+@property (nonatomic,copy)NSString *activityId;// <#Description#>
 
 @end

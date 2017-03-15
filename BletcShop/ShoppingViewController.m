@@ -526,7 +526,7 @@
             ProvinceModel *m = _dataSourceProvinceArray[indexPath.row];
             self.ereaString = m.name;
             
-            [self getcityDataById:m.code];
+            [self getcityDataById:m.code AndIndexPath:indexPath];
         }
     }
     self.indexss=1;
@@ -740,78 +740,53 @@
     if (self.dataSourceProvinceArray.count!=0) {
         ProvinceModel *M = [self.dataSourceProvinceArray firstObject];
         
-        [self getcityDataById:M.code];
+        [self getcityDataById:M.code AndIndexPath:nil];
 
     }
 }
 
 //getcityDataById:这个方法里是网络请求数据的解析市数据信息
-- (void)getcityDataById:(NSString *)proID
+- (void)getcityDataById:(NSString *)proID AndIndexPath:(DOPIndexPath*)indexPath
 {
 
     
-//    NSString *url = [NSString stringWithFormat:@"%@Extra/address/getStreet",BASEURL];;
-//    
-//    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
-//    [parame setValue:proID forKey:@"district_id"];
+    NSString *url = [NSString stringWithFormat:@"%@Extra/address/getStreet",BASEURL];;
     
-//    NSLog(@"url====+%@=====%@",url,parame);
-//    [KKRequestDataService requestWithURL:url params:parame httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-//        
-//        
-////        NSLog(@"----%@",result);
-//        //遍历当前数组给madel赋值
-//        [self.dataSourceCityArray removeAllObjects];
-//        
-//     
-//        
-//        
-//            for (NSDictionary *diction in result)
-//            {
-//                CityModel *model = [[CityModel alloc] init];
-//                [model setValuesForKeysWithDictionary:diction];
-//                [self.dataSourceCityArray addObject:model];
-//            }
-//
-//            
-////        [self.menu reloadData];
-//        
-//        
-//        NSLog(@"=========%ld",self.dataSourceCityArray.count);
-//        
-//        
-//        
-//    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"error-----%@",error);
-//    }];
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    [parame setValue:proID forKey:@"district_id"];
+    
+    NSLog(@"url====+%@=====%@",url,parame);
+    [KKRequestDataService requestWithURL:url params:parame httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        
+//        NSLog(@"----%@",result);
+        //遍历当前数组给madel赋值
+        [self.dataSourceCityArray removeAllObjects];
+        
+     
+        
+        
+            for (NSDictionary *diction in result)
+            {
+                CityModel *model = [[CityModel alloc] init];
+                [model setValuesForKeysWithDictionary:diction];
+                [self.dataSourceCityArray addObject:model];
+            }
+
+        if (indexPath) {
+            [self.menu reloadRightData:indexPath];
+
+        }
+        
+        NSLog(@"=========%ld",self.dataSourceCityArray.count);
+        
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error-----%@",error);
+    }];
 
     
-    NSString *urlString = [NSString stringWithFormat:@"%@Extra/address/getStreet",BASEURL];
-    
-    NSURL *URL = [NSURL URLWithString:urlString];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-    [request setHTTPMethod:@"POST"];
-    NSString *str = [NSString stringWithFormat:@"district_id=%@",proID];
-    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-    
-    [request setHTTPBody:data];
-    
-    NSData *receiced = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSArray *array = [NSJSONSerialization JSONObjectWithData:receiced options:NSJSONReadingMutableContainers error:nil];
-   
-    [self.dataSourceCityArray removeAllObjects];
-    
-    
-    
-    
-    for (NSDictionary *diction in array)
-    {
-        CityModel *model = [[CityModel alloc] init];
-        [model setValuesForKeysWithDictionary:diction];
-        [self.dataSourceCityArray addObject:model];
-    }
-    
-
     
     
 }
