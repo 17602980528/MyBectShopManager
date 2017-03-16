@@ -10,6 +10,7 @@
 #import "ShaperView.h"
 #import "UIImageView+WebCache.h"
 #import "SweetNoticeVC.h"
+#import "MyPch.pch"
 //#import "BindCustomView.h"
 @interface CouponIntroduceVC ()
 //{

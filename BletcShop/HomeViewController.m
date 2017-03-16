@@ -185,7 +185,30 @@
 //    [KCURRENTCITYINFODEFAULTS setObject:@"西安市" forKey:@"locationCity"];
 //    [KCURRENTCITYINFODEFAULTS setObject:@"西安市" forKey:@"currentcity"];
 //    
-//    
+//
+    
+    [self.manager currentCityDic:@"西安市" currentCityDic:^(NSDictionary *dic) {
+        
+        [KCURRENTCITYINFODEFAULTS setObject:dic forKey:@"locationCityDic"];
+        
+        [KCURRENTCITYINFODEFAULTS removeObjectForKey:@"currentEareDic"];
+        
+        [KCURRENTCITYINFODEFAULTS removeObjectForKey:@"currentCityDic"];
+        
+        
+        NSLog(@"TARGET_IPHONE_SIMULATOR------%@",dic);
+        
+        [self.manager areaData:dic[@"code"] areaData:^(NSMutableArray *areaData) {
+            
+            
+            [KCURRENTCITYINFODEFAULTS setObject:areaData forKey:@"currentEreaList"];
+            
+            
+            
+        }];
+        
+    }];
+
     
 #elif TARGET_OS_IPHONE
     
