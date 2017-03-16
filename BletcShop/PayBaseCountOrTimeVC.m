@@ -8,7 +8,6 @@
 
 #import "PayBaseCountOrTimeVC.h"
 #import "PayBaseClickCountVC.h"
-#import "PayBaseOnlineDaysVC.h"
 #import "SingleModel.h"
 @interface PayBaseCountOrTimeVC ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -86,8 +85,6 @@
     }else if (selectedRow==1){
         //按天数算
         model.baseOnCountsOrTime=@"time";
-//        PayBaseOnlineDaysVC *VC=[[PayBaseOnlineDaysVC alloc]init];
-//        [self.navigationController pushViewController:VC animated:YES];
         PayBaseClickCountVC *VC=[[PayBaseClickCountVC alloc]init];
         [self.navigationController pushViewController:VC animated:YES];
     }

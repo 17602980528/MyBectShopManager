@@ -41,7 +41,6 @@
 		1829884C1E727DF200164F32 /* SweetNoticeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1829884A1E727DF200164F32 /* SweetNoticeVC.xib */; };
 		182988501E778EF100164F32 /* PayBaseCountOrTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1829884F1E778EF100164F32 /* PayBaseCountOrTimeVC.m */; };
 		182988571E7794FE00164F32 /* PayBaseClickCountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182988561E7794FE00164F32 /* PayBaseClickCountVC.m */; };
-		1829885A1E77958E00164F32 /* PayBaseOnlineDaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182988591E77958E00164F32 /* PayBaseOnlineDaysVC.m */; };
 		1829885E1E77D1CA00164F32 /* SingleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1829885D1E77D1CA00164F32 /* SingleModel.m */; };
 		182FAAA61D502FAD0018F872 /* custom3.png in Resources */ = {isa = PBXBuildFile; fileRef = 182FAAA51D502FAD0018F872 /* custom3.png */; };
 		18302A2A1DAC8AE200E6EF8C /* ShopRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */; };
@@ -1157,8 +1156,6 @@
 		1829884F1E778EF100164F32 /* PayBaseCountOrTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayBaseCountOrTimeVC.m; sourceTree = "<group>"; };
 		182988551E7794FE00164F32 /* PayBaseClickCountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayBaseClickCountVC.h; sourceTree = "<group>"; };
 		182988561E7794FE00164F32 /* PayBaseClickCountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayBaseClickCountVC.m; sourceTree = "<group>"; };
-		182988581E77958E00164F32 /* PayBaseOnlineDaysVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayBaseOnlineDaysVC.h; sourceTree = "<group>"; };
-		182988591E77958E00164F32 /* PayBaseOnlineDaysVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayBaseOnlineDaysVC.m; sourceTree = "<group>"; };
 		1829885C1E77D1CA00164F32 /* SingleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleModel.h; sourceTree = "<group>"; };
 		1829885D1E77D1CA00164F32 /* SingleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleModel.m; sourceTree = "<group>"; };
 		182FAAA51D502FAD0018F872 /* custom3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom3.png; sourceTree = "<group>"; };
@@ -3238,28 +3235,18 @@
 			children = (
 				1829884E1E778EF100164F32 /* PayBaseCountOrTimeVC.h */,
 				1829884F1E778EF100164F32 /* PayBaseCountOrTimeVC.m */,
-				182988531E77945D00164F32 /* 按点击量算(共用了) */,
-				182988541E77946D00164F32 /* 按上线天数算(未用) */,
+				182988531E77945D00164F32 /* 按点击量/天数算(共用了) */,
 			);
 			name = "选按时间&按点击量";
 			sourceTree = "<group>";
 		};
-		182988531E77945D00164F32 /* 按点击量算(共用了) */ = {
+		182988531E77945D00164F32 /* 按点击量/天数算(共用了) */ = {
 			isa = PBXGroup;
 			children = (
 				182988551E7794FE00164F32 /* PayBaseClickCountVC.h */,
 				182988561E7794FE00164F32 /* PayBaseClickCountVC.m */,
 			);
-			name = "按点击量算(共用了)";
-			sourceTree = "<group>";
-		};
-		182988541E77946D00164F32 /* 按上线天数算(未用) */ = {
-			isa = PBXGroup;
-			children = (
-				182988581E77958E00164F32 /* PayBaseOnlineDaysVC.h */,
-				182988591E77958E00164F32 /* PayBaseOnlineDaysVC.m */,
-			);
-			name = "按上线天数算(未用)";
+			name = "按点击量/天数算(共用了)";
 			sourceTree = "<group>";
 		};
 		1829885B1E77C39B00164F32 /* 提交广告申请页 */ = {
@@ -7035,7 +7022,6 @@
 				079387101C561FBA0021B385 /* Mygroup.m in Sources */,
 				D992925C1D8FB89500103914 /* ChargeToAccountVC.m in Sources */,
 				D9853F7E1DD477A00028BF94 /* ActivityModel.m in Sources */,
-				1829885A1E77958E00164F32 /* PayBaseOnlineDaysVC.m in Sources */,
 				1CDA9E171C5A15B000DFE518 /* MyProtuctsController.m in Sources */,
 				180D872D1E5ABBBF00E7FFB4 /* AddCouponVC.m in Sources */,
 				D98E5C261E5156D7009D56BF /* LoginQuestionViewController.m in Sources */,
