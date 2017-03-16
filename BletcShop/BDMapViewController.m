@@ -64,6 +64,10 @@
     self.mapView.showsUserLocation = YES;
     // 2.更新用户最新位置到地图上
     [self.mapView updateLocationData:userLocation];
+    
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+
+    appdelegate.userLocation = userLocation;
     // 3.设置中心 为 用户位置
     CLLocationCoordinate2D loc = {_latitude, _longitude};
     CLLocationCoordinate2D center = loc;
@@ -137,8 +141,9 @@
     
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         CLLocationCoordinate2D dstLoc;
-        dstLoc.longitude = [[self.infoArray objectAtIndex:5] doubleValue];
-        dstLoc.latitude =[[self.infoArray objectAtIndex:6] doubleValue];
+        dstLoc.longitude = _longitude;
+        dstLoc.latitude =_latitude;
+    
         [self NavigateFrom:appdelegate.userLocation.location.coordinate to:dstLoc];
 }
 
@@ -172,10 +177,10 @@
 }
 - (void)openBaiDuMap{
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:终点&mode=driving",appdelegate.userLocation.location.coordinate.latitude, appdelegate.userLocation.location.coordinate.longitude,[[self.infoArray objectAtIndex:6] doubleValue],[[self.infoArray objectAtIndex:5] doubleValue]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
+    NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:终点&mode=driving",appdelegate.userLocation.location.coordinate.latitude, appdelegate.userLocation.location.coordinate.longitude,_latitude,_longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
     
+    printf("urlString======%s",[urlString UTF8String]);
     
-    NSLog(@"---%@",urlString);
     
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlString]];
     

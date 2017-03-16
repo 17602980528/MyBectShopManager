@@ -21,11 +21,9 @@
  *  定为服务
  */
 
-@property(nonatomic,strong)NSMutableArray *infoArray;
 
-@property (nonatomic , strong) NSMutableDictionary *muta_dic;// 商户信息
 
-@property(nonatomic,strong)NSMutableDictionary *infoDic;
+@property(nonatomic,strong)NSMutableDictionary *infoDic;// 商户信息
 
 
 
