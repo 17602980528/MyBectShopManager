@@ -80,7 +80,7 @@
         DebugLog(@"result---%@",result);
         if ([result count]==0) {
             
-//          [self initNoneActiveView];
+          [self initNoneActiveView];
 
         }else{
             NSArray *arr = (NSArray*)result;

@@ -175,10 +175,10 @@
     
     CGSize size = [UILabel getSizeWithLab:huiyuanLabel andMaxSize:CGSizeMake(1000, 1000)];
     
-   
+   NSDictionary *dic = self.data_A[section];
     
     UILabel *huiyuanText = [[UILabel alloc]initWithFrame:CGRectMake(huiyuanLabel.left +size.width+10, line.bottom, SCREENWIDTH-100, 35)];
-    huiyuanText.text = @"西安市高新区富鱼路";
+    huiyuanText.text = dic[@"datetime"];//@"西安市高新区富鱼路";
     huiyuanText.textAlignment = NSTextAlignmentLeft;
     huiyuanText.font = [UIFont systemFontOfSize:15];
     huiyuanText.textColor = RGB(51,51,51);
@@ -197,7 +197,7 @@
 {
     static NSString *cellIndentifier = @"cellIndentifier";
     // 定义唯一标识
-    // 通过indexPath创建cell实例 每一个cell都是单独的
+    // 通过indexPath创建cell实例 每一个cell都是单独的:hpuvuq
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
     
     
