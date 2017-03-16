@@ -28,10 +28,13 @@
 #import "PointRuleViewController.h"
 #import "EndOrBeginningViewController.h"
 
+
 #import "UIButton+WebCache.h"
 
 #import "ShareViewController.h"
 #import "LZDBASEViewController.h"
+
+#import "LZDUserInfoVC.h"
 
 
 //#import "UMSocial.h"
@@ -401,9 +404,13 @@
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     if (appdelegate.IsLogin) {
-        UserInfoViewController *userInfoVC = [[UserInfoViewController alloc]init];
         
-        [self.navigationController pushViewController:userInfoVC animated:YES];;
+        LZDUserInfoVC *VC = [[LZDUserInfoVC alloc]init];
+        
+
+//        UserInfoViewController *userInfoVC = [[UserInfoViewController alloc]init];
+        
+        [self.navigationController pushViewController:VC animated:YES];;
     }
     else{
         LandingController *LandVC = [[LandingController alloc]init];

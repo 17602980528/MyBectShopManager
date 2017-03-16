@@ -754,6 +754,16 @@
 		D98787331E274FDE00C7A828 /* NewMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D98787321E274FDE00C7A828 /* NewMessageVC.m */; };
 		D98787371E27517900C7A828 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D98787351E27517900C7A828 /* NewMessageCell.m */; };
 		D98787381E27517900C7A828 /* NewMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D98787361E27517900C7A828 /* NewMessageCell.xib */; };
+		D987BB201E78ED9A008AE24D /* LZDUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D987BB1E1E78ED9A008AE24D /* LZDUserInfoVC.m */; };
+		D987BB211E78ED9A008AE24D /* LZDUserInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D987BB1F1E78ED9A008AE24D /* LZDUserInfoVC.xib */; };
+		D987BB261E790B58008AE24D /* UserInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D987BB241E790B58008AE24D /* UserInfoHeaderCell.m */; };
+		D987BB271E790B59008AE24D /* UserInfoHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D987BB251E790B58008AE24D /* UserInfoHeaderCell.xib */; };
+		D987BB2B1E790CD7008AE24D /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D987BB291E790CD7008AE24D /* UserInfoCell.m */; };
+		D987BB2C1E790CD7008AE24D /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D987BB2A1E790CD7008AE24D /* UserInfoCell.xib */; };
+		D987BB301E791FAC008AE24D /* ProfessionEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D987BB2E1E791FAC008AE24D /* ProfessionEditVC.m */; };
+		D987BB311E791FAC008AE24D /* ProfessionEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D987BB2F1E791FAC008AE24D /* ProfessionEditVC.xib */; };
+		D987BB361E792C8E008AE24D /* UserInfoEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D987BB341E792C8E008AE24D /* UserInfoEditVC.m */; };
+		D987BB371E792C8E008AE24D /* UserInfoEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D987BB351E792C8E008AE24D /* UserInfoEditVC.xib */; };
 		D98B7B691DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D98B7B681DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.m */; };
 		D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D98E5B8E1E5150FC009D56BF /* GetDiscountCouponVC.m */; };
 		D98E5B901E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D98E5B8E1E5150FC009D56BF /* GetDiscountCouponVC.m */; };
@@ -2254,6 +2264,21 @@
 		D98787341E27517900C7A828 /* NewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageCell.h; sourceTree = "<group>"; };
 		D98787351E27517900C7A828 /* NewMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageCell.m; sourceTree = "<group>"; };
 		D98787361E27517900C7A828 /* NewMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMessageCell.xib; sourceTree = "<group>"; };
+		D987BB1D1E78ED9A008AE24D /* LZDUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZDUserInfoVC.h; sourceTree = "<group>"; };
+		D987BB1E1E78ED9A008AE24D /* LZDUserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZDUserInfoVC.m; sourceTree = "<group>"; };
+		D987BB1F1E78ED9A008AE24D /* LZDUserInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LZDUserInfoVC.xib; sourceTree = "<group>"; };
+		D987BB231E790B58008AE24D /* UserInfoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoHeaderCell.h; sourceTree = "<group>"; };
+		D987BB241E790B58008AE24D /* UserInfoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoHeaderCell.m; sourceTree = "<group>"; };
+		D987BB251E790B58008AE24D /* UserInfoHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoHeaderCell.xib; sourceTree = "<group>"; };
+		D987BB281E790CD7008AE24D /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
+		D987BB291E790CD7008AE24D /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
+		D987BB2A1E790CD7008AE24D /* UserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoCell.xib; sourceTree = "<group>"; };
+		D987BB2D1E791FAC008AE24D /* ProfessionEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionEditVC.h; sourceTree = "<group>"; };
+		D987BB2E1E791FAC008AE24D /* ProfessionEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionEditVC.m; sourceTree = "<group>"; };
+		D987BB2F1E791FAC008AE24D /* ProfessionEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfessionEditVC.xib; sourceTree = "<group>"; };
+		D987BB331E792C8E008AE24D /* UserInfoEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEditVC.h; sourceTree = "<group>"; };
+		D987BB341E792C8E008AE24D /* UserInfoEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEditVC.m; sourceTree = "<group>"; };
+		D987BB351E792C8E008AE24D /* UserInfoEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoEditVC.xib; sourceTree = "<group>"; };
 		D98B7B671DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReveiveMoneyQRInfoVC.h; sourceTree = "<group>"; };
 		D98B7B681DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReveiveMoneyQRInfoVC.m; sourceTree = "<group>"; };
 		D98E5B8D1E5150FC009D56BF /* GetDiscountCouponVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetDiscountCouponVC.h; path = BletcShop/GetDiscountCouponVC.h; sourceTree = SOURCE_ROOT; };
@@ -5168,6 +5193,11 @@
 				18FCAD461E56A16800FF57D0 /* BindCustomView.h */,
 				18FCAD471E56A16800FF57D0 /* BindCustomView.m */,
 				D95869371E4DA4EE00E91A47 /* ResetPhoneNextVC.xib */,
+				D987BB1D1E78ED9A008AE24D /* LZDUserInfoVC.h */,
+				D987BB1E1E78ED9A008AE24D /* LZDUserInfoVC.m */,
+				D987BB1F1E78ED9A008AE24D /* LZDUserInfoVC.xib */,
+				D987BB321E792C3D008AE24D /* 修改编辑信息 */,
+				D987BB221E790B28008AE24D /* 用户信息cell */,
 			);
 			name = "用户信息";
 			sourceTree = "<group>";
@@ -5243,6 +5273,32 @@
 				D98787361E27517900C7A828 /* NewMessageCell.xib */,
 			);
 			name = "消息";
+			sourceTree = "<group>";
+		};
+		D987BB221E790B28008AE24D /* 用户信息cell */ = {
+			isa = PBXGroup;
+			children = (
+				D987BB231E790B58008AE24D /* UserInfoHeaderCell.h */,
+				D987BB241E790B58008AE24D /* UserInfoHeaderCell.m */,
+				D987BB251E790B58008AE24D /* UserInfoHeaderCell.xib */,
+				D987BB281E790CD7008AE24D /* UserInfoCell.h */,
+				D987BB291E790CD7008AE24D /* UserInfoCell.m */,
+				D987BB2A1E790CD7008AE24D /* UserInfoCell.xib */,
+			);
+			name = "用户信息cell";
+			sourceTree = "<group>";
+		};
+		D987BB321E792C3D008AE24D /* 修改编辑信息 */ = {
+			isa = PBXGroup;
+			children = (
+				D987BB2D1E791FAC008AE24D /* ProfessionEditVC.h */,
+				D987BB2E1E791FAC008AE24D /* ProfessionEditVC.m */,
+				D987BB2F1E791FAC008AE24D /* ProfessionEditVC.xib */,
+				D987BB331E792C8E008AE24D /* UserInfoEditVC.h */,
+				D987BB341E792C8E008AE24D /* UserInfoEditVC.m */,
+				D987BB351E792C8E008AE24D /* UserInfoEditVC.xib */,
+			);
+			name = "修改编辑信息";
 			sourceTree = "<group>";
 		};
 		D98E5BDE1E515210009D56BF /* Masonry */ = {
@@ -6301,6 +6357,7 @@
 				18A4B6F31D33933B00EFBCC1 /* 椭圆-01.png in Resources */,
 				1836B8411E559DD700B587A6 /* Active_top4.jpg in Resources */,
 				D9BA5F041D7564090067E7A2 /* FriendRequest.plist in Resources */,
+				D987BB211E78ED9A008AE24D /* LZDUserInfoVC.xib in Resources */,
 				D95BAE4E1D542FD500ED0CDC /* award_04.png in Resources */,
 				D981FD061E2616080026E4B2 /* 适配iOS9+系统.html in Resources */,
 				D95BAE5B1D542FD500ED0CDC /* award_17.png in Resources */,
@@ -6355,6 +6412,7 @@
 				D93C0D5D1D251E7B001A1AC1 /* 小标-12.png in Resources */,
 				18D7C48E1D5B12BA00AEF545 /* mohu-10.png in Resources */,
 				D92302601D1528BB008FB9A9 /* entrance_default.png in Resources */,
+				D987BB2C1E790CD7008AE24D /* UserInfoCell.xib in Resources */,
 				D9FF0D9D1D53304C00443312 /* 图标-15new.png in Resources */,
 				D98E5C281E5156D7009D56BF /* LoginQuestionViewController.xib in Resources */,
 				D9ED52021D2A461800267729 /* add_yellow.png in Resources */,
@@ -6393,6 +6451,7 @@
 				D9E28FC51D2F75A9004514DF /* icon2.png in Resources */,
 				D9FF0D9B1D53304C00443312 /* 图标-13new.png in Resources */,
 				D947E4631D7D3BBA00F9FEE8 /* 聊天键盘-icon-选择照片-点击@2x.png in Resources */,
+				D987BB311E791FAC008AE24D /* ProfessionEditVC.xib in Resources */,
 				D947E4501D7D0EB100F9FEE8 /* group_participant_add@2x.png in Resources */,
 				D98011D41DF7B0DD00CE09CA /* ErrorQRViewController.xib in Resources */,
 				1C9E824A1C6058550007BF02 /* erweima@2x.png in Resources */,
@@ -6568,6 +6627,7 @@
 				D95F032B1DD9841500F9DC2F /* Unselected.png in Resources */,
 				D9D50D881D879B9900A5E469 /* emotion@2x.png in Resources */,
 				18EB36B81D4B4B5B0087CE1A /* 未标题-1-03.png in Resources */,
+				D987BB271E790B59008AE24D /* UserInfoHeaderCell.xib in Resources */,
 				D9ED52061D2A467700267729 /* grey_add.png in Resources */,
 				D981FD051E2616080026E4B2 /* UShare进阶.html in Resources */,
 				D9AB253E1D88E4ED000E9288 /* VoiceSearchFeedback016@2x.png in Resources */,
@@ -6658,6 +6718,7 @@
 				D9B57F181D337DD700E9654A /* areaAll.plist in Resources */,
 				D9AB253A1D88E4ED000E9288 /* VoiceSearchFeedback012@2x.png in Resources */,
 				D94DF2521CAE0AA4000D5B69 /* star_highlighted.png in Resources */,
+				D987BB371E792C8E008AE24D /* UserInfoEditVC.xib in Resources */,
 				18D7C48A1D5B12BA00AEF545 /* mohu-06.png in Resources */,
 				1CF6E4701C61DDD10001159C /* cheshi.png in Resources */,
 				D9FF0D741D531E8100443312 /* 图标-001.png in Resources */,
@@ -6922,6 +6983,7 @@
 				D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */,
 				18F031F11E5EB8C100ACD261 /* ConvertRecordVC.m in Sources */,
 				D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */,
+				D987BB261E790B58008AE24D /* UserInfoHeaderCell.m in Sources */,
 				D9B3A5A11D74255700F3F27E /* AdView.m in Sources */,
 				0793870D1C561D5E0021B385 /* Myitem.m in Sources */,
 				D95A876D1E728ADF00BDAC75 /* JFCityCollectionFlowLayout.m in Sources */,
@@ -6991,6 +7053,7 @@
 				18302A2A1DAC8AE200E6EF8C /* ShopRegisterController.m in Sources */,
 				D98E5C181E51524D009D56BF /* SRVideoBottomBar.m in Sources */,
 				D9B3A5AB1D74255700F3F27E /* EMSDImageCache.m in Sources */,
+				D987BB301E791FAC008AE24D /* ProfessionEditVC.m in Sources */,
 				079386811C55B5CA0021B385 /* main.m in Sources */,
 				189411411D8050BB00314E11 /* PictureDetailViewController.m in Sources */,
 				1CE8F32B1C5F3C570004F52C /* ProtuctCell.m in Sources */,
@@ -7052,6 +7115,7 @@
 				D968465A1CC9FCAB00146956 /* VipManagerTableViewCell.m in Sources */,
 				D94432C01D18FC6800B45135 /* UserProtocolViewController.m in Sources */,
 				D9A8ABE61E02939A00D4597F /* NewShopIntroduceViewController.m in Sources */,
+				D987BB201E78ED9A008AE24D /* LZDUserInfoVC.m in Sources */,
 				D9A06B5A1D8679C30037795B /* EMAudioPlayerUtil.m in Sources */,
 				D925E6451CC60F680020CEC7 /* AdvertViewController.m in Sources */,
 				D9F3A3CE1D7959B700F06E0C /* PublicGroupDetailViewController.m in Sources */,
@@ -7162,6 +7226,7 @@
 				079386B41C55B8750021B385 /* MainTabBarController.m in Sources */,
 				D98E5C021E515210009D56BF /* MASViewAttribute.m in Sources */,
 				1A4173C01D787C1500A70601 /* EMChooseViewController.m in Sources */,
+				D987BB361E792C8E008AE24D /* UserInfoEditVC.m in Sources */,
 				D9BB4DDE1E05019400971BCC /* DelayScanVC.m in Sources */,
 				D98533341DDE9B21004E1E6F /* NameSignViewController.m in Sources */,
 				D9B3A5BA1D74255700F3F27E /* UIView+EMWebCacheOperation.m in Sources */,
@@ -7184,6 +7249,7 @@
 				1CDCCD1E1C7594040094E70D /* AFURLResponseSerialization.m in Sources */,
 				D95353D11E5C27680004E42C /* GoToPayForAdvertistTableVC.m in Sources */,
 				D9B3A5B81D74255700F3F27E /* UIImageView+EMHighlightedWebCache.m in Sources */,
+				D987BB2B1E790CD7008AE24D /* UserInfoCell.m in Sources */,
 				1A4173AE1D78717E00A70601 /* LZDTextView.m in Sources */,
 				D9B3A5AA1D74255700F3F27E /* DACircularProgressView.m in Sources */,
 				D9EE55651DC9CBF10024C830 /* ShareCardCell.m in Sources */,

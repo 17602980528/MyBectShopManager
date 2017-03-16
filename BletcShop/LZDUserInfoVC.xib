@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LZDUserInfoVC">
+            <connections>
+                <outlet property="footView" destination="58P-ky-sEd" id="cek-mN-3hE"/>
+                <outlet property="tabView" destination="IcG-Kh-x7a" id="TM2-dC-P7b"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="IcG-Kh-x7a">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="zFy-6l-Co8"/>
+                        <outlet property="delegate" destination="-1" id="Fk1-To-8dp"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="IcG-Kh-x7a" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="05e-1h-IYc"/>
+                <constraint firstAttribute="trailing" secondItem="IcG-Kh-x7a" secondAttribute="trailing" id="CBg-gQ-Eld"/>
+                <constraint firstItem="IcG-Kh-x7a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MTm-5h-vI1"/>
+                <constraint firstAttribute="bottom" secondItem="IcG-Kh-x7a" secondAttribute="bottom" id="Px1-v2-fAV"/>
+            </constraints>
+            <point key="canvasLocation" x="-165" y="144"/>
+        </view>
+        <view contentMode="scaleToFill" id="58P-ky-sEd">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPo-7M-gYw">
+                    <rect key="frame" x="0.0" y="10" width="375" height="40"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Duv-FM-HhW"/>
+                    </constraints>
+                    <state key="normal" title="退出当前账号">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="logOut:" destination="-1" eventType="touchUpInside" id="n4Y-Gs-IYA"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="UPo-7M-gYw" secondAttribute="trailing" id="UMG-9r-JUw"/>
+                <constraint firstItem="UPo-7M-gYw" firstAttribute="top" secondItem="58P-ky-sEd" secondAttribute="top" constant="10" id="boz-gA-wmb"/>
+                <constraint firstItem="UPo-7M-gYw" firstAttribute="leading" secondItem="58P-ky-sEd" secondAttribute="leading" id="mVb-Ux-Bdm"/>
+                <constraint firstAttribute="bottom" secondItem="UPo-7M-gYw" secondAttribute="bottom" constant="10" id="oRG-zb-csY"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="123" y="-542"/>
+        </view>
+    </objects>
+</document>
