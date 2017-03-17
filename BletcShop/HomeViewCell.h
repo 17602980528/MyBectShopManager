@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HomeShopModel.h"
 
-static NSString *identifier = @"cellID";
+static NSString *identifier = @"HomeViewCellID";
 
 @interface HomeViewCell : UITableViewCell
 

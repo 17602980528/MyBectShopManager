@@ -12,12 +12,18 @@
 #import "NewChangePsWordViewController.h"
 
 #import "ResetPhoneViewController.h"
+#import "UserInfoEditVC.h"
 @interface ShopUserInfoViewController ()
 
 @end
 
 @implementation ShopUserInfoViewController
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.Mytable reloadData];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -98,6 +104,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
     }
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.section==0) {
@@ -119,7 +126,6 @@
             descripLabel.font = [UIFont systemFontOfSize:16];
             descripLabel.tag = 1000;
             AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-        
             if (indexPath.row==0) {
                 [cell setAccessoryType:UITableViewCellAccessoryNone];
                 descripLabel.text = appdelegate.shopInfoDic[@"bname"];
@@ -127,6 +133,8 @@
                 [cell setAccessoryType:UITableViewCellAccessoryNone];
                 descripLabel.text = appdelegate.shopInfoDic[@"store"];
             }else if (indexPath.row==2) {
+                NSLog(@"shopInfoDic======%@",appdelegate.shopInfoDic);
+
 //                [cell setAccessoryType:UITableViewCellAccessoryNone];
                 descripLabel.text = appdelegate.shopInfoDic[@"phone"];
             }else if (indexPath.row==3) {
@@ -199,7 +207,7 @@
             }else
             {
                 ResetPhoneViewController *VC = [[ResetPhoneViewController alloc]init];
-                
+                VC.whoPush = @"商户";
                 [self.navigationController pushViewController:VC animated:YES];
 
             }
@@ -242,8 +250,13 @@
                 NSLog(@"tgtgtgtgtg");
             }else
             {
-                self.selectRow =4;
-                [self NewAddAction];
+                UserInfoEditVC *VC = [[UserInfoEditVC alloc]init];
+                VC.whoPush = @"商户";
+                VC.leibie = @"地址";
+                [self.navigationController pushViewController:VC animated:YES];
+                
+//                self.selectRow =4;
+//                [self NewAddAction];
             }
 
             

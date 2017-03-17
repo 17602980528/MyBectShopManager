@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^UserInfoEditVCBlock)(NSDictionary *result_dic);
+
 @interface UserInfoEditVC : UIViewController
 @property (nonatomic,copy)NSString *leibie;// 修改的类目
+
+@property (nonatomic,copy)UserInfoEditVCBlock resultBlock;//
+
+@property (nonatomic,copy)NSString *whoPush;// <#Description#>
 
 
 @end

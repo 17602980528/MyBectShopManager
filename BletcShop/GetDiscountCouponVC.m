@@ -14,6 +14,7 @@
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
+
 @interface GetDiscountCouponVC ()<UITableViewDelegate,UITableViewDataSource,BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
     UITableView *_tableView;

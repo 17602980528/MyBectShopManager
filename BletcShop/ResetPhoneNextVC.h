@@ -10,5 +10,6 @@
 
 @interface ResetPhoneNextVC : UIViewController
 @property (nonatomic,copy)NSString *phone;// <#Description#>
+@property (nonatomic,copy)NSString *whoPush;// <#Description#>
 
 @end

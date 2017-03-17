@@ -13,10 +13,12 @@
 
 #import "LZDCenterViewController.h"
 
-#import "PointConvertViewController.h"
+//#import "PointConvertViewController.h"
 
 #import "GetDiscountCouponVC.h"
 
+
+#import "IntegralMallViewController.h"
 
 @interface LZDCenterViewController ()<UIScrollViewDelegate>
 {
@@ -24,20 +26,27 @@
     UIView *lineView;
     UIView *topView;
 }
-@property(nonatomic,strong) PointConvertViewController *pointVC;
+@property(nonatomic,strong) IntegralMallViewController *pointVC;
 @property(nonatomic,strong)GetDiscountCouponVC *getDiscountVC;
 @property (nonatomic, strong) NSArray *headArray;
 @property (nonatomic, strong) UIScrollView *bottomScrollView;
+
+
 
 @end
 
 @implementation LZDCenterViewController
 
+//-(void)goclick{
+//    IntegralMallViewController *VC = [[IntegralMallViewController alloc]init];
+//    [self.navigationController pushViewController:VC animated:YES];
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=RGB(234, 234, 234);
     self.navigationItem.title=@"会员中心";
 
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"跳转" style:UIBarButtonItemStylePlain target:self action:@selector(goclick)];
 
     self.headArray = @[@"积分商城",@"优惠券"];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -75,7 +84,7 @@
     
  
     
-    self.bottomScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, HH, SCREENWIDTH, SCREENHEIGHT-HH)];
+    self.bottomScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, HH, SCREENWIDTH, SCREENHEIGHT-HH-64)];
     self.bottomScrollView.backgroundColor = [UIColor purpleColor];
     self.bottomScrollView.contentSize = CGSizeMake(520, 0);
     self.bottomScrollView.bounces = NO;
@@ -108,12 +117,12 @@
 }
 -(void)setUpBottomScrollView{
     
-    self.pointVC = [[PointConvertViewController alloc] init];
-    [self.pointVC.view setFrame:CGRectMake(0, HH, SCREENWIDTH, SCREENHEIGHT - HH)];
+    self.pointVC = [[IntegralMallViewController alloc] init];
+    [self.pointVC.view setFrame:CGRectMake(0, HH, SCREENWIDTH, self.bottomScrollView.height)];
     [self addChildViewController:self.pointVC];
     
     self.getDiscountVC = [[GetDiscountCouponVC alloc] init];
-    [self.getDiscountVC.view setFrame:CGRectMake(0, HH, SCREENWIDTH, SCREENHEIGHT - HH)];
+    [self.getDiscountVC.view setFrame:CGRectMake(0, HH, SCREENWIDTH, self.bottomScrollView.height)];
     [self addChildViewController:_getDiscountVC];
     
     

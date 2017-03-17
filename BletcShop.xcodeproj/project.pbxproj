@@ -820,6 +820,7 @@
 		D98FDF871E601C280057C206 /* AD_ad_tb@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D98FDF831E601C280057C206 /* AD_ad_tb@3x.png */; };
 		D98FDF8A1E601C660057C206 /* AD_ad_qs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D98FDF881E601C660057C206 /* AD_ad_qs@2x.png */; };
 		D98FDF8B1E601C660057C206 /* AD_ad_qs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D98FDF891E601C660057C206 /* AD_ad_qs@3x.png */; };
+		D990FF041E7B773B00BF7E40 /* IntegralMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D990FF031E7B773B00BF7E40 /* IntegralMallViewController.m */; };
 		D992925C1D8FB89500103914 /* ChargeToAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D992925B1D8FB89500103914 /* ChargeToAccountVC.m */; };
 		D992925F1D8FEE0000103914 /* RJGDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D992925E1D8FEE0000103914 /* RJGDetailVC.m */; };
 		D99292621D8FF44A00103914 /* CashListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D99292611D8FF44A00103914 /* CashListViewController.m */; };
@@ -2348,6 +2349,8 @@
 		D98FDF831E601C280057C206 /* AD_ad_tb@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AD_ad_tb@3x.png"; sourceTree = "<group>"; };
 		D98FDF881E601C660057C206 /* AD_ad_qs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AD_ad_qs@2x.png"; sourceTree = "<group>"; };
 		D98FDF891E601C660057C206 /* AD_ad_qs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AD_ad_qs@3x.png"; sourceTree = "<group>"; };
+		D990FF021E7B773B00BF7E40 /* IntegralMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralMallViewController.h; sourceTree = "<group>"; };
+		D990FF031E7B773B00BF7E40 /* IntegralMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralMallViewController.m; sourceTree = "<group>"; };
 		D992925A1D8FB89500103914 /* ChargeToAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChargeToAccountVC.h; sourceTree = "<group>"; };
 		D992925B1D8FB89500103914 /* ChargeToAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChargeToAccountVC.m; sourceTree = "<group>"; };
 		D992925D1D8FEE0000103914 /* RJGDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJGDetailVC.h; sourceTree = "<group>"; };
@@ -4463,6 +4466,8 @@
 			children = (
 				D9345E591E7636C2006B2AC1 /* LZDCenterViewController.h */,
 				D9345E5A1E7636C2006B2AC1 /* LZDCenterViewController.m */,
+				D990FF021E7B773B00BF7E40 /* IntegralMallViewController.h */,
+				D990FF031E7B773B00BF7E40 /* IntegralMallViewController.m */,
 			);
 			name = "会员中心新";
 			sourceTree = "<group>";
@@ -6908,6 +6913,7 @@
 				D9DEED261CACED7C00ACDD00 /* UIImage+MultiFormat.m in Sources */,
 				D947E44A1D7D0AB900F9FEE8 /* ChatGroupDetailViewController.m in Sources */,
 				D9B3A4A41D73D6A900F3F27E /* LZDRootController.m in Sources */,
+				D990FF041E7B773B00BF7E40 /* IntegralMallViewController.m in Sources */,
 				D9C0E95E1DCC886D00FD1199 /* HomeViewCell.m in Sources */,
 				D9DEED451CAD191100ACDD00 /* CardTableViewCell.m in Sources */,
 				D9B3A5A21D74255700F3F27E /* MWCaptionView.m in Sources */,

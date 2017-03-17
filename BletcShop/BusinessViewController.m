@@ -126,6 +126,7 @@
     UIScrollView *bottomView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, TopView.bottom, SCREENWIDTH, SCREENHEIGHT-64-44-TopView.height)];
     [self.view addSubview:bottomView];
     
+    NSArray *imgS = @[@"bu_ad_icon",@"bu_st_icon",@"bu_carsh_icon",@"bu_setting_icon",@"bu_com_icon",@"bu_vvip_icon",@"bu_card_icon",@"bu_report_icon",@"bu_discant_icon"];
     for (int i = 0; i <arr_imgS.count; i ++) {
         int X = i %4;
         int Y = i /4;
@@ -139,7 +140,7 @@
         UIImageView *imgV = [[UIImageView alloc]init];
         imgV.bounds = CGRectMake(0, 0, btn.width/2.5, btn.width/2.5);
         imgV.center = CGPointMake(btn.center.x, btn.center.y-10);
-        imgV.image =[UIImage imageNamed:arr_imgS[i]];
+        imgV.image =[UIImage imageNamed:imgS[i]];
         [bottomView addSubview:imgV];
         
         UILabel *lab = [[UILabel alloc]init];

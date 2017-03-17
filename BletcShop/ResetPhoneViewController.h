@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ResetPhoneViewController : UIViewController
+@property (nonatomic,copy)NSString *whoPush;// 用户还是商户
 
 @end

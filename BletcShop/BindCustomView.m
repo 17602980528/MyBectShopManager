@@ -30,7 +30,6 @@
         self.noticeLable.text=@"温馨提示";
         self.noticeLable.textColor=RGB(102, 102, 102);
         [self.AlertView addSubview:self.noticeLable];
-        
         self.imageView=[[UIImageView alloc]init];
         self.imageView.image=[UIImage imageNamed:@"勾选"];
         self.imageView.frame=CGRectMake(alertViewWidth/2.0-(45*alertViewHeight/224.0)/2, self.noticeLable.bottom+10*alertViewHeight/224.0, 45*alertViewHeight/224.0, 45*alertViewHeight/224.0);

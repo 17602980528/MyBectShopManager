@@ -118,7 +118,67 @@
 -(void)sureClick{
     NSString *profession = @"";
     if (oldindexpath) {
+        
         profession = self.title_A[oldindexpath.section][oldindexpath.row];
+        
+        NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountSet",BASEURL];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        
+        [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+        
+        [params setObject:profession forKey:@"para"];
+        
+            [params setObject:@"occupation" forKey:@"type"];
+                NSLog(@"params===%@",params);
+        
+        [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+         {
+             DebugLog(@"result===+%@",result);
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+             hud.mode = MBProgressHUDModeText;
+             if ([result[@"result_code"] intValue]==1 ) {
+                 hud.label.text = NSLocalizedString(@"修改成功", @"HUD message title");
+                 
+                 hud.label.font = [UIFont systemFontOfSize:13];
+                 hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                 hud.userInteractionEnabled = YES;
+                 
+                 [hud hideAnimated:YES afterDelay:2.f];
+                 
+                 
+                 NSMutableDictionary *new_dic = [appdelegate.userInfoDic mutableCopy];
+                 
+                 
+                 [new_dic setValue:result[@"para"] forKey:result[@"type"]];
+                 
+                 appdelegate.userInfoDic = new_dic;
+                 
+                 self.prodessionBlock(result);
+                 
+             }else
+             {
+                 hud.label.text = NSLocalizedString(@"请求失败 请重试", @"HUD message title");
+                 
+                 hud.label.font = [UIFont systemFontOfSize:13];
+                 //    [hud setColor:[UIColor blackColor]];
+                 hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                 hud.userInteractionEnabled = YES;
+                 
+                 [hud hideAnimated:YES afterDelay:2.f];
+                 
+                 
+             }
+             
+             
+             
+             
+         } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+             NSLog(@"%@", error);
+             
+         }];
+        
     }
     NSLog(@"-profession----%@",profession);
 }

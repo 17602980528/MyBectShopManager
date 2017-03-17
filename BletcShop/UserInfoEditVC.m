@@ -8,6 +8,8 @@
 
 #import "UserInfoEditVC.h"
 
+#import "ValuePickerView.h"
+
 @interface UserInfoEditVC ()<UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 {
     UIPickerView *datePickView;
@@ -39,11 +41,33 @@
 }
 @property (weak, nonatomic) IBOutlet UILabel *title_lab;
 @property (weak, nonatomic) IBOutlet UITextField *contentTF;
+@property (nonatomic, strong) NSArray *marray_A;
+@property (nonatomic, strong) NSArray *education_A;
+@property (nonatomic, strong) ValuePickerView *pickerView;
 
 @end
 
 @implementation UserInfoEditVC
-
+-(ValuePickerView *)pickerView{
+    if (!_pickerView) {
+        _pickerView = [[ValuePickerView alloc]init];
+        
+    }
+    return _pickerView;
+    
+}
+-(NSArray *)marray_A{
+    if (!_marray_A) {
+        _marray_A = @[@"已婚",@"单身"];
+    }
+    return _marray_A;
+}
+-(NSArray *)education_A{
+    if (!_education_A) {
+        _education_A = @[@"小学",@"初中",@"高中",@"大专",@"本科",@"硕士",@"博士",@"其他"];
+    }
+    return _education_A;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[self.contentTF.subviews firstObject] removeFromSuperview];
@@ -67,9 +91,83 @@
     
     [self.contentTF resignFirstResponder];
     
-    [self postRevise];
+    
+    if ([self.whoPush isEqualToString:@"商户"]) {
+        [self postRequestAddress];
+    }else{
+        [self postRevise];
+ 
+    }
 }
 
+-(void)postRequestAddress
+{
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/accountSet",BASEURL];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    
+    [params setObject:[appdelegate.shopInfoDic objectForKey:@"muid"] forKey:@"muid"];
+    
+    [params setObject:@"address" forKey:@"type"];
+    [params setObject:self.contentTF.text forKey:@"para"];
+    NSLog(@"%@",params);
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         
+         NSLog(@"%@", result);
+         
+         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+         hud.mode = MBProgressHUDModeText;
+         if ([result[@"result_code"] intValue]==1) {
+             hud.label.text = NSLocalizedString(@"修改成功", @"HUD message title");
+             
+             hud.label.font = [UIFont systemFontOfSize:13];
+             //    [hud setColor:[UIColor blackColor]];
+             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+             hud.userInteractionEnabled = YES;
+             
+             [hud hideAnimated:YES afterDelay:2.f];
+             
+             AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+             
+             NSMutableDictionary *mutab_dic = [NSMutableDictionary dictionaryWithDictionary:appdelegate.shopInfoDic];
+             
+             
+             
+             
+             
+             [mutab_dic setObject:self.contentTF.text forKey:@"address"];
+             appdelegate.shopInfoDic = mutab_dic;
+             
+             
+         }else
+         {
+             hud.label.text = NSLocalizedString(@"请求失败 请重试", @"HUD message title");
+             
+             hud.label.font = [UIFont systemFontOfSize:13];
+             //    [hud setColor:[UIColor blackColor]];
+             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+             hud.userInteractionEnabled = YES;
+             
+             [hud hideAnimated:YES afterDelay:2.f];
+             
+             
+         }
+         
+         
+         
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         
+         NSLog(@"%@", error);
+         
+     }];
+    
+}
 -(void)postRevise
 {
     
@@ -93,6 +191,12 @@
         
     }else if ([self.leibie isEqualToString:@"生日"]) {
         [params setObject:@"age" forKey:@"type"];
+    }else if ([self.leibie isEqualToString:@"教育"]) {
+        [params setObject:@"education" forKey:@"type"];
+    }else if ([self.leibie isEqualToString:@"婚姻"]) {
+        [params setObject:@"mate" forKey:@"type"];
+    }else if ([self.leibie isEqualToString:@"爱好"]) {
+        [params setObject:@"hobby" forKey:@"type"];
     }
     NSLog(@"params===%@",params);
     
@@ -118,6 +222,10 @@
              [new_dic setValue:result[@"para"] forKey:result[@"type"]];
              
              appdelegate.userInfoDic = new_dic;
+             
+             
+             
+             self.resultBlock(result);
              
              
              
@@ -149,8 +257,33 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
-    if ([self.leibie isEqualToString:@"性别"]) {
-        [self creatSheetView];
+    
+    
+  
+    if ([self.leibie isEqualToString:@"性别"] || [self.leibie isEqualToString:@"教育"] ||[self.leibie isEqualToString:@"婚姻"]) {
+        if ([self.leibie isEqualToString:@"性别"]) {
+            self.pickerView.dataSource = @[@"男",@"女"];
+
+        }
+        if ([self.leibie isEqualToString:@"教育"]) {
+            self.pickerView.dataSource = self.education_A;
+            
+        }
+        if ([self.leibie isEqualToString:@"婚姻"]) {
+            self.pickerView.dataSource = self.marray_A;
+            
+        }
+        __weak typeof(self) weakSelf = self;
+
+        self.pickerView.valueDidSelect = ^(NSString * value){
+            
+            NSLog(@"======%@",[[value componentsSeparatedByString:@"/"] firstObject]);
+            weakSelf.contentTF.text = [[value componentsSeparatedByString:@"/"] firstObject];
+            
+        };
+        
+        [self.pickerView show];
+
         return NO;
     }else  if ([self.leibie isEqualToString:@"生日"]) {
         [self creatPickView];
@@ -420,24 +553,7 @@
 }
 
 
--(void)creatSheetView{
-    UIAlertController *alertVC = [[UIAlertController alloc]init];
-    
-    UIAlertAction *manAction = [UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.contentTF.text = @"男";
-        
-    }];
-    
-    UIAlertAction *wemon =[UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.contentTF.text = @"女";
 
-        
-    }];
-    [alertVC addAction:manAction];
-    [alertVC addAction:wemon];
-    [self presentViewController:alertVC animated:YES completion:nil];
-    
-}
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     

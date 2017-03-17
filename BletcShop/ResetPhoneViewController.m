@@ -27,20 +27,21 @@
     
     [self.phoneTF resignFirstResponder];
     
-    if ([ToolManager validateMobile:self.phoneTF.text]) {
+//    if ([ToolManager validateMobile:self.phoneTF.text]) {
         ResetPhoneNextVC *VC = [[ResetPhoneNextVC alloc]init];
         VC.phone = self.phoneTF.text;
+        VC.whoPush = self.whoPush;
         [self.navigationController pushViewController:VC animated:YES];
 
-    }else{
-        
-        
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请输入手机号" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
-
-        
-    }
+//    }else{
+//        
+//        
+//        
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请输入手机号" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alertView show];
+//
+//        
+//    }
     
     
     

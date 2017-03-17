@@ -29,6 +29,10 @@
 @property long long int date;//发送图片的时间戳
 @property (strong, nonatomic) IBOutlet UIView *footView;
 
+@property (weak, nonatomic) IBOutlet UIView *tishiview;
+@property (weak, nonatomic) IBOutlet UIButton *cancleBtn;
+@property (weak, nonatomic) IBOutlet UIButton *sureBtn;
+@property (weak, nonatomic) IBOutlet UILabel *tishiwenzi;
 
 @end
 
@@ -53,6 +57,12 @@
     self.tabView.rowHeight = UITableViewAutomaticDimension;
     self.tabView.tableFooterView = self.footView;
     
+    self.tishiview.frame = CGRectMake(0, 0, SCREENWIDTH,SCREENHEIGHT);
+    self.cancleBtn.layer.borderColor = NavBackGroundColor.CGColor;
+    self.cancleBtn.layer.borderWidth =1;
+    self.tishiview.hidden = YES;
+    [self.view addSubview:self.tishiview];
+
 
 }
 
@@ -94,7 +104,7 @@
         }
         cell.title_lab.text = _title_A[indexPath.row-1];
         
-        NSArray *key_A = @[@"nickname",@"address",@"phone",@"mail",@"sex",@"age",@"",@"",@"",@"",@"",@"",@"",@"",@""];
+        NSArray *key_A = @[@"nickname",@"address",@"phone",@"mail",@"sex",@"age",@"occupation",@"education",@"mate",@"hobby",@"",@"",@"",@"",@""];
         cell.content_lab.text = appdelegate.userInfoDic[key_A[indexPath.row-1]];
         
         
@@ -112,8 +122,16 @@
     }
     
     
-    if (indexPath.row ==1 || indexPath.row ==2 || indexPath.row ==4 || indexPath.row ==5 || indexPath.row ==6 ) {
+    if (indexPath.row ==1 || indexPath.row ==2 || indexPath.row ==4 || indexPath.row ==5 || indexPath.row ==6 || indexPath.row ==8|| indexPath.row ==9|| indexPath.row ==10) {
         UserInfoEditVC *VC = [[UserInfoEditVC alloc]init];
+        
+        VC.resultBlock=^(NSDictionary*result) {
+            
+            NSLog(@"UserInfoEditVC.block====%@",result);
+            self.tishiwenzi.text = [NSString stringWithFormat:@"恭喜你，完成个人信息获得%@个积 分，快去看看吧",result[@"result_code"]];
+            self.tishiview.hidden = NO;
+
+        };
         VC.leibie = self.title_A[indexPath.row-1];
         [self.navigationController pushViewController:VC animated:YES];    }
     
@@ -132,6 +150,14 @@
     
     if (indexPath.row ==7) {
         ProfessionEditVC *VC=[[ProfessionEditVC alloc]init];
+        VC.prodessionBlock=^(NSDictionary*result) {
+            
+            NSLog(@"UserInfoEditVC.block====%@",result);
+            self.tishiwenzi.text = [NSString stringWithFormat:@"恭喜你，完成个人信息获得%@个积 分，快去看看吧",result[@"result_code"]];
+            self.tishiview.hidden = NO;
+            
+        };
+
         [self.navigationController pushViewController:VC animated:YES];
         
     }
@@ -455,5 +481,15 @@
     [appdelegate loginOutBletcShop];
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)cancleClick:(UIButton *)sender {
+    
+    self.tishiview.hidden = YES;
+
+}
+- (IBAction)sureBtnClcik:(UIButton *)sender {
+
+    self.tishiview.hidden = YES;
+
 }
 @end

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ProfessionEditVCBlock)(NSDictionary*dic);
 @interface ProfessionEditVC : UIViewController
+
+@property (nonatomic,copy)ProfessionEditVCBlock prodessionBlock;// <#Description#>
 
 @end

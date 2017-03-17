@@ -288,7 +288,7 @@
         if (result) {
             shopInfoArray=result;
             
-            UIScrollView *goodsScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 191+36+1, SCREENWIDTH, SCREENHEIGHT-191-37-64)];
+            UIScrollView *goodsScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 191+36+1, SCREENWIDTH, SCREENHEIGHT-191-37-64-40)];
             goodsScrollView.contentSize=CGSizeMake(0, (SCREENWIDTH/2)*(shopInfoArray.count+1)/2);
             [self.view addSubview:goodsScrollView];
             

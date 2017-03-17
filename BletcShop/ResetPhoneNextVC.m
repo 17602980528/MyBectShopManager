@@ -53,13 +53,92 @@
     NSLog(@"----/%@/====/%@/",self.codeTF.text,self.array_code[0]);
     
     if ([self.codeTF.text isEqualToString:self.array_code[0]]) {
-        [self postRequest];
+        if ([self.whoPush isEqualToString:@"商户"]) {
+            [self postShopRequest];
+        }else{
+            
+            [self postRequest];
+
+        }
     }else{
         [self showHint:@"验证码输入错误"];
     }
     
     
 }
+//商户改手机号
+-(void)postShopRequest{
+    {
+        
+        
+        NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/accountSet",BASEURL];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        
+        [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
+        
+        [params setObject:@"phone" forKey:@"type"];
+        [params setObject:self.phone forKey:@"para"];
+        
+        NSLog(@"params===%@",params);
+        
+        [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+         {
+             NSLog(@"result----%@",result);
+             
+             if ([result[@"result_code"] integerValue]==1) {
+                 myalertView=[[BindCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+                 
+                 myalertView.phoneLable.text = [NSString stringWithFormat:@"您的新手机号：%@",self.phone];
+                 [myalertView.completeBtn addTarget:self action:@selector(removeAlertViewFromCurrentVC:) forControlEvents:UIControlEventTouchUpInside];
+                 [self.view addSubview:myalertView];
+                 AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+                 NSMutableDictionary *mutab_dic =[appdelegate.shopInfoDic mutableCopy];
+                 
+                 [mutab_dic setObject:self.phone forKey:@"phone"];
+                 appdelegate.shopInfoDic = mutab_dic;
+
+                 
+             }else if([result[@"result_code"] integerValue]==1062){
+                 
+                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                 
+                 hud.label.text = NSLocalizedString(@"该手机号在平台已存在!", @"HUD message title");
+                 
+                 hud.label.font = [UIFont systemFontOfSize:13];
+                 hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                 hud.userInteractionEnabled = YES;
+                 
+                 [hud hideAnimated:YES afterDelay:2.f];
+                 
+             }else{
+                 
+                 
+                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                 
+                 hud.label.text = NSLocalizedString(@"请求失败 请重试", @"HUD message title");
+                 
+                 hud.label.font = [UIFont systemFontOfSize:13];
+                 //    [hud setColor:[UIColor blackColor]];
+                 hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                 hud.userInteractionEnabled = YES;
+                 
+                 [hud hideAnimated:YES afterDelay:2.f];
+             }
+             
+             
+             
+             
+         } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+             NSLog(@"%@", error);
+             
+         }];
+        
+    }
+    
+}
+//用户改手机号
 -(void)postRequest{
     
     
@@ -79,16 +158,41 @@
          NSLog(@"result----%@",result);
          
          if ([result[@"result_code"] integerValue]==1) {
+             
+             AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+             NSMutableDictionary *mutab_dic =[appdelegate.userInfoDic mutableCopy];
+             
+             [mutab_dic setObject:self.phone forKey:@"phone"];
+             appdelegate.userInfoDic = mutab_dic;
+
              myalertView=[[BindCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
              
              myalertView.phoneLable.text = [NSString stringWithFormat:@"您的新手机号：%@",self.phone];
              [myalertView.completeBtn addTarget:self action:@selector(removeAlertViewFromCurrentVC:) forControlEvents:UIControlEventTouchUpInside];
              [self.view addSubview:myalertView];
+             
+             
+            
 
-         }else{
+             
+
+         }else if([result[@"result_code"] integerValue]==1062){
              
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
 
+             hud.label.text = NSLocalizedString(@"该手机号在平台已存在!", @"HUD message title");
+             
+             hud.label.font = [UIFont systemFontOfSize:13];
+             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+             hud.userInteractionEnabled = YES;
+             
+             [hud hideAnimated:YES afterDelay:2.f];
+
+         }else{
+             
+             
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+             
              hud.label.text = NSLocalizedString(@"请求失败 请重试", @"HUD message title");
              
              hud.label.font = [UIFont systemFontOfSize:13];
@@ -97,7 +201,6 @@
              hud.userInteractionEnabled = YES;
              
              [hud hideAnimated:YES afterDelay:2.f];
-
          }
          
          
