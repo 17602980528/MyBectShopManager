@@ -180,8 +180,9 @@
         deleteButton.layer.borderWidth=0.8;
         deleteButton.layer.cornerRadius=5.0f;
         deleteButton.clipsToBounds=YES;
+        deleteButton.tag=section;
         [view addSubview:deleteButton];
-        [deleteButton addTarget:self action:@selector(deletePublish) forControlEvents:UIControlEventTouchUpInside];
+        [deleteButton addTarget:self action:@selector(deletePublish:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *payButton=[UIButton buttonWithType:UIButtonTypeCustom];
         payButton.frame=CGRectMake(SCREENWIDTH-115, 10, 100, 30);
@@ -370,7 +371,7 @@
     
 }
 //取消订单
--(void)deletePublish{
+-(void)deletePublish:(UIButton *)sender{
     
 }
 //去付款
