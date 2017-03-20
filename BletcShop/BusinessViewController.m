@@ -94,6 +94,8 @@
     [self.view addSubview:TopView];
     
     NSArray *title_a = @[@"会员延期",@"预约处理"];
+    NSArray *img_a = @[@"bu_time_icon",@"bu_vip_icon"];
+
     for (int i=0 ; i< title_a.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(i*SCREENWIDTH/2, 0, SCREENWIDTH/2, TopView.height);
@@ -104,12 +106,12 @@
         UIImageView *imgV = [[UIImageView alloc]init];
         imgV.bounds = CGRectMake(0, 0, 50, 50);
         imgV.center = CGPointMake(btn.center.x, btn.center.y-15);
-        imgV.image = [UIImage imageNamed:title_a[i]];
+        imgV.image = [UIImage imageNamed:img_a[i]];
         [TopView addSubview:imgV];
         
-        if (i==1) {
-            imgV.bounds = CGRectMake(0, 0, 35, 35);
-        }
+//        if (i==1) {
+//            imgV.bounds = CGRectMake(0, 0, 35, 35);
+//        }
         UILabel *lab = [[UILabel alloc]init];
         lab.frame = CGRectMake(btn.left, 105, btn.width, 20);
         lab.text = title_a[i];
@@ -126,6 +128,11 @@
     UIScrollView *bottomView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, TopView.bottom, SCREENWIDTH, SCREENHEIGHT-64-44-TopView.height)];
     [self.view addSubview:bottomView];
     
+    UIView *huixin = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bottomView.width,10 )];
+    huixin.backgroundColor = RGB(234, 234, 234);
+    [bottomView addSubview:huixin];
+
+    
     NSArray *imgS = @[@"bu_ad_icon",@"bu_st_icon",@"bu_carsh_icon",@"bu_setting_icon",@"bu_com_icon",@"bu_vvip_icon",@"bu_card_icon",@"bu_report_icon",@"bu_discant_icon"];
     for (int i = 0; i <arr_imgS.count; i ++) {
         int X = i %4;
@@ -136,6 +143,18 @@
         [btn addTarget:self action:@selector(goMineBussy:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = i;
         bottomView.contentSize = CGSizeMake(0, btn.bottom);
+        UIView *shuxxian = [[UIView alloc]initWithFrame:CGRectMake(btn.width-1, 5, 1, btn.width-10)];
+        shuxxian.backgroundColor = RGB(234, 234, 234);
+        [btn addSubview:shuxxian];
+        
+        if (i==0 || i ==4) {
+            
+            UIView *hengxian = [[UIView alloc]initWithFrame:CGRectMake(12, btn.bottom+3, bottomView.width-24,1 )];
+            hengxian.backgroundColor = RGB(234, 234, 234);
+            [bottomView addSubview:hengxian];
+
+        }
+       
         
         UIImageView *imgV = [[UIImageView alloc]init];
         imgV.bounds = CGRectMake(0, 0, btn.width/2.5, btn.width/2.5);

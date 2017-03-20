@@ -88,6 +88,8 @@
 @property(nonatomic,strong)dispatch_source_t timer;
 @property(nonatomic,strong)dispatch_source_t repateTimer;
 
+@property(nonatomic,assign)BOOL shopperIsLog;//商户是否自动登录
+
 @end
 
 @implementation AppDelegate
@@ -1031,11 +1033,12 @@
         self.window.rootViewController = mainTB;
     }
     
-//    else if ([[defaults objectForKey:@"remeberShop"] isEqualToString:@"yes"]){
-//        //
-//        ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
-//        self.window.rootViewController = tabBarVC;
-//    }else{
+    if (self.shopperIsLog){
+        //
+        ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
+        self.window.rootViewController = tabBarVC;
+    }
+//    else{
 //        //
 //        [self _initChose];
 //    }
@@ -1676,11 +1679,12 @@
 {
 //    [self socketConnectHostShop];
     
-    ShopTabBarController *shopvc = [[ShopTabBarController alloc]init];
+  
     NSLog(@"-mut_dic-----%@",mut_dic);
     self.shopInfoDic = mut_dic;
     self.shopIsLogin= YES;
-    self.window.rootViewController = shopvc;
+    
+    self.shopperIsLog = YES;
     [self repeatLoadAPI];
 
     
@@ -1738,8 +1742,10 @@
 -(void)postRequestSeller:(NSString *)name andPassWord:(NSString *)password andState:(NSString *)log_type
 {
     
+    ShopTabBarController *shopvc = [[ShopTabBarController alloc]init];
+        self.window.rootViewController = shopvc;
     
-    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+//    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     
 
@@ -2525,6 +2531,7 @@
          self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
         dispatch_source_set_timer(self.timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
         dispatch_source_set_event_handler(self.timer, ^{
+            
             if(timeout<=0){
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
