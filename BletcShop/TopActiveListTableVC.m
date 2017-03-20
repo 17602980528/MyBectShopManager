@@ -87,7 +87,7 @@
         cell.headname.text = dic[@"title"];
         cell.headContent.text = dic[@"info"];
 
-        [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,dic[@"image_url"]]] placeholderImage:[UIImage imageNamed:@"5-01"]];
+        [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",LUNBO_IMAGE,dic[@"image_url"]]] placeholderImage:[UIImage imageNamed:@"5-01"]];
         
     }
     return cell;

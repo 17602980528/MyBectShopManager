@@ -8,6 +8,7 @@
 
 #import "AdverListViewController.h"
 #import "CommenShowPublishAdvertInfosVC.h"
+#import "UIImageView+WebCache.h"
 @interface AdverListViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIView *topBackView;
@@ -230,6 +231,10 @@
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(18, 50, 80, 80)];
     imageView.image=[UIImage imageNamed:@"icon3.png"];
     [view addSubview:imageView];
+    
+    NSURL * nurl1=[[NSURL alloc] initWithString:[[LUNBO_IMAGE stringByAppendingString:self.data_A[section][@"image_url"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+    [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+    
     //广告标题&描述
     NSString *descripString=self.data_A[section][@"info"];
     UILabel *advertDescription=[[UILabel alloc]init];

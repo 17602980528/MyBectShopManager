@@ -31,7 +31,8 @@
 
 //头像
 #define ICONIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/iconImage/"
-
+//轮播广告
+#define LUNBO_IMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/top/"
 
 //图片前缀
 #define IMG_URL @"http://101.201.100.191/cnconsum/Public/Uploads/"
