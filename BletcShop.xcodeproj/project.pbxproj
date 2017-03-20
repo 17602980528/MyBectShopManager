@@ -27,6 +27,7 @@
 		180CC7C01E64110D002F5E35 /* 收费标准.png in Resources */ = {isa = PBXBuildFile; fileRef = 180CC7BF1E64110D002F5E35 /* 收费标准.png */; };
 		180D872A1E5AB9C600E7FFB4 /* AddCouponHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */; };
 		180D872D1E5ABBBF00E7FFB4 /* AddCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */; };
+		181163921E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 181163911E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m */; };
 		1817FF591D405BE100AFC965 /* mhead_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1817FF581D405BE100AFC965 /* mhead_default.png */; };
 		1817FF5C1D40665900AFC965 /* MemberDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */; };
 		1828C7E51E272D4A00480DB9 /* CardEricShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1828C7E41E272D4A00480DB9 /* CardEricShareViewController.m */; };
@@ -1134,6 +1135,8 @@
 		180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponHomeVC.m; sourceTree = "<group>"; };
 		180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCouponVC.h; sourceTree = "<group>"; };
 		180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponVC.m; sourceTree = "<group>"; };
+		181163901E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenShowPublishAdvertInfosVC.h; sourceTree = "<group>"; };
+		181163911E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommenShowPublishAdvertInfosVC.m; sourceTree = "<group>"; };
 		1817FF581D405BE100AFC965 /* mhead_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mhead_default.png; sourceTree = "<group>"; };
 		1817FF5A1D40665900AFC965 /* MemberDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberDetailViewController.h; sourceTree = "<group>"; };
 		1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberDetailViewController.m; sourceTree = "<group>"; };
@@ -6024,6 +6027,8 @@
 			children = (
 				D9E5C3DC1E5EC0E6006BA2B1 /* AdverListViewController.h */,
 				D9E5C3DD1E5EC0E6006BA2B1 /* AdverListViewController.m */,
+				181163901E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.h */,
+				181163911E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m */,
 			);
 			name = "广告列表";
 			sourceTree = "<group>";
@@ -7210,6 +7215,7 @@
 				D9DEED1C1CACED7C00ACDD00 /* SDImageCache.m in Sources */,
 				D98E5C041E515210009D56BF /* MASViewConstraint.m in Sources */,
 				D9C206011D1D001300761DC4 /* ShopAllInfoTableViewCell.m in Sources */,
+				181163921E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m in Sources */,
 				D992925F1D8FEE0000103914 /* RJGDetailVC.m in Sources */,
 				D9DEED1F1CACED7C00ACDD00 /* SDWebImageDownloader.m in Sources */,
 				1859E7C41D869E1E00647514 /* CommenDataViewController.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "AdverListViewController.h"
-
+#import "CommenShowPublishAdvertInfosVC.h"
 @interface AdverListViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIView *topBackView;
@@ -70,9 +70,9 @@
     [super viewDidLoad];
     self.navigationItem.title = @"广告列表";
     self.selectTag=0;
-
+    
     [self initTopView];
-
+    
 }
 -(void)initTopView{
     
@@ -100,7 +100,7 @@
                 noticeLine.backgroundColor=RGB(66,170,252);
                 [topBackView addSubview:noticeLine];
             }
-           
+            
         }
         
     }
@@ -145,53 +145,110 @@
     return 30;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 1;
+    return 141;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
-        return 36+9;
+    if (_selectTag==3) {
+        return 50;
+    }else{
+        return 0.01;
+    }
+    return 0.01;
 }
 
 
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 36+9)];
-        view.backgroundColor = [UIColor whiteColor];
-        for (UIView*subview in view.subviews) {
-            [subview removeFromSuperview];
-        }
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 50)];
+    view.backgroundColor = [UIColor whiteColor];
+    for (UIView*subview in view.subviews) {
+        [subview removeFromSuperview];
+    }
+    
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 0, SCREENWIDTH, 1)];
+    line.backgroundColor = RGB(246,246,246);
+    [view addSubview:line];
+    if (_selectTag==3) {
+        UIButton *deleteButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        deleteButton.frame=CGRectMake(SCREENWIDTH-115-20-100, 10, 100, 30);
+        deleteButton.backgroundColor=[UIColor whiteColor];
+        [deleteButton setTitle:@"取消订单" forState:UIControlStateNormal];
+        deleteButton.titleLabel.font=[UIFont systemFontOfSize:15.0f];
+        [deleteButton setTitleColor:NavBackGroundColor forState:UIControlStateNormal];
+        deleteButton.layer.borderColor=[NavBackGroundColor CGColor];
+        deleteButton.layer.borderWidth=0.8;
+        deleteButton.layer.cornerRadius=5.0f;
+        deleteButton.clipsToBounds=YES;
+        [view addSubview:deleteButton];
+        [deleteButton addTarget:self action:@selector(deletePublish) forControlEvents:UIControlEventTouchUpInside];
         
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 0, SCREENWIDTH, 1)];
-        line.backgroundColor = RGB(246,246,246);
-        [view addSubview:line];
-        
-    UILabel *huiyuanLabel = [[UILabel alloc]initWithFrame:CGRectMake(13, line.bottom, 75, 35)];
-    huiyuanLabel.text = @"地区:";
-    huiyuanLabel.font = [UIFont systemFontOfSize:15];
-    huiyuanLabel.textColor = RGB(102,102,102);
-    huiyuanLabel.textAlignment = NSTextAlignmentLeft;
-    [view addSubview:huiyuanLabel];
+        UIButton *payButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        payButton.frame=CGRectMake(SCREENWIDTH-115, 10, 100, 30);
+        payButton.backgroundColor=NavBackGroundColor;
+        payButton.titleLabel.font=[UIFont systemFontOfSize:15.0f];
+        [payButton setTitle:@"去支付" forState:UIControlStateNormal];
+        [payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        payButton.layer.cornerRadius=5.0f;
+        payButton.clipsToBounds=YES;
+        payButton.tag=section;
+        [view addSubview:payButton];
+        [payButton addTarget:self action:@selector(payForPublish:) forControlEvents:UIControlEventTouchUpInside];
+    }
     
-    CGSize size = [UILabel getSizeWithLab:huiyuanLabel andMaxSize:CGSizeMake(1000, 1000)];
+    return view;
     
-   NSDictionary *dic = self.data_A[section];
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 10, SCREENWIDTH, 141)];
+    view.backgroundColor=[UIColor whiteColor];
     
-    UILabel *huiyuanText = [[UILabel alloc]initWithFrame:CGRectMake(huiyuanLabel.left +size.width+10, line.bottom, SCREENWIDTH-100, 35)];
-    huiyuanText.text = dic[@"datetime"];//@"西安市高新区富鱼路";
-    huiyuanText.textAlignment = NSTextAlignmentLeft;
-    huiyuanText.font = [UIFont systemFontOfSize:15];
-    huiyuanText.textColor = RGB(51,51,51);
-    [view addSubview:huiyuanText];
+    UIView *grayView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+    grayView.backgroundColor=RGB(240, 240, 240);
+    [view addSubview:grayView];
     
+    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
     
-    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, huiyuanLabel.bottom, SCREENWIDTH, view.height - huiyuanLabel.bottom)];
-    line2.backgroundColor = RGB(246,246,246);
-    [view addSubview:line2];
+    UILabel *shopNameLable=[[UILabel alloc]initWithFrame:CGRectMake(15, 10, SCREENWIDTH*2/3-15, 30)];
+    shopNameLable.text=delegate.shopInfoDic[@"store"];
     
+    shopNameLable.font=[UIFont systemFontOfSize:14.0f];
+    shopNameLable.backgroundColor=[UIColor whiteColor];
+    [view addSubview:shopNameLable];
     
-        return view;
+    UILabel *dateTime=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH*2/3, 15, SCREENWIDTH*1/3, 20)];
+    dateTime.text=self.data_A[section][@"datetime"];
+    dateTime.textColor=RGB(102, 102, 102);
+    dateTime.font=[UIFont systemFontOfSize:12.0f];
+    [view addSubview:dateTime];
     
+    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(12, 40,SCREENWIDTH-24, 1)];
+    lineView.backgroundColor=RGB(234, 234, 234);
+    [view addSubview:lineView];
+    //广告图片
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(18, 50, 80, 80)];
+    imageView.image=[UIImage imageNamed:@"icon3.png"];
+    [view addSubview:imageView];
+    //广告标题&描述
+    NSString *descripString=self.data_A[section][@"info"];
+    UILabel *advertDescription=[[UILabel alloc]init];
+    advertDescription.numberOfLines=4;
+    advertDescription.font=[UIFont systemFontOfSize:14.0f];
+    advertDescription.text=descripString;
+    advertDescription.lineBreakMode=NSLineBreakByTruncatingTail;
+    advertDescription.frame=CGRectMake(98+10, 55, SCREENWIDTH-108-10, 20);
+    [view addSubview:advertDescription];
+    
+    CGFloat height=[descripString boundingRectWithSize:CGSizeMake(SCREENWIDTH-108-10, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : advertDescription.font} context:nil].size.height;
+    CGRect frame = advertDescription.frame;
+    frame.size.height = height;
+    advertDescription.frame = frame;
+    
+    UIView *lineView2=[[UIView alloc]initWithFrame:CGRectMake(12, 140,SCREENWIDTH-24, 1)];
+    lineView2.backgroundColor=RGB(234, 234, 234);
+    [view addSubview:lineView2];
+    
+    return view;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -230,7 +287,7 @@
         switch (indexPath.row) {
             case 0:
             {
-                huiyuanLabel.text = @"日期:";
+                huiyuanLabel.text = @"广告类型:";
                 huiyuanText.text = dic[@"datetime"];
                 CGSize size = [UILabel getSizeWithLab:huiyuanLabel andMaxSize:CGSizeMake(1000, 1000)];
                 
@@ -243,7 +300,7 @@
                 break;
             case 1:
             {
-                huiyuanLabel.text = @"商家名称:";
+                huiyuanLabel.text = @"活动类型:";
                 huiyuanText.text =dic[@"datetime"];
                 
                 
@@ -251,16 +308,16 @@
                 break;
             case 2:
             {
-                huiyuanLabel.text = @"广告类型:";
-                huiyuanText.text = dic[@"datetime"];
+                huiyuanLabel.text = @"广告位置:";
+                huiyuanText.text = dic[@"position"];
                 
                 
             }
                 break;
             case 3:
             {
-                huiyuanLabel.text = @"活动类型:";
-                huiyuanText.text = dic[@"datetime"];
+                huiyuanLabel.text = @"收费方式:";
+                huiyuanText.text = dic[@"pay_type"];
                 
                 
                 
@@ -268,8 +325,8 @@
                 break;
             case 4:
             {
-                huiyuanLabel.text = @"广告位置:";
-                huiyuanText.text = dic[@"position"];
+                huiyuanLabel.text = @"地区:";
+                huiyuanText.text = dic[@"datetime"];
                 
                 
                 
@@ -281,13 +338,16 @@
                 break;
         }
         
-    
+        
     }
     
     
     return cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+}
 -(void)postRequestDataBaseState:(NSString *)state{
     AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
     
@@ -307,6 +367,17 @@
         NSLog(@"%@", error);
         
     }];
-
+    
+}
+//取消订单
+-(void)deletePublish{
+    
+}
+//去付款
+-(void)payForPublish:(UIButton *)sender{
+    NSLog(@"%ld",sender.tag);
+    CommenShowPublishAdvertInfosVC *vc=[[CommenShowPublishAdvertInfosVC alloc]init];
+    vc.infoDic=self.data_A[sender.tag];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
