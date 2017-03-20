@@ -48,7 +48,7 @@
      {
          NSLog(@"=====%@",result);
          
-         
+    
          self.data_A= (NSArray*)result;
          
          [self.tableView reloadData];

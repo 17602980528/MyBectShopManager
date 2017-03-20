@@ -28,6 +28,8 @@
 		180D872A1E5AB9C600E7FFB4 /* AddCouponHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */; };
 		180D872D1E5ABBBF00E7FFB4 /* AddCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */; };
 		181163921E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 181163911E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m */; };
+		181163961E7FBD9E00CA92A9 /* OffLineNoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 181163941E7FBD9E00CA92A9 /* OffLineNoticeVC.m */; };
+		181163971E7FBD9E00CA92A9 /* OffLineNoticeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181163951E7FBD9E00CA92A9 /* OffLineNoticeVC.xib */; };
 		1817FF591D405BE100AFC965 /* mhead_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1817FF581D405BE100AFC965 /* mhead_default.png */; };
 		1817FF5C1D40665900AFC965 /* MemberDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */; };
 		1828C7E51E272D4A00480DB9 /* CardEricShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1828C7E41E272D4A00480DB9 /* CardEricShareViewController.m */; };
@@ -1137,6 +1139,9 @@
 		180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponVC.m; sourceTree = "<group>"; };
 		181163901E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenShowPublishAdvertInfosVC.h; sourceTree = "<group>"; };
 		181163911E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommenShowPublishAdvertInfosVC.m; sourceTree = "<group>"; };
+		181163931E7FBD9E00CA92A9 /* OffLineNoticeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffLineNoticeVC.h; sourceTree = "<group>"; };
+		181163941E7FBD9E00CA92A9 /* OffLineNoticeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffLineNoticeVC.m; sourceTree = "<group>"; };
+		181163951E7FBD9E00CA92A9 /* OffLineNoticeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OffLineNoticeVC.xib; sourceTree = "<group>"; };
 		1817FF581D405BE100AFC965 /* mhead_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mhead_default.png; sourceTree = "<group>"; };
 		1817FF5A1D40665900AFC965 /* MemberDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberDetailViewController.h; sourceTree = "<group>"; };
 		1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberDetailViewController.m; sourceTree = "<group>"; };
@@ -3446,6 +3451,9 @@
 			children = (
 				18E0004D1E5C2693004884CC /* AdvertisementHomeVC.h */,
 				18E0004E1E5C2693004884CC /* AdvertisementHomeVC.m */,
+				181163931E7FBD9E00CA92A9 /* OffLineNoticeVC.h */,
+				181163941E7FBD9E00CA92A9 /* OffLineNoticeVC.m */,
+				181163951E7FBD9E00CA92A9 /* OffLineNoticeVC.xib */,
 				1829885C1E77D1CA00164F32 /* SingleModel.h */,
 				1829885D1E77D1CA00164F32 /* SingleModel.m */,
 			);
@@ -6654,6 +6662,7 @@
 				D9FF0DA31D53304C00443312 /* 图标-21new.png in Resources */,
 				1C9E82551C60A7480007BF02 /* 333-01.png in Resources */,
 				D95BAE4F1D542FD500ED0CDC /* award_05.png in Resources */,
+				181163971E7FBD9E00CA92A9 /* OffLineNoticeVC.xib in Resources */,
 				1852FB061D55C962009CF1B2 /* 代金券-04.png in Resources */,
 				1CF283981C58C48900F3952A /* membership.png in Resources */,
 				18EEE6E21D49940F00E168B4 /* Icon-240.png in Resources */,
@@ -7024,6 +7033,7 @@
 				D9DEED1A1CACED7C00ACDD00 /* MKAnnotationView+WebCache.m in Sources */,
 				D9F2E9341E03D89F008F6517 /* MineManagerViewController.m in Sources */,
 				D949EC301CE192AE0023B6D6 /* AddressPickerDemo.m in Sources */,
+				181163961E7FBD9E00CA92A9 /* OffLineNoticeVC.m in Sources */,
 				18E3DA1B1D8287450089597B /* NewPasswordViewController.m in Sources */,
 				D9B3A4901D73CFE800F3F27E /* LZDButton.m in Sources */,
 				D98B7B691DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.m in Sources */,

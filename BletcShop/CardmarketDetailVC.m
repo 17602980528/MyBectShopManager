@@ -52,8 +52,10 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 
-    [buyView removeFromSuperview];
-    
+    //[buyView removeFromSuperview];
+    CGRect frame = buyView.frame;
+    frame.origin.y = SCREENHEIGHT;
+    buyView.frame = frame;
     
 }
 -(void)getOrderPayResult:(NSNotification*)notification{

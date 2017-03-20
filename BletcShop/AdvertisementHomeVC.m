@@ -9,6 +9,8 @@
 #import "AdvertisementHomeVC.h"
 #import "SurroundingAreaVC.h"
 #import "PublishAdvertSecondVC.h"
+#import "OffLineNoticeVC.h"
+
 @interface AdvertisementHomeVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *adverKindArr;
@@ -76,9 +78,16 @@
     return 0.01;
 }
 -(void)goNextVC{
-    PublishAdvertSecondVC *publishAdvertSecondVC=[[PublishAdvertSecondVC alloc]init];
-    publishAdvertSecondVC.advertTitle=adverKindArr[selectedRow];
-    [self.navigationController pushViewController:publishAdvertSecondVC animated:YES];
+    if (selectedRow==0||selectedRow==5) {
+        //
+        OffLineNoticeVC *vc=[[OffLineNoticeVC alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        PublishAdvertSecondVC *publishAdvertSecondVC=[[PublishAdvertSecondVC alloc]init];
+        publishAdvertSecondVC.advertTitle=adverKindArr[selectedRow];
+        [self.navigationController pushViewController:publishAdvertSecondVC animated:YES];
+    }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
