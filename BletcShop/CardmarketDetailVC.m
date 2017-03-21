@@ -44,6 +44,8 @@
     [super viewWillAppear: animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderPayResult:) name:ORDER_PAY_NOTIFICATION object:nil];//监听一个通知
 
+    [self creatBuyView];
+
     
    
 }
@@ -52,10 +54,8 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 
-    //[buyView removeFromSuperview];
-    CGRect frame = buyView.frame;
-    frame.origin.y = SCREENHEIGHT;
-    buyView.frame = frame;
+    [buyView removeFromSuperview];
+   
     
 }
 -(void)getOrderPayResult:(NSNotification*)notification{
@@ -160,7 +160,6 @@
         moneyLabel.hidden = YES;
     }
 
-    [self creatBuyView];
   
     
     
