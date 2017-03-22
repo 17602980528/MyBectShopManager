@@ -21,5 +21,6 @@
 @property(nonatomic,copy)NSString *counts;//天数／次数
 @property(nonatomic,copy)NSString *commmitDate;//提交日期
 @property(nonatomic,copy)NSString *advertID;//活动ID
+@property(nonatomic)NSInteger advertIndex;
 +(SingleModel *)sharedManager;
 @end

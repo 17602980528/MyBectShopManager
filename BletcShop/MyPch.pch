@@ -64,8 +64,7 @@
 #define TWO_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert02/"
 
 //活动三图片
-#define THIER_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert03/"
-
+#define THIER_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/activity/"
 //活动四图片
 #define FOUR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert04/"
 //启动后广告页面

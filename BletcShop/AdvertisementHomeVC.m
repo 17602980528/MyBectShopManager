@@ -10,11 +10,13 @@
 #import "SurroundingAreaVC.h"
 #import "PublishAdvertSecondVC.h"
 #import "OffLineNoticeVC.h"
-
+#import "ArcForRandomAdvertVC.h"
+#import "SingleModel.h"
 @interface AdvertisementHomeVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *adverKindArr;
     NSInteger selectedRow;
+    SingleModel *model;
 }
 @end
 
@@ -26,7 +28,7 @@
     self.navigationItem.title=@"广告推送";
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"下一步" style:UIBarButtonItemStylePlain target:self action:@selector(goNextVC)];
     self.navigationItem.rightBarButtonItem=rightItem;
-    
+    model=[SingleModel sharedManager];
     adverKindArr=@[@"欢迎页广告",@"顶部轮播活动页面",@"活动区广告",@"周边广告",@"随机广告",@"弹出页广告"];
     selectedRow=0;
     
@@ -78,30 +80,22 @@
     return 0.01;
 }
 -(void)goNextVC{
-    if (selectedRow==0||selectedRow==5) {
+    model.advertIndex=selectedRow;
+    if (selectedRow==0||selectedRow==4||selectedRow==5) {
         //
         OffLineNoticeVC *vc=[[OffLineNoticeVC alloc]init];
+        vc.title=adverKindArr[selectedRow];
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (selectedRow==3){
+        SurroundingAreaVC *publishAdvertSecondVC=[[SurroundingAreaVC alloc]init];
+         publishAdvertSecondVC.title=adverKindArr[selectedRow];
+        [self.navigationController pushViewController:publishAdvertSecondVC animated:YES];
     }else{
         PublishAdvertSecondVC *publishAdvertSecondVC=[[PublishAdvertSecondVC alloc]init];
-        publishAdvertSecondVC.advertTitle=adverKindArr[selectedRow];
+        publishAdvertSecondVC.title=adverKindArr[selectedRow];
         [self.navigationController pushViewController:publishAdvertSecondVC animated:YES];
     }
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

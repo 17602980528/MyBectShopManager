@@ -357,14 +357,53 @@
 -(void)postRequestDataBaseState:(NSString *)state{
     AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/getList",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advert/get",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:delegate.shopInfoDic[@"muid"] forKey:@"muid"];
-    [params setObject:state forKey:@"state"];
+    [params setValue:delegate.shopInfoDic[@"muid"] forKey:@"muid"];
+    [params setValue:state forKey:@"state"];
+    NSLog(@"%@",params);
+    if (self.data_A.count!=0) {
+        [self.data_A removeAllObjects];
+    }
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"result===%@",result);
         if (result) {
-            self.data_A=result;
+            id objc_activity = result[@"activity"];
+            if ([objc_activity isKindOfClass:[NSArray class]]) {
+                for (int i=0; i<[objc_activity count]; i++) {
+                    [self.data_A addObject:objc_activity[i]];
+                }
+            }
+            id objc_wellcome=result[@"wellcome"];
+            if ([objc_wellcome isKindOfClass:[NSArray class]]) {
+                for (int i=0; i<[objc_wellcome count]; i++) {
+                    [self.data_A addObject:objc_wellcome[i]];
+                }
+            }
+            id objc_near=result[@"near"];
+            if ([objc_near isKindOfClass:[NSArray class]]) {
+                for (int i=0; i<[objc_near count]; i++) {
+                    [self.data_A addObject:objc_near[i]];
+                }
+            }
+            id objc_top=result[@"top"];
+            if ([objc_top isKindOfClass:[NSArray class]]) {
+                for (int i=0; i<[objc_top count]; i++) {
+                    [self.data_A addObject:objc_top[i]];
+                }
+            }
+            id objc_insert=result[@"insert"];
+            if ([objc_insert isKindOfClass:[NSArray class]]) {
+                for (int i=0; i<[objc_insert count]; i++) {
+                    [self.data_A addObject:objc_insert[i]];
+                }
+            }
+            id objc_popup=result[@"popup"];
+            if ([objc_popup isKindOfClass:[NSArray class]]) {
+                for (int i=0; i<[objc_popup count]; i++) {
+                    [self.data_A addObject:objc_popup[i]];
+                }
+            }
             [_tabView reloadData];
         }
         

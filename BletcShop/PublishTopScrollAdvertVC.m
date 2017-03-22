@@ -262,7 +262,11 @@
     
     NSMutableDictionary *parmer = [NSMutableDictionary dictionary];
     [parmer setValue:nameValue forKey:@"name"];
-    [parmer setValue:@"advert_top_image" forKey:@"type"];
+    if (model.advertIndex==2) {
+        [parmer setValue:@"advert_activity_image" forKey:@"type"];
+    }else{
+        [parmer setValue:@"advert_top_image" forKey:@"type"];
+    }
     [parmer setObject:img_Data forKey:@"file1"];
     [KKRequestDataService requestWithURL:url params:parmer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"%@",result);
