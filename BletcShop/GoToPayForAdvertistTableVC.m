@@ -42,6 +42,7 @@
     model=[SingleModel sharedManager];
     
     dataSourse_A = @[self.section1_A,self.section2_A];
+    NSLog(@"%@==%@==%@==%@==%@",model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition);
     data_A = @[@[model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition],@[@"￥299",@"￥0",@"￥299"]];
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = RGB(240, 240, 240);
@@ -129,8 +130,12 @@
 }
 //提交申请
 -(void)gotopay{
-    
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/add",BASEURL];
+    NSString *url=@"";
+    if (model.advertIndex==2) {
+        url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/add",BASEURL];
+    }else{
+        url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/add",BASEURL];
+    }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
@@ -141,6 +146,7 @@
     [params setObject:model.advertImageUlr forKey:@"image_url"];
     [params setObject:model.baseOnCountsOrTime forKey:@"pay_type"];
     [params setObject:model.counts forKey:@"pay_content"];
+    NSLog(@"%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"postRequestAddAdmin==%@", result);

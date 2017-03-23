@@ -1529,12 +1529,10 @@
         }
         if (sender.tag ==2) {
            
-            
-            NSDictionary *dic = self.data_A2[1];
             //            [self showHint:@"暂未开通!"];
             HolidayActivertyVC *holidayVC=[[HolidayActivertyVC alloc]init];
             holidayVC.activityId=dic[@"id"];
-            holidayVC.title = @"节日活动";//dic[@"theme"];
+            holidayVC.title = dic[@"theme"];
             [self.navigationController pushViewController:holidayVC animated:YES];
             
         }
@@ -1847,11 +1845,55 @@
 /// 拒绝定位
 - (void)refuseToUsePositioningSystem:(NSString *)message {
     NSLog(@"%@",message);
+    [self.manager currentCityDic:@"西安市" currentCityDic:^(NSDictionary *dic) {
+        
+        [KCURRENTCITYINFODEFAULTS setObject:dic forKey:@"locationCityDic"];
+        
+        [KCURRENTCITYINFODEFAULTS removeObjectForKey:@"currentEareDic"];
+        
+        [KCURRENTCITYINFODEFAULTS removeObjectForKey:@"currentCityDic"];
+        
+        
+        NSLog(@"TARGET_IPHONE_SIMULATOR------%@",dic);
+        
+        [self.manager areaData:dic[@"code"] areaData:^(NSMutableArray *areaData) {
+            
+            
+            [KCURRENTCITYINFODEFAULTS setObject:areaData forKey:@"currentEreaList"];
+            
+            
+            
+        }];
+        
+    }];
+
 }
 
 /// 定位失败
 - (void)locateFailure:(NSString *)message {
     NSLog(@"%@",message);
+    [self.manager currentCityDic:@"西安市" currentCityDic:^(NSDictionary *dic) {
+        
+        [KCURRENTCITYINFODEFAULTS setObject:dic forKey:@"locationCityDic"];
+        
+        [KCURRENTCITYINFODEFAULTS removeObjectForKey:@"currentEareDic"];
+        
+        [KCURRENTCITYINFODEFAULTS removeObjectForKey:@"currentCityDic"];
+        
+        
+        NSLog(@"TARGET_IPHONE_SIMULATOR------%@",dic);
+        
+        [self.manager areaData:dic[@"code"] areaData:^(NSMutableArray *areaData) {
+            
+            
+            [KCURRENTCITYINFODEFAULTS setObject:areaData forKey:@"currentEreaList"];
+            
+            
+            
+        }];
+        
+    }];
+
 }
 
 

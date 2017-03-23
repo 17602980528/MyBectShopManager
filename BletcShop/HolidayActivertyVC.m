@@ -13,7 +13,7 @@
 @interface HolidayActivertyVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView *table_View;
-    
+    NSMutableDictionary *temp_dic;
 }
 @property(nonatomic,strong)UIView *headerView;//头view
 @property(nonatomic,strong)NSArray *data_A;//存放数据,传递给下级界面
@@ -33,14 +33,13 @@
     table_View.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview: table_View];
     [self getDate];
-    
+    temp_dic=[NSMutableDictionary dictionaryWithCapacity:0];
 }
 -(void)getDate{
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/activity/advertGet",BASEURL];
-    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/getList",BASEURL];
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
-    [paramer setValue:self.activityId forKey:@"activity"];
+    [paramer setValue:self.activityId forKey:@"advert_id"];
     
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
