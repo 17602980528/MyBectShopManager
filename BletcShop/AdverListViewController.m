@@ -231,8 +231,22 @@
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(18, 50, 80, 80)];
     imageView.image=[UIImage imageNamed:@"icon3.png"];
     [view addSubview:imageView];
-    
-    NSURL * nurl1=[[NSURL alloc] initWithString:[[LUNBO_IMAGE stringByAppendingString:self.data_A[section][@"image_url"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+    NSString *pictureBefore=@"";
+    //区分是什么广告图片
+    if ([self.data_A[section][@"mark"] isEqualToString:@"activity"]) {
+        pictureBefore=THIER_ADVERTIMAGE;
+    }else if ([self.data_A[section][@"mark"] isEqualToString:@"top"]){
+        pictureBefore=LUNBO_IMAGE;
+    }else if ([self.data_A[section][@"mark"] isEqualToString:@"near"]){
+        pictureBefore=SHOPIMAGE_ADDIMAGE;
+    }else if ([self.data_A[section][@"mark"] isEqualToString:@"wellcome"]){
+        pictureBefore=STAR_ADVERTIMAGE;
+    }else if ([self.data_A[section][@"mark"] isEqualToString:@"insert"]){
+        pictureBefore=LONGADVERTIMAGE;
+    }else if ([self.data_A[section][@"mark"] isEqualToString:@"popup"]){
+        pictureBefore=POPADVERTIMAGE;
+    }
+    NSURL * nurl1=[[NSURL alloc] initWithString:[[pictureBefore stringByAppendingString:self.data_A[section][@"image_url"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
     
     //广告标题&描述
@@ -366,46 +380,59 @@
         [self.data_A removeAllObjects];
     }
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        NSLog(@"result===%@",result);
+//        NSLog(@"result===%@",result);
         if (result) {
             id objc_activity = result[@"activity"];
             if ([objc_activity isKindOfClass:[NSArray class]]) {
                 for (int i=0; i<[objc_activity count]; i++) {
-                    [self.data_A addObject:objc_activity[i]];
+                    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:objc_activity[i]];
+                    [dic setObject:@"activity" forKey:@"mark"];
+                    [self.data_A addObject:dic];
                 }
             }
             id objc_wellcome=result[@"wellcome"];
             if ([objc_wellcome isKindOfClass:[NSArray class]]) {
                 for (int i=0; i<[objc_wellcome count]; i++) {
-                    [self.data_A addObject:objc_wellcome[i]];
+                    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:objc_wellcome[i]];
+                    [dic setObject:@"wellcome" forKey:@"mark"];
+                    [self.data_A addObject:dic];
                 }
             }
             id objc_near=result[@"near"];
             if ([objc_near isKindOfClass:[NSArray class]]) {
                 for (int i=0; i<[objc_near count]; i++) {
-                    [self.data_A addObject:objc_near[i]];
+                    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:objc_near[i]];
+                    [dic setObject:@"near" forKey:@"mark"];
+                    [self.data_A addObject:dic];
                 }
             }
             id objc_top=result[@"top"];
             if ([objc_top isKindOfClass:[NSArray class]]) {
                 for (int i=0; i<[objc_top count]; i++) {
-                    [self.data_A addObject:objc_top[i]];
+                    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:objc_top[i]];
+                    [dic setObject:@"top" forKey:@"mark"];
+                    [self.data_A addObject:dic];
                 }
             }
             id objc_insert=result[@"insert"];
             if ([objc_insert isKindOfClass:[NSArray class]]) {
                 for (int i=0; i<[objc_insert count]; i++) {
-                    [self.data_A addObject:objc_insert[i]];
+                    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:objc_insert[i]];
+                    [dic setObject:@"insert" forKey:@"mark"];
+                    [self.data_A addObject:dic];
                 }
             }
             id objc_popup=result[@"popup"];
             if ([objc_popup isKindOfClass:[NSArray class]]) {
                 for (int i=0; i<[objc_popup count]; i++) {
-                    [self.data_A addObject:objc_popup[i]];
+                    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:objc_popup[i]];
+                    [dic setObject:@"popup" forKey:@"mark"];
+                    [self.data_A addObject:dic];
                 }
             }
             [_tabView reloadData];
         }
+        NSLog(@"result===%@",self.data_A);
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         

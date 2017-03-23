@@ -13,7 +13,7 @@
 @implementation ActivityModel
 -(ActivityModel*)initWithDic:(NSDictionary*)dic{
 
-       self.activity = [NSString getTheNoNullStr:dic[@"activity"] andRepalceStr:@""];
+       self.activity = [NSString getTheNoNullStr:dic[@"id"] andRepalceStr:@""];
     self.merchant = [NSString getTheNoNullStr:dic[@"merchant"] andRepalceStr:@""];
     if ([self.activity intValue]==1) {
         
@@ -22,8 +22,7 @@
     }
     
     if ([self.activity intValue]==2) {
-        
-        self.Image_url = [NSString stringWithFormat:@"%@%@",TWO_ADVERTIMAGE,[NSString getTheNoNullStr:dic[@"advert_image_url"] andRepalceStr:@""]];
+        self.Image_url = [NSString stringWithFormat:@"%@%@",THIER_ADVERTIMAGE,[NSString getTheNoNullStr:dic[@"image_url"] andRepalceStr:@""]];
         
     }
     if ([self.activity intValue]==3) {

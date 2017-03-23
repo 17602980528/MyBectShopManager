@@ -204,6 +204,16 @@
             };
             
             [tempSelf.pickerView show];
+        }else{
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"该地区无活动", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            //    [hud setColor:[UIColor blackColor]];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            hud.userInteractionEnabled = YES;
+            
+            [hud hideAnimated:YES afterDelay:2.f];
         }
     }
         
@@ -519,7 +529,7 @@
         
         [hud hideAnimated:YES afterDelay:2.f];
     }else{
-        model.advertTitle=self.advertTitle;
+        model.advertTitle=self.title;
         model.advertArea=areaLable.text;
         model.advertKind=_advertStyleLable.text;
         model.advertPosition=advertPositionLable.text;

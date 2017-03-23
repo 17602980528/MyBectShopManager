@@ -170,7 +170,8 @@
     picker.dataSource = self;
     picker.delegate = self;
     picker.showsSelectionIndicator = YES;
-    [picker selectRow: 0 inComponent: 0 animated: YES];
+//    [picker selectRow: 0 inComponent: 0 animated: YES];
+//    selected_pro=0;
     [self.view addSubview: picker];
     
     if (self.toolbarCancelDone==nil) {

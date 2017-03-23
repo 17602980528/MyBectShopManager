@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PublishAdvertSecondVC : UIViewController
-@property(nonatomic,copy)NSString *advertTitle;
+
 @end

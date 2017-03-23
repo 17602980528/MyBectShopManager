@@ -42,6 +42,7 @@
     model=[SingleModel sharedManager];
     
     dataSourse_A = @[self.section1_A,self.section2_A];
+    NSLog(@"%@==%@==%@==%@==%@",model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition);
     data_A = @[@[model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition],@[@"￥299",@"￥0",@"￥299"]];
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = RGB(240, 240, 240);
