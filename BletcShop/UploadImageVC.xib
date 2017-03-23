@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadImageVC">
+            <connections>
+                <outlet property="miaoshulab" destination="Chn-wy-Zwm" id="EMZ-0b-Sqc"/>
+                <outlet property="textView" destination="VgM-qS-8Ad" id="hwq-1E-bqy"/>
+                <outlet property="upImagView" destination="3C6-Ox-70l" id="ToK-mn-x8t"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w42-ci-xAf">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="193"/>
+                    <subviews>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tupian(1).png" translatesAutoresizingMaskIntoConstraints="NO" id="3C6-Ox-70l">
+                            <rect key="frame" x="91" y="32" width="192" height="128"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="3C6-Ox-70l" secondAttribute="height" multiplier="3:2" id="f6s-vh-wFm"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="pEQ-aZ-ZUC" appends="YES" id="7fg-Kf-6ug"/>
+                            </connections>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="3C6-Ox-70l" secondAttribute="bottom" constant="33" id="V4K-GG-xeV"/>
+                        <constraint firstItem="3C6-Ox-70l" firstAttribute="top" secondItem="w42-ci-xAf" secondAttribute="top" constant="32" id="XcI-Ul-J9d"/>
+                        <constraint firstItem="3C6-Ox-70l" firstAttribute="centerY" secondItem="w42-ci-xAf" secondAttribute="centerY" id="az5-qY-fjp"/>
+                        <constraint firstAttribute="height" constant="193" id="hgO-tt-CVl"/>
+                        <constraint firstItem="3C6-Ox-70l" firstAttribute="centerX" secondItem="w42-ci-xAf" secondAttribute="centerX" id="p24-Z3-pBh"/>
+                    </constraints>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VgM-qS-8Ad">
+                    <rect key="frame" x="16" y="201" width="343" height="130"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="130" id="pEu-Gk-e7Y"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="H0l-Al-e8a"/>
+                    </connections>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chn-wy-Zwm">
+                    <rect key="frame" x="24" y="209" width="65.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="WAq-UX-Iun"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="113" id="WJQ-IB-KQU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJO-EP-iVF">
+                    <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                    <color key="backgroundColor" red="0.88627450980392153" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="Mux-uR-VT6"/>
+                    </constraints>
+                    <state key="normal" title="完成">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="sureClick:" destination="-1" eventType="touchUpInside" id="IHo-0d-qVl"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="VgM-qS-8Ad" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="K7Z-IX-wmE"/>
+                <constraint firstAttribute="trailing" secondItem="aJO-EP-iVF" secondAttribute="trailing" id="RA6-4X-wiH"/>
+                <constraint firstAttribute="trailing" secondItem="w42-ci-xAf" secondAttribute="trailing" id="VOa-Ey-m8V"/>
+                <constraint firstItem="VgM-qS-8Ad" firstAttribute="top" secondItem="w42-ci-xAf" secondAttribute="bottom" constant="8" id="dfe-rs-eyK"/>
+                <constraint firstItem="w42-ci-xAf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hcN-pR-Iy8"/>
+                <constraint firstItem="Chn-wy-Zwm" firstAttribute="top" secondItem="w42-ci-xAf" secondAttribute="bottom" constant="16" id="oM7-RU-apA"/>
+                <constraint firstAttribute="bottom" secondItem="aJO-EP-iVF" secondAttribute="bottom" id="onN-cS-3fA"/>
+                <constraint firstItem="Chn-wy-Zwm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="pzd-SA-QPg"/>
+                <constraint firstItem="aJO-EP-iVF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uNj-yS-Zd6"/>
+                <constraint firstItem="w42-ci-xAf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="w5h-Gc-H8p"/>
+                <constraint firstAttribute="trailing" secondItem="VgM-qS-8Ad" secondAttribute="trailing" constant="16" id="yp5-RS-KSm"/>
+            </constraints>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
+        </view>
+        <tapGestureRecognizer id="pEQ-aZ-ZUC">
+            <connections>
+                <action selector="uploadImgClick:" destination="-1" id="09i-i2-3JI"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="tupian(1).png" width="300" height="200"/>
+    </resources>
+</document>

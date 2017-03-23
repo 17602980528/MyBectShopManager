@@ -585,22 +585,22 @@ static int threadCount;
     [passwordAlert addSubview:metaNameTextField];
     
     
-    UITextField* metaDescribeTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,105,263,30)];
-    metaDescribeTextField.borderStyle = UITextBorderStyleRoundedRect;
-    metaDescribeTextField.tag = 1002;
-    metaDescribeTextField.keyboardAppearance = UIKeyboardAppearanceAlert;
-    metaDescribeTextField.delegate = self;
-    metaNameTextField.secureTextEntry=NO;
-    metaDescribeTextField.placeholder = @"视频描述";
-    [passwordAlert addSubview:metaDescribeTextField];
-    
+//    UITextField* metaDescribeTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,105,263,30)];
+//    metaDescribeTextField.borderStyle = UITextBorderStyleRoundedRect;
+//    metaDescribeTextField.tag = 1002;
+//    metaDescribeTextField.keyboardAppearance = UIKeyboardAppearanceAlert;
+//    metaDescribeTextField.delegate = self;
+//    metaNameTextField.secureTextEntry=NO;
+//    metaDescribeTextField.placeholder = @"视频描述";
+//    [passwordAlert addSubview:metaDescribeTextField];
+//    
     UITextField *textfield = [passwordAlert textFieldAtIndex:0];
     textfield.placeholder = @"视频名称";
     textfield.secureTextEntry = NO;
-    
-    UITextField *text2 = [passwordAlert textFieldAtIndex:1];
-    text2.placeholder = @"视频描述";
-    text2.secureTextEntry = NO;
+//
+//    UITextField *text2 = [passwordAlert textFieldAtIndex:1];
+//    text2.placeholder = @"视频描述";
+//    text2.secureTextEntry = NO;
     [passwordAlert show];
     
     
@@ -686,7 +686,7 @@ static int threadCount;
     if (buttonIndex==0) {
         return;
     }
-    UITextField* metaNameTextField = (UITextField *)[alertView viewWithTag:1001];
+    UITextField* metaNameTextField = [alertView textFieldAtIndex:0];
     UITextField* metaDescTextField = (UITextField *)[alertView viewWithTag:1002];
     NSString* metaName = metaNameTextField.text;
     if (metaName==nil || (id)metaName==[NSNull null]) {
@@ -694,7 +694,7 @@ static int threadCount;
     }
     NSString* metaDesc = metaDescTextField.text;
     if (metaDesc==nil || (id)metaDesc==[NSNull null]) {
-        metaDesc = @"";
+        metaDesc = @"暂不描述";
     }
     
     /*
@@ -702,7 +702,8 @@ static int threadCount;
      description  固定的名字
      */
     __block VCOPViewController* tempSelf = self;
-    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:@"hi",@"file_name",@"jellpo",@"description",nil];
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:metaName,@"file_name",metaDesc,@"description",nil];
+    NSLog(@"====%@",params);
     VCOPClient *client = [self VCOPClientInstance];
     self.onUploadingItem.params = params;
     [client uploadVideoWithContentOfFile:self.onUploadingItem.filePath fileType:self.onUploadingItem.fileType params:params threadCount:threadCount willStart:^(NSString* filePath, NSString *fileId) {

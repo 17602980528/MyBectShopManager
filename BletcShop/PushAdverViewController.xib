@@ -29,14 +29,21 @@
                         <constraint firstAttribute="width" constant="250" id="4qv-Mo-8DZ"/>
                         <constraint firstAttribute="height" constant="150" id="vmL-yL-W72"/>
                     </constraints>
-                    <state key="normal" image="AD_ad_tb" backgroundImage="AD_ad_tb"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                     </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="adverListBtn:" destination="-1" eventType="touchUpInside" id="w0j-M9-cuo"/>
-                    </connections>
                 </button>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AD_icon_ad_list" translatesAutoresizingMaskIntoConstraints="NO" id="0cu-Ld-Ycq">
+                    <rect key="frame" x="148" y="135" width="80" height="80"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="ebi-Ss-1zg"/>
+                        <constraint firstAttribute="width" constant="80" id="vLK-Ax-hGR"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="sNJ-kp-iJn" appends="YES" id="aGr-cV-2ey"/>
+                    </connections>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广告列表" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfD-ao-7zs">
                     <rect key="frame" x="62" y="220" width="250" height="40"/>
                     <constraints>
@@ -67,13 +74,9 @@
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="WHe-oh-5vL"/>
                         <constraint firstAttribute="height" constant="150" id="kPT-Wx-xDd"/>
                     </constraints>
-                    <state key="normal" image="AD_ad_is" backgroundImage="AD_ad_is"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                     </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="pushAdverBtn:" destination="-1" eventType="touchUpInside" id="98x-4k-oVN"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布广告" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rns-A2-cbP">
                     <rect key="frame" x="63" y="391" width="250" height="40"/>
@@ -85,9 +88,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AD_icon_ad_publish" translatesAutoresizingMaskIntoConstraints="NO" id="y7P-3g-Ucf">
+                    <rect key="frame" x="147" y="305" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="ss2-rs-yKa"/>
+                        <constraint firstAttribute="width" constant="80" id="xeY-Wq-twK"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
+                <constraint firstItem="y7P-3g-Ucf" firstAttribute="centerY" secondItem="ZLM-58-iq4" secondAttribute="centerY" constant="-10" id="0wZ-7e-mKP"/>
                 <constraint firstItem="Rns-A2-cbP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2kd-xJ-0jJ"/>
                 <constraint firstItem="Rns-A2-cbP" firstAttribute="top" secondItem="CfD-ao-7zs" secondAttribute="bottom" constant="131" id="9Hs-jj-uNI"/>
                 <constraint firstItem="X50-nD-1dZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9ID-Pp-Dvr"/>
@@ -96,15 +108,31 @@
                 <constraint firstItem="CfD-ao-7zs" firstAttribute="bottom" secondItem="X50-nD-1dZ" secondAttribute="bottom" id="FRI-hF-rXd"/>
                 <constraint firstItem="CfD-ao-7zs" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KnZ-j3-HCC"/>
                 <constraint firstItem="ZLM-58-iq4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Q0K-eh-VHd"/>
+                <constraint firstItem="0cu-Ld-Ycq" firstAttribute="centerX" secondItem="X50-nD-1dZ" secondAttribute="centerX" id="bwk-A8-uc4"/>
                 <constraint firstItem="l1t-11-s5Y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="g62-yK-su7"/>
+                <constraint firstItem="0cu-Ld-Ycq" firstAttribute="centerY" secondItem="X50-nD-1dZ" secondAttribute="centerY" constant="-10" id="gUu-We-obQ"/>
+                <constraint firstItem="y7P-3g-Ucf" firstAttribute="centerX" secondItem="ZLM-58-iq4" secondAttribute="centerX" id="jsG-hk-pAB"/>
                 <constraint firstItem="X50-nD-1dZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="110" id="ljk-tJ-mPJ"/>
             </constraints>
-            <point key="canvasLocation" x="-46" y="-696"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="hBC-0S-mpt" appends="YES" id="Fuf-F2-nCQ"/>
+            </connections>
+            <point key="canvasLocation" x="-46.5" y="-696.5"/>
         </view>
+        <tapGestureRecognizer id="sNJ-kp-iJn">
+            <connections>
+                <action selector="adverListBtn:" destination="-1" id="jwD-aS-Mcu"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="hBC-0S-mpt">
+            <connections>
+                <action selector="pushAdverBtn:" destination="-1" id="9dh-uT-pV1"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="AD_ad_is" width="250" height="150"/>
         <image name="AD_ad_qs" width="24" height="24"/>
-        <image name="AD_ad_tb" width="250" height="150"/>
+        <image name="AD_icon_ad_list" width="105" height="105"/>
+        <image name="AD_icon_ad_publish" width="105" height="105"/>
     </resources>
 </document>

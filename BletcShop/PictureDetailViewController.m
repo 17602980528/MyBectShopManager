@@ -15,6 +15,7 @@
 #import "HKModelMarco.h"
 #import "HKImageClipperViewController.h"
 #import "VCOPViewController.h"//eric add
+#import "UploadImageVC.h"
 @interface PictureDetailViewController ()<UITableViewDelegate,UITableViewDataSource,CustomeAlertViewDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
 {
     NSMutableArray *dataArr;
@@ -36,11 +37,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-43);
+
     kind=44;
     stateNum=@"1";
-    self.view.backgroundColor=[UIColor whiteColor];
-    self.title=@"图文详情";
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStyleGrouped];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-43) style:UITableViewStyleGrouped];
     _tableView.dataSource=self;
     _tableView.delegate=self;
     [self.view addSubview:_tableView];
@@ -79,9 +80,9 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*2/3)];
         imageView.tag=100;
-        UILongPressGestureRecognizer *recognizer=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(editOrDelete:)];
-        recognizer.minimumPressDuration=0.15;
-        recognizer.numberOfTouchesRequired=1;
+        UITapGestureRecognizer *recognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(editOrDelete:)];
+//        recognizer.minimumPressDuration=0.15;
+//        recognizer.numberOfTouchesRequired=1;
         [cell addGestureRecognizer:recognizer];
         [cell addSubview:imageView];
         
@@ -95,22 +96,21 @@
         label.textColor=[UIColor whiteColor];
         [cell addSubview:label];
         UIImageView *imageView2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH/2, (SCREENWIDTH/2-10)*2/3)];
-        [cell addGestureRecognizer:recognizer];
         imageView2.tag=300;
         [cell addSubview:imageView2];
         
-        UILabel *lab=[[UILabel alloc]init];
-        lab.frame=CGRectMake(SCREENWIDTH-105, 5, 100, 40);
-        lab.userInteractionEnabled=YES;
-        lab.layer.cornerRadius=8;
-        lab.clipsToBounds=YES;
-        lab.backgroundColor=[UIColor grayColor];
-        lab.font=[UIFont systemFontOfSize:13.0f];
-        lab.alpha=0.4;
-        lab.tag=400;
-        lab.text=@"长按上传视频";
-        lab.textAlignment=NSTextAlignmentCenter;
-        [cell addSubview:lab];
+//        UILabel *lab=[[UILabel alloc]init];
+//        lab.frame=CGRectMake(SCREENWIDTH-105, 5, 100, 40);
+//        lab.userInteractionEnabled=YES;
+//        lab.layer.cornerRadius=8;
+//        lab.clipsToBounds=YES;
+//        lab.backgroundColor=[UIColor grayColor];
+//        lab.font=[UIFont systemFontOfSize:13.0f];
+//        lab.alpha=0.4;
+//        lab.tag=400;
+//        lab.text=@"长按上传视频";
+//        lab.textAlignment=NSTextAlignmentCenter;
+//        [cell addSubview:lab];
     }
     UIImageView *imgView=(UIImageView*)[cell viewWithTag:100];
     
@@ -202,20 +202,20 @@
     }
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 60)];
-    //view.backgroundColor=[UIColor redColor];
-    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:@"grey_add"] forState:UIControlStateNormal];
-    button.frame=CGRectMake(SCREENWIDTH/2-30, 0, 60, 60);
-    [button addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:button];
-    
-    return view;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 60)];
+//    //view.backgroundColor=[UIColor redColor];
+//    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [button setImage:[UIImage imageNamed:@"grey_add"] forState:UIControlStateNormal];
+//    button.frame=CGRectMake(SCREENWIDTH/2-30, 0, 60, 60);
+//    [button addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+//    [view addSubview:button];
+//    
+//    return view;
+//}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 60;
+    return 0.01;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -226,13 +226,13 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)btnClick{
-    CustomeAlertView *noticeView=[[CustomeAlertView alloc]init];
-    noticeView.delegate=self;
-    noticeView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT);
-    noticeView.backgroundColor=[UIColor whiteColor];
-    [self.view addSubview:noticeView];
-}
+//-(void)btnClick{
+//    CustomeAlertView *noticeView=[[CustomeAlertView alloc]init];
+//    noticeView.delegate=self;
+//    noticeView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT);
+//    noticeView.backgroundColor=[UIColor whiteColor];
+//    [self.view addSubview:noticeView];
+//}
 
 -(void)ClickBtnAtIndex:(NSInteger)index state:(NSInteger)state{
     if (index==1) {
@@ -647,21 +647,21 @@
     [self.contentText resignFirstResponder];
 }
 
--(void)editOrDelete:(UILongPressGestureRecognizer *)recognizer{
+-(void)editOrDelete:(UITapGestureRecognizer *)recognizer{
     UITableViewCell *cell=(UITableViewCell *)[recognizer view];
     NSIndexPath *indexPathes=[_tableView indexPathForCell:cell];
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-        
-        return;
-        
-    } else if (recognizer.state == UIGestureRecognizerStateBegan) {
-        
+//    if (recognizer.state == UIGestureRecognizerStateEnded) {
+//        
+//        return;
+//        
+//    } else if (recognizer.state == UIGestureRecognizerStateBegan) {
+    
         //TODO
         if (indexPathes.row==0) {
-            NSLog(@"长按了第0行");
-            UIActionSheet *sheet=[[UIActionSheet alloc]initWithTitle:@"视频上传" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"上传视频" ,nil];
-            sheet.tag=1000;
-            [sheet showInView:self.view];
+//            NSLog(@"长按了第0行");
+//            UIActionSheet *sheet=[[UIActionSheet alloc]initWithTitle:@"视频上传" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"上传视频" ,nil];
+//            sheet.tag=1000;
+//            [sheet showInView:self.view];
         }else{
             NSLog(@"长按了%ld行",(long)indexPathes.row);
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"删除或编辑信息？" delegate:self cancelButtonTitle:@"删除" otherButtonTitles:@"编辑", @"取消",nil];
@@ -670,7 +670,7 @@
             
         }
         
-    }
+//    }
 }
 //删除的请求
 -(void)deletePictureAndContextRequest:(NSInteger)index{
@@ -701,7 +701,17 @@
     }else if(buttonIndex==1){
         //编辑修改图片和文字的操作
         kind=88;
-        [self NewAddVipAction];
+        
+        UploadImageVC *VC = [[UploadImageVC alloc]init];
+        NSDictionary *dic;
+        
+        if (dataArr.count!=0) {
+             dic =  dataArr[indexNum];
+            VC.infoDic = dic;
+        }
+        
+        [self.navigationController pushViewController:VC animated:YES];
+//        [self NewAddVipAction];
     }
 }
 //顶端rightbtn
