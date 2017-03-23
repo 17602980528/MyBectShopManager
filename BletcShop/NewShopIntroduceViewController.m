@@ -9,7 +9,10 @@
 #import "NewShopIntroduceViewController.h"
 #import "PictureDetailViewController.h"
 #import "UIImageView+WebCache.h"
-@interface NewShopIntroduceViewController ()
+#import "PictureAndVeidoDetailVC.h"
+
+
+@interface NewShopIntroduceViewController ()<UITextViewDelegate>
 
 @end
 
@@ -21,10 +24,72 @@
     __block UITextView *serviceText;
     __block UITextView *noticeTextView;
     __block UITextView *wnoticeTextView;
+    
+    UIView *textDetailView;
+    UIView *noticeView;
+    
+    UITextView *mytextView;
+    CGFloat oldoffset;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self postRequestGetImageInfo];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDismiss:) name:UIKeyboardWillHideNotification object:nil];
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+
+    
+}
+-(void)keyboardShow:(NSNotification*)notification{
+    
+    CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    
+    CGFloat offset = mytextView.superview.top+ mytextView.bottom+10 - (SCREENHEIGHT -64- keyboardRect.size.height);
+    NSLog(@"==%lf===%lf=====%lf",offset,mytextView.bottom,(SCREENHEIGHT - keyboardRect.size.height));
+    
+    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    if (offset>0) {
+        
+       [UIView animateWithDuration:duration animations:^{
+          
+            oldoffset = bgScrollView.contentOffset.y;
+           
+         
+           bgScrollView.contentOffset = CGPointMake(0, offset);
+           
+       }];
+    }
+    
+}
+
+-(void)keyboardDismiss:(NSNotification*)notification{
+    
+    
+    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    
+        [UIView animateWithDuration:duration animations:^{
+            
+            bgScrollView.contentOffset = CGPointMake(0, oldoffset);
+            
+        }];
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"商家介绍";
+    oldoffset = 0.0f;
     UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(btnClick)];
     self.navigationItem.rightBarButtonItem=item;
     
@@ -77,10 +142,33 @@
     serviceText=[[UITextView alloc]initWithFrame:CGRectMake(11, 95+16+3, SCREENWIDTH-22, 45)];
     serviceText.backgroundColor=RGB(240, 240, 240);
     serviceText.font=[UIFont systemFontOfSize:15.0f];
+    serviceText.delegate =self;
     [businessTimeAndServiceView addSubview:serviceText];
 
+    
+    
+    textDetailView=[[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(businessTimeAndServiceView.frame)+10, SCREENWIDTH, 136)];
+    textDetailView.backgroundColor=[UIColor whiteColor];
+    [bgScrollView addSubview:textDetailView];
+    
+    UILabel *detailLabel=[[UILabel alloc]initWithFrame:CGRectMake(19, 10, 100, 16)];
+    detailLabel.text=@"图文详情：";
+    [textDetailView addSubview:detailLabel];
+    
+    UILabel *lookLable=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-100, 10, 100, 16)];
+    lookLable.text=@"点击查看 >";
+    lookLable.font=[UIFont systemFontOfSize:13.0f];
+    lookLable.textColor=[UIColor grayColor];
+    [textDetailView addSubview:lookLable];
+    
+    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(setClick)];
+    [textDetailView addGestureRecognizer:tapRecognizer];
+    
+
+    
+    
     //noticeView
-    UIView *noticeView=[[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(businessTimeAndServiceView.frame)+10, SCREENWIDTH, 230)];
+    noticeView=[[UIView alloc]initWithFrame:CGRectMake(0, textDetailView.bottom+10, SCREENWIDTH, 230)];
     noticeView.backgroundColor=[UIColor whiteColor];
     [bgScrollView addSubview:noticeView];
     //notice
@@ -91,6 +179,7 @@
     noticeTextView=[[UITextView alloc]initWithFrame:CGRectMake(11, 30, SCREENWIDTH-22, 106)];
     noticeTextView.backgroundColor=RGB(240, 240, 240);
     noticeTextView.font=[UIFont systemFontOfSize:15.0f];
+    noticeTextView.delegate = self;
     [noticeView addSubview:noticeTextView];
     
     UIView *lineView2=[[UIView alloc]initWithFrame:CGRectMake(0, 144, SCREENWIDTH, 1)];
@@ -105,28 +194,12 @@
     wnoticeTextView.backgroundColor=RGB(240, 240, 240);
     wnoticeTextView.font=[UIFont systemFontOfSize:15.0f];
     [noticeView addSubview:wnoticeTextView];
-    
+    wnoticeTextView.delegate = self;
+
     //imageAndText
-    UIView *textDetailView=[[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(noticeView.frame)+10, SCREENWIDTH, 30)];
-    textDetailView.backgroundColor=[UIColor whiteColor];
-    [bgScrollView addSubview:textDetailView];
-    
-    UILabel *detailLabel=[[UILabel alloc]initWithFrame:CGRectMake(19, 10, 100, 16)];
-    detailLabel.text=@"图文详情：";
-    [textDetailView addSubview:detailLabel];
-    
-    UILabel *lookLable=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-100, 13, 100, 13)];
-    lookLable.text=@"点击查看 >";
-    lookLable.font=[UIFont systemFontOfSize:13.0f];
-    lookLable.textColor=[UIColor grayColor];
-    [textDetailView addSubview:lookLable];
-    
-    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(setClick)];
-    [textDetailView addGestureRecognizer:tapRecognizer];
-    
-    [self postRequestGetInfo];
-    [self postRequestGetImageInfo];
-    // Do any additional setup after loading the view.
+       [self postRequestGetInfo];
+
+
 }
 -(void)btnClick{
     
@@ -140,7 +213,9 @@
     
 }
 -(void)setClick{
-    PictureDetailViewController *picVC = [[PictureDetailViewController alloc]init];
+    PictureAndVeidoDetailVC *picVC = [[PictureAndVeidoDetailVC alloc]init];
+    
+//    PictureDetailViewController *picVC = [[PictureDetailViewController alloc]init];
     [self.navigationController pushViewController:picVC animated:YES ];
 }
 //get
@@ -222,74 +297,63 @@
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray * result) {
         
-        NSLog(@"postRequestGetInfo%@", result);
+        NSLog(@"postRequestGetImageInfo=%@", result);
         tempSelf.imageArray = result;
 
         if (tempSelf.imageArray.count>0) {
-            if (tempSelf.imageArray.count==1) {
-                UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+0%3*120, 560+0/3*120, 90, 90)];
-                imageView.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView];
-                NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[0]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+            
+            [UIView animateWithDuration:0.5 animations:^{
                 
-            }else if (tempSelf.imageArray.count==2){
+                CGRect frame = textDetailView.frame ;
+                frame.size.height = 136;
+                textDetailView.frame = frame;
                 
-                UIImageView *imageView0=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+0%3*120, 560+0/3*120, 90, 90)];
-                imageView0.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView0];
-                NSURL * nurl0=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[0]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                [imageView0 sd_setImageWithURL:nurl0 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+                CGRect notFrame = noticeView.frame;
+                notFrame.origin.y = textDetailView.bottom +10;
                 
+                noticeView.frame = notFrame;
                 
-                UIImageView *imageView1=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+1%3*120, 560+1/3*120, 90, 90)];
-                imageView1.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView1];
-                NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[1]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                [imageView1 sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+            }];
+
+            for (UIView  *view in textDetailView.subviews) {
+                if ([view isKindOfClass:[UIImageView class]]) {
+                    [view removeFromSuperview];
+                    
+                }
+            }
+            
+            for (int i = 0; i < MIN(tempSelf.imageArray.count, 3); i ++) {
                 
-            }else if (tempSelf.imageArray.count==3){
-                
-                UIImageView *imageView0=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+0%3*120, 560+0/3*120, 90, 90)];
-                imageView0.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView0];
-                NSURL * nurl0=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[0]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                [imageView0 sd_setImageWithURL:nurl0 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-                
-                
-                UIImageView *imageView1=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+1%3*120, 560+1/3*120, 90, 90)];
-                imageView1.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView1];
-                NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[1]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                [imageView1 sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-                
-                UIImageView *imageView3=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+2%3*120, 560+2/3*120, 90, 90)];
+              
+                UIImageView *imageView3=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+i%3*120, 36, 90, 90)];
                 imageView3.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView3];
-                NSURL * nurl2=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[2]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+                [textDetailView addSubview:imageView3];
+                NSURL * nurl2=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[i]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
                 [imageView3 sd_setImageWithURL:nurl2 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-            }else if (tempSelf.imageArray.count>3){
-                UIImageView *imageView0=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+0%3*120, 560+0/3*120, 90, 90)];
-                imageView0.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView0];
-                NSURL * nurl0=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[0]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                [imageView0 sd_setImageWithURL:nurl0 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-                
-                
-                UIImageView *imageView1=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+1%3*120, 560+1/3*120, 90, 90)];
-                imageView1.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView1];
-                NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[1]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                [imageView1 sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-                
-                UIImageView *imageView3=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+2%3*120, 560+2/3*120, 90, 90)];
-                imageView3.backgroundColor=[UIColor redColor];
-                [bgScrollView addSubview:imageView3];
-                NSURL * nurl2=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[2]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                [imageView3 sd_setImageWithURL:nurl2 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-            }else{
                 
             }
+            
+
+        }else{
+            [UIView animateWithDuration:0.5 animations:^{
+                
+                for (UIView  *view in textDetailView.subviews) {
+                    if ([view isKindOfClass:[UIImageView class]]) {
+                        [view removeFromSuperview];
+                        
+                    }
+                }
+                CGRect frame = textDetailView.frame ;
+                frame.size.height = 36;
+                textDetailView.frame = frame;
+                
+                CGRect notFrame = noticeView.frame;
+                notFrame.origin.y = textDetailView.bottom +10;
+                
+                noticeView.frame = notFrame;
+
+            }];
+           
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -300,6 +364,11 @@
     
 }
 
+
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    mytextView = textView;
+    return YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

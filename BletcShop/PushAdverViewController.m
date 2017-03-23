@@ -24,15 +24,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"广告投放";
-    // Do any additional setup after loading the view from its nib.
+
 }
-- (IBAction)pushAdverBtn:(UIButton *)sender {
+- (IBAction)pushAdverBtn:(UITapGestureRecognizer *)sender {
     
     AdvertisementHomeVC *advertisementHomeVC=[[AdvertisementHomeVC alloc]init];
     [self.navigationController pushViewController:advertisementHomeVC animated:YES];
     
 }
-- (IBAction)adverListBtn:(id)sender {
+- (IBAction)adverListBtn:(UITapGestureRecognizer*)sender {
     
     
     AdverListViewController *advertisementHomeVC=[[AdverListViewController alloc]init];
@@ -49,14 +49,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

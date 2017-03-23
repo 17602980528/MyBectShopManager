@@ -70,6 +70,8 @@
     UIImageView *downImg;//商户
     
     NSInteger whichInter;
+    
+    MBProgressHUD *shophud;
 
 
 }
@@ -152,6 +154,11 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    
+#pragma mark 环信
+    [self initHuanXin];
+    
     //设置根控制器
     NSDictionary *infoDic = [[NSBundle mainBundle]infoDictionary];
     // app版本
@@ -167,7 +174,8 @@
         
         LZDRootViewController *VC = [[LZDRootViewController alloc]init];
         self.window.rootViewController = VC;
-       
+        
+     
         
         
         {
@@ -225,15 +233,14 @@
             
         }
         
+        
         //加载广页
         [self initAdvertisePage];
-
         
      }
 
     
-#pragma mark 环信
-    [self initHuanXin];
+
 /***************************************************************/
     
     
@@ -1679,7 +1686,7 @@
 {
 //    [self socketConnectHostShop];
     
-  
+    
     NSLog(@"-mut_dic-----%@",mut_dic);
     self.shopInfoDic = mut_dic;
     self.shopIsLogin= YES;
@@ -1741,13 +1748,15 @@
  */
 -(void)postRequestSeller:(NSString *)name andPassWord:(NSString *)password andState:(NSString *)log_type
 {
-    
     ShopTabBarController *shopvc = [[ShopTabBarController alloc]init];
-        self.window.rootViewController = shopvc;
+    self.window.rootViewController = shopvc;
+
     
 //    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     
+    shophud =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
+    shophud.label.text = @"正在登陆...";
 
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/login",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -1779,7 +1788,7 @@
                          NSUserDefaults *use_name = [NSUserDefaults standardUserDefaults];
                          
                          [[EMClient sharedClient].options setIsAutoLogin:NO];
-                         
+                         [shophud hideAnimated:YES];
                          
                          
                          //本地保存商户信息

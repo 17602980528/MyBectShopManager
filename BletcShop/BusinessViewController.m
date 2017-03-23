@@ -34,6 +34,7 @@
 //#import "AdvertisementHomeVC.h"
 
 
+
 #import "PushAdverViewController.h"
 
 
@@ -177,11 +178,9 @@
 -(void)gotoShopAllInfoView
 {
     
-    
-    NewShopIntroduceViewController *rjgmView = [[NewShopIntroduceViewController alloc]init];
 
-//    ShopAllInfoViewController *rjgmView = [[ShopAllInfoViewController alloc]init];
-    [self.navigationController pushViewController:rjgmView animated:YES];
+    NewShopIntroduceViewController *VC = [[NewShopIntroduceViewController alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 //资金提现RjgmViewController
 -(void)gotoRjgmView
