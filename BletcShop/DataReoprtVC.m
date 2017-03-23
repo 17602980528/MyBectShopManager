@@ -122,7 +122,8 @@
     pie.backgroundColor = [UIColor whiteColor];
 //    pie.center = CGPointMake(CGRectGetMaxX(self.view.frame)/2, CGRectGetMaxY(self.view.frame)/2);
     
-   CGFloat remian = [dic[@"sum"] floatValue]-[dic[@"consumed"] floatValue];
+    
+   CGFloat remian = [[NSString getTheNoNullStr:dic[@"sum"] andRepalceStr:@"0"] floatValue]-[[NSString getTheNoNullStr:dic[@"consumed"] andRepalceStr:@"0"] floatValue];
     
     NSString *consumed = [NSString getTheNoNullStr:dic[@"consumed"] andRepalceStr:@"0"];
     
