@@ -50,10 +50,10 @@ static int threadCount;
     __block typeof(self) tempSelf = self;
     [client refreshTokenWithRefreshToken:refreshToken success:^(NSString *queryKey, id responseObjct) {
         [tempSelf storeAuthData];
-        [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:nil];
+        //[tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:nil];
         
     } failure:^(NSString *queryKey, NSError *error) {
-        [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:error];
+       // [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:error];
     }];
     return;
 }
@@ -245,6 +245,33 @@ static int threadCount;
         
         VCOPClient *client = [self VCOPClientInstance];
         __block typeof(self) tempSelf = self;
+        NSLog(@"----%@",self.onUploadingItem.fileId);
+        
+        NSString *url = @"http://upload.iqiyi.com/cancelupload";
+        NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.onUploadingItem.fileId forKey:@"file_id"];
+        [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+            if ([result isKindOfClass:[NSDictionary class]]) {
+                if ([result[@"code"] isEqualToString:@"A00000"]) {
+                    [tempSelf alertViewShow:@"取消成功" andError:nil];
+                    progressView.percent = 0.0;
+                    [progressView removeFromSuperview];
+                    self.imageView.image = [UIImage imageNamed:@"jiaopian(1)"];
+                    self.cancleBtn.enabled = NO;
+                }
+                
+            }
+            
+          
+      
+
+            
+        } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [tempSelf alertViewShow:@"取消失败" andError:nil];
+
+        }];
+       
+        /**
+         
         [client cancelUploadWithfileId:self.onUploadingItem.fileId
                                success:^(NSString *fileId, id responseObj) {
                                    //如果是批量取消，这个id用来标示取消的是哪个。
@@ -252,6 +279,8 @@ static int threadCount;
                                    [tempSelf alertViewShow:@"取消成功" andError:nil];
                                    progressView.percent = 0.0;
                                    [progressView removeFromSuperview];
+                                   self.imageView.image = [UIImage imageNamed:@"jiaopian(1)"];
+                                   
                                    
                                    
                                }
@@ -260,7 +289,8 @@ static int threadCount;
                                    [tempSelf alertViewShow:@"取消失败" andError:nil];
                                    
                                }];
-        
+         */
+
 
     }else
     if (alertView.tag==999) {
@@ -271,6 +301,8 @@ static int threadCount;
             [client deleteVideoByFileId:self.videoID
                                 success:^(NSString *queryKey, id responseObj) {
                                     tempSelf.imageView.hidden = NO;
+                                    self.lab.text = @"";
+                                    self.imageView.image = [UIImage imageNamed:@"jiaopian(1)"];
 
                                     //[tempSelf.contentView.imageView setImage:[UIImage imageNamed:@"icon3.png"]];
                                     NSURL *url=[NSURL URLWithString:@""];
@@ -349,6 +381,8 @@ static int threadCount;
             //        [tempSelf.contentView startUpload];
         } progress:^(NSString *fileId, NSNumber *percent) {
             //上传过程中
+            NSLog(@"-------%ld====%d===%@===%lf",percent.integerValue,percent.intValue,percent.stringValue,percent.floatValue);
+            
             progressView.percent = percent.floatValue;
 
             //        [tempSelf.contentView updateProgress:percent.floatValue];
@@ -492,13 +526,14 @@ static int threadCount;
         [alertView show];
         
     }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示 !"
+                                                            message:info
+                                                           delegate:nil cancelButtonTitle:@"取消"
+                                                  otherButtonTitles: nil];
+        alertView.tag = 0;
+        [alertView show];
         
-        //        QYShowResultView* showView = [[QYShowResultView alloc] initWithFrame:self.view.bounds];
-        //        [[UIApplication sharedApplication].keyWindow addSubview:showView];
-        //        showView.content = info;
-        //        [showView setContent:info];
-        
-    }
+      }
 }
 
 
@@ -550,7 +585,7 @@ static int threadCount;
     [client authorizeWithSuccess:^(NSString* queryKey, id responseObjct){
         NSLog(@"success!");
         [tempSelf storeAuthData];
-        [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:nil];
+       // [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:nil];
         BOOL isUploading = NO;
         if (tempSelf.onUploadingItem.fileId) {
             isUploading = YES;

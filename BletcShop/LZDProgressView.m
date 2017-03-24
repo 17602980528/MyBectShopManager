@@ -117,7 +117,7 @@
         
         fontSize = 13;
         arcColor = (_arcUnfinishColor == nil) ? [UIColor blueColor] : _arcUnfinishColor;
-        percent = [NSString stringWithFormat:@"%0.2f%%",_percent*100];
+        percent = [NSString stringWithFormat:@"%.0f%%",_percent*100];
     }
     
     CGSize viewSize = self.bounds.size;

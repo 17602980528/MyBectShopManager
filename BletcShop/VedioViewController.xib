@@ -38,10 +38,10 @@
                     </connections>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIs-xo-FoZ">
-                    <rect key="frame" x="100" y="118" width="120" height="21"/>
+                    <rect key="frame" x="60" y="118" width="200" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="KIl-XS-nxv"/>
-                        <constraint firstAttribute="width" constant="120" id="wNT-KH-BL1"/>
+                        <constraint firstAttribute="width" constant="200" id="wNT-KH-BL1"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

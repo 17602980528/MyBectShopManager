@@ -113,6 +113,7 @@
     passText.font = [UIFont systemFontOfSize:15];
     passText.placeholder = @"密码";
     passText.clearButtonMode = UITextFieldViewModeWhileEditing;
+    passText.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.passText = passText;
     [landView addSubview:passText];
 

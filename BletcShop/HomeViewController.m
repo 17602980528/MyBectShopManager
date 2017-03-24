@@ -395,7 +395,6 @@
     };
 
     
-        [self getVersion_code];
 
     
     
@@ -1331,6 +1330,13 @@
          }
 
          
+         static dispatch_once_t onceToken;
+         dispatch_once(&onceToken, ^{
+             
+             [self getVersion_code];
+
+         });
+         
          
          [_refreshheader endRefreshing];
          [_refreshFooter endRefreshing];
@@ -1412,7 +1418,7 @@
     imageView.center = CGPointMake(curent_window.center.x, curent_window.center.y-30);
                               
     
-    [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POPADVERTIMAGE,img_url]] placeholderImage:nil];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POPADVERTIMAGE,img_url]] placeholderImage:[UIImage imageNamed:@"icon3"]];
     
 
     [PopupAdvertiseView addSubview:imageView];
