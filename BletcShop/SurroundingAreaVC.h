@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SurroundingAreaVC : UIViewController
-@property(nonatomic,copy)NSString *advertTitle;
+
 @end

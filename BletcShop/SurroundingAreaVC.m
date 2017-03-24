@@ -71,6 +71,10 @@
     selected_street=0;
     selectedDistricts=@"";
     
+    model=[SingleModel sharedManager];
+    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    model.shopName=delegate.shopInfoDic[@"store"];
+    
     [self initTopView];
     [self postRequestProvince];
 }
@@ -220,7 +224,8 @@
                 NSString * newValue=arr[0];
                 tempSelf.advertStyleLable.text=newValue;
                 //获取广告位
-                //[self accessAdvertPositionById:@""];
+                NSString *detailAreaStr=[NSString stringWithFormat:@"%@%@",areaLable.text,tempSelf.advertStyleLable.text];
+                [self accessAdvertPositionByDetailArea:detailAreaStr];
             };
             
             [tempSelf.pickerView show];
@@ -389,9 +394,9 @@
         
         [hud hideAnimated:YES afterDelay:2.f];
     }else{
-        model.advertTitle=self.advertTitle;
-        model.advertArea=areaLable.text;
-        model.advertKind=_advertStyleLable.text;
+        model.advertTitle=self.title;
+        model.advertArea=[NSString stringWithFormat:@"%@%@",areaLable.text,self.advertStyleLable.text];
+        model.advertKind=@"无";
         model.advertPosition=advertPositionLable.text;
         if ([_stateStr isEqualToString:@"true"]) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -412,13 +417,11 @@
     
 }
 //获取广告位
--(void)accessAdvertPositionById:(NSString *)advertID{
-    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+-(void)accessAdvertPositionByDetailArea:(NSString *)detailArea{
     __block SurroundingAreaVC *tempSelf=self;
     NSString *url=[[NSString alloc]initWithFormat:@"%@MerchantType/advertNear/getPosition",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:advertID forKey:@"advert_id"];
-    [params setObject:delegate.shopInfoDic[@"muid"] forKey:@"muid"];
+    [params setObject:detailArea forKey:@"address"];
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"result===%@",result);
         if (result) {
