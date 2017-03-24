@@ -246,7 +246,7 @@
     }else if ([self.data_A[section][@"mark"] isEqualToString:@"popup"]){
         pictureBefore=POPADVERTIMAGE;
     }
-    NSURL * nurl1=[[NSURL alloc] initWithString:[[pictureBefore stringByAppendingString:self.data_A[section][@"image_url"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+    NSURL * nurl1=[[NSURL alloc] initWithString:[[pictureBefore stringByAppendingString:[NSString getTheNoNullStr:self.data_A[section][@"image_url"] andRepalceStr:@"0000"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
     
     //广告标题&描述
