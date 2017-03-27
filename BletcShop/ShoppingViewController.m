@@ -34,6 +34,8 @@
     SDRefreshHeaderView *_refreshheader;
     
     NSArray *arr;
+    
+    NSDictionary *curentEare;
 }
 
 @property(nonatomic,strong)DOPIndexPath *indexpathSelect;
@@ -163,7 +165,9 @@
     self.sorts = @[@"智能排序",@"好评优先",@"离我最近"];
     
     
-    if (arr != [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEreaList"]) {
+    if (arr != [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEreaList"] || [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEareDic"] != curentEare) {
+        
+        NSLog(@"getData");
         [self getData];
     }
 
@@ -188,6 +192,7 @@
     [super viewDidLoad];
     self.indexss=1;
     NSLog(@"viewDidLoad");
+    curentEare = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEareDic"];;
     [self getData];
 
     
