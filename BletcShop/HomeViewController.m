@@ -1486,8 +1486,8 @@
         
         
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-        appdelegate.cityChoice= cityName;
-        appdelegate.districtString = eareName.length>0 ? eareName:cityName;
+        appdelegate.cityChoice= [NSString getTheNoNullStr:cityName andRepalceStr:appdelegate.cityChoice];
+        appdelegate.districtString = eareName.length>0 ? [NSString getTheNoNullStr:eareName andRepalceStr:appdelegate.districtString]:[NSString getTheNoNullStr:cityName andRepalceStr:appdelegate.cityChoice];
         
         NSLog(@"-----%@====%@\\\\",cityName,eareName);
         
