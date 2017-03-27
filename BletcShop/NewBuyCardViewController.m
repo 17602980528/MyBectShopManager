@@ -43,16 +43,20 @@
     NSLog(@"ddddddd%@",self.coup_dic);
     self.Type = Wares;
     
-    NSRange pend = [self.coup_dic[@"type"] rangeOfString:@"元"];
-    NSString* price =[self.coup_dic[@"type"] substringToIndex:pend.location];
-    if (!(([self.moneyString floatValue]*10/100)<[price floatValue])) {
-        self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
-    }else
-    {
-        self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]*90/100)];
-        
-    }
+    NSString* price =self.coup_dic[@"sum"];
+//    if (!(([self.moneyString floatValue]*10/100)<[price floatValue])) {
+//        self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
+//    }else
+//    {
+//        self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]*90/100)];
+//        
+//    }
 
+    
+    if ([self.moneyString floatValue]>=[price floatValue]) {
+        self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
+
+    }
     [self.myTable reloadData];
     
 }
@@ -151,6 +155,9 @@
     
     [self postRequestPoints];
     
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.myTable.delegate tableView:self.myTable didSelectRowAtIndexPath:indexPath];
+    
 }
 -(void)postRequestPoints
 {
@@ -187,17 +194,17 @@
     if (indexPath.section==0) {
         return 84;
     }else if (indexPath.section==1){
-        return 0.01;
-        //        return 50;
+//        return 0.01;
+                return 50;
     }else if (indexPath.section==2){
         return 54;
     }
     return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==1) {
-        return 0.01;
-    }else
+//    if (section==1) {
+//        return 0.01;
+//    }else
     return 50;
 }
 
@@ -205,8 +212,8 @@
     if (section==0) {
         return 49;
     }else if(section==2){
-//        return 43;
-        return 0.01;
+        return 43;
+//        return 0.01;
     }else
         return 0.01;
 }
@@ -214,7 +221,7 @@
     if (section==0) {
         return self.cardListArray.count;
     }else if (section==1){
-        return 2;
+        return 1;
     }else{
         return 2;
     }
@@ -238,9 +245,9 @@
         label.text=self.shop_name;
         
     }else if (section==1){
-        label.hidden = YES;
-//        label.frame=CGRectMake(13, 7, SCREENWIDTH-13, 26);
-//        label.text=@"优惠方式";
+//        label.hidden = YES;
+        label.frame=CGRectMake(13, 7, SCREENWIDTH-13, 26);
+        label.text=@"优惠方式";
     }else if (section==2){
         label.frame=CGRectMake(13, 7, SCREENWIDTH-13, 26);
         label.text=@"支付方式";
@@ -352,23 +359,23 @@
         
     }else if (indexPath.section==1){
 
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
-//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 0, 90, 50)];
-//        label.font = [UIFont systemFontOfSize:15];
-//        [cell addSubview:label];
-//        
-//        label.textAlignment = NSTextAlignmentLeft;
-//        
-//        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 20, 20)];
-//        
-//        [cell addSubview:imageView];
-//        
-//        UILabel *contentlabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, SCREENWIDTH-150, 50)];
-//        contentlabel.font = [UIFont systemFontOfSize:12];
-//        [cell addSubview:contentlabel];
-//        
-//        contentlabel.textAlignment = NSTextAlignmentRight;
-//        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 0, 90, 50)];
+        label.font = [UIFont systemFontOfSize:15];
+        [cell addSubview:label];
+        
+        label.textAlignment = NSTextAlignmentLeft;
+        
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 20, 20)];
+        
+        [cell addSubview:imageView];
+        
+        UILabel *contentlabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, SCREENWIDTH-150, 50)];
+        contentlabel.font = [UIFont systemFontOfSize:12];
+        [cell addSubview:contentlabel];
+        
+        contentlabel.textAlignment = NSTextAlignmentRight;
+        
 //        if (indexPath.row==0) {
 //            label.text = @"使用乐点";
 //            NSLog(@"self.allPoint==%@,self.moneyString==%@",self.allPoint,self.moneyString);
@@ -397,24 +404,24 @@
 //                contentlabel.text =@"不可使用乐点";
 //            }
 //        }else
-//        {
-//            label.text = @"使用代金券";
-//            if (self.coup_dic.count>0) {
-//                contentlabel.text = [[NSString alloc]initWithFormat:@"%@代金券",self.coup_dic[@"type"]];
-//                if (self.Type == Wares) {
-//                    imageView.image = [UIImage imageNamed:@"checkbox_yes"];
-//                }else{
-//                    contentlabel.text =@"";
-//
-//                }
-//            }
-//            
-//            if(([self.moneyString floatValue]<1)&&self.moneyString)
-//            {
-//                contentlabel.text = @"不可用代金券";
-//            }
-//            
-//        }
+        {
+            label.text = @"使用代金券";
+            if (self.coup_dic.count>0) {
+                contentlabel.text = [[NSString alloc]initWithFormat:@"%@代金券",self.coup_dic[@"sum"]];
+                if (self.Type == Wares) {
+                    imageView.image = [UIImage imageNamed:@"checkbox_yes"];
+                }else{
+                    contentlabel.text =@"";
+
+                }
+            }
+            
+            if(([self.moneyString floatValue]<1)&&self.moneyString)
+            {
+                contentlabel.text = @"不可用代金券";
+            }
+            
+        }
 
     }else if (indexPath.section==2){
         
@@ -464,8 +471,8 @@
     }
     if (indexPath.section==1)
     {
-        if(indexPath.row == 1)
-        {
+//        if(indexPath.row == 1)
+//        {
             if(!([self.moneyString floatValue]<1))
             {
                 self.pay_Type=@"voucher";
@@ -473,21 +480,22 @@
                 self.canUsePoint =0;
                 MyCashCouponViewController *choiceView = [[MyCashCouponViewController alloc]init];
                 
+                choiceView.moneyString = self.moneyString;
                 choiceView.useCoupon = 100;
                 choiceView.delegate = self;
                 [self.navigationController pushViewController:choiceView animated:YES];
             }
             
-        }
-        else if(indexPath.row == 0)
-        {
-            if(!((([self.moneyString floatValue])/2)<1)){
-                self.pay_Type=@"integral";
-                self.Type = points;
-                self.coup_dic=[NSDictionary dictionaryWithObject:@"0元" forKey:@"type"];
-                [self.myTable reloadData];
-            }
-        }
+//        }
+//        else if(indexPath.row == 0)
+//        {
+//            if(!((([self.moneyString floatValue])/2)<1)){
+//                self.pay_Type=@"integral";
+//                self.Type = points;
+//                self.coup_dic=[NSDictionary dictionaryWithObject:@"0元" forKey:@"type"];
+//                [self.myTable reloadData];
+//            }
+//        }
         
     }
     if (indexPath.section==2) {
@@ -496,34 +504,42 @@
     }
     if(self.Type==Wares)
     {
-        NSRange pend = [self.coup_dic[@"type"] rangeOfString:@"元"];
-        NSString* price =[self.coup_dic[@"type"] substringToIndex:pend.location];
-        if (!(([self.moneyString floatValue]*10/100)<[price floatValue])) {
+        NSString* price =self.coup_dic[@"sum"];
+//        if (!(([self.moneyString floatValue]*10/100)<[price floatValue])) {
+//            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
+//        }else
+//        {
+//            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]*90/100)];
+//            
+//        }
+        
+        
+        if ([self.moneyString floatValue]>=[price floatValue]) {
             self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
-        }else
-        {
-            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]*90/100)];
             
         }
-        NSLog(@"self.couponArray%@",self.coup_dic[@"type"]);
         
-    }else if(self.Type==points)
-    {
-        if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
-        {
-            self.canUsePoint =(([self.moneyString floatValue])/2)*10;
-        }else
-            self.canUsePoint =[self.allPoint floatValue];
-        
-
-        
-        if(!((([self.moneyString floatValue])/2)<1))
-        {
-            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]-self.canUsePoint/10];
-        }else
-            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]];
-        
-    }else
+    }
+    
+//    else if(self.Type==points)
+//    {
+//        if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
+//        {
+//            self.canUsePoint =(([self.moneyString floatValue])/2)*10;
+//        }else
+//            self.canUsePoint =[self.allPoint floatValue];
+//        
+//
+//        
+//        if(!((([self.moneyString floatValue])/2)<1))
+//        {
+//            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]-self.canUsePoint/10];
+//        }else
+//            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]];
+//        
+//    }
+    
+    else
     {
         self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]];
     }
@@ -676,7 +692,7 @@
     if (self.Type==Wares)
     {
         [params setObject:@"voucher" forKey:@"pay_type"];
-        [params setObject:self.coup_dic[@"type"] forKey:@"content"];
+        [params setObject:self.coup_dic[@"sum"] forKey:@"content"];
     }
     else if (self.Type == points)
     {
@@ -757,7 +773,7 @@
     
     if (self.Type==Wares) {
         
-        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",self.pay_Type,@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"],self.coup_dic[@"type"]];
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",self.pay_Type,@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"],self.coup_dic[@"sum"]];
         
     }else if (self.Type == points) {
         

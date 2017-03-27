@@ -19,7 +19,6 @@
 {
     __block MBProgressHUD *hud;
     UITableView *_tableView;
-    NSArray *_dataArray;
 }
 
 -(NSMutableArray *)couponArray{
@@ -85,9 +84,24 @@
         }else{
             NSArray *arr = (NSArray*)result;
             [self.couponArray removeAllObjects];
-            for (NSDictionary *dic in arr) {
-               
+            
+            if (self.useCoupon ==100) {
+                for (NSDictionary *dic in arr) {
+                    
+                    if ([dic[@"pri_condition"] floatValue] >= [self.moneyString floatValue]) {
+                        [self.couponArray addObject:dic];
+
+                    }
+                    
+                }
+
+                
+            }else{
+                for (NSDictionary *dic in arr) {
+                    
                     [self.couponArray addObject:dic];
+                }
+ 
             }
             
         }
@@ -123,7 +137,7 @@
         
         [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,dic[@"image_url"]]]];
         cell.shopNamelab.text=dic[@"store"];
-        cell.couponMoney.text=dic[@"pri_condition"];
+        cell.couponMoney.text=dic[@"sum"];
         cell.deadTime.text= [NSString stringWithFormat:@"%@~%@",dic[@"date_start"],dic[@"date_end"]];
         cell.limitLab.text=dic[@"content"];
         
@@ -143,10 +157,21 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CouponIntroduceVC *vc=[[CouponIntroduceVC alloc]init];
-    vc.infoDic=_couponArray[indexPath.row];
-    vc.index=0;
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if (self.useCoupon ==100) {
+        
+        if (self.delegate && [_delegate respondsToSelector:@selector(sendValue:)]) {
+            [_delegate sendValue:_couponArray[indexPath.row]];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }else{
+        CouponIntroduceVC *vc=[[CouponIntroduceVC alloc]init];
+        vc.infoDic=_couponArray[indexPath.row];
+        vc.index=0;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
 }
 
 

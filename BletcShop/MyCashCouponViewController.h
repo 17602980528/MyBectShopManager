@@ -15,10 +15,11 @@
 
 @end
 @interface MyCashCouponViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)NSArray *data;
 @property (nonatomic,strong)NSMutableArray *couponArray;
 
-@property int useCoupon;
+@property (nonatomic,copy)NSString *moneyString;// 支付总额
+
+@property int useCoupon;//100代表从购买卡进入
 // 委托代理人，代理一般需使用弱引用(weak)
 @property (weak, nonatomic) id<ViewControllerBDelegate> delegate;
 @end

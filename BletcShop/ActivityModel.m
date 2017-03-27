@@ -13,9 +13,10 @@
 @implementation ActivityModel
 -(ActivityModel*)initWithDic:(NSDictionary*)dic{
 
-       self.activity = [NSString getTheNoNullStr:dic[@"id"] andRepalceStr:@""];
+    self.activity = [NSString getTheNoNullStr:dic[@"id"] ? dic[@"id"] :dic[@"activity"] andRepalceStr:@""];
     self.merchant = [NSString getTheNoNullStr:dic[@"merchant"] andRepalceStr:@""];
     if ([self.activity intValue]==1) {
+        
         
         self.Image_url = [NSString stringWithFormat:@"%@%@",ONE_ADVERTIMAGE,[NSString getTheNoNullStr:dic[@"advert_image_url"] andRepalceStr:@""]];
 

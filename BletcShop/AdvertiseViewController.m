@@ -10,6 +10,7 @@
 #import "AdvertiseCell.h"
 #import "ActivityModel.h"
 #import "SellerViewController.h"
+#import "TopActiveCell.h"
 @interface AdvertiseViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 {
@@ -39,7 +40,7 @@
     table_View = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-self.tabBarController.tabBar.frame.size.height) style:UITableViewStyleGrouped];
     table_View.dataSource = self;
     table_View.delegate = self;
-    table_View.estimatedRowHeight = 200;
+    table_View.estimatedRowHeight = 130;
     table_View.separatorStyle= UITableViewCellSeparatorStyleNone;
     table_View.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview: table_View];
@@ -143,18 +144,39 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    AdvertiseCell *cell = [AdvertiseCell advertiseCellIntiWithTableView:tableView];
+//    AdvertiseCell *cell = [AdvertiseCell advertiseCellIntiWithTableView:tableView];
+//    
+//    if (self.data_A.count!=0 && [[self.data_A firstObject] isKindOfClass:[NSDictionary class]]) {
+//        ActivityModel *model = [[ActivityModel alloc]initWithDic:self.data_A[indexPath.row]];
+//        cell.model = model;
+//        cell.goLooK.tag = indexPath.row;
+//        [cell.goLooK addTarget:self action:@selector(goLookClick:) forControlEvents:UIControlEventTouchUpInside];
+//
+//        
+//    }
     
-    if (self.data_A.count!=0 && [[self.data_A firstObject] isKindOfClass:[NSDictionary class]]) {
-        ActivityModel *model = [[ActivityModel alloc]initWithDic:self.data_A[indexPath.row]];
-        cell.model = model;
-        cell.goLooK.tag = indexPath.row;
-        [cell.goLooK addTarget:self action:@selector(goLookClick:) forControlEvents:UIControlEventTouchUpInside];
 
+    
+    
+        TopActiveCell *cell = [tableView dequeueReusableCellWithIdentifier:@"topActiveId"];
         
-    }
-
-    return cell;
+        
+        
+        
+        if (!cell) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"TopActiveCell" owner:self options:nil] lastObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        if (_data_A.count !=0) {
+            NSDictionary *dic = _data_A[indexPath.row];
+            cell.headname.text = dic[@"title"];
+            cell.headContent.text = dic[@"info"];
+            
+            [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",THIER_ADVERTIMAGE,dic[@"image_url"]]] placeholderImage:[UIImage imageNamed:@"5-01"]];
+            
+        }
+        return cell;
     
 }
 
@@ -162,19 +184,19 @@
 {
     
     
-    AdvertiseCell*cell = (AdvertiseCell*)[tableView cellForRowAtIndexPath:indexPath];
-    
-    UIButton *button =cell.goLooK;
-    
-    [self goLookClick:button];
-    
-    
-}
-
--(void)goLookClick:(UIButton*)sender{
-    
-    NSLog(@"----%ld",sender.tag);
-    NSMutableDictionary *shopInfoDic = [self.data_A objectAtIndex:sender.tag];
+//    AdvertiseCell*cell = (AdvertiseCell*)[tableView cellForRowAtIndexPath:indexPath];
+//    
+//    UIButton *button =cell.goLooK;
+//    
+//    [self goLookClick:button];
+//    
+//    
+//}
+//
+//-(void)goLookClick:(UIButton*)sender{
+//    
+//    NSLog(@"----%ld",sender.tag);
+    NSMutableDictionary *shopInfoDic = [self.data_A objectAtIndex:indexPath.row];
     
     SellerViewController *vc= [self startSellerView:shopInfoDic];
     vc.videoID=@"";
@@ -182,7 +204,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //获取商家手机号
     
-    [params setObject:shopInfoDic[@"merchant"] forKey:@"merchant"];
+    [params setObject:shopInfoDic[@"muid"] forKey:@"merchant"];
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
      {
          NSLog(@"result==%@",result);
