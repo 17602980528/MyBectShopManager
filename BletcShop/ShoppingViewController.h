@@ -12,7 +12,9 @@
 @interface ShoppingViewController : UIViewController
 @property (nonatomic,retain)NSString *menuTitle;
 @property (nonatomic,copy)NSString *classifyString;
-@property (nonatomic,retain)NSString *ereaString;
+@property (nonatomic,copy)NSString *ereaString;
+@property (nonatomic,copy)NSString *streetString;
+
 @property(nonatomic)int indexss;
 
 

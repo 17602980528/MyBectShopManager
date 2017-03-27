@@ -64,9 +64,9 @@
     UILabel *lab1=[cell viewWithTag:100];
     UILabel *lab2=[cell viewWithTag:200];
     UILabel *lab3=[cell viewWithTag:300];
-    lab1.text=_dataArray[indexPath.row][@"content"];
+    lab1.text=_dataArray[indexPath.row][@"type"];
     lab2.text=_dataArray[indexPath.row][@"datetime"];
-    lab3.text=[NSString stringWithFormat:@"-%@",_dataArray[indexPath.row][@"sum"]];
+    lab3.text=[NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"integral"]];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -80,6 +80,8 @@
     AppDelegate *del=(AppDelegate *)[UIApplication sharedApplication].delegate;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:del.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+    
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"result==%@", result);
