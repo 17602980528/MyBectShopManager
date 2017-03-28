@@ -12,6 +12,7 @@
 #import "SweetNoticeVC.h"
 #import "MyPch.pch"
 //#import "BindCustomView.h"
+#import "SellerViewController.h"
 @interface CouponIntroduceVC ()
 //{
 //    BindCustomView *alertView;
@@ -147,7 +148,45 @@
     
 }
 -(void)buyCardBtnClick:(UIButton *)sender{
+    
+    
     NSLog(@"goBuyCard");
+    
+    
+    SellerViewController *vc= [[SellerViewController alloc]init];
+    vc.title = @"商铺详情";
+    vc.infoDic = [NSMutableDictionary dictionaryWithDictionary:self.infoDic];
+    vc.videoID=@"";
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //获取商家手机号
+    
+    [params setObject:self.infoDic[@"muid"] forKey:@"merchant"];
+    
+    
+    __block typeof(self) tempSelf = self;
+
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
+     {
+         NSLog(@"%@",result);
+
+         if (result.count>0) {
+             vc.videoID=result[0][@"video"];
+             [tempSelf.navigationController pushViewController:vc animated:YES];
+         }else{
+             vc.videoID=@"";
+             [tempSelf.navigationController pushViewController:vc animated:YES];
+         }
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"%@", error);
+         vc.videoID=@"";
+         [tempSelf.navigationController pushViewController:vc animated:YES];
+     }];
+    
+
+    
 }
 -(void)notice{
     NSLog(@"notice");

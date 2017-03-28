@@ -170,7 +170,10 @@
            
             NSString *level = cityDic[@"level"];
 
-            NSDictionary *currentCityDic = [KCURRENTCITYINFODEFAULTS objectForKey:CURRENTCityDic];
+//            NSDictionary *currentCityDic = [KCURRENTCITYINFODEFAULTS objectForKey:CURRENTCityDic];
+            
+            NSDictionary *currentCityDic =[KCURRENTCITYINFODEFAULTS objectForKey:CURRENTCityDic] ? [KCURRENTCITYINFODEFAULTS objectForKey:CURRENTCityDic] : [KCURRENTCITYINFODEFAULTS objectForKey:@"locationCityDic"];
+
 
             self.choseCityBlock(currentCityDic[@"name"],[level integerValue]==3 ?cityName:@"");
 

@@ -723,10 +723,12 @@
             
             [_menu reloadData];
             
-//            DOPIndexPath *indexpath = [DOPIndexPath indexPathWithCol:1 row:0 item:0];
-            
+
             [self getAdverListRequestWithIndePath:self.indexpathSelect];
-        }
+
+            [self performSelector:@selector(setdefaultTitle) withObject:nil afterDelay:0.2];
+            
+               }
         
         NSLog(@"=========%ld",self.dataSourceCityArray.count);
         
@@ -739,6 +741,16 @@
     
     
     
+}
+-(void)setdefaultTitle{
+    
+    if ([_menu.dataSource respondsToSelector:@selector(menu:numberOfItemsInRow:column:)]) {
+        
+        [_menu selectIndexPath:self.indexpathSelect];
+
+    }
+    
+
 }
 //获取广告请求
 
