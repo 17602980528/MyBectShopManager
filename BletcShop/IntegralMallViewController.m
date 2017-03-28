@@ -17,14 +17,16 @@
 #import "PointAllGetAndCostsVC.h"//积分明细
 #import "ConvertCostVC.h"
 #import "SDCycleScrollView.h"
+
 @interface IntegralMallViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 {
     UIImageView *headImageView;
     UILabel *convertLabel;
     UIView *slipBackView;
-    NSString *pointInt;
-    
+   
+    NSDictionary *pointAndSign_dic;
+
     NSMutableArray* _adverImages;
 
 
@@ -54,8 +56,11 @@ static NSString *const headId = @"headId";
     [self createCollectionView];
 
     [self getLunBoAdvert];
+    
+    
 
 }
+
 
 -(void)createCollectionView{
     
@@ -195,16 +200,6 @@ static NSString *const headId = @"headId";
         [headView addSubview:headImageView];
         headImageView.contentMode = UIViewContentModeScaleAspectFill;
         
-        AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
-        if (delegate.IsLogin)
-        {
-            //请求积分等
-            NSLog(@"%@",delegate.userInfoDic);
-            NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,[delegate.userInfoDic objectForKey:@"headimage"]]];
-            
-            [headImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-            
-        }
         
         
         UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goLandingOrNot)];
@@ -216,19 +211,52 @@ static NSString *const headId = @"headId";
         convertLabel.textAlignment=NSTextAlignmentLeft;
         convertLabel.font=[UIFont systemFontOfSize:16.0f];
         convertLabel.textColor=NavBackGroundColor;//RGB(66, 170, 250);
-        convertLabel.text= [NSString stringWithFormat:@"%ld积分",[pointInt integerValue] ];
+        
+        convertLabel.text= [NSString stringWithFormat:@"%ld积分",[pointAndSign_dic[@"integral"] integerValue] ];
         [headView addSubview:convertLabel];
         
         UIButton *signBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        signBtn.frame=CGRectMake(SCREENWIDTH-128, 15, 120, 30);
-        signBtn.backgroundColor=NavBackGroundColor;//RGB(66, 170, 250);
-        [signBtn setTitle:@"积分规则" forState:UIControlStateNormal];
+        signBtn.frame=CGRectMake(SCREENWIDTH-88, 15, 80, 30);
+        
+        if ([pointAndSign_dic[@"signed"]isEqualToString:@"yes"]) {
+            [signBtn setTitle:@"已签到" forState:UIControlStateNormal];
+            signBtn.backgroundColor=RGB(202, 202, 202);
+            
+
+            signBtn.enabled = NO;
+        }else{
+            signBtn.enabled = YES;
+
+            [signBtn setTitle:@"签到" forState:UIControlStateNormal];
+            signBtn.backgroundColor=NavBackGroundColor;
+        }
         [signBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        signBtn.titleLabel.font=[UIFont systemFontOfSize:13.0f];
+        signBtn.titleLabel.font=[UIFont systemFontOfSize:14.0f];
         signBtn.layer.cornerRadius=15;
         signBtn.clipsToBounds=YES;
         [headView addSubview:signBtn];
-        [signBtn addTarget:self action:@selector(pointUseRule) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+        if (delegate.IsLogin)
+        {
+            //请求积分等
+            NSLog(@"%@",delegate.userInfoDic);
+            NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,[delegate.userInfoDic objectForKey:@"headimage"]]];
+            
+            [headImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+            [signBtn addTarget:self action:@selector(signBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+
+            
+        }else{
+            
+            [signBtn addTarget:self action:@selector(goLandingOrNot) forControlEvents:UIControlEventTouchUpInside];
+
+            signBtn.backgroundColor=[UIColor lightGrayColor];//RGB(66, 170, 250);
+
+        }
+
+        
         
         UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 63, SCREENWIDTH, 1)];
         lineView.backgroundColor=RGB(234, 234, 234);
@@ -311,7 +339,8 @@ static NSString *const headId = @"headId";
     NSInteger sum=[_data_A[indexPath.row][@"sum"] integerValue];
     NSInteger remain=[_data_A[indexPath.row][@"remain"] integerValue];
     pointCostVC.converRecordCount=[NSString stringWithFormat:@"%ld",(sum-remain)];
-    pointCostVC.totalPoint=pointInt;
+    pointCostVC.totalPoint=pointAndSign_dic[@"integral"];
+    
     [self.navigationController pushViewController:pointCostVC animated:YES];
 
 }
@@ -376,7 +405,34 @@ static NSString *const headId = @"headId";
     }];
     
 }
+//签到
+-(void)signBtnClick:(UIButton*)sender{
+    
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/mall/sign",BASEURL ];
+    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
 
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:delegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"result==%@", result);
+        if ([result[@"result_code"] intValue]==1) {
+            
+         [self postRequestPointWithSign:delegate.userInfoDic[@"uuid"]];
+            
+            
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
+    
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -386,7 +442,9 @@ static NSString *const headId = @"headId";
     {
         //请求积分等
         NSLog(@"%@",delegate.userInfoDic);
-        [self postRequestPointWithString:delegate.userInfoDic[@"uuid"] WithKind:@"integral"];
+        [self postRequestPointWithSign:delegate.userInfoDic[@"uuid"]];
+        
+        
         NSURL * nurl1=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,[delegate.userInfoDic objectForKey:@"headimage"]]];
         
         [headImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
@@ -396,20 +454,22 @@ static NSString *const headId = @"headId";
     }
     
 }
--(void)postRequestPointWithString:(NSString *)uuid WithKind:(NSString *)kind{
+-(void)postRequestPointWithSign:(NSString *)uuid {
     
     //请求乐点数
-    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountGet",BASEURL ];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/mall/getIntegral",BASEURL ];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:uuid forKey:@"uuid"];
-    [params setObject:kind forKey:@"type"];
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"result==%@", result);
         if (result) {
-            pointInt=[NSString getTheNoNullStr:[NSString stringWithFormat:@"%@",result[@"integral"]] andRepalceStr:@"0"];
+            
+            pointAndSign_dic = [NSDictionary dictionaryWithDictionary:result];
+            ;
+            [self.collectionView reloadData];
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {

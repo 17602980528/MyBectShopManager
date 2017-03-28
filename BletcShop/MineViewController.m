@@ -27,7 +27,7 @@
 #import "MyCashCouponViewController.h"
 #import "PointRuleViewController.h"
 #import "EndOrBeginningViewController.h"
-
+#import "WXApi.h"
 
 #import "UIButton+WebCache.h"
 
@@ -611,6 +611,46 @@
             NSLog(@"************Share fail with error %@*********",error);
         }else{
             NSLog(@"response data is %@",result);
+
+            if ([result isKindOfClass:[UMSocialShareResponse class]]) {
+                if (platforeType == UMSocialPlatformType_WechatTimeLine || platforeType == UMSocialPlatformType_Sina) {
+                    
+                    
+                    NSString *url = [NSString stringWithFormat:@"%@UserType/share/resolve",BASEURL];
+                    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+                    
+                    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+                    
+                    
+                    [paramer setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+                    if (platforeType == UMSocialPlatformType_WechatTimeLine) {
+                        [paramer setObject:@"微信分享" forKey:@"tip"];
+
+                    }else{
+                        [paramer setObject:@"微博分享" forKey:@"tip"];
+
+                    }
+                    
+                    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+                        
+                        
+                        if ([result[@"result_code"] integerValue]==1) {
+                            NSString *reward =result[@"reward"];
+                        }
+                        
+                        
+                    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        
+                    }];
+
+                }
+                
+                
+                
+            }else{
+                NSLog(@"response data is %@",result);
+ 
+            }
         }
     }];
     

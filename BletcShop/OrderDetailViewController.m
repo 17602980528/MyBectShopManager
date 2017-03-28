@@ -14,7 +14,7 @@
 
 #import "DefaultAddressVC.h"
 
-@interface OrderDetailViewController ()
+@interface OrderDetailViewController ()<UIAlertViewDelegate>
 
 {
     NSDictionary *receiceInfo;
@@ -112,47 +112,12 @@
           
             
         }else{
-            NSString *url = [NSString stringWithFormat:@"%@Extra/mall/exchange",BASEURL];
             
-            NSMutableDictionary *paramer =[NSMutableDictionary dictionary];
-            
-            [paramer setObject:app.userInfoDic[@"uuid"] forKey:@"uuid"];
-            [paramer setObject:self.product_dic[@"id"] forKey:@"goods_id"];
-            [paramer setObject:self.acturePrice.text forKey:@"sum"];
-
-            [paramer setObject:self.receive_p_address.text forKey:@"address"];
-            
-            [paramer setObject:self.receive_p_phone.text forKey:@"phone"];
-            [paramer setObject:self.receive_p_name.text forKey:@"name"];
-
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确定兑换该商品?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [altView show];
             
             
-            
-            NSLog(@"paramer------%@",paramer);
-            
-            [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-                NSLog(@"result----%@",result);
-                NSString *message;
-                
-                if ([result[@"result_code"] integerValue]==1) {
-                   message = @"您已兑换成功,商品准备发货!";
-                }else{
-                    
-                    message = @"兑换失败!";
-  
-                }
-               
-                UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                
-                
-                [alt show];
-                
-            } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-                
-                NSLog(@"error---%@",error);
-            }];
-            
-        }
+                   }
  
     }else{
         LandingController *VC = [[LandingController alloc]init];
@@ -164,5 +129,54 @@
     
 }
 
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==1) {
+        
+        NSString *url = [NSString stringWithFormat:@"%@Extra/mall/exchange",BASEURL];
+        
+        NSMutableDictionary *paramer =[NSMutableDictionary dictionary];
+        
+        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+        [paramer setObject:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+        [paramer setObject:self.product_dic[@"id"] forKey:@"goods_id"];
+        [paramer setObject:self.acturePrice.text forKey:@"sum"];
+        
+        [paramer setObject:self.receive_p_address.text forKey:@"address"];
+        
+        [paramer setObject:self.receive_p_phone.text forKey:@"phone"];
+        [paramer setObject:self.receive_p_name.text forKey:@"name"];
+        
+        
+        
+        
+        NSLog(@"paramer------%@",paramer);
+        
+        [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+            NSLog(@"result----%@",result);
+            NSString *message;
+            
+            if ([result[@"result_code"] integerValue]==1) {
+                message = @"您已兑换成功,商品准备发货!";
+            }else{
+                
+                message = @"兑换失败!";
+                
+            }
+            
+            UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            
+            
+            [alt show];
+            
+        } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            NSLog(@"error---%@",error);
+        }];
+        
+
+    }
+}
 
 @end

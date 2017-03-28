@@ -730,7 +730,6 @@
         if (indexPath.row == 3) {
             self.pickerView.dataSource = self.marray_A;
         }
-        __weak typeof(self) weakSelf = self;
         
         self.pickerView.valueDidSelect = ^(NSString * value){
             
