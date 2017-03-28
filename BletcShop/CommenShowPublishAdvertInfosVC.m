@@ -105,7 +105,11 @@
         button.layer.cornerRadius = 4;
         [button addTarget:self action:@selector(gotopay) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:button];
-        
+        if ([self.applyState isEqualToString:@"WAIT_FOR_PAY"]) {
+            button.hidden=NO;
+        }else{
+            button.hidden=YES;
+        }
         return view;
     }else return nil;
 }

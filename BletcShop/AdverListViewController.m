@@ -149,12 +149,12 @@
     return 141;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    if (_selectTag==3) {
+    if (_selectTag==3) {
         return 50;
-//    }else{
-//        return 0.01;
-//    }
-//    return 0.01;
+    }else{
+        return 0.01;
+    }
+    return 0.01;
 }
 
 
@@ -170,7 +170,7 @@
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 0, SCREENWIDTH, 1)];
     line.backgroundColor = RGB(246,246,246);
     [view addSubview:line];
-//    if (_selectTag==3) {
+    if (_selectTag==3) {
         UIButton *deleteButton=[UIButton buttonWithType:UIButtonTypeCustom];
         deleteButton.frame=CGRectMake(SCREENWIDTH-115-20-100, 10, 100, 30);
         deleteButton.backgroundColor=[UIColor whiteColor];
@@ -196,8 +196,8 @@
         payButton.tag=section;
         [view addSubview:payButton];
         [payButton addTarget:self action:@selector(payForPublish:) forControlEvents:UIControlEventTouchUpInside];
-//    }
-    
+    }
+
     return view;
     
 }
@@ -362,8 +362,11 @@
     
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{//applyState
+    CommenShowPublishAdvertInfosVC *vc=[[CommenShowPublishAdvertInfosVC alloc]init];
+    vc.infoDic=self.data_A[indexPath.section];
+    vc.applyState=stateArray[self.selectTag];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 -(void)postRequestDataBaseState:(NSString *)state{

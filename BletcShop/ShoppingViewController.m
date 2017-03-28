@@ -166,7 +166,7 @@
     
     
     if (arr != [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEreaList"] || [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEareDic"] != curentEare) {
-        
+        curentEare = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEareDic"];
         NSLog(@"getData");
         [self getData];
     }
@@ -192,7 +192,7 @@
     [super viewDidLoad];
     self.indexss=1;
     NSLog(@"viewDidLoad");
-    curentEare = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEareDic"];;
+    curentEare = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentEareDic"];
     [self getData];
 
     

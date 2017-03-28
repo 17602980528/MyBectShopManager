@@ -10,4 +10,5 @@
 
 @interface CommenShowPublishAdvertInfosVC : UITableViewController
 @property(nonatomic,strong)NSDictionary *infoDic;
+@property(nonatomic,copy)NSString *applyState;
 @end
