@@ -321,7 +321,7 @@
             case 1:
             {
                 huiyuanLabel.text = @"活动类型:";
-                huiyuanText.text =dic[@"adver_type"];
+                huiyuanText.text =dic[@"advert_type"];
                 
                 
             }
@@ -381,7 +381,7 @@
         [self.data_A removeAllObjects];
     }
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-//        NSLog(@"result===%@",result);
+        NSLog(@"result===%@",result);
         if (result) {
             id objc_activity = result[@"activity"];
             if ([objc_activity isKindOfClass:[NSArray class]]) {

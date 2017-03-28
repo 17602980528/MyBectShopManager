@@ -253,11 +253,11 @@
     
     NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/upload/upload",BASEURL];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
-//    NSLog(@"%f",time);
-//    self.date = (long long int)time;
+    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+    NSLog(@"%f",time);
+    self.date = (long long int)time;
     
-    NSString *nameValue = [[NSString alloc]initWithFormat:@"%@",[appdelegate.shopInfoDic objectForKey:@"muid"]];
+    NSString *nameValue = [[NSString alloc]initWithFormat:@"%@_%lld",[appdelegate.shopInfoDic objectForKey:@"muid"],self.date];
     NSData *img_Data = [NSData dataWithContentsOfFile:fullPath];
     
     NSMutableDictionary *parmer = [NSMutableDictionary dictionary];

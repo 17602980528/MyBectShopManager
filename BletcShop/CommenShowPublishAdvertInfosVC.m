@@ -69,7 +69,7 @@
     if ([_infoDic[@"mark"] isEqualToString:@"near"]) {
         data_A = @[@[appdelegate.shopInfoDic[@"store"],_infoDic[@"advert_cate"],_infoDic[@"address"],@"周边",_infoDic[@"position"]],@[_infoDic[@"datetime"],type,counts,_infoDic[@"sum"]]];
     }else{
-        data_A = @[@[appdelegate.shopInfoDic[@"store"],_infoDic[@"advert_cate"],_infoDic[@"address"],_infoDic[@"adver_type"],_infoDic[@"position"]],@[_infoDic[@"datetime"],type,counts,_infoDic[@"sum"]]];
+        data_A = @[@[appdelegate.shopInfoDic[@"store"],_infoDic[@"advert_cate"],_infoDic[@"address"],_infoDic[@"advert_type"],_infoDic[@"position"]],@[_infoDic[@"datetime"],type,counts,_infoDic[@"sum"]]];
     }
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = RGB(240, 240, 240);
