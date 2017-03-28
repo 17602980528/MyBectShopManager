@@ -26,13 +26,13 @@
 
 -(NSArray *)section1_A{
     if (!_section1_A) {
-        _section1_A = @[@"商家名称",@"广告类型",@"广告地区",@"活动类型",@"广告位置",@"图文详情"];
+        _section1_A = @[@"商家名称",@"广告类型",@"广告地区",@"活动类型",@"广告位置"];
     }
     return _section1_A;
 }
 -(NSArray *)section2_A{
     if (!_section2_A) {
-        _section2_A = @[@"有效日期",@"提交日期",@"收费方式",@"购买次数 ",@"优惠金额",@"实付金额",@"结算状态"];
+        _section2_A = @[@"提交日期",@"收费方式",@"购买次数 ",@"实付金额"];
     }
     return _section2_A;
 }
@@ -53,10 +53,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"广告列表";
-    
+    NSLog(@"====>>>%@",self.infoDic);
     dataSourse_A = @[self.section1_A,self.section2_A];
-    data_A = @[@[@"商消乐",@"顶部活动轮播页面",@"西安市高新区富鱼路",@"美发类",@"1-12",@""],@[@"2016-12-01至2017-05-07",@"2016-12-08 17:00:05",@"按点击量",@"1000次",@"￥0",@"￥299",@"未结算"]];
+    NSString *type=self.infoDic[@"pay_type"];
+    NSString *counts=self.infoDic[@"pay_content"];
+    if ([type isEqualToString:@"click"]) {
+        type=@"按点击量";
+        counts=[NSString stringWithFormat:@"%@次",counts];
+    }else{
+        type=@"按天数";
+        counts=[NSString stringWithFormat:@"%@天",counts];
+    }
+    AppDelegate *appdelegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
     
+    if ([_infoDic[@"mark"] isEqualToString:@"near"]) {
+        data_A = @[@[appdelegate.shopInfoDic[@"store"],_infoDic[@"advert_cate"],_infoDic[@"address"],@"周边",_infoDic[@"position"]],@[_infoDic[@"datetime"],type,counts,_infoDic[@"sum"]]];
+    }else{
+        data_A = @[@[appdelegate.shopInfoDic[@"store"],_infoDic[@"advert_cate"],_infoDic[@"address"],_infoDic[@"adver_type"],_infoDic[@"position"]],@[_infoDic[@"datetime"],type,counts,_infoDic[@"sum"]]];
+    }
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = RGB(240, 240, 240);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -324,10 +338,10 @@
     
     switch (selectBtn.tag) {
         case 0:
-            //[self initAlipayInfo];
+            [self initAlipayInfo];
             break;
         case 1:
-            //[self postPaymentsRequest];
+            [self postPaymentsRequest];
             break;
         default:
             break;
@@ -338,191 +352,133 @@
 /**
  银联支付
  */
-//-(void)postPaymentsRequest
-//{
-//    
-//    //    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/TPConsume.php";
-//    NSString *url ;
-//    
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//    
-//    
-//    [params setValue:appdelegate.userInfoDic[@"uuid"] forKey:@"b_uuid"];
-//    [params setValue:_model.uuid forKey:@"s_uuid"];
-//    [params setValue:_model.muid forKey:@"muid"];
-//    [params setValue:_model.card_code forKey:@"card_code"];
-//    [params setValue:_model.card_level forKey:@"card_level"];
-//    
-//    
-//    if ([_model.method isEqualToString:@"share"]) {
-//        NSLog(@"蹭卡");
-//        url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Share.php";
-//        
-//        [params setValue:_model.card_type forKey:@"card_type"];
-//        [params setValue:allPayMoney forKey:@"b_sum"];
-//        
-//        
-//        
-//        [params setValue:chargeMoney forKey:@"s_sum"];
-//        
-//    }else{
-//        NSLog(@"买二手卡");
-//        url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Transfer.php";
-//        
-//        [params setValue:priceString forKey:@"sum"];
-//        
-//    }
-//    
-//    
-//    
-//    
-//    NSLog(@"params-----%@",params);
-//    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-//        
-//        NSLog(@"银联支付===%@", result);
-//        NSArray *arr = result;
-//        
-//#ifdef DEBUG
-//        [[UPPaymentControl defaultControl] startPay:[arr objectAtIndex:0] fromScheme:@"blectShop" mode:@"01" viewController:self];
-//        
-//        
-//#else
-//        [[UPPaymentControl defaultControl] startPay:[arr objectAtIndex:0] fromScheme:@"blectShop" mode:@"00" viewController:self];
-//        
-//        
-//#endif
-//        
-//        
-//        
-//        
-//        
-//    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        
-//        NSLog(@"error%@", error);
-//        
-//    }];
-//    
-//}
-//- (void)handlePaymentResult:(NSURL*)url completeBlock:(UPPaymentResultBlock)completionBlock
-//
-//{
-//    
-//    NSLog(@"UPPaymentResultBlock====%@",completionBlock);
-//    
-//}
-//-(void)initAlipayInfo{
-//    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//    NSLog(@"appdelegate.cardInfo_dic==%@",appdelegate.cardInfo_dic);
-//    appdelegate.whoPay =1;//办卡
-//    /*
-//     *生成订单信息及签名
-//     */
-//    //将商品信息赋予AlixPayOrder的成员变量
-//    Order *order = [[Order alloc] init];
-//    order.partner = kAlipayPartner;
-//    order.sellerID = kAlipaySeller;
-//    int x= arc4random()%100000;
-//    NSDate *currentDate = [NSDate date];//获取当前时间，日期
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"YYYYMMddhhmmss"];
-//    NSString *dateString = [dateFormatter stringFromDate:currentDate];
-//    
-//    
-//    //    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
-//    //    NSInteger date = (long long int)time;
-//    NSString *outtrade =[[NSString alloc]initWithFormat:@"%@%5d",dateString,x];
-//    NSLog(@"%@",outtrade);
-//    order.outTradeNO = outtrade; //订单ID（由商家自行制定）
-//    
-//    
-//    
-//    
-//    
-//    if ([_model.method isEqualToString:@"share"]) {
-//        NSLog(@"蹭卡");
-//        order.subject = @"蹭卡"; //商品标题
-//        
-//        order.notifyURL =  @"http://101.201.100.191/alipay/share_notify_url.php"; //回调URL
-//        
-//        
-//        //        float serviceCharge = [priceTextField.text floatValue]*[_model.rate floatValue]*0.01;
-//        //        NSString *serviceCharge_s = [NSString stringWithFormat:@"%f",serviceCharge];
-//        
-//        order.totalFee = allPayMoney;
-//        
-//        
-//        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@",_model.uuid,appdelegate.userInfoDic[@"uuid"],_model.muid,_model.card_code,_model.card_level,_model.card_type,priceTextField.text,chargeMoney];
-//        
-//        
-//    }else{
-//        NSLog(@"买二手卡");
-//        order.subject = @"购买二手卡"; //商品标题
-//        
-//        order.notifyURL =  @"http://101.201.100.191/alipay/transfer_notify_url.php"; //回调URL
-//        order.totalFee = priceString;
-//        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@",_model.uuid,appdelegate.userInfoDic[@"uuid"],_model.muid,_model.card_code,_model.card_level,priceString];
-//        
-//    }
-//    
-//    
-//    NSLog(@"order.body====%@",order.body);
-//    
-//    order.service = @"mobile.securitypay.pay";
-//    order.paymentType = @"1";
-//    order.inputCharset = @"utf-8";
-//    order.itBPay = @"30m";
-//    order.showURL = @"m.alipay.com";
-//    
-//    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-//    NSString *appScheme = @"blectShop";
-//    
-//    //将商品信息拼接成字符串
-//    NSString *orderSpec = [order description];
-//    NSLog(@"orderSpec = %@",orderSpec);
-//    
-//    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-//    id<DataSigner> signer = CreateRSADataSigner(kAlipayPrivateKey);
-//    NSString *signedString = [signer signString:orderSpec];
-//    
-//    //将签名成功字符串格式化为订单字符串,请严格按照该格式
-//    NSString *orderString = nil;
-//    if (signedString != nil) {
-//        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
-//                       orderSpec, signedString, @"RSA"];
-//        
-//        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic)
-//         {
-//             NSLog(@"BuyCardChoicePayViewControllerreslut = %@",resultDic);
-//             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
-//             if (orderState==9000) {
-//                 
-//                 //                 PaySuccessVc *VC = [[PaySuccessVc alloc]init];
-//                 //                 VC.orderInfoType = self.orderInfoType;
-//                 //                 VC.card_dic = self.card_dic;
-//                 //                 VC.money_str = [self.contentLabel.text substringFromIndex:4];
-//                 //
-//                 //                 [self.navigationController pushViewController:VC animated:YES];
-//                 
-//                 
-//                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"恭喜" message:@"您已成功支付啦!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//                 
-//                 [alert show];
-//                 
-//             }else{
-//                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是否放弃当前交易?" delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:@"去支付", nil];
-//                 alert.tag =1111;
-//                 [alert show];
-//                 //
-//             }
-//             
-//             
-//             
-//         }];
-//        
-//    }
-//    
-//}
+-(void)postPaymentsRequest
+{
+    NSString *url ;
+    url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Transfer.php";
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    [params setValue:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
+    [params setValue:_infoDic[@"mark"] forKey:@"type"];
+    if ([_infoDic[@"mark"] isEqualToString:@"near"]) {
+        [params setValue:_infoDic[@"address"] forKey:@"id"];
+    }else{
+         [params setValue:_infoDic[@"id"] forKey:@"id"];
+    }
+    [params setValue:_infoDic[@"sum"] forKey:@"sum"];
+    [params setValue:_infoDic[@"advert_cate"] forKey:@"des"];
+    
+    NSLog(@"params-----%@",params);
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"银联支付===%@", result);
+        NSArray *arr = result;
+        
+#ifdef DEBUG
+        [[UPPaymentControl defaultControl] startPay:[arr objectAtIndex:0] fromScheme:@"blectShop" mode:@"01" viewController:self];
+        
+        
+#else
+        [[UPPaymentControl defaultControl] startPay:[arr objectAtIndex:0] fromScheme:@"blectShop" mode:@"00" viewController:self];
+        
+        
+#endif
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"error%@", error);
+        
+    }];
+    
+}
+- (void)handlePaymentResult:(NSURL*)url completeBlock:(UPPaymentResultBlock)completionBlock
+
+{
+    
+    NSLog(@"UPPaymentResultBlock====%@",completionBlock);
+    
+}
+-(void)initAlipayInfo{
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    /*
+     *生成订单信息及签名
+     */
+    //将商品信息赋予AlixPayOrder的成员变量
+    Order *order = [[Order alloc] init];
+    order.partner = kAlipayPartner;
+    order.sellerID = kAlipaySeller;
+    int x= arc4random()%100000;
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYYMMddhhmmss"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    
+    
+    //    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+    //    NSInteger date = (long long int)time;
+    NSString *outtrade =[[NSString alloc]initWithFormat:@"%@%5d",dateString,x];
+    NSLog(@"%@",outtrade);
+    order.outTradeNO = outtrade; //订单ID（由商家自行制定）
+    order.subject = @"周边广告支付"; //商品标题
+    order.notifyURL =  @"http://101.201.100.191/alipay/advert_notify_urlphp"; //回调URL
+    order.totalFee = _infoDic[@"sum"];
+    NSString *idss;
+    if ([_infoDic[@"mark"] isEqualToString:@"near"]) {
+        idss=_infoDic[@"address"];
+    }else{
+        idss=_infoDic[@"id"];
+    }
+    order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#",_infoDic[@"advert_cate"],idss,appdelegate.shopInfoDic[@"muid"],_infoDic[@"position"]];
+    NSLog(@"order.body====%@",order.body);
+    
+    order.service = @"mobile.securitypay.pay";
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    order.itBPay = @"30m";
+    order.showURL = @"m.alipay.com";
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+    NSString *appScheme = @"blectShop";
+    
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    id<DataSigner> signer = CreateRSADataSigner(kAlipayPrivateKey);
+    NSString *signedString = [signer signString:orderSpec];
+    
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+        
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic)
+         {
+             NSLog(@"BuyCardChoicePayViewControllerreslut = %@",resultDic);
+             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
+             if (orderState==9000) {
+                 
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"恭喜" message:@"您已成功支付啦!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                 
+                 [alert show];
+                 
+             }else{
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是否放弃当前交易?" delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:@"去支付", nil];
+                 alert.tag =1111;
+                 [alert show];
+                 //
+             }
+             
+         }];
+        
+    }
+    
+}
 - (void)processOrderWithPaymentResult:(NSURL *)resultUrl
                       standbyCallback:(CompletionBlock)completionBlock
 {
@@ -542,10 +498,10 @@
         if (buttonIndex ==1) {
             
             if (selectBtn.tag==0) {
-                //[self initAlipayInfo];
+                [self initAlipayInfo];
             }else if (selectBtn.tag==1){
                 
-                //[self postPaymentsRequest];
+                [self postPaymentsRequest];
             }
             
         }

@@ -149,12 +149,12 @@
     return 141;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (_selectTag==3) {
+//    if (_selectTag==3) {
         return 50;
-    }else{
-        return 0.01;
-    }
-    return 0.01;
+//    }else{
+//        return 0.01;
+//    }
+//    return 0.01;
 }
 
 
@@ -170,7 +170,7 @@
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 0, SCREENWIDTH, 1)];
     line.backgroundColor = RGB(246,246,246);
     [view addSubview:line];
-    if (_selectTag==3) {
+//    if (_selectTag==3) {
         UIButton *deleteButton=[UIButton buttonWithType:UIButtonTypeCustom];
         deleteButton.frame=CGRectMake(SCREENWIDTH-115-20-100, 10, 100, 30);
         deleteButton.backgroundColor=[UIColor whiteColor];
@@ -196,7 +196,7 @@
         payButton.tag=section;
         [view addSubview:payButton];
         [payButton addTarget:self action:@selector(payForPublish:) forControlEvents:UIControlEventTouchUpInside];
-    }
+//    }
     
     return view;
     
@@ -308,7 +308,7 @@
             case 0:
             {
                 huiyuanLabel.text = @"广告类型:";
-                huiyuanText.text = dic[@"datetime"];
+                huiyuanText.text = dic[@"advert_cate"];
                 CGSize size = [UILabel getSizeWithLab:huiyuanLabel andMaxSize:CGSizeMake(1000, 1000)];
                 
                 CGRect frame = huiyuanText.frame;
@@ -321,7 +321,7 @@
             case 1:
             {
                 huiyuanLabel.text = @"活动类型:";
-                huiyuanText.text =dic[@"datetime"];
+                huiyuanText.text =dic[@"adver_type"];
                 
                 
             }
@@ -337,19 +337,17 @@
             case 3:
             {
                 huiyuanLabel.text = @"收费方式:";
-                huiyuanText.text = dic[@"pay_type"];
-                
-                
-                
+                if ([dic[@"pay_type"] isEqualToString:@"click"]) {
+                    huiyuanText.text=@"按点击量";
+                }else{
+                    huiyuanText.text = @"按天数";
+                }
             }
                 break;
             case 4:
             {
                 huiyuanLabel.text = @"地区:";
-                huiyuanText.text = dic[@"datetime"];
-                
-                
-                
+                huiyuanText.text = dic[@"address"];
             }
                 break;
                 
@@ -443,7 +441,8 @@
 }
 //取消订单
 -(void)deletePublish:(UIButton *)sender{
-    
+    NSDictionary *dic=self.data_A[sender.tag];
+    [self postCancerApplayCationWithDic:dic];
 }
 //去付款
 -(void)payForPublish:(UIButton *)sender{
@@ -451,5 +450,36 @@
     CommenShowPublishAdvertInfosVC *vc=[[CommenShowPublishAdvertInfosVC alloc]init];
     vc.infoDic=self.data_A[sender.tag];
     [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)postCancerApplayCationWithDic:(NSDictionary *)dic{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:dic[@"muid"] forKey:@"muid"];
+    [params setValue:dic[@"position"] forKey:@"position"];
+    
+    NSString *url;
+    if ([dic[@"mark"] isEqualToString:@"top"]) {
+        url=[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/del",BASEURL];
+        [params setValue:dic[@"id"] forKey:@"id"];
+    }else if ([dic[@"mark"] isEqualToString:@"activity"]){
+        url=[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/del",BASEURL];
+        [params setValue:dic[@"id"] forKey:@"id"];
+    }else if ([dic[@"mark"] isEqualToString:@"near"]){
+        url=[[NSString alloc]initWithFormat:@"%@MerchantType/advertNear/del",BASEURL];
+        [params setValue:dic[@"address"] forKey:@"address"];
+    }
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"result===%@",result);
+        if (result&&[result[@"result_code"]integerValue]==1) {
+            [self postRequestDataBaseState:@"WAIT_FOR_PAY"];
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
+    
 }
 @end
