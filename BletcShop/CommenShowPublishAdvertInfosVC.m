@@ -371,6 +371,7 @@
     }else{
          [params setValue:_infoDic[@"id"] forKey:@"id"];
     }
+    [params setValue:_infoDic[@"position"] forKey:@"position"];
     [params setValue:_infoDic[@"sum"] forKey:@"sum"];
     [params setValue:_infoDic[@"advert_cate"] forKey:@"des"];
     

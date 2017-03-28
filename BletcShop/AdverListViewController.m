@@ -452,6 +452,7 @@
     NSLog(@"%ld",sender.tag);
     CommenShowPublishAdvertInfosVC *vc=[[CommenShowPublishAdvertInfosVC alloc]init];
     vc.infoDic=self.data_A[sender.tag];
+    vc.applyState=stateArray[self.selectTag];
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)postCancerApplayCationWithDic:(NSDictionary *)dic{
