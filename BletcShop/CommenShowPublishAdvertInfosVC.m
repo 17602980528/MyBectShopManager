@@ -69,7 +69,7 @@
     if ([_infoDic[@"mark"] isEqualToString:@"near"]) {
         data_A = @[@[appdelegate.shopInfoDic[@"store"],_infoDic[@"advert_cate"],_infoDic[@"address"],@"周边",_infoDic[@"position"]],@[_infoDic[@"datetime"],type,counts,_infoDic[@"sum"]]];
     }else{
-        data_A = @[@[appdelegate.shopInfoDic[@"store"],_infoDic[@"advert_cate"],_infoDic[@"address"],_infoDic[@"adver_type"],_infoDic[@"position"]],@[_infoDic[@"datetime"],type,counts,_infoDic[@"sum"]]];
+        data_A = @[@[appdelegate.shopInfoDic[@"store"],_infoDic[@"advert_cate"],_infoDic[@"address"],_infoDic[@"advert_type"],_infoDic[@"position"]],@[_infoDic[@"datetime"],type,counts,_infoDic[@"sum"]]];
     }
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = RGB(240, 240, 240);
@@ -254,7 +254,7 @@
     [backView addSubview:moneylab];
     
     UILabel *pricelab = [[UILabel alloc]initWithFrame:CGRectMake(0, line.bottom +51*2+17, SCREENWIDTH-24, 19)];
-    pricelab.text = [NSString stringWithFormat:@"%@元",@"299"];
+    pricelab.text = [NSString stringWithFormat:@"%@元",_infoDic[@"sum"]];
     pricelab.textColor = RGB(51,51,51);
     pricelab.font = [UIFont systemFontOfSize:21];
     pricelab.textAlignment = NSTextAlignmentRight;
@@ -359,7 +359,7 @@
 -(void)postPaymentsRequest
 {
     NSString *url ;
-    url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Transfer.php";
+    url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/AdvertPay.php";
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -371,7 +371,9 @@
     }else{
          [params setValue:_infoDic[@"id"] forKey:@"id"];
     }
-    [params setValue:_infoDic[@"sum"] forKey:@"sum"];
+    [params setValue:_infoDic[@"position"] forKey:@"position"];
+    NSString *money=[NSString stringWithFormat:@"%ld",[_infoDic[@"sum"]integerValue]*100];
+    [params setValue:money forKey:@"sum"];
     [params setValue:_infoDic[@"advert_cate"] forKey:@"des"];
     
     NSLog(@"params-----%@",params);
@@ -426,7 +428,7 @@
     NSString *outtrade =[[NSString alloc]initWithFormat:@"%@%5d",dateString,x];
     NSLog(@"%@",outtrade);
     order.outTradeNO = outtrade; //订单ID（由商家自行制定）
-    order.subject = @"周边广告支付"; //商品标题
+    order.subject = _infoDic[@"advert_cate"]; //商品标题
     order.notifyURL =  @"http://101.201.100.191/alipay/advert_notify_urlphp"; //回调URL
     order.totalFee = _infoDic[@"sum"];
     NSString *idss;
