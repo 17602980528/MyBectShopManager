@@ -26,7 +26,7 @@
 
 #import "LZDCenterViewController.h"
 #import "TopActiveListTableVC.h"
-
+#import "SDCycleScrollView.h"
 
 #import "ScanViewController.h"
 #import "HolidayActivertyVC.h"
@@ -36,7 +36,7 @@
 #import "JFAreaDataManager.h"
 #import "HotNewsVC.h"
 
-@interface HomeViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GYChangeTextViewDelegate,SelectCityDelegate,JFLocationDelegate>
+@interface HomeViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GYChangeTextViewDelegate,SelectCityDelegate,JFLocationDelegate,SDCycleScrollViewDelegate>
 {
     
     int currentIndex3;//请求页码
@@ -46,15 +46,12 @@
     
     //广告轮播
     NSArray* _topAdverImages;
-    UIScrollView* _scrollView;
     NSInteger _pageID;
     
     UIPageControl *topPageControl;
 
    
     NSTimer* _timer;
-    
-    NSMutableArray* _adverImages;
     
     UIButton* _longAdvertise_btn;//长条广告
     
@@ -74,18 +71,21 @@
     UIScrollView    *_smallSV;
     UIPageControl   *_pc;
     UIView *PopupAdvertiseView;//弹出广告
-
+    SDCycleScrollView *cycleScrollView2;
+    
 
 }
 
 @property(nonatomic,copy) NSString *city_district;//市区
 @property (nonatomic, strong) GYChangeTextView *tView;
 
+@property(nonatomic,strong)NSMutableArray* adverImages;
 @property(nonatomic,strong) NSArray *icon_A;//20个小分类
 @property(nonatomic,strong) NSArray *advertiseHeaderList;//头条信息
 @property(nonatomic,strong) NSDictionary *longAdvertise_dic;//长条广告信息
+@property(nonatomic,strong)NSMutableArray *titles;//顶部轮播广告
 
-
+@property(nonatomic,strong)NSArray *circleAdverlist;//顶部轮播广告
 @property(nonatomic,strong)UIView *headerView;//头view
 @property(nonatomic,strong)NSMutableArray *data_A3; //广告位.第三部分列表
 @property(nonatomic,strong)UIView *secondheaderView;//头2view
@@ -122,9 +122,15 @@
     return _manager;
 }
 
-
+-(NSMutableArray*)titles{
+    if (!_titles) {
+        _titles = [NSMutableArray array];
+    }
+    return _titles;
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     self.navigationController.navigationBar.hidden= YES;
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     if (self.tView && (self.advertiseHeaderList.count!=0)) {
@@ -151,24 +157,16 @@
         [self autoAuth];
 
     
+    [cycleScrollView2 adjustWhenControllerViewWillAppera];
+
  
 }
 - (void)viewDidAppear:(BOOL)animated {
     
-    _timer = [NSTimer timerWithTimeInterval:3.0f target:self selector:@selector(autoScroll:) userInfo:_scrollView repeats:YES];
-    
-    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+   
 }
 #pragma mark - action
 
-- (void)autoScroll:(NSTimer* )timer {
-    
-//    NSLog(@"autoScroll====%lf",_scrollView.contentOffset.x);
-    if (_scrollView.contentOffset.x>=SCREENWIDTH) {
-        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width * 2, 0) animated:YES];
-    }
-    
-}
 
 - (void)viewDidDisappear:(BOOL)animated {
     
@@ -653,45 +651,23 @@
     slipBackView.backgroundColor=RGB(240, 240, 240);
     [view addSubview:slipBackView];
 
-    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, slipBackView.height)];
     
-    _topAdverImages = @[[UIImage imageNamed:@"Active_top4.jpg"], [UIImage imageNamed:@"Active_top2.jpg"], [UIImage imageNamed:@"Active_top1.jpg"]];
-    //只创建 3 张图片。
-    for (NSInteger i = 0; i < _topAdverImages.count; i++) {
-        UIImageView *adversImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH * i, 0, self.view.frame.size.width, scrollView.height)];
-        adversImageView.tag=i+1;
-        adversImageView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(topActiveClick:)];
-        [adversImageView addGestureRecognizer:tap];
-        [scrollView addSubview:adversImageView];
+    if (_adverImages.count !=0) {
+        cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREENWIDTH, slipBackView.height) delegate:self placeholderImage:[UIImage imageNamed:@""]];
+        cycleScrollView2.imageURLStringsGroup = _adverImages;
+        cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+//           cycleScrollView2.titlesGroup = self.titles;
+        cycleScrollView2.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
+        cycleScrollView2.hidesForSinglePage = YES;
+        [slipBackView addSubview:cycleScrollView2];
+    }else{
+       
+        UIImageView *imgView = [[UIImageView alloc]initWithFrame:slipBackView.frame];
+        imgView.image = [UIImage imageNamed:@"Active_top4.jpg"];
+        [slipBackView addSubview:imgView];
     }
-
-    scrollView.pagingEnabled = YES;
     
-    scrollView.contentSize = CGSizeMake(SCREENWIDTH *  _topAdverImages.count, 0);
-    
-    scrollView.bounces = NO;
-    
-    scrollView.showsHorizontalScrollIndicator = NO;
-    
-    scrollView.delegate = self;
-    
-    //显示中间这张图片。
-    scrollView.contentOffset = CGPointMake(SCREENWIDTH, 0);
-    
-    [self setContentInScrollView:scrollView];
-    
-    [slipBackView addSubview:scrollView];
-    _scrollView = scrollView;
-
-    
-    topPageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, slipBackView.height -20, SCREENWIDTH, 20)];
-    
-    topPageControl.currentPageIndicatorTintColor  = [UIColor greenColor];
-    topPageControl.pageIndicatorTintColor = [UIColor whiteColor];
-    topPageControl.numberOfPages = _topAdverImages.count;
-    [slipBackView addSubview:topPageControl];
-    
+ 
     
     
     
@@ -1142,10 +1118,12 @@
 //获取小分类
 -(void)getIcons:(NSString*)more{
     
+    
     NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/Source/tradeIconGet",BASEURL];
     [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          self.icon_A= (NSArray*)result;
+
 
          [self getAdvertiseHeaderLineGet:more];
          
@@ -1169,10 +1147,10 @@
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          self.advertiseHeaderList= (NSArray*)result;
-         self.headerView = [self creatHeaderView];
-         
-         [self postRequestAdv2:more];
-
+//         self.headerView = [self creatHeaderView];
+//         
+//         [self postRequestAdv2:more];
+         [self getTopCircleAdverList:more];
          
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -1182,6 +1160,45 @@
      }];
 }
 
+
+-(void)getTopCircleAdverList:(NSString*)more{
+    
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/get",BASEURL];
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:appdelegate.cityChoice forKey:@"address"];
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         
+         NSLog(@"getTopCircleAdverList--%@ ==%@",paramer,result);
+
+         self.circleAdverlist= (NSArray*)result;
+         
+         
+         [self.adverImages removeAllObjects];
+         
+         [self.titles removeAllObjects];
+         for (int i=0; i<[result count]; i++) {
+             [self.adverImages addObject:[NSString stringWithFormat:@"%@%@",HOME_LUNBO_IMAGE,result[i][@"image_url"]]];
+             
+             [self.titles addObject:result[i][@"title"]];
+         }
+
+         self.headerView = [self creatHeaderView];
+         
+         [self postRequestAdv2:more];
+         
+         
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [_refreshheader endRefreshing];
+         [_refreshFooter endRefreshing];
+         NSLog(@"%@", error);
+     }];
+
+}
 
 /**
  获取活动数据
@@ -1315,6 +1332,7 @@
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
+
                   NSLog(@"result3==%@",result);
          
          NSArray *arr = (NSArray*)result;
@@ -1328,7 +1346,6 @@
              [self.shopData_A addObject:dic];
 
          }
-
          
          static dispatch_once_t onceToken;
          dispatch_once(&onceToken, ^{
@@ -1694,108 +1711,21 @@
     
 }
 
-#pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    if ([scrollView isMemberOfClass:[UIScrollView class]]&&scrollView ==_scrollView) {
-        
-        if (scrollView.contentOffset.x == self.view.frame.size.width * 2) {
-            
-            scrollView.contentOffset = CGPointMake(self.view.frame.size.width * 1, 0);
-            
-            _pageID++;
-            
-            if (_pageID == _topAdverImages.count) {
-                _pageID = 0;
-            }
-            
-            [self setContentInScrollView:scrollView];
-        }else if (scrollView.contentOffset.x == 0) {
-            
-            scrollView.contentOffset = CGPointMake(self.view.frame.size.width * 1, 0);
-            
-            _pageID--;
-            
-            if (_pageID == -1) {
-                _pageID = _topAdverImages.count - 1;
-            }
-            
-            [self setContentInScrollView:scrollView];
-        }
-    }
-}
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    if ([scrollView isMemberOfClass:[UIScrollView class]]&&scrollView ==_scrollView) {
-        
-        if (scrollView.contentOffset.x == self.view.frame.size.width * 2) {
-            
-            scrollView.contentOffset = CGPointMake(self.view.frame.size.width * 1, 0);
-            
-            _pageID++;
-            
-            if (_pageID == _topAdverImages.count) {
-                _pageID = 0;
-            }
-            
-            [self setContentInScrollView:scrollView];
-        }else if (scrollView.contentOffset.x == 0) {
-            
-            scrollView.contentOffset = CGPointMake(self.view.frame.size.width * 1, 0);
-            
-            _pageID--;
-            
-            if (_pageID == -1) {
-                _pageID = _topAdverImages.count - 1;
-            }
-            
-            [self setContentInScrollView:scrollView];
-        }
-    }
-}
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    
-    //开始拖动 scrollView。
-    
-    //设置启动时间为很久后的一个时间，永远也到不了的时间。
-    
-    if ([scrollView isMemberOfClass:[UIScrollView class]] &&scrollView ==_scrollView) {
-        
-        _timer.fireDate = [NSDate distantFuture];
-    }
-}
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+-(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
-    //结束拖动 scrollView。
-    
-    //取消暂停。
-    
-    if ([scrollView isMemberOfClass:[UIScrollView class]]&&scrollView ==_scrollView) {
-        
-        _timer.fireDate = [NSDate distantPast];
-    }
-}
-
-- (void)setContentInScrollView:(UIScrollView* )scrollView {
-    UIImageView * view = [scrollView viewWithTag:1];
-    view.image = _topAdverImages[_pageID - 1 < 0 ? _topAdverImages.count - 1 : _pageID - 1];
-    
-    view = [scrollView viewWithTag:2];
-    view.image = _topAdverImages[_pageID];
-    
-    view = [scrollView viewWithTag:3];
-    view.image = _topAdverImages[_pageID + 1 == _topAdverImages.count ? 0 : _pageID + 1];
-    
-//    NSLog(@"-------%ld",_pageID);
-    
-        topPageControl.currentPage = _pageID;
-
-}
--(void)topActiveClick:(UITapGestureRecognizer*)tap{
     TopActiveListTableVC *VC = [[TopActiveListTableVC alloc]init];
+    VC.activityId = self.circleAdverlist[index][@"id"];
+    VC.navigationItem.title = self.circleAdverlist[index][@"title"];
     [self.navigationController pushViewController:VC animated:YES];
+    
+}
+
+
+-(void)topActiveClick:(UITapGestureRecognizer*)tap{
+   
 }
 
 //定位中...
@@ -1905,7 +1835,19 @@
 
 
 #pragma mark 懒加载
+-(NSMutableArray*)adverImages{
+    if (!_adverImages) {
+        _adverImages = [NSMutableArray array];
+    }
+    return _adverImages;
+}
 
+-(NSArray *)circleAdverlist{
+    if (!_circleAdverlist) {
+        _circleAdverlist = [NSArray array];
+    }
+    return _circleAdverlist;
+}
 -(NSDictionary*)longAdvertise_dic{
     if (!_longAdvertise_dic) {
         _longAdvertise_dic = [NSDictionary dictionary];

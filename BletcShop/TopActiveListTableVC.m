@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = RGB( 234, 234, 234);
-    self.navigationItem.title = @"顶部轮播广告";
+//    self.navigationItem.title = @"顶部轮播广告";
     self.tableView.estimatedRowHeight = 130;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
@@ -41,7 +41,7 @@
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertTop/getList",BASEURL];
     
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
-    [paramer setValue:@"0001" forKey:@"advert_id"];
+    [paramer setValue:self.activityId forKey:@"advert_id"];
     
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)

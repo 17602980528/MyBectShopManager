@@ -9,7 +9,7 @@
 #import "ReveiveMoneyQRInfoVC.h"
 #import "HGDQQRCodeView.h"
 
-@interface ReveiveMoneyQRInfoVC ()
+@interface ReveiveMoneyQRInfoVC ()<UIActionSheetDelegate>
 @property (nonatomic,strong)  UIView *QRView;
 @property (strong, nonatomic)  UILabel *msglabel;
 
@@ -38,6 +38,9 @@
     [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.2, SCREENWIDTH*0.2) logoImageWithCornerRadius:0];
     
     
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressClcik:)];
+    
+    [self.QRView addGestureRecognizer:longPress];
     
     
     
@@ -45,19 +48,36 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)longPressClcik:(UILongPressGestureRecognizer*)longPress{
+    
+    NSLog(@"longPressClcik");
+
+    if (longPress.state ==UIGestureRecognizerStateBegan) {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"提示" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存到相册", nil];
+        
+        [actionSheet showInView:self.view];
+
+    }
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
+    NSLog(@"----_%ld",(long)buttonIndex);
+    if (buttonIndex==0) {
+        UIImage *image = [HGDQQRCodeView screenShotFormView:self.QRView];
+        
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void*)self);
+
+    }
+    
+  }
+
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    
+    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

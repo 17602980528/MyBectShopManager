@@ -21,7 +21,7 @@
 
 
 
-/*************************************************************/
+/************************最新定义*********************************/
 
 #define kQIYIAppKey @"3cebded02e884b1a98c42046ad4fb996"
 #define kQIYIAppSecret @"d50834895639cdf46a98e0efd427b9a1"
@@ -33,6 +33,10 @@
 #define ICONIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/iconImage/"
 //轮播广告
 #define LUNBO_IMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/top/"
+//启动后广告页面
+#define STAR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/lead/"
+//首页顶部轮播广告
+#define HOME_LUNBO_IMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/top/index/"
 
 //图片前缀
 #define IMG_URL @"http://101.201.100.191/cnconsum/Public/Uploads/"
@@ -50,12 +54,12 @@
 #define ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advertImage/"
 
 //二级广告位图片(四个广告)
-#define FOURADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/"
+#define FOURADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/activity/index/"
 
 //长条插入广告
-#define LONGADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/insert/"
+#define LONGADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/insert/"
 //弹出广告
-#define POPADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/popUp/"
+#define POPADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/popUp/"
 
 //活动一图片
 #define ONE_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert01/"
@@ -67,8 +71,7 @@
 #define THIER_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/activity/"
 //活动四图片
 #define FOUR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert04/"
-//启动后广告页面
-#define STAR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/lead/"
+
 
 #define POINT_LUNBO @"http://101.201.100.191/cnconsum/Public/Uploads/mall/advertImage/"
 #define POINT_GOODS @"http://101.201.100.191/cnconsum/Public/Uploads/mall/goodsImage/"

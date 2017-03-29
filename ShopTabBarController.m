@@ -85,23 +85,23 @@
     ShopVipController *oneVc = [[ShopVipController alloc]init];
     oneVc.shopEnter = self.shopEnter;
     NSLog(@"oneVc.shopEnter%d",self.shopEnter);
-    [self addOneChindVC:oneVc title:@"我的会员" imageName:@"1-02(1)" selectedImageName:@"2-02(1)"];
+    [self addOneChindVC:oneVc title:@"我的会员" imageName:@"bu_vip_icon_n" selectedImageName:@"bu_vip_icon_s"];
 //    oneVc.infoArray = self.array;
 //    NSLog(@"self.infoArray = %@",self.array);
     MyProtuctsController *twoVC = [[MyProtuctsController alloc]init];
-    [self addOneChindVC:twoVC title:@"我的商品" imageName:@"4-02(1)" selectedImageName:@"3-02(1)"];
+    [self addOneChindVC:twoVC title:@"我的商品" imageName:@"bu_shop_icon_n" selectedImageName:@"bu_shop_icon_s"];
     
 
     
 //    ClosingController *threeVc = [[ClosingController alloc]init];
     ChargeCenterVC *threeVc = [[ChargeCenterVC alloc]init];
 
-    [self addOneChindVC:threeVc title:@"结算中心" imageName:@"5-02" selectedImageName:@"6-02"];
+    [self addOneChindVC:threeVc title:@"结算中心" imageName:@"bu_set_icon_n" selectedImageName:@"bu_set_icon_s"];
     
     BusinessViewController *fourVC = [[BusinessViewController alloc]init];
-    [self addOneChindVC:fourVC title:@"业务中心" imageName:@"7-02" selectedImageName:@"8-02"];
+    [self addOneChindVC:fourVC title:@"业务中心" imageName:@"bu_bu_icon_n" selectedImageName:@"bu_bu_icon_s"];
     ShopMoreViewController *fiveVC = [[ShopMoreViewController alloc]init];
-    [self addOneChindVC:fiveVC title:@"更多" imageName:@"4.1-02" selectedImageName:@"4-02"];
+    [self addOneChindVC:fiveVC title:@"更多" imageName:@"bu_more_icon_n" selectedImageName:@"bu_more_icon_s"];
     
     
 }

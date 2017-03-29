@@ -65,7 +65,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title = @"业务中心";
-    arr_imgS = @[@"广告推送",@"店铺管理",@"资金提现",@"管理员设置",@"商家介绍",@"会员卡管理",@"授信额度",@"数据报表",@"优惠券"];
+    arr_imgS = @[@"广告推送",@"店铺管理",@"资金提现",@"管理员设置",@"商家介绍",@"会员延期",@"授信额度",@"预约处理",@"优惠券"];
     
     UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 64)];
     topView.backgroundColor =NavBackGroundColor;
@@ -85,7 +85,6 @@
     [self creatSubviews];
     
     
-//    [self _initBtnView];
 }
 
 -(void)creatSubviews{
@@ -94,8 +93,8 @@
     TopView.backgroundColor = NavBackGroundColor;
     [self.view addSubview:TopView];
     
-    NSArray *title_a = @[@"会员延期",@"预约处理"];
-    NSArray *img_a = @[@"bu_time_icon",@"bu_vip_icon"];
+    NSArray *title_a = @[@"会员卡管理",@"数据报表"];
+    NSArray *img_a = @[@"bu_vvip_icon-1",@"bu_report_icon-1"];
 
     for (int i=0 ; i< title_a.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -134,7 +133,7 @@
     [bottomView addSubview:huixin];
 
     
-    NSArray *imgS = @[@"bu_ad_icon",@"bu_st_icon",@"bu_carsh_icon",@"bu_setting_icon",@"bu_com_icon",@"bu_vvip_icon",@"bu_card_icon",@"bu_report_icon",@"bu_discant_icon"];
+    NSArray *imgS = @[@"bu_ad_icon",@"bu_st_icon",@"bu_carsh_icon",@"bu_setting_icon",@"bu_com_icon",@"bu_vip_icon",@"bu_card_icon",@"bu_time_icon",@"bu_discant_icon"];
     for (int i = 0; i <arr_imgS.count; i ++) {
         int X = i %4;
         int Y = i /4;
@@ -297,11 +296,25 @@
     switch (sender.tag) {
         case 0:
         {
+            AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
             
-            DelayShopViewController *delayView = [[DelayShopViewController alloc]init];
-            
-            [self.navigationController pushViewController:delayView animated:YES];
+            NSString *bankAccount = [NSString getTheNoNullStr:app.shopInfoDic[@"account"] andRepalceStr:@""];
+            NSString *bankName = [NSString getTheNoNullStr:app.shopInfoDic[@"name"] andRepalceStr:@""];
+            NSString *bankAddress = [NSString getTheNoNullStr:app.shopInfoDic[@"bank"] andRepalceStr:@""];
 
+            NSLog(@"-----%ld==%@==%@",bankAccount.length,bankName,bankAddress);
+            if ((bankAccount.length!=19 && bankAccount.length!=16)||bankName.length==0||bankAddress.length==0){
+                
+                [self showTiShi:@"银行卡信息不完整，请填写" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
+                
+                
+                
+            }
+            else{
+                
+                [self vipManagerView];
+                
+            }
 
         }
             break;
@@ -309,8 +322,8 @@
         case 1:
         {
 
-            [self orderView];
-            
+            [self gotoDataTable];
+
             
         }
             break;
@@ -323,18 +336,12 @@
 
 -(void)goMineBussy:(UIButton*)sender{
     
-    AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    
-    NSString *bankAccount = [NSString getTheNoNullStr:app.shopInfoDic[@"account"] andRepalceStr:@""];
-    NSString *bankName = [NSString getTheNoNullStr:app.shopInfoDic[@"name"] andRepalceStr:@""];
-    NSString *bankAddress = [NSString getTheNoNullStr:app.shopInfoDic[@"bank"] andRepalceStr:@""];
     
 
         NSString *stateStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"wangyongle"];
     
     
 
-    NSLog(@"bankAccount==%@",bankAccount);
     
 #ifdef DEBUG
     stateStr = @"login_access";
@@ -408,19 +415,12 @@
         case 5:
         {
             
-            NSLog(@"-----%ld==%@==%@",bankAccount.length,bankName,bankAddress);
-            if ((bankAccount.length!=19 && bankAccount.length!=16)||bankName.length==0||bankAddress.length==0){
-                
-                [self showTiShi:@"银行卡信息不完整，请填写" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
-                
-                
-                
-            }
-            else{
-                
-                [self vipManagerView];
-                
-            }
+            DelayShopViewController *delayView = [[DelayShopViewController alloc]init];
+            
+            [self.navigationController pushViewController:delayView animated:YES];
+            
+            
+            
             
         }
             break;
@@ -434,7 +434,10 @@
             break;
         case 7:
         {
-            [self gotoDataTable];
+            
+            [self orderView];
+
+          
             
         }
             break;
