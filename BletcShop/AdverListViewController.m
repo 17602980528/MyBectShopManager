@@ -149,16 +149,8 @@
     return 141;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (_selectTag==3) {
-        return 50;
-    }else{
-        return 0.01;
-    }
-    return 0.01;
+    return 50;
 }
-
-
-
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 50)];
@@ -196,6 +188,20 @@
         payButton.tag=section;
         [view addSubview:payButton];
         [payButton addTarget:self action:@selector(payForPublish:) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        UIButton *deleteButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        deleteButton.frame=CGRectMake(SCREENWIDTH-115, 10, 100, 30);
+        deleteButton.backgroundColor=[UIColor whiteColor];
+        [deleteButton setTitle:@"取消订单" forState:UIControlStateNormal];
+        deleteButton.titleLabel.font=[UIFont systemFontOfSize:15.0f];
+        [deleteButton setTitleColor:NavBackGroundColor forState:UIControlStateNormal];
+        deleteButton.layer.borderColor=[NavBackGroundColor CGColor];
+        deleteButton.layer.borderWidth=0.8;
+        deleteButton.layer.cornerRadius=5.0f;
+        deleteButton.clipsToBounds=YES;
+        deleteButton.tag=section;
+        [view addSubview:deleteButton];
+        [deleteButton addTarget:self action:@selector(deletePublish:) forControlEvents:UIControlEventTouchUpInside];
     }
 
     return view;
@@ -475,7 +481,7 @@
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"result===%@",result);
         if (result&&[result[@"result_code"]integerValue]==1) {
-            [self postRequestDataBaseState:@"WAIT_FOR_PAY"];
+            [self postRequestDataBaseState:stateArray[self.selectTag]];
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
