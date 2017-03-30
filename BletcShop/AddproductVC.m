@@ -7,7 +7,7 @@
 //
 
 #import "AddproductVC.h"
-
+#import "UIButton+WebCache.h"
 @interface AddproductVC ()<UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UIScrollView *backView;
@@ -51,8 +51,7 @@
 
     
 //    NSLog(@"=====%@---%f",textField,keyboardRect.size.height);
-        CGFloat offset = textField.bottom+64 - ((SCREENHEIGHT)-keyboardRect.size.height)
-   ;
+        CGFloat offset = textField.bottom+64 - ((SCREENHEIGHT)-keyboardRect.size.height);
     CGFloat maxoffset = self.count_textField.bottom+64 - ((SCREENHEIGHT)-keyboardRect.size.height);
         
         NSLog(@"offset=keyboardWillShow==%f",offset);
@@ -192,6 +191,13 @@
     imgButton.frame = CGRectMake(27, 5, 95, 95);
     imgButton.backgroundColor = RGB(240, 240, 240);
     [imgButton addTarget:self action:@selector(imgSelect:) forControlEvents:UIControlEventTouchUpInside];
+    if (self.product_dic) {
+        [imgButton sd_setImageWithURL:[NSURL URLWithString:@""] forState:0 placeholderImage:[UIImage imageNamed:@"add_yellow"]];
+        
+    }else{
+        [imgButton setImage:[UIImage imageNamed:@"add_yellow"] forState:0];
+  
+    }
     [view2 addSubview:imgButton];
    
     UIView *view3 = [[UIView alloc]initWithFrame:CGRectMake(0, view2.bottom+10, SCREENWIDTH, 130+35+50)];
@@ -385,24 +391,24 @@
     NSLog(@"选择图片");
     
     
-//    
-//    UIActionSheet *sheet;
-//    // 判断是否支持相机
-//    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-//        
-//    {
-//        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择照片" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选择", nil];
-//        
-//    }
-//    
-//    else {
-//        
-//        sheet = [[UIActionSheet alloc] initWithTitle:@"选择照片" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButt我onTitles:@"从相册选择", nil];
-//        
-//    }
-//    
-//    
-//    [sheet showInView:self.view];
+    
+    UIActionSheet *sheet;
+    // 判断是否支持相机
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        
+    {
+        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择照片" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选择", nil];
+        
+    }
+    
+    else {
+        
+        sheet = [[UIActionSheet alloc] initWithTitle:@"选择照片" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从相册选择", nil];
+        
+    }
+    
+    
+    [sheet showInView:self.view];
 
 }
 

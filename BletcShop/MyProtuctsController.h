@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CustomIOSAlertView.h"
 @interface MyProtuctsController : UIViewController<CustomIOSAlertViewDelegate>
-@property (nonatomic,retain)NSMutableArray *array;
-@property (nonatomic,retain)NSString *chaXun;
 @property (nonatomic,retain)UITextField *proCodeText;//编号
 @property (nonatomic,retain)UITextField *proNameText;//名称
 @property (nonatomic,retain)UITextField *proNumText;//数量
