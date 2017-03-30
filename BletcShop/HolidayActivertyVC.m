@@ -164,6 +164,32 @@
          [tempSelf.navigationController pushViewController:vc animated:YES];
      }];
     
+    if ([self.data_A[indexPath.row][@"pay_type"] isEqualToString:@"click"]) {
+        [self postRemainClickCount:self.data_A[indexPath.row]];
+    }
+    
+}
+//点击广告处理
+-(void)postRemainClickCount:(NSDictionary *)dic{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advert/click",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //获取商家手机号
+    [params setObject:dic[@"muid"] forKey:@"muid"];
+    [params setObject:@"top" forKey:@"advert_type"];
+    [params setObject:[getUUID getUUID] forKey:@"local_id"];
+    [params setObject:dic[@"id"] forKey:@"advert_id"];
+    [params setObject:dic[@"position"] forKey:@"advert_position"];
+    NSLog(@"%@",params);
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         NSLog(@"result==%@",result);
+         
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"%@", error);
+         
+     }];
+    
 }
 
 -(SellerViewController *)startSellerView:(NSMutableDictionary*)dic{

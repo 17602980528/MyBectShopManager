@@ -225,7 +225,9 @@
          [tempSelf.navigationController pushViewController:vc animated:YES];
      }];
     //
-    [self postRemainClickCount:self.data_A[indexPath.row]];
+    if ([self.data_A[indexPath.row][@"pay_type"] isEqualToString:@"click"]) {
+        [self postRemainClickCount:self.data_A[indexPath.row]];
+    }
     
 }
 
