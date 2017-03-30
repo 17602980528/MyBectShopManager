@@ -36,7 +36,7 @@
     NSArray *arr;
     
     NSDictionary *curentEare;
-    NSArray *ad_A ;
+
 }
 
 @property(nonatomic,strong)DOPIndexPath *indexpathSelect;
@@ -383,9 +383,18 @@
     NSMutableDictionary *dic;
     
     if (indexPath.section==0) {
-        dic = [self.adverList objectAtIndex:indexPath.row];
-        NSLog(@"%@",dic);
-        [self postRemainClickCount:dic];
+        dic = [[self.adverList objectAtIndex:indexPath.row][@"info"] firstObject];
+        NSDictionary *para = [self.adverList objectAtIndex:indexPath.row][@"para"];
+        
+        if (para) {
+            if ([para[@"pay_type"] isEqualToString:@"click"]) {
+                
+                [self postRemainClickCount:para];
+
+            }
+
+        }
+        
     }else{
         dic = [self.data1 objectAtIndex:indexPath.row];
 
@@ -442,9 +451,9 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //获取商家手机号
     [params setObject:dic[@"muid"] forKey:@"muid"];
-    [params setObject:@"top" forKey:@"advert_type"];
+    [params setObject:@"near" forKey:@"advert_type"];
     [params setObject:[getUUID getUUID] forKey:@"local_id"];
-    [params setObject:dic[@"id"] forKey:@"advert_id"];
+    [params setObject:dic[@"address"] forKey:@"advert_id"];
     [params setObject:dic[@"position"] forKey:@"advert_position"];
     NSLog(@"%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
@@ -594,7 +603,7 @@
     if (indexPath.section==0) {
         
         if (self.adverList.count>0) {
-            dic=[self.adverList objectAtIndex:indexPath.row];
+            dic=[[self.adverList objectAtIndex:indexPath.row][@"info"] firstObject];
         }
         
     }else{
@@ -815,25 +824,21 @@
         if ([result isKindOfClass:[NSDictionary class]]) {
             
             
-            ad_A = result[@"advert"];
+            NSArray *ad_A = result[@"advert"];
             
             NSArray *shop_A = result[@"merchant"];
             
             [self.adverList removeAllObjects];
             
+            
             for (NSDictionary *dic in ad_A) {
-                
-                if ([dic[@"info"] firstObject]) {
-                    [self.adverList addObject:[dic[@"info"] firstObject]];
+                [self.adverList addObject:dic];
 
-                }
                 
             }
             for (NSDictionary *dic in shop_A) {
-                if ([dic[@"info"] firstObject]) {
-                    [self.adverList addObject:[dic[@"info"] firstObject]];
+                [self.adverList addObject:dic];
 
-                }
                 
             }
             

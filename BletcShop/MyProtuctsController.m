@@ -39,10 +39,7 @@
     [super viewDidLoad];
     self.editDic = [[NSMutableDictionary alloc]init];
     self.editTag = 0;
-    self.array = [[NSMutableArray alloc]initWithObjects:@"按姓名查询",@"按年龄查询",@"按分类查询",@"按XX查询", nil];//@[@"按姓名查询",@"按年龄查询",@"按分类查询",@"按XX查询"];
-    self.chaXun = [[NSString alloc]init];
-    self.chaXun = @"";
-    // Do any additional setup after loading the view.
+
     [self _initUI];
     [self postRequest];
 }
