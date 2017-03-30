@@ -36,6 +36,7 @@
     NSArray *arr;
     
     NSDictionary *curentEare;
+    NSArray *ad_A ;
 }
 
 @property(nonatomic,strong)DOPIndexPath *indexpathSelect;
@@ -171,11 +172,6 @@
         [self getData];
     }
 
-    
-    
-    
-
-    
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -388,6 +384,8 @@
     
     if (indexPath.section==0) {
         dic = [self.adverList objectAtIndex:indexPath.row];
+        NSLog(@"%@",dic);
+        [self postRemainClickCount:dic];
     }else{
         dic = [self.data1 objectAtIndex:indexPath.row];
 
@@ -438,6 +436,28 @@
     
 }
 
+//点击广告处理
+-(void)postRemainClickCount:(NSDictionary *)dic{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advert/click",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //获取商家手机号
+    [params setObject:dic[@"muid"] forKey:@"muid"];
+    [params setObject:@"top" forKey:@"advert_type"];
+    [params setObject:[getUUID getUUID] forKey:@"local_id"];
+    [params setObject:dic[@"id"] forKey:@"advert_id"];
+    [params setObject:dic[@"position"] forKey:@"advert_position"];
+    NSLog(@"%@",params);
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         NSLog(@"result==%@",result);
+         
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"%@", error);
+         
+     }];
+    
+}
 
 
 //下拉列表的代理方法
@@ -795,7 +815,7 @@
         if ([result isKindOfClass:[NSDictionary class]]) {
             
             
-            NSArray *ad_A = result[@"advert"];
+            ad_A = result[@"advert"];
             
             NSArray *shop_A = result[@"merchant"];
             

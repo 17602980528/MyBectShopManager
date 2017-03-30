@@ -117,7 +117,6 @@
     if ([self exist]) {
         NSLog(@"数据库存在");
     }
-
 //    [NSThread sleepForTimeInterval:5];
    
     self.whoPay = 0;

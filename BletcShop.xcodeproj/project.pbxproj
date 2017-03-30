@@ -101,6 +101,8 @@
 		189411481D80573200314E11 /* FirstViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 189411451D80573200314E11 /* FirstViewController.mm */; };
 		189411491D80573200314E11 /* SellerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 189411471D80573200314E11 /* SellerViewController.mm */; };
 		189619441D92319D003BA40C /* ContactSeverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189619431D92319D003BA40C /* ContactSeverViewController.m */; };
+		189ED0421E8CD53600A762C7 /* getUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 189ED03F1E8CD53600A762C7 /* getUUID.m */; };
+		189ED0431E8CD53600A762C7 /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 189ED0411E8CD53600A762C7 /* KeyChainStore.m */; };
 		189F4CF41D50672E00461830 /* ActiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F4CF31D50672E00461830 /* ActiveViewController.m */; };
 		189F4CF71D508EF300461830 /* ActiveMoreRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F4CF61D508EF200461830 /* ActiveMoreRuleViewController.m */; };
 		18A4B6F21D33933B00EFBCC1 /* 椭圆-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A4B6F01D33933B00EFBCC1 /* 椭圆-02.png */; };
@@ -1259,6 +1261,11 @@
 		189411471D80573200314E11 /* SellerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SellerViewController.mm; sourceTree = "<group>"; };
 		189619421D92319D003BA40C /* ContactSeverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSeverViewController.h; sourceTree = "<group>"; };
 		189619431D92319D003BA40C /* ContactSeverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSeverViewController.m; sourceTree = "<group>"; };
+		189ED03D1E8CD50900A762C7 /* BletcShop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BletcShop.entitlements; sourceTree = "<group>"; };
+		189ED03E1E8CD53600A762C7 /* getUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getUUID.h; sourceTree = "<group>"; };
+		189ED03F1E8CD53600A762C7 /* getUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getUUID.m; sourceTree = "<group>"; };
+		189ED0401E8CD53600A762C7 /* KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainStore.h; sourceTree = "<group>"; };
+		189ED0411E8CD53600A762C7 /* KeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainStore.m; sourceTree = "<group>"; };
 		189F4CF21D50672E00461830 /* ActiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveViewController.h; sourceTree = "<group>"; };
 		189F4CF31D50672E00461830 /* ActiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveViewController.m; sourceTree = "<group>"; };
 		189F4CF51D508EF200461830 /* ActiveMoreRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveMoreRuleViewController.h; sourceTree = "<group>"; };
@@ -2916,6 +2923,7 @@
 		0793867E1C55B5CA0021B385 /* BletcShop */ = {
 			isa = PBXGroup;
 			children = (
+				189ED03D1E8CD50900A762C7 /* BletcShop.entitlements */,
 				1836B8341E5597A000B587A6 /* activerty_top01.jpg */,
 				1836B8361E5597A700B587A6 /* activerty_top02.jpg */,
 				1836B8381E5597AE00B587A6 /* activerty_top03.jpg */,
@@ -2929,6 +2937,10 @@
 				18302A2C1DAC8B0E00E6EF8C /* CanPayCardViewController.m */,
 				D923024B1D14DEDF008FB9A9 /* WelcomViewController.h */,
 				D923024C1D14DEDF008FB9A9 /* WelcomViewController.m */,
+				189ED03E1E8CD53600A762C7 /* getUUID.h */,
+				189ED03F1E8CD53600A762C7 /* getUUID.m */,
+				189ED0401E8CD53600A762C7 /* KeyChainStore.h */,
+				189ED0411E8CD53600A762C7 /* KeyChainStore.m */,
 				1894115F1D816CE600314E11 /* 密码 */,
 				1CDA9E091C5A116200DFE518 /* 用户端 */,
 				180C3D3D1E514C0900BC9177 /* New Player */,
@@ -6297,6 +6309,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 0;
 							};
@@ -7092,6 +7107,7 @@
 				D9345E6A1E769805006B2AC1 /* TopActiveListTableVC.m in Sources */,
 				D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */,
 				18F031F11E5EB8C100ACD261 /* ConvertRecordVC.m in Sources */,
+				189ED0431E8CD53600A762C7 /* KeyChainStore.m in Sources */,
 				D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */,
 				D987BB261E790B58008AE24D /* UserInfoHeaderCell.m in Sources */,
 				D9B3A5A11D74255700F3F27E /* AdView.m in Sources */,
@@ -7339,6 +7355,7 @@
 				D94040411CBE29F100EC98EA /* UpgradeViewController.m in Sources */,
 				1CDCCD191C7594040094E70D /* AFHTTPSessionManager.m in Sources */,
 				D9345E5B1E7636C2006B2AC1 /* LZDCenterViewController.m in Sources */,
+				189ED0421E8CD53600A762C7 /* getUUID.m in Sources */,
 				D93027DA1CFEA66C007447D2 /* AppraiseViewController.m in Sources */,
 				079386B41C55B8750021B385 /* MainTabBarController.m in Sources */,
 				D98E5C021E515210009D56BF /* MASViewAttribute.m in Sources */,
@@ -7557,6 +7574,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = BletcShop/BletcShop.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NQK9Q69HHD;
@@ -7609,6 +7627,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = BletcShop/BletcShop.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NQK9Q69HHD;

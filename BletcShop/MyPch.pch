@@ -128,7 +128,7 @@
 #import "UILabel+extension.h"
 #import "NSDictionary+Log.h"
 #import "ToolManager.h"
-
+#import "getUUID.h"
 
 #import "Database.h"
 #define kWeChatPadding 10
