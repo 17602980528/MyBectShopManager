@@ -382,23 +382,23 @@
             }else{
                 
                 AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                if (appdelegate.IsLogin) {
-                    [self getCardListInfo:dic];
-
+                if (appdelegate.shopIsLogin) {
+                    //
+                    NSLog(@"商户端扫码");
                 }else{
-                    
-                    LandingController *VC = [[LandingController alloc]init];
+                    if (appdelegate.IsLogin) {
+                        [self getCardListInfo:dic];
+                        
+                    }else{
+                        
+                        LandingController *VC = [[LandingController alloc]init];
+                        
+                        [self.navigationController pushViewController:VC animated:YES];
+                    }
 
-                    [self.navigationController pushViewController:VC animated:YES];
                 }
-                
-
  
             }
-
-            
-            
-            
         }
         
     }
