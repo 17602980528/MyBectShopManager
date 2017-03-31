@@ -13,6 +13,9 @@
 #import "AddproductVC.h"
 
 @interface MyProtuctsController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,AddProductDelegate>
+{
+    SDRefreshHeaderView *headerRefresh;
+}
 @property(nonatomic,strong)NSMutableArray *data;
 @property(nonatomic,strong)UITableView *tabView;
 @end
@@ -63,13 +66,15 @@
     
     MyProtuctsController *tempSelf=self;
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
+        [headerRefresh endRefreshing];
         NSLog(@"<<<<<<%@", result);
         tempSelf.data = [NSMutableArray arrayWithArray:result];
         [tempSelf.tabView reloadData];
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        [headerRefresh endRefreshing];
+
         NSLog(@"%@", error);
         
     }];
@@ -107,6 +112,15 @@
     _tabView.dataSource = self;
     _tabView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tabView];
+    
+    
+    headerRefresh = [SDRefreshHeaderView refreshView];
+    [headerRefresh addToScrollView:_tabView];
+    headerRefresh.isEffectedByNavigationController = NO;
+    __block typeof(self)blockSelf = self;
+    headerRefresh.beginRefreshingOperation = ^{
+        [blockSelf postRequest];
+    };
     
 }
 
@@ -572,12 +586,12 @@
     }
     
     if (self.data.count>0) {
-        NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_ADDIMAGE stringByAppendingString:self.data[indexPath.row][@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+        NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCE_PRODUCT stringByAppendingString:self.data[indexPath.row][@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         
         cell.pruductName.text =[NSString stringWithFormat:@"%@",[[self.data objectAtIndex:indexPath.row] objectForKey:@"name"]] ;
         cell.pruductCode.text = [NSString stringWithFormat:@"%@",[[self.data objectAtIndex:indexPath.row] objectForKey:@"number"]];
         cell.pruductPrice.text = [NSString stringWithFormat:@"￥%@",[[self.data objectAtIndex:indexPath.row] objectForKey:@"price"]];
-        cell.pruductRemain.text = [NSString stringWithFormat:@"库存 %@",[[self.data objectAtIndex:indexPath.row] objectForKey:@"remain"]];
+        cell.pruductRemain.text = [NSString stringWithFormat:@"库存 %@",[NSString getTheNoNullStr:[[self.data objectAtIndex:indexPath.row] objectForKey:@"remain"] andRepalceStr:@"----"]];
         [cell.headImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
     }
     

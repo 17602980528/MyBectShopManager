@@ -78,6 +78,8 @@
 //商家选择会员卡图片
 
 #define SOURCECARD @"http://101.201.100.191/cnconsum/Public/Uploads/cardImage/"
+//商家商品的图片
+#define SOURCE_PRODUCT @"http://101.201.100.191/cnconsum/Public/Uploads/commodity/"
 //type==0
 //#define SHOPCARD  @"http://101.201.100.191/VipCard/upload/MerchantImage/cardImage/"
 

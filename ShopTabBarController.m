@@ -28,7 +28,7 @@
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
 
-    NSLog(@"tgtgtgtgtg%@",appdelegate.shopInfoDic);
+   // NSLog(@"tgtgtgtgtg%@",appdelegate.shopInfoDic);
     
     if ([appdelegate.shopInfoDic[@"privi"]  isEqualToString:@"shopAs"]) {
         self.selectedIndex = 2;
