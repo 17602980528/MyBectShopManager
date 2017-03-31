@@ -357,7 +357,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 7;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -388,6 +388,10 @@
             return 1;
             break;
         case 5:
+            
+            return 1;
+            break;
+        case 6:
             NSLog(@"%ld",self.appraiseArray.count);
             if (self.appraiseArray!=nil&&self.appraiseArray.count>0) {
                 if (self.appraiseArray.count<=2) {
@@ -399,7 +403,7 @@
             }else
                 return 1;
             break;
-        case 6:
+        case 7:
             return 1;
             
             break;
@@ -408,14 +412,14 @@
     return row;
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if(section == 4||section == 6||section == 3||section == 5){
+    if(section == 4||section == 6||section == 3||section == 5||section == 7){
         return 40;
     }
     return 0.1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section==3||section==4||section==5||section==6) {
+    if (section==3||section==4||section==5||section==6||section==7) {
         return 10;
     }
     return 0.1;
@@ -430,6 +434,9 @@
     label.font = [UIFont systemFontOfSize:15.0];
     [view addSubview:label];
     if (section==4) {
+        label.text = @"全部商品";
+    }
+    if (section==5) {
         label.text =@"商家详情";
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToShopPicture)];
         [label addGestureRecognizer:tapGesture];
@@ -440,10 +447,10 @@
         
     }else if (section==3){
         label.text=@"会员卡";
-    }else if (section==5){
+    }else if (section==6){
         label.text=@"会员口碑";
         
-    }else if (section==6) {
+    }else if (section==7) {
         label.text = @"购买需知";
     }
     return view;
@@ -471,9 +478,20 @@
             break;
         }
         case 4:
-            return height1;
+        {
+            NSArray *arr = wholeInfoDic[@"commodity_list"];
+            if (arr.count!=0) {
+                return 150;
+            }else{
+                return 40;
+  
+            }
+        }
             break;
         case 5:
+            return height1;
+            break;
+        case 6:
         {
             UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
             if(self.appraiseArray.count>0) {
@@ -484,7 +502,7 @@
             
         }
             break;
-        case 6:
+        case 7:
         {
             return height2+49;
         }
@@ -548,7 +566,7 @@
     if (indexPath.section == 2) {
         //[self gotoMapView];
     }
-    else if (indexPath.section==4)
+    else if (indexPath.section==5)
     {
         PointRuleViewController *PointRuleView = [[PointRuleViewController alloc]init];
         PointRuleView.type = 9999;
@@ -827,7 +845,64 @@
             
         }
             break;
-        case 4:
+            
+            case 4:
+        {
+            
+            NSArray* commodity_list = wholeInfoDic[@"commodity_list"];
+            
+            if (commodity_list.count==0) {
+                UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREENWIDTH, 40)];
+                [cell addSubview:label];
+                label.font = [UIFont systemFontOfSize:14];
+                label.text = @"本店暂无商品";
+            }else{
+                
+                UIScrollView *commodity_scroView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, 10, SCREENWIDTH, 140)];
+                [cell addSubview:commodity_scroView];
+                commodity_scroView.showsVerticalScrollIndicator = NO;
+                commodity_scroView.showsHorizontalScrollIndicator = NO;
+                commodity_scroView.contentSize = CGSizeMake(commodity_list.count*110+10, 0);
+
+                
+                for (int i = 0; i < commodity_list.count; i ++) {
+                    NSDictionary *dic_comm = commodity_list[i];
+                    UIView *b_v = [[UIView alloc]initWithFrame:CGRectMake(110*i+10, 0, 100, 140)];
+                    [commodity_scroView addSubview:b_v];
+                    
+                    UIImageView *ImgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, b_v.width, b_v.width)];
+                     NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCE_PRODUCT stringByAppendingString:dic_comm[@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+                    [ImgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3"]];
+                    [b_v addSubview:ImgView];
+                    
+                    
+                    UILabel *title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.bottom, ImgView.width, 20)];
+                    title_lab.text =dic_comm[@"name"];
+                    title_lab.textAlignment =NSTextAlignmentCenter;
+                    title_lab.textColor = RGB(51, 51, 51);
+                    title_lab.font = [UIFont systemFontOfSize:12];
+                    [b_v addSubview:title_lab];
+                    
+                    UILabel *price_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, title_lab.bottom, ImgView.width, 15)];
+                    price_lab.text =[NSString stringWithFormat:@"¥%@",dic_comm[@"price"]];
+                    price_lab.textAlignment =NSTextAlignmentCenter;
+                    price_lab.textColor = RGB(253,89,88);
+                    price_lab.font = [UIFont systemFontOfSize:11];
+                    [b_v addSubview:price_lab];
+                    
+                    
+                }
+                
+                
+            }
+            
+            UIView *line = [[UIView alloc]init];
+            line.frame = CGRectMake(10,0, SCREENWIDTH, 1);
+            line.backgroundColor = RGB(225, 225, 225);
+            [cell addSubview:line];
+        }
+            break;
+        case 5:
         {
             UILabel *label2=[[UILabel alloc]init];
             label2.numberOfLines=0;
@@ -896,7 +971,7 @@
         }
             break;
             
-        case 5:
+        case 6:
         {
             if ([self.appraiseArray count]== 0||self.appraiseArray==nil)
             {
@@ -942,7 +1017,7 @@
             
         }
             break;
-        case 6:
+        case 7:
         {
             UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(13, 10, 3, 15)];
             view1.backgroundColor=[UIColor colorWithRed:66/255.0 green:170/255.0 blue:250/255.0 alpha:1.0f];

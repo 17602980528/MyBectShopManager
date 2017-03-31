@@ -12,6 +12,8 @@
 {
     UIScrollView *backView;
     UIButton *imgButton;
+    
+    NSString *photoName;
 }
 @property (strong, nonatomic)  UITextField *title_textField;
 @property (strong, nonatomic)  UILabel *title_len;
@@ -31,7 +33,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 -(void)keyboardWillShow:(NSNotification*)aNotification{
-    NSLog(@"----keyboardWillShow-");
+//    NSLog(@"----keyboardWillShow-");
 
     CGRect keyboardRect = [[[aNotification userInfo]objectForKey:UIKeyboardBoundsUserInfoKey]CGRectValue];
     
@@ -54,7 +56,7 @@
         CGFloat offset = textField.bottom+64 - ((SCREENHEIGHT)-keyboardRect.size.height);
     CGFloat maxoffset = self.count_textField.bottom+64 - ((SCREENHEIGHT)-keyboardRect.size.height);
         
-        NSLog(@"offset=keyboardWillShow==%f",offset);
+        //NSLog(@"offset=keyboardWillShow==%f",offset);
         
   
     
@@ -85,7 +87,7 @@
 
 -(void)keyboardWillHide:(NSNotification*)aNotification{
     
-    NSLog(@"----keyboardWillHide-");
+    //NSLog(@"----keyboardWillHide-");
     
     CGRect keyboardRect = [[[aNotification userInfo] objectForKey:UIKeyboardBoundsUserInfoKey] CGRectValue];
             NSTimeInterval animationDuartion = [[[aNotification userInfo]objectForKey:UIKeyboardAnimationDurationUserInfoKey]doubleValue];
@@ -107,7 +109,7 @@
     CGFloat offset = textField.bottom+64 - ((SCREENHEIGHT)-keyboardRect.size.height);
 
     
-    NSLog(@"offset==keyboardWillHide=%f",offset);
+    //NSLog(@"offset==keyboardWillHide=%f",offset);
     
     
     if (offset>0) {
@@ -187,12 +189,16 @@
     view2.backgroundColor =[UIColor whiteColor];
     [backView addSubview:view2];
     
+
+    
     imgButton = [UIButton buttonWithType:UIButtonTypeCustom];
     imgButton.frame = CGRectMake(27, 5, 95, 95);
     imgButton.backgroundColor = RGB(240, 240, 240);
     [imgButton addTarget:self action:@selector(imgSelect:) forControlEvents:UIControlEventTouchUpInside];
     if (self.product_dic) {
-        [imgButton sd_setImageWithURL:[NSURL URLWithString:@""] forState:0 placeholderImage:[UIImage imageNamed:@"add_yellow"]];
+        NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCE_PRODUCT stringByAppendingString:self.product_dic[@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+
+        [imgButton sd_setImageWithURL:nurl1 forState:0 placeholderImage:[UIImage imageNamed:@"add_yellow"]];
         
     }else{
         [imgButton setImage:[UIImage imageNamed:@"add_yellow"] forState:0];
@@ -233,13 +239,14 @@
             textField.placeholder = @"请输入编号";
             self.number_textField = textField;
             self.number_textField.text =  [NSString getTheNoNullStr:self.product_dic[@"number"] andRepalceStr:@""];
-            
+            self.number_textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             
         }
         if (i==1) {
             lab.text = @"价格:";
             textField.placeholder = @"请输入价格";
             self.price_textfield = textField;
+            self.price_textfield.keyboardType = UIKeyboardTypeDecimalPad;
 
             self.price_textfield.text =  [NSString getTheNoNullStr:self.product_dic[@"price"] andRepalceStr:@""];
 
@@ -248,6 +255,8 @@
             lab.text = @"库存:";
             textField.placeholder = @"请输入库存";
             self.count_textField = textField;
+            self.count_textField.keyboardType = UIKeyboardTypeNumberPad;
+
             self.count_textField.text =  [NSString getTheNoNullStr:self.product_dic[@"remain"] andRepalceStr:@""];
 
 
@@ -264,10 +273,7 @@
     NSLog(@"完成");
     [self canEditClick];
 
-    if (self.delegate && [self.delegate respondsToSelector:@selector(reloadTheAPI)]) {
-        [self.delegate reloadTheAPI];
-        
-    }
+  
     
     
         if ([self.number_textField.text isEqualToString:@""]) {
@@ -279,18 +285,20 @@
             [self tishi:@"请填写商品名称"];
 
         }
-        else if ([self.count_textField.text isEqualToString:@""])
-        {
-            [self tishi:@"请填写商品数量"];
-
-        }else if ([self.price_textfield.text isEqualToString:@""])
+       else if ([self.price_textfield.text isEqualToString:@""])
         {
             [self tishi:@"请填写商品价格"];
 
         }else
         {
             if (self.editTag == 0) {
-                [self postRequestAddVipCard];
+                 if(photoName.length==0){
+                    [self tishi:@"请添加商品图片"];
+                    
+                 }else{
+                     [self postRequestAddVipCard];
+
+                 }
 
             }
             if (self.editTag == 1) {
@@ -312,6 +320,9 @@
     [params setObject:self.count_textField.text forKey:@"remain"];
     [params setObject:self.title_textField.text forKey:@"name"];
     [params setObject:self.number_textField.text forKey:@"code"];
+    
+    [params setObject:[photoName stringByAppendingString:@".png"]  forKey:@"image_url"];
+
     NSLog(@"params  %@", params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
@@ -322,7 +333,7 @@
             
             [self tishi:@"添加商品成功"];
 
-            [self performSelector:@selector(popView) withObject:nil afterDelay:1];
+            [self performSelector:@selector(popView) withObject:nil afterDelay:2];
             
             
         }else if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"result_code"]] isEqualToString:@"1062"]){
@@ -351,7 +362,14 @@
     [params setObject:self.count_textField.text forKey:@"remain"];
     [params setObject:self.title_textField.text forKey:@"name"];
     [params setObject:self.number_textField.text forKey:@"code"];
-    
+    if (photoName.length ==0) {
+        [params setObject:self.product_dic[@"image_url"]  forKey:@"image_url"];
+
+    }else{
+        [params setObject:[photoName stringByAppendingString:@".png"]  forKey:@"image_url"];
+
+    }
+
     NSLog(@"params =%@", params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
@@ -466,7 +484,11 @@
     
     // 保存图片至本地，方法见下文
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSString *photoName =[NSString stringWithFormat:@"%@_%@.png",appdelegate.shopInfoDic[@"name"],appdelegate.shopInfoDic[@"phone"]];
+    
+    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+    long long int date = time;
+    
+    photoName = [[NSString alloc]initWithFormat:@"%@_%lld",appdelegate.shopInfoDic[@"muid"],date];
     
     [self saveImage:image withName:photoName];
     
@@ -482,7 +504,7 @@
     [parmer setValue:photoName forKey:@"name"];
     
     
-        [parmer setValue:@"advert1" forKey:@"type"];
+        [parmer setValue:@"commodity" forKey:@"type"];
         
     
     
@@ -490,6 +512,8 @@
     NSData *img_Data = [NSData dataWithContentsOfFile:fullPath];
     [parmer setObject:img_Data forKey:@"file1"];
     
+    
+   // NSLog(@"0-----%@",parmer);
     [KKRequestDataService requestWithURL:url params:parmer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         if ([result[@"result_code"] isEqualToString:@"access"]) {
@@ -515,41 +539,7 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
--(void)postImage
-{
-    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSString *photoName =[NSString stringWithFormat:@"%@_%@.png",appdelegate.shopInfoDic[@"name"],appdelegate.shopInfoDic[@""]];
-    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/upload/upload",BASEURL];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
 
-    [params setObject:photoName forKey:@"name"];
-    [params setObject:@"advert1" forKey:@"type"];
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
-     {
-         
-         NSLog(@"%@", result);
-         
-         
-         if ([result[@"result_code"] isEqualToString:@"access"]) {
-             [self tishi:@"添加成功"];
-
-             
-         }
-         else
-         {
-             [self tishi:@"添加出错,请重新添加"];
-           
-         }
-         
-     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         
-         NSLog(@"%@", error);
-         [self tishi:@"添加出错,请重新添加"];
-
-         
-     }];
-    
-}
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
 {
     
@@ -600,6 +590,10 @@
 }
 
 -(void)popView{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(reloadTheAPI)]) {
+        [self.delegate reloadTheAPI];
+        
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)tishi:(NSString *)tishi{
