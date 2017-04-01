@@ -49,7 +49,7 @@
     NSInteger _pageID;
     
     UIPageControl *topPageControl;
-
+    MBProgressHUD *data_hud;
    
     NSTimer* _timer;
     
@@ -396,7 +396,6 @@
 
     
     
-    [self getIcons:@""];
     
 
 }
@@ -1118,13 +1117,14 @@
 //获取小分类
 -(void)getIcons:(NSString*)more{
     
+    data_hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/Source/tradeIconGet",BASEURL];
     [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          self.icon_A= (NSArray*)result;
 
-
+         
          [self getAdvertiseHeaderLineGet:more];
          
 
@@ -1332,6 +1332,7 @@
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
+         [data_hud hideAnimated:YES];
 
                   NSLog(@"result3==%@",result);
          

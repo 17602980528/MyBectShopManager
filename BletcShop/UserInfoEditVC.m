@@ -130,7 +130,7 @@
              hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
              hud.userInteractionEnabled = YES;
              
-             [hud hideAnimated:YES afterDelay:2.f];
+             [hud hideAnimated:YES afterDelay:1.f];
              
              AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
              
@@ -144,6 +144,11 @@
              appdelegate.shopInfoDic = mutab_dic;
              
              
+             
+             [self performSelector:@selector(popVC) withObject:nil afterDelay:1.5];
+
+             
+             
          }else
          {
              hud.label.text = NSLocalizedString(@"请求失败 请重试", @"HUD message title");
@@ -153,7 +158,7 @@
              hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
              hud.userInteractionEnabled = YES;
              
-             [hud hideAnimated:YES afterDelay:2.f];
+             [hud hideAnimated:YES afterDelay:1.f];
              
              
          }
@@ -213,7 +218,7 @@
              hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
              hud.userInteractionEnabled = YES;
              
-             [hud hideAnimated:YES afterDelay:2.f];
+             [hud hideAnimated:YES afterDelay:1.f];
              
              
              NSMutableDictionary *new_dic = [appdelegate.userInfoDic mutableCopy];
@@ -228,6 +233,7 @@
              self.resultBlock(result);
              
              
+             [self performSelector:@selector(popVC) withObject:nil afterDelay:1.5];
              
          }else
          {
@@ -238,7 +244,7 @@
              hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
              hud.userInteractionEnabled = YES;
              
-             [hud hideAnimated:YES afterDelay:2.f];
+             [hud hideAnimated:YES afterDelay:1.f];
              
              
          }
@@ -254,7 +260,9 @@
     
 }
 
-
+-(void)popVC{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
     

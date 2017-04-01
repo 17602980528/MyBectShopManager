@@ -62,7 +62,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"我的";
     self.view.backgroundColor= [UIColor whiteColor];
     [self _initTable];
     //获取通知中心单例对象

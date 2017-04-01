@@ -144,7 +144,7 @@
                  hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
                  hud.userInteractionEnabled = YES;
                  
-                 [hud hideAnimated:YES afterDelay:2.f];
+                 [hud hideAnimated:YES afterDelay:1.f];
                  
                  
                  NSMutableDictionary *new_dic = [appdelegate.userInfoDic mutableCopy];
@@ -156,6 +156,8 @@
                  
                  self.prodessionBlock(result);
                  
+                 [self performSelector:@selector(popVC) withObject:nil afterDelay:1.5];
+                 
              }else
              {
                  hud.label.text = NSLocalizedString(@"请求失败 请重试", @"HUD message title");
@@ -165,7 +167,7 @@
                  hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
                  hud.userInteractionEnabled = YES;
                  
-                 [hud hideAnimated:YES afterDelay:2.f];
+                 [hud hideAnimated:YES afterDelay:1.f];
                  
                  
              }
@@ -181,5 +183,9 @@
         
     }
     NSLog(@"-profession----%@",profession);
+}
+
+-(void)popVC{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
