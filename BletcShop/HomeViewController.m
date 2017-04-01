@@ -927,8 +927,8 @@
     if (self.longAdvertise_dic) {
         NSString *_longimg_str = [NSString stringWithFormat:@"%@%@",LONGADVERTIMAGE,self.longAdvertise_dic[@"image_url"]];
         
-        [_longAdvertise_btn sd_setImageWithURL:[NSURL URLWithString:_longimg_str] forState:0 placeholderImage:[UIImage imageNamed:@"hgjuygk.png"]];
-        [_longAdvertise_btn sd_setImageWithURL:[NSURL URLWithString:_longimg_str] forState:UIControlStateHighlighted placeholderImage:[UIImage imageNamed:@"hgjuygk.png"]];
+        [_longAdvertise_btn sd_setImageWithURL:[NSURL URLWithString:_longimg_str] forState:0 placeholderImage:[UIImage imageNamed:@"-2-01.jpg"]];
+        [_longAdvertise_btn sd_setImageWithURL:[NSURL URLWithString:_longimg_str] forState:UIControlStateHighlighted placeholderImage:[UIImage imageNamed:@"-2-01.jpg"]];
 
 
     }
