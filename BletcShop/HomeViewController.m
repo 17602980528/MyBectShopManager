@@ -536,7 +536,7 @@
         
         if (model.remark.length>0) {
             
-            static NSString *cellID = @"cellId";
+            static NSString *cellID = @"homeCellId";
             
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
             if (!cell) {
@@ -548,7 +548,7 @@
             }
             
             UIImageView *img_view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 76-1)];
-            [img_view sd_setImageWithURL:[NSURL URLWithString:model.long_img_url] placeholderImage:[UIImage imageNamed:@"hgjgk.png"]];
+            [img_view sd_setImageWithURL:[NSURL URLWithString:model.long_img_url] placeholderImage:[UIImage imageNamed:@"icon3"]];
             
             [cell.contentView addSubview:img_view];
             

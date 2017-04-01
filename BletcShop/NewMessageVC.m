@@ -8,64 +8,7 @@
 
 #import "NewMessageVC.h"
 #import "NewMessageCell.h"
-//
-//@interface NewMessageVC ()<UITableViewDelegate,UITableViewDataSource>
-//@property(nonatomic,strong)UITableView *table_View;
-//
-//@end
-//
-//@implementation NewMessageVC
-//
-//- (void)viewDidLoad {
-//    [super viewDidLoad];
-//    self.navigationItem.title = @"消息";
-//    self.view.backgroundColor = RGB(240, 240, 240);
-//    
-//    
-//    [self inittableView];
-//
-//    
-//}
-//
-//
-//
-//-(void)inittableView{
-//    UITableView *tabV = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStylePlain];
-//    tabV.delegate = self;
-//    tabV.dataSource = self;
-//    tabV.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    tabV.rowHeight = 89;
-//    [self.view addSubview:tabV];
-//    tabV.backgroundColor = [UIColor clearColor];
-//    self.table_View = tabV;
-//
-//}
-//
-//
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//    
-//    return 2;
-//}
-//
-//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    if (section==0) {
-//        return 30;
-//    }else return 0.01;
-//}
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    
-//    return 2;
-//}
-//
-//-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    
-//    NewMessageCell *cell = [NewMessageCell CellWithTableView:tableView];
-//    
-//    return cell;
-//    
-//    
-//}
+
 
 #import "LZDChartViewController.h"
 #import "UIImageView+WebCache.h"
@@ -185,7 +128,7 @@
         return _data_array.count;
         
     }else
-        return 2;
+        return 0;
     
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
