@@ -37,7 +37,8 @@
     SDRefreshHeaderView *_refreshheader;
     int currentIndex1;//请求页码
     
-    
+    NSString *address_old;//之前的地址
+
 }
 @property(nonatomic,copy)NSString *cityChoice;//选择的地点
 @property (nonatomic,assign)BOOL ifOpen;
@@ -65,6 +66,8 @@
     self.navigationController.navigationBar.hidden= YES;
     
     [self initTopView];
+    
+    
     
     
 }
@@ -97,7 +100,8 @@
     
     [self initTableView];
     
-    
+    address_old = appdelegate.districtString.length>0?appdelegate.districtString:appdelegate.cityChoice;
+
     
 }
 
@@ -213,8 +217,16 @@
     self.cityChoice = appdelegate.cityChoice;
     self.city_district = [NSString stringWithFormat:@"%@%@",appdelegate.cityChoice,[appdelegate.districtString isEqualToString:appdelegate.cityChoice] ? @"":appdelegate.districtString];
     
-    [self getDataWithMore:@""];
     
+    
+    NSLog(@"address_old------%@===%@",address_old,dingweiBtn.titleLabel.text);
+
+    
+    if (![address_old isEqualToString:dingweiBtn.titleLabel.text]) {
+        address_old = dingweiBtn.titleLabel.text;
+        [self getDataWithMore:@""];
+        
+    }
     
     
 }
@@ -456,7 +468,8 @@
     
     
     
-    
+    [self getDataWithMore:@""];
+
     
     
 }

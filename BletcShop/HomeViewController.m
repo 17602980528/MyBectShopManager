@@ -44,6 +44,7 @@
 
     UIView*searchView;
     
+    NSString *address_old;//之前的地址
     //广告轮播
     NSArray* _topAdverImages;
     NSInteger _pageID;
@@ -230,6 +231,9 @@
     [self initTableView];
 
     
+    
+    address_old = appdelegate.districtString.length>0?appdelegate.districtString:appdelegate.cityChoice;
+
 
     
 }
@@ -281,6 +285,8 @@
     
     dingweiBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 20, 43, 44)];
     [dingweiBtn addTarget:self action:@selector(dingweiClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     
     [dingweiBtn setTitle:appdelegate.districtString.length>0?appdelegate.districtString:appdelegate.cityChoice forState:UIControlStateNormal];
@@ -358,9 +364,15 @@
         
         
     }
+    NSLog(@"address_old------%@===%@",address_old,dingweiBtn.titleLabel.text);
+    
+    if (![address_old isEqualToString:dingweiBtn.titleLabel.text]) {
+        address_old = dingweiBtn.titleLabel.text;
+        [self getIcons:@""];
+ 
+    }
     
     
-    [self getIcons:@""];
     
     
     
@@ -394,7 +406,8 @@
 
     
 
-    
+    [self getIcons:@""];
+
     
     
 
