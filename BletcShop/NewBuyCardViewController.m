@@ -221,7 +221,7 @@
     if (section==0) {
         return self.cardListArray.count;
     }else if (section==1){
-        return 1;
+        return 2;
     }else{
         return 2;
     }
@@ -376,34 +376,34 @@
         
         contentlabel.textAlignment = NSTextAlignmentRight;
         
-//        if (indexPath.row==0) {
-//            label.text = @"使用乐点";
-//            NSLog(@"self.allPoint==%@,self.moneyString==%@",self.allPoint,self.moneyString);
-//            if (self.Type == points) {
-//                imageView.image = [UIImage imageNamed:@"checkbox_yes"];
-//                if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
-//                {
-//                    self.canUsePoint =(([self.moneyString floatValue])/2)*10;
-//                }else
-//                    self.canUsePoint =[self.allPoint floatValue];
-//                
-//                
-//                NSLog(@"self.allPoint%ld",(([self.moneyString integerValue])/2)*10);
-//                
-//                //self.canUsePoint =40;
-//                float diXian =self.canUsePoint/10;
-//                if(!((([self.moneyString floatValue])/2)<1))
-//                {
-//                    contentlabel.text = [[NSString alloc]initWithFormat:@"可用%.f乐点抵用%.2f元现金",self.canUsePoint,diXian ];
-//                }else
-//                    contentlabel.text =@"不可使用乐点";
-//                
-//            }
-//            if(((([self.moneyString floatValue])/2)<1)&&self.moneyString)
-//            {
-//                contentlabel.text =@"不可使用乐点";
-//            }
-//        }else
+        if (indexPath.row==0) {
+            label.text = @"使用乐点";
+            NSLog(@"self.allPoint==%@,self.moneyString==%@",self.allPoint,self.moneyString);
+            if (self.Type == points) {
+                imageView.image = [UIImage imageNamed:@"checkbox_yes"];
+                if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
+                {
+                    self.canUsePoint =(([self.moneyString floatValue])/2)*10;
+                }else
+                    self.canUsePoint =[self.allPoint floatValue];
+                
+                
+                NSLog(@"self.allPoint%ld",(([self.moneyString integerValue])/2)*10);
+                
+                //self.canUsePoint =40;
+                float diXian =self.canUsePoint/10;
+                if(!((([self.moneyString floatValue])/2)<1))
+                {
+                    contentlabel.text = [[NSString alloc]initWithFormat:@"可用%.f乐点抵用%.2f元现金",self.canUsePoint,diXian ];
+                }else
+                    contentlabel.text =@"不可使用乐点";
+                
+            }
+            if(((([self.moneyString floatValue])/2)<1)&&self.moneyString)
+            {
+                contentlabel.text =@"不可使用乐点";
+            }
+        }else
         {
             label.text = @"使用代金券";
             if (self.coup_dic.count>0) {
@@ -471,8 +471,8 @@
     }
     if (indexPath.section==1)
     {
-//        if(indexPath.row == 1)
-//        {
+        if(indexPath.row == 1)
+        {
             if(!([self.moneyString floatValue]<1))
             {
                 self.pay_Type=@"voucher";
@@ -486,16 +486,16 @@
                 [self.navigationController pushViewController:choiceView animated:YES];
             }
             
-//        }
-//        else if(indexPath.row == 0)
-//        {
-//            if(!((([self.moneyString floatValue])/2)<1)){
-//                self.pay_Type=@"integral";
-//                self.Type = points;
-//                self.coup_dic=[NSDictionary dictionaryWithObject:@"0元" forKey:@"type"];
-//                [self.myTable reloadData];
-//            }
-//        }
+        }
+        else if(indexPath.row == 0)
+        {
+            if(!((([self.moneyString floatValue])/2)<1)){
+                self.pay_Type=@"integral";
+                self.Type = points;
+                self.coup_dic=[NSDictionary dictionaryWithObject:@"0元" forKey:@"type"];
+                [self.myTable reloadData];
+            }
+        }
         
     }
     if (indexPath.section==2) {
@@ -521,23 +521,23 @@
         
     }
     
-//    else if(self.Type==points)
-//    {
-//        if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
-//        {
-//            self.canUsePoint =(([self.moneyString floatValue])/2)*10;
-//        }else
-//            self.canUsePoint =[self.allPoint floatValue];
-//        
-//
-//        
-//        if(!((([self.moneyString floatValue])/2)<1))
-//        {
-//            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]-self.canUsePoint/10];
-//        }else
-//            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]];
-//        
-//    }
+    else if(self.Type==points)
+    {
+        if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
+        {
+            self.canUsePoint =(([self.moneyString floatValue])/2)*10;
+        }else
+            self.canUsePoint =[self.allPoint floatValue];
+        
+
+        
+        if(!((([self.moneyString floatValue])/2)<1))
+        {
+            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]-self.canUsePoint/10];
+        }else
+            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]];
+        
+    }
     
     else
     {

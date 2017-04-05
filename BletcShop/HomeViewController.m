@@ -876,7 +876,13 @@
 
         [img_2 sd_setImageWithURL:[NSURL URLWithString:img_str] placeholderImage:[UIImage imageNamed:@"dasda.png"]];
         
+        CGFloat hh = [lab2_2.text boundingRectWithSize:CGSizeMake(lab2_2.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName :lab2_2.font} context:nil].size.height;
         
+        
+        if (hh>lab2_2.height) {
+            lab2_2.frame = CGRectMake(13, 31, button2.width/2-13, 25);
+            lab2_2.numberOfLines= 2;
+        }
     }
 
     
