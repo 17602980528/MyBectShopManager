@@ -195,7 +195,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)adjustShop{
-    
+    [self buyCardBtnClick:nil];
 }
 
 - (void)didReceiveMemoryWarning {
