@@ -41,8 +41,10 @@
     self.coup_dic = value;
     
     NSLog(@"ddddddd%@",self.coup_dic);
+    self.pay_Type=@"cp";
     self.Type = Wares;
-    
+    self.canUsePoint =0;
+
     NSString* price =self.coup_dic[@"sum"];
 //    if (!(([self.moneyString floatValue]*10/100)<[price floatValue])) {
 //        self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
@@ -97,6 +99,8 @@
 -(void)showtishi:(BOOL)payResult{
     
     if (payResult) {
+        
+        self.coup_dic = nil;
         
         PaySuccessVc *VC = [[PaySuccessVc alloc]init];
         VC.orderInfoType = self.orderInfoType;
@@ -162,28 +166,60 @@
 -(void)postRequestPoints
 {
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountGet",BASEURL];
+//    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountGet",BASEURL];
+//    
+//    
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+//    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+//    [params setObject:@"integral" forKey:@"type"];
+//    
+//    
+//    
+//    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+//        
+//        NSLog(@"%@", result);
+//        
+//        self.allPoint = result[@"integral"];
+//        
+//        
+//    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        
+//        NSLog(@"%@", error);
+//        
+//    }];
     
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSString *url =[NSString stringWithFormat:@"%@UserType/user/getRedPacket",BASEURL];
+    NSMutableDictionary *paramer =[NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
-    [params setObject:@"integral" forKey:@"type"];
     
+    [paramer setValue:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
     
-    
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+   
+        [paramer setValue:@"1" forKey:@"page"];
         
-        NSLog(@"%@", result);
+    
+    //    NSLog(@"---%@",paramer);
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
-        self.allPoint = result[@"integral"];
+        
+        if (result) {
+            
+            self.allPoint =result[@"sum"];
+            
+           
+        }
+        
+        
+        
         
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"%@", error);
+        NSLog(@"error---%@",error);
         
     }];
+
     
 }
 //tableview---delegate
@@ -377,13 +413,13 @@
         contentlabel.textAlignment = NSTextAlignmentRight;
         
         if (indexPath.row==0) {
-            label.text = @"使用乐点";
+            label.text = @"使用红包";
             NSLog(@"self.allPoint==%@,self.moneyString==%@",self.allPoint,self.moneyString);
             if (self.Type == points) {
                 imageView.image = [UIImage imageNamed:@"checkbox_yes"];
-                if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
+                if(!(([self.allPoint floatValue])<([self.moneyString floatValue]*0.9)))
                 {
-                    self.canUsePoint =(([self.moneyString floatValue])/2)*10;
+                    self.canUsePoint =[self.moneyString floatValue]*0.9;
                 }else
                     self.canUsePoint =[self.allPoint floatValue];
                 
@@ -391,17 +427,17 @@
                 NSLog(@"self.allPoint%ld",(([self.moneyString integerValue])/2)*10);
                 
                 //self.canUsePoint =40;
-                float diXian =self.canUsePoint/10;
+                float diXian =self.canUsePoint;
                 if(!((([self.moneyString floatValue])/2)<1))
                 {
-                    contentlabel.text = [[NSString alloc]initWithFormat:@"可用%.f乐点抵用%.2f元现金",self.canUsePoint,diXian ];
+                    contentlabel.text = [[NSString alloc]initWithFormat:@"可用%.f红包抵用%.2f元现金",self.canUsePoint,diXian ];
                 }else
-                    contentlabel.text =@"不可使用乐点";
+                    contentlabel.text =@"不可使用红包";
                 
             }
             if(((([self.moneyString floatValue])/2)<1)&&self.moneyString)
             {
-                contentlabel.text =@"不可使用乐点";
+                contentlabel.text =@"不可使用红包";
             }
         }else
         {
@@ -462,6 +498,8 @@
         selectRow = indexPath.row;
         self.moneyString=self.cardListArray[indexPath.row][@"price"];
         
+        self.coup_dic = nil;
+        
         [self.myTable reloadData];
         
         self.card_dic=self.cardListArray[indexPath.row];
@@ -475,11 +513,8 @@
         {
             if(!([self.moneyString floatValue]<1))
             {
-                self.pay_Type=@"voucher";
-                self.Type = Wares;
-                self.canUsePoint =0;
                 MyCashCouponViewController *choiceView = [[MyCashCouponViewController alloc]init];
-                
+                choiceView.muid =  self.cardListArray[selectRow][@"merchant"];
                 choiceView.moneyString = self.moneyString;
                 choiceView.useCoupon = 100;
                 choiceView.delegate = self;
@@ -490,7 +525,7 @@
         else if(indexPath.row == 0)
         {
             if(!((([self.moneyString floatValue])/2)<1)){
-                self.pay_Type=@"integral";
+                self.pay_Type=@"rp";
                 self.Type = points;
                 self.coup_dic=[NSDictionary dictionaryWithObject:@"0元" forKey:@"type"];
                 [self.myTable reloadData];
@@ -523,17 +558,16 @@
     
     else if(self.Type==points)
     {
-        if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
+        if(!(([self.allPoint floatValue])<([self.moneyString floatValue]*0.9)))
         {
-            self.canUsePoint =(([self.moneyString floatValue])/2)*10;
+            self.canUsePoint =[self.moneyString floatValue]*0.9;
         }else
             self.canUsePoint =[self.allPoint floatValue];
-        
 
         
         if(!((([self.moneyString floatValue])/2)<1))
         {
-            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]-self.canUsePoint/10];
+            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]-self.canUsePoint];
         }else
             self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",[self.moneyString floatValue]];
         
@@ -692,7 +726,7 @@
     if (self.Type==Wares)
     {
         [params setObject:@"cp" forKey:@"pay_type"];
-        [params setObject:self.coup_dic[@"sum"] forKey:@"content"];
+        [params setObject:self.coup_dic[@"coupon_id"] forKey:@"content"];
     }
     else if (self.Type == points)
     {

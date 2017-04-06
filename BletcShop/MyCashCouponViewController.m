@@ -71,6 +71,12 @@
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
     
+    
+    if (_useCoupon ==100) {
+        
+        [params setObject:self.muid forKey:@"muid"];
+
+    }
     NSLog(@"params---%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         

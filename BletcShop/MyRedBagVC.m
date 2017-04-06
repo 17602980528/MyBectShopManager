@@ -198,7 +198,7 @@
     [paramer setValue:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
     
     if ([more isEqualToString:@"more"]) {
-        [paramer setValue:[NSString stringWithFormat:@"%d",currentIndex++] forKey:@"page"];
+        [paramer setValue:[NSString stringWithFormat:@"%d",++currentIndex] forKey:@"page"];
         
     }else{
         currentIndex = 1;
@@ -206,7 +206,7 @@
         
     }
     
-    //    NSLog(@"---%@",paramer);
+       NSLog(@"---%@",paramer);
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         [_footRefresh endRefreshing];

@@ -19,6 +19,8 @@
 
 @property (nonatomic,copy)NSString *moneyString;// 支付总额
 
+@property (nonatomic,copy)NSString *muid;// 商户ID
+
 @property int useCoupon;//100代表从购买卡进入
 // 委托代理人，代理一般需使用弱引用(weak)
 @property (weak, nonatomic) id<ViewControllerBDelegate> delegate;

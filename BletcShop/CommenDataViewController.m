@@ -492,15 +492,15 @@
     
     lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
     
-    NSMutableArray *d_a = [NSMutableArray array];
+//    NSMutableArray *d_a = [NSMutableArray array];
+//    
+//    for (int i =1; i <=vareArr.count; i ++) {
+//        [d_a addObject:[NSString stringWithFormat:@"%d",arc4random()%50]];
+//        
+//    }
     
-    for (int i =1; i <=vareArr.count; i ++) {
-        [d_a addObject:[NSString stringWithFormat:@"%d",arc4random()%50]];
-        
-    }
     
-    
-    lineChart.valueArr = @[d_a];
+    lineChart.valueArr = @[vareArr];
     lineChart.showYLevelLine = YES;
     lineChart.showYLine = NO;
     lineChart.showValueLeadingLine = NO;
