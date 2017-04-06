@@ -691,12 +691,12 @@
     [params setObject:self.moneyString forKey:@"sum"];
     if (self.Type==Wares)
     {
-        [params setObject:@"voucher" forKey:@"pay_type"];
+        [params setObject:@"cp" forKey:@"pay_type"];
         [params setObject:self.coup_dic[@"sum"] forKey:@"content"];
     }
     else if (self.Type == points)
     {
-        [params setObject:@"integral" forKey:@"pay_type"];
+        [params setObject:@"rp" forKey:@"pay_type"];
         [params setObject:[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint] forKey:@"content"];
     }else
     {

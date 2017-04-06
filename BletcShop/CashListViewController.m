@@ -30,7 +30,8 @@
     UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStylePlain];
     tableView.delegate =self;
     tableView.dataSource = self;
-    tableView.rowHeight = 80;
+    tableView.estimatedRowHeight = 100;
+    tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = RGB(240, 240, 240);
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
@@ -53,7 +54,7 @@
     if (self.data_array.count!=0) {
         
         NSDictionary *dic = self.data_array[indexPath.row];
-        cell.name_lab.text = [NSString stringWithFormat:@"客户类型:%@",dic[@"name"]];
+//        cell.name_lab.text = [NSString stringWithFormat:@"客户类型:%@",dic[@"name"]];
         cell.cardNum.text = [NSString stringWithFormat:@"单号:%@",dic[@"ordernum"]];
         cell.time_lab.text = [NSString stringWithFormat:@"时间:%@",dic[@"datetime"]];
         cell.cash_lab.text = [NSString stringWithFormat:@"%@元",dic[@"sum"]];

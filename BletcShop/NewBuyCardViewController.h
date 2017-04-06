@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 enum OrderTypes{
-    points,
-    Wares
+    points,//红包
+    Wares//优惠券
 };
 @interface NewBuyCardViewController : UIViewController
 @property (nonatomic,retain)UITableView *myTable;

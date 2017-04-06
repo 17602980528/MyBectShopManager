@@ -8,7 +8,7 @@
 
 #import "GoToPayForAdvertistTableVC.h"
 #import "SingleModel.h"
-@interface GoToPayForAdvertistTableVC ()
+@interface GoToPayForAdvertistTableVC ()<UITableViewDelegate,UITableViewDataSource>
 
 {
     NSArray *dataSourse_A;
@@ -36,6 +36,7 @@
     }
     return _section2_A;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
   self.navigationItem.title = @"发布广告";
@@ -43,14 +44,61 @@
     
     dataSourse_A = @[self.section1_A,self.section2_A];
     NSLog(@"%@==%@==%@==%@==%@",model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition);
-    data_A = @[@[model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition],@[@"￥299",@"￥0",@"￥299"]];
+    data_A = @[@[model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition],@[@"￥0",@"￥0",@"￥0"]];
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = RGB(240, 240, 240);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight = 35 ;
-
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self getAdvertPrice];
 }
+-(void)getAdvertPrice{
+    
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/advert/getPrice",BASEURL];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    
+    [paramer setObject:model.advertID forKey:@"advert_id"];
 
+    if (model.advertIndex==2) {
+        [paramer setObject:@"activity" forKey:@"advert_type"];
+
+    }else if (model.advertIndex==3){
+        
+        [paramer setObject:@"near" forKey:@"advert_type"];
+        [paramer setObject:model.advertArea forKey:@"advert_id"];
+
+    }
+    else{
+        [paramer setObject:@"top" forKey:@"advert_type"];
+
+    }
+
+    
+   
+    [paramer setObject:model.advertPosition forKey:@"position"];//
+    [paramer setObject:model.baseOnCountsOrTime forKey:@"pay_type"];//
+    [paramer setObject:model.counts forKey:@"pay_content"];//
+
+    
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"=====%@",result);
+        
+        NSString *p1 = [NSString stringWithFormat:@"¥%@",result[@"price"]];
+        
+
+        data_A = @[@[model.shopName,model.advertTitle,model.advertArea,model.advertKind,model.advertPosition],@[p1,@"￥0",p1]];
+
+//        [self.tableView reloadData];
+        
+        NSIndexSet *indexSet = [[NSIndexSet alloc]initWithIndex:1];
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
 
 
 #pragma mark - Table view data source
@@ -63,15 +111,15 @@
     if (section==0) {
         return 10;
     }else{
-        return SCREENHEIGHT -64- tableView.contentSize.height;
+        return 84;
     }
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (section==1) {
         UIView *view = [UIView new];
-        view.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT -64- tableView.contentSize.height);
-        view.backgroundColor = [UIColor whiteColor];
+        view.frame = CGRectMake(0, 0, SCREENWIDTH, 84);
+        view.backgroundColor = [UIColor clearColor];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(25, 20, SCREENWIDTH-50, 44);
         button.backgroundColor = NavBackGroundColor;
@@ -121,6 +169,8 @@
     
     leftLab.text = dataSourse_A[indexPath.section][indexPath.row];
     rightLab.text = data_A[indexPath.section][indexPath.row];
+    
+    NSLog(@"====%@",data_A[1]);
     
     if (indexPath.section==1 && indexPath.row ==5) {
         rightLab.textColor = RGB(215,32,32);
