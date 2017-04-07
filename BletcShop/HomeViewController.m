@@ -36,6 +36,7 @@
 #import "JFAreaDataManager.h"
 #import "HotNewsVC.h"
 
+#import "ChouJiangVC.h"
 @interface HomeViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GYChangeTextViewDelegate,SelectCityDelegate,JFLocationDelegate,SDCycleScrollViewDelegate>
 {
     
@@ -74,6 +75,8 @@
     UIView *PopupAdvertiseView;//弹出广告
     SDCycleScrollView *cycleScrollView2;
     
+    
+    NSDictionary *pop_data_Dic;
 
 }
 
@@ -1401,6 +1404,8 @@
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          NSLog(@"getPopupAdvertise-result-%@",result);
+         
+         pop_data_Dic = [NSDictionary dictionaryWithDictionary:result];
          NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
          formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
          
@@ -1454,11 +1459,15 @@
     imageView.bounds =CGRectMake(0,0, SCREENWIDTH-20, (SCREENWIDTH-20)*0.8);
     imageView.center = CGPointMake(curent_window.center.x, curent_window.center.y-30);
                               
-    
+    imageView.userInteractionEnabled = YES;
     [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",POPADVERTIMAGE,img_url]] placeholderImage:[UIImage imageNamed:@"icon3"]];
     
 
     [PopupAdvertiseView addSubview:imageView];
+    
+    
+    UITapGestureRecognizer *tapgesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(popImgClick)];
+    [imageView addGestureRecognizer:tapgesture];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake((SCREENWIDTH-30)/2, imageView.bottom+50, 30, 30);
@@ -1851,8 +1860,18 @@
     }];
 
 }
+//弹出广告点击
+-(void)popImgClick{
+    [self tapCl];
+    NSLog(@"--popImgClick--%@",pop_data_Dic);
+    ChouJiangVC *VC = [[ChouJiangVC alloc]init];
+    VC.urlString = pop_data_Dic[@"url"];
+    
+    if ([VC.urlString hasPrefix:@"http://"]) {
+        [self.navigationController pushViewController:VC animated:YES];
 
-
+    }
+}
 
 #pragma mark 懒加载
 -(NSMutableArray*)adverImages{

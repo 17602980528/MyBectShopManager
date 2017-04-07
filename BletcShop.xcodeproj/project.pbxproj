@@ -969,6 +969,8 @@
 		D9C0E9611DCC891500FD1199 /* HomeShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C0E9601DCC891500FD1199 /* HomeShopModel.m */; };
 		D9C206011D1D001300761DC4 /* ShopAllInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C206001D1D001300761DC4 /* ShopAllInfoTableViewCell.m */; };
 		D9C206041D1D300E00761DC4 /* GraphicDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C206031D1D300E00761DC4 /* GraphicDetailsViewController.m */; };
+		D9C3A3001E9642890062B17D /* ChouJiangVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C3A2FE1E9642890062B17D /* ChouJiangVC.m */; };
+		D9C3A3011E9642890062B17D /* ChouJiangVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C3A2FF1E9642890062B17D /* ChouJiangVC.xib */; };
 		D9C4CDEA1DE4161E009C76C1 /* MyOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C4CDE91DE4161E009C76C1 /* MyOrderDetailVC.m */; };
 		D9C4CDED1DE44587009C76C1 /* ValuePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C4CDEC1DE44587009C76C1 /* ValuePickerView.m */; };
 		D9C7D45E1E2F3BEB00ADB6A1 /* MoneybagDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C7D45D1E2F3BEB00ADB6A1 /* MoneybagDetailVC.m */; };
@@ -2625,6 +2627,9 @@
 		D9C206001D1D001300761DC4 /* ShopAllInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopAllInfoTableViewCell.m; sourceTree = "<group>"; };
 		D9C206021D1D300E00761DC4 /* GraphicDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicDetailsViewController.h; sourceTree = "<group>"; };
 		D9C206031D1D300E00761DC4 /* GraphicDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphicDetailsViewController.m; sourceTree = "<group>"; };
+		D9C3A2FD1E9642890062B17D /* ChouJiangVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChouJiangVC.h; sourceTree = "<group>"; };
+		D9C3A2FE1E9642890062B17D /* ChouJiangVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChouJiangVC.m; sourceTree = "<group>"; };
+		D9C3A2FF1E9642890062B17D /* ChouJiangVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChouJiangVC.xib; sourceTree = "<group>"; };
 		D9C4CDE81DE4161E009C76C1 /* MyOrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderDetailVC.h; sourceTree = "<group>"; };
 		D9C4CDE91DE4161E009C76C1 /* MyOrderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderDetailVC.m; sourceTree = "<group>"; };
 		D9C4CDEB1DE44587009C76C1 /* ValuePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuePickerView.h; sourceTree = "<group>"; };
@@ -4819,6 +4824,7 @@
 		D9501DD11DD024450090A911 /* home首页 */ = {
 			isa = PBXGroup;
 			children = (
+				D9C3A2FC1E9642440062B17D /* 抽奖 */,
 				D9345E661E7697C0006B2AC1 /* 顶部轮播广告 */,
 				D9BB4DE31E051DB800971BCC /* 关闭.png */,
 				D99E9CF01DFAB62C009D67F4 /* 消息home.png */,
@@ -5929,6 +5935,16 @@
 			name = "分享和转让";
 			sourceTree = "<group>";
 		};
+		D9C3A2FC1E9642440062B17D /* 抽奖 */ = {
+			isa = PBXGroup;
+			children = (
+				D9C3A2FD1E9642890062B17D /* ChouJiangVC.h */,
+				D9C3A2FE1E9642890062B17D /* ChouJiangVC.m */,
+				D9C3A2FF1E9642890062B17D /* ChouJiangVC.xib */,
+			);
+			name = "抽奖";
+			sourceTree = "<group>";
+		};
 		D9CF3F9F1D76717100D9D0EC /* 申请与通知 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6348,6 +6364,7 @@
 				18F27EE91D640E84002DD03A /* 头像-1.png in Resources */,
 				D9ACF1AB1E24A64300BCC877 /* icon-weibo.png in Resources */,
 				D923025A1D152443008FB9A9 /* user_ed.png in Resources */,
+				D9C3A3011E9642890062B17D /* ChouJiangVC.xib in Resources */,
 				D9AB253F1D88E4ED000E9288 /* VoiceSearchFeedback017@2x.png in Resources */,
 				D9ACF1AC1E24A64300BCC877 /* icon-weixin.png in Resources */,
 				D94DF2641CAE0DB8000D5B69 /* result_small_star_highlight@2x.png in Resources */,
@@ -7070,6 +7087,7 @@
 				D9D50DB61D87DE0E00A5E469 /* ExpressionCL.m in Sources */,
 				18F27EC91D640C21002DD03A /* NewModelImageViewController.m in Sources */,
 				189F4CF71D508EF300461830 /* ActiveMoreRuleViewController.m in Sources */,
+				D9C3A3001E9642890062B17D /* ChouJiangVC.m in Sources */,
 				D9345E641E766EE6006B2AC1 /* DefaultAddressCell.m in Sources */,
 				D9A8ABEC1E02954200D4597F /* CardShowViewController.m in Sources */,
 				D9DEED1B1CACED7C00ACDD00 /* NSData+ImageContentType.m in Sources */,
