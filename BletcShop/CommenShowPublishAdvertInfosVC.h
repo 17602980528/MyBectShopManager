@@ -11,4 +11,10 @@
 @interface CommenShowPublishAdvertInfosVC : UITableViewController
 @property(nonatomic,strong)NSDictionary *infoDic;
 @property(nonatomic,copy)NSString *applyState;
+@property(nonatomic,assign)id dele;
+@end
+@protocol CommenShowPublishAdvertInfosVCDelegate <NSObject>
+
+-(void)refreshTableView;
+
 @end

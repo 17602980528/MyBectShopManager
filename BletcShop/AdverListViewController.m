@@ -9,7 +9,7 @@
 #import "AdverListViewController.h"
 #import "CommenShowPublishAdvertInfosVC.h"
 #import "UIImageView+WebCache.h"
-@interface AdverListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AdverListViewController ()<UITableViewDelegate,UITableViewDataSource,CommenShowPublishAdvertInfosVCDelegate>
 {
     UIView *topBackView;
     UIView *noticeLine;
@@ -370,6 +370,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{//applyState
     CommenShowPublishAdvertInfosVC *vc=[[CommenShowPublishAdvertInfosVC alloc]init];
+    vc.dele=self;
     vc.infoDic=self.data_A[indexPath.section];
     vc.applyState=stateArray[self.selectTag];
     [self.navigationController pushViewController:vc animated:YES];
@@ -491,5 +492,8 @@
     }];
 
     
+}
+-(void)refreshTableView{
+    [self postRequestDataBaseState:stateArray[self.selectTag]];
 }
 @end

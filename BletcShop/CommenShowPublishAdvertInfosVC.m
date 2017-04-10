@@ -324,6 +324,11 @@
         
         [alert show];
         
+        if (_dele && [_dele respondsToSelector:@selector(refreshTableView)]){
+            [_dele refreshTableView];
+        }
+        
+        
     }else{
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是否放弃当前交易?" delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:@"去支付", nil];
         alert.tag =1111;
