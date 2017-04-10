@@ -447,6 +447,10 @@
 		D9345E6F1E76984F006B2AC1 /* TopActiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9345E6D1E76984F006B2AC1 /* TopActiveCell.m */; };
 		D9345E701E76984F006B2AC1 /* TopActiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9345E6E1E76984F006B2AC1 /* TopActiveCell.xib */; };
 		D936F5831D473CBF00424B22 /* MyCashCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D936F5821D473CBF00424B22 /* MyCashCouponViewController.m */; };
+		D939D6C41E9B17CD00D0569E /* AllSenderMessageViewControlleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D939D6C21E9B17CD00D0569E /* AllSenderMessageViewControlleVC.m */; };
+		D939D6C51E9B17CD00D0569E /* AllSenderMessageViewControlleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D939D6C31E9B17CD00D0569E /* AllSenderMessageViewControlleVC.xib */; };
+		D939D6C91E9B1DE100D0569E /* AllSenderMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D939D6C71E9B1DE100D0569E /* AllSenderMessageCell.m */; };
+		D939D6CA1E9B1DE100D0569E /* AllSenderMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D939D6C81E9B1DE100D0569E /* AllSenderMessageCell.xib */; };
 		D93A3AA51CDC3DD60010F72B /* DelayShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93A3AA41CDC3DD60010F72B /* DelayShopViewController.m */; };
 		D93A3AA81CDC3DEC0010F72B /* UpgradeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93A3AA71CDC3DEC0010F72B /* UpgradeShopViewController.m */; };
 		D93A3AAB1CDC3E090010F72B /* OrderShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93A3AAA1CDC3E090010F72B /* OrderShopViewController.m */; };
@@ -1748,6 +1752,12 @@
 		D9345E6E1E76984F006B2AC1 /* TopActiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopActiveCell.xib; sourceTree = "<group>"; };
 		D936F5811D473CBF00424B22 /* MyCashCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCashCouponViewController.h; sourceTree = "<group>"; };
 		D936F5821D473CBF00424B22 /* MyCashCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCashCouponViewController.m; sourceTree = "<group>"; };
+		D939D6C11E9B17CD00D0569E /* AllSenderMessageViewControlleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSenderMessageViewControlleVC.h; sourceTree = "<group>"; };
+		D939D6C21E9B17CD00D0569E /* AllSenderMessageViewControlleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSenderMessageViewControlleVC.m; sourceTree = "<group>"; };
+		D939D6C31E9B17CD00D0569E /* AllSenderMessageViewControlleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllSenderMessageViewControlleVC.xib; sourceTree = "<group>"; };
+		D939D6C61E9B1DE100D0569E /* AllSenderMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSenderMessageCell.h; sourceTree = "<group>"; };
+		D939D6C71E9B1DE100D0569E /* AllSenderMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSenderMessageCell.m; sourceTree = "<group>"; };
+		D939D6C81E9B1DE100D0569E /* AllSenderMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllSenderMessageCell.xib; sourceTree = "<group>"; };
 		D93A3AA31CDC3DD60010F72B /* DelayShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayShopViewController.h; sourceTree = "<group>"; };
 		D93A3AA41CDC3DD60010F72B /* DelayShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayShopViewController.m; sourceTree = "<group>"; };
 		D93A3AA61CDC3DEC0010F72B /* UpgradeShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeShopViewController.h; sourceTree = "<group>"; };
@@ -5029,6 +5039,12 @@
 				1CDA9E101C5A142900DFE518 /* ShopVipController.m */,
 				1817FF5A1D40665900AFC965 /* MemberDetailViewController.h */,
 				1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */,
+				D939D6C11E9B17CD00D0569E /* AllSenderMessageViewControlleVC.h */,
+				D939D6C21E9B17CD00D0569E /* AllSenderMessageViewControlleVC.m */,
+				D939D6C31E9B17CD00D0569E /* AllSenderMessageViewControlleVC.xib */,
+				D939D6C61E9B1DE100D0569E /* AllSenderMessageCell.h */,
+				D939D6C71E9B1DE100D0569E /* AllSenderMessageCell.m */,
+				D939D6C81E9B1DE100D0569E /* AllSenderMessageCell.xib */,
 			);
 			name = "我的";
 			sourceTree = "<group>";
@@ -6494,6 +6510,7 @@
 				1C2ED1261C5B5868003EE93B /* 6-02@2x.png in Resources */,
 				D94C5F341D90D6910063EB27 /* leftArrow.png in Resources */,
 				1C0BEF8C1C7DB3AF00519481 /* xing.png in Resources */,
+				D939D6CA1E9B1DE100D0569E /* AllSenderMessageCell.xib in Resources */,
 				18F0320B1E5ED79300ACD261 /* tempProducts_06.jpg in Resources */,
 				1C9E82471C60557E0007BF02 /* 5(2)@2x.png in Resources */,
 				D9AB25311D88E4ED000E9288 /* VoiceSearchFeedback003@2x.png in Resources */,
@@ -6598,6 +6615,7 @@
 				D953B7741D3F1B7100C5D5A9 /* 小标-24.png in Resources */,
 				D94C5F3A1D90FD4A0063EB27 /* 1 界面-01.png in Resources */,
 				D92302611D1528BB008FB9A9 /* entrance_selected.png in Resources */,
+				D939D6C51E9B17CD00D0569E /* AllSenderMessageViewControlleVC.xib in Resources */,
 				D9637DFF1D59BAF900C19D0B /* admin_p.png in Resources */,
 				D95BAE4B1D542FD500ED0CDC /* award_01.png in Resources */,
 				D95C84D91E34602E0028C440 /* 引导页-02.png in Resources */,
@@ -7061,6 +7079,7 @@
 				079386841C55B5CA0021B385 /* AppDelegate.mm in Sources */,
 				1CDA9E071C5A0E1000DFE518 /* ShopTabBarController.m in Sources */,
 				D9B3A5B41D74255700F3F27E /* UIButton+EMWebCache.m in Sources */,
+				D939D6C41E9B17CD00D0569E /* AllSenderMessageViewControlleVC.m in Sources */,
 				1CDCCCFF1C7572130094E70D /* BaseModel.m in Sources */,
 				D9B3A4871D73CF7400F3F27E /* LZDContactViewController.m in Sources */,
 				D93A3AAB1CDC3E090010F72B /* OrderShopViewController.m in Sources */,
@@ -7329,6 +7348,7 @@
 				D98E5C021E515210009D56BF /* MASViewAttribute.m in Sources */,
 				1A4173C01D787C1500A70601 /* EMChooseViewController.m in Sources */,
 				D987BB361E792C8E008AE24D /* UserInfoEditVC.m in Sources */,
+				D939D6C91E9B1DE100D0569E /* AllSenderMessageCell.m in Sources */,
 				D9BB4DDE1E05019400971BCC /* DelayScanVC.m in Sources */,
 				D98533341DDE9B21004E1E6F /* NameSignViewController.m in Sources */,
 				D9B3A5BA1D74255700F3F27E /* UIView+EMWebCacheOperation.m in Sources */,
