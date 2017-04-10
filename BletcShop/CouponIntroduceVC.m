@@ -162,7 +162,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //获取商家手机号
     
-    [params setObject:self.infoDic[@"muid"] forKey:@"merchant"];
+    [params setObject:self.infoDic[@"muid"] forKey:@"muid"];
     
     
     __block typeof(self) tempSelf = self;

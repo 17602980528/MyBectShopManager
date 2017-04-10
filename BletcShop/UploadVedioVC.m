@@ -17,7 +17,7 @@
     LZDProgressView *progressView;
 }
 @property (weak, nonatomic) IBOutlet UILabel *lab;
-@property (weak, nonatomic) IBOutlet UIButton *cancleBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *cancleBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property(nonatomic, strong)    Item* onUploadingItem;
@@ -27,7 +27,7 @@
 
 @end
 
-static int threadCount;
+//static int threadCount;
 
 @implementation UploadVedioVC
 - (VCOPClient *)VCOPClientInstance
@@ -55,10 +55,11 @@ static int threadCount;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    
     self.deleteBtn.enabled = NO;
-    self.cancleBtn.enabled = NO;
+//    self.cancleBtn.enabled = NO;
     self.videoID=@"";
-
+    _webView.scrollView.bounces = NO;
     
     [self ifExistsAFielID];
 }
@@ -195,12 +196,14 @@ static int threadCount;
         
         [progressView removeFromSuperview];
         //                       tempSelf.videoID=fileId;
-        tempSelf.cancleBtn.enabled = NO;
+//        tempSelf.cancleBtn.enabled = NO;
         tempSelf.deleteBtn.enabled = YES;
         NSLog(@"-responseObject-----%@",responseObject);
         
         if ([responseObject[@"result_code"] isEqualToString:@"access"]) {
             BOOL isHave =  [[NSFileManager defaultManager] fileExistsAtPath:self.onUploadingItem.filePath];
+            
+            [self ifExistsAFielID];
             
             if (isHave) {
                 BOOL isDelete = [[NSFileManager defaultManager] removeItemAtPath:self.onUploadingItem.filePath error:nil];
@@ -255,7 +258,7 @@ static int threadCount;
                     progressView.percent = 0.0;
                     [progressView removeFromSuperview];
                     self.imageView.image = [UIImage imageNamed:@"jiaopian(1)"];
-                    self.cancleBtn.enabled = NO;
+//                    self.cancleBtn.enabled = NO;
                 }
                 
             }
@@ -338,28 +341,7 @@ static int threadCount;
         
     }else if(alertView.tag ==1001){
         
-       //
-     /**
-      
-      
-      [manager POST:url parameters:paramer constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-      [formData appendPartWithFileURL:fileUrl name:@"我的视频1" fileName:self.onUploadingItem.fileName mimeType:@"application/octet-stream" error:nil];
-      } success:^(NSURLSessionDataTask *task, id responseObject) {
-      NSLog(@"-responseObject-----%@",responseObject);
-      
-      
-      } failure:^(NSURLSessionDataTask *task, NSError *error) {
-      NSLog(@"error------%@",error);
-      
-      }];
- 
-      
-      
-      
-      
-      */
-        
-
+     
 
 
     }
@@ -385,36 +367,36 @@ static int threadCount;
         });
     }
 }
--(void)saveFielIDToSever:(NSString *)fielID{
-    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSLog(@"%@",delegate.shopUserInfoArray);
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoCommit",BASEURL];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:fielID forKey:@"video"];
-    [params setObject:delegate.shopInfoDic[@"muid"] forKey:@"muid"];
-    
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
-     {
-         NSLog(@"%@",result);
-         if ([[NSString stringWithFormat:@"%@",result[@"result_code"]] isEqualToString:@"1"]) {
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-             hud.frame = CGRectMake(0, 64, 375, 667);
-             // Set the annular determinate mode to show task progress.
-             hud.mode = MBProgressHUDModeText;
-             hud.label.text = NSLocalizedString(@"上传成功，等待审核", @"HUD message title");
-             hud.label.font = [UIFont systemFontOfSize:13];
-             
-             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-             [hud hideAnimated:YES afterDelay:3.f];
-             
-//             [self ifExistsAFielID];
-         }
-         
-     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"%@", error);
-     }];
-    
-}
+//-(void)saveFielIDToSever:(NSString *)fielID{
+//    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    NSLog(@"%@",delegate.shopUserInfoArray);
+//    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoCommit",BASEURL];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    [params setObject:fielID forKey:@"video"];
+//    [params setObject:delegate.shopInfoDic[@"muid"] forKey:@"muid"];
+//    
+//    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+//     {
+//         NSLog(@"%@",result);
+//         if ([[NSString stringWithFormat:@"%@",result[@"result_code"]] isEqualToString:@"1"]) {
+//             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//             hud.frame = CGRectMake(0, 64, 375, 667);
+//             // Set the annular determinate mode to show task progress.
+//             hud.mode = MBProgressHUDModeText;
+//             hud.label.text = NSLocalizedString(@"上传成功，等待审核", @"HUD message title");
+//             hud.label.font = [UIFont systemFontOfSize:13];
+//             
+//             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+//             [hud hideAnimated:YES afterDelay:3.f];
+//             
+////             [self ifExistsAFielID];
+//         }
+//         
+//     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//         NSLog(@"%@", error);
+//     }];
+//    
+//}
 //获取视频信息
 -(void)vedioStatusCheck:(NSString *)fieldID{
     VCOPClient * client = [self VCOPClientInstance];
@@ -525,6 +507,8 @@ static int threadCount;
      {
          NSLog(@"%@",result);
          if ([[NSString stringWithFormat:@"%@",result[@"result_code"]] isEqualToString:@"1"]) {
+             
+             self.deleteBtn.enabled = NO;
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.frame = CGRectMake(0, 64, 375, 667);
              // Set the annular determinate mode to show task progress.
@@ -543,31 +527,7 @@ static int threadCount;
     
 }
 
-/*
- //企业用户授权
- */
-//-(void)enterPriseAuthorzieButtonPressed
-//{
-//    VCOPClient *client = [self VCOPClientInstance];
-//    
-//    __block typeof(self) tempSelf = self;
-//    [client authorizeWithSuccess:^(NSString* queryKey, id responseObjct){
-//        NSLog(@"success!");
-//        [tempSelf storeAuthData];
-//       // [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:nil];
-//        BOOL isUploading = NO;
-//        if (tempSelf.onUploadingItem.fileId) {
-//            isUploading = YES;
-//        }
-//       // [tempSelf.contentView updateBtnStateWithAuthorFlag:YES isUploading:isUploading];
-//        //[tempSelf.contentView.deleteButton setEnabled:YES];
-//    }
-//                         failure:^(NSString* queryKey, NSError* error) {
-//                             NSLog(@"error.useinfo=%@",error.userInfo);
-//                             //[tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:error];
-//                         }];
-//    
-//}
+
 - (IBAction)cancleBtnclick:(UIButton *)sender {
     
     
@@ -596,18 +556,37 @@ static int threadCount;
              tempSelf.videoID=dic[@"video"];
              
              if (![tempSelf.videoID isEqualToString:@""]) {
-                 
                  tempSelf.deleteBtn.enabled = YES;
 
-                 tempSelf.imageView.hidden = YES;
-//                 //1.获取虚拟url
-//                 [tempSelf vitualUrl:fieldID];
+                 if ([dic[@"state"] isEqualToString:@"ture"]) {
+                     
+                     
+                     tempSelf.imageView.hidden = YES;
+                     
+                     NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,tempSelf.videoID];
+                     
+                     NSURL *url=[NSURL URLWithString:returnedurl];
+                     NSURLRequest *request=[NSURLRequest requestWithURL:url];
+                     [self.webView loadRequest:request];
+
+                     
+                     
+                 }else  if ([dic[@"state"] isEqualToString:@"false"]){
+                     self.lab.text = @"审核未通过!";
+
+                     [tempSelf.imageView setImage: [UIImage imageNamed:@"jiaopian"]];
+
+                 }else{
+
+                     tempSelf.imageView.userInteractionEnabled = NO;
+                      [tempSelf.imageView setImage: [UIImage imageNamed:@"jiaopian"]];
+                     
+                     
+                     self.lab.text = @"视频正在审核中...";
+                     
+                 }
+
                  
-                 NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,tempSelf.videoID];
-                 
-                 NSURL *url=[NSURL URLWithString:returnedurl];
-                 NSURLRequest *request=[NSURLRequest requestWithURL:url];
-                 [self.webView loadRequest:request];
                  
 
              }else{

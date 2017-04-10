@@ -204,7 +204,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //获取商家手机号
     
-    [params setObject:shopInfoDic[@"muid"] forKey:@"merchant"];
+    [params setObject:shopInfoDic[@"muid"] forKey:@"muid"];
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
      {
          NSLog(@"result==%@",result);

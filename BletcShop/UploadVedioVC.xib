@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadVedioVC">
             <connections>
-                <outlet property="cancleBtn" destination="3uH-A0-cds" id="jym-ts-7RJ"/>
                 <outlet property="deleteBtn" destination="fRF-oL-m7X" id="Asz-Vm-0BF"/>
                 <outlet property="imageView" destination="Fad-66-iFj" id="3u2-ol-xFH"/>
                 <outlet property="lab" destination="cMV-rA-xh5" id="YU6-9B-PuJ"/>
@@ -52,10 +51,10 @@
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="url-0j-dBb">
-                                    <rect key="frame" x="12" y="16" width="6" height="12"/>
+                                    <rect key="frame" x="12" y="10" width="12" height="24"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="12" id="0O6-jr-QjU"/>
-                                        <constraint firstAttribute="width" constant="6" id="GmU-uZ-DFo"/>
+                                        <constraint firstAttribute="height" constant="24" id="0O6-jr-QjU"/>
+                                        <constraint firstAttribute="width" constant="12" id="GmU-uZ-DFo"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
@@ -114,23 +113,14 @@
                         <constraint firstAttribute="width" secondItem="Vmd-Yq-V8O" secondAttribute="height" multiplier="1:1" id="xnz-CC-fiT"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uH-A0-cds">
-                    <rect key="frame" x="323" y="385" width="40" height="38"/>
-                    <state key="normal" image="vido_icon_undo_nor">
-                        <color key="titleColor" red="0.047911844135802469" green="0.34901960784313724" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="cancleBtnclick:" destination="-1" eventType="touchUpInside" id="s75-zo-2sB"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRF-oL-m7X">
-                    <rect key="frame" x="283" y="385" width="40" height="38"/>
+                    <rect key="frame" x="323" y="385" width="40" height="38"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="38" id="07v-tV-BKa"/>
-                        <constraint firstAttribute="width" constant="40" id="WFB-Z3-tB3"/>
+                        <constraint firstAttribute="height" constant="38" id="A21-7G-wdy"/>
+                        <constraint firstAttribute="width" constant="40" id="rgW-x0-Eqw"/>
                     </constraints>
                     <state key="normal" image="vido_icon_delete_nor">
-                        <color key="titleColor" red="0.0" green="0.34901960784313724" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="deleteVedio:" destination="-1" eventType="touchUpInside" id="bAV-Wo-rGk"/>
@@ -139,15 +129,11 @@
             </subviews>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="3uH-A0-cds" firstAttribute="top" secondItem="Vmd-Yq-V8O" secondAttribute="bottom" constant="10" id="0gc-2o-ql8"/>
                 <constraint firstItem="Vmd-Yq-V8O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FSd-Zp-RhQ"/>
+                <constraint firstItem="fRF-oL-m7X" firstAttribute="top" secondItem="Vmd-Yq-V8O" secondAttribute="bottom" constant="10" id="Fda-PZ-FJQ"/>
                 <constraint firstAttribute="trailing" secondItem="Vmd-Yq-V8O" secondAttribute="trailing" id="Isv-X7-OLC"/>
-                <constraint firstItem="3uH-A0-cds" firstAttribute="leading" secondItem="fRF-oL-m7X" secondAttribute="trailing" id="fch-m5-MHd"/>
-                <constraint firstItem="3uH-A0-cds" firstAttribute="width" secondItem="fRF-oL-m7X" secondAttribute="width" id="kCD-dM-plO"/>
                 <constraint firstItem="Vmd-Yq-V8O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mxl-vR-axJ"/>
-                <constraint firstItem="3uH-A0-cds" firstAttribute="centerY" secondItem="fRF-oL-m7X" secondAttribute="centerY" id="qoi-VL-42j"/>
-                <constraint firstAttribute="trailing" secondItem="3uH-A0-cds" secondAttribute="trailing" constant="12" id="xSy-Ph-ndd"/>
-                <constraint firstItem="3uH-A0-cds" firstAttribute="height" secondItem="fRF-oL-m7X" secondAttribute="height" id="yA0-73-jL5"/>
+                <constraint firstAttribute="trailing" secondItem="fRF-oL-m7X" secondAttribute="trailing" constant="12" id="vOJ-9Q-caE"/>
             </constraints>
             <point key="canvasLocation" x="-851" y="-319"/>
         </view>
@@ -161,6 +147,5 @@
         <image name="jiaopian(1).png" width="560" height="420"/>
         <image name="leftArrow.png" width="14" height="30"/>
         <image name="vido_icon_delete_nor" width="24" height="24"/>
-        <image name="vido_icon_undo_nor" width="24" height="24"/>
     </resources>
 </document>
