@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WebViewJavascriptBridge.h"
 @interface ChouJiangVC : UIViewController
 @property (nonatomic,copy)NSString *urlString;// <#Description#>
-
+@property (strong, nonatomic) WebViewJavascriptBridge *javascriptBridge;
 @end

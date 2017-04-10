@@ -98,6 +98,8 @@
 		189411481D80573200314E11 /* FirstViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 189411451D80573200314E11 /* FirstViewController.mm */; };
 		189411491D80573200314E11 /* SellerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 189411471D80573200314E11 /* SellerViewController.mm */; };
 		189619441D92319D003BA40C /* ContactSeverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189619431D92319D003BA40C /* ContactSeverViewController.m */; };
+		189757491E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 189757471E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt */; };
+		1897574A1E9B16A400AB1D00 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 189757481E9B16A400AB1D00 /* WebViewJavascriptBridge.m */; };
 		189ED0421E8CD53600A762C7 /* getUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 189ED03F1E8CD53600A762C7 /* getUUID.m */; };
 		189ED0431E8CD53600A762C7 /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 189ED0411E8CD53600A762C7 /* KeyChainStore.m */; };
 		189F4CF41D50672E00461830 /* ActiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F4CF31D50672E00461830 /* ActiveViewController.m */; };
@@ -1247,6 +1249,9 @@
 		189411471D80573200314E11 /* SellerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SellerViewController.mm; sourceTree = "<group>"; };
 		189619421D92319D003BA40C /* ContactSeverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSeverViewController.h; sourceTree = "<group>"; };
 		189619431D92319D003BA40C /* ContactSeverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSeverViewController.m; sourceTree = "<group>"; };
+		189757461E9B16A400AB1D00 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		189757471E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
+		189757481E9B16A400AB1D00 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		189ED03D1E8CD50900A762C7 /* BletcShop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BletcShop.entitlements; sourceTree = "<group>"; };
 		189ED03E1E8CD53600A762C7 /* getUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getUUID.h; sourceTree = "<group>"; };
 		189ED03F1E8CD53600A762C7 /* getUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getUUID.m; sourceTree = "<group>"; };
@@ -2918,6 +2923,9 @@
 				189ED03F1E8CD53600A762C7 /* getUUID.m */,
 				189ED0401E8CD53600A762C7 /* KeyChainStore.h */,
 				189ED0411E8CD53600A762C7 /* KeyChainStore.m */,
+				189757461E9B16A400AB1D00 /* WebViewJavascriptBridge.h */,
+				189757471E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt */,
+				189757481E9B16A400AB1D00 /* WebViewJavascriptBridge.m */,
 				1894115F1D816CE600314E11 /* 密码 */,
 				1CDA9E091C5A116200DFE518 /* 用户端 */,
 				180C3D3D1E514C0900BC9177 /* New Player */,
@@ -6489,6 +6497,7 @@
 				D95BAE4D1D542FD500ED0CDC /* award_03.png in Resources */,
 				18D7C4911D5B12BA00AEF545 /* mohu-13.png in Resources */,
 				1852FAD91D557DF2009CF1B2 /* wa-02.png in Resources */,
+				189757491E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt in Resources */,
 				18D7C48F1D5B12BA00AEF545 /* mohu-11.png in Resources */,
 				D9FF0DA51D53304C00443312 /* 图标-23new.png in Resources */,
 				1C2ED1261C5B5868003EE93B /* 6-02@2x.png in Resources */,
@@ -7146,6 +7155,7 @@
 				D9A06B5B1D8679C30037795B /* EMAudioRecorderUtil.m in Sources */,
 				D947E4561D7D263200F9FEE8 /* UIViewController+HUD.m in Sources */,
 				D9DEED401CAD0C7200ACDD00 /* AddressTableViewCell.m in Sources */,
+				1897574A1E9B16A400AB1D00 /* WebViewJavascriptBridge.m in Sources */,
 				D95A87731E728AE000BDAC75 /* JFLocation.m in Sources */,
 				18302A2A1DAC8AE200E6EF8C /* ShopRegisterController.m in Sources */,
 				D98E5C181E51524D009D56BF /* SRVideoBottomBar.m in Sources */,

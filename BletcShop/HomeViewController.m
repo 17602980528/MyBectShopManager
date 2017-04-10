@@ -37,6 +37,7 @@
 #import "HotNewsVC.h"
 
 #import "ChouJiangVC.h"
+#import "LandingController.h"
 @interface HomeViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GYChangeTextViewDelegate,SelectCityDelegate,JFLocationDelegate,SDCycleScrollViewDelegate>
 {
     
@@ -134,7 +135,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    PopupAdvertiseView.hidden=NO;
     self.navigationController.navigationBar.hidden= YES;
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     if (self.tView && (self.advertiseHeaderList.count!=0)) {
@@ -1862,17 +1863,25 @@
 }
 //弹出广告点击
 -(void)popImgClick{
-    [self tapCl];
-    NSLog(@"--popImgClick--%@",pop_data_Dic);
-    ChouJiangVC *VC = [[ChouJiangVC alloc]init];
-    VC.urlString = pop_data_Dic[@"url"];
+    AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
     
-    if ([VC.urlString hasPrefix:@"http://"]) {
-        [self.navigationController pushViewController:VC animated:YES];
-
+    NSLog(@"--popImgClick--%@",pop_data_Dic);
+    if (delegate.IsLogin) {
+        [self tapCl];
+        ChouJiangVC *VC = [[ChouJiangVC alloc]init];
+        VC.urlString = pop_data_Dic[@"url"];
+        
+        if ([VC.urlString hasPrefix:@"http://"]) {
+            [self.navigationController pushViewController:VC animated:YES];
+            
+        }
+    }else{
+        LandingController *landVC=[[LandingController alloc]init];
+        PopupAdvertiseView.hidden=YES;
+        [self.navigationController pushViewController:landVC animated:YES];
     }
+    
 }
-
 #pragma mark 懒加载
 -(NSMutableArray*)adverImages{
     if (!_adverImages) {

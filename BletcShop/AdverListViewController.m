@@ -9,7 +9,7 @@
 #import "AdverListViewController.h"
 #import "CommenShowPublishAdvertInfosVC.h"
 #import "UIImageView+WebCache.h"
-@interface AdverListViewController ()<UITableViewDelegate,UITableViewDataSource,CommenShowPublishAdvertInfosVCDelegate>
+@interface AdverListViewController ()<UITableViewDelegate,UITableViewDataSource,CommenShowPublishAdvertInfosVCDelegate,UIAlertViewDelegate>
 {
     UIView *topBackView;
     UIView *noticeLine;
@@ -25,7 +25,7 @@
 @property (nonatomic , strong) NSMutableArray *confuse_A;// 未通过
 @property (nonatomic , strong) NSMutableArray *wait_pay;// 待支付
 @property (nonatomic , strong) NSMutableArray *sure_A;// 已上线
-
+@property (nonatomic)NSInteger selectSection;
 @end
 
 @implementation AdverListViewController
@@ -71,7 +71,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"广告列表";
     self.selectTag=0;
-    
+    self.selectSection=-1;
     [self initTopView];
     
 }
@@ -451,8 +451,18 @@
 }
 //取消订单
 -(void)deletePublish:(UIButton *)sender{
-    NSDictionary *dic=self.data_A[sender.tag];
-    [self postCancerApplayCationWithDic:dic];
+    UIAlertView *alertiew=[[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"取消订单后将无法恢复，是否继续？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    [alertiew show];
+    _selectSection=sender.tag;
+    
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"%ld",(long)buttonIndex);
+    if (buttonIndex==1) {
+        NSDictionary *dic=self.data_A[_selectSection];
+        [self postCancerApplayCationWithDic:dic];
+        _selectSection=-1;
+    }
 }
 //去付款
 -(void)payForPublish:(UIButton *)sender{
