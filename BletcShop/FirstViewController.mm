@@ -1366,24 +1366,24 @@
 }
 
 -(void)autoAuth{
-    VCOPClient *client = [self VCOPClientInstance];
-    client.accessToken=kQIYIAppKey;
-    client.appSecret=kQIYIAppSecret;
-    NSLog(@"%@",client.accessToken);
-    __block FirstViewController* tempSelf = self;
-    [client authorizeWithSuccess:^(NSString* queryKey, id responseObjct){
-        NSLog(@"success!");
-        NSLog(@"%@",responseObjct);
-        client.accessToken=[responseObjct objectForKey:@"access_token"];
-        client.expirationDate=[responseObjct objectForKey:@"expires_in"];
-        client.refreshToken=[responseObjct objectForKey:@"refresh_token"];
-        [tempSelf storeAuthData];
-    }
-                         failure:^(NSString* queryKey, NSError* error) {
-                             NSLog(@"error.useinfo=%@",error.userInfo);
-                             //[tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:error];
-                         }];
-    return;
+//    VCOPClient *client = [self VCOPClientInstance];
+//    client.accessToken=kQIYIAppKey;
+//    client.appSecret=kQIYIAppSecret;
+//    NSLog(@"%@",client.accessToken);
+//    __block FirstViewController* tempSelf = self;
+//    [client authorizeWithSuccess:^(NSString* queryKey, id responseObjct){
+//        NSLog(@"success!");
+//        NSLog(@"%@",responseObjct);
+//        client.accessToken=[responseObjct objectForKey:@"access_token"];
+//        client.expirationDate=[responseObjct objectForKey:@"expires_in"];
+//        client.refreshToken=[responseObjct objectForKey:@"refresh_token"];
+//        [tempSelf storeAuthData];
+//    }
+//                         failure:^(NSString* queryKey, NSError* error) {
+//                             NSLog(@"error.useinfo=%@",error.userInfo);
+//                             //[tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:error];
+//                         }];
+//    return;
 }
 - (VCOPClient *)VCOPClientInstance
 {
@@ -1392,16 +1392,16 @@
 }
 - (void)storeAuthData
 {
-    VCOPClient *client = [self VCOPClientInstance];
-    
-    NSDictionary *authData = [NSDictionary dictionaryWithObjectsAndKeys:
-                              client.accessToken, @"AccessTokenKey",
-                              client.expirationDate, @"ExpirationDateKey",
-                              client.refreshToken,@"FefreshTokenKey",
-                              nil
-                              ];
-    [[NSUserDefaults standardUserDefaults] setObject:authData forKey:@"VCOPAuthData"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    VCOPClient *client = [self VCOPClientInstance];
+//    
+//    NSDictionary *authData = [NSDictionary dictionaryWithObjectsAndKeys:
+//                              client.accessToken, @"AccessTokenKey",
+//                              client.expirationDate, @"ExpirationDateKey",
+//                              client.refreshToken,@"FefreshTokenKey",
+//                              nil
+//                              ];
+//    [[NSUserDefaults standardUserDefaults] setObject:authData forKey:@"VCOPAuthData"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

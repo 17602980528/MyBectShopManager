@@ -953,6 +953,7 @@
 		D9B3BB9A1DE7E05700CC8B0D /* AddproductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B3BB981DE7E05700CC8B0D /* AddproductVC.m */; };
 		D9B3BB9E1DE7FFEB00CC8B0D /* NewProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B3BB9D1DE7FFEB00CC8B0D /* NewProductTableViewCell.m */; };
 		D9B57F181D337DD700E9654A /* areaAll.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9B57F171D337DD700E9654A /* areaAll.plist */; };
+		D9B650071E9724A0007DF5DC /* ShopManagerDataReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B650061E9724A0007DF5DC /* ShopManagerDataReportVC.m */; };
 		D9BA5F041D7564090067E7A2 /* FriendRequest.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9BA5F031D7564090067E7A2 /* FriendRequest.plist */; };
 		D9BB4DDA1E04EA8200971BCC /* NewOrderShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9BB4DD91E04EA8200971BCC /* NewOrderShopViewController.m */; };
 		D9BB4DDE1E05019400971BCC /* DelayScanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9BB4DDD1E05019400971BCC /* DelayScanVC.m */; };
@@ -2601,6 +2602,8 @@
 		D9B3BB9C1DE7FFEB00CC8B0D /* NewProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProductTableViewCell.h; sourceTree = "<group>"; };
 		D9B3BB9D1DE7FFEB00CC8B0D /* NewProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProductTableViewCell.m; sourceTree = "<group>"; };
 		D9B57F171D337DD700E9654A /* areaAll.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areaAll.plist; sourceTree = "<group>"; };
+		D9B650051E9724A0007DF5DC /* ShopManagerDataReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopManagerDataReportVC.h; sourceTree = "<group>"; };
+		D9B650061E9724A0007DF5DC /* ShopManagerDataReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopManagerDataReportVC.m; sourceTree = "<group>"; };
 		D9BA5F031D7564090067E7A2 /* FriendRequest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FriendRequest.plist; sourceTree = "<group>"; };
 		D9BB4DD81E04EA8200971BCC /* NewOrderShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewOrderShopViewController.h; sourceTree = "<group>"; };
 		D9BB4DD91E04EA8200971BCC /* NewOrderShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewOrderShopViewController.m; sourceTree = "<group>"; };
@@ -6151,6 +6154,8 @@
 				D9F2E92F1E03D89F008F6517 /* MineManagerViewController.m */,
 				D9F2E9321E03D89F008F6517 /* OtherApplyViewController.h */,
 				D9F2E9331E03D89F008F6517 /* OtherApplyViewController.m */,
+				D9B650051E9724A0007DF5DC /* ShopManagerDataReportVC.h */,
+				D9B650061E9724A0007DF5DC /* ShopManagerDataReportVC.m */,
 			);
 			name = "店铺管理";
 			sourceTree = "<group>";
@@ -7023,6 +7028,7 @@
 				D920B95D1DD05164001AC7F5 /* AdvertiseCell.m in Sources */,
 				D986A1BD1DE5436B007B798B /* GetMoneySuccessVC.m in Sources */,
 				D96503E61CE06E1D006907EF /* GCDAsyncUdpSocket.m in Sources */,
+				D9B650071E9724A0007DF5DC /* ShopManagerDataReportVC.m in Sources */,
 				1A9B3AD21D77123D00919CDC /* Message.m in Sources */,
 				D9A6E46C1D4F3BB8008A3C29 /* AddVipCardViewController.m in Sources */,
 				D9B3BB9E1DE7FFEB00CC8B0D /* NewProductTableViewCell.m in Sources */,

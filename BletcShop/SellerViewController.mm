@@ -51,123 +51,33 @@
         self.state = NO;
         [_rightdBt setBackgroundImage:[UIImage imageNamed:@"c_de"] forState:UIControlStateNormal];
     }
-    NSLog(@"%@",appdelegate.VCOPClientInstance.accessToken);
-    [self ifExistsAFielID];
+    
+    if (![self.videoID isEqualToString:@""]) {
+        if (self.shopTableView) {
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+            
+            [self.shopTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            
+            UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
+            [self.view addSubview:playerView];
+            NSString *url = [NSString stringWithFormat:@"%@%@",VEDIO_URL,self.videoID];
+            NSLog(@"VEDIO_URL===%@",url);
+            _videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview];
+            _videoPlayer.videoName = @"";
+            _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
+            [_videoPlayer pause];
+            
+            
+        }
+
+    }
+    
+    
+    
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_videoPlayer destroyPlayer];
-}
-//
--(void)ifExistsAFielID{
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    //获取商家手机号
-    [params setObject:self.infoDic[@"muid"] forKey:@"muid"];
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
-     {
-         NSLog(@" ifExistsAFielID=%@",result);
-         if (result.count>0) {
-             __block SellerViewController* tempSelf = self;
-             tempSelf.videoID=result[0][@"video"];
-             if (![tempSelf.videoID isEqualToString:@""]) {
-                 
-                 [tempSelf vedioStatusCheck:tempSelf.videoID];
-             }
-         }else{
-             self.videoID=@"";
-             [self.shopTableView reloadData];
-         }
-         
-     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"%@", error);
-     }];
-    
-}
-//获取视频信息
--(void)vedioStatusCheck:(NSString *)fieldID{
-    VCOPClient * client = [self VCOPClientInstance];
-    __block SellerViewController* tempSelf = self;
-    
-    [client fetchSingleVideoInfoByFileId:fieldID success:^(NSString *queryKey, id responseObj) {
-        NSLog(@"responseObj==%@",responseObj);
-        NSArray *array= [(NSDictionary *)responseObj objectForKey:@"data"];
-        
-        NSLog(@"responseObj===array==%@",array);
-        
-        if (array.count>0) {
-            NSString *stateStr=[[NSString alloc]initWithFormat:@"%@",[array[0] objectForKey:@"fileStatus"]];
-            NSString *thumImage=[array[0] objectForKey:@"img"];
-            tempSelf.imageStr=thumImage;
-            if ([stateStr isEqualToString:@"2"]) {
-                //此处开始获取real play url
-                //1.获取虚拟url
-                [tempSelf vitualUrl:fieldID];
-            }
-            
-        }
-        
-    } failure:^(NSString *queryKey, NSError *error) {
-        NSLog(@"%@",error);
-    }];
-    
-}
--(void)vitualUrl:(NSString *)fielID{
-    VCOPClient * client = [self VCOPClientInstance];
-    __block SellerViewController* tempSelf = self;
-    
-    [client fetchVideoUrlStrWithFileId:fielID fileType:@"1" success:^(NSString *queryKey, id responseObj) {
-        NSLog(@"vitualUrl==%@",responseObj);
-        NSString *viturlStr= [[responseObj objectForKey:@"mp4"] objectForKey:@"1"];
-        [tempSelf accessRealUrlID:fielID vitualUrl:viturlStr];
-        
-    } failure:^(NSString *queryKey, NSError *error) {
-        NSLog(@"%@",error);
-    }];
-    
-}
--(void)accessRealUrlID:(NSString *)fielID vitualUrl:(NSString *)url{
-    //[_contentView.virtualUrlView resignFirstResponder];
-    VCOPClient * client = [self VCOPClientInstance];
-    __block SellerViewController* tempSelf = self;
-    [client fetchVideoUrlStrWithViutualUrl:url fileId:fielID
-                                   success:^(NSString *queryKey, NSString *returnedurl) {
-                                       //得到了real url保存到服务器
-                                       NSLog(@"%@",returnedurl);
-                                       tempSelf.playUrl=returnedurl;
-                                       if (self.shopTableView) {
-                                           NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-                                           
-                                           [self.shopTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-                                           
-                                           UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
-                                           [self.view addSubview:playerView];
-                                           _videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:tempSelf.playUrl] playerView:playerView playerSuperView:playerView.superview];
-                                           _videoPlayer.videoName = @"";
-                                           _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
-                                           [_videoPlayer pause];
-                                           
-                                           //                                           _playImageView=[UIButton buttonWithType:UIButtonTypeCustom];
-                                           //                                           [_playImageView setImage:[UIImage imageNamed:@"playvedio.jpg"] forState:UIControlStateNormal];
-                                           //                                           _playImageView.tag=10086;
-                                           //                                           _playImageView.layer.cornerRadius=20;
-                                           //                                           _playImageView.clipsToBounds=YES;
-                                           //                                           _playImageView.frame=CGRectMake(SCREENWIDTH/2-20, SCREENWIDTH*9/32-20, 40, 40);
-                                           //                                           [self.view addSubview:_playImageView];
-                                           //                                           [_playImageView addTarget:self action:@selector(playBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-                                       }
-                                       
-                                   } failure:^(NSString *queryKey, NSError *error) {
-                                       NSLog(@"%@",error);
-                                   }];
-    
-}
-
-//
-- (VCOPClient *)VCOPClientInstance
-{
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    return delegate.VCOPClientInstance;
 }
 //获取收藏状态
 -(void)postRequestState
@@ -689,36 +599,10 @@
                 nameLabel.frame=CGRectMake(12, SCREENWIDTH*9/16+5, SCREENWIDTH-12, 40);
                 nameLabel.text = [wholeInfoDic objectForKey:@"store"];
             }
-            //Eric
-            //shopImageView.userInteractionEnabled = YES;
             
             if (![self.playUrl isEqualToString:@""]) {
                 
-                //                NSURL *url=[NSURL URLWithString:self.playUrl];
-                //
-                //                if (!self.player) {
-                //                    self.player = [[MPMoviePlayerController alloc]initWithContentURL:url];
-                //                }
-                //                //self.player.scalingMode = MPMovieScalingModeAspectFill;
-                //                //1设置播放器的大小
-                //                [self.player.view setFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)]; //16:9是主流媒体的样式
-                //                //2将播放器视图添加到根视图
-                //                [cell addSubview:self.player.view];
-                //                //4播放
-                //
-                //                //通过通知中心，以观察者模式监听视频播放状态
-                //                //1 监听播放状态
-                //                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChange) name:MPMoviePlayerPlaybackStateDidChangeNotification object:nil];
-                //                //2 监听播放完成
-                //                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(finishedPlay) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
-                //                //3视频进入全屏
-                //                //                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(beginFullScreen) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
-                //                //4退出全屏通知
-                //                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(exitFullScreen) name:MPMoviePlayerDidExitFullscreenNotification object:nil];
-                //                //
-                
-                //
-                line.frame=CGRectMake(10, SCREENWIDTH*9/16+50, SCREENWIDTH, 1);
+                                line.frame=CGRectMake(10, SCREENWIDTH*9/16+50, SCREENWIDTH, 1);
                 
                 nameLabel.frame=CGRectMake(12, SCREENWIDTH*9/16+5, SCREENWIDTH-12, 40);
                 nameLabel.text = [wholeInfoDic objectForKey:@"store"];

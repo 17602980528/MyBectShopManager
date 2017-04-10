@@ -52,7 +52,18 @@
              if (![videoID isEqualToString:@""]) {
                  
                  // [tempSelf uploadSucceed];
-                 [tempSelf vedioStatusCheck:videoID];
+//                 [tempSelf vedioStatusCheck:videoID];
+                 
+                 
+                 tempSelf.imgView.hidden = YES;
+                 //                 //1.获取虚拟url
+                 //                 [tempSelf vitualUrl:fieldID];
+                 
+                 NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,videoID];
+                 
+                 NSURL *url=[NSURL URLWithString:returnedurl];
+                 NSURLRequest *request=[NSURLRequest requestWithURL:url];
+                 [self.webView loadRequest:request];
              }
          }else{
              
@@ -68,88 +79,88 @@
 
 
 //获取视频信息
--(void)vedioStatusCheck:(NSString *)fieldID{
-    VCOPClient * client = [self VCOPClientInstance];
-    __block typeof(self) tempSelf = self;
-    
-    [client fetchSingleVideoInfoByFileId:fieldID success:^(NSString *queryKey, id responseObj) {
-        NSLog(@"vedioStatusCheck=%@",responseObj);
-        NSArray *array= [(NSDictionary *)responseObj objectForKey:@"data"];
-        NSString *stateStr=[[NSString alloc]initWithFormat:@"%@",[array[0] objectForKey:@"fileStatus"]];
-        if ([stateStr isEqualToString:@"2"]) {
-            NSLog(@"%@",fieldID);
-            tempSelf.imgView.hidden = YES;
-            //1.获取虚拟url
-            [tempSelf vitualUrl:fieldID];
-        }else if ([stateStr isEqualToString:@"1"]){
-            
-            [tempSelf.imgView sd_setImageWithURL:[NSURL URLWithString:[array[0] objectForKey:@"img"]] placeholderImage:[UIImage imageNamed:@"jiaopian"]];
-            
-           
-            self.lab.text = @"视频正在审核中...";
-            
-        }
-        
-    } failure:^(NSString *queryKey, NSError *error) {
-        [tempSelf alertViewShow:@"获取video Info 失败" andError:error];
-    }];
-    
-}
+//-(void)vedioStatusCheck:(NSString *)fieldID{
+//    VCOPClient * client = [self VCOPClientInstance];
+//    __block typeof(self) tempSelf = self;
+//    
+//    [client fetchSingleVideoInfoByFileId:fieldID success:^(NSString *queryKey, id responseObj) {
+//        NSLog(@"vedioStatusCheck=%@",responseObj);
+//        NSArray *array= [(NSDictionary *)responseObj objectForKey:@"data"];
+//        NSString *stateStr=[[NSString alloc]initWithFormat:@"%@",[array[0] objectForKey:@"fileStatus"]];
+//        if ([stateStr isEqualToString:@"2"]) {
+//            NSLog(@"%@",fieldID);
+//            tempSelf.imgView.hidden = YES;
+//            //1.获取虚拟url
+//            [tempSelf vitualUrl:fieldID];
+//        }else if ([stateStr isEqualToString:@"1"]){
+//            
+//            [tempSelf.imgView sd_setImageWithURL:[NSURL URLWithString:[array[0] objectForKey:@"img"]] placeholderImage:[UIImage imageNamed:@"jiaopian"]];
+//            
+//           
+//            self.lab.text = @"视频正在审核中...";
+//            
+//        }
+//        
+//    } failure:^(NSString *queryKey, NSError *error) {
+//        [tempSelf alertViewShow:@"获取video Info 失败" andError:error];
+//    }];
+//    
+//}
 
--(void)vitualUrl:(NSString *)fielID{
-    VCOPClient * client = [self VCOPClientInstance];
-    __block typeof(self) tempSelf = self;
-    NSLog(@"1111111%@",fielID);
-    [client fetchVideoUrlStrWithFileId:fielID fileType:@"1" success:^(NSString *queryKey, id responseObj) {
-        NSLog(@"%@",responseObj);
-        NSString *viturlStr= [[responseObj objectForKey:@"mp4"] objectForKey:@"1"];
-        NSLog(@"%@__-_____-%@",fielID,viturlStr);
-        [tempSelf accessRealUrlID:fielID vitualUrl:viturlStr];
-        
-    } failure:^(NSString *queryKey, NSError *error) {
-        NSLog(@"%@",error);
-    }];
-    
-}
+//-(void)vitualUrl:(NSString *)fielID{
+//    VCOPClient * client = [self VCOPClientInstance];
+//    __block typeof(self) tempSelf = self;
+//    NSLog(@"1111111%@",fielID);
+//    [client fetchVideoUrlStrWithFileId:fielID fileType:@"1" success:^(NSString *queryKey, id responseObj) {
+//        NSLog(@"%@",responseObj);
+//        NSString *viturlStr= [[responseObj objectForKey:@"mp4"] objectForKey:@"1"];
+//        NSLog(@"%@__-_____-%@",fielID,viturlStr);
+//        [tempSelf accessRealUrlID:fielID vitualUrl:viturlStr];
+//        
+//    } failure:^(NSString *queryKey, NSError *error) {
+//        NSLog(@"%@",error);
+//    }];
+//    
+//}
 
--(void)accessRealUrlID:(NSString *)fielID vitualUrl:(NSString *)url{
-    // [_contentView.virtualUrlView resignFirstResponder];
-    VCOPClient * client = [self VCOPClientInstance];
-    [client fetchVideoUrlStrWithViutualUrl:url fileId:fielID
-                                   success:^(NSString *queryKey, NSString *returnedurl) {
-                                       //得到了real url保存到服务器
-                                       NSURL *url=[NSURL URLWithString:returnedurl];
-                                       NSURLRequest *request=[NSURLRequest requestWithURL:url];
-                                       [self.webView loadRequest:request];
-                                       
-                                   } failure:^(NSString *queryKey, NSError *error) {
-                                       NSLog(@")))))))))");
-                                   }];
-    
-}
+//-(void)accessRealUrlID:(NSString *)fielID vitualUrl:(NSString *)url{
+//    // [_contentView.virtualUrlView resignFirstResponder];
+//    VCOPClient * client = [self VCOPClientInstance];
+//    [client fetchVideoUrlStrWithViutualUrl:url fileId:fielID
+//                                   success:^(NSString *queryKey, NSString *returnedurl) {
+//                                       //得到了real url保存到服务器
+//                                       NSURL *url=[NSURL URLWithString:returnedurl];
+//                                       NSURLRequest *request=[NSURLRequest requestWithURL:url];
+//                                       [self.webView loadRequest:request];
+//                                       
+//                                   } failure:^(NSString *queryKey, NSError *error) {
+//                                       NSLog(@")))))))))");
+//                                   }];
+//    
+//}
 
 
 #pragma mark - VCOPClient Delegate
 
--(void) alertViewShow:(NSString *)info andError:(NSError *)error
-{
-    if (error != nil) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error! ! !"
-                                                            message:[NSString stringWithFormat:@"\"Token info:%@\" ,Error:%@", info,error]
-                                                           delegate:nil cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:@"OK", nil];
-        alertView.tag = 0;
-        [alertView show];
-        
-    }else{
-        
-        //        QYShowResultView* showView = [[QYShowResultView alloc] initWithFrame:self.view.bounds];
-        //        [[UIApplication sharedApplication].keyWindow addSubview:showView];
-        //        showView.content = info;
-        //        [showView setContent:info];
-        
-    }
-}
+//-(void) alertViewShow:(NSString *)info andError:(NSError *)error
+//{
+//    if (error != nil) {
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error! ! !"
+//                                                            message:[NSString stringWithFormat:@"\"Token info:%@\" ,Error:%@", info,error]
+//                                                           delegate:nil cancelButtonTitle:@"Cancel"
+//                                                  otherButtonTitles:@"OK", nil];
+//        alertView.tag = 0;
+//        [alertView show];
+//        
+//    }else{
+//        
+//        //        QYShowResultView* showView = [[QYShowResultView alloc] initWithFrame:self.view.bounds];
+//        //        [[UIApplication sharedApplication].keyWindow addSubview:showView];
+//        //        showView.content = info;
+//        //        [showView setContent:info];
+//        
+//    }
+//}
 
 
 @end

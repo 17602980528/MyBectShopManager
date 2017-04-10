@@ -38,42 +38,11 @@ static int threadCount;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    [self refrshToken];
+//    [self refrshToken];
 
 }
 
--(void)refrshToken{
-    VCOPClient *client = [self VCOPClientInstance];
-    
-    //测试重新获取accessToken
-    NSString* refreshToken = client.refreshToken;
-    __block typeof(self) tempSelf = self;
-    [client refreshTokenWithRefreshToken:refreshToken success:^(NSString *queryKey, id responseObjct) {
-        [tempSelf storeAuthData];
-        //[tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:nil];
-        
-    } failure:^(NSString *queryKey, NSError *error) {
-       // [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:error];
-    }];
-    return;
-}
--(NSString *)getAccessTokenInfo:(VCOPClient *)client
-{
-    return [NSString stringWithFormat:@"accessToken=%@, expireationDate=%@, refreshToken=%@",client.accessToken,client.expirationDate,client.refreshToken];
-}
-- (void)storeAuthData
-{
-    VCOPClient *client = [self VCOPClientInstance];
-    
-    NSDictionary *authData = [NSDictionary dictionaryWithObjectsAndKeys:
-                              client.accessToken, @"AccessTokenKey",
-                              client.expirationDate, @"ExpirationDateKey",
-                              client.refreshToken,@"FefreshTokenKey",
-                              nil
-                              ];
-    [[NSUserDefaults standardUserDefaults] setObject:authData forKey:@"VCOPAuthData"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
+
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -89,48 +58,14 @@ static int threadCount;
     self.deleteBtn.enabled = NO;
     self.cancleBtn.enabled = NO;
     self.videoID=@"";
-//    VCOPClient *client = [self VCOPClientInstance];
 
-//    BOOL isLogIn = [client isLoggedIn];
-
+    
     [self ifExistsAFielID];
-    
-
-    [self enterPriseAuthorzieButtonPressed];
-}
-
--(void)ifExistsAFielID{
-    
-    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:delegate.shopInfoDic[@"muid"] forKey:@"muid"];
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
-     {
-         NSLog(@"ifExistsAFielID==%@",result);
-         if ([result count] > 0) {
-             NSDictionary *dic = result[0];
-             __block typeof(self) tempSelf = self;
-             
-             tempSelf.videoID=dic[@"video"];
-             if (![tempSelf.videoID isEqualToString:@""]) {
-                 
-                 tempSelf.deleteBtn.enabled = YES;
-               // [tempSelf uploadSucceed];
-                [tempSelf vedioStatusCheck:tempSelf.videoID];
-             }
-         }
-         
-     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"%@", error);
-     }];
-    
 }
 
 
 - (IBAction)choseVedioClick:(UITapGestureRecognizer *)sender
 {
-    threadCount = 1;//[_contentView.threadNumTextField.text intValue];
     if ([self.videoID isEqualToString:@""]) {
         UIImagePickerController *picker=[[UIImagePickerController alloc] init];
         NSArray *mediaTypesAllowed = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
@@ -168,6 +103,7 @@ static int threadCount;
             NSURL *url =  [info objectForKey:UIImagePickerControllerMediaURL];
             NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
             AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
+        
             long long  second = 0;
             second = urlAsset.duration.value / urlAsset.duration.timescale; // 获取视频总时长,单位秒
             NSLog(@"second==%lld",second);
@@ -179,9 +115,11 @@ static int threadCount;
             NSData *videoData = [NSData dataWithContentsOfURL:url];
             NSString *videoPath = [NSString stringWithFormat:@"%@/Documents/%@.%@",NSHomeDirectory(),videoName,videoType];
             [videoData writeToFile:videoPath atomically:NO];
+            
             Item* item = [[Item alloc] init];
             item.filePath = videoPath;
             item.fileType = videoType;
+            item.fileName = [NSString stringWithFormat:@"%@.%@",videoName,videoType];
             self.onUploadingItem = item;
             
             
@@ -208,28 +146,89 @@ static int threadCount;
 }
 
 -(void)prepareParamsBeforeUpload{
+    progressView = [[LZDProgressView alloc]init];
+    progressView.center = self.webView.center;
+    progressView.bounds =CGRectMake(0, 0, 60, 60);
     
-    UIAlertView *passwordAlert = [[UIAlertView alloc] initWithTitle:@"设置视频信息" message:@"视频名称:" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-    passwordAlert.tag =1001;
-    passwordAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
-    UITextField* metaNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,72,263,32)];
-    metaNameTextField.borderStyle = UITextBorderStyleRoundedRect;
-    metaNameTextField.keyboardAppearance = UIKeyboardAppearanceAlert;
-    metaNameTextField.delegate = self;
-    [metaNameTextField becomeFirstResponder];
-    metaNameTextField.placeholder = @"视频名称";
-    [passwordAlert addSubview:metaNameTextField];
+    progressView.arcFinishColor = [UIColor colorWithHexString:@"#75AB33"];
+    progressView.arcUnfinishColor = [UIColor colorWithHexString:@"#0D6FAE"];
+    progressView.arcBackColor = [UIColor colorWithHexString:@"#EAEAEA"];
+    [self.view addSubview:progressView];
+    progressView.percent = 0.0;
+    self.imageView.image = [UIImage imageNamed:@"jiaopian"];
     
     
-  
-    UITextField *textfield = [passwordAlert textFieldAtIndex:0];
-    textfield.placeholder = @"视频名称";
-    textfield.secureTextEntry = NO;
-    
-    [passwordAlert show];
-    
+   
+    __block UploadVedioVC* tempSelf = self;
 
+    
+    NSString *url = [[NSString alloc]initWithFormat:@"%@Extra/upload/uploadVideo",BASEURL];
+
+    NSURL *fileUrl = [NSURL fileURLWithPath:self.onUploadingItem.filePath];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+
+    
+    NSString *nameValue = [appdelegate.shopInfoDic objectForKey:@"muid"];
+    
+    [paramer setValue:nameValue forKey:@"muid"];
+    
+    
+    
+    
+    NSError *error = nil;
+    
+    
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    NSMutableURLRequest *request = [manager.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:url parameters:paramer constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        NSLog(@"formData-----%@",formData);
+        [formData appendPartWithFileURL:fileUrl name:nameValue fileName:self.onUploadingItem.fileName mimeType:@"application/octet-stream" error:nil];
+        
+    } error:&error];
+    
+    NSProgress *progress = nil;
+    __block NSURLSessionDataTask *task = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+        
+        [progressView removeFromSuperview];
+        //                       tempSelf.videoID=fileId;
+        tempSelf.cancleBtn.enabled = NO;
+        tempSelf.deleteBtn.enabled = YES;
+        NSLog(@"-responseObject-----%@",responseObject);
+        
+        if ([responseObject[@"result_code"] isEqualToString:@"access"]) {
+            BOOL isHave =  [[NSFileManager defaultManager] fileExistsAtPath:self.onUploadingItem.filePath];
+            
+            if (isHave) {
+                BOOL isDelete = [[NSFileManager defaultManager] removeItemAtPath:self.onUploadingItem.filePath error:nil];
+                if (isDelete) {
+                    NSLog(@"delete");
+                    
+                }else{
+                    NSLog(@"delete fail");
+                    
+                }
+                
+            }else{
+                NSLog(@"文件不存在");
+            }
+            
+        }
+        
+        
+        
+    }];
+    
+    [task resume];
+    
+    [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:nil];
+    
+    NSLog(@"---%ld",task.state);
+ 
+    
    
 }
 
@@ -243,7 +242,7 @@ static int threadCount;
     }
     if (alertView.tag ==888) {
         
-        VCOPClient *client = [self VCOPClientInstance];
+//        VCOPClient *client = [self VCOPClientInstance];
         __block typeof(self) tempSelf = self;
         NSLog(@"----%@",self.onUploadingItem.fileId);
         
@@ -339,83 +338,53 @@ static int threadCount;
         
     }else if(alertView.tag ==1001){
         
-         progressView = [[LZDProgressView alloc]init];
-        progressView.center = self.webView.center;
-        progressView.bounds =CGRectMake(0, 0, 60, 60);
-        
-        progressView.arcFinishColor = [UIColor colorWithHexString:@"#75AB33"];
-        progressView.arcUnfinishColor = [UIColor colorWithHexString:@"#0D6FAE"];
-        progressView.arcBackColor = [UIColor colorWithHexString:@"#EAEAEA"];
-        [self.view addSubview:progressView];
-        progressView.percent = 0.0;
-        self.imageView.image = [UIImage imageNamed:@"jiaopian"];
+       //
+     /**
       
-        UITextField* metaNameTextField = [alertView textFieldAtIndex:0];
-        [metaNameTextField resignFirstResponder];
-        UITextField* metaDescTextField = (UITextField *)[alertView viewWithTag:1002];
-        NSString* metaName = metaNameTextField.text;
-        if (metaName==nil || (id)metaName==[NSNull null]) {
-            metaName = @"暂不命名";
-        }
-        NSString* metaDesc = metaDescTextField.text;
-        if (metaDesc==nil || (id)metaDesc==[NSNull null]) {
-            metaDesc = @"暂不描述";
-        }
+      
+      [manager POST:url parameters:paramer constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+      [formData appendPartWithFileURL:fileUrl name:@"我的视频1" fileName:self.onUploadingItem.fileName mimeType:@"application/octet-stream" error:nil];
+      } success:^(NSURLSessionDataTask *task, id responseObject) {
+      NSLog(@"-responseObject-----%@",responseObject);
+      
+      
+      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+      NSLog(@"error------%@",error);
+      
+      }];
+ 
+      
+      
+      
+      
+      */
         
-        
-        /*
-         file_name   固定的名字
-         description  固定的名字
-         */
-        __block UploadVedioVC* tempSelf = self;
-        NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:metaName,@"file_name",metaDesc,@"description",nil];
-        NSLog(@"====%@",params);
-        VCOPClient *client = [self VCOPClientInstance];
-        self.onUploadingItem.params = params;
-        [client uploadVideoWithContentOfFile:self.onUploadingItem.filePath fileType:self.onUploadingItem.fileType params:params threadCount:threadCount willStart:^(NSString* filePath, NSString *fileId) {
-            //将要开始上传
-            //这里近行一些存储操作， 在客户端也要存储上传的列表。
-            NSLog(@"fileId=%@",fileId);
-            tempSelf.onUploadingItem.fileId = fileId;
-            tempSelf.cancleBtn.enabled = YES;
-            //        [tempSelf.contentView startUpload];
-        } progress:^(NSString *fileId, NSNumber *percent) {
-            //上传过程中
-            NSLog(@"-------%ld====%d===%@===%lf",percent.integerValue,percent.intValue,percent.stringValue,percent.floatValue);
-            
-            progressView.percent = percent.floatValue;
 
-            //        [tempSelf.contentView updateProgress:percent.floatValue];
-        } complete:^(NSString* fileId, NSDictionary *videoInfo) {
-            //上传成功结束
-            [progressView removeFromSuperview];
-            tempSelf.videoID=fileId;
-            tempSelf.cancleBtn.enabled = NO;
-            tempSelf.deleteBtn.enabled = YES;
-            //        [tempSelf.contentView uploadSucceed];
-            
-            NSLog(@"complete fileId=%@",fileId);
-            //上传id到我们的服务器
-            [tempSelf saveFielIDToSever:fileId];
-            //[tempSelf realUrl:tempSelf.onUploadingItem.fileId];
-            
-        } failure:^(NSString* fileId, NSError *error) {
-            //上传失败
-            self.imageView.image = [UIImage imageNamed:@"jiaopian(1)"];
 
-            [progressView removeFromSuperview];
-            
-                        [tempSelf alertViewShow:@"上传失败" andError:error];
-            
-            //        [tempSelf.contentView uploadFailed];
-        }];
 
     }
     
     
    }
 
-
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSString *,id> *)change
+                       context:(void *)context {
+    
+    NSProgress *progress = nil;
+    if ([object isKindOfClass:[NSProgress class]]) {
+        progress = (NSProgress *)object;
+    }
+    if (progress) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 在主线程中更新 UI
+            NSLog(@"=====%lf",progress.fractionCompleted);
+            progressView.percent = progress.fractionCompleted;
+//            self.progressHUD.progress = progress.fractionCompleted;
+        });
+    }
+}
 -(void)saveFielIDToSever:(NSString *)fielID{
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSLog(@"%@",delegate.shopUserInfoArray);
@@ -438,7 +407,7 @@ static int threadCount;
              hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
              [hud hideAnimated:YES afterDelay:3.f];
              
-             [self ifExistsAFielID];
+//             [self ifExistsAFielID];
          }
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -577,28 +546,28 @@ static int threadCount;
 /*
  //企业用户授权
  */
--(void)enterPriseAuthorzieButtonPressed
-{
-    VCOPClient *client = [self VCOPClientInstance];
-    
-    __block typeof(self) tempSelf = self;
-    [client authorizeWithSuccess:^(NSString* queryKey, id responseObjct){
-        NSLog(@"success!");
-        [tempSelf storeAuthData];
-       // [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:nil];
-        BOOL isUploading = NO;
-        if (tempSelf.onUploadingItem.fileId) {
-            isUploading = YES;
-        }
-       // [tempSelf.contentView updateBtnStateWithAuthorFlag:YES isUploading:isUploading];
-        //[tempSelf.contentView.deleteButton setEnabled:YES];
-    }
-                         failure:^(NSString* queryKey, NSError* error) {
-                             NSLog(@"error.useinfo=%@",error.userInfo);
-                             //[tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:error];
-                         }];
-    
-}
+//-(void)enterPriseAuthorzieButtonPressed
+//{
+//    VCOPClient *client = [self VCOPClientInstance];
+//    
+//    __block typeof(self) tempSelf = self;
+//    [client authorizeWithSuccess:^(NSString* queryKey, id responseObjct){
+//        NSLog(@"success!");
+//        [tempSelf storeAuthData];
+//       // [tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:nil];
+//        BOOL isUploading = NO;
+//        if (tempSelf.onUploadingItem.fileId) {
+//            isUploading = YES;
+//        }
+//       // [tempSelf.contentView updateBtnStateWithAuthorFlag:YES isUploading:isUploading];
+//        //[tempSelf.contentView.deleteButton setEnabled:YES];
+//    }
+//                         failure:^(NSString* queryKey, NSError* error) {
+//                             NSLog(@"error.useinfo=%@",error.userInfo);
+//                             //[tempSelf alertViewShow:[tempSelf getAccessTokenInfo:client] andError:error];
+//                         }];
+//    
+//}
 - (IBAction)cancleBtnclick:(UIButton *)sender {
     
     
@@ -610,6 +579,64 @@ static int threadCount;
     
     
 }
+
+-(void)ifExistsAFielID{
+    
+    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:delegate.shopInfoDic[@"muid"] forKey:@"muid"];
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         NSLog(@"ifExistsAFielID==%@",result);
+         if ([result count] > 0) {
+             NSDictionary *dic = [result firstObject];
+             __block typeof(self) tempSelf = self;
+             
+             tempSelf.videoID=dic[@"video"];
+             
+             if (![tempSelf.videoID isEqualToString:@""]) {
+                 
+                 tempSelf.deleteBtn.enabled = YES;
+
+                 tempSelf.imageView.hidden = YES;
+//                 //1.获取虚拟url
+//                 [tempSelf vitualUrl:fieldID];
+                 
+                 NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,tempSelf.videoID];
+                 
+                 NSURL *url=[NSURL URLWithString:returnedurl];
+                 NSURLRequest *request=[NSURLRequest requestWithURL:url];
+                 [self.webView loadRequest:request];
+                 
+
+             }else{
+                 
+             }
+             
+             
+//             if ([stateStr isEqualToString:@"2"]) {
+//                 NSLog(@"%@",fieldID);
+//                
+//             }else if ([stateStr isEqualToString:@"1"]){
+//                 
+//                 [tempSelf.imageView sd_setImageWithURL:[NSURL URLWithString:[array[0] objectForKey:@"img"]] placeholderImage:[UIImage imageNamed:@"jiaopian"]];
+//                 
+//                 
+//                 
+//                 self.lab.text = @"视频正在审核中...";
+//                 
+//             }
+
+             
+         }
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"%@", error);
+     }];
+    
+}
+
 
 
 @end

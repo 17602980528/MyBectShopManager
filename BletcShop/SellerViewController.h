@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "UIImageView+WebCache.h"
-#import "VCOPClient.h"
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface SellerViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>

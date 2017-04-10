@@ -83,6 +83,12 @@
 //type==0
 //#define SHOPCARD  @"http://101.201.100.191/VipCard/upload/MerchantImage/cardImage/"
 
+//视频地址
+
+#define VEDIO_URL @"http://101.201.100.191/cnconsum/Public/Uploads/video/"
+
+
+
  /*************************************************************/
 
 
