@@ -100,6 +100,8 @@
 		189619441D92319D003BA40C /* ContactSeverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189619431D92319D003BA40C /* ContactSeverViewController.m */; };
 		189757491E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 189757471E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt */; };
 		1897574A1E9B16A400AB1D00 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 189757481E9B16A400AB1D00 /* WebViewJavascriptBridge.m */; };
+		1897574E1E9B705400AB1D00 /* SendMessageToAllVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1897574C1E9B705400AB1D00 /* SendMessageToAllVC.m */; };
+		1897574F1E9B705400AB1D00 /* SendMessageToAllVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1897574D1E9B705400AB1D00 /* SendMessageToAllVC.xib */; };
 		189ED0421E8CD53600A762C7 /* getUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 189ED03F1E8CD53600A762C7 /* getUUID.m */; };
 		189ED0431E8CD53600A762C7 /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 189ED0411E8CD53600A762C7 /* KeyChainStore.m */; };
 		189F4CF41D50672E00461830 /* ActiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F4CF31D50672E00461830 /* ActiveViewController.m */; };
@@ -1256,6 +1258,9 @@
 		189757461E9B16A400AB1D00 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		189757471E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
 		189757481E9B16A400AB1D00 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		1897574B1E9B705400AB1D00 /* SendMessageToAllVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMessageToAllVC.h; sourceTree = "<group>"; };
+		1897574C1E9B705400AB1D00 /* SendMessageToAllVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMessageToAllVC.m; sourceTree = "<group>"; };
+		1897574D1E9B705400AB1D00 /* SendMessageToAllVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendMessageToAllVC.xib; sourceTree = "<group>"; };
 		189ED03D1E8CD50900A762C7 /* BletcShop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BletcShop.entitlements; sourceTree = "<group>"; };
 		189ED03E1E8CD53600A762C7 /* getUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getUUID.h; sourceTree = "<group>"; };
 		189ED03F1E8CD53600A762C7 /* getUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getUUID.m; sourceTree = "<group>"; };
@@ -5053,6 +5058,9 @@
 				D939D6C61E9B1DE100D0569E /* AllSenderMessageCell.h */,
 				D939D6C71E9B1DE100D0569E /* AllSenderMessageCell.m */,
 				D939D6C81E9B1DE100D0569E /* AllSenderMessageCell.xib */,
+				1897574B1E9B705400AB1D00 /* SendMessageToAllVC.h */,
+				1897574C1E9B705400AB1D00 /* SendMessageToAllVC.m */,
+				1897574D1E9B705400AB1D00 /* SendMessageToAllVC.xib */,
 			);
 			name = "我的";
 			sourceTree = "<group>";
@@ -6582,6 +6590,7 @@
 				D981FD091E2616080026E4B2 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D9E5C3DA1E5EBED6006BA2B1 /* PushAdverViewController.xib in Resources */,
 				1829884C1E727DF200164F32 /* SweetNoticeVC.xib in Resources */,
+				1897574F1E9B705400AB1D00 /* SendMessageToAllVC.xib in Resources */,
 				D9FF0DA01D53304C00443312 /* 图标-18new.png in Resources */,
 				18F27EF81D640E84002DD03A /* 头像-16.png in Resources */,
 				1CF6E46E1C61DD610001159C /* yuyue@2x.png in Resources */,
@@ -7132,6 +7141,7 @@
 				D9FF0D721D52D6E900443312 /* ShopListTableViewCell.m in Sources */,
 				D9A06B631D8679C30037795B /* EMVoiceConverter.mm in Sources */,
 				D95A87721E728AE000BDAC75 /* JFSearchView.m in Sources */,
+				1897574E1E9B705400AB1D00 /* SendMessageToAllVC.m in Sources */,
 				D9B3A5BD1D74255700F3F27E /* PSTCollectionViewCell.m in Sources */,
 				D9DEED1A1CACED7C00ACDD00 /* MKAnnotationView+WebCache.m in Sources */,
 				D9F2E9341E03D89F008F6517 /* MineManagerViewController.m in Sources */,

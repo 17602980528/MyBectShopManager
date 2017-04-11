@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface AllSenderMessageCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *stateImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *headImageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLable;
 
 @end
