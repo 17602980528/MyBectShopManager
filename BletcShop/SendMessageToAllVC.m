@@ -40,7 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@",self.dic);
-    _contentStr = [[NSMutableString alloc] init];
     NSArray *persons=[self.dic allValues];
     for (int i=0; i<persons.count; i++) {
         if (persons.count==1) {
@@ -176,6 +175,8 @@
 
     //表情点击------------
     _toolView.emtionBlock = ^(UITextView*textView){
+        weakSelf.contentStr = [[NSMutableString alloc] init];
+
         //        NSLog(@"%s--emtionClick",__func__);
         [weakSelf.anyViewNeedTextView resignFirstResponder];
         [weakSelf.view endEditing:YES];
