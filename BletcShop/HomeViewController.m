@@ -355,6 +355,16 @@
         img_mine.image = [UIImage imageNamed:@"扫描二维码"];
         [minePageBtn addSubview:img_mine];
         if (i==1) {
+            
+            
+           
+
+//            UIView *redView = [[UIView alloc]initWithFrame:CGRectMake(16, 4, 4, 4)];
+//            redView.backgroundColor = [UIColor redColor];
+//            redView.layer.cornerRadius = redView.width/2;
+//            redView.clipsToBounds = YES;
+//            [img_mine addSubview:redView];
+            
             img_mine.frame =CGRectMake(2.5, 5.5, 24, 24);
             img_mine.image = [UIImage imageNamed:@"home_adress_choose_n"];
             
@@ -612,13 +622,20 @@
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         //获取商家手机号
         
-        [params setObject:shopInfoDic[@"muid"] forKey:@"merchant"];
+        [params setObject:shopInfoDic[@"muid"] forKey:@"muid"];
         [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
          {
              NSLog(@"%@",result);
              if (result.count>0) {
                  __block HomeViewController* tempSelf = self;
-                 vc.videoID=result[0][@"video"];
+                 
+                 if ([result[0][@"state"] isEqualToString:@"ture"]) {
+                     vc.videoID=result[0][@"video"];
+                     
+                 }else{
+                     vc.videoID=@"";
+                     
+                 }
                  [tempSelf.navigationController pushViewController:vc animated:YES];
              }else{
                  __block HomeViewController* tempSelf = self;

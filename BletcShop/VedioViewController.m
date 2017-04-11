@@ -7,10 +7,11 @@
 //
 
 #import "VedioViewController.h"
-#import "VCOPClient.h"
+//#import "VCOPClient.h"
 #import "UIImageView+WebCache.h"
 #import "UploadVedioVC.h"
-@interface VedioViewController ()
+
+@interface VedioViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UILabel *lab;
@@ -18,17 +19,25 @@
 @end
 
 @implementation VedioViewController
-- (VCOPClient *)VCOPClientInstance
-{
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    return delegate.VCOPClientInstance;
-}
+//- (VCOPClient *)VCOPClientInstance
+//{
+//    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    return delegate.VCOPClientInstance;
+//}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-43);
 
-    [self ifExistsAFielID];
+    _webView.scrollView.bounces = NO;
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
+    [self ifExistsAFielID];
 }
 - (IBAction)tapClick:(id)sender {
     
@@ -48,22 +57,33 @@
              NSDictionary *dic = result[0];
              __block typeof(self) tempSelf = self;
              
+             
+            
+             
              NSString*videoID=dic[@"video"];
              if (![videoID isEqualToString:@""]) {
                  
-                 // [tempSelf uploadSucceed];
-//                 [tempSelf vedioStatusCheck:videoID];
+
+                 if ([dic[@"state"] isEqualToString:@"ture"]) {
+                     tempSelf.imgView.hidden = YES;
+                     
+                     NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,videoID];
+                     
+                     NSURL *url=[NSURL URLWithString:returnedurl];
+                     NSURLRequest *request=[NSURLRequest requestWithURL:url];
+                     [self.webView loadRequest:request];
+                     NSLog(@"VEDIO_URL===%@",url);
+
+                 }else  if ([dic[@"state"] isEqualToString:@"false"]){
+                     self.lab.text = @"审核未通过!";
+
+                 }else{
+                     self.lab.text = @"视频正在审核中...";
+
+                 }
                  
-                 
-                 tempSelf.imgView.hidden = YES;
-                 //                 //1.获取虚拟url
-                 //                 [tempSelf vitualUrl:fieldID];
-                 
-                 NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,videoID];
-                 
-                 NSURL *url=[NSURL URLWithString:returnedurl];
-                 NSURLRequest *request=[NSURLRequest requestWithURL:url];
-                 [self.webView loadRequest:request];
+                
+
              }
          }else{
              
@@ -76,6 +96,7 @@
      }];
     
 }
+
 
 
 //获取视频信息

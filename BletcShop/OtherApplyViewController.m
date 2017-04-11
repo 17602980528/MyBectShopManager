@@ -234,6 +234,10 @@
 
             [self postApplyRequest];
             
+        }else if([result[@"result_code"] integerValue]==1062){
+            
+            [self tishi:@"数据重复!"];
+
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -8,6 +8,7 @@
 
 #import "MineManagerViewController.h"
 #import "MerchantDetailViewController.h"
+#import "ShopManagerDataReportVC.h"
 @interface MineManagerViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)NSArray *data_A;
 @property (nonatomic,strong)UITextField *phoneText;
@@ -18,9 +19,21 @@
 {
     UITableView *_tableView;
 }
+
+-(void)ScanClcik{
+    
+   
+    ShopManagerDataReportVC *VC=[[ShopManagerDataReportVC alloc]init];
+    VC.data_A = self.data_A;
+    
+    [self.navigationController pushViewController:VC animated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"我管理的店铺";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"查看" style:UIBarButtonItemStylePlain target:self action:@selector(ScanClcik)];
+
     self.view.backgroundColor=[UIColor whiteColor];
     
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStyleGrouped];

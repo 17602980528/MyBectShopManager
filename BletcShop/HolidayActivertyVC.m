@@ -143,14 +143,19 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //获取商家手机号
     
-    [params setObject:shopInfoDic[@"muid"] forKey:@"merchant"];
+    [params setObject:shopInfoDic[@"muid"] forKey:@"muid"];
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
      {
          NSLog(@"result==%@",result);
          if (result.count>0) {
              __block HolidayActivertyVC* tempSelf = self;
-             vc.videoID=result[0][@"video"];
-             [tempSelf.navigationController pushViewController:vc animated:YES];
+             if ([result[0][@"state"] isEqualToString:@"ture"]) {
+                 vc.videoID=result[0][@"video"];
+                 
+             }else{
+                 vc.videoID=@"";
+                 
+             }             [tempSelf.navigationController pushViewController:vc animated:YES];
          }else{
              __block HolidayActivertyVC* tempSelf = self;
              vc.videoID=@"";
