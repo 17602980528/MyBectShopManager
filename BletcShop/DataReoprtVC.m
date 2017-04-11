@@ -98,7 +98,7 @@
     
 //    CGFloat originX = (SCREENWIDTH-column.typeSpace*(column.valueArr.count+1)-column.columnWidth*column.valueArr.count)/2;
     
-    column.originSize = CGPointMake(30, 20);
+    column.originSize = CGPointMake(30, 17);
     
 
     column.bgVewBackgoundColor = [UIColor whiteColor];
@@ -106,7 +106,7 @@
     column.colorForXYLine = [UIColor darkGrayColor];
     column.columnBGcolorsArr = @[[UIColor colorWithRed:72/256.0 green:200.0/256 blue:255.0/256 alpha:1],[UIColor greenColor],[UIColor orangeColor]];
     column.xShowInfoText = title_array;
-    column.xDescTextFontSize = 10;
+    column.xDescTextFontSize = 9;
     [column showAnimation];
     [self.view addSubview:column];
 

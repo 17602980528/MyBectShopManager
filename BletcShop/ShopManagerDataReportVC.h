@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ShopManagerDataReportVC : UIViewController
+@property (nonatomic , strong) NSArray *data_A;// <#Description#>
 
 @end

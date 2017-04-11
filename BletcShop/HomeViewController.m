@@ -355,6 +355,16 @@
         img_mine.image = [UIImage imageNamed:@"扫描二维码"];
         [minePageBtn addSubview:img_mine];
         if (i==1) {
+            
+            
+           
+
+//            UIView *redView = [[UIView alloc]initWithFrame:CGRectMake(16, 4, 4, 4)];
+//            redView.backgroundColor = [UIColor redColor];
+//            redView.layer.cornerRadius = redView.width/2;
+//            redView.clipsToBounds = YES;
+//            [img_mine addSubview:redView];
+            
             img_mine.frame =CGRectMake(2.5, 5.5, 24, 24);
             img_mine.image = [UIImage imageNamed:@"home_adress_choose_n"];
             

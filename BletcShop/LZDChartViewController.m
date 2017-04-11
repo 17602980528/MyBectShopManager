@@ -101,7 +101,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteAllMessages:) name:KNOTIFICATIONNAME_DELETEALLMESSAGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitGroup) name:@"ExitGroup" object:nil];
-    contentStr = [[NSMutableString alloc] init];
 
     
     rightBtn = [LZDButton creatLZDButton];
@@ -277,8 +276,9 @@
     toolView.emtionBlock = ^(UITextView*textView){
 //        NSLog(@"%s--emtionClick",__func__);
         [self.anyViewNeedTextView resignFirstResponder];
-        
-//        NSLog(@"textView.text-----%@",textView.text);
+        contentStr = [[NSMutableString alloc] init];
+
+        NSLog(@"textView.text-----%@",textView.text);
         [contentStr appendString:textView.text];
         __block __weak LZDChartViewController *this = self;
 
@@ -298,9 +298,9 @@
             
            self.r_textView = textView;
             _faceView.sendBlock = ^{
-                NSLog(@"sendBlock----%@",textView.text);
-                [this sendMsg:textView];
-                [this cancelFocus:textView];
+                NSLog(@"sendBlock----%@",weakSelf.r_textView.text);
+                [this sendMsg:weakSelf.r_textView];
+                [this cancelFocus:weakSelf.r_textView];
             };
         }
         float height = _faceView.height;
@@ -836,7 +836,7 @@
 
 - (void)ExpressionSelect:(NSString *)str;{
     [contentStr appendString:str];
-//    NSLog(@"ExpressionSelect----%@--%@",str,self.r_textView);
+    NSLog(@"ExpressionSelect----%@--%@",str,self.r_textView);
     
     self.r_textView.text = [ConvertToCommonEmoticonsHelper convertToSystemEmoticons:contentStr];
     
