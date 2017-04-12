@@ -19,12 +19,12 @@
 {
     UIScrollView *_scrollView;
     NSString *allPersons;
+     NSMutableString *contentStr;
 }
 @property (nonatomic, weak) UITextView *anyViewNeedTextView;
 @property (nonatomic, strong) ExpressionKeyboardView *faceView;
-@property(nonatomic,copy)NSMutableString *contentStr;
 @property(nonatomic,strong)UITextView *r_textView;
-@property(nonatomic,strong) LZDToolView *toolView;
+@property(nonatomic,weak) LZDToolView *toolView;
 @property(nonatomic,weak)UIImagePickerController *imgPicker;//***图片选择器
 @property (nonatomic, strong) EMMessage *photoMessage;
 /** 更多功能 */
@@ -175,14 +175,14 @@
 
     //表情点击------------
     _toolView.emtionBlock = ^(UITextView*textView){
-        weakSelf.contentStr = [[NSMutableString alloc] init];
+        contentStr = [[NSMutableString alloc] init];
 
         //        NSLog(@"%s--emtionClick",__func__);
         [weakSelf.anyViewNeedTextView resignFirstResponder];
         [weakSelf.view endEditing:YES];
         
         //        NSLog(@"textView.text-----%@",textView.text);
-        [weakSelf.contentStr appendString:textView.text];
+        [contentStr appendString:textView.text];
       
         
         if (_faceView == nil) {
@@ -333,12 +333,12 @@
 - (void)cancelFocus:(UITextView*)textView
 {
     self.r_textView.text = nil;
-    NSRange range = NSMakeRange(0, _contentStr.length);
-    [_contentStr deleteCharactersInRange:range];
+    NSRange range = NSMakeRange(0, contentStr.length);
+    [contentStr deleteCharactersInRange:range];
 }
 - (void)ExpressionSelect:(NSString *)str;{
-    [_contentStr appendString:str];
-    self.r_textView.text = [ConvertToCommonEmoticonsHelper convertToSystemEmoticons:_contentStr];
+    [contentStr appendString:str];
+    self.r_textView.text = [ConvertToCommonEmoticonsHelper convertToSystemEmoticons:contentStr];
 }
 
 - (void)deleteExpression:(NSMutableString *)content{
@@ -399,8 +399,8 @@
     
 }
 - (void)ExpressionDelete{
-    [self deleteExpression:_contentStr];
-    self.r_textView.text = [ConvertToCommonEmoticonsHelper convertToSystemEmoticons:_contentStr];
+    [self deleteExpression:contentStr];
+    self.r_textView.text = [ConvertToCommonEmoticonsHelper convertToSystemEmoticons:contentStr];
 }
 
 #pragma mark - UIImagePickerControllerDelegate

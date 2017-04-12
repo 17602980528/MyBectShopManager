@@ -64,7 +64,15 @@
     [self ifExistsAFielID];
 }
 
+/**mov转mp4格式*/
+-(Item*)convertMovSourceURL:(NSURL *)sourceUrl
+{
+    
+    Item* item = [[Item alloc] init];
 
+    
+    return item;
+}
 - (IBAction)choseVedioClick:(UITapGestureRecognizer *)sender
 {
     if ([self.videoID isEqualToString:@""]) {
@@ -102,6 +110,7 @@
         else if ( [ mediaType isEqualToString:@"public.movie" ]){
             NSLog(@"info==%@",info);
             NSURL *url =  [info objectForKey:UIImagePickerControllerMediaURL];
+          self.onUploadingItem = [self convertMovSourceURL:url];
             
             
             
@@ -111,68 +120,97 @@
             long long  second = 0;
             second = urlAsset.duration.value / urlAsset.duration.timescale; // 获取视频总时长,单位秒
             NSLog(@"second==%lld",second);
-            NSString *urlString = [url absoluteString];
-            NSArray *videoArray = [urlString componentsSeparatedByString:@"."];
-            NSInteger videoArrayCount = [videoArray count];
-            NSString *videoName = [videoArray objectAtIndex: (videoArrayCount -2)];
-            NSString *videoType = [videoArray objectAtIndex:(videoArrayCount -1)];
-            NSData *videoData = [NSData dataWithContentsOfURL:url];
-            
-            NSString *videoPath = [NSString stringWithFormat:@"%@/Documents/%@.%@",NSHomeDirectory(),videoName,videoType];
-            [videoData writeToFile:videoPath atomically:NO];
-            
-//            AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
+//            NSString *urlString = [url absoluteString];
+//            NSArray *videoArray = [urlString componentsSeparatedByString:@"."];
+//            NSInteger videoArrayCount = [videoArray count];
+//            NSString *videoName = [videoArray objectAtIndex: (videoArrayCount -2)];
+//            NSString *videoType = [videoArray objectAtIndex:(videoArrayCount -1)];
+//            NSData *videoData = [NSData dataWithContentsOfURL:url];
 //            
-//            
-//            NSArray *compatiblepresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
-//            
-//            if ([compatiblepresets containsObject:AVAssetExportPresetMediumQuality]) {
-//                
-//                NSString *videoPath = [NSString stringWithFormat:@"%@/Documents/%@.mp4",NSHomeDirectory(),videoName];
-//                
-//                AVAssetExportSession *exportsession = [[AVAssetExportSession alloc]initWithAsset:avAsset presetName:AVAssetExportPresetMediumQuality];
-//                
-//                exportsession.outputURL = [NSURL URLWithString:videoPath];
-//                exportsession.outputFileType = AVFileTypeMPEG4;
-//                
-//                [exportsession exportAsynchronouslyWithCompletionHandler:^{
-//                
-//                    if ([exportsession status] == AVAssetExportSessionStatusCompleted) {
-//                        <#statements#>
-//                    }
-//                    
-//                    
-//                }];
-//                
-//                
+//            NSString *videoPath = [NSString stringWithFormat:@"%@/Documents/%@.%@",NSHomeDirectory(),videoName,videoType];
+//            [videoData writeToFile:videoPath atomically:NO];
 //
-//                
-//            }
             
-            
-            Item* item = [[Item alloc] init];
-            item.filePath = videoPath;
-            item.fileType = videoType;
-            item.fileName = [NSString stringWithFormat:@"%@.%@",videoName,videoType];
-            self.onUploadingItem = item;
-            
-            
-           // self.contentView.progressView.progress = 0;
-         //   self.contentView.progressValue.text = @"0.00";
-            if (second<=30) {
-               [self prepareParamsBeforeUpload];
-            }else{
-                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                hud.frame = CGRectMake(0, 64, 375, 667);
-                // Set the annular determinate mode to show task progress.
-                hud.mode = MBProgressHUDModeText;
-                hud.label.text = NSLocalizedString(@"视频时长不能大于30秒", @"HUD message title");
-                hud.label.font = [UIFont systemFontOfSize:13];
-                // Move to bottm center.
-                //    hud.offset = CGPointMake(0.f, );
-                hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-                [hud hideAnimated:YES afterDelay:4.f];
+            AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
+            NSArray *compatiblePresets=[AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
+            //NSLog(@"%@",compatiblePresets);
+            if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
+                AVAssetExportSession *exportSession=[[AVAssetExportSession alloc] initWithAsset:avAsset presetName:AVAssetExportPresetHighestQuality];
+                NSDateFormatter *formater=[[NSDateFormatter alloc] init];//用时间给文件全名
+                [formater setDateFormat:@"yyyyMMddHHmmss"];
+                //        NSString *mp4Path=[[NSUserDefaults standardUserDefaults] objectForKey:@"kMP4FilePath"];
+                //        NSString *resultPath=[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0] stringByAppendingFormat:@"/output-%@.mp4", [formater stringFromDate:[NSDate date]]];
+                
+                
+                NSString *dateString = [formater stringFromDate:[NSDate date]];
+                
+                NSString *resultPath = [NSString stringWithFormat:@"%@/Documents/output-%@.mp4",NSHomeDirectory(),dateString];
+                
+                exportSession.outputURL=[NSURL fileURLWithPath:resultPath];
+                exportSession.outputFileType = AVFileTypeMPEG4;
+                exportSession.shouldOptimizeForNetworkUse = YES;
+                [exportSession exportAsynchronouslyWithCompletionHandler:^(void){
+                    switch (exportSession.status) {
+                        case AVAssetExportSessionStatusCancelled:
+                            NSLog(@"AVAssetExportSessionStatusCancelled");
+                            break;
+                        case AVAssetExportSessionStatusUnknown:
+                            NSLog(@"AVAssetExportSessionStatusUnknown");
+                            break;
+                        case AVAssetExportSessionStatusWaiting:
+                            NSLog(@"AVAssetExportSessionStatusWaiting");
+                            break;
+                        case AVAssetExportSessionStatusExporting:
+                            NSLog(@"AVAssetExportSessionStatusExporting");
+                            break;
+                        case AVAssetExportSessionStatusCompleted:
+                        {
+                            [NSThread isMainThread]?NSLog(@"isMainThread") : NSLog(@"isNOMainThread");
+                            NSLog(@"AVAssetExportSessionStatusCompleted");
+                            
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               
+                               self.onUploadingItem.filePath = resultPath;
+                               self.onUploadingItem.fileName = [NSString stringWithFormat:@"output-%@.mp4",dateString];
+                               
+                               if (second<=30) {
+                                   [self prepareParamsBeforeUpload];
+                               }else{
+                                   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                   hud.frame = CGRectMake(0, 64, 375, 667);
+                                   // Set the annular determinate mode to show task progress.
+                                   hud.mode = MBProgressHUDModeText;
+                                   hud.label.text = NSLocalizedString(@"视频时长不能大于30秒", @"HUD message title");
+                                   hud.label.font = [UIFont systemFontOfSize:13];
+                                   // Move to bottm center.
+                                   //    hud.offset = CGPointMake(0.f, );
+                                   hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                                   [hud hideAnimated:YES afterDelay:4.f];
+                               }
+
+                               
+                           });
+                            
+                            
+                           
+                            
+                            break;
+                        }
+                        case AVAssetExportSessionStatusFailed:
+                            NSLog(@"AVAssetExportSessionStatusFailed");
+                            break;
+                    }
+                }];
             }
+
+            
+            
+            
+           
+            
+            
+            
+            
             
         }
     }];
@@ -180,6 +218,7 @@
 }
 
 -(void)prepareParamsBeforeUpload{
+    
     progressView = [[LZDProgressView alloc]init];
     progressView.center = self.webView.center;
     progressView.bounds =CGRectMake(0, 0, 60, 60);
@@ -240,6 +279,9 @@
             
             if (isHave) {
                 BOOL isDelete = [[NSFileManager defaultManager] removeItemAtPath:self.onUploadingItem.filePath error:nil];
+                
+             [[NSFileManager defaultManager]removeItemAtPath:NSTemporaryDirectory() error:nil];
+                
                 if (isDelete) {
                     NSLog(@"delete");
                     
@@ -267,6 +309,7 @@
     
    
 }
+
 
 #pragma UIAlertViewDelegate implementation
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -330,32 +373,23 @@
     }else
     if (alertView.tag==999) {
         
-        VCOPClient *client = [self VCOPClientInstance];
-        __block typeof(self) tempSelf = self;
-        if (![tempSelf.videoID isEqualToString:@""]) {
-            [client deleteVideoByFileId:self.videoID
-                                success:^(NSString *queryKey, id responseObj) {
-                                    tempSelf.imageView.hidden = NO;
-                                    self.lab.text = @"";
-                                    self.imageView.image = [UIImage imageNamed:@"jiaopian(1)"];
-
-                                    //[tempSelf.contentView.imageView setImage:[UIImage imageNamed:@"icon3.png"]];
-                                    NSURL *url=[NSURL URLWithString:@""];
-                                    NSURLRequest *request=[NSURLRequest requestWithURL:url];
-                                    [tempSelf.webView loadRequest:request];
-                                    
-                                    tempSelf.videoID=@"";
-                                    //将服务器的id也换为@“”；
-                                    //[tempSelf saveFielIDToSever:@""];
-                                    //删除服务器的fielid
-                                    [self deleteFieldIdBymuid];
-                                    
-                                }
-                                failure:^(NSString *queryKey, NSError *error) {
-                                   [tempSelf alertViewShow:@"删除失败" andError:error];
-                                    
-                                }];
+        {
+            self.imageView.hidden = NO;
+            self.lab.text = @"";
+            self.imageView.image = [UIImage imageNamed:@"jiaopian(1)"];
             
+            //[tempSelf.contentView.imageView setImage:[UIImage imageNamed:@"icon3.png"]];
+            NSURL *url=[NSURL URLWithString:@""];
+            NSURLRequest *request=[NSURLRequest requestWithURL:url];
+            [self.webView loadRequest:request];
+            
+            self.videoID=@"";
+            //将服务器的id也换为@“”；
+            //[tempSelf saveFielIDToSever:@""];
+            //删除服务器的fielid
+            [self deleteFieldIdBymuid];
+            
+        }
         }else{
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.frame = CGRectMake(0, 64, 375, 667);
@@ -369,18 +403,8 @@
             [hud hideAnimated:YES afterDelay:3.f];
         }
 
-        
-        
-        
-    }else if(alertView.tag ==1001){
-        
-     
 
-
-    }
-    
-    
-   }
+}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
