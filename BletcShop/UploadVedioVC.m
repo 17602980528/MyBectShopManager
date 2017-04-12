@@ -102,6 +102,9 @@
         else if ( [ mediaType isEqualToString:@"public.movie" ]){
             NSLog(@"info==%@",info);
             NSURL *url =  [info objectForKey:UIImagePickerControllerMediaURL];
+            
+            
+            
             NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
             AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
         
@@ -114,8 +117,38 @@
             NSString *videoName = [videoArray objectAtIndex: (videoArrayCount -2)];
             NSString *videoType = [videoArray objectAtIndex:(videoArrayCount -1)];
             NSData *videoData = [NSData dataWithContentsOfURL:url];
+            
             NSString *videoPath = [NSString stringWithFormat:@"%@/Documents/%@.%@",NSHomeDirectory(),videoName,videoType];
             [videoData writeToFile:videoPath atomically:NO];
+            
+//            AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
+//            
+//            
+//            NSArray *compatiblepresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
+//            
+//            if ([compatiblepresets containsObject:AVAssetExportPresetMediumQuality]) {
+//                
+//                NSString *videoPath = [NSString stringWithFormat:@"%@/Documents/%@.mp4",NSHomeDirectory(),videoName];
+//                
+//                AVAssetExportSession *exportsession = [[AVAssetExportSession alloc]initWithAsset:avAsset presetName:AVAssetExportPresetMediumQuality];
+//                
+//                exportsession.outputURL = [NSURL URLWithString:videoPath];
+//                exportsession.outputFileType = AVFileTypeMPEG4;
+//                
+//                [exportsession exportAsynchronouslyWithCompletionHandler:^{
+//                
+//                    if ([exportsession status] == AVAssetExportSessionStatusCompleted) {
+//                        <#statements#>
+//                    }
+//                    
+//                    
+//                }];
+//                
+//                
+//
+//                
+//            }
+            
             
             Item* item = [[Item alloc] init];
             item.filePath = videoPath;

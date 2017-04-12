@@ -128,7 +128,7 @@
 @property int whoPay;
 
 @property(nonnull,retain)NSString *addressInfo;;
-@property(nonnull,retain)NSString *addressDistrite;//定位到的区
+@property(nonnull,copy)NSString *addressDistrite;//定位到的区
 //(nonatomic, retain)NSTimer *connectTimer;
 
 

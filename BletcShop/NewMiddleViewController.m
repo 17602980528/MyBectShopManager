@@ -12,6 +12,9 @@
 #import "SDImageCache.h"
 #import "SDWebImageManager.h"
 
+#import "JFAreaDataManager.h"
+#import "ValuePickerView.h"
+
 @interface NewMiddleViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 {
     NSArray *nameArray;
@@ -24,6 +27,10 @@
     NSMutableDictionary *shopInfoDic;
     
     NSMutableArray *array;//保存所有图片
+    
+    
+    NSMutableArray *eare_data;
+    ValuePickerView *pickView;
 
 }
 @end
@@ -49,6 +56,76 @@
     shopInfoDic = [[NSMutableDictionary alloc]initWithDictionary:dic];
 
     DebugLog(@"shopInfoDic==%@",shopInfoDic);
+    
+    
+    __block typeof(self)  bloskSelf = self;
+    
+    NSLog(@"-app.city-----%@",app.city);
+
+    [[JFAreaDataManager shareManager] currentCityDic:app.city currentCityDic:^(NSDictionary *dic) {
+        
+        
+        NSLog(@"-dic-----%@",dic);
+        [[JFAreaDataManager shareManager]areaData:dic[@"code"] areaData:^(NSMutableArray *areaData) {
+            
+            
+            NSLog(@"-areaData-----%@",areaData);
+            
+            for (NSDictionary *dic in areaData) {
+                NSString *name = dic[@"name"];
+                
+                
+                if ([name isEqualToString:app.addressDistrite] || [name containsString:app.addressDistrite] || [app.addressDistrite containsString:name]) {
+                    
+                    
+                    NSString *url = [NSString stringWithFormat:@"%@Extra/address/getStreet",BASEURL];;
+                    
+                    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+                    [parame setValue:dic[@"code"] forKey:@"district_id"];
+                    
+                    NSLog(@"url====+%@=====%@",url,parame);
+                    [KKRequestDataService requestWithURL:url params:parame httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+                        
+                        NSLog(@"-areaData-----%@",areaData);
+                        
+                        eare_data = [NSMutableArray arrayWithArray:result];
+                        
+                        NSMutableArray *arr = [NSMutableArray array];
+                        for (NSDictionary *dic_eare in result) {
+                            [arr addObject:dic_eare[@"name"]];
+                            
+                        }
+                        
+                        pickView= [[ValuePickerView alloc]init];
+                        
+                        NSLog(@"--------------%@",arr);
+                        pickView.dataSource = arr;
+                        pickView.valueDidSelect = ^(NSString *value) {
+                            
+                            
+                            bloskSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
+                            
+                        };
+                        
+                    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        
+                    }];
+                    
+                    
+                    
+                    
+                    
+                    
+                    break;
+                    
+                    
+                }
+            }
+            
+        }];
+    }];
+    
+    
     
     totalHeight=80+((SCREENWIDTH-150)/2)*116/176;
     [self initTopView];
@@ -315,14 +392,14 @@
     //名称
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(30, 55, 110, 40)];
     label2.font=[UIFont systemFontOfSize:15.0f];
-    label2.text=@"详细地址";
+    label2.text=@"街道";
     [_scrollView addSubview:label2];
     
     //输入框
     _detailAddressTF=[[UITextField alloc]initWithFrame:CGRectMake(140, 55, SCREENWIDTH-140, 40)];
     _detailAddressTF.font=[UIFont systemFontOfSize:13.0f];
     _detailAddressTF.placeholder=@"门店地址";
-
+    _detailAddressTF.delegate = self;
     
     NSString *detail_s =shopInfoDic[@"address"];
     if (detail_s.length>_locationLab.text.length) {
@@ -978,7 +1055,7 @@
         [array addObject:image6];
     }
     
-    DebugLog(@"array===%@",array);
+//    DebugLog(@"array===%@",array);
     [self performSelectorOnMainThread:@selector(refreshUI:) withObject:array waitUntilDone:NO];
 }
 -(void)refreshUI:(NSMutableArray *)arr{
@@ -1376,6 +1453,13 @@
             return NO;
         }
     }
+    
+    if (textField ==self.detailAddressTF) {
+        [pickView show];
+        
+        return NO;
+    }
+    
     return YES;
 }
 -(void)tapAndHidden{
