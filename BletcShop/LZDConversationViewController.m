@@ -30,6 +30,10 @@
     if (!_data_array) {
         _data_array = [NSMutableArray array];
     }
+    
+    
+  
+    
     return _data_array;
 }
 
