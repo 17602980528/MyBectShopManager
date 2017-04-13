@@ -12,7 +12,9 @@
 #import "AddVipTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "MemberDetailViewController.h"
-#import "AllSenderMessageViewControlleVC.h"
+
+#import "AllMessageListViewVC.h"
+
 @interface ShopVipController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,weak)UIScrollView *listView;
 @property(nonatomic,strong)NSArray *data;
@@ -39,7 +41,7 @@
 -(void)allSender{
     
     
-    AllSenderMessageViewControlleVC *VC = [[AllSenderMessageViewControlleVC alloc]init];
+    AllMessageListViewVC *VC = [[AllMessageListViewVC alloc]init];
     [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)viewDidLoad {

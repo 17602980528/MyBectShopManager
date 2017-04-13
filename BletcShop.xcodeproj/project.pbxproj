@@ -836,6 +836,9 @@
 		D99292661D8FF5E600103914 /* CashListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D99292641D8FF5E600103914 /* CashListCell.m */; };
 		D99292671D8FF5E600103914 /* CashListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99292651D8FF5E600103914 /* CashListCell.xib */; };
 		D99313751E333CF20053D9B6 /* 新年首页.png in Resources */ = {isa = PBXBuildFile; fileRef = D99313741E333CF20053D9B6 /* 新年首页.png */; };
+		D99372B81E9F481C0088016D /* AllMessageListViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D99372B61E9F481C0088016D /* AllMessageListViewVC.m */; };
+		D99372B91E9F481C0088016D /* AllMessageListViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99372B71E9F481C0088016D /* AllMessageListViewVC.xib */; };
+		D99372CC1E9F4F450088016D /* AllmessageListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D99372CB1E9F4F450088016D /* AllmessageListCell.m */; };
 		D9937D7F1DDFF22C0001B575 /* PayMentController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9937D7D1DDFF22C0001B575 /* PayMentController.m */; };
 		D9937D841DE056DF0001B575 /* NewChangePsWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9937D831DE056DF0001B575 /* NewChangePsWordViewController.m */; };
 		D9955C6D1D488F4E00E1BF57 /* OrderInfomaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9955C6C1D488F4E00E1BF57 /* OrderInfomaViewController.m */; };
@@ -2399,6 +2402,11 @@
 		D99292641D8FF5E600103914 /* CashListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashListCell.m; sourceTree = "<group>"; };
 		D99292651D8FF5E600103914 /* CashListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashListCell.xib; sourceTree = "<group>"; };
 		D99313741E333CF20053D9B6 /* 新年首页.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新年首页.png"; sourceTree = "<group>"; };
+		D99372B51E9F481C0088016D /* AllMessageListViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMessageListViewVC.h; sourceTree = "<group>"; };
+		D99372B61E9F481C0088016D /* AllMessageListViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllMessageListViewVC.m; sourceTree = "<group>"; };
+		D99372B71E9F481C0088016D /* AllMessageListViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllMessageListViewVC.xib; sourceTree = "<group>"; };
+		D99372CA1E9F4F450088016D /* AllmessageListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllmessageListCell.h; sourceTree = "<group>"; };
+		D99372CB1E9F4F450088016D /* AllmessageListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllmessageListCell.m; sourceTree = "<group>"; };
 		D9937D7C1DDFF22C0001B575 /* PayMentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMentController.h; sourceTree = "<group>"; };
 		D9937D7D1DDFF22C0001B575 /* PayMentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMentController.m; sourceTree = "<group>"; };
 		D9937D821DE056DF0001B575 /* NewChangePsWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewChangePsWordViewController.h; sourceTree = "<group>"; };
@@ -5052,6 +5060,10 @@
 				1CDA9E101C5A142900DFE518 /* ShopVipController.m */,
 				1817FF5A1D40665900AFC965 /* MemberDetailViewController.h */,
 				1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */,
+				D99372B51E9F481C0088016D /* AllMessageListViewVC.h */,
+				D99372B61E9F481C0088016D /* AllMessageListViewVC.m */,
+				D99372B71E9F481C0088016D /* AllMessageListViewVC.xib */,
+				D99372BF1E9F49C50088016D /* 信息列表自定义cell */,
 				D939D6C11E9B17CD00D0569E /* AllSenderMessageViewControlleVC.h */,
 				D939D6C21E9B17CD00D0569E /* AllSenderMessageViewControlleVC.m */,
 				D939D6C31E9B17CD00D0569E /* AllSenderMessageViewControlleVC.xib */,
@@ -5491,6 +5503,15 @@
 				D98ECBDE1D9D1F1200BEDD57 /* RoyShopTableViewCell.m */,
 			);
 			name = "添加商品";
+			sourceTree = "<group>";
+		};
+		D99372BF1E9F49C50088016D /* 信息列表自定义cell */ = {
+			isa = PBXGroup;
+			children = (
+				D99372CA1E9F4F450088016D /* AllmessageListCell.h */,
+				D99372CB1E9F4F450088016D /* AllmessageListCell.m */,
+			);
+			name = "信息列表自定义cell";
 			sourceTree = "<group>";
 		};
 		D9937D811DE049560001B575 /* 支付 */ = {
@@ -6708,6 +6729,7 @@
 				D9FF0D951D53304C00443312 /* 图标-07new.png in Resources */,
 				1C2ED1141C5B1827003EE93B /* 1-02@2x.png in Resources */,
 				D9345E701E76984F006B2AC1 /* TopActiveCell.xib in Resources */,
+				D99372B91E9F481C0088016D /* AllMessageListViewVC.xib in Resources */,
 				1A8312831D88544D001BC3B6 /* chat_sender_audio_playing_002@2x.png in Resources */,
 				18F50E051D1E365800811CD1 /* -2-01.jpg in Resources */,
 				D9962F6F1D98F60600E63218 /* langchchng.png in Resources */,
@@ -6988,6 +7010,7 @@
 				D9811C1E1DDD3E0D0041A8C9 /* SettlementViewController.m in Sources */,
 				D9CDFBB81CC4DB8C0054EBE3 /* ShopManagerViewController.m in Sources */,
 				D9DEED291CACED7C00ACDD00 /* UIImageView+WebCache.m in Sources */,
+				D99372B81E9F481C0088016D /* AllMessageListViewVC.m in Sources */,
 				182988471E723F4200164F32 /* UIView+SDExtension.m in Sources */,
 				D9764E8F1DD5B62100B088DE /* PointConvertViewController.m in Sources */,
 				D9442ADD1D1E330A00956AB4 /* Singleton.m in Sources */,
@@ -7330,6 +7353,7 @@
 				D958AD6D1E654CF200B0776F /* JHShowInfoView.m in Sources */,
 				D947E4761D7D4CB000F9FEE8 /* UIView+SDExtension.m in Sources */,
 				D9DEED211CACED7C00ACDD00 /* SDWebImageManager+MJ.m in Sources */,
+				D99372CC1E9F4F450088016D /* AllmessageListCell.m in Sources */,
 				D9B3A5B21D74255700F3F27E /* MKAnnotationView+EMWebCache.m in Sources */,
 				D9BB4DE21E050EA200971BCC /* AppointStateViewController.m in Sources */,
 				D99760EC1E68FFE6008E21FE /* CouponCell.m in Sources */,

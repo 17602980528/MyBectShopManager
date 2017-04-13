@@ -40,7 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@",self.dic);
-    NSArray *persons=[self.dic allValues];
+    
+       NSArray *persons=[self.dic allValues];
     for (int i=0; i<persons.count; i++) {
         if (persons.count==1) {
             allPersons=[NSString stringWithFormat:@"%@",persons[i][@"user"]];
@@ -95,10 +96,12 @@
     
     
     // 2. 创建自定义控件
-    _toolView = [[LZDToolView alloc]init];
-    _toolView.frame = CGRectMake(0, SCREENHEIGHT-44-64, SCREENWIDTH, 44);
-    _toolView.delegate = self;
-    [self.view addSubview:_toolView];
+    
+    LZDToolView *toolView = [[LZDToolView alloc]init];
+    toolView.frame = CGRectMake(0, SCREENHEIGHT-44-64, SCREENWIDTH, 44);
+    toolView.delegate = self;
+    [self.view addSubview:toolView];
+    self.toolView = toolView;
     __weak typeof(self) weakSelf = self;
     
     _toolView.sendTextBlock = ^(UITextView *textView ,LZDToolViewEditTextViewType tpye){
@@ -200,6 +203,16 @@
             weakSelf.r_textView = textView;
             weakSelf.faceView.sendBlock = ^{
                 NSLog(@"sendBlock----%@",textView.text);
+                
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    
+                    weakSelf.faceView.top = kWeChatScreenHeight;
+                weakSelf.toolView.frame = CGRectMake(0, SCREENHEIGHT-64-44, SCREENWIDTH, 44);
+                    
+                }];
+               
+                
                 [weakSelf sendMsg:textView];
                 [weakSelf cancelFocus:textView];
             };
@@ -282,13 +295,22 @@
         return;
     }
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.label.text = NSLocalizedString(@"发送中...", @"HUD message title");
+    hud.label.font = [UIFont systemFontOfSize:13];
+
+    
     NSString *from = [[EMClient sharedClient] currentUsername];
     
     NSArray *values=[self.dic allValues];
     
+    
+    NSDictionary *message_dic = [NSDictionary dictionaryWithObject:values forKey:@"persons"];
+
     for (int i=0; i<values.count; i++) {
         
-        EMMessage *message = [[EMMessage alloc] initWithConversationID:values[i][@"uuid"] from:from to:values[i][@"uuid"] body:body ext:nil];
+        EMMessage *message = [[EMMessage alloc] initWithConversationID:from from:from to:values[i][@"uuid"] body:body ext:message_dic];
         message.chatType=EMChatTypeChat;
         
         [[EMClient sharedClient].chatManager sendMessage:message progress:^(int progress) {
@@ -296,6 +318,29 @@
         } completion:^(EMMessage *message, EMError *error) {
             NSLog(@"===发送成功");
             
+            if (i==values.count-1) {
+                
+
+                hud.label.text = @"发送成功";
+                [hud hideAnimated:YES afterDelay:1];
+                
+                _toolView.top=SCREENHEIGHT-64-44;
+                
+               
+            }
+            
+            if (values.count >1) {
+                if (i !=0) {
+
+                    EMConversation*conver=[[EMClient sharedClient].chatManager getConversation:from type:EMConversationTypeGroupChat createIfNotExist:YES];
+                    
+                    [conver deleteMessageWithId:message.messageId error:nil];
+                    
+
+                    
+
+                }
+            }
             
         }];
     }
@@ -312,11 +357,20 @@
         //    NSString *img_str = [NSString stringWithFormat:@"%@",[NSURL URLWithString:[HEADIMAGE stringByAppendingString:self.userInfo[1]]]];
         //
         //    NSDictionary *dic = @{@"headerName":self.userInfo[0],@"headerImg":img_str};
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.label.text = NSLocalizedString(@"发送中...", @"HUD message title");
+        hud.label.font = [UIFont systemFontOfSize:13];
+        
         NSArray *values=[self.dic allValues];
         
+        
+        NSDictionary *message_dic = [NSDictionary dictionaryWithObject:values forKey:@"persons"];
+
         for (int i=0; i<values.count; i++) {
             
-            EMMessage *message = [[EMMessage alloc] initWithConversationID:values[i][@"uuid"] from:from to:values[i][@"uuid"] body:body ext:nil];
+            EMMessage *message = [[EMMessage alloc] initWithConversationID:from from:from to:values[i][@"uuid"] body:body ext:message_dic];
             message.chatType=EMChatTypeChat;
             
             [[EMClient sharedClient].chatManager sendMessage:message progress:^(int progress) {
@@ -324,6 +378,30 @@
             } completion:^(EMMessage *message, EMError *error) {
                 NSLog(@"===发送成功");
                 textView.text = @"";
+                
+                if (i==values.count-1) {
+                    
+                    hud.label.text = @"发送成功";
+                    [hud hideAnimated:YES afterDelay:1];
+                    [self.view endEditing:YES];
+
+//                    _toolView.top=SCREENHEIGHT-44;
+                }
+                
+                
+                if (values.count >1) {
+                    if (i !=0) {
+                        
+                        EMConversation*conver=[[EMClient sharedClient].chatManager getConversation:from type:EMConversationTypeGroupChat createIfNotExist:YES];
+                        
+                        [conver deleteMessageWithId:message.messageId error:nil];
+                        
+                        
+                        
+                        
+                    }
+                }
+
                 
             }];
         }
@@ -433,6 +511,9 @@
 - (void)sendImage:(UIImage *)image
 {
     
+                    _toolView.top=SCREENHEIGHT-64-44;
+
+    
     NSData * data = UIImageJPEGRepresentation(image, 1.0);
     NSData *thumbnailData=UIImageJPEGRepresentation (image, 0.3);
     //生成图片的data
@@ -446,9 +527,11 @@
     hud.label.text = NSLocalizedString(@"发送中...", @"HUD message title");
     hud.label.font = [UIFont systemFontOfSize:13];
     NSArray *values=[self.dic allValues];
+    NSDictionary *message_dic = [NSDictionary dictionaryWithObject:values forKey:@"persons"];
     for (int i=0; i<values.count; i++) {
         
-        EMMessage *message = [[EMMessage alloc] initWithConversationID:values[i][@"uuid"] from:from to:values[i][@"uuid"] body:body ext:nil];
+        
+        EMMessage *message = [[EMMessage alloc] initWithConversationID:from from:from to:values[i][@"uuid"] body:body ext:message_dic];
         message.chatType=EMChatTypeChat;
         [[EMClient sharedClient].chatManager
          sendMessage:message progress:^(int progress) {
@@ -460,9 +543,25 @@
          } completion:^(EMMessage *message, EMError *error) {
              NSLog(@"发送图片Error%@",error.errorDescription);
              if (i==values.count-1) {
-                 [MBProgressHUD hideHUDForView:self.view animated:YES];//隐藏菊花
-                 _toolView.top=SCREENHEIGHT;
+                 
+                 hud.label.text = @"发送成功";
+                 [hud hideAnimated:YES afterDelay:1];
+                 
              }
+             
+             if (values.count >1) {
+                 if (i !=0) {
+                     
+                     EMConversation*conver=[[EMClient sharedClient].chatManager getConversation:from type:EMConversationTypeGroupChat createIfNotExist:YES];
+                     
+                     [conver deleteMessageWithId:message.messageId error:nil];
+                     
+                     
+                     
+                     
+                 }
+             }
+
              if (!error)
              {   //存入数组
                  NSLog(@"发送成功");
