@@ -10,4 +10,6 @@
 
 @interface SendMessageToAllVC : UIViewController
 @property(nonatomic,strong)NSMutableDictionary *dic;
+@property (nonatomic,copy)NSString *whoPush;// <#Description#>
+
 @end

@@ -39,6 +39,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"群发";
     NSLog(@"%@",self.dic);
     
        NSArray *persons=[self.dic allValues];
@@ -342,6 +344,9 @@
                 }
             }
             
+            [self performSelector:@selector(popToView) withObject:nil afterDelay:1.5];
+
+            
         }];
     }
 }
@@ -401,6 +406,8 @@
                         
                     }
                 }
+
+                [self performSelector:@selector(popToView) withObject:nil afterDelay:1.5];
 
                 
             }];
@@ -567,6 +574,7 @@
                  NSLog(@"发送成功");
              }
              
+             [self performSelector:@selector(popToView) withObject:nil afterDelay:1.5];
          }];
         
     }
@@ -611,14 +619,14 @@
     return nil;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)popToView{
+    
+    
+    UIViewController *vc = self.navigationController.viewControllers[1];
+    
+    [self.navigationController popToViewController:vc animated:YES];
+    
 }
-*/
 
 @end

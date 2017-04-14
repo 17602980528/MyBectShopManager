@@ -96,7 +96,7 @@
         
         LZDButton *againSend = [LZDButton creatLZDButton];
         [againSend setTitle:@"再发一条" forState:0];
-        [againSend setTitleColor:RGB(189, 189, 189) forState:0];
+        [againSend setTitleColor:RGB(51, 51, 51) forState:0];
         againSend.titleLabel.font = [UIFont systemFontOfSize:12];
         againSend.backgroundColor = RGB(246, 246, 246);
         [self.bottomView addSubview:againSend];
@@ -159,6 +159,8 @@
         
         //        [self.chatButton setAttributedTitle:attrStr forState:UIControlStateNormal];
         
+       
+        
         CGSize size =  [textBody.text boundingRectWithSize:CGSizeMake(kWeChatScreenWidth-50, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:15]} context:nil].size;
         //        NSLog(@"=length====%ld",textBody.text.length);
         //        CGSize size = [attrStr boundingRectWithSize:CGSizeMake(kWeChatScreenWidth/2, CGFLOAT_MAX)options: NSStringDrawingUsesLineFragmentOrigin context:nil].size;
@@ -168,7 +170,7 @@
         self.chatButton.size = realSize;
         
         
-        self.chatButton.frame = CGRectMake(20, 80+30, realSize.width, realSize.height);
+        self.chatButton.frame = CGRectMake(20, 80+20, realSize.width, realSize.height);
         self.chatButton.imageEdgeInsets = UIEdgeInsetsZero;
         
         
@@ -226,13 +228,13 @@
 
     
     if (![body isKindOfClass:[EMTextMessageBody class]]) {
-        self.chatButton.center = CGPointMake(kWeChatScreenWidth/2, 80+30+self.chatButton.size.height/2);
+        self.chatButton.center = CGPointMake(kWeChatScreenWidth/2, 80+20+self.chatButton.size.height/2);
 
  
     }
     
     
-    self.backView.frame = CGRectMake(20, 30, kWeChatScreenWidth-2*20, self.chatButton.bottom+60);
+    self.backView.frame = CGRectMake(20, 30, kWeChatScreenWidth-2*20, self.chatButton.bottom+40);
     self.topView.frame = CGRectMake(0, 0, self.backView.width, 50);
     self.bottomView.frame = CGRectMake(0, self.topView.bottom, self.backView.width, self.backView.height -self.topView.bottom);
 
@@ -285,7 +287,6 @@
     }
     
     
-    self.chatButton.backgroundColor = [UIColor redColor];
 }
 
 - (CGFloat)rowHeight
