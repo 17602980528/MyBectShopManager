@@ -176,7 +176,7 @@
 //
 //        Myitem *item12 = [Myitem itemsWithImg:@"mine_m_n" title:jifen vcClass:[PointRuleViewController class]];
         
-        Myitem *item13 = [Myitem itemsWithImg:@"mine_vou_n" title:@"我的代金券" vcClass:[MyCashCouponViewController class]];
+        Myitem *item13 = [Myitem itemsWithImg:@"mine_vou_n" title:@"我的优惠券" vcClass:[MyCashCouponViewController class]];
         Myitem *item14 = [Myitem itemsWithImg:@"mine_cust_n" title:@"我的消费" vcClass:[MyOderController class]];
         
         Mygroup *group1 = [[Mygroup alloc] init];

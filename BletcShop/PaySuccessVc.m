@@ -30,7 +30,7 @@
 
     if (self.orderInfoType==1) {
         self.sureButton.hidden= YES;
-        string = [NSString stringWithFormat:@"购买成功，获得%d积分",(int)[self.money_str floatValue]*10];
+        string = [NSString stringWithFormat:@"购买成功，获得%d积分",(int)[self.money_str floatValue]];
         
         self.card_level.text = [NSString stringWithFormat:@"%@会员",self.card_dic[@"level"]];
         self.card_code.text = self.card_dic[@"code"];
@@ -40,13 +40,13 @@
 
 
     if (self.orderInfoType==2) {
-       string = [NSString stringWithFormat:@"续卡成功，获得%d积分",(int)[self.money_str floatValue]*10];
+       string = [NSString stringWithFormat:@"续卡成功，获得%d积分",(int)[self.money_str floatValue]];
         self.card_level.text = [NSString stringWithFormat:@"%@会员",self.card_dic[@"card_level"]];
 
 
     }
     if (self.orderInfoType==4) {
-        string = [NSString stringWithFormat:@"升级成功，获得%d积分",(int)[self.money_str floatValue]*10];
+        string = [NSString stringWithFormat:@"升级成功，获得%d积分",(int)[self.money_str floatValue]];
         self.card_level.text = [NSString stringWithFormat:@"%@会员",self.type_new];
 
         

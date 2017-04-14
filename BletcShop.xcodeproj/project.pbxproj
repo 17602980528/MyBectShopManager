@@ -185,6 +185,7 @@
 		18F032111E5EE02700ACD261 /* HolidayActivertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F032101E5EE02700ACD261 /* HolidayActivertyVC.m */; };
 		18F05E671E2626BD002E4C10 /* TransferOwnershipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F05E661E2626BD002E4C10 /* TransferOwnershipViewController.m */; };
 		18F05E6A1E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F05E691E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m */; };
+		18F065141EA0983000D62B5F /* ValuePickerViewEric.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F065131EA0983000D62B5F /* ValuePickerViewEric.m */; };
 		18F27EC91D640C21002DD03A /* NewModelImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F27EC81D640C21002DD03A /* NewModelImageViewController.m */; };
 		18F27EE91D640E84002DD03A /* 头像-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F27ECB1D640E84002DD03A /* 头像-1.png */; };
 		18F27EEA1D640E84002DD03A /* 头像-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F27ECC1D640E84002DD03A /* 头像-2.png */; };
@@ -1380,6 +1381,8 @@
 		18F05E661E2626BD002E4C10 /* TransferOwnershipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferOwnershipViewController.m; sourceTree = "<group>"; };
 		18F05E681E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckTransferStateAndEditOrRemoveCardViewController.h; sourceTree = "<group>"; };
 		18F05E691E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckTransferStateAndEditOrRemoveCardViewController.m; sourceTree = "<group>"; };
+		18F065121EA0983000D62B5F /* ValuePickerViewEric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuePickerViewEric.h; sourceTree = "<group>"; };
+		18F065131EA0983000D62B5F /* ValuePickerViewEric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuePickerViewEric.m; sourceTree = "<group>"; };
 		18F27EC71D640C21002DD03A /* NewModelImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewModelImageViewController.h; sourceTree = "<group>"; };
 		18F27EC81D640C21002DD03A /* NewModelImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewModelImageViewController.m; sourceTree = "<group>"; };
 		18F27ECB1D640E84002DD03A /* 头像-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像-1.png"; sourceTree = "<group>"; };
@@ -3025,6 +3028,8 @@
 				D99760EE1E690575008E21FE /* SawtoothView.m */,
 				D9C4CDEB1DE44587009C76C1 /* ValuePickerView.h */,
 				D9C4CDEC1DE44587009C76C1 /* ValuePickerView.m */,
+				18F065121EA0983000D62B5F /* ValuePickerViewEric.h */,
+				18F065131EA0983000D62B5F /* ValuePickerViewEric.m */,
 				D97F60061D62DCAA000EE794 /* NSArray+Log.h */,
 				D97F60071D62DCAA000EE794 /* NSArray+Log.m */,
 				D97F60081D62DCAA000EE794 /* NSDictionary+Log.h */,
@@ -7237,6 +7242,7 @@
 				D9A06B611D8679C30037795B /* amrFileCodec.mm in Sources */,
 				D947E4931D7D729000F9FEE8 /* Person.m in Sources */,
 				D9DEED241CACED7C00ACDD00 /* UIButton+WebCache.m in Sources */,
+				18F065141EA0983000D62B5F /* ValuePickerViewEric.m in Sources */,
 				D94113581CE9A3D7008E231F /* base64.m in Sources */,
 				D98ECBCF1D9CE7A700BEDD57 /* AddVIPModel.m in Sources */,
 				D9B3A5B31D74255700F3F27E /* NSData+EMImageContentType.m in Sources */,

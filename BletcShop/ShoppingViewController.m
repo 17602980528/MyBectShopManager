@@ -351,7 +351,7 @@
     NSLog(@"%@",self.ereaString);
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-//        NSLog(@"postRequestShop-----%@",result);
+       NSLog(@"postRequestShop-----%@",result);
         if ([result isKindOfClass:[NSArray class]]) {
             if (self.indexss==1) {
                 
@@ -826,13 +826,13 @@
     DebugLog(@"===url=%@\n===paramer==%@",url,params);
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        //          NSLog(@"getAdverListRequestWithIndePath-----%@",result);
+                  NSLog(@"getAdverListRequestWithIndePath-----%@",result);
         if ([result isKindOfClass:[NSDictionary class]]) {
             
             
             NSArray *ad_A = result[@"advert"];
             
-            NSArray *shop_A = result[@"merchant"];
+           // NSArray *shop_A = result[@"merchant"];
             
             [self.adverList removeAllObjects];
             
@@ -842,11 +842,11 @@
 
                 
             }
-            for (NSDictionary *dic in shop_A) {
-                [self.adverList addObject:dic];
-
-                
-            }
+//            for (NSDictionary *dic in shop_A) {
+//                [self.adverList addObject:dic];
+//
+//                
+//            }
             
             
             

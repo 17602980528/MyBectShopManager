@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"我的代金券";
+    self.title = @"我的优惠券";
 
     self.view.backgroundColor = [UIColor whiteColor];
     NSLog(@"#######%@",self.couponArray);
