@@ -58,18 +58,18 @@
     NSString *url = [NSString stringWithFormat:@"%@MerchantType/advert/getPrice",BASEURL];
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
     
-    [paramer setObject:model.advertID forKey:@"advert_id"];
-
     if (model.advertIndex==2) {
+         [paramer setObject:model.advertID forKey:@"advert_id"];
         [paramer setObject:@"activity" forKey:@"advert_type"];
 
     }else if (model.advertIndex==3){
-        
+         [paramer setObject:model.advertArea forKey:@"advert_id"];
         [paramer setObject:@"near" forKey:@"advert_type"];
         [paramer setObject:model.advertArea forKey:@"advert_id"];
 
     }
     else{
+        [paramer setObject:model.advertID forKey:@"advert_id"];
         [paramer setObject:@"top" forKey:@"advert_type"];
 
     }

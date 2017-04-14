@@ -11,7 +11,7 @@
 
 #import "PublishAdvertSecondVC.h"
 #import "PublishTopScrollAdvertVC.h"
-#import "ValuePickerView.h"
+#import "ValuePickerViewEric.h"
 #import "SingleModel.h"
 @interface PublishAdvertSecondVC ()<UIPickerViewDelegate, UIPickerViewDataSource>
 {
@@ -24,13 +24,14 @@
     NSString *selectedProvince;
     UILabel *areaLable;//活动地区
     NSMutableArray *activatyKindsArr;//活动类型数据源
+    NSMutableArray *activatyIds;
     UILabel *advertPositionLable;
     __block SingleModel *model;
     NSArray *advertPositionArr;//广告位数据源
 }
 @property (nonatomic,strong)UIToolbar *toolbarCancelDone;
-@property (nonatomic, strong) ValuePickerView *pickerView;
-@property (nonatomic,strong) ValuePickerView *advertPositionPickerView;
+@property (nonatomic, strong) ValuePickerViewEric *pickerView;
+@property (nonatomic,strong) ValuePickerViewEric *advertPositionPickerView;
 @property (nonatomic,strong)UILabel *advertStyleLable;
 @property (nonatomic,copy)NSString *stateStr;
 @end
@@ -126,8 +127,9 @@
     
     //-----初始化活动
     activatyKindsArr=[[NSMutableArray alloc]initWithCapacity:0];
-    self.pickerView = [[ValuePickerView alloc]init];
-    self.advertPositionPickerView=[[ValuePickerView alloc]init];
+    activatyIds=[[NSMutableArray alloc]initWithCapacity:0];
+    self.pickerView = [[ValuePickerViewEric alloc]init];
+    self.advertPositionPickerView=[[ValuePickerViewEric alloc]init];
 }
 //选地区
 -(void)chooseAreaBtnClick{
@@ -161,7 +163,7 @@
     }else{
         if (advertPositionArr.count>0) {
             //有地区，并且有活动类型
-            tempSelf.advertPositionPickerView.valueDidSelect = ^(NSString *value){
+            tempSelf.advertPositionPickerView.valueDidSelect = ^(NSString *value,NSInteger selectedRow){
                 NSArray * arr =[value componentsSeparatedByString:@"/"];
                 NSString * newValue=arr[0];
                 advertPositionLable.text=newValue;
@@ -190,17 +192,13 @@
     }else{
         if (activatyKindsArr.count>0) {
             //有地区，并且有活动类型
-            tempSelf.pickerView.valueDidSelect = ^(NSString *value){
+            tempSelf.pickerView.valueDidSelect = ^(NSString *value,NSInteger selectedRow){
                 NSArray * arr =[value componentsSeparatedByString:@"/"];
                 NSString * newValue=arr[0];
-                NSString *realValue=[[newValue componentsSeparatedByString:@"&"]firstObject];
-                tempSelf.advertStyleLable.text=realValue;
-                
-                NSString *advertID=[[newValue componentsSeparatedByString:@"&"] lastObject];
-                NSLog(@"%@",advertID);
+                tempSelf.advertStyleLable.text=newValue;
                 //获取广告位
-                model.advertID=advertID;
-                [tempSelf accessAdvertPositionById:advertID];
+                model.advertID=activatyIds[selectedRow];;
+                [tempSelf accessAdvertPositionById:activatyIds[selectedRow]];
             };
             
             [tempSelf.pickerView show];
@@ -367,13 +365,17 @@
     if (activatyKindsArr.count>0) {
         [activatyKindsArr removeAllObjects];
     }
+    if (activatyIds.count>0) {
+        [activatyIds removeAllObjects];
+    }
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"result===%@",result);
         if (result) {
             for (int i=0; i<[result count]; i++) {
                 NSString *title = result[i][@"title"];
-                NSString *newTitle=[NSString stringWithFormat:@"%@&%@",title,result[i][@"id"]];
-                [activatyKindsArr addObject:newTitle];
+                //NSString *newTitle=[NSString stringWithFormat:@"%@&%@",title,result[i][@"id"]];
+                [activatyKindsArr addObject:title];
+                [activatyIds addObject:result[i][@"id"]];
             }
             tempSelf.pickerView.dataSource=activatyKindsArr;
         }
