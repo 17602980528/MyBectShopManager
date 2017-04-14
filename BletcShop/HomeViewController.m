@@ -928,8 +928,8 @@
         lab_2.textColor = RGB(102,102,102);
         lab_2.textAlignment = NSTextAlignmentLeft;
         [btn addSubview:lab_2];
-
-        UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(btn.width-13-38, btn.height-38-2, 38, 38)];
+//btn.width-13-38, btn.height-38-2, 38, 38
+        UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake( (btn.width-38*224/110)/2, btn.height-38-2, 38*224/110, 38)];
         [btn addSubview:img];
         
               [back_view addSubview:btn];
@@ -942,13 +942,13 @@
             
             NSString *img_str = [NSString stringWithFormat:@"%@%@",FOURADVERTIMAGE,dic[@"image_url"]];
             
-            [img sd_setImageWithURL:[NSURL URLWithString:img_str] placeholderImage:[UIImage imageNamed:@"adcerc.png"]];
+            [img sd_setImageWithURL:[NSURL URLWithString:img_str] placeholderImage:[UIImage imageNamed:@"icon3.png"]];
             
             
             if (i ==0) {
-                img.frame = CGRectMake(13, btn.height-38-2, 38, 38);
-                [img sd_setImageWithURL:[NSURL URLWithString:img_str] placeholderImage:[UIImage imageNamed:@"adve2(1).png"]];
-//                lab_2.text = @"喜迎中国年!";
+                //img.frame = CGRectMake(13, btn.height-38-2, 38, 38);
+                [img sd_setImageWithURL:[NSURL URLWithString:img_str] placeholderImage:[UIImage imageNamed:@"icon3.png"]];
+//                lab_2.text = @"喜迎中国年!";(13, btn.height-38-2, 38, 38
                 
             }
 

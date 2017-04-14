@@ -550,7 +550,7 @@
 -(void)getReportDataWithDate_type:(NSInteger)index{
     NSString *url = [NSString stringWithFormat:@"%@MerchantType/record/getSortChart",BASEURL];
     AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSArray *arr = @[@"buy",@"renew",@"upgrade",@"tally"];
+    NSArray *arr = @[@"buy",@"renew",@"upgrade",@"consum"];
     
     NSDate *date =[NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
