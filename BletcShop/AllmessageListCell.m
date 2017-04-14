@@ -94,15 +94,15 @@
         self.bottomView = bottomView;
 
         
-        LZDButton *againSend = [LZDButton creatLZDButton];
-        [againSend setTitle:@"再发一条" forState:0];
-        [againSend setTitleColor:RGB(51, 51, 51) forState:0];
-        againSend.titleLabel.font = [UIFont systemFontOfSize:12];
-        againSend.backgroundColor = RGB(246, 246, 246);
-        [self.bottomView addSubview:againSend];
-        againSend.layer.cornerRadius = 12;
-        againSend.layer.masksToBounds = YES;
-        self.againSend = againSend;
+//        LZDButton *againSend = [LZDButton creatLZDButton];
+//        [againSend setTitle:@"再发一条" forState:0];
+//        [againSend setTitleColor:RGB(51, 51, 51) forState:0];
+//        againSend.titleLabel.font = [UIFont systemFontOfSize:12];
+//        againSend.backgroundColor = RGB(246, 246, 246);
+//        [self.bottomView addSubview:againSend];
+//        againSend.layer.cornerRadius = 12;
+//        againSend.layer.masksToBounds = YES;
+//        self.againSend = againSend;
         
         
         // 聊天消息

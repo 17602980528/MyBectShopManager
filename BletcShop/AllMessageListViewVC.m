@@ -29,7 +29,7 @@
     NSString *from = [[EMClient sharedClient] currentUsername];
     NSLog(@"====%@",from);
     
-    EMConversation*conver=[[EMClient sharedClient].chatManager getConversation:@"m_d7c116a9cc" type:EMConversationTypeGroupChat createIfNotExist:YES];
+    EMConversation*conver=[[EMClient sharedClient].chatManager getConversation:from type:EMConversationTypeGroupChat createIfNotExist:YES];
     
     
     
@@ -99,25 +99,25 @@
         
         cell.message = msg;
         
-        cell.againSend.block = ^(LZDButton *sender) {
-            
-            
-            SendMessageToAllVC *VC = [[SendMessageToAllVC alloc]init];
-            VC.whoPush = @"再来一发";
-            
-            NSMutableDictionary *mutaDic = [NSMutableDictionary dictionary];
-            NSArray *msg_a = msg.ext[@"persons"];
-            for (NSDictionary *dic in msg_a) {
-                
-                [mutaDic setObject:dic forKey:[NSString stringWithFormat:@"%lu",(unsigned long)[msg_a indexOfObject:dic]]];
-                
-            }
-            VC.dic = mutaDic;
-            
-            [self.navigationController pushViewController:VC animated:YES];
-
-            
-        };
+//        cell.againSend.block = ^(LZDButton *sender) {
+//            
+//            
+//            SendMessageToAllVC *VC = [[SendMessageToAllVC alloc]init];
+//            VC.whoPush = @"再来一发";
+//            
+//            NSMutableDictionary *mutaDic = [NSMutableDictionary dictionary];
+//            NSArray *msg_a = msg.ext[@"persons"];
+//            for (NSDictionary *dic in msg_a) {
+//                
+//                [mutaDic setObject:dic forKey:[NSString stringWithFormat:@"%lu",(unsigned long)[msg_a indexOfObject:dic]]];
+//                
+//            }
+//            VC.dic = mutaDic;
+//            
+//            [self.navigationController pushViewController:VC animated:YES];
+//
+//            
+//        };
     }
 
     return cell;

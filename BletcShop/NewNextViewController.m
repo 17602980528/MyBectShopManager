@@ -230,6 +230,7 @@
         nickLab.text=nameArray[2];
 
         UITextField *textField=[[UITextField alloc]initWithFrame:CGRectMake(140, 5, SCREENWIDTH-140, 40)];
+        textField.delegate=self;
         textField.placeholder=@"请输入您的真实姓名";
         textField.tag=202;
         textField.font=[UIFont systemFontOfSize:13.0f];
@@ -494,8 +495,8 @@
                     
                 }else{
                     
-                    [NSThread detachNewThreadSelector:@selector(saveInfo) toTarget:self withObject:nil];
-                    
+                    [self saveInfo];
+                    [self saveRequest:999];
                     NewMiddleViewController *middleVC=[[NewMiddleViewController alloc]init];
                     middleVC.phoneStr=self.phoneString;
                     middleVC.nibNameString=self.nickTextTF.text;

@@ -128,7 +128,7 @@
         VC.resultBlock=^(NSDictionary*result) {
             
             NSLog(@"UserInfoEditVC.block====%@",result);
-            self.tishiwenzi.text = [NSString stringWithFormat:@"恭喜你，完成个人信息获得%@个积 分，快去看看吧",result[@"result_code"]];
+            self.tishiwenzi.text = [NSString stringWithFormat:@"恭喜你，完成个人信息获得 20 个积分，快去看看吧"];
             self.tishiview.hidden = NO;
 
         };

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HotNewsVC : UIViewController
-
+@property(nonatomic,copy)NSString *href;
 @end

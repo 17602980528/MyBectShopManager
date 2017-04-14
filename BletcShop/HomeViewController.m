@@ -1186,6 +1186,7 @@
     NSLog(@"--%@",paramer);
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
+         NSLog(@"result====>>>%@",result);
          self.advertiseHeaderList= (NSArray*)result;
 //         self.headerView = [self creatHeaderView];
 //         
@@ -1627,6 +1628,7 @@
 - (void)gyChangeTextView:(GYChangeTextView *)textView didTapedAtIndex:(NSInteger)index {
     NSLog(@"%ld",index);
     HotNewsVC *vc=[[HotNewsVC alloc]init];
+    vc.href=self.advertiseHeaderList[index][@"href"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

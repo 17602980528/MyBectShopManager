@@ -26,7 +26,8 @@
     UIWebView *_webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
     _webView.delegate=self;
     [self.view addSubview:_webView];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://mp.weixin.qq.com/s/5YhVWVpyc4lSg59_1rASzQ"]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:
+                                                        self.href]]];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [hud hideAnimated:YES afterDelay:0.0f];
