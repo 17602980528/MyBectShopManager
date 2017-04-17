@@ -37,7 +37,7 @@
         
         self.data_A = [aMessages copy];
         [self.tableVIew reloadData];
-        
+        [self.tableVIew scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.data_A.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         NSLog(@"-----%@",self.data_A);
         
         
