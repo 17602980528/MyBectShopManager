@@ -77,6 +77,18 @@
 {
     
     NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.font = [UIFont systemFontOfSize:13];
+    hud.userInteractionEnabled = YES;
+    
+    [hud hideAnimated:YES afterDelay:2.f];
+    if (error) {
+        hud.label.text = NSLocalizedString(@"保存失败", @"HUD message title");
+    }else{
+        hud.label.text = NSLocalizedString(@"保存成功", @"HUD message title");
+    }
+
 }
 
 
