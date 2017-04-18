@@ -883,7 +883,7 @@
     [button2 addSubview:lab2_2];
     
     
-    UIImageView *img_2 = [[UIImageView alloc]initWithFrame:CGRectMake(button2.width/2+10, 0, button2.width/2-10, button2.height)];
+    UIImageView *img_2 = [[UIImageView alloc]initWithFrame:CGRectMake(button2.width/2, 0, button2.height*230/124, button2.height)];
 //    img_2.backgroundColor = RGB(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255));
     [button2 addSubview:img_2];
     
