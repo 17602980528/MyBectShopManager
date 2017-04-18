@@ -613,7 +613,7 @@
         case 1:
         {
             
-            UILabel *lab1=[[UILabel alloc]initWithFrame:CGRectMake(150,15, SCREENWIDTH-150, 14)];
+            UILabel *lab1=[[UILabel alloc]initWithFrame:CGRectMake(200,15, SCREENWIDTH-200, 14)];
             lab1.textAlignment=NSTextAlignmentLeft;
             lab1.text=[[NSString alloc]initWithFormat:@"已售:%@",[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"sold"] andRepalceStr:@"0"]];
             lab1.font=[UIFont systemFontOfSize:13.0f];
@@ -638,6 +638,12 @@
             UIView *line = [[UIView alloc]initWithFrame:CGRectMake(10, 43, SCREENWIDTH, 1)];
             line.backgroundColor = RGB(225, 225, 225);
             [cell addSubview:line];
+            
+            UILabel *points=[[UILabel alloc]initWithFrame:CGRectMake(150, 7, 50, 30)];
+            points.textColor=[UIColor redColor];
+            points.font=[UIFont systemFontOfSize:15.0f];
+            points.text=[NSString stringWithFormat:@"%.1f",dlCtrl.rating];
+            [cell addSubview:points];
         }
             break;
         case 2:
@@ -679,7 +685,7 @@
                 imageView.layer.cornerRadius = 5;
                 imageView.layer.masksToBounds = YES;
                 imageView.layer.borderWidth = 0.5;
-                imageView.layer.borderColor = RGB(234, 234, 234).CGColor;
+                imageView.layer.borderColor = RGB(180, 180, 180).CGColor;
                 
                 
                 imageView.backgroundColor=[UIColor colorWithHexString:[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"card_temp_color"]];
@@ -703,28 +709,42 @@
                 
                 vipLab.attributedText = attr;
                 
-                
-                
-                
-                //                NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCECARD stringByAppendingString:[NSString getTheNoNullStr:[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"card_image_url"] andRepalceStr:@""]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                //                [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon2.png"] options:SDWebImageRetryFailed];
-                
                 UILabel *content_lab = [[UILabel alloc]init];
                 content_lab.text =[NSString getTheNoNullStr:[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"content"] andRepalceStr:@"暂无优惠!"];
                 content_lab.font = [UIFont systemFontOfSize:14];
-                content_lab.numberOfLines = 0;
+                content_lab.numberOfLines = 2;
                 CGFloat height_lab =  [UILabel getSizeWithLab:content_lab andMaxSize:CGSizeMake(SCREENWIDTH-85-70, 50)].height;
-                content_lab.frame = CGRectMake(imageView.right+5, imageView.top, SCREENWIDTH-85-70, height_lab+2);
+                content_lab.frame = CGRectMake(imageView.right+10, imageView.top, SCREENWIDTH-85-70, height_lab+2);
                 [cell addSubview:content_lab];
                 
-                
-                
-                UILabel *cardPriceLable=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-120-15, 33, 120, 14)];
+                UILabel *cardPriceLable=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-120-15, 23-5, 120, 14)];
                 cardPriceLable.textAlignment=NSTextAlignmentRight;
                 cardPriceLable.font=[UIFont systemFontOfSize:14.0f];
                 cardPriceLable.text=[NSString stringWithFormat:@"￥%@",[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"price"]];
                 cardPriceLable.textColor=[UIColor redColor];
                 [cell addSubview:cardPriceLable];
+                
+                NSString *discounts=[NSString getTheNoNullStr:[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"rule"] andRepalceStr:@"0"];
+                CGFloat dis=[discounts floatValue]/10.0f;
+                
+                
+                UILabel *discountLable=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-120-15, cardPriceLable.bottom+5, 120, 14)];
+                discountLable.font=[UIFont systemFontOfSize:13.0f];
+                discountLable.textColor=[UIColor grayColor];
+                discountLable.textAlignment=NSTextAlignmentRight;
+                discountLable.text=[NSString stringWithFormat:@"%.1f折",dis];
+                [cell addSubview:discountLable];
+                
+                UILabel *timeLable=[[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, content_lab.bottom+3, content_lab.width, 20)];
+                timeLable.font=[UIFont systemFontOfSize:13.0f];
+                timeLable.textColor=[UIColor grayColor];
+                if ([[NSString getTheNoNullStr:[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"indate"] andRepalceStr:@"0"] isEqualToString:@"0"]) {
+                    timeLable.text=[NSString stringWithFormat:@"有效期: 无期限(%@)",[NSString getTheNoNullStr:[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"type"] andRepalceStr:@"---"]];
+                }else{
+                    timeLable.text=[NSString stringWithFormat:@"有效期: %@年(%@)",[NSString getTheNoNullStr:[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"indate"] andRepalceStr:@"0"],[NSString getTheNoNullStr:[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"type"] andRepalceStr:@"---"]];
+                }
+                [cell addSubview:timeLable];
+                
             }
             
         }
