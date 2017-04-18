@@ -346,7 +346,7 @@
         imageView.layer.cornerRadius = 5;
         imageView.layer.masksToBounds = YES;
         imageView.layer.borderWidth = 0.5;
-        imageView.layer.borderColor = RGB(234, 234, 234).CGColor;
+        imageView.layer.borderColor = RGB(180, 180, 180).CGColor;
 
         [cell addSubview:imageView];
         
