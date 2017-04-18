@@ -239,7 +239,7 @@
                 }else{
                     [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,p.imgStr]] placeholderImage:[UIImage imageNamed:@"user"]];
                     
-                    
+                    NSLog(@"%@",p.imgStr);
                     
                 }
                 

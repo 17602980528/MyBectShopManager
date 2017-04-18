@@ -673,6 +673,11 @@
             cell.giveContent.text  = @"暂无活动!";
             
         }
+        if ([dic[@"coupon"] isEqualToString:@"yes"]) {
+            cell.couponLable.hidden=NO;
+        }else{
+            cell.couponLable.hidden=YES;
+        }
         
     }
     

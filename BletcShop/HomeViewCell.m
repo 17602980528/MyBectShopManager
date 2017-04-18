@@ -30,6 +30,7 @@
 
 @property(nonatomic,weak)UILabel *seller_Label;//销量
 @property(nonatomic,weak)UILabel *give_Lab;//赠送描述
+@property(nonatomic,weak)UILabel *coupon_Lable;
 
 @end
 @implementation HomeViewCell
@@ -62,7 +63,7 @@
     UIImageView *shopImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 10, 64, 64)];
     shopImageView.layer.cornerRadius = 5;
     shopImageView.layer.masksToBounds = YES;
-//    shopImageView.backgroundColor = [UIColor orangeColor];
+    //    shopImageView.backgroundColor = [UIColor orangeColor];
     [self addSubview:shopImageView];
     self.img_v = shopImageView;
     
@@ -79,7 +80,7 @@
     
     
     //评分
-  
+    
     DLStarRatingControl* dlCtrl = [[DLStarRatingControl alloc]initWithFrame:CGRectMake(-40, 0, 160, 35) andStars:5 isFractional:YES star:[UIImage imageNamed:@"result_small_star_disable_iphone"] highlightStar:[UIImage imageNamed:@"redstar"]];
     
     dlCtrl.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -90,11 +91,11 @@
     starLabel.backgroundColor = [UIColor clearColor];
     starLabel.textAlignment = NSTextAlignmentLeft;
     starLabel.font = [UIFont systemFontOfSize:15];
-
+    
     [starLabel addSubview:dlCtrl];
     [self addSubview:starLabel];
-
-       //距离
+    
+    //距离
     UILabel *distanceLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 63, 150, 12)];
     distanceLabel.backgroundColor = [UIColor clearColor];
     distanceLabel.textAlignment = NSTextAlignmentLeft;
@@ -103,7 +104,7 @@
     [self addSubview:distanceLabel];
     self.distance_lab = distanceLabel;
     //销售额
-    UILabel *sellerLabel=[[UILabel alloc]initWithFrame:CGRectMake(90+95+20, 40, SCREENWIDTH-90-95-20, 12)];
+    UILabel *sellerLabel=[[UILabel alloc]initWithFrame:CGRectMake(90+95+20, 40, SCREENWIDTH-90-95-20-62, 12)];
     sellerLabel.text=@"已售258笔";
     sellerLabel.font=[UIFont systemFontOfSize:12.0f];
     sellerLabel.textAlignment=NSTextAlignmentLeft;
@@ -116,7 +117,7 @@
     [self addSubview:viewt];
     
     //折扣
-
+    
     UILabel *sheLab=[[UILabel alloc]initWithFrame:CGRectMake(90, 97, 15, 15)];
     sheLab.backgroundColor=[UIColor colorWithRed:238/255.0 green:94/255.0 blue:44/255.0f alpha:1.0];
     sheLab.text=@"折";
@@ -148,7 +149,7 @@
     [self addSubview:giveLab_1];
     
     self.give_Lab = giveLab_1;
-
+    
     
     UILabel *brandLabel=[[UILabel alloc]initWithFrame:CGRectMake(52, 10, 24, 12)];
     brandLabel.textAlignment=1;
@@ -157,15 +158,22 @@
     [self addSubview:brandLabel];
     brandLabel.backgroundColor=[UIColor colorWithRed:255/255.0 green:210/255.0 blue:0 alpha:1];
     
-  
     
     
     
-     lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 139, SCREENWIDTH, 1)];
+    
+    lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 139, SCREENWIDTH, 1)];
     lineView.backgroundColor=[UIColor colorWithRed:234/255.0f green:234/255.0f blue:234/255.0f alpha:1.0f];
     [self addSubview:lineView];
     
-    
+    UILabel *couponLab=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-52, 40-1.5, 15, 15)];
+    couponLab.backgroundColor=[UIColor colorWithRed:238/255.0 green:94/255.0 blue:44/255.0f alpha:1.0];
+    couponLab.text=@"券";
+    couponLab.textAlignment=1;
+    couponLab.textColor=[UIColor whiteColor];
+    couponLab.font=[UIFont systemFontOfSize:12.0f];
+    [self addSubview:couponLab];
+    self.coupon_Lable=couponLab;
     
 }
 
@@ -179,14 +187,14 @@
     
     if ([_model.subTitl floatValue]>0.0 && [_model.subTitl floatValue]<100.0) {
         self.subTitle.text = [NSString stringWithFormat:@"%.1f折",[_model.subTitl floatValue]/10];
-
+        
     }else{
         self.subTitle.text  = @"暂无折扣!";
-
+        
     }
     
     self.title_lab.text = _model.title_S;
-//    self.give_Lab.text = _model.addTitl;
+    //    self.give_Lab.text = _model.addTitl;
     
     if ([_model.addTitl floatValue]>0.0) {
         self.give_Lab.text = [NSString stringWithFormat:@"办卡就送%@",_model.addTitl];
@@ -195,7 +203,7 @@
         self.give_Lab.text  = @"暂无活动!";
         
     }
-
+    
     self.seller_Label.text = [NSString stringWithFormat:@"已售%@笔",_model.soldCount];
     self.dlCtrl.rating = [_model.stars floatValue];
     
@@ -214,7 +222,11 @@
     }else
         self.distance_lab.text = [[NSString alloc]initWithFormat:@"%dm",meter];
     
-    
+    if ([_model.coupon_exists isEqualToString:@"yes"]) {
+        self.coupon_Lable.hidden=NO;
+    }else{
+        self.coupon_Lable.hidden=YES;
+    }
 }
 
 -(CGFloat)cellHeightWithModel:(HomeShopModel *)model{

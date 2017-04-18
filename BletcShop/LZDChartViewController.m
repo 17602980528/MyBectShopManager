@@ -521,7 +521,7 @@
         [_refesh endRefreshing];
         [_chatTableView reloadData];
         
-//        [self scrollBottom];
+        [self scrollBottom];
 
     }];
     

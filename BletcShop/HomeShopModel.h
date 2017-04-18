@@ -30,7 +30,7 @@
 @property (nonatomic,copy)NSString *remark;// 长条广告标记
 
 @property(nonatomic,copy)NSString *long_img_url; //广告图
-
+@property(nonatomic,copy)NSString *coupon_exists;
 
 
 -(HomeShopModel*)initWithDictionary:(NSDictionary*)dic;

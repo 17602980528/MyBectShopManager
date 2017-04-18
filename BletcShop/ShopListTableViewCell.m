@@ -46,7 +46,7 @@
     distanceLabel.text = @"1000米";
     [self addSubview:distanceLabel];
     //销售额
-    UILabel *sellerLabel=[[UILabel alloc]initWithFrame:CGRectMake(90+95+20, 40, SCREENWIDTH-90-95-20, 12)];
+    UILabel *sellerLabel=[[UILabel alloc]initWithFrame:CGRectMake(90+95+20, 40, SCREENWIDTH-90-95-20-62, 12)];
     sellerLabel.font=[UIFont systemFontOfSize:12.0f];
     sellerLabel.textAlignment=NSTextAlignmentLeft;
     [self addSubview:sellerLabel];
@@ -55,7 +55,7 @@
     ShaperView *viewt= [viewr drawDashLine:viewr lineLength:3 lineSpacing:3 lineColor:[UIColor colorWithRed:234/255.0f green:234/255.0f blue:234/255.0f alpha:1.0f]];
     [self addSubview:viewt];
     
-    UILabel *sheLab=[[UILabel alloc]initWithFrame:CGRectMake(90, 97, 12, 12)];
+    UILabel *sheLab=[[UILabel alloc]initWithFrame:CGRectMake(90, 97, 15, 15)];
     sheLab.backgroundColor=[UIColor colorWithRed:238/255.0 green:94/255.0 blue:44/255.0f alpha:1.0];
     sheLab.text=@"折";
     sheLab.textAlignment=1;
@@ -63,13 +63,13 @@
     sheLab.font=[UIFont systemFontOfSize:12.0f];
     [self addSubview:sheLab];
     
-    UILabel *sheContent=[[UILabel alloc]initWithFrame:CGRectMake(114, 97, SCREENWIDTH-114, 12)];
+    UILabel *sheContent=[[UILabel alloc]initWithFrame:CGRectMake(114, 97, SCREENWIDTH-114, 15)];
     sheContent.textAlignment=NSTextAlignmentLeft;
     sheContent.font=[UIFont systemFontOfSize:12.0f];
     
     [self addSubview:sheContent];
     
-    UILabel *giveLab=[[UILabel alloc]initWithFrame:CGRectMake(90, 117, 12, 12)];
+    UILabel *giveLab=[[UILabel alloc]initWithFrame:CGRectMake(90, 117, 15, 15)];
     giveLab.backgroundColor=[UIColor colorWithRed:86/255.0 green:171/255.0 blue:228/255.0f alpha:1.0];
     giveLab.text=@"赠";
     giveLab.textAlignment=1;
@@ -77,7 +77,7 @@
     giveLab.font=[UIFont systemFontOfSize:12.0f];
     [self addSubview:giveLab];
     
-    UILabel *giveContent=[[UILabel alloc]initWithFrame:CGRectMake(114, 117, SCREENWIDTH-114, 12)];
+    UILabel *giveContent=[[UILabel alloc]initWithFrame:CGRectMake(114, 117, SCREENWIDTH-114, 15)];
     giveContent.textAlignment=NSTextAlignmentLeft;
     giveContent.font=[UIFont systemFontOfSize:12.0f];
     
@@ -108,7 +108,16 @@
     lineView.backgroundColor=[UIColor colorWithRed:234/255.0f green:234/255.0f blue:234/255.0f alpha:1.0f];
     [self addSubview:lineView];
     
+    UILabel *couponLab=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-52, 40-1.5, 15, 15)];
+    couponLab.backgroundColor=[UIColor colorWithRed:238/255.0 green:94/255.0 blue:44/255.0f alpha:1.0];
+    couponLab.text=@"券";
+    couponLab.textAlignment=1;
+    couponLab.textColor=[UIColor whiteColor];
+    couponLab.font=[UIFont systemFontOfSize:12.0f];
+    [self addSubview:couponLab];
     
+    
+    self.couponLable=couponLab;
     self.shopImageView = shopImageView;
     self.nameLabel = nameLabel;
     self.distanceLabel =distanceLabel;

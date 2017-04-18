@@ -17,4 +17,5 @@
 @property (nonatomic , strong) DLStarRatingControl *dlCtrl;// <#Description#>
 @property (nonatomic , strong)  UILabel *sheContent;// <#Description#>
 @property (nonatomic , strong) UILabel *giveContent;
+@property (nonatomic,strong) UILabel *couponLable;
 @end
