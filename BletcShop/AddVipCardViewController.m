@@ -693,6 +693,9 @@
     [params setObject:self.cardLevelLabel.text forKey:@"level"];
     [params setObject:self.contentText.text forKey:@"content"];
     [params setObject:self.priceText.text forKey:@"price"];
+    if ([self.zhekouText.text floatValue]==0||[self.zhekouText.text floatValue]>=100||[self.zhekouText.text isEqualToString:@""]) {
+        self.zhekouText.text=@"100";
+    }
     [params setObject:self.zhekouText.text forKey:@"rule"];
     [params setObject:[self.deadLine_dic objectForKey:self.deadLineText.text] forKey:@"indate"];
 
