@@ -18,7 +18,7 @@
     if ([self.activity intValue]==1) {
         
         
-        self.Image_url = [NSString stringWithFormat:@"%@%@",ONE_ADVERTIMAGE,[NSString getTheNoNullStr:dic[@"advert_image_url"] andRepalceStr:@""]];
+        self.Image_url = [NSString stringWithFormat:@"%@%@",THIER_ADVERTIMAGE,[NSString getTheNoNullStr:dic[@"image_url"] andRepalceStr:@""]];
 
     }
     

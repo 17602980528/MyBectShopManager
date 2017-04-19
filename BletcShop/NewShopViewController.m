@@ -49,10 +49,10 @@
 }
 -(void)getDate{
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/activity/advertGet",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/getList",BASEURL];
     
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
-    [paramer setValue:self.activityId forKey:@"activity"];
+    [paramer setValue:self.activityId forKey:@"advert_id"];
 
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
@@ -140,7 +140,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //获取商家手机号
 
-    [params setObject:shopInfoDic[@"merchant"] forKey:@"muid"];
+    [params setObject:shopInfoDic[@"muid"] forKey:@"muid"];
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
      {
          NSLog(@"result==%@",result);

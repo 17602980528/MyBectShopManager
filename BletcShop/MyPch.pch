@@ -62,15 +62,15 @@
 #define POPADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/popUp/"
 
 //活动一图片
-#define ONE_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert01/"
+#define ONE_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert01/"//废弃了
 
 //活动二图片
-#define TWO_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert02/"
+#define TWO_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert02/"//废弃了
 
 //活动三图片
 #define THIER_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advert/activity/"
 //活动四图片
-#define FOUR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert04/"
+#define FOUR_ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/activity/advert04/"//废弃了
 
 
 #define POINT_LUNBO @"http://101.201.100.191/cnconsum/Public/Uploads/mall/advertImage/"

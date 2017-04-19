@@ -68,12 +68,12 @@
     }
     return _adverList;
 }
--(NSMutableArray *)classifys{
-    if (!_classifys) {
-        _classifys = [[NSMutableArray alloc]initWithArray:@[@"全部分类",@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所"]];
-    }
-    return _classifys;
-}
+//-(NSMutableArray *)classifys{
+//    if (!_classifys) {
+//        _classifys = [[NSMutableArray alloc]initWithArray:@[@"全部分类",@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所"]];
+//    }
+//    return _classifys;
+//}
 -(NSMutableArray *)areas{
     if (!_areas) {
         _areas = [NSMutableArray array];
@@ -90,6 +90,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    _classifys = [[NSMutableArray alloc]initWithArray:@[@"全部分类",@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所"]];
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
@@ -156,10 +157,11 @@
         
     }
     
-    //    数据
+    //数据
     if (appdelegate.menuString!=nil&&![appdelegate.menuString isEqualToString:@""]) {
         [self.classifys insertObject:appdelegate.menuString atIndex:0];
-    }if (appdelegate.addressDistrite!=nil&&![appdelegate.addressDistrite isEqualToString:@""]) {
+    }
+    if (appdelegate.addressDistrite!=nil&&![appdelegate.addressDistrite isEqualToString:@""]) {
         [self.areas insertObject:appdelegate.addressDistrite atIndex:0];
     }
     
@@ -171,7 +173,7 @@
         NSLog(@"getData");
         [self getData];
     }
-
+    [_menu selectDefalutIndexPath];
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -348,6 +350,8 @@
     [params setObject:address forKey:@"eare"];
     [params setObject:self.classifyString forKey:@"trade"];
     DebugLog(@"===url=%@\n===paramer==%@",url,params);
+    NSLog(@">>>%@",self.classifyString);
+    NSLog(@"===%@",address);
     NSLog(@"%@",self.ereaString);
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
@@ -891,7 +895,7 @@
     [super viewWillDisappear:animated];
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    appdelegate.menuString = @"";
+    appdelegate.menuString = self.classifyString;
     appdelegate.addressDistrite = @"";
     self.navigationController.navigationBarHidden = NO;
 }
