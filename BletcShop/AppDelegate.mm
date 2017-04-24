@@ -1768,7 +1768,7 @@
      {
          
          NSLog(@"postRequestSeller-result%@", result);
-         if ([result[@"result_code"]  isEqualToString: @"login_access"] ||[result[@"result_code"]  isEqualToString: @"incomplete"] ||[result[@"result_code"]  isEqualToString: @"user_not_auth"]) {
+         if ([result[@"result_code"]  isEqualToString: @"login_access"] ||[result[@"result_code"]  isEqualToString: @"incomplete"] ||[result[@"result_code"]  isEqualToString: @"user_not_auth"]||[result[@"result_code"]  isEqualToString: @"user_auth_fail"]||[result[@"result_code"]  isEqualToString: @"auditing"]) {
              NSLog(@"成功");
              
              NSDictionary *userInfo = result[@"info"];

@@ -371,9 +371,12 @@
             
            
 
-        }
-
-        else if ([stateStr isEqualToString:@"login_access"]){
+        }else if ([stateStr isEqualToString:@"auditing"]){
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"正在审核中" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            
+            [altView show];
+            
+        }else if ([stateStr isEqualToString:@"login_access"]){
 
             
             

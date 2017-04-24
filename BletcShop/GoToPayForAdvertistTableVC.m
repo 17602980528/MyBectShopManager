@@ -8,6 +8,7 @@
 
 #import "GoToPayForAdvertistTableVC.h"
 #import "SingleModel.h"
+#import "AdverListViewController.h"
 @interface GoToPayForAdvertistTableVC ()<UITableViewDelegate,UITableViewDataSource>
 
 {
@@ -219,7 +220,8 @@
             //    [hud setColor:[UIColor blackColor]];
             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
             hud.userInteractionEnabled = YES;
-            [hud hideAnimated:YES afterDelay:2.f];
+            [hud hideAnimated:YES afterDelay:1.f];
+            [self performSelector:@selector(gotoAdvertList) withObject:nil afterDelay:2.0f];
             
         }
         else
@@ -231,7 +233,7 @@
             //    [hud setColor:[UIColor blackColor]];
             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
             hud.userInteractionEnabled = YES;
-            [hud hideAnimated:YES afterDelay:2.f];
+            [hud hideAnimated:YES afterDelay:1.f];
             
         }
         
@@ -241,6 +243,10 @@
         
     }];
 
+}
+-(void)gotoAdvertList{
+    AdverListViewController *vc=[[AdverListViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 /*
  post参数:

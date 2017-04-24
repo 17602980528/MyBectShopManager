@@ -108,9 +108,22 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 1) {
-
-        NewNextViewController *VC = [[NewNextViewController alloc]init];
-        [self presentViewController:VC animated:YES completion:nil];
+         NSString *stateStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"wangyongle"];
+        if ([stateStr isEqualToString:@"auditing"]) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"正在审核中,无法修改", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            //    [hud setColor:[UIColor blackColor]];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            hud.userInteractionEnabled = YES;
+            
+            [hud hideAnimated:YES afterDelay:2.f];
+        }else{
+            NewNextViewController *VC = [[NewNextViewController alloc]init];
+            [self presentViewController:VC animated:YES completion:nil];
+        }
+        
         
     }if (indexPath.section ==1) {
         if (indexPath.row==0) {

@@ -70,10 +70,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"广告列表";
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.selectTag=0;
     self.selectSection=-1;
     [self initTopView];
     
+}
+-(void)back{
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
 }
 -(void)initTopView{
     

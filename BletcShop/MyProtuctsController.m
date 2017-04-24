@@ -152,8 +152,12 @@
     }else if ([stateStr isEqualToString:@"user_auth_fail"]){
         
         [self showTiShi:@"审核未通过，请重新修改" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
-    }
-    else if ([stateStr isEqualToString:@"login_access"]){
+    }else if ([stateStr isEqualToString:@"user_auth_fail"]){
+        //正在审核中
+        UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"正在审核中" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [altView show];
+        
+    }else if ([stateStr isEqualToString:@"login_access"]){
         
         AddproductVC *VC = [[AddproductVC alloc]init];
         VC.editTag = 0;
