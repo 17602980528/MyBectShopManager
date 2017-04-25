@@ -290,7 +290,7 @@
     
     _refreshFooter.beginRefreshingOperation =^{
         blockSelf.indexss++;
-        [blockSelf postRequestShop];
+        [blockSelf postRequestShopWithAddress:blockSelf.ereaString];
         
     };
 
@@ -339,16 +339,8 @@
 }
 
 
--(void)postRequestShop
+-(void)postRequestShopWithAddress:(NSString *)address
 {
-    
-    NSString *address = [NSString stringWithFormat:@"%@%@%@",currentCityDic[@"name"],self.ereaString,self.streetString];
-
-    if ([address containsString:@"全城"]) {
-        
-        address = [[address componentsSeparatedByString:@"全城"] lastObject];
-        
-    }
     
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/search/get",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -356,12 +348,10 @@
     [params setObject:address forKey:@"eare"];
     [params setObject:self.classifyString forKey:@"trade"];
     DebugLog(@"===url=%@\n===paramer==%@",url,params);
-    NSLog(@">>>%@",self.classifyString);
-    NSLog(@"===%@",address);
-    NSLog(@"%@",self.ereaString);
+  
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-       NSLog(@"postRequestShop-----%@",result);
+//       NSLog(@"postRequestShop-----%@",result);
         if ([result isKindOfClass:[NSArray class]]) {
             if (self.indexss==1) {
                 
@@ -557,11 +547,11 @@
     
     NSLog(@"currentSelectRowArray----%@",menu.currentSelectRowArray);
     NSLog(@"点击了 %ld - %ld - %ld 项目",indexPath.column,indexPath.row,indexPath.item);
-  
+    self.indexpathSelect =indexPath;
+
 
     if (indexPath.item >= 0) {
         
-        self.indexpathSelect =indexPath;
 
         [self getAdverListRequestWithIndePath:indexPath];
        // [self postRequestShop];
@@ -583,12 +573,9 @@
         
         self.indexss=1;
         NSLog(@"点击了 %@ - %@",self.classifyString,self.ereaString);
-       // [self postRequestShop];
-        if (indexPath.column !=1) {
-            
+        
             [self getAdverListRequestWithIndePath:self.indexpathSelect];
 
-        }
 
     }
    
@@ -726,27 +713,36 @@
     
     
     
-    
-    for (NSDictionary *dic in arr)
-    {
+    ProvinceModel *MM = [[ProvinceModel alloc]init];
+    [MM setName:@"全城"];
+
+    for (int i = 0; i < arr.count; i ++) {
+        NSDictionary *dic = arr[i];
+        
         ProvinceModel *model = [[ProvinceModel alloc] init];
         [model setValuesForKeysWithDictionary:dic];
         //        NSLog(@"%@ * %@", model.fullname, model.id);
         if ([currentEare isEqualToString:model.name]) {
             [self.dataSourceProvinceArray insertObject:model atIndex:0];
+            if (i ==0) {
+                [self.dataSourceProvinceArray insertObject:MM atIndex:1];
 
+            }
+            
         }else{
             [self.dataSourceProvinceArray addObject:model];
- 
+            
+            if (i ==0) {
+                [self.dataSourceProvinceArray insertObject:MM atIndex:0];
+                
+            }
+
         }
-        
+
     }
     
     
 
-    ProvinceModel *MM = [[ProvinceModel alloc]init];
-    [MM setName:@"全城"];
-    [self.dataSourceProvinceArray insertObject:MM atIndex:0];
     
     
     
@@ -779,16 +775,16 @@
 
         NSLog(@"indexPath-----%@=%ld=%ld=%ld",indexPath,indexPath.column ,indexPath.row,indexPath.item);
         
-        if (!indexPath || !proID) {
+        if (!proID) {
             
             for (int i = 0; i <1; i ++) {
                 CityModel *mod = [[CityModel alloc] init];
 
                 
                 if (i==0) {
-                    [mod setName:@"全城"];
+//                    [mod setName:@"全城"];
 
-//                    [mod setName: currentCityDic[@"name"]];
+                    [mod setName: currentCityDic[@"name"]];
 
                 }else{
 
@@ -868,7 +864,7 @@
         self.ereaString = provinceM.name;
 
     }
-    if (_dataSourceCityArray.count!=0) {
+    if (_dataSourceCityArray.count!=0 && indexPath.item>=0) {
 
         cityM = self.dataSourceCityArray[indexPath.item];
         self.streetString = [NSString getTheNoNullStr:cityM.name andRepalceStr:@""];
@@ -893,7 +889,7 @@
         
     }
     
-    
+    self.ereaString = address;
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/search/multiGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
@@ -902,7 +898,7 @@
     DebugLog(@"===url=%@\n===paramer==%@",url,params);
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-                  NSLog(@"getAdverListRequestWithIndePath-----%@",result);
+//                  NSLog(@"getAdverListRequestWithIndePath-----%@",result);
         if ([result isKindOfClass:[NSDictionary class]]) {
             
             
@@ -926,7 +922,7 @@
             
             
             
-            [self postRequestShop];
+            [self postRequestShopWithAddress:address];
             
             [_refreshheader endRefreshing];
             [_refreshFooter endRefreshing];
