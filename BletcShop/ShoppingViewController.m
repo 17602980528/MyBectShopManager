@@ -822,7 +822,7 @@
 
             [self getAdverListRequestWithIndePath:self.indexpathSelect];
 
-            [self performSelector:@selector(setdefaultTitle) withObject:nil afterDelay:0.2];
+//            [self performSelector:@selector(setdefaultTitle) withObject:nil afterDelay:0.2];
             
                }
         
@@ -838,18 +838,18 @@
     
     
 }
--(void)setdefaultTitle{
-    
-    if ([_menu.dataSource respondsToSelector:@selector(menu:numberOfItemsInRow:column:)]) {
-        
-        NSLog(@"setdefaultTitle======%ld===%ld===%ld",self.indexpathSelect.column,self.indexpathSelect.row,self.indexpathSelect.item);
-        
-        [_menu selectIndexPath:self.indexpathSelect];
-        
-    }
-    
-
-}
+//-(void)setdefaultTitle{
+//    
+//    if ([_menu.dataSource respondsToSelector:@selector(menu:numberOfItemsInRow:column:)]) {
+//        
+//        NSLog(@"setdefaultTitle======%ld===%ld===%ld",self.indexpathSelect.column,self.indexpathSelect.row,self.indexpathSelect.item);
+//        
+//        [_menu selectIndexPath:self.indexpathSelect];
+//        
+//    }
+//    
+//
+//}
 //获取广告请求
 
 -(void)getAdverListRequestWithIndePath:(DOPIndexPath*)indexPath{
