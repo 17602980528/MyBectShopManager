@@ -427,12 +427,21 @@
         [self.navigationController pushViewController:landVc animated:YES];
     }else{
         
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect frame = buyView.frame;
-            frame.origin.y = 0;
-            buyView.frame = frame;
-        }];
+        if ([appdelegate.userInfoDic[@"uuid"] isEqualToString:self.model.uuid]) {
+            
+            UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:@"不能蹭自己的卡!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alt show];
+            
+        }else{
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect frame = buyView.frame;
+                frame.origin.y = 0;
+                buyView.frame = frame;
+            }];
 
+        }
+        
+       
     }
    }
 
