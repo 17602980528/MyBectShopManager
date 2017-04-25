@@ -615,7 +615,7 @@
              if (![tempSelf.videoID isEqualToString:@""]) {
                  tempSelf.deleteBtn.enabled = YES;
 
-                 if ([dic[@"state"] isEqualToString:@"ture"]) {
+                 if ([dic[@"state"] isEqualToString:@"true"]) {
                      
                      
                      tempSelf.imageView.hidden = YES;

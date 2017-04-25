@@ -64,7 +64,7 @@
              if (![videoID isEqualToString:@""]) {
                  
 
-                 if ([dic[@"state"] isEqualToString:@"ture"]) {
+                 if ([dic[@"state"] isEqualToString:@"true"]) {
                      tempSelf.imgView.hidden = YES;
                      
                      NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,videoID];

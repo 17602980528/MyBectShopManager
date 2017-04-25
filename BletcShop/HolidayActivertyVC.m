@@ -149,7 +149,7 @@
          NSLog(@"result==%@",result);
          if (result.count>0) {
              __block HolidayActivertyVC* tempSelf = self;
-             if ([result[0][@"state"] isEqualToString:@"ture"]) {
+             if ([result[0][@"state"] isEqualToString:@"true"]) {
                  vc.videoID=result[0][@"video"];
                  
              }else{

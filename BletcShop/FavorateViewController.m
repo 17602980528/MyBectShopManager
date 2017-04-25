@@ -177,7 +177,7 @@
          NSLog(@"%@",result);
          if (result.count>0) {
              __block FavorateViewController* tempSelf = self;
-             if ([result[0][@"state"] isEqualToString:@"ture"]) {
+             if ([result[0][@"state"] isEqualToString:@"true"]) {
                  vc.videoID=result[0][@"video"];
 
              }else{
