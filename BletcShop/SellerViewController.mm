@@ -734,7 +734,9 @@
                 discountLable.textAlignment=NSTextAlignmentRight;
                 discountLable.text=[NSString stringWithFormat:@"%.1f折",dis];
                 [cell addSubview:discountLable];
-                
+                if ([[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"计次卡"]) {
+                    discountLable.text=[NSString stringWithFormat:@"%@次",[[self.cardArray objectAtIndex:indexPath.row] objectForKey:@"rule"]];
+                }
                 UILabel *timeLable=[[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, content_lab.bottom+3, content_lab.width, 20)];
                 timeLable.font=[UIFont systemFontOfSize:13.0f];
                 timeLable.textColor=[UIColor grayColor];
