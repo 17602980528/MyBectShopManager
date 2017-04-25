@@ -37,8 +37,8 @@
         
     }
 
-    self.text = [NSString getTheNoNullStr:dic[@"text"] andRepalceStr:@""];
-    self.store = [NSString getTheNoNullStr:dic[@"store"] andRepalceStr:@""];
+    self.text = [NSString getTheNoNullStr:dic[@"info"] andRepalceStr:@""];
+    self.store = [NSString getTheNoNullStr:dic[@"title"] andRepalceStr:@""];
     self.sold = [NSString stringWithFormat:@"已售%@单",[NSString getTheNoNullStr:dic[@"sold"] andRepalceStr:@"0"]];
     self.latitude = [NSString getTheNoNullStr:dic[@"latitude"] andRepalceStr:@""];
     self.longtitude = [NSString getTheNoNullStr:dic[@"longtitude"] andRepalceStr:@""];

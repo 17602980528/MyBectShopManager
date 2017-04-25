@@ -24,6 +24,7 @@
 
     }
     
+    cell.distance_lab.hidden = YES;
     cell.goLooK.layer.cornerRadius = 3;
     cell.goLooK.layer.masksToBounds = YES;
     return cell;

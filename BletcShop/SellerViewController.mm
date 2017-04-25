@@ -600,7 +600,7 @@
                 nameLabel.text = [wholeInfoDic objectForKey:@"store"];
             }
             
-            if (![self.playUrl isEqualToString:@""]) {
+            if (![self.videoID isEqualToString:@""]) {
                 
                                 line.frame=CGRectMake(10, SCREENWIDTH*9/16+50, SCREENWIDTH, 1);
                 
