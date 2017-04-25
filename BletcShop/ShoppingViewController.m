@@ -547,11 +547,11 @@
     
     NSLog(@"currentSelectRowArray----%@",menu.currentSelectRowArray);
     NSLog(@"点击了 %ld - %ld - %ld 项目",indexPath.column,indexPath.row,indexPath.item);
-    self.indexpathSelect =indexPath;
 
 
     if (indexPath.item >= 0) {
-        
+        self.indexpathSelect =indexPath;
+
 
         [self getAdverListRequestWithIndePath:indexPath];
        // [self postRequestShop];
@@ -563,7 +563,8 @@
             }else
                 self.classifyString = [self.classifys objectAtIndex:indexPath.row];
         }else if (indexPath.column == 1 ) {
-            
+            self.indexpathSelect =indexPath;
+
             
             ProvinceModel *m = _dataSourceProvinceArray[indexPath.row];
             
@@ -696,7 +697,7 @@
 //getData这个方法里是网络请求数据的解析省份数据信息
 - (void)getData
 {
-    self.indexpathSelect = [DOPIndexPath indexPathWithCol:1 row:0 item:0];
+    self.indexpathSelect = [DOPIndexPath indexPathWithCol:1 row:0 item:-1];
 
     //数据源数组:
     self.dataSourceProvinceArray = [NSMutableArray array];
