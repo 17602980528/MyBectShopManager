@@ -20,6 +20,7 @@
 @property (nonatomic,copy)NSString *latitude;// 纬度
 @property (nonatomic,copy)NSString *longtitude;// 经度
 
+@property (nonatomic,copy)NSString *video;// 视频地址
 
 @property(nonatomic,copy)NSString *stars; //评分
 @property(nonatomic,assign) CGFloat cellHight;

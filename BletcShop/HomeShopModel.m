@@ -33,7 +33,7 @@
     self.subTitl = [NSString getTheNoNullStr:dic[@"discount"] andRepalceStr:@"暂无折扣!"];
     self.addTitl = [NSString getTheNoNullStr:dic[@"add"] andRepalceStr:@"暂无活动!"];
     
-    
+    self.video = [NSString getTheNoNullStr:dic[@"video"] andRepalceStr:@""];
     self.soldCount = [NSString getTheNoNullStr:dic[@"sold"] andRepalceStr:@"0"];
     
     self.longtitude =[NSString getTheNoNullStr:dic[@"longtitude"] andRepalceStr:@""];

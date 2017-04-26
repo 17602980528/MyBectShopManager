@@ -617,38 +617,42 @@
 
         
         SellerViewController *vc= [self startSellerView:shopInfoDic];
-        vc.videoID=@"";
-        NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
-        NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        //获取商家手机号
+        vc.videoID=model.video;
         
-        [params setObject:shopInfoDic[@"muid"] forKey:@"muid"];
-        [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
-         {
-             NSLog(@"%@",result);
-             if (result.count>0) {
-                 __block HomeViewController* tempSelf = self;
-                 
-                 if ([result[0][@"state"] isEqualToString:@"true"]) {
-                     vc.videoID=result[0][@"video"];
-                     
-                 }else{
-                     vc.videoID=@"";
-                     
-                 }
-                 [tempSelf.navigationController pushViewController:vc animated:YES];
-             }else{
-                 __block HomeViewController* tempSelf = self;
-                 vc.videoID=@"";
-                 [tempSelf.navigationController pushViewController:vc animated:YES];
-             }
-             
-         } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-             NSLog(@"%@", error);
-             __block HomeViewController* tempSelf = self;
-             vc.videoID=@"";
-             [tempSelf.navigationController pushViewController:vc animated:YES];
-         }];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+
+//        NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
+//        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//        //获取商家手机号
+//        
+//        [params setObject:shopInfoDic[@"muid"] forKey:@"muid"];
+//        [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
+//         {
+//             NSLog(@"%@",result);
+//             if (result.count>0) {
+//                 __block HomeViewController* tempSelf = self;
+//                 
+//                 if ([result[0][@"state"] isEqualToString:@"true"]) {
+//                     vc.videoID=result[0][@"video"];
+//                     
+//                 }else{
+//                     vc.videoID=@"";
+//                     
+//                 }
+//                 [tempSelf.navigationController pushViewController:vc animated:YES];
+//             }else{
+//                 __block HomeViewController* tempSelf = self;
+//                 vc.videoID=@"";
+//                 [tempSelf.navigationController pushViewController:vc animated:YES];
+//             }
+//             
+//         } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//             NSLog(@"%@", error);
+//             __block HomeViewController* tempSelf = self;
+//             vc.videoID=@"";
+//             [tempSelf.navigationController pushViewController:vc animated:YES];
+//         }];
         
 
 
@@ -1885,7 +1889,7 @@
     AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
     
     NSLog(@"--popImgClick--%@",pop_data_Dic);
-    if (delegate.IsLogin) {
+//    if (delegate.IsLogin) {
         [self tapCl];
         ChouJiangVC *VC = [[ChouJiangVC alloc]init];
         VC.urlString = pop_data_Dic[@"url"];
@@ -1894,11 +1898,11 @@
             [self.navigationController pushViewController:VC animated:YES];
             
         }
-    }else{
-        LandingController *landVC=[[LandingController alloc]init];
-        PopupAdvertiseView.hidden=YES;
-        [self.navigationController pushViewController:landVC animated:YES];
-    }
+//    }else{
+//        LandingController *landVC=[[LandingController alloc]init];
+//        PopupAdvertiseView.hidden=YES;
+//        [self.navigationController pushViewController:landVC animated:YES];
+//    }
     
 }
 #pragma mark 懒加载

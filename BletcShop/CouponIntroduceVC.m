@@ -158,6 +158,10 @@
     vc.infoDic = [NSMutableDictionary dictionaryWithDictionary:self.infoDic];
     vc.videoID=@"";
     
+//    vc.videoID=[NSString getTheNoNullStr:self.infoDic[@"video"] andRepalceStr:@""];
+//    [self.navigationController pushViewController:vc animated:YES];
+//
+    
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //获取商家手机号
@@ -172,7 +176,14 @@
          NSLog(@"%@",result);
 
          if (result.count>0) {
-             vc.videoID=result[0][@"video"];
+             
+             if ([result[0][@"state"] isEqualToString:@"true"]) {
+                  vc.videoID=result[0][@"video"];
+
+              }else{
+                  vc.videoID=@"";
+                  
+              }
              [tempSelf.navigationController pushViewController:vc animated:YES];
          }else{
              vc.videoID=@"";

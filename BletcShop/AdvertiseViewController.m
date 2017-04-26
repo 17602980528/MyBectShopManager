@@ -199,32 +199,36 @@
     NSMutableDictionary *shopInfoDic = [self.data_A objectAtIndex:indexPath.row];
     
     SellerViewController *vc= [self startSellerView:shopInfoDic];
-    vc.videoID=@"";
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    //获取商家手机号
+    vc.videoID=[NSString getTheNoNullStr:shopInfoDic[@"video"] andRepalceStr:@""];
+    [self.navigationController pushViewController:vc animated:YES];
     
-    [params setObject:shopInfoDic[@"muid"] forKey:@"muid"];
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
-     {
-         NSLog(@"result==%@",result);
-         if (result.count>0) {
-             __block AdvertiseViewController* tempSelf = self;
-             vc.videoID=result[0][@"video"];
-             [tempSelf.navigationController pushViewController:vc animated:YES];
-         }else{
-             __block AdvertiseViewController* tempSelf = self;
-             vc.videoID=@"";
-             [tempSelf.navigationController pushViewController:vc animated:YES];
-         }
-         
-     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"%@", error);
-         __block AdvertiseViewController* tempSelf = self;
-         vc.videoID=@"";
-         [tempSelf.navigationController pushViewController:vc animated:YES];
-     }];
-    //
+    
+    
+//    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    //获取商家手机号
+//    
+//    [params setObject:shopInfoDic[@"muid"] forKey:@"muid"];
+//    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, NSArray* result)
+//     {
+//         NSLog(@"result==%@",result);
+//         if (result.count>0) {
+//             __block AdvertiseViewController* tempSelf = self;
+//             vc.videoID=result[0][@"video"];
+//             [tempSelf.navigationController pushViewController:vc animated:YES];
+//         }else{
+//             __block AdvertiseViewController* tempSelf = self;
+//             vc.videoID=@"";
+//             [tempSelf.navigationController pushViewController:vc animated:YES];
+//         }
+//         
+//     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//         NSLog(@"%@", error);
+//         __block AdvertiseViewController* tempSelf = self;
+//         vc.videoID=@"";
+//         [tempSelf.navigationController pushViewController:vc animated:YES];
+//     }];
+//    //
     if ([self.data_A[indexPath.row][@"pay_type"] isEqualToString:@"click"]) {
         [self postRemainClickCount:self.data_A[indexPath.row]];
     }
