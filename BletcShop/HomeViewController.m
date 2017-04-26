@@ -35,7 +35,6 @@
 #import "JFLocation.h"
 #import "JFAreaDataManager.h"
 #import "HotNewsVC.h"
-
 #import "ChouJiangVC.h"
 #import "LandingController.h"
 @interface HomeViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GYChangeTextViewDelegate,SelectCityDelegate,JFLocationDelegate,SDCycleScrollViewDelegate>
@@ -1775,10 +1774,32 @@
 
 -(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
-    TopActiveListTableVC *VC = [[TopActiveListTableVC alloc]init];
-    VC.activityId = self.circleAdverlist[index][@"id"];
-    VC.navigationItem.title = self.circleAdverlist[index][@"title"];
-    [self.navigationController pushViewController:VC animated:YES];
+    NSDictionary *dic = self.circleAdverlist[index];
+    if ([[NSString getTheNoNullStr:dic[@"num"] andRepalceStr:@""] intValue]==0) {
+        
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        
+        hud.label.text =@"暂时没有数据!";
+        hud.label.font = [UIFont systemFontOfSize:13];
+        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+        [hud hideAnimated:YES afterDelay:1.f];
+        
+        
+        
+
+        
+        
+    }else{
+        TopActiveListTableVC *VC = [[TopActiveListTableVC alloc]init];
+        VC.activityId = dic[@"id"];
+        VC.navigationItem.title = dic[@"title"];
+        [self.navigationController pushViewController:VC animated:YES];
+    }
+   
+    
+    
     
 }
 
