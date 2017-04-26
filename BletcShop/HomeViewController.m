@@ -509,7 +509,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section==0) {
         
-        return 2*(SCREENWIDTH/5+10)+66-10+150*LZDScale;
+        return 2*(SCREENWIDTH/5+10)+66-10+150*LZDScale+10;
     }else if(section==1){
         return 30;
     }else
@@ -784,18 +784,24 @@
     line.backgroundColor =RGB(240, 240, 240);
     [view addSubview:line];
     
-    UILabel *hot_label = [[UILabel alloc]initWithFrame:CGRectMake(0, _smallSV.bottom+1, SCREENWIDTH, 30)];
+    UILabel *hot_label = [[UILabel alloc]initWithFrame:CGRectMake(0, _smallSV.bottom+1, SCREENWIDTH, 30+10)];
     hot_label.text = @"   今日头条";
-    hot_label.font = [UIFont systemFontOfSize:12];
-//    hot_label.textColor = [UIColor colorWithHexString:@"fe0000"];
+    hot_label.font = [UIFont systemFontOfSize:14];
     hot_label.textColor = [UIColor colorWithHexString:@"fe0000"];
+    
     hot_label.backgroundColor = [UIColor whiteColor];
     [view addSubview:hot_label];
     
+//    UIImageView *imgVi = [[UIImageView alloc]initWithFrame:CGRectMake(5, _smallSV.bottom+1+7.5, 145/2, 15)];
+//    imgVi.image = [UIImage imageNamed:@"今日头条"];
+//    
+//    [view addSubview:imgVi];
     
     CGFloat hot_ww = [self getSizeWithLab:hot_label andMaxSize:CGSizeMake(100, 100)].width;
     
-    GYChangeTextView *tView = [[GYChangeTextView alloc] initWithFrame:CGRectMake(hot_ww+5, hot_label.top+(hot_label.height-12)/2, SCREENWIDTH-hot_ww-20, 12)];
+//    GYChangeTextView *tView = [[GYChangeTextView alloc] initWithFrame:CGRectMake(hot_ww+5, hot_label.top+(hot_label.height-12)/2, SCREENWIDTH-hot_ww-20, 12)];
+    GYChangeTextView *tView = [[GYChangeTextView alloc] initWithFrame:CGRectMake(hot_ww+5, hot_label.top, SCREENWIDTH-hot_ww-20, hot_label.height)];
+
     tView.delegate = self;
     [view addSubview:tView];
     self.tView = tView;

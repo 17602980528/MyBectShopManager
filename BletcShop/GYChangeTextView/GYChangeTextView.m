@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, GYTitlePosition) {
         _textLabel.layer.bounds = CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));
         _textLabel.layer.position = self.middlePosition;
         _textLabel.textAlignment = NSTextAlignmentLeft;
-        _textLabel.font = [UIFont systemFontOfSize:12];
+        _textLabel.font = [UIFont systemFontOfSize:14];
         [self addSubview:_textLabel];
         self.clipsToBounds = YES;   /*保证文字不跑出视图*/
         self.needDealy = DEALY_WHEN_TITLE_IN_MIDDLE;    /*控制第一次显示时间*/

@@ -678,6 +678,7 @@
 		D96555451E33306B0096D815 /* 登陆-04(2).png in Resources */ = {isa = PBXBuildFile; fileRef = D96555401E33306B0096D815 /* 登陆-04(2).png */; };
 		D96555461E33306B0096D815 /* 登陆-05(2).png in Resources */ = {isa = PBXBuildFile; fileRef = D96555411E33306B0096D815 /* 登陆-05(2).png */; };
 		D96643741E0B821E0048EFDB /* BonusCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96643731E0B821E0048EFDB /* BonusCashViewController.m */; };
+		D967F9341EB075D300D77ED6 /* 今日头条.png in Resources */ = {isa = PBXBuildFile; fileRef = D967F9331EB075D300D77ED6 /* 今日头条.png */; };
 		D96846561CC9F4E400146956 /* ShopManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96846551CC9F4E400146956 /* ShopManagerTableViewCell.m */; };
 		D968465A1CC9FCAB00146956 /* VipManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96846591CC9FCAB00146956 /* VipManagerTableViewCell.m */; };
 		D968465D1CC9FCD000146956 /* VipManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D968465C1CC9FCD000146956 /* VipManagerViewController.m */; };
@@ -2169,6 +2170,7 @@
 		D96555411E33306B0096D815 /* 登陆-05(2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登陆-05(2).png"; sourceTree = "<group>"; };
 		D96643721E0B821E0048EFDB /* BonusCashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusCashViewController.h; sourceTree = "<group>"; };
 		D96643731E0B821E0048EFDB /* BonusCashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusCashViewController.m; sourceTree = "<group>"; };
+		D967F9331EB075D300D77ED6 /* 今日头条.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "今日头条.png"; sourceTree = "<group>"; };
 		D96846541CC9F4E400146956 /* ShopManagerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopManagerTableViewCell.h; sourceTree = "<group>"; };
 		D96846551CC9F4E400146956 /* ShopManagerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopManagerTableViewCell.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D96846581CC9FCAB00146956 /* VipManagerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipManagerTableViewCell.h; sourceTree = "<group>"; };
@@ -4867,6 +4869,7 @@
 				D9345E661E7697C0006B2AC1 /* 顶部轮播广告 */,
 				D9BB4DE31E051DB800971BCC /* 关闭.png */,
 				D99E9CF01DFAB62C009D67F4 /* 消息home.png */,
+				D967F9331EB075D300D77ED6 /* 今日头条.png */,
 				D9C0E9561DCC201700FD1199 /* HomeViewController.h */,
 				D9C0E9571DCC201700FD1199 /* HomeViewController.m */,
 				D9C0E95C1DCC886D00FD1199 /* HomeViewCell.h */,
@@ -6578,6 +6581,7 @@
 				18F27EEE1D640E84002DD03A /* 头像-6.png in Resources */,
 				1C9E82441C60557E0007BF02 /* 5(5)@2x.png in Resources */,
 				D97F601C1D62F770000EE794 /* 注册-07.png in Resources */,
+				D967F9341EB075D300D77ED6 /* 今日头条.png in Resources */,
 				18F27EF51D640E84002DD03A /* 头像-13.png in Resources */,
 				18F27EED1D640E84002DD03A /* 头像-5.png in Resources */,
 				D9AB25301D88E4ED000E9288 /* VoiceSearchFeedback002@2x.png in Resources */,
