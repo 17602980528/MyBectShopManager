@@ -57,7 +57,8 @@
     [topBgView addSubview:lineView];
     
     UILabel *totalPointLable=[[UILabel alloc]initWithFrame:CGRectMake(0, 291, SCREENWIDTH/2, 35)];
-    totalPointLable.text=[NSString stringWithFormat:@"我的积分:%@",_totalPoint];
+    
+    totalPointLable.text=[NSString stringWithFormat:@"我的积分:%@",[NSString getTheNoNullStr:_totalPoint andRepalceStr:@"0"]];
     totalPointLable.textAlignment=1;
     totalPointLable.font=[UIFont systemFontOfSize:15.0f];
     [topBgView addSubview:totalPointLable];

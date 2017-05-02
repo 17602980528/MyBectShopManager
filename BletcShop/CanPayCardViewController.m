@@ -174,13 +174,15 @@
 }
 -(void)choiceCard:(LZDButton *)btn
 {
+    
+    NSLog(@"=======%ld",btn.row);
     if ([self.payCardArray[btn.row][@"card_type"] isEqualToString:@"计次卡"]) {
         CountPAYViewController *countVC=[[CountPAYViewController alloc]init];
-        countVC.card_dic=self.payCardArray[btn.tag];
+        countVC.card_dic=self.payCardArray[btn.row];
         [self.navigationController pushViewController:countVC animated:YES];
     }else{
         MoneyPAYViewController *moneyVC=[[MoneyPAYViewController alloc]init];
-        moneyVC.card_dic=self.payCardArray[btn.tag];
+        moneyVC.card_dic=self.payCardArray[btn.row];
         [self.navigationController pushViewController:moneyVC animated:YES];
     }
 

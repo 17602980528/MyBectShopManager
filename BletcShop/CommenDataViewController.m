@@ -41,7 +41,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     _dateArray=@[@"month",@"year"];
     record_type_A = @[@"buy",@"renew",@"upgrade",@"consum"];
-    page = 0;
+    page = 1;
     type_date =@"month";
     lzdunit = @"天";
     
@@ -292,7 +292,7 @@
      *  个滚动视图的contentSize.height
      */
     
-    if (scrollView.contentOffset.y >64*7) {
+    if (scrollView.contentOffset.y +scrollView.frame.size.height >scrollView.contentSize.height) {
         //        static int page=0;
         page++;
         NSString *pageStr=[NSString stringWithFormat:@"%d",page];
@@ -344,7 +344,7 @@
     [self.mutableArray removeAllObjects];
     type_date =_dateArray[sender.tag-10];
     
-    [self totalDataRequest:record_type_A[self.tag-1] dateType:type_date page:@"0"];
+    [self totalDataRequest:record_type_A[self.tag-1] dateType:type_date page:@"1"];
     
     [self getReportDataWithDate_type:self.tag-1];
     

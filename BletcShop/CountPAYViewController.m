@@ -161,7 +161,8 @@
     
     
     [params setObject:[[NSString alloc] initWithFormat:@"%.2f",pay] forKey:@"sum"];
-    
+
+    NSLog(@"paramer===%@",params);
 
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
@@ -184,7 +185,7 @@
          }
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"%@", error);
+         NSLog(@"error=%@", error);
      }];
     
 }
