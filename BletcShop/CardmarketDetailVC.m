@@ -429,7 +429,12 @@
         
         if ([appdelegate.userInfoDic[@"uuid"] isEqualToString:self.model.uuid]) {
             
-            UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:@"不能蹭自己的卡!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            NSString *str = @"蹭";
+            if ([_model.method isEqualToString:@"transfer"]) {
+                str = @"购买";
+            }
+
+            UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:[NSString stringWithFormat:@"不能%@自己的卡!",str] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alt show];
             
         }else{
