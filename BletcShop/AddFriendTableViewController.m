@@ -56,6 +56,12 @@
    
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSLog(@"搜所Return");
+    [self getData];
+    
+    return YES;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 40+2*kWeChatPadding;
@@ -69,7 +75,7 @@
     textFiled.font = [UIFont systemFontOfSize:15];
     textFiled.placeholder = @"输入要查找的好友";
     textFiled.delegate = self;
-    
+    textFiled.returnKeyType = UIReturnKeySearch;
     [view addSubview:textFiled];
     self.textFiled = textFiled;
     return view;

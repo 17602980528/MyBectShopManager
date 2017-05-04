@@ -384,7 +384,7 @@
    
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSDictionary *res_dic = (NSDictionary *)result;
-        if ([res_dic[@"result_code"] integerValue]==1) {
+        if ([res_dic[@"result_code"] integerValue]==1||[res_dic[@"result_code"] integerValue]==0) {
             
             UIAlertView *altView =[[UIAlertView alloc]initWithTitle:@"提示" message:@"您已认证成功是否重新登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             [altView show];

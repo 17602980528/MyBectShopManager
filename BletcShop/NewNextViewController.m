@@ -368,7 +368,7 @@
     }else if (indexPath.row==9){
 
         UIButton *nextButton=[UIButton buttonWithType:UIButtonTypeCustom];
-        nextButton.backgroundColor=NavBackGroundColor;
+        nextButton.backgroundColor=[UIColor redColor];
         nextButton.frame=CGRectMake(SCREENWIDTH/2-50, 5, 100, 40);
         [nextButton setTintColor:[UIColor whiteColor]];
         nextButton.tag=300;
@@ -918,7 +918,7 @@
     NSLog(@"paramer ===%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
-        NSLog(@"%@", result);
+        NSLog(@"NewNext==%@", result);
         
         if (tag ==999) {
             
