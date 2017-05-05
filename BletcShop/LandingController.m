@@ -372,39 +372,58 @@
     
 #ifdef DEBUG
 
+    if ([self.userText.text  isEqualToString: @""]||[self.passText.text isEqualToString:@""]) {
+        [self textExample];
+    }else{
         [self postRequest];
+
+    }
 
     NSLog(@"==DEBUG==");
 #else
 
-    
-    if ([self.userText.text  isEqualToString: @""]||[self.passText.text isEqualToString:@""]) {
-        [self textExample];
-    }else if ([self.proText.text  isEqualToString: @""]) {
+    if ([pgy_OR_AppStore isEqualToString:@"1"]) {
         
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text = NSLocalizedString(@"请输入验证码", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-        hud.userInteractionEnabled = YES;
-        
-        [hud hideAnimated:YES afterDelay:2.f];
-    
-    }
-    
-    else if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
-        [self postRequest];
-    }
-    else if (![self.proText.text  isEqualToString: @""])
-    {
-        
-        [self validationCode];
+        if ([self.userText.text  isEqualToString: @""]||[self.passText.text isEqualToString:@""]) {
+            [self textExample];
+        }else{
+            [self postRequest];
+            
+        }
+    }else{
         
         
-    }
+        if ([self.userText.text  isEqualToString: @""]||[self.passText.text isEqualToString:@""]) {
+            [self textExample];
+        }else if ([self.proText.text  isEqualToString: @""]) {
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"请输入验证码", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            hud.userInteractionEnabled = YES;
+            
+            [hud hideAnimated:YES afterDelay:2.f];
+            
+        }
+        
+        else if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
+            [self postRequest];
+        }
+        else if (![self.proText.text  isEqualToString: @""])
+        {
+            
+            [self validationCode];
+            
+            
+        }
 
+    }
+    
+    
+   
 
 #endif
     

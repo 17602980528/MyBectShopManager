@@ -221,79 +221,73 @@
 
 -(void)nextAction
 {
-    
-#ifdef DEBUG
-    [self postRequest];
-#else
-    
-    
-    
-    
-    
-    
-    if ([self.phoneText.text isEqualToString:@""]||[self.passwordText.text isEqualToString:@""]||[self.passwordText2.text isEqualToString:@""]||[self.showQuanTextfield.text isEqualToString:@""]) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+         
         
-        hud.mode = MBProgressHUDModeText;
-        
-        hud.label.text = NSLocalizedString(@"请检查信息是否填写完整", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-        [hud hideAnimated:YES afterDelay:3.f];
-        
-        ;
-    }else if (_data_code[0] != _proText.text)
-    {
-        
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.frame = CGRectMake(0, 64, 375, 667);
-        hud.mode = MBProgressHUDModeText;
-        
-        hud.label.text = NSLocalizedString(@"验证码错误", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-        [hud hideAnimated:YES afterDelay:3.f];
-        
-        
-    } else if ([self.passwordText.text length]<6||[self.passwordText.text length]>16) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.frame = CGRectMake(0, 64, 375, 667);
-        hud.mode = MBProgressHUDModeText;
-        
-        hud.label.text = NSLocalizedString(@"请设置一个6-16位的密码", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-        [hud hideAnimated:YES afterDelay:3.f];
-    }
-    
-    else
-    {
-        if([self.passwordText.text isEqualToString:self.passwordText2.text])
-        {
-            
-            [self postRequest];
-            
-            
-
-        }
-        else
-        {
+        if ([self.phoneText.text isEqualToString:@""]||[self.passwordText.text isEqualToString:@""]||[self.passwordText2.text isEqualToString:@""]||[self.showQuanTextfield.text isEqualToString:@""]) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.frame = CGRectMake(0, 64, 375, 667);
-            // Set the annular determinate mode to show task progress.
+            
             hud.mode = MBProgressHUDModeText;
             
-            hud.label.text = NSLocalizedString(@"密码不一致,请重新输入", @"HUD message title");
+            hud.label.text = NSLocalizedString(@"请检查信息是否填写完整", @"HUD message title");
             hud.label.font = [UIFont systemFontOfSize:13];
-            // Move to bottm center.
-            //    hud.offset = CGPointMake(0.f, );
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            [hud hideAnimated:YES afterDelay:3.f];
+            
+            ;
+        }else if (_data_code[0] != _proText.text)
+        {
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.frame = CGRectMake(0, 64, 375, 667);
+            hud.mode = MBProgressHUDModeText;
+            
+            hud.label.text = NSLocalizedString(@"验证码错误", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            [hud hideAnimated:YES afterDelay:3.f];
+            
+            
+        } else if ([self.passwordText.text length]<6||[self.passwordText.text length]>16) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.frame = CGRectMake(0, 64, 375, 667);
+            hud.mode = MBProgressHUDModeText;
+            
+            hud.label.text = NSLocalizedString(@"请设置一个6-16位的密码", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
             [hud hideAnimated:YES afterDelay:3.f];
         }
-    }
+        
+        else
+        {
+            if([self.passwordText.text isEqualToString:self.passwordText2.text])
+            {
+                
+                [self postRequest];
+                
+                
+                
+            }
+            else
+            {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.frame = CGRectMake(0, 64, 375, 667);
+                // Set the annular determinate mode to show task progress.
+                hud.mode = MBProgressHUDModeText;
+                
+                hud.label.text = NSLocalizedString(@"密码不一致,请重新输入", @"HUD message title");
+                hud.label.font = [UIFont systemFontOfSize:13];
+                // Move to bottm center.
+                //    hud.offset = CGPointMake(0.f, );
+                hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                [hud hideAnimated:YES afterDelay:3.f];
+            }
+        }
+
     
-#endif
     
+    
+
 }
 
 -(void)postRequest{
