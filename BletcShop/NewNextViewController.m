@@ -210,7 +210,11 @@
         textField.font=[UIFont systemFontOfSize:13.0f];
         [cell addSubview:textField];
 
-        textField.text= [NSString getTheNoNullStr:shopInfoDic[@"bname"] andRepalceStr:@""];
+        if (self.nickTextTF.text&&![self.nickTextTF.text isEqualToString:@""]) {
+            textField.text=self.nickTextTF.text;
+        }else{
+            textField.text= [NSString getTheNoNullStr:shopInfoDic[@"bname"] andRepalceStr:@""];
+        }
         self.nickTextTF=textField;
     }else if (indexPath.row==1){
 //        nickLab.hidden=YES;
