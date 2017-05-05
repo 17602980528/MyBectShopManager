@@ -334,22 +334,30 @@
 #ifdef DEBUG
     [self postRequest];
 #else
+    
+    if ([pgy_OR_AppStore isEqualToString:@"1"]) {
+        [self postRequest];
+    }else{
+       
+        if (_data_code[0] == _proText.text) {
+            
+            [self postRequest];
+            
+            
+            return;
+        }else    if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
+            [self postRequest];
+            
+        }else{
+            [self alert:@"验证码输入错误"];
+            
+        }
+
+        
+    }
 
     NSLog(@"=%@==%@",_data_code,_proText.text);
     
-    if (_data_code[0] == _proText.text) {
-        
-        [self postRequest];
-        
-       
-        return;
-    }else    if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
-        [self postRequest];
-
-    }else{
-        [self alert:@"验证码输入错误"];
-
-    }
     
 #endif
     

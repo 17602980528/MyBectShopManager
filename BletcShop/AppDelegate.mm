@@ -1013,10 +1013,12 @@
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"leadGet-----%@",result);
         [imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",STAR_ADVERTIMAGE,result[@"image_url"]]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//            if (image) {[UIImage imageNamed:@"ad_image"]
+            if (!image) {
+                
+                [UIImage imageNamed:@"ad_image"];
             
 //                [imageV addGestureRecognizer:tapGesture];
-//            }
+            }
             
         }];
 
