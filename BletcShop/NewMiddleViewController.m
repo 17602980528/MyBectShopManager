@@ -33,9 +33,11 @@
     ValuePickerView *pickView;
 
 }
+@property(nonatomic,strong)NSArray *streetArray;
 @end
 
 @implementation NewMiddleViewController
+
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
     UIImage * result;
@@ -95,7 +97,7 @@
                             [arr addObject:dic_eare[@"name"]];
                             
                         }
-                        
+                        self.streetArray=[[NSArray alloc]initWithArray:arr];
                         pickView= [[ValuePickerView alloc]init];
                         
                         NSLog(@"--------------%@",arr);
@@ -212,7 +214,9 @@
     [shopInfoDic setValue:self.detailAddressTF.text forKey:@"address"];
     [shopInfoDic setValue:self.agencyNameTF.text forKey:@"store"];
     [shopInfoDic setValue:self.kindLab.text forKey:@"trade"];
-    
+    [shopInfoDic setValue:_adddetailnewAddressTF.text forKey:@"full_add"];
+    [shopInfoDic setValue:_company_nameTF.text forKey:@"company_name"];
+    [shopInfoDic setValue:_company_styleTF.text forKey:@"company_nature"];
     if (self.haveBtn.selected==YES){
         [shopInfoDic setValue:@"null" forKey:@"explain_lic"];
     }else{
@@ -266,7 +270,22 @@
     NSString *longtitude =[[NSString alloc]initWithFormat:@"%f",longti];
     [params setObject:longtitude forKey:@"longtitude"];
     
-   
+    if (![_adddetailnewAddressTF.text isEqualToString:@""]) {
+         [params setObject:_adddetailnewAddressTF.text forKey:@"full_add"];
+    }else{
+         [params setObject:@"" forKey:@"full_add"];
+    }
+    if (![_company_nameTF.text isEqualToString:@""]) {
+        [params setObject:_company_nameTF.text forKey:@"company_name"];
+    }else{
+        [params setObject:@"" forKey:@"company_name"];
+    }
+    if (![_company_styleTF.text isEqualToString:@""]) {
+        [params setObject:_company_styleTF.text forKey:@"company_nature"];
+    }else{
+        [params setObject:@"" forKey:@"company_nature"];
+    }
+    
     if (![self.agencyNameTF.text isEqualToString:@""]) {
         NSLog(@"%@",self.agencyNameTF.text);
         [params setObject:self.agencyNameTF.text forKey:@"store"];//机构名称
@@ -413,7 +432,79 @@
 
     [_scrollView addSubview:_detailAddressTF];
     
-    UILabel *xingLab3=[[UILabel alloc]initWithFrame:CGRectMake(10, 115, 20, 20)];
+    //new_add
+    UILabel *xingLab_new=[[UILabel alloc]initWithFrame:CGRectMake(10, 115, 20, 20)];
+    xingLab_new.font=[UIFont systemFontOfSize:20.0f];
+    xingLab_new.textColor=[UIColor redColor];
+    xingLab_new.text=@"*";
+    xingLab_new.textAlignment=1;
+    [_scrollView addSubview:xingLab_new];
+    //名称
+    UILabel *labelnew3=[[UILabel alloc]initWithFrame:CGRectMake(30, 105, 110, 40)];
+    labelnew3.font=[UIFont systemFontOfSize:15.0f];
+    labelnew3.text=@"详细地点";
+    [_scrollView addSubview:labelnew3];
+
+    _adddetailnewAddressTF=[[UITextField alloc]initWithFrame:CGRectMake(140, 105, SCREENWIDTH-140, 40)];
+    _adddetailnewAddressTF.font=[UIFont systemFontOfSize:13.0f];
+    _adddetailnewAddressTF.text=[NSString getTheNoNullStr:shopInfoDic[@"full_add"] andRepalceStr:@""];
+    _adddetailnewAddressTF.placeholder=@"详细地点";
+    [_scrollView addSubview:_adddetailnewAddressTF];
+    
+    UIView *lineViewnew=[[UIView alloc]initWithFrame:CGRectMake(10, 150, SCREENWIDTH-20, 0.3)];
+    lineViewnew.backgroundColor=[UIColor lightGrayColor];
+    [_scrollView addSubview: lineViewnew];
+    
+    UILabel *xingLab_comName=[[UILabel alloc]initWithFrame:CGRectMake(10, 115+50, 20, 20)];
+    xingLab_comName.font=[UIFont systemFontOfSize:20.0f];
+    xingLab_comName.textColor=[UIColor redColor];
+    xingLab_comName.text=@"*";
+    xingLab_comName.textAlignment=1;
+    [_scrollView addSubview:xingLab_comName];
+    
+    UILabel *xingLab_com=[[UILabel alloc]initWithFrame:CGRectMake(30, 105+50, 110, 40)];
+    xingLab_com.font=[UIFont systemFontOfSize:15.0f];
+    xingLab_com.text=@"企业名称";
+    [_scrollView addSubview:xingLab_com];
+    
+    _company_nameTF=[[UITextField alloc]initWithFrame:CGRectMake(140, 105+50, SCREENWIDTH-140, 40)];
+    _company_nameTF.font=[UIFont systemFontOfSize:13.0f];
+    _company_nameTF.text=[NSString getTheNoNullStr:shopInfoDic[@"company_name"] andRepalceStr:@""];
+    _company_nameTF.placeholder=@"企业名称";
+    [_scrollView addSubview:_company_nameTF];
+    
+    UIView *lineViewnewcom=[[UIView alloc]initWithFrame:CGRectMake(10, 150+50, SCREENWIDTH-20, 0.3)];
+    lineViewnewcom.backgroundColor=[UIColor lightGrayColor];
+    [_scrollView addSubview: lineViewnewcom];
+    //
+    UILabel *xingLab_comStyle=[[UILabel alloc]initWithFrame:CGRectMake(10, 115+50+50, 20, 20)];
+    xingLab_comStyle.font=[UIFont systemFontOfSize:20.0f];
+    xingLab_comStyle.textColor=[UIColor redColor];
+    xingLab_comStyle.text=@"*";
+    xingLab_comStyle.textAlignment=1;
+    [_scrollView addSubview:xingLab_comStyle];
+    
+    UILabel *xingLab_coms=[[UILabel alloc]initWithFrame:CGRectMake(30, 105+50+50, 110, 40)];
+    xingLab_coms.font=[UIFont systemFontOfSize:15.0f];
+    xingLab_coms.text=@"企业性质";
+    [_scrollView addSubview:xingLab_coms];
+    
+    _company_styleTF=[[UITextField alloc]initWithFrame:CGRectMake(140, 105+50+50, SCREENWIDTH-140, 40)];
+    _company_styleTF.delegate=self;
+    _company_styleTF.font=[UIFont systemFontOfSize:13.0f];
+    _company_styleTF.text=[NSString getTheNoNullStr:shopInfoDic[@"company_nature"] andRepalceStr:@""];
+    _company_styleTF.placeholder=@"企业性质";
+    [_scrollView addSubview:_company_styleTF];
+    
+    UIView *lineViewnewcoms=[[UIView alloc]initWithFrame:CGRectMake(10, 150+50+50, SCREENWIDTH-20, 0.3)];
+    lineViewnewcoms.backgroundColor=[UIColor lightGrayColor];
+    [_scrollView addSubview: lineViewnewcoms];
+    
+    
+    
+    //new_add
+    
+    UILabel *xingLab3=[[UILabel alloc]initWithFrame:CGRectMake(10, 115+50+100, 20, 20)];
     xingLab3.font=[UIFont systemFontOfSize:20.0f];
     xingLab3.textColor=[UIColor redColor];
     xingLab3.text=@"*";
@@ -421,26 +512,26 @@
     [_scrollView addSubview:xingLab3];
     
     //名称
-    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(30, 105, 110, 40)];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(30, 105+50+100, 110, 40)];
     label3.font=[UIFont systemFontOfSize:15.0f];
-    label3.text=@"单位名称";
+    label3.text=@"店铺名称";
     [_scrollView addSubview:label3];
     
     //输入框
-    _agencyNameTF=[[UITextField alloc]initWithFrame:CGRectMake(140, 105, SCREENWIDTH-140, 40)];
+    _agencyNameTF=[[UITextField alloc]initWithFrame:CGRectMake(140, 105+50+100, SCREENWIDTH-140, 40)];
     _agencyNameTF.font=[UIFont systemFontOfSize:13.0f];
-    _agencyNameTF.placeholder=@"单位名称";
+    _agencyNameTF.placeholder=@"店铺名称";
 
     _agencyNameTF.text=shopInfoDic[@"store"];
 
     [_scrollView addSubview:_agencyNameTF];
     
-    UIView *lineView3=[[UIView alloc]initWithFrame:CGRectMake(10, 150, SCREENWIDTH-20, 0.3)];
+    UIView *lineView3=[[UIView alloc]initWithFrame:CGRectMake(10, 150+50+100, SCREENWIDTH-20, 0.3)];
     lineView3.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView3];
     
     
-    UILabel *xing_store=[[UILabel alloc]initWithFrame:CGRectMake(10, 115+50, 20, 20)];
+    UILabel *xing_store=[[UILabel alloc]initWithFrame:CGRectMake(10, 115+50+50+100, 20, 20)];
     xing_store.font=[UIFont systemFontOfSize:20.0f];
     xing_store.textColor=[UIColor redColor];
     xing_store.text=@"*";
@@ -448,25 +539,25 @@
     [_scrollView addSubview:xing_store];
     
     //名称
-    UILabel *store_number=[[UILabel alloc]initWithFrame:CGRectMake(30, 105+50, 110, 40)];
+    UILabel *store_number=[[UILabel alloc]initWithFrame:CGRectMake(30, 105+50+50+100, 110, 40)];
     store_number.font=[UIFont systemFontOfSize:15.0f];
     store_number.text=@"联系方式";
     [_scrollView addSubview:store_number];
     
     //输入框
-    self.store_textf=[[UITextField alloc]initWithFrame:CGRectMake(140, 105+50, SCREENWIDTH-140, 40)];
+    self.store_textf=[[UITextField alloc]initWithFrame:CGRectMake(140, 105+50+50+100, SCREENWIDTH-140, 40)];
     self.store_textf.font=[UIFont systemFontOfSize:13.0f];
     self.store_textf.placeholder=@"联系方式";
     self.store_textf.text=shopInfoDic[@"store_number"];
     [_scrollView addSubview:self.store_textf];
     
-    UIView *lineViewe=[[UIView alloc]initWithFrame:CGRectMake(10, 150+50, SCREENWIDTH-20, 0.3)];
+    UIView *lineViewe=[[UIView alloc]initWithFrame:CGRectMake(10, 150+50+50+100, SCREENWIDTH-20, 0.3)];
     lineViewe.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineViewe];
 
     
     //4hang--------
-    UILabel *xingLab4=[[UILabel alloc]initWithFrame:CGRectMake(10, 165+50, 20, 20)];
+    UILabel *xingLab4=[[UILabel alloc]initWithFrame:CGRectMake(10, 165+50+50+100, 20, 20)];
     xingLab4.font=[UIFont systemFontOfSize:20.0f];
     xingLab4.textColor=[UIColor redColor];
     xingLab4.text=@"*";
@@ -474,17 +565,17 @@
     [_scrollView addSubview:xingLab4];
     
     //名称
-    UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(30, 155+50, 110, 40)];
+    UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(30, 155+50+50+100, 110, 40)];
     label4.font=[UIFont systemFontOfSize:15.0f];
     label4.text=@"所属行业";
     [_scrollView addSubview:label4];
     
-    UIView *lineView4=[[UIView alloc]initWithFrame:CGRectMake(10, 200+50, SCREENWIDTH-20, 0.3)];
+    UIView *lineView4=[[UIView alloc]initWithFrame:CGRectMake(10, 200+50+50+100, SCREENWIDTH-20, 0.3)];
     lineView4.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView4];
     
     //所属行业选择
-    _kindLab=[[UILabel alloc]initWithFrame:CGRectMake(110, 160+50, 100, 30)];
+    _kindLab=[[UILabel alloc]initWithFrame:CGRectMake(110, 160+50+50+100, 100, 30)];
     _kindLab.text=@"请选择";
     _kindLab.font=[UIFont systemFontOfSize:13.0f];
     _kindLab.layer.borderColor=[[UIColor grayColor]CGColor];
@@ -499,19 +590,19 @@
     }
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapChooseClick:)];
     [_kindLab addGestureRecognizer:tap];
-    UIImageView *zijieImage=[[UIImageView alloc]initWithFrame:CGRectMake(185, 165+50, 20, 20)];
+    UIImageView *zijieImage=[[UIImageView alloc]initWithFrame:CGRectMake(185, 165+50+50+100, 20, 20)];
     zijieImage.image=[UIImage imageNamed:@"zijie"];
     
     [_scrollView addSubview:zijieImage];
     //5hang------
-    UILabel *xingLab5=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+50, 20, 20)];
+    UILabel *xingLab5=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+50+50+100, 20, 20)];
     xingLab5.font=[UIFont systemFontOfSize:20.0f];
     xingLab5.textColor=[UIColor redColor];
     xingLab5.text=@"*";
     xingLab5.textAlignment=1;
     [_scrollView addSubview:xingLab5];
     //名称
-    UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+50, 110, 40)];
+    UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+50+50+100, 110, 40)];
     label5.font=[UIFont systemFontOfSize:15.0f];
     label5.text=@"营业执照";
     [_scrollView addSubview:label5];
@@ -519,7 +610,7 @@
     
     //营业执照下的有无
     _haveBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _haveBtn.frame=CGRectMake(30, 250+50, 80, 25);
+    _haveBtn.frame=CGRectMake(30, 250+50+50+100, 80, 25);
     
     _haveBtn.layer.cornerRadius=5.0f;
     _haveBtn.titleLabel.font=[UIFont systemFontOfSize:15.0f];
@@ -531,7 +622,7 @@
     
     //无
     _noneBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _noneBtn.frame=CGRectMake(30, 285+50, 80, 25);
+    _noneBtn.frame=CGRectMake(30, 285+50+50+100, 80, 25);
     
     _noneBtn.layer.cornerRadius=5.0f;
     _noneBtn.titleLabel.font=[UIFont systemFontOfSize:15.0f];
@@ -540,7 +631,7 @@
     [_scrollView addSubview:_noneBtn];
     [_noneBtn addTarget:self action:@selector(btn1Click:) forControlEvents:UIControlEventTouchUpInside];
     
-    _imageView1=[[UIImageView alloc]initWithFrame:CGRectMake(120, 220+50, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView1=[[UIImageView alloc]initWithFrame:CGRectMake(120, 220+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView1.userInteractionEnabled=YES;
     _imageView1.image=[UIImage imageNamed:@"mohu-09"];
     [_scrollView addSubview:_imageView1];
@@ -549,7 +640,7 @@
     [_imageView1 addGestureRecognizer:tapGesture1];
     
     //设state判断是否已经运行过一次
-    _reasonTF=[[UITextField alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _reasonTF=[[UITextField alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _reasonTF.placeholder=@"关于营业执照情况说明";
     _reasonTF.layer.borderWidth=1;
     _reasonTF.layer.borderColor=[[UIColor grayColor]CGColor];
@@ -559,7 +650,7 @@
     self.reasonTF.delegate=self;
     
     //照片下端红色文字
-    UILabel *underLab=[[UILabel alloc]initWithFrame:CGRectMake(120, 220+((SCREENWIDTH-150)/2)*116/176+50, (SCREENWIDTH-150)/2, 40)];
+    UILabel *underLab=[[UILabel alloc]initWithFrame:CGRectMake(120, 220+((SCREENWIDTH-150)/2)*116/176+50+50+100, (SCREENWIDTH-150)/2, 40)];
     underLab.tag=900;
     underLab.text=@"营业执照照片";
     underLab.font=[UIFont systemFontOfSize:15.0f];
@@ -568,7 +659,7 @@
     [_scrollView addSubview:underLab];
     
     
-    UIView *lineView5=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight+50, SCREENWIDTH-20, 0.3)];
+    UIView *lineView5=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight+50+50+100, SCREENWIDTH-20, 0.3)];
     lineView5.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView5];
     
@@ -581,7 +672,7 @@
 //    [_scrollView addSubview:xingLab6];
     //营业执照下的有无
     _agreeBtn1=[UIButton buttonWithType:UIButtonTypeCustom];
-    _agreeBtn1.frame=CGRectMake(30, 220+totalHeight+50, 85, 25);
+    _agreeBtn1.frame=CGRectMake(30, 220+totalHeight+50+50+100, 85, 25);
     _agreeBtn1.layer.cornerRadius=5.0f;
     _agreeBtn1.titleLabel.font=[UIFont systemFontOfSize:15.0f];
     [_agreeBtn1 setTitle:@"租赁合同" forState:UIControlStateNormal];
@@ -590,7 +681,7 @@
     [_agreeBtn1 addTarget:self action:@selector(btn2Click:) forControlEvents:UIControlEventTouchUpInside];
     //无
     _agreeBtn2=[UIButton buttonWithType:UIButtonTypeCustom];
-    _agreeBtn2.frame=CGRectMake(30, 255+totalHeight+50, 85, 25);
+    _agreeBtn2.frame=CGRectMake(30, 255+totalHeight+50+50+100, 85, 25);
     _agreeBtn2.layer.cornerRadius=5.0f;
     _agreeBtn2.titleLabel.font=[UIFont systemFontOfSize:15.0f];
     [ _agreeBtn2 setTitle:@"房产证明" forState:UIControlStateNormal];
@@ -599,7 +690,7 @@
     [ _agreeBtn2 addTarget:self action:@selector(btn2Click:) forControlEvents:UIControlEventTouchUpInside];
     //tupian2
     
-    _imageView2=[[UIImageView alloc]initWithFrame:CGRectMake(120, 220+totalHeight+50, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView2=[[UIImageView alloc]initWithFrame:CGRectMake(120, 220+totalHeight+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView2.userInteractionEnabled=YES;
     _imageView2.image=[UIImage imageNamed:@"mohu-10"];
     [_scrollView addSubview:_imageView2];
@@ -607,7 +698,7 @@
     [_imageView2 addGestureRecognizer:tapGesture2];
     
     //照片下端红色文字
-    _houseProvide1=[[UILabel alloc]initWithFrame:CGRectMake(120, 220+totalHeight+((SCREENWIDTH-150)/2)*116/176+50, (SCREENWIDTH-150)/2, 40)];
+    _houseProvide1=[[UILabel alloc]initWithFrame:CGRectMake(120, 220+totalHeight+((SCREENWIDTH-150)/2)*116/176+50+50+100, (SCREENWIDTH-150)/2, 40)];
     
     _houseProvide1.font=[UIFont systemFontOfSize:14.0f];
     _houseProvide1.textColor=[UIColor redColor];
@@ -615,25 +706,25 @@
     [_scrollView addSubview:_houseProvide1];
     
     //tupian3
-    _imageView3=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight+50, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView3=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView3.image=[UIImage imageNamed:@"mohu-11"];
     _imageView3.userInteractionEnabled=YES;
     [_scrollView addSubview:_imageView3];
     UITapGestureRecognizer *tapGesture3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
     [_imageView3 addGestureRecognizer:tapGesture3];
     //照片下端红色文字
-    _houseProvide2=[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight+50+((SCREENWIDTH-150)/2)*116/176, (SCREENWIDTH-150)/2, 40)];
+    _houseProvide2=[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight+50+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
     
     _houseProvide2.font=[UIFont systemFontOfSize:14.0f];
     _houseProvide2.textAlignment=1;
     _houseProvide2.textColor=[UIColor redColor];
     [_scrollView addSubview:_houseProvide2];
     
-    UIView *lineView6=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*2+50, SCREENWIDTH-20, 0.6)];
+    UIView *lineView6=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*2+50+50+100, SCREENWIDTH-20, 0.6)];
     lineView6.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView6];
     //hang7-----
-    UILabel *xingLab7=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+totalHeight*2+50, 20, 20)];
+    UILabel *xingLab7=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+totalHeight*2+50+50+100, 20, 20)];
     xingLab7.font=[UIFont systemFontOfSize:20.0f];
     xingLab7.textColor=[UIColor redColor];
     xingLab7.textAlignment=1;
@@ -641,58 +732,58 @@
     [_scrollView addSubview:xingLab7];
     
     //名称
-    UILabel *label7=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*2+50, 110, 40)];
+    UILabel *label7=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*2+50+50+100, 110, 40)];
     label7.font=[UIFont systemFontOfSize:15.0f];
     label7.text=@"法人照片";
     [_scrollView addSubview:label7];
     //tupian4
-    _imageView4=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*2+50, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView4=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*2+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView4.image=[UIImage imageNamed:@"mohu-12"];
     _imageView4.userInteractionEnabled=YES;
     [_scrollView addSubview:_imageView4];
     UITapGestureRecognizer *tapGesture4=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
     [_imageView4 addGestureRecognizer:tapGesture4];
     //照片下端红色文字
-    UILabel *under_red1 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*2+((SCREENWIDTH-150)/2)*116/176, (SCREENWIDTH-150)/2, 40)];
+    UILabel *under_red1 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*2+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
     under_red1.text=@"法人正面照片";
     under_red1.font=[UIFont systemFontOfSize:14.0f];
     under_red1.textAlignment=1;
     under_red1.textColor=[UIColor redColor];
     [_scrollView addSubview:under_red1];
     
-    UIView *lineView7=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*3+50, SCREENWIDTH-20, 0.6)];
+    UIView *lineView7=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*3+50+50+100, SCREENWIDTH-20, 0.6)];
     lineView7.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView7];
     
     //hang8-----
-    UILabel *xingLab8=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+totalHeight*3+50, 20, 20)];
+    UILabel *xingLab8=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+totalHeight*3+50+50+100, 20, 20)];
     xingLab8.font=[UIFont systemFontOfSize:20.0f];
     xingLab8.textColor=[UIColor redColor];
     xingLab8.textAlignment=1;
     xingLab8.text=@"*";
     [_scrollView addSubview:xingLab8];
     
-    UILabel *label8=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*3+50, 110, 40)];
+    UILabel *label8=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*3+50+50+100, 110, 40)];
     label8.font=[UIFont systemFontOfSize:14.0f];
     label8.text=@"经营场地照片";
     [_scrollView addSubview:label8];
     
     //tupian5
-    _imageView5=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*3+50, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView5=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*3+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView5.image=[UIImage imageNamed:@"mohu-13"];
     _imageView5.userInteractionEnabled=YES;
     [_scrollView addSubview:_imageView5];
     UITapGestureRecognizer *tapGesture5=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
     [_imageView5 addGestureRecognizer:tapGesture5];
     //照片下端红色文字
-    UILabel *under_red2 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*3+((SCREENWIDTH-150)/2)*116/176, (SCREENWIDTH-150)/2, 40)];
+    UILabel *under_red2 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*3+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
     under_red2.text=@"经营场地照片";
     under_red2.font=[UIFont systemFontOfSize:14.0f];
     under_red2.textAlignment=1;
     under_red2.textColor=[UIColor redColor];
     [_scrollView addSubview:under_red2];
     
-    UIView *lineView8=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*4+50, SCREENWIDTH-20, 0.6)];
+    UIView *lineView8=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*4+50+50+100, SCREENWIDTH-20, 0.6)];
     lineView8.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView8];
     
@@ -705,28 +796,28 @@
 //    [_scrollView addSubview:xingLab9];
 
     
-    UILabel *label9=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*4+50, 110, 40)];
+    UILabel *label9=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*4+50+50+100, 110, 40)];
     label9.font=[UIFont systemFontOfSize:14.0f];
 
     label9.text=@"营业地水电票";
     [_scrollView addSubview:label9];
     
     //tupian6
-    _imageView6=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*4+50, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView6=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*4+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView6.image=[UIImage imageNamed:@"mohu-14"];
     _imageView6.userInteractionEnabled=YES;
     [_scrollView addSubview:_imageView6];
     UITapGestureRecognizer *tapGesture6=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
     [_imageView6 addGestureRecognizer:tapGesture6];
     //照片下端红色文字
-    UILabel *under_red3 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*4+((SCREENWIDTH-150)/2)*116/176, (SCREENWIDTH-150)/2, 40)];
+    UILabel *under_red3 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*4+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
     under_red3.text=@"水电票据照片";
     under_red3.font=[UIFont systemFontOfSize:14.0f];
     under_red3.textAlignment=1;
     under_red3.textColor=[UIColor redColor];
     [_scrollView addSubview:under_red3];
     
-    UIView *lineView9=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*5+50, SCREENWIDTH-20, 0.6)];
+    UIView *lineView9=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*5+50+50+100, SCREENWIDTH-20, 0.6)];
     lineView9.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView9];
     
@@ -734,7 +825,7 @@
     
     //最后一行，返回上一级，或者进入下一级页面
     UIButton *from=[UIButton buttonWithType:UIButtonTypeCustom];
-    from.frame=CGRectMake(SCREENWIDTH/2-110, 210+totalHeight*5+50, 100, 40);
+    from.frame=CGRectMake(SCREENWIDTH/2-110, 210+totalHeight*5+50+50+100, 100, 40);
     from.backgroundColor=[UIColor whiteColor];
     [from setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [from setTitle:@"上一步" forState:UIControlStateNormal];
@@ -746,7 +837,7 @@
     [_scrollView addSubview:from];
     
     UIButton *goNext=[UIButton buttonWithType:UIButtonTypeCustom];
-    goNext.frame=CGRectMake(SCREENWIDTH/2+5, 210+totalHeight*5+50, 100, 40);
+    goNext.frame=CGRectMake(SCREENWIDTH/2+5, 210+totalHeight*5+50+50+100, 100, 40);
     goNext.backgroundColor=[UIColor redColor];
     [goNext setTitle:@"下一步" forState:UIControlStateNormal];
     [goNext setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -795,6 +886,9 @@
     }
     [NSThread detachNewThreadSelector:@selector(downLoadImageAndSeeIfExists) toTarget:self withObject:nil];
     
+    
+    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, goNext.bottom+20);
+    
 }
 #pragma mark --界面完结
 //模态消失，返回上级界面
@@ -804,7 +898,7 @@
 -(void)goNext:(UIButton *)sender{
     if (self.haveBtn.selected==YES) {
 
-        if ([self.locationLab.text isEqualToString:@""]||[self.detailAddressTF.text isEqualToString:@""]||[self.store_textf.text isEqualToString:@""]||[self.agencyNameTF.text isEqualToString:@""]||[self.kindLab.text isEqualToString:@""]||self.ifImageView1==NO||self.ifImageView4==NO||self.ifImageView5==NO) {
+        if ([self.locationLab.text isEqualToString:@""]||[self.detailAddressTF.text isEqualToString:@""]||[self.store_textf.text isEqualToString:@""]||[self.agencyNameTF.text isEqualToString:@""]||[self.kindLab.text isEqualToString:@""]||self.ifImageView1==NO||self.ifImageView4==NO||self.ifImageView5==NO||[_company_nameTF.text isEqualToString:@""]||[_company_styleTF.text isEqualToString:@""]) {
 
             //MBProgressHUD *hud判断如果有一项没填就出提示
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -849,7 +943,7 @@
         
     }else{
 
-        if ([self.locationLab.text isEqualToString:@""]||[self.detailAddressTF.text isEqualToString:@""]||[self.store_textf.text isEqualToString:@""]||[self.agencyNameTF.text isEqualToString:@""]||[self.kindLab.text isEqualToString:@""]||[self.reasonTF.text isEqualToString:@""]||self.ifImageView4==NO||self.ifImageView5==NO) {
+        if ([self.locationLab.text isEqualToString:@""]||[self.detailAddressTF.text isEqualToString:@""]||[self.store_textf.text isEqualToString:@""]||[self.agencyNameTF.text isEqualToString:@""]||[self.kindLab.text isEqualToString:@""]||[self.reasonTF.text isEqualToString:@""]||self.ifImageView4==NO||self.ifImageView5==NO||[_company_nameTF.text isEqualToString:@""]||[_company_styleTF.text isEqualToString:@""]) {
             //MBProgressHUD *hud判断如果有一项没填就出提示
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.frame = CGRectMake(0, 64, 375, 667);
@@ -1455,6 +1549,25 @@
     }
     
     if (textField ==self.detailAddressTF) {
+        pickView.dataSource=self.streetArray;
+        __weak NewMiddleViewController *wealSelf=self;
+        pickView.valueDidSelect = ^(NSString *value) {
+            
+            wealSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
+            
+        };
+        [pickView show];
+        
+        return NO;
+    }
+    
+    if (textField ==self.company_styleTF) {
+        pickView.dataSource=@[@"国有企业",@"集体企业",@"联营企业",@"股份合作制企业",@"私营企业",@"个体户",@"合作企业",@"有限责任公司",@"股份有限公司"];
+        __weak NewMiddleViewController *wealSelf=self;
+        pickView.valueDidSelect = ^(NSString *value) {
+            
+            wealSelf.company_styleTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
+        };
         [pickView show];
         
         return NO;
