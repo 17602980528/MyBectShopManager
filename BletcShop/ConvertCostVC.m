@@ -40,9 +40,10 @@
     shopImageView.frame=CGRectMake((SCREENWIDTH-200)/2, 15, 200, 200);
     [topBgView addSubview:shopImageView];
     
-    UILabel *shopNameLable=[[UILabel alloc]initWithFrame:CGRectMake(20, 230, SCREENWIDTH-40, 30)];
+    UILabel *shopNameLable=[[UILabel alloc]initWithFrame:CGRectMake(20, 230, SCREENWIDTH-40, 59)];
     shopNameLable.text=[NSString stringWithFormat:@"%@  %@积分",self.shopNameString,self.shopNeedPoint];
-    shopNameLable.font=[UIFont systemFontOfSize:24.0f];
+    shopNameLable.font=[UIFont systemFontOfSize:20.0f];
+    shopNameLable.numberOfLines = 2;
     [topBgView addSubview:shopNameLable];
     
 //    UILabel *detailLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 260, SCREENWIDTH-40, 30)];
