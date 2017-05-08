@@ -128,9 +128,13 @@
         VC.resultBlock=^(NSDictionary*result) {
             
             NSLog(@"UserInfoEditVC.block====%@",result);
-            self.tishiwenzi.text = [NSString stringWithFormat:@"恭喜你，完成个人信息获得 20 个积分，快去看看吧"];
-            self.tishiview.hidden = NO;
+            
+            if (![result[@"award"] isEqualToString:@"false"]) {
+                self.tishiwenzi.text = [NSString stringWithFormat:@"恭喜你，完成个人信息获得 %@ 个积分，快去看看吧",[NSString getTheNoNullStr:result[@"award"] andRepalceStr:@"0"]];
+                self.tishiview.hidden = NO;
 
+            }
+          
         };
         VC.leibie = self.title_A[indexPath.row-1];
         [self.navigationController pushViewController:VC animated:YES];    }
@@ -153,8 +157,15 @@
         VC.prodessionBlock=^(NSDictionary*result) {
             
             NSLog(@"UserInfoEditVC.block====%@",result);
-            self.tishiwenzi.text = [NSString stringWithFormat:@"恭喜你，完成个人信息获得%@个积 分，快去看看吧",result[@"result_code"]];
-            self.tishiview.hidden = NO;
+            
+            if (![result[@"award"] isEqualToString:@"false"]) {
+                self.tishiwenzi.text = [NSString stringWithFormat:@"恭喜你，完成个人信息获得 %@ 个积分，快去看看吧",[NSString getTheNoNullStr:result[@"award"] andRepalceStr:@"0"]];
+                
+                self.tishiview.hidden = NO;
+                
+            }
+
+          
             
         };
 
