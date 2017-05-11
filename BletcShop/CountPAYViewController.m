@@ -84,7 +84,9 @@
  确认支付
  */
 -(void)buyClick{
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
+    NSString *pay_passwd= [NSString getTheNoNullStr:appdelegate.userInfoDic[@"pay_passwd"] andRepalceStr:@""];
     
     NSString *oneString = self.card_dic[@"price"];
     
@@ -100,10 +102,21 @@
     NSLog(@"-----%ld---%d",[textTF.text integerValue],time);
     
     if ([textTF.text integerValue]>0 &&  [textTF.text integerValue]<=time) {
-        self.payCount=[textTF.text intValue];
-        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"登录密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-        alertView.alertViewStyle=UIAlertViewStyleSecureTextInput;
-        [alertView show];
+        
+        if ([pay_passwd isEqualToString:@"未设置"]) {
+            
+            UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还没有设置支付密码!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去设置", nil];
+            alt.tag = 888;
+            [alt show];
+            
+        }else{
+            
+            self.payCount=[textTF.text intValue];
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"登录密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            alertView.alertViewStyle=UIAlertViewStyleSecureTextInput;
+            [alertView show];
+        }
+        
     }else{
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -114,9 +127,10 @@
     }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-
-    if (alertView.tag==999) {
+    if (alertView.tag ==888) {
+        NSLog(@"去设置");
+        
+    }else if (alertView.tag==999) {
         //支付成功提示框
         if (buttonIndex==0) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -131,17 +145,56 @@
 
         if (buttonIndex==1) {
             //判断密码对不对，如果对，调支付接口
-            AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-            //        NSLog(@"%@",appdelegate.userInfoArray);
-            if ([tf.text isEqualToString:appdelegate.userInfoDic[@"passwd"]]) {
-                //pay
-                [self postSocketCardPayAction];
-            }
+            
+            [self checkPayPassWd:tf.text];
+
+//            AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+//            //        NSLog(@"%@",appdelegate.userInfoArray);
+//            if ([tf.text isEqualToString:appdelegate.userInfoDic[@"passwd"]]) {
+//                //pay
+//                [self postSocketCardPayAction];
+//            }
         }
 
     }
     
 }
+
+-(void)checkPayPassWd:(NSString *)payPassWd{
+    
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/passwd/checkPayPasswd",BASEURL];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:payPassWd forKey:@"pay_passwd"];
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"result---_%@",result);
+        if ([result[@"result_code"] isEqualToString:@"access"]) {
+            [self postSocketCardPayAction];
+            
+        }else{
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.label.text = @"支付密码错误,请重新输入!";
+            hud.mode = MBProgressHUDModeText;
+            hud.label.font =[UIFont systemFontOfSize:13];
+            [hud hideAnimated:YES afterDelay:1.5];
+        }
+        
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
 -(void)postSocketCardPayAction
 {
 

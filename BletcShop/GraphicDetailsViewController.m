@@ -27,7 +27,7 @@
     }
     NSLog(@"===info_dic%@",self.infoDic);
     [self.pictureArray insertObject:[self.infoDic objectForKey:@"image_url"] atIndex:0];
-    [self.contentArray insertObject:[self.infoDic objectForKey:@"store"] atIndex:0];
+    [self.contentArray insertObject:[self.infoDic objectForKey:@"store"] ?[self.infoDic objectForKey:@"store"]:[self.infoDic objectForKey:@"title"]  atIndex:0];
     [self.modelStateArray insertObject:@"1" atIndex:0];
 
     [self initTableView];

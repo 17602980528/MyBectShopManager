@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmD-sr-3U6">
@@ -27,7 +27,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13250002360" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4SQ-cF-OzQ">
-                        <rect key="frame" x="79" y="15" width="104" height="19"/>
+                        <rect key="frame" x="79" y="16" width="104" height="19"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="19" id="YhV-70-7UL"/>
                         </constraints>
@@ -39,7 +39,7 @@
                         <rect key="frame" x="18" y="16" width="70" height="19"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="8ch-N4-MeV"/>
-                            <constraint firstAttribute="height" constant="19" id="tUH-09-peY"/>
+                            <constraint firstAttribute="height" constant="19" id="p82-cM-Yvw"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,16 +54,16 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="thO-DV-irn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0Ye-u4-1RO"/>
-                    <constraint firstItem="4SQ-cF-OzQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2jY-by-SDU"/>
                     <constraint firstAttribute="bottom" secondItem="VmD-sr-3U6" secondAttribute="bottom" id="6Od-lQ-ZxM"/>
                     <constraint firstItem="trc-gp-fvA" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-5" id="FHB-sR-DiN"/>
+                    <constraint firstItem="4SQ-cF-OzQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="HNI-aA-wD8"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="4SQ-cF-OzQ" secondAttribute="trailing" constant="10" id="Obn-FD-VuW"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="thO-DV-irn" secondAttribute="bottom" constant="6.5" id="R9x-Uk-LYY"/>
                     <constraint firstItem="trc-gp-fvA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RKo-re-rrL"/>
+                    <constraint firstItem="VmD-sr-3U6" firstAttribute="top" secondItem="4SQ-cF-OzQ" secondAttribute="bottom" constant="13" id="Tmd-ai-sKv"/>
+                    <constraint firstItem="VmD-sr-3U6" firstAttribute="top" secondItem="thO-DV-irn" secondAttribute="bottom" constant="13" id="ZC0-Q7-kBh"/>
                     <constraint firstItem="VmD-sr-3U6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="cnP-oy-HfL"/>
+                    <constraint firstItem="thO-DV-irn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="dy8-nY-8CZ"/>
                     <constraint firstItem="4SQ-cF-OzQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="71" id="itG-iL-wEj"/>
-                    <constraint firstItem="thO-DV-irn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7.5" id="l6e-oj-v7s"/>
                     <constraint firstAttribute="trailing" secondItem="VmD-sr-3U6" secondAttribute="trailing" id="try-dB-A8G"/>
                     <constraint firstItem="thO-DV-irn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="ukD-aw-ddi"/>
                 </constraints>
@@ -72,7 +72,7 @@
                 <outlet property="content_lab" destination="4SQ-cF-OzQ" id="arN-d5-lws"/>
                 <outlet property="title_lab" destination="thO-DV-irn" id="tc2-QW-2dS"/>
             </connections>
-            <point key="canvasLocation" x="-262" y="-68"/>
+            <point key="canvasLocation" x="37" y="-70"/>
         </tableViewCell>
     </objects>
     <resources>
