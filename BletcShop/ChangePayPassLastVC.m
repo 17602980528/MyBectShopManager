@@ -9,6 +9,9 @@
 #import "ChangePayPassLastVC.h"
 #import "SYPasswordView.h"
 #import "SingleModel.h"
+#import "LZDUserInfoVC.h"
+#import "MoneyPAYViewController.h"
+#import "CountPAYViewController.h"
 @interface ChangePayPassLastVC ()<UIAlertViewDelegate>
 {
     UIButton *button;
@@ -58,6 +61,14 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //
     if (alertView.tag==100) {
+        
+        NSInteger index = 0;
+        for (UIViewController *VC in self.navigationController.viewControllers) {
+            if ([VC isKindOfClass:[LZDUserInfoVC class]]||[VC isKindOfClass:[MoneyPAYViewController class]]||[VC isKindOfClass:[CountPAYViewController class]]) {
+                index = [self.navigationController.viewControllers indexOfObject:VC];
+            }
+        }
+        [self.navigationController popToViewController:self.navigationController.viewControllers[index] animated:YES];
         
     }else{
         [self.pasView clearUpPassword];

@@ -57,6 +57,7 @@
     
              ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
              [self.navigationController pushViewController:vc animated:YES];
+            
              
          }else
          {
@@ -69,6 +70,7 @@
          NSLog(@"%@", error);
          
      }];
+    [self.pasView.textField resignFirstResponder];
 
 }
 -(void)observationPassLength:(NSString *)pwd{

@@ -32,6 +32,7 @@
 }
 
 -(void)passLenghtEqualsToSix:(NSString *)pass{
+    [self.pasView.textField resignFirstResponder];
     ChangePayPassLastVC *vc=[[ChangePayPassLastVC alloc]init];
     vc.pass=pass;
     [self.navigationController pushViewController:vc animated:YES];

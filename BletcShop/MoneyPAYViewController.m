@@ -8,6 +8,7 @@
 
 #import "MoneyPAYViewController.h"
 #import "SoundPaly.h"
+#import "ChangePayPassVC.h"
 @interface MoneyPAYViewController ()<UIAlertViewDelegate>
 {
     UITextField *textTF;
@@ -94,6 +95,10 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag ==888) {
         NSLog(@"去设置");
+        if (buttonIndex==1) {
+            ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
         
     }else if (alertView.tag==999) {
         //支付成功提示框

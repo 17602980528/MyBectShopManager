@@ -7,7 +7,7 @@
 //
 
 #import "AccessCodeVC.h"
-#import "ChangePayPassLastVC.h"
+#import "ChangePayPassVC.h"
 @interface AccessCodeVC ()<UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *codeTF;
 @property (strong, nonatomic) IBOutlet UIButton *sendButton;
@@ -23,7 +23,7 @@
     NSLog(@"----/%@/====/%@/",self.codeTF.text,self.array_code[0]);
     
     if ([self.codeTF.text isEqualToString:self.array_code[0]]) {
-        ChangePayPassLastVC *vc=[[ChangePayPassLastVC alloc]init];
+        ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         [self showHint:@"验证码输入错误"];
@@ -56,7 +56,7 @@
 -(void)getCodeNumber{
     NSString *url  = @"http://101.201.100.191/smsVertify/Demo/SendTemplateSMS.php";
     
-    NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.phone forKey:@"phone"];;
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.phone.text forKey:@"phone"];
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"-result---%@",result);
         [self TimeNumAction];
