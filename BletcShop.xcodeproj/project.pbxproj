@@ -49,12 +49,22 @@
 		182FAAA61D502FAD0018F872 /* custom3.png in Resources */ = {isa = PBXBuildFile; fileRef = 182FAAA51D502FAD0018F872 /* custom3.png */; };
 		18302A2A1DAC8AE200E6EF8C /* ShopRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */; };
 		18302A2D1DAC8B0E00E6EF8C /* CanPayCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A2C1DAC8B0E00E6EF8C /* CanPayCardViewController.m */; };
+		183577411EC40AFF00F321F1 /* CheckOldPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 183577401EC40AFF00F321F1 /* CheckOldPassVC.m */; };
+		183577451EC430AE00F321F1 /* RealChooseChangePayPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 183577431EC430AE00F321F1 /* RealChooseChangePayPassVC.m */; };
+		183577461EC430AE00F321F1 /* RealChooseChangePayPassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183577441EC430AE00F321F1 /* RealChooseChangePayPassVC.xib */; };
+		1835774A1EC437F900F321F1 /* AccessCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 183577481EC437F900F321F1 /* AccessCodeVC.m */; };
+		1835774B1EC437F900F321F1 /* AccessCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183577491EC437F900F321F1 /* AccessCodeVC.xib */; };
 		1836B83B1E559D5000B587A6 /* Active_top1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B83A1E559D5000B587A6 /* Active_top1.jpg */; };
 		1836B83D1E559D5600B587A6 /* Active_top2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B83C1E559D5600B587A6 /* Active_top2.jpg */; };
 		1836B83F1E559D5B00B587A6 /* Active_top3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B83E1E559D5B00B587A6 /* Active_top3.jpg */; };
 		1836B8411E559DD700B587A6 /* Active_top4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B8401E559DD700B587A6 /* Active_top4.jpg */; };
 		1843104A1E6F9C39005521BF /* AddCouponDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184310481E6F9C39005521BF /* AddCouponDetailsVC.m */; };
 		1843104B1E6F9C39005521BF /* AddCouponDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184310491E6F9C39005521BF /* AddCouponDetailsVC.xib */; };
+		184C72031EC2F9150065EE65 /* SYPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C72021EC2F9150065EE65 /* SYPasswordView.m */; };
+		184C72081EC305000065EE65 /* ChangeLoginOrPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C72061EC305000065EE65 /* ChangeLoginOrPayVC.m */; };
+		184C72091EC305000065EE65 /* ChangeLoginOrPayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184C72071EC305000065EE65 /* ChangeLoginOrPayVC.xib */; };
+		184C720E1EC310CA0065EE65 /* ChangePayPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C720D1EC310CA0065EE65 /* ChangePayPassVC.m */; };
+		184C72131EC31A770065EE65 /* ChangePayPassLastVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C72121EC31A770065EE65 /* ChangePayPassLastVC.m */; };
 		18518D571E7945A000067D95 /* s_money_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 18518D541E7945A000067D95 /* s_money_n.png */; };
 		18518D581E7945A000067D95 /* s_money_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18518D551E7945A000067D95 /* s_money_n@2x.png */; };
 		18518D591E7945A000067D95 /* s_money_n@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18518D561E7945A000067D95 /* s_money_n@3x.png */; };
@@ -1194,6 +1204,14 @@
 		18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopRegisterController.m; sourceTree = "<group>"; };
 		18302A2B1DAC8B0E00E6EF8C /* CanPayCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanPayCardViewController.h; sourceTree = "<group>"; };
 		18302A2C1DAC8B0E00E6EF8C /* CanPayCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanPayCardViewController.m; sourceTree = "<group>"; };
+		1835773F1EC40AFF00F321F1 /* CheckOldPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOldPassVC.h; sourceTree = "<group>"; };
+		183577401EC40AFF00F321F1 /* CheckOldPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOldPassVC.m; sourceTree = "<group>"; };
+		183577421EC430AE00F321F1 /* RealChooseChangePayPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealChooseChangePayPassVC.h; sourceTree = "<group>"; };
+		183577431EC430AE00F321F1 /* RealChooseChangePayPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealChooseChangePayPassVC.m; sourceTree = "<group>"; };
+		183577441EC430AE00F321F1 /* RealChooseChangePayPassVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RealChooseChangePayPassVC.xib; sourceTree = "<group>"; };
+		183577471EC437F900F321F1 /* AccessCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessCodeVC.h; sourceTree = "<group>"; };
+		183577481EC437F900F321F1 /* AccessCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessCodeVC.m; sourceTree = "<group>"; };
+		183577491EC437F900F321F1 /* AccessCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccessCodeVC.xib; sourceTree = "<group>"; };
 		1836B83A1E559D5000B587A6 /* Active_top1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top1.jpg; sourceTree = "<group>"; };
 		1836B83C1E559D5600B587A6 /* Active_top2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top2.jpg; sourceTree = "<group>"; };
 		1836B83E1E559D5B00B587A6 /* Active_top3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top3.jpg; sourceTree = "<group>"; };
@@ -1201,6 +1219,15 @@
 		184310471E6F9C39005521BF /* AddCouponDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCouponDetailsVC.h; sourceTree = "<group>"; };
 		184310481E6F9C39005521BF /* AddCouponDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponDetailsVC.m; sourceTree = "<group>"; };
 		184310491E6F9C39005521BF /* AddCouponDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCouponDetailsVC.xib; sourceTree = "<group>"; };
+		184C72011EC2F9150065EE65 /* SYPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPasswordView.h; sourceTree = "<group>"; };
+		184C72021EC2F9150065EE65 /* SYPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPasswordView.m; sourceTree = "<group>"; };
+		184C72051EC305000065EE65 /* ChangeLoginOrPayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLoginOrPayVC.h; sourceTree = "<group>"; };
+		184C72061EC305000065EE65 /* ChangeLoginOrPayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLoginOrPayVC.m; sourceTree = "<group>"; };
+		184C72071EC305000065EE65 /* ChangeLoginOrPayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeLoginOrPayVC.xib; sourceTree = "<group>"; };
+		184C720C1EC310CA0065EE65 /* ChangePayPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPassVC.h; sourceTree = "<group>"; };
+		184C720D1EC310CA0065EE65 /* ChangePayPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPassVC.m; sourceTree = "<group>"; };
+		184C72111EC31A770065EE65 /* ChangePayPassLastVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPassLastVC.h; sourceTree = "<group>"; };
+		184C72121EC31A770065EE65 /* ChangePayPassLastVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPassLastVC.m; sourceTree = "<group>"; };
 		18518D541E7945A000067D95 /* s_money_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s_money_n.png; sourceTree = "<group>"; };
 		18518D551E7945A000067D95 /* s_money_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s_money_n@2x.png"; sourceTree = "<group>"; };
 		18518D561E7945A000067D95 /* s_money_n@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s_money_n@3x.png"; sourceTree = "<group>"; };
@@ -3216,6 +3243,7 @@
 			children = (
 				079386C41C55BC310021B385 /* MineViewController.h */,
 				079386C51C55BC310021B385 /* MineViewController.m */,
+				184C720A1EC3050D0065EE65 /* 密码管理 */,
 			);
 			name = "我的界面";
 			sourceTree = "<group>";
@@ -3353,6 +3381,26 @@
 			name = "提交广告申请页";
 			sourceTree = "<group>";
 		};
+		1835774C1EC4380E00F321F1 /* 修改和忘记密码 */ = {
+			isa = PBXGroup;
+			children = (
+				183577421EC430AE00F321F1 /* RealChooseChangePayPassVC.h */,
+				183577431EC430AE00F321F1 /* RealChooseChangePayPassVC.m */,
+				183577441EC430AE00F321F1 /* RealChooseChangePayPassVC.xib */,
+			);
+			name = "修改和忘记密码";
+			sourceTree = "<group>";
+		};
+		1835774D1EC4382400F321F1 /* 获取支付验码 */ = {
+			isa = PBXGroup;
+			children = (
+				183577471EC437F900F321F1 /* AccessCodeVC.h */,
+				183577481EC437F900F321F1 /* AccessCodeVC.m */,
+				183577491EC437F900F321F1 /* AccessCodeVC.xib */,
+			);
+			name = "获取支付验码";
+			sourceTree = "<group>";
+		};
 		184310441E6F9B83005521BF /* 优惠券列表 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3381,6 +3429,59 @@
 				184310491E6F9C39005521BF /* AddCouponDetailsVC.xib */,
 			);
 			name = "优惠券详情";
+			sourceTree = "<group>";
+		};
+		184C72041EC2F9260065EE65 /* 仿支付宝输入框 */ = {
+			isa = PBXGroup;
+			children = (
+				184C72011EC2F9150065EE65 /* SYPasswordView.h */,
+				184C72021EC2F9150065EE65 /* SYPasswordView.m */,
+			);
+			name = "仿支付宝输入框";
+			sourceTree = "<group>";
+		};
+		184C720A1EC3050D0065EE65 /* 密码管理 */ = {
+			isa = PBXGroup;
+			children = (
+				184C72101EC3113C0065EE65 /* 登录或支付 */,
+				184C720B1EC3107F0065EE65 /* 修改登录密码 */,
+				184C720F1EC310ED0065EE65 /* 修改支付密码 */,
+			);
+			name = "密码管理";
+			sourceTree = "<group>";
+		};
+		184C720B1EC3107F0065EE65 /* 修改登录密码 */ = {
+			isa = PBXGroup;
+			children = (
+				D9937D821DE056DF0001B575 /* NewChangePsWordViewController.h */,
+				D9937D831DE056DF0001B575 /* NewChangePsWordViewController.m */,
+			);
+			name = "修改登录密码";
+			sourceTree = "<group>";
+		};
+		184C720F1EC310ED0065EE65 /* 修改支付密码 */ = {
+			isa = PBXGroup;
+			children = (
+				1835773F1EC40AFF00F321F1 /* CheckOldPassVC.h */,
+				183577401EC40AFF00F321F1 /* CheckOldPassVC.m */,
+				184C720C1EC310CA0065EE65 /* ChangePayPassVC.h */,
+				184C720D1EC310CA0065EE65 /* ChangePayPassVC.m */,
+				184C72111EC31A770065EE65 /* ChangePayPassLastVC.h */,
+				184C72121EC31A770065EE65 /* ChangePayPassLastVC.m */,
+			);
+			name = "修改支付密码";
+			sourceTree = "<group>";
+		};
+		184C72101EC3113C0065EE65 /* 登录或支付 */ = {
+			isa = PBXGroup;
+			children = (
+				184C72051EC305000065EE65 /* ChangeLoginOrPayVC.h */,
+				184C72061EC305000065EE65 /* ChangeLoginOrPayVC.m */,
+				184C72071EC305000065EE65 /* ChangeLoginOrPayVC.xib */,
+				1835774C1EC4380E00F321F1 /* 修改和忘记密码 */,
+				1835774D1EC4382400F321F1 /* 获取支付验码 */,
+			);
+			name = "登录或支付";
 			sourceTree = "<group>";
 		};
 		1852FADC1D55C51A009CF1B2 /* 代金劵图 */ = {
@@ -3462,12 +3563,11 @@
 		1894115F1D816CE600314E11 /* 密码 */ = {
 			isa = PBXGroup;
 			children = (
-				D9937D821DE056DF0001B575 /* NewChangePsWordViewController.h */,
-				D9937D831DE056DF0001B575 /* NewChangePsWordViewController.m */,
 				18E3DA161D8287450089597B /* ChangePasswordViewController.h */,
 				18E3DA171D8287450089597B /* ChangePasswordViewController.m */,
 				18E3DA181D8287450089597B /* NewPasswordViewController.h */,
 				18E3DA191D8287450089597B /* NewPasswordViewController.m */,
+				184C72041EC2F9260065EE65 /* 仿支付宝输入框 */,
 			);
 			name = "密码";
 			sourceTree = "<group>";
@@ -5290,9 +5390,9 @@
 				D95869321E4D9C9600E91A47 /* ResetPhoneViewController.xib */,
 				D95869351E4DA4EE00E91A47 /* ResetPhoneNextVC.h */,
 				D95869361E4DA4EE00E91A47 /* ResetPhoneNextVC.m */,
+				D95869371E4DA4EE00E91A47 /* ResetPhoneNextVC.xib */,
 				18FCAD461E56A16800FF57D0 /* BindCustomView.h */,
 				18FCAD471E56A16800FF57D0 /* BindCustomView.m */,
-				D95869371E4DA4EE00E91A47 /* ResetPhoneNextVC.xib */,
 				D987BB1D1E78ED9A008AE24D /* LZDUserInfoVC.h */,
 				D987BB1E1E78ED9A008AE24D /* LZDUserInfoVC.m */,
 				D987BB1F1E78ED9A008AE24D /* LZDUserInfoVC.xib */,
@@ -6528,6 +6628,7 @@
 				D93C0D601D251E7B001A1AC1 /* 小标-15.png in Resources */,
 				D96555461E33306B0096D815 /* 登陆-05(2).png in Resources */,
 				D98FDF8A1E601C660057C206 /* AD_ad_qs@2x.png in Resources */,
+				184C72091EC305000065EE65 /* ChangeLoginOrPayVC.xib in Resources */,
 				D9AB25391D88E4ED000E9288 /* VoiceSearchFeedback011@2x.png in Resources */,
 				18BCCDCA1D3C9EE8005E145D /* back_04.png in Resources */,
 				D9E28FC61D2F75A9004514DF /* icon1.png in Resources */,
@@ -6592,6 +6693,7 @@
 				D93C0D631D251E7B001A1AC1 /* 小标-18.png in Resources */,
 				1CF2838F1C58C48900F3952A /* food.png in Resources */,
 				18F0320D1E5ED79300ACD261 /* tempProducts_08.png in Resources */,
+				1835774B1EC437F900F321F1 /* AccessCodeVC.xib in Resources */,
 				1CF283911C58C48900F3952A /* health.png in Resources */,
 				D947E4661D7D3BBA00F9FEE8 /* 聊天键盘-icon-选择照片@3x.png in Resources */,
 				D949C15A1CBF7E4D0091D8FC /* withdrawu.png in Resources */,
@@ -6843,6 +6945,7 @@
 				D94DF2321CAE08AB000D5B69 /* colletc_selected.png in Resources */,
 				D96555441E33306B0096D815 /* 登陆-03(2).png in Resources */,
 				D9F5E26C1E238DB5008B5000 /* 安全.png in Resources */,
+				183577461EC430AE00F321F1 /* RealChooseChangePayPassVC.xib in Resources */,
 				1CF6E4801C61E4350001159C /* guanggao@2x.png in Resources */,
 				D986A1C81DE57849007B798B /* PaySuccessVc.xib in Resources */,
 				D98E5C211E51525E009D56BF /* SRVideoPlayer.bundle in Resources */,
@@ -7002,6 +7105,7 @@
 				D9222B041D13C8EC00C82683 /* CreditThanViewController.m in Sources */,
 				1CB53C121C572019002B6CC1 /* LookAgoController.m in Sources */,
 				D958AD651E654CF200B0776F /* JHColumnChart.m in Sources */,
+				184C72031EC2F9150065EE65 /* SYPasswordView.m in Sources */,
 				D97B70301E2C90FE00CEAFC1 /* CardMarketModel.m in Sources */,
 				18F031F41E5ED34300ACD261 /* PointAllGetAndCostsVC.m in Sources */,
 				1CDCCD201C7594040094E70D /* KKRequestDataService.m in Sources */,
@@ -7028,6 +7132,7 @@
 				D94040441CBE353700EC98EA /* DelayViewController.m in Sources */,
 				D98787291E27229000C7A828 /* ComplaintVC.m in Sources */,
 				D9AB25191D88E482000E9288 /* EaseRecordView.m in Sources */,
+				184C72081EC305000065EE65 /* ChangeLoginOrPayVC.m in Sources */,
 				D9222B071D13DE3400C82683 /* BindBankCardViewController.m in Sources */,
 				185ABD881D80227900BD8097 /* UploadHistoryViewController.m in Sources */,
 				1A4173C61D787E9A00A70601 /* EMRemarkImageView.m in Sources */,
@@ -7077,6 +7182,7 @@
 				D9F2E9361E03D89F008F6517 /* OtherApplyViewController.m in Sources */,
 				D9DEED281CACED7C00ACDD00 /* UIImageView+HighlightedWebCache.m in Sources */,
 				1CB53C0C1C571FE1002B6CC1 /* NoEvaluateController.m in Sources */,
+				183577451EC430AE00F321F1 /* RealChooseChangePayPassVC.m in Sources */,
 				D9B3A48F1D73CFE800F3F27E /* LZDAnyView.m in Sources */,
 				D9DEED251CACED7C00ACDD00 /* UIImage+GIF.m in Sources */,
 				D9B3A5C31D74255700F3F27E /* PSTCollectionViewUpdateItem.m in Sources */,
@@ -7091,6 +7197,7 @@
 				18E3DA1A1D8287450089597B /* ChangePasswordViewController.m in Sources */,
 				D92C632B1CC8C8D4006768C6 /* AdminViewController.m in Sources */,
 				D958AD691E654CF200B0776F /* JHPieItemsView.m in Sources */,
+				183577411EC40AFF00F321F1 /* CheckOldPassVC.m in Sources */,
 				D98E5C001E515210009D56BF /* MASLayoutConstraint.m in Sources */,
 				185ABD871D80227900BD8097 /* QYShowResultView.m in Sources */,
 				D920B95D1DD05164001AC7F5 /* AdvertiseCell.m in Sources */,
@@ -7168,6 +7275,7 @@
 				D9DEED1B1CACED7C00ACDD00 /* NSData+ImageContentType.m in Sources */,
 				079387131C5620290021B385 /* Mycell.m in Sources */,
 				D9B3A5B01D74255700F3F27E /* EMSDWebImageManager.m in Sources */,
+				184C72131EC31A770065EE65 /* ChangePayPassLastVC.m in Sources */,
 				D9195D1A1E8218F200FB4367 /* PictureAndVeidoDetailVC.m in Sources */,
 				D9A6E46F1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m in Sources */,
 				D9FF0D721D52D6E900443312 /* ShopListTableViewCell.m in Sources */,
@@ -7191,6 +7299,7 @@
 				180D872A1E5AB9C600E7FFB4 /* AddCouponHomeVC.m in Sources */,
 				1C54234D1C9803E60028DC30 /* ShopLandController.m in Sources */,
 				D958AD6E1E654CF200B0776F /* JHTableChart.m in Sources */,
+				184C720E1EC310CA0065EE65 /* ChangePayPassVC.m in Sources */,
 				18E9E1451D88E8EF007981B6 /* PersonDetailViewController.m in Sources */,
 				D9CF3FA71D76730300D9D0EC /* GroupViewController.m in Sources */,
 				1CF2836E1C58899900F3952A /* FirstLikeCell.m in Sources */,
@@ -7290,6 +7399,7 @@
 				D9A06B5A1D8679C30037795B /* EMAudioPlayerUtil.m in Sources */,
 				D925E6451CC60F680020CEC7 /* AdvertViewController.m in Sources */,
 				D9F3A3CE1D7959B700F06E0C /* PublicGroupDetailViewController.m in Sources */,
+				1835774A1EC437F900F321F1 /* AccessCodeVC.m in Sources */,
 				D9C0E9611DCC891500FD1199 /* HomeShopModel.m in Sources */,
 				D97F5FFE1D62B690000EE794 /* HGDQQRCodeView.m in Sources */,
 				182988411E723F4200164F32 /* TAAbstractDotView.m in Sources */,

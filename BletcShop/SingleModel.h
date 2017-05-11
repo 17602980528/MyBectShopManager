@@ -22,5 +22,6 @@
 @property(nonatomic,copy)NSString *commmitDate;//提交日期
 @property(nonatomic,copy)NSString *advertID;//活动ID
 @property(nonatomic)NSInteger advertIndex;
+@property(nonatomic,copy)NSString *payPass;
 +(SingleModel *)sharedManager;
 @end
