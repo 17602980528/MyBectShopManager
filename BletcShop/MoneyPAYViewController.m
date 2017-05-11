@@ -42,33 +42,60 @@
 }
 -(void)btnClick:(UIButton *)sender{
     [textTF resignFirstResponder];
-    //判断输入的金额和卡的余额对比，如果小于，就弹出输入密码警告框，否就弹出提示，余额不够
     
-    NSArray *array=[self.card_dic[@"card_remain"] componentsSeparatedByString:@"元"];
-//    NSLog(@"---%lf",)
-    if ([textTF.text floatValue]>0&&[textTF.text floatValue]<=[array[0] floatValue]) {
-        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"登录密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-        alertView.alertViewStyle=UIAlertViewStyleSecureTextInput;
-        [alertView show];
-    }else{
-        if ([textTF.text isEqualToString:@""]) {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"没有输入金额,请输入金额", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            [hud hideAnimated:YES afterDelay:2.f];
-        }else{
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"输入金额大于当前卡余额", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            [hud hideAnimated:YES afterDelay:2.f];
+    
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+
+    NSString *pay_passwd= [NSString getTheNoNullStr:appdelegate.userInfoDic[@"pay_passwd"] andRepalceStr:@""];
+    
+    
+        
+        //判断输入的金额和卡的余额对比，如果小于，就弹出输入密码警告框，否就弹出提示，余额不够
+        
+        NSArray *array=[self.card_dic[@"card_remain"] componentsSeparatedByString:@"元"];
+        //    NSLog(@"---%lf",)
+        if ([textTF.text floatValue]>0&&[textTF.text floatValue]<=[array[0] floatValue]) {
+            
+            if ([pay_passwd isEqualToString:@"未设置"]) {
+                
+                UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还没有设置支付密码!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去设置", nil];
+                alt.tag = 888;
+                [alt show];
+                
+            }else{
+
+                
+                
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"支付密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                alertView.alertViewStyle=UIAlertViewStyleSecureTextInput;
+                [alertView show];
+
+            }
+            
+                }else{
+            if ([textTF.text isEqualToString:@""]) {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                hud.label.text = NSLocalizedString(@"没有输入金额,请输入金额", @"HUD message title");
+                hud.label.font = [UIFont systemFontOfSize:13];
+                [hud hideAnimated:YES afterDelay:2.f];
+            }else{
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                hud.label.text = NSLocalizedString(@"输入金额大于当前卡余额", @"HUD message title");
+                hud.label.font = [UIFont systemFontOfSize:13];
+                [hud hideAnimated:YES afterDelay:2.f];
+            }
         }
-    }
+
+  
+    
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if (alertView.tag==999) {
+    if (alertView.tag ==888) {
+        NSLog(@"去设置");
+        
+    }else if (alertView.tag==999) {
         //支付成功提示框
         if (buttonIndex==0) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -83,15 +110,53 @@
 
         if (buttonIndex==1) {
             //判断密码对不对，如果对，调支付接口
-            AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-
-            if ([tf.text isEqualToString:appdelegate.userInfoDic[@"passwd"]]) {
-                [self postSocketCardPayAction];
-            }
+            
+            [self checkPayPassWd:tf.text];
+            
+//            AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+//
+//            if ([tf.text isEqualToString:appdelegate.userInfoDic[@"passwd"]]) {
+//                [self postSocketCardPayAction];
+//            }
         }
  
     }
     
+}
+
+-(void)checkPayPassWd:(NSString *)payPassWd{
+    
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/passwd/checkPayPasswd",BASEURL];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:payPassWd forKey:@"pay_passwd"];
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"result---_%@",result);
+        if ([result[@"result_code"] isEqualToString:@"access"]) {
+            [self postSocketCardPayAction];
+
+        }else{
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.label.text = @"支付密码错误,请重新输入!";
+            hud.mode = MBProgressHUDModeText;
+            hud.label.font =[UIFont systemFontOfSize:13];
+            [hud hideAnimated:YES afterDelay:1.5];
+        }
+        
+
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 -(void)postSocketCardPayAction
 {
@@ -207,14 +272,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
