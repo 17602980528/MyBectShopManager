@@ -129,6 +129,7 @@
     for (UIView *view in cell.subviews) {
         [view removeFromSuperview];
     }
+    //用户
     if(tableView==_tableView2)
     {
         UILabel *yonghuLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(18, 15-2, SCREENWIDTH-18, 15+4)];
@@ -173,10 +174,7 @@
         yonghuLabel.font = [UIFont systemFontOfSize:15];
         [cell addSubview:yonghuLabel];
         
-        if (_array.count>0) {
-            yonghuLabel.text = [NSString getTheNoNullStr:[[_array objectAtIndex:indexPath.row] objectForKey:@"name"] andRepalceStr:@"未知"];
-        }
-        //储值额
+               //储值额
         UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(18, 46, SCREENWIDTH/2-18, 15)];
         moneyLabel.text = @"营业总额:";
         moneyLabel.textColor=[UIColor grayColor];
@@ -185,10 +183,7 @@
         moneyLabel.font = [UIFont systemFontOfSize:13];
         [cell addSubview:moneyLabel];
         
-        if (_array.count>0) {
-            moneyLabel.text = [NSString stringWithFormat:@"营业总额 %@",[[_array objectAtIndex:indexPath.row] objectForKey:@"sum"]];
-        }
-       
+        
         //提成
         UILabel *tichengLabel = [[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2+10, 46, SCREENWIDTH/2-10, 15)];
         tichengLabel.text = @"推荐奖励:";
@@ -198,8 +193,40 @@
         tichengLabel.font = [UIFont systemFontOfSize:12];
         [cell addSubview:tichengLabel];
         
+        //审核状态
+        UILabel *statelab = [[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2+10, 15-2, SCREENWIDTH/2-10, 15)];
+        statelab.textColor=[UIColor purpleColor];
+        statelab.font = [UIFont systemFontOfSize:13];
+        [cell addSubview:statelab];
+
+        
         if (_array.count>0) {
+            
+            yonghuLabel.text = [NSString getTheNoNullStr:[[_array objectAtIndex:indexPath.row] objectForKey:@"name"] andRepalceStr:@"未知"];
+
+            moneyLabel.text = [NSString stringWithFormat:@"营业总额 %@",[[_array objectAtIndex:indexPath.row] objectForKey:@"sum"]];
+
             tichengLabel.text = [NSString stringWithFormat:@"推荐奖励 %@",[[_array objectAtIndex:indexPath.row] objectForKey:@"income"]];
+            
+            NSString *state_s = [NSString getTheNoNullStr:[[_array objectAtIndex:indexPath.row] objectForKey:@"state"] andRepalceStr:@""];
+            
+            if ([state_s isEqualToString:@"ONLINE"]) {
+                
+                statelab.text = @"已上线!";
+                
+                
+            }else if ([state_s isEqualToString:@"Auditing"]){
+                
+                statelab.text = @"审核中!";
+
+            }else if ([state_s isEqualToString:@"Fail"]){
+                statelab.text = @"审核失败!";
+
+            }else{
+                statelab.text = @"";
+ 
+            }
+
         }
         
     }
