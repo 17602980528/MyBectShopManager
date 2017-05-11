@@ -16,6 +16,7 @@
 #import "UserInfoEditVC.h"
 
 #import "NewModelImageViewController.h"
+#import "ChangeLoginOrPayVC.h"
 @interface LZDUserInfoVC ()<UITableViewDelegate,UITableViewDataSource,NewModelImageViewControllerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 {
@@ -39,7 +40,7 @@
 @implementation LZDUserInfoVC
 -(NSArray *)title_A{
     if (!_title_A) {
-        _title_A = @[@"昵称",@"地址",@"手机号",@"邮箱",@"性别",@"生日",@"职业",@"教育",@"婚姻",@"爱好",@"修改密码"];
+        _title_A = @[@"昵称",@"地址",@"手机号",@"邮箱",@"性别",@"生日",@"职业",@"教育",@"婚姻",@"爱好",@"密码管理"];
     }
     return _title_A;
 }
@@ -91,7 +92,7 @@
         
         str = [[[NSString alloc]initWithFormat:@"%@%@",HEADIMAGE,[appdelegate.userInfoDic objectForKey:@"headimage"]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         DebugLog(@"headerImg ==%@",str);
-        
+        cell.headImg.contentMode=UIViewContentModeScaleAspectFill;
         [cell.headImg sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"头像.png"] options:SDWebImageRetryFailed];
         
         return cell;
@@ -147,8 +148,12 @@
     }
     
     if (indexPath.row ==11) {
-        NewChangePsWordViewController *passVC=[[NewChangePsWordViewController alloc]init];
+        //ChangeLoginOrPayVC
+        ChangeLoginOrPayVC *passVC=[[ChangeLoginOrPayVC alloc]init];
         [self.navigationController pushViewController:passVC animated:YES];
+//        NewChangePsWordViewController *passVC=[[NewChangePsWordViewController alloc]init];
+//        [self.navigationController pushViewController:passVC animated:YES];
+        
 
     }
     

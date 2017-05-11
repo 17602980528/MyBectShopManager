@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=RGB(240, 240, 240);
-    self.navigationItem.title=@"修改密码";
+    self.navigationItem.title=@"登录密码";
     UIBarButtonItem *saveButton=[[UIBarButtonItem alloc]initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(saveBtnClick)];
     self.navigationItem.rightBarButtonItem=saveButton;
 
@@ -297,7 +297,9 @@
     
 }
 
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 
 @end
