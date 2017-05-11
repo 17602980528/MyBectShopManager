@@ -113,7 +113,7 @@
         }else{
             
             self.payCount=[textTF.text intValue];
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"登录密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"支付密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             alertView.alertViewStyle=UIAlertViewStyleSecureTextInput;
             [alertView show];
         }
