@@ -7,7 +7,6 @@
 //
 
 #import "SYPasswordView.h"
-#import "SingleModel.h"
 #define kDotSize CGSizeMake (10, 10) //密码点的大小
 #define kDotCount 6  //密码个数
 #define K_Field_Height self.frame.size.height  //每一个输入框的高度等于当前view的高度

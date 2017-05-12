@@ -46,6 +46,7 @@
 		182988501E778EF100164F32 /* PayBaseCountOrTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1829884F1E778EF100164F32 /* PayBaseCountOrTimeVC.m */; };
 		182988571E7794FE00164F32 /* PayBaseClickCountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182988561E7794FE00164F32 /* PayBaseClickCountVC.m */; };
 		1829885E1E77D1CA00164F32 /* SingleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1829885D1E77D1CA00164F32 /* SingleModel.m */; };
+		182E7D441EC5604D009CAC02 /* PayCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182E7D431EC5604D009CAC02 /* PayCustomView.m */; };
 		182FAAA61D502FAD0018F872 /* custom3.png in Resources */ = {isa = PBXBuildFile; fileRef = 182FAAA51D502FAD0018F872 /* custom3.png */; };
 		18302A2A1DAC8AE200E6EF8C /* ShopRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */; };
 		18302A2D1DAC8B0E00E6EF8C /* CanPayCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A2C1DAC8B0E00E6EF8C /* CanPayCardViewController.m */; };
@@ -1199,6 +1200,8 @@
 		182988561E7794FE00164F32 /* PayBaseClickCountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayBaseClickCountVC.m; sourceTree = "<group>"; };
 		1829885C1E77D1CA00164F32 /* SingleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleModel.h; sourceTree = "<group>"; };
 		1829885D1E77D1CA00164F32 /* SingleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleModel.m; sourceTree = "<group>"; };
+		182E7D421EC5604D009CAC02 /* PayCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayCustomView.h; sourceTree = "<group>"; };
+		182E7D431EC5604D009CAC02 /* PayCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayCustomView.m; sourceTree = "<group>"; };
 		182FAAA51D502FAD0018F872 /* custom3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom3.png; sourceTree = "<group>"; };
 		18302A281DAC8AE200E6EF8C /* ShopRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopRegisterController.h; sourceTree = "<group>"; };
 		18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopRegisterController.m; sourceTree = "<group>"; };
@@ -3443,6 +3446,7 @@
 		184C720A1EC3050D0065EE65 /* 密码管理 */ = {
 			isa = PBXGroup;
 			children = (
+				184C72041EC2F9260065EE65 /* 仿支付宝输入框 */,
 				184C72101EC3113C0065EE65 /* 登录或支付 */,
 				184C720B1EC3107F0065EE65 /* 修改登录密码 */,
 				184C720F1EC310ED0065EE65 /* 修改支付密码 */,
@@ -3567,7 +3571,6 @@
 				18E3DA171D8287450089597B /* ChangePasswordViewController.m */,
 				18E3DA181D8287450089597B /* NewPasswordViewController.h */,
 				18E3DA191D8287450089597B /* NewPasswordViewController.m */,
-				184C72041EC2F9260065EE65 /* 仿支付宝输入框 */,
 			);
 			name = "密码";
 			sourceTree = "<group>";
@@ -4031,6 +4034,8 @@
 				18F4CD481D6FD6BD008FBAD1 /* CountPAYViewController.m */,
 				18E3DA131D82460A0089597B /* SoundPaly.h */,
 				18E3DA141D82460A0089597B /* SoundPaly.m */,
+				182E7D421EC5604D009CAC02 /* PayCustomView.h */,
+				182E7D431EC5604D009CAC02 /* PayCustomView.m */,
 				D9C009E21E28C29C009EAA62 /* 分享和转让 */,
 				D98787251E27223800C7A828 /* 我要投诉 */,
 				D9BB4DDF1E050E7A00971BCC /* 预约 */,
@@ -7447,6 +7452,7 @@
 				D98ECBC61D9CBACD00BEDD57 /* LZDCashViewController.m in Sources */,
 				D9B3A5C21D74255700F3F27E /* PSTCollectionViewLayout.m in Sources */,
 				D94C5F3D1D912DC10063EB27 /* UIColor+Hex.m in Sources */,
+				182E7D441EC5604D009CAC02 /* PayCustomView.m in Sources */,
 				D947E4741D7D4CB000F9FEE8 /* SDRefreshHeaderView.m in Sources */,
 				D98E5C1C1E51524D009D56BF /* SRVideoOperationTip.m in Sources */,
 				D9B3A5B71D74255700F3F27E /* UIImage+EMWebP.m in Sources */,

@@ -9,10 +9,13 @@
 #import "CountPAYViewController.h"
 #import "SoundPaly.h"
 #import "ChangePayPassVC.h"
-@interface CountPAYViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
+#import "PayCustomView.h"
+#import "CheckOldPassVC.h"
+@interface CountPAYViewController ()<UITextFieldDelegate,UIAlertViewDelegate,PayCustomViewDelegate>
 {
     UITextField *textTF;
     NSInteger count;
+    PayCustomView *view;
 }
 @end
 
@@ -58,13 +61,13 @@
     textTF.delegate=self;
     textTF.borderStyle=UITextBorderStyleRoundedRect;
     [self.view addSubview:textTF];
-//    countLab=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-25, 75, 50, 50)];
-//    countLab.textColor=[UIColor redColor];
-//    countLab.text=[[NSString alloc]initWithFormat:@"%ld",(long)count];
-//    countLab.font=[UIFont systemFontOfSize:20.0f];
-//    countLab.textAlignment=1;
+    //    countLab=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-25, 75, 50, 50)];
+    //    countLab.textColor=[UIColor redColor];
+    //    countLab.text=[[NSString alloc]initWithFormat:@"%ld",(long)count];
+    //    countLab.font=[UIFont systemFontOfSize:20.0f];
+    //    countLab.textAlignment=1;
     [self.view addSubview:textTF];
-
+    
 }
 -(void)redBtnClick{
     if (count!=0) {
@@ -93,7 +96,7 @@
     
     
     NSString *allString = self.card_dic[@"card_remain"];;
-
+    
     
     double onePrice = [oneString doubleValue];
     double allPrice = [allString doubleValue];
@@ -113,9 +116,11 @@
         }else{
             
             self.payCount=[textTF.text intValue];
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"支付密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-            alertView.alertViewStyle=UIAlertViewStyleSecureTextInput;
-            [alertView show];
+            
+            view=[[PayCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+            view.delegate=self;
+            [view.forgotButton addTarget:self action:@selector(forgetPayPass) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:view];
         }
         
     }else{
@@ -124,7 +129,7 @@
         hud.label.text = NSLocalizedString(@"可消费次数不足", @"HUD message title");
         hud.label.font = [UIFont systemFontOfSize:13];
         [hud hideAnimated:YES afterDelay:2.f];
-
+        
     }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -144,22 +149,7 @@
         
     }else{
         //得到输入框
-        UITextField *tf=[alertView textFieldAtIndex:0];
-        [tf resignFirstResponder];
-
-        if (buttonIndex==1) {
-            //判断密码对不对，如果对，调支付接口
-            
-            [self checkPayPassWd:tf.text];
-
-//            AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//            //        NSLog(@"%@",appdelegate.userInfoArray);
-//            if ([tf.text isEqualToString:appdelegate.userInfoDic[@"passwd"]]) {
-//                //pay
-//                [self postSocketCardPayAction];
-//            }
-        }
-
+        
     }
     
 }
@@ -181,6 +171,7 @@
         
         NSLog(@"result---_%@",result);
         if ([result[@"result_code"] isEqualToString:@"access"]) {
+            [view removeFromSuperview];
             [self postSocketCardPayAction];
             
         }else{
@@ -201,15 +192,15 @@
 
 -(void)postSocketCardPayAction
 {
-
+    
     NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/card/pay",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-
+    
     [params setObject:self.card_dic[@"user"] forKey:@"uuid"];
     [params setObject:self.card_dic[@"merchant"] forKey:@"muid"];
     [params setObject:self.card_dic[@"card_code"] forKey:@"cardCode"];
     [params setObject:self.card_dic[@"card_level"] forKey:@"cardLevel"];
-   
+    
     
     int cishu =[self.card_dic[@"rule"] intValue];
     float pay = (self.all/cishu)*self.payCount;
@@ -218,13 +209,13 @@
     
     
     [params setObject:[[NSString alloc] initWithFormat:@"%.2f",pay] forKey:@"sum"];
-
+    
     NSLog(@"paramer===%@",params);
-
+    
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          NSLog(@"self.payCardArray%@", result);
-
+         
          
          if ([result[@"result_code"] intValue]==1) {
              SoundPaly *sound=[SoundPaly sharedManager:@"sms-received1" type:@"caf"];
@@ -237,8 +228,8 @@
              
              
              //发送订单详情,获取店名
- 
-//             [self getShopName];
+             
+             //             [self getShopName];
          }
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -271,39 +262,39 @@
 
 -(void)postOrderInfoWithShopName:(NSString*)shopName
 {
-
+    
     NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/cnCmt",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-
+    
     
     [params setObject:self.card_dic[@"user"] forKey:@"uuid"];
     
     
     NSString *orderInfoMessage = [[NSString alloc]initWithFormat:@"%@%@结算次数%@%@",self.card_dic[@"merchant"],PAY_USCS,PAY_NP,textTF.text];
-
+    
     
     int cishu =[self.card_dic[@"rule"] intValue];
     float pay = (self.all/cishu)*self.payCount;
     
     [params setObject:[[NSString alloc] initWithFormat:@"%.2f",pay] forKey:@"sum"];
     
-
-
+    
+    
     [params setObject:orderInfoMessage forKey:@"content"];
     NSDateFormatter* matter = [[NSDateFormatter alloc]init];
     [matter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate* date  = [NSDate date];
     NSString *NowDate = [matter stringFromDate:date];
     [params setObject:NowDate forKey:@"datetime"];
-
+    
     NSLog(@"发送订单---%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          NSLog(@"result%@", result);
-
+         
          if ([result[@"result_code"] intValue]==1) {
              ;
-
+             
              
          }
          else
@@ -322,6 +313,14 @@
 }
 -(void)dismissSelf{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)confirmPassRightOrWrong:(NSString *)pass{
+    [self checkPayPassWd:pass];
+}
+-(void)forgetPayPass{
+    CheckOldPassVC *vc=[[CheckOldPassVC alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
