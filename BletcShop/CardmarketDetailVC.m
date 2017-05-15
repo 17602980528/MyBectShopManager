@@ -573,7 +573,7 @@
     
     
     
-    NSLog(@"params-----%@",params);
+    NSLog(@"params-----%@===%@",params,url);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"银联支付===%@", result);

@@ -237,6 +237,10 @@
             [cardImageView addSubview:deadLine];
 
             
+            if ([self.card_dic[@"indate"] isEqualToString:@"no"]) {
+               deadLine.text = @"无限期";
+            }
+            
             
             UILabel *shopName=[[UILabel alloc]initWithFrame:CGRectMake(12, 0, downView.width-91-12, downView.height)];
             shopName.text=[NSString getTheNoNullStr:cardInfo_dic[@"store"] andRepalceStr:@""];
