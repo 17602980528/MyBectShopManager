@@ -363,8 +363,18 @@
  */
 -(void)postPaymentsRequest
 {
-    NSString *url ;
-    url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/AdvertPay.php";
+//    NSString *url ;
+//    url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/AdvertPay.php";
+    
+#ifdef DEBUG
+    NSString *url = @"http://101.201.100.191//unionpay/demo/api_05_app/AdvertPay.php";
+    
+    
+#else
+    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/AdvertPay.php";
+    
+    
+#endif
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];

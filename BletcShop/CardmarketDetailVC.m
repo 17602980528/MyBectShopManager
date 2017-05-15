@@ -533,7 +533,18 @@
     
     if ([_model.method isEqualToString:@"share"]) {
         NSLog(@"蹭卡");
+        
+//        url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Share.php";
+        
+#ifdef DEBUG
+       url = @"http://101.201.100.191//unionpay/demo/api_05_app/Share.php";
+        
+        
+#else
         url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Share.php";
+        
+        
+#endif
         
         [params setValue:_model.card_type forKey:@"card_type"];
         [params setValue:allPayMoney forKey:@"b_sum"];
@@ -544,8 +555,17 @@
         
     }else{
         NSLog(@"买二手卡");
+//        url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Transfer.php";
+        
+#ifdef DEBUG
+        url = @"http://101.201.100.191//unionpay/demo/api_05_app/Transfer.php";
+        
+        
+#else
         url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Transfer.php";
         
+        
+#endif
         [params setValue:priceString forKey:@"sum"];
         
     }
