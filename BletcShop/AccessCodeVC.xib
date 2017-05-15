@@ -80,8 +80,8 @@
                         <constraint firstItem="spj-p0-dqK" firstAttribute="top" secondItem="9qT-vL-Bpq" secondAttribute="top" constant="5" id="wsC-JD-RPu"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dym-rM-CP3">
-                    <rect key="frame" x="15" y="220" width="345" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dym-rM-CP3">
+                    <rect key="frame" x="15" y="219" width="345" height="50"/>
                     <color key="backgroundColor" red="0.88627450980392153" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="ohk-UH-MvO"/>

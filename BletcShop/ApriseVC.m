@@ -89,6 +89,9 @@
     }
     if (_dataAray.count>0) {
          [ cell.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,_dataAray[indexPath.row][@"headimage"]]] placeholderImage:[UIImage imageNamed:@"3.1-02"]];
+        cell.headImageView.layer.cornerRadius=cell.headImageView.width/2;
+        cell.headImageView.clipsToBounds=YES;
+        cell.headImageView.contentMode=UIViewContentModeScaleAspectFill;
         cell.nickNameLable.text=_dataAray[indexPath.row][@"nickname"];
         cell.apriseLable.text=_dataAray[indexPath.row][@"content"];
         cell.timeLable.text=_dataAray[indexPath.row][@"datetime"];
