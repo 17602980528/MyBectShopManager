@@ -120,6 +120,15 @@
         cell.couponMoney.text=_dataArray[indexPath.row][@"sum"];
         cell.deadTime.text=[NSString stringWithFormat:@"有效期为:%@～%@",_dataArray[indexPath.row][@"date_start"],_dataArray[indexPath.row][@"date_end"]];
         cell.limitLab.text=_dataArray[indexPath.row][@"content"];
+        
+        
+        if ([_dataArray[indexPath.row][@"validate"] isEqualToString:@"true"]) {
+            cell.showImg.hidden = YES ;
+        }else{
+            cell.showImg.hidden = NO ;
+            
+        }
+
 
     }
     

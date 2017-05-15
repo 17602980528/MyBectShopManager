@@ -19,6 +19,7 @@ static NSString *identifier = @"couponCellId";
 @property (nonatomic , strong) UILabel *deadTime;// 限制时间
 @property (nonatomic , strong) UILabel *limitLab;// 满多少可用
 @property (nonatomic , strong) UIImageView *headImg;// 头像
+@property (nonatomic , strong) UIImageView *showImg;// 过期
 
 +(instancetype)couponCellWithTableView:(UITableView*)tableView;
 

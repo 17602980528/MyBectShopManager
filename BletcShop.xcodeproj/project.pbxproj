@@ -703,6 +703,7 @@
 		D9764E801DD591A500B088DE /* AddBankAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9764E7F1DD591A500B088DE /* AddBankAccountVC.m */; };
 		D9764E8F1DD5B62100B088DE /* PointConvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9764E8C1DD5B62100B088DE /* PointConvertViewController.m */; };
 		D9764E901DD5B62100B088DE /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9764E8E1DD5B62100B088DE /* THProgressView.m */; };
+		D977C1461EC97BE800CA5AF5 /* WechatIMG16.png in Resources */ = {isa = PBXBuildFile; fileRef = D977C1451EC97BE800CA5AF5 /* WechatIMG16.png */; };
 		D97B70281E2C5E7300CEAFC1 /* CardMarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D97B70271E2C5E7300CEAFC1 /* CardMarketViewController.m */; };
 		D97B702C1E2C62AC00CEAFC1 /* CardMarketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D97B702A1E2C62AC00CEAFC1 /* CardMarketCell.m */; };
 		D97B70301E2C90FE00CEAFC1 /* CardMarketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D97B702F1E2C90FE00CEAFC1 /* CardMarketModel.m */; };
@@ -2229,6 +2230,7 @@
 		D9764E8C1DD5B62100B088DE /* PointConvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointConvertViewController.m; sourceTree = "<group>"; };
 		D9764E8D1DD5B62100B088DE /* THProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THProgressView.h; sourceTree = "<group>"; };
 		D9764E8E1DD5B62100B088DE /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
+		D977C1451EC97BE800CA5AF5 /* WechatIMG16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WechatIMG16.png; sourceTree = "<group>"; };
 		D97B70261E2C5E7300CEAFC1 /* CardMarketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMarketViewController.h; sourceTree = "<group>"; };
 		D97B70271E2C5E7300CEAFC1 /* CardMarketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMarketViewController.m; sourceTree = "<group>"; };
 		D97B70291E2C62AC00CEAFC1 /* CardMarketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMarketCell.h; sourceTree = "<group>"; };
@@ -4705,6 +4707,7 @@
 				D9329CCF1D49AFFE00BC84F4 /* 代金券.png */,
 				D94B52521D4AE6D800C067B3 /* 代金券-01.jpg */,
 				D94B52541D4AEA4500C067B3 /* 代金券-03.png */,
+				D977C1451EC97BE800CA5AF5 /* WechatIMG16.png */,
 				D936F5811D473CBF00424B22 /* MyCashCouponViewController.h */,
 				D936F5821D473CBF00424B22 /* MyCashCouponViewController.m */,
 			);
@@ -6820,6 +6823,7 @@
 				D95C84DB1E34602E0028C440 /* 引导页-03.png in Resources */,
 				D953B7741D3F1B7100C5D5A9 /* 小标-24.png in Resources */,
 				D94C5F3A1D90FD4A0063EB27 /* 1 界面-01.png in Resources */,
+				D977C1461EC97BE800CA5AF5 /* WechatIMG16.png in Resources */,
 				D92302611D1528BB008FB9A9 /* entrance_selected.png in Resources */,
 				D939D6C51E9B17CD00D0569E /* AllSenderMessageViewControlleVC.xib in Resources */,
 				D9637DFF1D59BAF900C19D0B /* admin_p.png in Resources */,

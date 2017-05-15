@@ -146,6 +146,12 @@
         cell.couponMoney.text=dic[@"sum"];
         cell.deadTime.text= [NSString stringWithFormat:@"%@~%@",dic[@"date_start"],dic[@"date_end"]];
         cell.limitLab.text=dic[@"content"];
+        if ([dic[@"validate"] isEqualToString:@"true"]) {
+            cell.showImg.hidden = YES ;
+        }else{
+            cell.showImg.hidden = NO ;
+
+        }
         
     }
     
@@ -172,11 +178,16 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     }else{
-        CouponIntroduceVC *vc=[[CouponIntroduceVC alloc]init];
-        vc.infoDic=_couponArray[indexPath.row];
-        vc.index=0;
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if ([_couponArray[indexPath.row][@"validate"] isEqualToString:@"true"]) {
+            
+            CouponIntroduceVC *vc=[[CouponIntroduceVC alloc]init];
+            vc.infoDic=_couponArray[indexPath.row];
+            vc.index=0;
+            [self.navigationController pushViewController:vc animated:YES];
 
+        }
+       
     }
 }
 

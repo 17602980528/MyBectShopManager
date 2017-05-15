@@ -513,12 +513,21 @@
         {
             if(!([self.moneyString floatValue]<1))
             {
-                MyCashCouponViewController *choiceView = [[MyCashCouponViewController alloc]init];
-                choiceView.muid =  self.cardListArray[selectRow][@"merchant"];
-                choiceView.moneyString = self.moneyString;
-                choiceView.useCoupon = 100;
-                choiceView.delegate = self;
-                [self.navigationController pushViewController:choiceView animated:YES];
+                if (self.Type == Wares) {
+                    self.Type = 888;
+                    [self.myTable reloadData];
+
+                    
+                }else{
+                    MyCashCouponViewController *choiceView = [[MyCashCouponViewController alloc]init];
+                    choiceView.muid =  self.cardListArray[selectRow][@"merchant"];
+                    choiceView.moneyString = self.moneyString;
+                    choiceView.useCoupon = 100;
+                    choiceView.delegate = self;
+                    [self.navigationController pushViewController:choiceView animated:YES];
+                }
+
+               
             }
             
         }
@@ -526,7 +535,13 @@
         {
             if(!((([self.moneyString floatValue])/2)<1)){
                 self.pay_Type=@"rp";
-                self.Type = points;
+                if (self.Type == points) {
+                    self.Type = 888;
+
+                }else{
+                    self.Type = points;
+
+                }
                 self.coup_dic=[NSDictionary dictionaryWithObject:@"0元" forKey:@"type"];
                 [self.myTable reloadData];
             }

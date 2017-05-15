@@ -123,6 +123,18 @@
 
     self.limitLab = limitLab;
     
+        UIImageView *validateImg = [[UIImageView alloc]init];
+        
+        validateImg.bounds = CGRectMake(0, 0, backView.height*0.8, backView.height*0.8);
+        validateImg.center = CGPointMake(SCREENWIDTH -backView.height*0.8, backView.center.y);
+    validateImg.layer.cornerRadius = validateImg.height/2;
+    validateImg.layer.masksToBounds = YES;
+    validateImg.hidden = NO;
+    validateImg.image = [UIImage imageNamed:@"WechatIMG16"];
+//        validateImg.backgroundColor = RGB(234, 234, 234);
+        [self addSubview:validateImg];
+ 
+    self.showImg = validateImg;
     
 }
 @end
