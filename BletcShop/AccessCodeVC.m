@@ -19,15 +19,22 @@
 - (IBAction)commitBtnClick:(id)sender {
     
     [self.codeTF resignFirstResponder];
-    
-    NSLog(@"----/%@/====/%@/",self.codeTF.text,self.array_code[0]);
-    
-    if ([self.codeTF.text isEqualToString:self.array_code[0]]) {
-        ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+       if (![self.codeTF.text isEqualToString:@""]) {
+           if (self.array_code&&self.array_code.count>0) {
+               if ([self.codeTF.text isEqualToString:self.array_code[0]]) {
+                   ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
+                   [self.navigationController pushViewController:vc animated:YES];
+               }else{
+                   [self showHint:@"验证码输入错误"];
+               }
+           }else{
+                [self showHint:@"验证码输入错误"];
+           }
+       
     }else{
-        [self showHint:@"验证码输入错误"];
+         [self showHint:@"请输入验证码"];
     }
+   
 
 }
 - (IBAction)sendBtnClick:(id)sender {
