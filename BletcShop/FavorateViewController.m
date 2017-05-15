@@ -8,7 +8,7 @@
 
 #import "FavorateViewController.h"
 #import "UIImageView+WebCache.h"
-#import "SellerViewController.h"
+#import "NewShopDetailVC.h"
 
 
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
@@ -163,7 +163,7 @@
     // 进入下层入口
     NSMutableDictionary *dic = [self.favorateShopArray objectAtIndex:indexPath.row];
     
-    SellerViewController *vc= [self startSellerView:dic];
+    NewShopDetailVC *vc= [self startSellerView:dic];
     
     vc.videoID=[NSString getTheNoNullStr:dic[@"video"] andRepalceStr:@""];
     [self.navigationController pushViewController:vc animated:YES];
@@ -203,8 +203,8 @@
     
     
 }
--(SellerViewController*)startSellerView:(NSMutableDictionary*)dic{
-    SellerViewController *controller = [[SellerViewController alloc]init];
+-(NewShopDetailVC*)startSellerView:(NSMutableDictionary*)dic{
+    NewShopDetailVC *controller = [[NewShopDetailVC alloc]init];
     
     controller.infoDic = dic;
     

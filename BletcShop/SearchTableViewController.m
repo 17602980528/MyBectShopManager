@@ -8,7 +8,7 @@
 
 #import "SearchTableViewController.h"
 #import "UIImageView+WebCache.h"
-#import "SellerViewController.h"
+#import "NewShopDetailVC.h"
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
@@ -302,7 +302,7 @@
     
     NSMutableDictionary *shopInfoDic = [self.searchList objectAtIndex:indexPath.row];
     
-    SellerViewController *vc= [self startSellerView:shopInfoDic];
+    NewShopDetailVC *vc= [self startSellerView:shopInfoDic];
     vc.videoID=[NSString getTheNoNullStr:shopInfoDic[@"video"] andRepalceStr:@""];
     [self.navigationController pushViewController:vc animated:YES];
 //    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/videoGet",BASEURL];
@@ -341,9 +341,9 @@
 }
 
 
--(SellerViewController *)startSellerView:(NSMutableDictionary*)dic{
+-(NewShopDetailVC *)startSellerView:(NSMutableDictionary*)dic{
     
-    SellerViewController *controller = [[SellerViewController alloc]init];
+    NewShopDetailVC *controller = [[NewShopDetailVC alloc]init];
     
     controller.infoDic = dic;
     

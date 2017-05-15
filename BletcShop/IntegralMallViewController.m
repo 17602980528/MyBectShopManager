@@ -328,7 +328,7 @@ static NSString *const headId = @"headId";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    NSLog(@"===%@",_data_A[indexPath.row]);
     
     ConvertCostVC *pointCostVC=[[ConvertCostVC alloc]init];
     pointCostVC.infoDic=_data_A[indexPath.row];

@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "TopActiveCell.h"
 
-#import "SellerViewController.h"
+#import "NewShopDetailVC.h"
 @interface TopActiveListTableVC ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) NSArray *data_A;
@@ -100,7 +100,7 @@
     // 进入下层入口
     NSMutableDictionary *dic = [self.data_A objectAtIndex:indexPath.row];
     
-    SellerViewController *vc= [self startSellerView:dic];
+    NewShopDetailVC *vc= [self startSellerView:dic];
     vc.videoID=@"";
     
     vc.videoID=[NSString getTheNoNullStr:dic[@"video"] andRepalceStr:@""];
@@ -144,9 +144,9 @@
 
 
 
--(SellerViewController *)startSellerView:(NSMutableDictionary*)dic{
+-(NewShopDetailVC *)startSellerView:(NSMutableDictionary*)dic{
     
-    SellerViewController *controller = [[SellerViewController alloc]init];
+    NewShopDetailVC *controller = [[NewShopDetailVC alloc]init];
     
     controller.infoDic = dic;
     

@@ -12,7 +12,7 @@
 #import "SweetNoticeVC.h"
 #import "MyPch.pch"
 //#import "BindCustomView.h"
-#import "SellerViewController.h"
+#import "NewShopDetailVC.h"
 @interface CouponIntroduceVC ()
 //{
 //    BindCustomView *alertView;
@@ -153,7 +153,7 @@
     NSLog(@"goBuyCard");
     
     
-    SellerViewController *vc= [[SellerViewController alloc]init];
+    NewShopDetailVC *vc= [[NewShopDetailVC alloc]init];
     vc.title = @"商铺详情";
     vc.infoDic = [NSMutableDictionary dictionaryWithDictionary:self.infoDic];
     vc.videoID=@"";

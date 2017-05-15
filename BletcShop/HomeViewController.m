@@ -17,7 +17,7 @@
 #import "AddressPickerDemo.h"
 #import "SearchTableViewController.h"
 #import "GYChangeTextView.h"
-#import "SellerViewController.h"
+#import "NewShopDetailVC.h"
 #import "BaseNavigationController.h"
 #import "AdvertiseViewController.h"
 #import "NewShopViewController.h"
@@ -615,7 +615,7 @@
         NSLog(@"---%@--==%@",model.title_S,shopInfoDic);
 
         
-        SellerViewController *vc= [self startSellerView:shopInfoDic];
+        NewShopDetailVC *vc= [self startSellerView:shopInfoDic];
         vc.videoID=model.video;
         
         
@@ -658,9 +658,9 @@
     }
 }
 
--(SellerViewController *)startSellerView:(NSMutableDictionary*)dic{
+-(NewShopDetailVC *)startSellerView:(NSMutableDictionary*)dic{
     
-    SellerViewController *controller = [[SellerViewController alloc]init];
+    NewShopDetailVC *controller = [[NewShopDetailVC alloc]init];
     
     controller.infoDic = dic;
     
