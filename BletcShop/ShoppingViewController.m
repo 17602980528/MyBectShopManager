@@ -13,7 +13,7 @@
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "AppDelegate.h"
-#import "SellerViewController.h"
+#import "NewShopDetailVC.h"
 #import "ShopListTableViewCell.h"
 #import "DLStarRatingControl.h"
 #import "ShaperView.h"
@@ -401,7 +401,7 @@
     }
 //    NSMutableDictionary *dic = [self.data1 objectAtIndex:indexPath.row];
     
-    SellerViewController *vc= [self startSellerView:dic];
+    NewShopDetailVC *vc= [self startSellerView:dic];
     vc.videoID=@"";
     
     vc.videoID=[NSString getTheNoNullStr:dic[@"video"] andRepalceStr:@""];
@@ -442,9 +442,9 @@
     
 }
 
--(SellerViewController *)startSellerView:(NSMutableDictionary*)dic{
+-(NewShopDetailVC *)startSellerView:(NSMutableDictionary*)dic{
     
-    SellerViewController *controller = [[SellerViewController alloc]init];
+    NewShopDetailVC *controller = [[NewShopDetailVC alloc]init];
     
     controller.infoDic = dic;
     

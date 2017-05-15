@@ -9,7 +9,7 @@
 #import "AdvertiseViewController.h"
 #import "AdvertiseCell.h"
 #import "ActivityModel.h"
-#import "SellerViewController.h"
+#import "NewShopDetailVC.h"
 #import "TopActiveCell.h"
 @interface AdvertiseViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -198,7 +198,7 @@
 //    NSLog(@"----%ld",sender.tag);
     NSMutableDictionary *shopInfoDic = [self.data_A objectAtIndex:indexPath.row];
     
-    SellerViewController *vc= [self startSellerView:shopInfoDic];
+    NewShopDetailVC *vc= [self startSellerView:shopInfoDic];
     vc.videoID=[NSString getTheNoNullStr:shopInfoDic[@"video"] andRepalceStr:@""];
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -235,9 +235,9 @@
     
 }
 
--(SellerViewController *)startSellerView:(NSMutableDictionary*)dic{
+-(NewShopDetailVC *)startSellerView:(NSMutableDictionary*)dic{
     
-    SellerViewController *controller = [[SellerViewController alloc]init];
+    NewShopDetailVC *controller = [[NewShopDetailVC alloc]init];
     
     controller.infoDic = dic;
     
