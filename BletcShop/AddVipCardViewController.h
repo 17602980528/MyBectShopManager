@@ -12,7 +12,7 @@
 @property(nonatomic,weak)UITableView *MyAddtable;
 
 @property (nonatomic,retain)UITextField *phoneText;
-@property (nonatomic,retain)UITextField *codeText;//会员卡编号
+//@property (nonatomic,retain)UITextField *codeText;//会员卡编号
 @property (nonatomic,retain)UITextField *priceText;
 @property (nonatomic,retain)UITextField *contentText;
 @property (nonatomic , strong) UITextField *deadLineText;// 期限

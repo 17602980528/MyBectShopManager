@@ -9,9 +9,10 @@
 #import "VipManagerViewController.h"
 #import "RoyTableViewCell.h"
 #import "UIImageView+WebCache.h"
-#import "AddVipCardViewController.h"
+//#import "AddVipCardViewController.h"
 #import "CardShowViewController.h"
-#import "ChooseCardTypeVC.h"
+#import "CardSearialsVC.h"
+#import "ChangeVipCardInfoVC.h"
 @interface VipManagerViewController ()<UITextFieldDelegate>
 
 @property(nonatomic,weak)UIScrollView *listView;
@@ -32,7 +33,9 @@
 
 @end
 @implementation VipManagerViewController
-
+{
+    UITableView *TabSc;
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -49,7 +52,7 @@
     [menuBt setImage:[UIImage imageNamed:@"add_yellow"] forState:UIControlStateHighlighted];
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:menuBt];
     self.navigationItem.rightBarButtonItem = item;
-        
+    
     
     self.edit_dic = [[NSDictionary alloc]init];
     self.title = @"会员卡管理";
@@ -86,7 +89,7 @@
     for (UIView *view in self.view.subviews) {
         [view removeFromSuperview];
     }
-    UITableView *TabSc = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,SCREENHEIGHT-64) style:UITableViewStyleGrouped];
+    TabSc = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,SCREENHEIGHT-64) style:UITableViewStyleGrouped];
     TabSc.backgroundColor=RGB(240, 240, 240);
     TabSc.delegate = self;
     TabSc.dataSource = self;
@@ -311,7 +314,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 170;
+    return 210;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -329,17 +332,42 @@
         cell.cardPriceLable.text = [[self.data objectAtIndex:indexPath.row] objectForKey:@"price"];
         cell.cardDescription.text = [[self.data objectAtIndex:indexPath.row] objectForKey:@"content"];
         cell.shopNameLable.text=delegate.shopInfoDic[@"store"];
+        
+        if ([self.data[indexPath.row][@"state"] isEqualToString:@"true"]) {
+            if ([self.data[indexPath.row][@"display_state"] isEqualToString:@"on"]) {
+                [cell.onOrOffButton setTitle:@"下架" forState:UIControlStateNormal];
+                cell.editButton.hidden=YES;
+                cell.deleteButton.hidden=YES;
+                cell.onOrOffButton.hidden=NO;
+            }else if([self.data[indexPath.row][@"display_state"] isEqualToString:@"null"]){
+                cell.editButton.hidden=NO;
+                cell.deleteButton.hidden=NO;
+                cell.onOrOffButton.hidden=NO;
+                [cell.onOrOffButton setTitle:@"上架" forState:UIControlStateNormal];
+            }else if([self.data[indexPath.row][@"display_state"] isEqualToString:@"off"]){
+                cell.editButton.hidden=YES;
+                cell.deleteButton.hidden=YES;
+                cell.onOrOffButton.hidden=NO;
+                [cell.onOrOffButton setTitle:@"上架" forState:UIControlStateNormal];
+            }
+        }else if ([self.data[indexPath.row][@"state"] isEqualToString:@"false"]){
+            cell.editButton.hidden=NO;
+            cell.deleteButton.hidden=NO;
+            cell.onOrOffButton.hidden=YES;
+        }else{
+            cell.editButton.hidden=YES;
+            cell.deleteButton.hidden=YES;
+            cell.onOrOffButton.hidden=YES;
+        }
+        [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.onOrOffButton addTarget:self action:@selector(onOrOffButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    //    [cell.eiditBtn addTarget:self action:@selector(editBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    //cell.codeLab.text = [[self.data objectAtIndex:indexPath.row] objectAtIndex:5];
     return cell;
     
 }
-/**
- 查看会员卡
- 
- */
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.edit_dic = [self.data objectAtIndex:indexPath.row];
     //    [self NewAddVipAction];
@@ -356,19 +384,83 @@
 //添加会员卡
 -(void)addtBtnAction:(UIButton *)Btn
 {
-    //ChooseCardTypeVC
-//    AddVipCardViewController *addVipCardView = [[AddVipCardViewController alloc]init];
-//    [self.navigationController pushViewController:addVipCardView animated:YES];
-    ChooseCardTypeVC *addVipCardView = [[ChooseCardTypeVC alloc]init];
-    [self.navigationController pushViewController:addVipCardView animated:YES];
-    
+    //    AddVipCardViewController *addVipCardView = [[AddVipCardViewController alloc]init];
+    //    [self.navigationController pushViewController:addVipCardView animated:YES];
+    CardSearialsVC *vc=[[CardSearialsVC alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
 //不可编辑
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     return NO;
 }
-
+//编辑
+-(void)editButtonClick:(UIButton *)sender{
+    UITableViewCell *cell=(UITableViewCell *)[[sender superview]superview];
+    NSIndexPath *indexPath=[TabSc indexPathForCell:cell];
+    ChangeVipCardInfoVC *vc=[[ChangeVipCardInfoVC alloc]init];
+    vc.codeDic=self.data[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+//删除
+-(void)deleteButtonClick:(UIButton *)sender{
+    UITableViewCell *cell=(UITableViewCell *)[[sender superview]superview];
+    NSIndexPath *indexPath=[TabSc indexPathForCell:cell];
+    NSDictionary *dic=self.data[indexPath.row];
+    [self postDeleteCards:dic];
+}
+//上下架
+-(void)onOrOffButtonClick:(UIButton *)sender{
+    UITableViewCell *cell=(UITableViewCell *)[[sender superview]superview];
+    NSIndexPath *indexPath=[TabSc indexPathForCell:cell];
+    NSDictionary *dic=self.data[indexPath.row];
+    NSString *state=dic[@"display_state"];
+    if ([state isEqualToString:@"on"]) {
+        [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"off"];
+    }else{
+        [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"on"];
+    }
+}
+-(void)postRequestGetCardsLists:(NSString *)muid code:(NSString *)code display_state:(NSString *)state{
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/card/turn",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:muid forKey:@"muid"];
+    [params setObject:code forKey:@"code"];
+    [params setObject:state forKey:@"display_state"];
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"result===%@", result);
+        if ([result[@"result_code"]integerValue]==1) {
+            [self postRequest];
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
+-(void)postDeleteCards:(NSDictionary *)dic{
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/card/del",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:dic[@"merchant"] forKey:@"muid"];
+    [params setObject:dic[@"code"] forKey:@"code"];
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"result===%@", result);
+        if ([result[@"result_code"]integerValue]==1) {
+            [self postRequest];
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

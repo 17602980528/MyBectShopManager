@@ -20,7 +20,7 @@
     if (self) {
         self.backgroundColor=[UIColor clearColor];
         // 创建子视图
-        UIView *bgview=[[UIView alloc]initWithFrame:CGRectMake(12, 10, SCREENWIDTH-24, 160)];
+        UIView *bgview=[[UIView alloc]initWithFrame:CGRectMake(12, 10, SCREENWIDTH-24, 200)];
         bgview.layer.cornerRadius=8.0f;
         bgview.layer.borderWidth=1.0f;
         bgview.layer.borderColor=[RGB(240, 240, 240)CGColor];
@@ -66,13 +66,38 @@
         _cardDescription.textColor=[UIColor grayColor];
         [describeView addSubview:_cardDescription];
         
+        _editButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        _editButton.frame=CGRectMake(12, describeView.bottom+10, 80, 30);
+        _editButton.backgroundColor=RGB(240, 240, 240);
+        [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
+        [_editButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        _editButton.titleLabel.font=[UIFont systemFontOfSize:14.0f];
+        [bgview addSubview:_editButton];
+        
+        _deleteButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        _deleteButton.frame=CGRectMake(102, describeView.bottom+10, 80, 30);
+        _deleteButton.backgroundColor=RGB(240, 240, 240);
+        [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+        [_deleteButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        _deleteButton.titleLabel.font=[UIFont systemFontOfSize:14.0f];
+        [bgview addSubview:_deleteButton];
+        
+        _onOrOffButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        _onOrOffButton.frame=CGRectMake(describeView.right-12-80, describeView.bottom+10, 80, 30);
+        _onOrOffButton.backgroundColor=RGB(240, 240, 240);
+        [_onOrOffButton setTitle:@"上架" forState:UIControlStateNormal];
+        [_onOrOffButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        _onOrOffButton.titleLabel.font=[UIFont systemFontOfSize:14.0f];
+        [bgview addSubview:_onOrOffButton];
+        
+        
         
     }
     return self;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

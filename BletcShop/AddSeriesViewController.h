@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface AddSeriesViewController : UIViewController
+@property(nonatomic,assign)id delegate;
+@property(nonatomic,copy)NSString *cardTypes;
+@end
+@protocol AddSeriesViewControllerDelegate <NSObject>
+
+-(void)addCardCodeAndTypes:(NSString *)names type:(NSString *)types muid:(NSString *)muid;
 
 @end

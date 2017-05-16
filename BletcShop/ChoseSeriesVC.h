@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ChoseSeriesVC : UIViewController
-
+@property(nonatomic,copy)NSString *cardType;
 @end

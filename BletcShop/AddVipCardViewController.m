@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "ChoiceCardPictureViewController.h"
 #import "ValuePickerView.h"
+//#import "CardSearialsVC.h"
 @interface AddVipCardViewController ()<ChoiceCardDelegate,UIActionSheetDelegate>
 {
     UIToolbar *toolView;
@@ -39,7 +40,7 @@
     
     self.view.backgroundColor = RGB(240, 240, 240);
     self.navigationItem.title = @"添加会员卡";
-    self.cardTypeString = @"";
+    self.cardTypeString = self.codeDic[@"type"];
     self.cardLevelString = @"";
     self.typeArray= @[@"储值卡",@"计次卡"];
     self.levelArray= @[@"普卡",@"银卡",@"金卡",@"白金卡",@"钻卡",@"黑金卡"];
@@ -48,7 +49,14 @@
     self.isOpen2=NO;
     [self _initTable];
     self.pickerView = [[ValuePickerView alloc]init];
+    //    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithTitle:@"系列" style:UIBarButtonItemStylePlain target:self action:@selector(addCodeKinds)];
+    //    self.navigationItem.rightBarButtonItem=item;
 }
+//新建卡系列
+//-(void)addCodeKinds{
+//    CardSearialsVC *vc=[[CardSearialsVC alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 -(void)_initTable
 {
     UITableView *mytable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStyleGrouped];
@@ -64,8 +72,8 @@
     [self.MyAddtable addGestureRecognizer:singleTap];
     [self.view addSubview:mytable];
     
-
-
+    
+    
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 
@@ -105,14 +113,14 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        if (indexPath.section==0) {
+    if (indexPath.section==0) {
         return 50;
     }else if(indexPath.section==1||indexPath.section==2){
         return 50;
     }else if(indexPath.section==3){
-
+        
         return 120;
-       
+        
         
     }
     return 50;
@@ -141,7 +149,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-   
+    
     return 0.01;
     
 }
@@ -178,15 +186,19 @@
                 label.text = @"会员卡编号:";
                 label.font = [UIFont systemFontOfSize:14];
                 [cell addSubview:label];
-                UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
-                nameText.delegate = self;
-                [nameText setInputAccessoryView:toolView];
-                nameText.text = self.codeText.text;
-                self.codeText = nameText;
-                nameText.placeholder = @"请输入会员卡编号";
-                nameText.font = [UIFont systemFontOfSize:14];
-                nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
-                [cell addSubview:nameText];
+                //                UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
+                //                nameText.delegate = self;
+                //                [nameText setInputAccessoryView:toolView];
+                //                nameText.text = self.codeText.text;
+                //                self.codeText = nameText;
+                //                nameText.placeholder = @"请输入会员卡编号";
+                //                nameText.font = [UIFont systemFontOfSize:14];
+                //                nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
+                //                [cell addSubview:nameText];
+                UILabel *codeLable=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
+                codeLable.font=[UIFont systemFontOfSize:14.0f];
+                codeLable.text=self.codeDic[@"id"];
+                [cell addSubview:codeLable];
                 
             }
             else if (indexPath.row==1) {
@@ -196,30 +208,30 @@
                 typeLabel.font = [UIFont systemFontOfSize:14];
                 [cell addSubview:typeLabel];
                 UILabel *cardTypeLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 10, 80, 30)];
-                cardTypeLabel.text=self.cardTypeLabel.text;
+                cardTypeLabel.text=self.codeDic[@"type"];//self.cardTypeLabel.text;
                 self.cardTypeLabel=cardTypeLabel;
                 //                cardTypeLabel.layer.borderWidth = 0.3;
                 cardTypeLabel.textAlignment = NSTextAlignmentCenter;
-                if ([self.cardTypeString isEqualToString:@""]) {
-                    cardTypeLabel.text = @"储值卡";
-                }
-                else
-                {
-                    cardTypeLabel.text = self.cardTypeString;
-                }
+                //                if ([self.cardTypeString isEqualToString:@""]) {
+                //                    cardTypeLabel.text = @"储值卡";
+                //                }
+                //                else
+                //                {
+                //                    cardTypeLabel.text = self.cardTypeString;
+                //                }
                 NSLog(@"%@",cardTypeLabel.text);
                 cardTypeLabel.font = [UIFont systemFontOfSize:14];
                 [cell addSubview:cardTypeLabel];
                 
                 //箭头
-                UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                choiceBtn.frame = CGRectMake(90, 15, 190, 20);
-                //    choseBtn.backgroundColor = [UIColor redColor];
-                [choiceBtn setImage:[UIImage imageNamed:@"arraw_right"] forState:UIControlStateNormal];
-                [choiceBtn setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateSelected];
-                [choiceBtn addTarget:self action:@selector(choiceTypeAction:) forControlEvents:UIControlEventTouchUpInside];
-                //    self.boyBtn = boyBtn;
-                [cell addSubview:choiceBtn];
+                //                UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                //                choiceBtn.frame = CGRectMake(90, 15, 190, 20);
+                //                //    choseBtn.backgroundColor = [UIColor redColor];
+                //                [choiceBtn setImage:[UIImage imageNamed:@"arraw_right"] forState:UIControlStateNormal];
+                //                [choiceBtn setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateSelected];
+                //                [choiceBtn addTarget:self action:@selector(choiceTypeAction:) forControlEvents:UIControlEventTouchUpInside];
+                //                //    self.boyBtn = boyBtn;
+                //                [cell addSubview:choiceBtn];
                 
             }else if (indexPath.row==2) {
                 //会员卡级别
@@ -347,7 +359,7 @@
                 [zhekouText setInputAccessoryView:toolView];
                 self.zhekouText = zhekouText;
                 
-
+                
                 zhekouText.keyboardType = UIKeyboardTypeNumberPad;
                 zhekouText.font = [UIFont systemFontOfSize:14];
                 [cell addSubview:zhekouText];
@@ -364,12 +376,12 @@
                     self.zhekouLabel.text = @"折扣率:";
                     self.zhekouLabel1.text = @"%";
                     self.zhekouText.placeholder = @"请输入折扣率";
-
+                    
                 }else{
                     self.zhekouLabel.text = @"使用次数:";
                     self.zhekouLabel1.text = @"次";
                     self.zhekouText.placeholder = @"请输入可使用次数";
-
+                    
                 }
                 
             }
@@ -393,15 +405,19 @@
                 label.font = [UIFont systemFontOfSize:14];
                 [cell addSubview:label];
                 
-                UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
-                nameText.delegate = self;
-                [nameText setInputAccessoryView:toolView];
-                nameText.text = self.codeText.text;
-                self.codeText = nameText;
-                nameText.placeholder = @"请输入会员卡编号";
-                nameText.font = [UIFont systemFontOfSize:14];
-                nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
-                [cell addSubview:nameText];
+                //                UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
+                //                nameText.delegate = self;
+                //                [nameText setInputAccessoryView:toolView];
+                //                nameText.text = self.codeText.text;
+                //                self.codeText = nameText;
+                //                nameText.placeholder = @"请输入会员卡编号";
+                //                nameText.font = [UIFont systemFontOfSize:14];
+                //                nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
+                //                [cell addSubview:nameText];
+                UILabel *codeLable=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
+                codeLable.font=[UIFont systemFontOfSize:14.0f];
+                codeLable.text=self.codeDic[@"id"];
+                [cell addSubview:codeLable];
                 
             }
             else if (indexPath.row==1) {
@@ -411,32 +427,32 @@
                 typeLabel.font = [UIFont systemFontOfSize:14];
                 [cell addSubview:typeLabel];
                 UILabel *cardTypeLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 5, 80, 40)];
-                cardTypeLabel.text=self.cardTypeLabel.text;
+                cardTypeLabel.text=self.codeDic[@"type"];//self.cardTypeLabel.text;
                 self.cardTypeLabel=cardTypeLabel;
                 //                cardTypeLabel.layer.borderWidth = 0.3;
                 cardTypeLabel.textAlignment = NSTextAlignmentCenter;
-                if ([self.cardTypeString isEqualToString:@""]) {
-                    self.cardTypeString = @"储值卡";
-                    cardTypeLabel.text = @"储值卡";
-                }
-                else
-                {
-                    cardTypeLabel.text = @"";
-                    cardTypeLabel.text = self.cardTypeString;
-                }
+                //                if ([self.cardTypeString isEqualToString:@""]) {
+                //                    self.cardTypeString = @"储值卡";
+                //                    cardTypeLabel.text = @"储值卡";
+                //                }
+                //                else
+                //                {
+                //                    cardTypeLabel.text = @"";
+                //                    cardTypeLabel.text = self.cardTypeString;
+                //                }
                 NSLog(@"%@",cardTypeLabel.text);
                 cardTypeLabel.font = [UIFont systemFontOfSize:14];
                 [cell addSubview:cardTypeLabel];
                 
                 //箭头
-                UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                choiceBtn.frame = CGRectMake(90, 15, 190, 20);
-                //    choseBtn.backgroundColor = [UIColor redColor];
-                [choiceBtn setImage:[UIImage imageNamed:@"arraw_right"] forState:UIControlStateNormal];
-                [choiceBtn setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateSelected];
-                [choiceBtn addTarget:self action:@selector(choiceTypeAction:) forControlEvents:UIControlEventTouchUpInside];
-                //    self.boyBtn = boyBtn;
-                [cell addSubview:choiceBtn];
+                //                UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                //                choiceBtn.frame = CGRectMake(90, 15, 190, 20);
+                //                //    choseBtn.backgroundColor = [UIColor redColor];
+                //                [choiceBtn setImage:[UIImage imageNamed:@"arraw_right"] forState:UIControlStateNormal];
+                //                [choiceBtn setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateSelected];
+                //                [choiceBtn addTarget:self action:@selector(choiceTypeAction:) forControlEvents:UIControlEventTouchUpInside];
+                //                //    self.boyBtn = boyBtn;
+                //                [cell addSubview:choiceBtn];
                 
             }else if (indexPath.row==2) {
                 //会员卡级别
@@ -559,12 +575,12 @@
                     self.zhekouLabel.text = @"折扣率:";
                     self.zhekouLabel1.text = @"%";
                     self.zhekouText.placeholder = @"请输入折扣率";
-
+                    
                 }else{
                     self.zhekouLabel.text = @"使用次数:";
                     self.zhekouLabel1.text = @"次";
                     self.zhekouText.placeholder = @"请输入可使用次数";
-
+                    
                 }
             }
             if (indexPath.row<7) {
@@ -623,57 +639,57 @@
         [choiceBtn addTarget:self action:@selector(choiceDeadLine:) forControlEvents:UIControlEventTouchUpInside];
         //    self.boyBtn = boyBtn;
         [cell addSubview:choiceBtn];
-
+        
         
     }else
-     
+        
         if (indexPath.section==3){
-        if (indexPath.row==0) {
-            //上传卡片
-            UILabel *uploadLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 80, 20)];
-            uploadLabel.text = @"上传卡片:";
-            uploadLabel.font = [UIFont systemFontOfSize:14];
-            [cell addSubview:uploadLabel];
-            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(27, 30, 120, 80)];
-            imageView.backgroundColor=RGB(240, 240, 240);
-            imageView.image = [UIImage imageNamed:@""];
-            //imageView.backgroundColor = [UIColor grayColor];
-            imageView.userInteractionEnabled = YES;
-            imageView.layer.borderWidth=0.5;
-            imageView.layer.borderColor=[[UIColor grayColor]CGColor];
-            self.imageView = imageView;
-            UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(choicePicture)];
-            [imageView addGestureRecognizer:tapGesture];
-            [cell addSubview:imageView];
-            
-            UIImageView *defaultImageView=[[UIImageView alloc]initWithFrame:CGRectMake(40, 10, 40, 40)];
-            defaultImageView.image=[UIImage imageNamed:@"vip_pic_n"];
-            [imageView addSubview:defaultImageView];
-            
-            UILabel *addLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 80, 15)];
-            addLabel.text=@"添加图片";
-            addLabel.textAlignment=1;
-            addLabel.font=[UIFont systemFontOfSize:13.0f];
-            addLabel.textColor=[UIColor grayColor];
-            [imageView addSubview:addLabel];
-            
-        }else if (indexPath.row==1){
-            UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 120)];
-            view.backgroundColor=RGB(240, 240, 240);
-            [cell addSubview:view];
-            
-            UIButton *LandBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            LandBtn.frame = CGRectMake(12, 35, SCREENWIDTH-24, 50);
-            [LandBtn setTitle:@"确定" forState:UIControlStateNormal];
-            [LandBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [LandBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-            [LandBtn setBackgroundColor:NavBackGroundColor];
-            LandBtn.layer.cornerRadius = 5.0f;
-            [LandBtn addTarget:self action:@selector(addVipCardAction) forControlEvents:UIControlEventTouchUpInside];
-            LandBtn.titleLabel.font = [UIFont systemFontOfSize:20];
-            [view addSubview:LandBtn];
+            if (indexPath.row==0) {
+                //上传卡片
+                UILabel *uploadLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 80, 20)];
+                uploadLabel.text = @"上传卡片:";
+                uploadLabel.font = [UIFont systemFontOfSize:14];
+                [cell addSubview:uploadLabel];
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(27, 30, 120, 80)];
+                imageView.backgroundColor=RGB(240, 240, 240);
+                imageView.image = [UIImage imageNamed:@""];
+                //imageView.backgroundColor = [UIColor grayColor];
+                imageView.userInteractionEnabled = YES;
+                imageView.layer.borderWidth=0.5;
+                imageView.layer.borderColor=[[UIColor grayColor]CGColor];
+                self.imageView = imageView;
+                UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(choicePicture)];
+                [imageView addGestureRecognizer:tapGesture];
+                [cell addSubview:imageView];
+                
+                UIImageView *defaultImageView=[[UIImageView alloc]initWithFrame:CGRectMake(40, 10, 40, 40)];
+                defaultImageView.image=[UIImage imageNamed:@"vip_pic_n"];
+                [imageView addSubview:defaultImageView];
+                
+                UILabel *addLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 80, 15)];
+                addLabel.text=@"添加图片";
+                addLabel.textAlignment=1;
+                addLabel.font=[UIFont systemFontOfSize:13.0f];
+                addLabel.textColor=[UIColor grayColor];
+                [imageView addSubview:addLabel];
+                
+            }else if (indexPath.row==1){
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 120)];
+                view.backgroundColor=RGB(240, 240, 240);
+                [cell addSubview:view];
+                
+                UIButton *LandBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                LandBtn.frame = CGRectMake(12, 35, SCREENWIDTH-24, 50);
+                [LandBtn setTitle:@"确定" forState:UIControlStateNormal];
+                [LandBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [LandBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+                [LandBtn setBackgroundColor:NavBackGroundColor];
+                LandBtn.layer.cornerRadius = 5.0f;
+                [LandBtn addTarget:self action:@selector(addVipCardAction) forControlEvents:UIControlEventTouchUpInside];
+                LandBtn.titleLabel.font = [UIFont systemFontOfSize:20];
+                [view addSubview:LandBtn];
+            }
         }
-    }
     return cell;
 }
 -(void)addVipCardAction
@@ -682,14 +698,12 @@
 }
 -(void)postRequestAddVipCard
 {
-    
-
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/card/add",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
-    [params setObject:self.codeText.text forKey:@"code"];
-    [params setObject:self.cardTypeLabel.text forKey:@"type"];
+    [params setObject:self.codeDic[@"id"] forKey:@"code"];
+    [params setObject:self.codeDic[@"type"] forKey:@"type"];
     [params setObject:self.cardLevelLabel.text forKey:@"level"];
     [params setObject:self.contentText.text forKey:@"content"];
     [params setObject:self.priceText.text forKey:@"price"];
@@ -698,7 +712,7 @@
     }
     [params setObject:self.zhekouText.text forKey:@"rule"];
     [params setObject:[self.deadLine_dic objectForKey:self.deadLineText.text] forKey:@"indate"];
-
+    
     //addition
     if(self.okButton.selected)
     {
@@ -709,7 +723,7 @@
     }
     [params setObject:[[NSString alloc] initWithFormat:@"%d",self.choiceType]
                forKey:@"image_type"];
-    NSString *imageUrl = [NSString stringWithFormat:@"%@_%@_%@_%@.png",appdelegate.shopInfoDic[@"name"],appdelegate.shopInfoDic[@"phone"],self.cardLevelLabel.text,self.codeText.text];
+    NSString *imageUrl = [NSString stringWithFormat:@"%@_%@_%@_%@.png",appdelegate.shopInfoDic[@"name"],appdelegate.shopInfoDic[@"phone"],self.cardLevelLabel.text,self.codeDic[@"id"]];
     
     if (self.choiceType==1)
     {
@@ -751,45 +765,45 @@
     
 }
 #pragma mark------cardType
--(void)choiceTypeAction:(UIButton *)sender
-{
-    
-    self.pickerView.dataSource =self.typeArray;
-    __weak typeof(self) weakSelf= self;
-    
-    self.pickerView.valueDidSelect = ^(NSString *value){
-        
-        NSLog(@"------------%@",value);
-        weakSelf.cardTypeLabel.text = [[value componentsSeparatedByString:@"/"] firstObject];
-        
-        weakSelf.cardTypeString= weakSelf.cardTypeLabel.text;
-        NSInteger index = [[[value componentsSeparatedByString:@"/"] lastObject] integerValue];
-        
-        if (index==1) {
-            weakSelf.zhekouText.placeholder = @"请输入折扣率";
-            weakSelf.zhekouLabel.text = @"折扣率:";
-            weakSelf.zhekouLabel1.text = @"%";
-            
-            
-        }
-        if (index==2) {
-            weakSelf.zhekouText.placeholder = @"请输入可使用次数";
-
-            weakSelf.zhekouLabel.text = @"使用次数:";
-            weakSelf.zhekouLabel1.text = @"次";
-            
-        }
-        
-        
-    };
-    
-    
-    [self.pickerView show];
-    
-}
+//-(void)choiceTypeAction:(UIButton *)sender
+//{
+//
+//    self.pickerView.dataSource =self.typeArray;
+//    __weak typeof(self) weakSelf= self;
+//
+//    self.pickerView.valueDidSelect = ^(NSString *value){
+//
+//        NSLog(@"------------%@",value);
+////        weakSelf.cardTypeLabel.text = [[value componentsSeparatedByString:@"/"] firstObject];
+////
+////        weakSelf.cardTypeString= weakSelf.cardTypeLabel.text;
+//        NSInteger index = [[[value componentsSeparatedByString:@"/"] lastObject] integerValue];
+//
+//        if (index==1) {
+//            weakSelf.zhekouText.placeholder = @"请输入折扣率";
+//            weakSelf.zhekouLabel.text = @"折扣率:";
+//            weakSelf.zhekouLabel1.text = @"%";
+//
+//
+//        }
+//        if (index==2) {
+//            weakSelf.zhekouText.placeholder = @"请输入可使用次数";
+//
+//            weakSelf.zhekouLabel.text = @"使用次数:";
+//            weakSelf.zhekouLabel1.text = @"次";
+//
+//        }
+//
+//
+//    };
+//
+//
+//    [self.pickerView show];
+//
+//}
 -(void)choiceLevelAction:(UIButton *)sender
 {
-       self.pickerView.dataSource =self.levelArray;
+    self.pickerView.dataSource =self.levelArray;
     __weak typeof(self) weakSelf = self;
     self.pickerView.valueDidSelect = ^(NSString *value){
         
@@ -924,7 +938,7 @@
      */
     // 保存图片至本地，方法见下文
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSString *imageUrl = [NSString stringWithFormat:@"%@_%@_%@_%@.png",appdelegate.shopInfoDic[@"name"],appdelegate.shopInfoDic[@"phone"],self.cardLevelString,self.codeText.text];
+    NSString *imageUrl = [NSString stringWithFormat:@"%@_%@_%@_%@.png",appdelegate.shopInfoDic[@"name"],appdelegate.shopInfoDic[@"phone"],self.cardLevelString,self.codeDic[@"id"]];
     
     [self saveImage:image withName:imageUrl];
     
@@ -933,7 +947,7 @@
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     _isFullScreen = NO;
     
-   
+    
     
     [self.imageView setImage:savedImage];
     
@@ -1054,7 +1068,7 @@
     
     
     [self.pickerView show];
-
+    
     
 }
 

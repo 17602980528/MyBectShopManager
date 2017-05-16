@@ -25,8 +25,18 @@
     
 }
 - (IBAction)btnClick:(UIButton *)sender {
-}
+    if (![self.textField.text isEqualToString:@""]) {
+        if ([_delegate respondsToSelector:@selector(addCardCodeAndTypes: type: muid:)]) {
+            AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication]delegate];
+            [_delegate addCardCodeAndTypes: self.textField.text type:_cardTypes muid:delegate.shopInfoDic[@"muid"]];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
 
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -7,7 +7,7 @@
 //
 
 #import "ChooseCardTypeVC.h"
-
+#import "ChoseSeriesVC.h"
 @interface ChooseCardTypeVC ()
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
@@ -43,7 +43,9 @@
     _selectResult=@"储值卡";
 }
 - (IBAction)gotoNextVC:(id)sender {
-    
+    ChoseSeriesVC *choseSeriesVC=[[ChoseSeriesVC alloc]init];
+    choseSeriesVC.cardType=_selectResult;
+    [self.navigationController pushViewController:choseSeriesVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
