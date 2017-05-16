@@ -709,6 +709,12 @@
 		D9699E541D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9699E531D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.m */; };
 		D9699E7B1D34D382001DEC06 /* hair_01.png in Resources */ = {isa = PBXBuildFile; fileRef = D9699E7A1D34D382001DEC06 /* hair_01.png */; };
 		D96AA13B1CB399CA00F2003B /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = D96AA13A1CB399CA00F2003B /* NIDropDown.m */; };
+		D96E1B721ECAD46200084453 /* AddSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96E1B701ECAD46200084453 /* AddSeriesViewController.m */; };
+		D96E1B731ECAD46200084453 /* AddSeriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96E1B711ECAD46200084453 /* AddSeriesViewController.xib */; };
+		D96E1B771ECAD94B00084453 /* ChoseSeriesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D96E1B751ECAD94B00084453 /* ChoseSeriesVC.m */; };
+		D96E1B781ECAD94B00084453 /* ChoseSeriesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96E1B761ECAD94B00084453 /* ChoseSeriesVC.xib */; };
+		D96E1B7C1ECAD9EF00084453 /* ChoseSeriesCellT.m in Sources */ = {isa = PBXBuildFile; fileRef = D96E1B7A1ECAD9EF00084453 /* ChoseSeriesCellT.m */; };
+		D96E1B7D1ECAD9EF00084453 /* ChoseSeriesCellT.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */; };
 		D971FABB1E2DE82A00C5387C /* CardMarketSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */; };
 		D973D58C1D9E4588003F82FB /* tanhao.png in Resources */ = {isa = PBXBuildFile; fileRef = D973D58B1D9E4588003F82FB /* tanhao.png */; };
 		D9764E801DD591A500B088DE /* AddBankAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9764E7F1DD591A500B088DE /* AddBankAccountVC.m */; };
@@ -2247,6 +2253,15 @@
 		D9699E7A1D34D382001DEC06 /* hair_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hair_01.png; sourceTree = "<group>"; };
 		D96AA1391CB399CA00F2003B /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
 		D96AA13A1CB399CA00F2003B /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
+		D96E1B6F1ECAD46200084453 /* AddSeriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSeriesViewController.h; sourceTree = "<group>"; };
+		D96E1B701ECAD46200084453 /* AddSeriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSeriesViewController.m; sourceTree = "<group>"; };
+		D96E1B711ECAD46200084453 /* AddSeriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddSeriesViewController.xib; sourceTree = "<group>"; };
+		D96E1B741ECAD94B00084453 /* ChoseSeriesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseSeriesVC.h; sourceTree = "<group>"; };
+		D96E1B751ECAD94B00084453 /* ChoseSeriesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseSeriesVC.m; sourceTree = "<group>"; };
+		D96E1B761ECAD94B00084453 /* ChoseSeriesVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseSeriesVC.xib; sourceTree = "<group>"; };
+		D96E1B791ECAD9EF00084453 /* ChoseSeriesCellT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseSeriesCellT.h; sourceTree = "<group>"; };
+		D96E1B7A1ECAD9EF00084453 /* ChoseSeriesCellT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseSeriesCellT.m; sourceTree = "<group>"; };
+		D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseSeriesCellT.xib; sourceTree = "<group>"; };
 		D971FAB91E2DE82A00C5387C /* CardMarketSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMarketSearchVC.h; sourceTree = "<group>"; };
 		D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMarketSearchVC.m; sourceTree = "<group>"; };
 		D973D58B1D9E4588003F82FB /* tanhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tanhao.png; sourceTree = "<group>"; };
@@ -4304,8 +4319,17 @@
 		1CDA9E0D1C5A11C600DFE518 /* 业务中心 */ = {
 			isa = PBXGroup;
 			children = (
+				D96E1B6F1ECAD46200084453 /* AddSeriesViewController.h */,
+				D96E1B701ECAD46200084453 /* AddSeriesViewController.m */,
+				D96E1B711ECAD46200084453 /* AddSeriesViewController.xib */,
 				D9CDFBB61CC4DB8C0054EBE3 /* ShopManagerViewController.h */,
 				D9CDFBB71CC4DB8C0054EBE3 /* ShopManagerViewController.m */,
+				D96E1B741ECAD94B00084453 /* ChoseSeriesVC.h */,
+				D96E1B751ECAD94B00084453 /* ChoseSeriesVC.m */,
+				D96E1B761ECAD94B00084453 /* ChoseSeriesVC.xib */,
+				D96E1B791ECAD9EF00084453 /* ChoseSeriesCellT.h */,
+				D96E1B7A1ECAD9EF00084453 /* ChoseSeriesCellT.m */,
+				D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */,
 				D925E6421CC60EEC0020CEC7 /* 多种业务界面 */,
 				1CF6E46A1C61A8570001159C /* BussinessView.h */,
 				1CF6E46B1C61A8570001159C /* BussinessView.m */,
@@ -6608,6 +6632,7 @@
 				18518D581E7945A000067D95 /* s_money_n@2x.png in Resources */,
 				D9FF0D9E1D53304C00443312 /* 图标-16new.png in Resources */,
 				D9637DFD1D59BAF900C19D0B /* register_p.png in Resources */,
+				D96E1B731ECAD46200084453 /* AddSeriesViewController.xib in Resources */,
 				1C2ED1101C5B1827003EE93B /* 4-02@2x.png in Resources */,
 				189411431D8052FE00314E11 /* playvedio.jpg in Resources */,
 				D9F1358A1DEE696700D2703D /* AddAdminCell.xib in Resources */,
@@ -6814,12 +6839,14 @@
 				18F27EFC1D640E84002DD03A /* 头像-20.png in Resources */,
 				18F27EFB1D640E84002DD03A /* 头像-19.png in Resources */,
 				1A8312821D88544D001BC3B6 /* chat_sender_audio_playing_001@2x.png in Resources */,
+				D96E1B781ECAD94B00084453 /* ChoseSeriesVC.xib in Resources */,
 				D9195D241E8225C600FB4367 /* UploadImageVC.xib in Resources */,
 				18F27EFA1D640E84002DD03A /* 头像-18.png in Resources */,
 				1CF6E47D1C61E4350001159C /* zijin@2x.png in Resources */,
 				D96555451E33306B0096D815 /* 登陆-04(2).png in Resources */,
 				D9E28FC51D2F75A9004514DF /* icon2.png in Resources */,
 				D9FF0D9B1D53304C00443312 /* 图标-13new.png in Resources */,
+				D96E1B7D1ECAD9EF00084453 /* ChoseSeriesCellT.xib in Resources */,
 				D947E4631D7D3BBA00F9FEE8 /* 聊天键盘-icon-选择照片-点击@2x.png in Resources */,
 				D9195D291E82261F00FB4367 /* UploadVedioVC.xib in Resources */,
 				D987BB311E791FAC008AE24D /* ProfessionEditVC.xib in Resources */,
@@ -7438,6 +7465,7 @@
 				D98E5C261E5156D7009D56BF /* LoginQuestionViewController.m in Sources */,
 				1828C7E51E272D4A00480DB9 /* CardEricShareViewController.m in Sources */,
 				18CB32DA1D6C2B2B005A9D64 /* UIImage+Extends.m in Sources */,
+				D96E1B771ECAD94B00084453 /* ChoseSeriesVC.m in Sources */,
 				189411481D80573200314E11 /* FirstViewController.mm in Sources */,
 				18CB32D71D6C2B2B005A9D64 /* HKClipperVeiw.m in Sources */,
 				D949EC2D1CE192970023B6D6 /* BHotCityCell.m in Sources */,
@@ -7604,6 +7632,7 @@
 				D99760EC1E68FFE6008E21FE /* CouponCell.m in Sources */,
 				D941135D1CE9A3D7008E231F /* openssl_wrapper.m in Sources */,
 				D9B3A5BC1D74255700F3F27E /* PSTCollectionView.m in Sources */,
+				D96E1B721ECAD46200084453 /* AddSeriesViewController.m in Sources */,
 				18E3CA8D1D532C6000789065 /* EndOrBeginningViewController.m in Sources */,
 				D941135E1CE9A3D7008E231F /* RSADataSigner.m in Sources */,
 				D98E5C0E1E515210009D56BF /* ViewController+MASAdditions.m in Sources */,
@@ -7653,6 +7682,7 @@
 				18F032111E5EE02700ACD261 /* HolidayActivertyVC.m in Sources */,
 				D95869381E4DA4EE00E91A47 /* ResetPhoneNextVC.m in Sources */,
 				D9A8ABED1E02954200D4597F /* ContentDetailViewController.m in Sources */,
+				D96E1B7C1ECAD9EF00084453 /* ChoseSeriesCellT.m in Sources */,
 				D9937D7F1DDFF22C0001B575 /* PayMentController.m in Sources */,
 				1CDCCD1A1C7594040094E70D /* AFNetworkReachabilityManager.m in Sources */,
 				D9B3A5BE1D74255700F3F27E /* PSTCollectionViewController.m in Sources */,
