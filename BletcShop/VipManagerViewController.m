@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "AddVipCardViewController.h"
 #import "CardShowViewController.h"
+#import "ChooseCardTypeVC.h"
 @interface VipManagerViewController ()<UITextFieldDelegate>
 
 @property(nonatomic,weak)UIScrollView *listView;
@@ -355,7 +356,10 @@
 //添加会员卡
 -(void)addtBtnAction:(UIButton *)Btn
 {
-    AddVipCardViewController *addVipCardView = [[AddVipCardViewController alloc]init];
+    //ChooseCardTypeVC
+//    AddVipCardViewController *addVipCardView = [[AddVipCardViewController alloc]init];
+//    [self.navigationController pushViewController:addVipCardView animated:YES];
+    ChooseCardTypeVC *addVipCardView = [[ChooseCardTypeVC alloc]init];
     [self.navigationController pushViewController:addVipCardView animated:YES];
     
 }

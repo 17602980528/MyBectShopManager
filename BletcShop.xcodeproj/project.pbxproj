@@ -84,6 +84,17 @@
 		1852FB0C1D55C962009CF1B2 /* 代金券-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852FB001D55C962009CF1B2 /* 代金券-10.png */; };
 		1852FB0D1D55C962009CF1B2 /* 代金券-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852FB011D55C962009CF1B2 /* 代金券-11.png */; };
 		1852FB0E1D55C962009CF1B2 /* 代金券-12.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852FB021D55C962009CF1B2 /* 代金券-12.png */; };
+		18543E351ECACA3E00E0A4DA /* ChooseCardTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18543E331ECACA3E00E0A4DA /* ChooseCardTypeVC.m */; };
+		18543E361ECACA3E00E0A4DA /* ChooseCardTypeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18543E341ECACA3E00E0A4DA /* ChooseCardTypeVC.xib */; };
+		18543E381ECAD89200E0A4DA /* quan3.png in Resources */ = {isa = PBXBuildFile; fileRef = 18543E371ECAD89100E0A4DA /* quan3.png */; };
+		18543E3A1ECAD89F00E0A4DA /* quan4.png in Resources */ = {isa = PBXBuildFile; fileRef = 18543E391ECAD89F00E0A4DA /* quan4.png */; };
+		18543E3C1ECAD8A500E0A4DA /* quan1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18543E3B1ECAD8A500E0A4DA /* quan1.png */; };
+		18543E3E1ECAD8C700E0A4DA /* quan2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18543E3D1ECAD8C700E0A4DA /* quan2.png */; };
+		18543E451ECADCC600E0A4DA /* CardCodeTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18543E401ECADCC600E0A4DA /* CardCodeTypeVC.m */; };
+		18543E461ECADCC700E0A4DA /* CardCodeTypeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18543E411ECADCC600E0A4DA /* CardCodeTypeVC.xib */; };
+		18543E471ECADCC700E0A4DA /* CardSearialsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18543E431ECADCC600E0A4DA /* CardSearialsVC.m */; };
+		18543E481ECADCC700E0A4DA /* CardSearialsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18543E441ECADCC600E0A4DA /* CardSearialsVC.xib */; };
+		18543E4B1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18543E4A1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m */; };
 		1859E7C11D86991B00647514 /* CheckDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1859E7C01D86991B00647514 /* CheckDataViewController.m */; };
 		1859E7C41D869E1E00647514 /* CommenDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1859E7C31D869E1E00647514 /* CommenDataViewController.m */; };
 		185ABD621D8021B100BD8097 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185ABD611D8021B100BD8097 /* Foundation.framework */; };
@@ -1256,6 +1267,21 @@
 		1852FB001D55C962009CF1B2 /* 代金券-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "代金券-10.png"; sourceTree = "<group>"; };
 		1852FB011D55C962009CF1B2 /* 代金券-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "代金券-11.png"; sourceTree = "<group>"; };
 		1852FB021D55C962009CF1B2 /* 代金券-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "代金券-12.png"; sourceTree = "<group>"; };
+		18543E321ECACA3E00E0A4DA /* ChooseCardTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCardTypeVC.h; sourceTree = "<group>"; };
+		18543E331ECACA3E00E0A4DA /* ChooseCardTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCardTypeVC.m; sourceTree = "<group>"; };
+		18543E341ECACA3E00E0A4DA /* ChooseCardTypeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCardTypeVC.xib; sourceTree = "<group>"; };
+		18543E371ECAD89100E0A4DA /* quan3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quan3.png; sourceTree = "<group>"; };
+		18543E391ECAD89F00E0A4DA /* quan4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quan4.png; sourceTree = "<group>"; };
+		18543E3B1ECAD8A500E0A4DA /* quan1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quan1.png; sourceTree = "<group>"; };
+		18543E3D1ECAD8C700E0A4DA /* quan2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quan2.png; sourceTree = "<group>"; };
+		18543E3F1ECADCC600E0A4DA /* CardCodeTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardCodeTypeVC.h; sourceTree = "<group>"; };
+		18543E401ECADCC600E0A4DA /* CardCodeTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardCodeTypeVC.m; sourceTree = "<group>"; };
+		18543E411ECADCC600E0A4DA /* CardCodeTypeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCodeTypeVC.xib; sourceTree = "<group>"; };
+		18543E421ECADCC600E0A4DA /* CardSearialsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSearialsVC.h; sourceTree = "<group>"; };
+		18543E431ECADCC600E0A4DA /* CardSearialsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardSearialsVC.m; sourceTree = "<group>"; };
+		18543E441ECADCC600E0A4DA /* CardSearialsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardSearialsVC.xib; sourceTree = "<group>"; };
+		18543E491ECADCDF00E0A4DA /* ChangeVipCardInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeVipCardInfoVC.h; sourceTree = "<group>"; };
+		18543E4A1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeVipCardInfoVC.m; sourceTree = "<group>"; };
 		1859E7BF1D86991B00647514 /* CheckDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckDataViewController.h; sourceTree = "<group>"; };
 		1859E7C01D86991B00647514 /* CheckDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckDataViewController.m; sourceTree = "<group>"; };
 		1859E7C21D869E1E00647514 /* CommenDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenDataViewController.h; sourceTree = "<group>"; };
@@ -3524,6 +3550,30 @@
 			);
 			name = "代金劵图";
 			path = "动画效果";
+			sourceTree = "<group>";
+		};
+		18543E2C1ECAC3C700E0A4DA /* 会员卡首页 */ = {
+			isa = PBXGroup;
+			children = (
+				D968465B1CC9FCD000146956 /* VipManagerViewController.h */,
+				D968465C1CC9FCD000146956 /* VipManagerViewController.m */,
+				18543E321ECACA3E00E0A4DA /* ChooseCardTypeVC.h */,
+				18543E331ECACA3E00E0A4DA /* ChooseCardTypeVC.m */,
+				18543E341ECACA3E00E0A4DA /* ChooseCardTypeVC.xib */,
+				18543E3F1ECADCC600E0A4DA /* CardCodeTypeVC.h */,
+				18543E401ECADCC600E0A4DA /* CardCodeTypeVC.m */,
+				18543E411ECADCC600E0A4DA /* CardCodeTypeVC.xib */,
+				18543E421ECADCC600E0A4DA /* CardSearialsVC.h */,
+				18543E431ECADCC600E0A4DA /* CardSearialsVC.m */,
+				18543E441ECADCC600E0A4DA /* CardSearialsVC.xib */,
+				18543E491ECADCDF00E0A4DA /* ChangeVipCardInfoVC.h */,
+				18543E4A1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m */,
+				18543E3B1ECAD8A500E0A4DA /* quan1.png */,
+				18543E3D1ECAD8C700E0A4DA /* quan2.png */,
+				18543E371ECAD89100E0A4DA /* quan3.png */,
+				18543E391ECAD89F00E0A4DA /* quan4.png */,
+			);
+			name = "会员卡首页";
 			sourceTree = "<group>";
 		};
 		185ABD671D80224600BD8097 /* 爱奇艺 */ = {
@@ -5811,12 +5861,11 @@
 		D9A6E4691D4F3B65008A3C29 /* 会员制管理 */ = {
 			isa = PBXGroup;
 			children = (
+				18543E2C1ECAC3C700E0A4DA /* 会员卡首页 */,
 				D9A8ABE81E02954200D4597F /* CardShowViewController.h */,
 				D9A8ABE91E02954200D4597F /* CardShowViewController.m */,
 				D9A8ABEA1E02954200D4597F /* ContentDetailViewController.h */,
 				D9A8ABEB1E02954200D4597F /* ContentDetailViewController.m */,
-				D968465B1CC9FCD000146956 /* VipManagerViewController.h */,
-				D968465C1CC9FCD000146956 /* VipManagerViewController.m */,
 				D9A6E46A1D4F3BB8008A3C29 /* AddVipCardViewController.h */,
 				D9A6E46B1D4F3BB8008A3C29 /* AddVipCardViewController.m */,
 				D9A6E46D1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.h */,
@@ -6602,6 +6651,7 @@
 				D981FD041E2616080026E4B2 /* UShare快速集成.html in Resources */,
 				D9699E501D348EF7001DEC06 /* 小标-22.png in Resources */,
 				1CF2839D1C58C48900F3952A /* more_default.png in Resources */,
+				18543E3C1ECAD8A500E0A4DA /* quan1.png in Resources */,
 				D95F032A1DD9841500F9DC2F /* Selected.png in Resources */,
 				1852FB051D55C962009CF1B2 /* 代金券-03.png in Resources */,
 				1CDA9E001C59FAB300DFE518 /* ad_fast.jpg in Resources */,
@@ -6801,10 +6851,12 @@
 				18D7C4921D5B12BA00AEF545 /* mohu-14.png in Resources */,
 				1A83127C1D885444001BC3B6 /* chat_receiver_audio_playing003@2x.png in Resources */,
 				1C2ED1221C5B5868003EE93B /* 4-02(1)@2x.png in Resources */,
+				18543E461ECADCC700E0A4DA /* CardCodeTypeVC.xib in Resources */,
 				D9FF0D991D53304C00443312 /* 图标-11new.png in Resources */,
 				D9AB252F1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png in Resources */,
 				18BCCDCC1D3C9EE8005E145D /* merchant_es1.png in Resources */,
 				D9DEED411CAD0C7200ACDD00 /* AddressTableViewCell.xib in Resources */,
+				18543E3E1ECAD8C700E0A4DA /* quan2.png in Resources */,
 				18518D571E7945A000067D95 /* s_money_n.png in Resources */,
 				D95BAE521D542FD500ED0CDC /* award_08.png in Resources */,
 				D973D58C1D9E4588003F82FB /* tanhao.png in Resources */,
@@ -6827,6 +6879,7 @@
 				D92302611D1528BB008FB9A9 /* entrance_selected.png in Resources */,
 				D939D6C51E9B17CD00D0569E /* AllSenderMessageViewControlleVC.xib in Resources */,
 				D9637DFF1D59BAF900C19D0B /* admin_p.png in Resources */,
+				18543E361ECACA3E00E0A4DA /* ChooseCardTypeVC.xib in Resources */,
 				D95BAE4B1D542FD500ED0CDC /* award_01.png in Resources */,
 				D95C84D91E34602E0028C440 /* 引导页-02.png in Resources */,
 				D925D1861E7106EB0000B8B1 /* SelectAddressViewController.xib in Resources */,
@@ -6834,6 +6887,7 @@
 				1817FF591D405BE100AFC965 /* mhead_default.png in Resources */,
 				1C9E825D1C60AD610007BF02 /* 1-01.png in Resources */,
 				18F27EEC1D640E84002DD03A /* 头像-4.png in Resources */,
+				18543E481ECADCC700E0A4DA /* CardSearialsVC.xib in Resources */,
 				D9541E9E1E1F65B1003022E5 /* 登陆-03.png in Resources */,
 				0793868A1C55B5CA0021B385 /* Main.storyboard in Resources */,
 				1A4173B91D787B1400A70601 /* Localizable.strings in Resources */,
@@ -6865,6 +6919,7 @@
 				18BCCDCB1D3C9EE8005E145D /* merchant_ed1.png in Resources */,
 				D93C0D6B1D251E7B001A1AC1 /* wash_06.png in Resources */,
 				18F27EF11D640E84002DD03A /* 头像-9.png in Resources */,
+				18543E3A1ECAD89F00E0A4DA /* quan4.png in Resources */,
 				D941CCF31CF698CE0012303C /* Images.xcassets in Resources */,
 				D93B7E5D1D23694F002AFBCC /* 点击-01.png in Resources */,
 				D94DF2501CAE0AA4000D5B69 /* star_highlighted-darker.png in Resources */,
@@ -6878,6 +6933,7 @@
 				D981FD0F1E2616080026E4B2 /* read_me.txt in Resources */,
 				D9AB25321D88E4ED000E9288 /* VoiceSearchFeedback004@2x.png in Resources */,
 				D97F60161D62F770000EE794 /* 注册-01.png in Resources */,
+				18543E381ECAD89200E0A4DA /* quan3.png in Resources */,
 				1CF6E47B1C61E4350001159C /* shenji@2x.png in Resources */,
 				18F27F021D640E84002DD03A /* 头像-26.png in Resources */,
 				1CF283971C58C48900F3952A /* market.png in Resources */,
@@ -7222,6 +7278,7 @@
 				D9C206041D1D300E00761DC4 /* GraphicDetailsViewController.m in Sources */,
 				D9210BB91CC718D500010DF7 /* CardInfoViewController.m in Sources */,
 				185ABD891D80227900BD8097 /* Item.m in Sources */,
+				18543E351ECACA3E00E0A4DA /* ChooseCardTypeVC.m in Sources */,
 				D94DF2541CAE0AA4000D5B69 /* UIView+Subviews.m in Sources */,
 				1A4173CC1D787FF200A70601 /* BaseTableViewCell.m in Sources */,
 				D9ABB1AD1EC9408E00FBE080 /* ApriseVC.m in Sources */,
@@ -7308,6 +7365,7 @@
 				D947E4851D7D710200F9FEE8 /* FMDatabasePool.m in Sources */,
 				D94743931CE56A6000D1D3EE /* LNLocationGeocoder.m in Sources */,
 				D98E5BFE1E515210009D56BF /* MASConstraintMaker.m in Sources */,
+				18543E4B1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m in Sources */,
 				D98ECBC91D9CC52200BEDD57 /* LZDAddVipCell.m in Sources */,
 				D9ACF1AF1E24CB4200BCC877 /* thirdlogVC.m in Sources */,
 				D9345E6A1E769805006B2AC1 /* TopActiveListTableVC.m in Sources */,
@@ -7342,6 +7400,7 @@
 				D9195D1A1E8218F200FB4367 /* PictureAndVeidoDetailVC.m in Sources */,
 				D9A6E46F1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m in Sources */,
 				D9FF0D721D52D6E900443312 /* ShopListTableViewCell.m in Sources */,
+				18543E471ECADCC700E0A4DA /* CardSearialsVC.m in Sources */,
 				D9A06B631D8679C30037795B /* EMVoiceConverter.mm in Sources */,
 				D95A87721E728AE000BDAC75 /* JFSearchView.m in Sources */,
 				1897574E1E9B705400AB1D00 /* SendMessageToAllVC.m in Sources */,
@@ -7366,6 +7425,7 @@
 				18E9E1451D88E8EF007981B6 /* PersonDetailViewController.m in Sources */,
 				D9CF3FA71D76730300D9D0EC /* GroupViewController.m in Sources */,
 				1CF2836E1C58899900F3952A /* FirstLikeCell.m in Sources */,
+				18543E451ECADCC600E0A4DA /* CardCodeTypeVC.m in Sources */,
 				D9B3A5C51D74255700F3F27E /* PSTGridLayoutItem.m in Sources */,
 				D98787331E274FDE00C7A828 /* NewMessageVC.m in Sources */,
 				D9C7D45E1E2F3BEB00ADB6A1 /* MoneybagDetailVC.m in Sources */,

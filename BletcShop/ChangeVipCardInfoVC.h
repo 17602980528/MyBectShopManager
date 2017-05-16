@@ -1,18 +1,18 @@
 //
-//  AddVipCardViewController.h
+//  ChangeVipCardInfoVC.h
 //  BletcShop
 //
-//  Created by Bletc on 16/8/1.
-//  Copyright © 2016年 bletc. All rights reserved.
+//  Created by apple on 2017/5/3.
+//  Copyright © 2017年 bletc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface AddVipCardViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface ChangeVipCardInfoVC : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property(nonatomic,weak)UITableView *MyAddtable;
 
 @property (nonatomic,retain)UITextField *phoneText;
-@property (nonatomic,retain)UITextField *codeText;//会员卡编号
+//@property (nonatomic,retain)UITextField *codeText;//会员卡编号
 @property (nonatomic,retain)UITextField *priceText;
 @property (nonatomic,retain)UITextField *contentText;
 @property (nonatomic , strong) UITextField *deadLineText;// 期限
