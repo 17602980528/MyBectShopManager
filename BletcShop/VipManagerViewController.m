@@ -9,10 +9,9 @@
 #import "VipManagerViewController.h"
 #import "RoyTableViewCell.h"
 #import "UIImageView+WebCache.h"
-//#import "AddVipCardViewController.h"
 #import "CardShowViewController.h"
-#import "CardSearialsVC.h"
 #import "ChangeVipCardInfoVC.h"
+#import "ChooseCardTypeVC.h"
 @interface VipManagerViewController ()<UITextFieldDelegate>
 
 @property(nonatomic,weak)UIScrollView *listView;
@@ -384,9 +383,7 @@
 //添加会员卡
 -(void)addtBtnAction:(UIButton *)Btn
 {
-    //    AddVipCardViewController *addVipCardView = [[AddVipCardViewController alloc]init];
-    //    [self.navigationController pushViewController:addVipCardView animated:YES];
-    CardSearialsVC *vc=[[CardSearialsVC alloc]init];
+    ChooseCardTypeVC *vc=[[ChooseCardTypeVC alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 //不可编辑

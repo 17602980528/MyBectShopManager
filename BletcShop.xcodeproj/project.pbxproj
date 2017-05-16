@@ -90,10 +90,6 @@
 		18543E3A1ECAD89F00E0A4DA /* quan4.png in Resources */ = {isa = PBXBuildFile; fileRef = 18543E391ECAD89F00E0A4DA /* quan4.png */; };
 		18543E3C1ECAD8A500E0A4DA /* quan1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18543E3B1ECAD8A500E0A4DA /* quan1.png */; };
 		18543E3E1ECAD8C700E0A4DA /* quan2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18543E3D1ECAD8C700E0A4DA /* quan2.png */; };
-		18543E451ECADCC600E0A4DA /* CardCodeTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18543E401ECADCC600E0A4DA /* CardCodeTypeVC.m */; };
-		18543E461ECADCC700E0A4DA /* CardCodeTypeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18543E411ECADCC600E0A4DA /* CardCodeTypeVC.xib */; };
-		18543E471ECADCC700E0A4DA /* CardSearialsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18543E431ECADCC600E0A4DA /* CardSearialsVC.m */; };
-		18543E481ECADCC700E0A4DA /* CardSearialsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18543E441ECADCC600E0A4DA /* CardSearialsVC.xib */; };
 		18543E4B1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18543E4A1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m */; };
 		1859E7C11D86991B00647514 /* CheckDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1859E7C01D86991B00647514 /* CheckDataViewController.m */; };
 		1859E7C41D869E1E00647514 /* CommenDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1859E7C31D869E1E00647514 /* CommenDataViewController.m */; };
@@ -1280,12 +1276,6 @@
 		18543E391ECAD89F00E0A4DA /* quan4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quan4.png; sourceTree = "<group>"; };
 		18543E3B1ECAD8A500E0A4DA /* quan1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quan1.png; sourceTree = "<group>"; };
 		18543E3D1ECAD8C700E0A4DA /* quan2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quan2.png; sourceTree = "<group>"; };
-		18543E3F1ECADCC600E0A4DA /* CardCodeTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardCodeTypeVC.h; sourceTree = "<group>"; };
-		18543E401ECADCC600E0A4DA /* CardCodeTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardCodeTypeVC.m; sourceTree = "<group>"; };
-		18543E411ECADCC600E0A4DA /* CardCodeTypeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCodeTypeVC.xib; sourceTree = "<group>"; };
-		18543E421ECADCC600E0A4DA /* CardSearialsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSearialsVC.h; sourceTree = "<group>"; };
-		18543E431ECADCC600E0A4DA /* CardSearialsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardSearialsVC.m; sourceTree = "<group>"; };
-		18543E441ECADCC600E0A4DA /* CardSearialsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardSearialsVC.xib; sourceTree = "<group>"; };
 		18543E491ECADCDF00E0A4DA /* ChangeVipCardInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeVipCardInfoVC.h; sourceTree = "<group>"; };
 		18543E4A1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeVipCardInfoVC.m; sourceTree = "<group>"; };
 		1859E7BF1D86991B00647514 /* CheckDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckDataViewController.h; sourceTree = "<group>"; };
@@ -3584,12 +3574,6 @@
 				D96E1B6F1ECAD46200084453 /* AddSeriesViewController.h */,
 				D96E1B701ECAD46200084453 /* AddSeriesViewController.m */,
 				D96E1B711ECAD46200084453 /* AddSeriesViewController.xib */,
-				18543E3F1ECADCC600E0A4DA /* CardCodeTypeVC.h */,
-				18543E401ECADCC600E0A4DA /* CardCodeTypeVC.m */,
-				18543E411ECADCC600E0A4DA /* CardCodeTypeVC.xib */,
-				18543E421ECADCC600E0A4DA /* CardSearialsVC.h */,
-				18543E431ECADCC600E0A4DA /* CardSearialsVC.m */,
-				18543E441ECADCC600E0A4DA /* CardSearialsVC.xib */,
 				D9A6E46A1D4F3BB8008A3C29 /* AddVipCardViewController.h */,
 				D9A6E46B1D4F3BB8008A3C29 /* AddVipCardViewController.m */,
 				18543E491ECADCDF00E0A4DA /* ChangeVipCardInfoVC.h */,
@@ -6878,7 +6862,6 @@
 				18D7C4921D5B12BA00AEF545 /* mohu-14.png in Resources */,
 				1A83127C1D885444001BC3B6 /* chat_receiver_audio_playing003@2x.png in Resources */,
 				1C2ED1221C5B5868003EE93B /* 4-02(1)@2x.png in Resources */,
-				18543E461ECADCC700E0A4DA /* CardCodeTypeVC.xib in Resources */,
 				D9FF0D991D53304C00443312 /* 图标-11new.png in Resources */,
 				D9AB252F1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png in Resources */,
 				18BCCDCC1D3C9EE8005E145D /* merchant_es1.png in Resources */,
@@ -6914,7 +6897,6 @@
 				1817FF591D405BE100AFC965 /* mhead_default.png in Resources */,
 				1C9E825D1C60AD610007BF02 /* 1-01.png in Resources */,
 				18F27EEC1D640E84002DD03A /* 头像-4.png in Resources */,
-				18543E481ECADCC700E0A4DA /* CardSearialsVC.xib in Resources */,
 				D9541E9E1E1F65B1003022E5 /* 登陆-03.png in Resources */,
 				0793868A1C55B5CA0021B385 /* Main.storyboard in Resources */,
 				1A4173B91D787B1400A70601 /* Localizable.strings in Resources */,
@@ -7427,7 +7409,6 @@
 				D9195D1A1E8218F200FB4367 /* PictureAndVeidoDetailVC.m in Sources */,
 				D9A6E46F1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m in Sources */,
 				D9FF0D721D52D6E900443312 /* ShopListTableViewCell.m in Sources */,
-				18543E471ECADCC700E0A4DA /* CardSearialsVC.m in Sources */,
 				D9A06B631D8679C30037795B /* EMVoiceConverter.mm in Sources */,
 				D95A87721E728AE000BDAC75 /* JFSearchView.m in Sources */,
 				1897574E1E9B705400AB1D00 /* SendMessageToAllVC.m in Sources */,
@@ -7452,7 +7433,6 @@
 				18E9E1451D88E8EF007981B6 /* PersonDetailViewController.m in Sources */,
 				D9CF3FA71D76730300D9D0EC /* GroupViewController.m in Sources */,
 				1CF2836E1C58899900F3952A /* FirstLikeCell.m in Sources */,
-				18543E451ECADCC600E0A4DA /* CardCodeTypeVC.m in Sources */,
 				D9B3A5C51D74255700F3F27E /* PSTGridLayoutItem.m in Sources */,
 				D98787331E274FDE00C7A828 /* NewMessageVC.m in Sources */,
 				D9C7D45E1E2F3BEB00ADB6A1 /* MoneybagDetailVC.m in Sources */,
