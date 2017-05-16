@@ -40,6 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title=@"选卡类型";
     _selectResult=@"储值卡";
 }
 - (IBAction)gotoNextVC:(id)sender {
