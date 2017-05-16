@@ -12,7 +12,7 @@
 #import "CardShowViewController.h"
 #import "ChangeVipCardInfoVC.h"
 #import "ChooseCardTypeVC.h"
-@interface VipManagerViewController ()<UITextFieldDelegate>
+@interface VipManagerViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
 
 @property(nonatomic,weak)UIScrollView *listView;
 @property(nonatomic,strong)NSArray *data;
@@ -96,215 +96,6 @@
     [self.view addSubview:TabSc];
     
 }
--(void)NewAddVipAction
-{
-    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] init];
-    self.alertView = alertView;
-    
-    [alertView setContainerView:[self createDemoView]];
-    
-    
-    {
-        [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"确定", nil]];
-    }
-    [alertView setDelegate:self];
-    
-    [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
-        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, (int)[alertView tag]);
-        [alertView close];
-    }];
-    
-    [alertView setUseMotionEffects:true];
-    
-    [alertView show];
-}
-
-- (void)customIOS7dialogButtonTouchUpInside: (CustomIOSAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
-{
-    if (alertView.tag ==0&&buttonIndex==0) {
-    }
-    else
-        [alertView close];
-}
-
-- (UIView *)createDemoView
-{
-    UIView *demoView = [[UIView alloc] init ];
-    demoView.frame=CGRectMake(0, 0, SCREENWIDTH, 290);
-    
-    self.demoView = demoView;
-    
-    
-    
-    {
-        demoView.frame=CGRectMake(0, 0, SCREENWIDTH, 280);
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 40)];
-        label.text = @"会员卡编号:";
-        label.font = [UIFont systemFontOfSize:13];
-        [demoView addSubview:label];
-        UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(110, 5, 160, 30)];
-        self.codeText = nameText;
-        nameText.delegate=self;
-        
-        nameText.layer.borderWidth = 0.3;
-        nameText.backgroundColor = tableViewBackgroundColor;
-        nameText.text = self.edit_dic[@"code"];
-        nameText.font = [UIFont systemFontOfSize:13];
-        nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
-        [demoView addSubview:nameText];
-        
-        
-        UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 0.3)];
-        line2.backgroundColor = [UIColor grayColor];
-        line2.alpha = 0.3;
-        [demoView addSubview:line2];
-        
-        
-        //会员卡类型
-        UILabel *typeLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 40, 100, 40)];
-        typeLabel.text = @"会员卡类型:";
-        typeLabel.font = [UIFont systemFontOfSize:13];
-        [demoView addSubview:typeLabel];
-        UILabel *cardTypeLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 45, 100, 30)];
-        self.cardTypeLabel=cardTypeLabel;
-        cardTypeLabel.layer.borderWidth = 0.3;
-        cardTypeLabel.textAlignment = NSTextAlignmentCenter;
-        cardTypeLabel.text = self.edit_dic[@"type"];
-        
-        NSLog(@"%@",cardTypeLabel.text);
-        cardTypeLabel.font = [UIFont systemFontOfSize:13];
-        [demoView addSubview:cardTypeLabel];
-        
-        //箭头
-        UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        choiceBtn.frame = CGRectMake(210, 45, 30, 30);
-        //    choseBtn.backgroundColor = [UIColor redColor];
-        [choiceBtn setImage:[UIImage imageNamed:@"arraw_right"] forState:UIControlStateNormal];
-        [choiceBtn setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateSelected];
-        
-        [demoView addSubview:choiceBtn];
-        UIView *linecard = [[UIView alloc]initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 0.3)];
-        linecard.backgroundColor = [UIColor grayColor];
-        linecard.alpha = 0.3;
-        [demoView addSubview:linecard];
-        //会员卡级别
-        UILabel *levelLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 100, 40)];
-        levelLabel.text = @"会员卡级别:";
-        levelLabel.font = [UIFont systemFontOfSize:13];
-        [demoView addSubview:levelLabel];
-        UILabel *cardLevelLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 85, 100, 30)];
-        cardLevelLabel.layer.borderWidth = 0.3;
-        cardLevelLabel.textAlignment = NSTextAlignmentCenter;
-        self.cardLevelLabel=cardLevelLabel;
-        cardLevelLabel.text = self.edit_dic[@"level"];
-        NSLog(@"%@",cardLevelLabel.text);
-        cardLevelLabel.font = [UIFont systemFontOfSize:13];
-        [demoView addSubview:cardLevelLabel];
-        
-        //箭头
-        UIButton *choiceBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        choiceBtn1.frame = CGRectMake(210, 85, 30, 30);
-        //    choseBtn.backgroundColor = [UIColor redColor];
-        [choiceBtn1 setImage:[UIImage imageNamed:@"arraw_right"] forState:UIControlStateNormal];
-        [choiceBtn1 setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateSelected];
-        
-        [demoView addSubview:choiceBtn1];
-        UIView *lineLevel = [[UIView alloc]initWithFrame:CGRectMake(0, 120, SCREENWIDTH, 0.3)];
-        lineLevel.backgroundColor = [UIColor grayColor];
-        lineLevel.alpha = 0.3;
-        [demoView addSubview:lineLevel];
-        
-        UIView *lineJibie = [[UIView alloc]initWithFrame:CGRectMake(0, 120, SCREENWIDTH, 0.3)];
-        lineJibie.backgroundColor = [UIColor grayColor];
-        lineJibie.alpha = 0.3;
-        [demoView addSubview:lineJibie];
-        //金额
-        UILabel *addresslabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 120, 100, 40)];
-        addresslabel.text = @"金额:";
-        addresslabel.font = [UIFont systemFontOfSize:13];
-        [demoView addSubview:addresslabel];
-        UITextField *addressText = [[UITextField alloc]initWithFrame:CGRectMake(110, 125, 160, 30)];
-        addressText.delegate=self;
-        self.priceText = addressText;
-        addressText.layer.borderWidth = 0.3;
-        addressText.backgroundColor = tableViewBackgroundColor;
-        addressText.text = self.edit_dic[@"price"];
-        addressText.font = [UIFont systemFontOfSize:13];
-        addressText.clearButtonMode = UITextFieldViewModeWhileEditing;
-        [demoView addSubview:addressText];
-        UIView *lineAdd = [[UIView alloc]initWithFrame:CGRectMake(0, 160, SCREENWIDTH, 0.3)];
-        lineAdd.backgroundColor = [UIColor grayColor];
-        lineAdd.alpha = 0.3;
-        [demoView addSubview:lineAdd];
-        UIView *lineMoney = [[UIView alloc]initWithFrame:CGRectMake(0, 1160, SCREENWIDTH, 0.3)];
-        lineMoney.backgroundColor = [UIColor grayColor];
-        lineMoney.alpha = 0.3;
-        [demoView addSubview:lineMoney];
-        
-        //优惠内容
-        UILabel *descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 160, 100, 40)];
-        descriptionLabel.text = @"优惠内容";
-        descriptionLabel.font = [UIFont systemFontOfSize:12];
-        [demoView addSubview:descriptionLabel];
-        UITextField *descriptionText = [[UITextField alloc]initWithFrame:CGRectMake(110, 165, 160, 30)];
-        descriptionText.delegate=self;
-        self.contentText = descriptionText;
-        descriptionText.layer.borderWidth = 0.3;
-        descriptionText.backgroundColor = tableViewBackgroundColor;
-        descriptionText.text = self.edit_dic[@"content"];
-        descriptionText.font = [UIFont systemFontOfSize:13];
-        descriptionText.clearButtonMode = UITextFieldViewModeWhileEditing;
-        [demoView addSubview:descriptionText];
-        UIView *lineDes = [[UIView alloc]initWithFrame:CGRectMake(0, 200, SCREENWIDTH, 0.3)];
-        lineDes.backgroundColor = [UIColor grayColor];
-        lineDes.alpha = 0.3;
-        [demoView addSubview:lineDes];
-        //上传卡片
-        UILabel *uploadLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 200, 100, 70)];
-        uploadLabel.text = @"上传卡片";
-        uploadLabel.font = [UIFont systemFontOfSize:13];
-        [demoView addSubview:uploadLabel];
-        
-        
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(110, 205, 70, 60)];
-        imageView.backgroundColor = [UIColor colorWithHexString:self.edit_dic[@"card_temp_color"]];
-        imageView.userInteractionEnabled = YES;
-        
-        //
-        //           NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCECARD stringByAppendingString:self.edit_dic[@"card_temp_color"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-        //
-        //
-        //        [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon2.png"] options:SDWebImageRetryFailed];
-        
-        
-        
-        self.imageView = imageView;
-        [demoView addSubview:imageView];
-        
-        UILabel *vipLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 42)];
-        vipLab.text = [NSString stringWithFormat:@"VIP%@",self.edit_dic[@"level"]];
-        vipLab.textAlignment = NSTextAlignmentCenter;
-        vipLab.textColor = [UIColor whiteColor];
-        [imageView addSubview:vipLab];
-        
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:vipLab.text];
-        
-        [attr setAttributes:@{NSForegroundColorAttributeName:RGB(253,171,65),NSFontAttributeName:[UIFont boldSystemFontOfSize:15]} range:NSMakeRange(0, 3)];
-        
-        [attr setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]} range:NSMakeRange(3, vipLab.text.length-3)];
-        
-        vipLab.attributedText = attr;
-        
-        
-        UIView *whiteView =[[UIView alloc]initWithFrame:CGRectMake(0, imageView.height-18, imageView.width, 18)];
-        whiteView.backgroundColor =[UIColor whiteColor];
-        [imageView addSubview:whiteView];
-        
-        
-    }
-    return demoView;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
@@ -369,7 +160,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.edit_dic = [self.data objectAtIndex:indexPath.row];
-    //    [self NewAddVipAction];
     CardShowViewController *showVC=[[CardShowViewController alloc]init];
     showVC.dic=self.edit_dic;
     [self.navigationController pushViewController:showVC animated:YES];
@@ -402,8 +192,9 @@
 -(void)deleteButtonClick:(UIButton *)sender{
     UITableViewCell *cell=(UITableViewCell *)[[sender superview]superview];
     NSIndexPath *indexPath=[TabSc indexPathForCell:cell];
-    NSDictionary *dic=self.data[indexPath.row];
-    [self postDeleteCards:dic];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"确定删除次会员卡？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    alert.tag=indexPath.row;
+    [alert show];
 }
 //上下架
 -(void)onOrOffButtonClick:(UIButton *)sender{
@@ -445,6 +236,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:dic[@"merchant"] forKey:@"muid"];
     [params setObject:dic[@"code"] forKey:@"code"];
+    NSLog(@"%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"result===%@", result);
@@ -457,6 +249,12 @@
         NSLog(@"%@", error);
         
     }];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==1) {
+        NSDictionary *dic=self.data[alertView.tag];
+        [self postDeleteCards:dic];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
