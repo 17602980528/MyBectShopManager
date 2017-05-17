@@ -13,6 +13,7 @@
 @interface ChoseSeriesVC ()<UITableViewDelegate,UITableViewDataSource,AddSeriesViewControllerDelegate>
 {
     NSInteger selectedRow;
+    UIImageView *imageView;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tabView;
 @property(nonatomic,strong)NSArray *array;
@@ -85,9 +86,21 @@
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"result===%@", result);
-        _array=result;
-        [_tabView reloadData];
-        
+        if (result) {
+               _array=result;
+        }
+        if (_array.count>0) {
+              [_tabView reloadData];
+            _tabView.hidden=NO;
+            if (imageView) {
+                [imageView removeFromSuperview];
+            }
+        }else{
+            _tabView.hidden=YES;
+            imageView=[[UIImageView alloc]initWithFrame:CGRectMake(12, 25, SCREENWIDTH-24, (SCREENWIDTH-24)*215/702)];
+            imageView.image=[UIImage imageNamed:@"xilietishi"];
+            [self.view addSubview:imageView];
+        }
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"%@", error);

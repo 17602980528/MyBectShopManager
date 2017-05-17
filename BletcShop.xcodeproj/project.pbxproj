@@ -33,6 +33,7 @@
 		181718B71E80BFE00019C7C7 /* ArcForRandomAdvertVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 181718B61E80BFE00019C7C7 /* ArcForRandomAdvertVC.m */; };
 		1817FF591D405BE100AFC965 /* mhead_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1817FF581D405BE100AFC965 /* mhead_default.png */; };
 		1817FF5C1D40665900AFC965 /* MemberDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */; };
+		181F9C991ECBFF82003A62AE /* xilietishi.png in Resources */ = {isa = PBXBuildFile; fileRef = 181F9C981ECBFF82003A62AE /* xilietishi.png */; };
 		1828C7E51E272D4A00480DB9 /* CardEricShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1828C7E41E272D4A00480DB9 /* CardEricShareViewController.m */; };
 		182988411E723F4200164F32 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182988341E723F4200164F32 /* TAAbstractDotView.m */; };
 		182988421E723F4200164F32 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182988361E723F4200164F32 /* TAAnimatedDotView.m */; };
@@ -1195,6 +1196,7 @@
 		1817FF581D405BE100AFC965 /* mhead_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mhead_default.png; sourceTree = "<group>"; };
 		1817FF5A1D40665900AFC965 /* MemberDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberDetailViewController.h; sourceTree = "<group>"; };
 		1817FF5B1D40665900AFC965 /* MemberDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberDetailViewController.m; sourceTree = "<group>"; };
+		181F9C981ECBFF82003A62AE /* xilietishi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xilietishi.png; sourceTree = "<group>"; };
 		1828C7E31E272D4A00480DB9 /* CardEricShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardEricShareViewController.h; sourceTree = "<group>"; };
 		1828C7E41E272D4A00480DB9 /* CardEricShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardEricShareViewController.m; sourceTree = "<group>"; };
 		182988331E723F4200164F32 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
@@ -3568,6 +3570,7 @@
 				D96E1B741ECAD94B00084453 /* ChoseSeriesVC.h */,
 				D96E1B751ECAD94B00084453 /* ChoseSeriesVC.m */,
 				D96E1B761ECAD94B00084453 /* ChoseSeriesVC.xib */,
+				181F9C981ECBFF82003A62AE /* xilietishi.png */,
 				D96E1B791ECAD9EF00084453 /* ChoseSeriesCellT.h */,
 				D96E1B7A1ECAD9EF00084453 /* ChoseSeriesCellT.m */,
 				D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */,
@@ -7004,6 +7007,7 @@
 				D9541EA01E1F65B1003022E5 /* 登陆-05.png in Resources */,
 				D9FF0D981D53304C00443312 /* 图标-10new.png in Resources */,
 				18E000581E5C40D7004884CC /* adver_sample.png in Resources */,
+				181F9C991ECBFF82003A62AE /* xilietishi.png in Resources */,
 				D9D315DB1E07C9E5009FB465 /* QQ20161219-0.png in Resources */,
 				D94DF2601CAE0DB8000D5B69 /* result_small_star_disable@2x.png in Resources */,
 				18F27F041D640E84002DD03A /* 头像-28.png in Resources */,
