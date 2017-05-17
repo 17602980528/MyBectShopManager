@@ -7,8 +7,8 @@
 //
 
 #import "AddFriendTableViewController.h"
-#import "MessageCell.h"
-
+#import "AddFriendCell.h"
+#import "UIImageView+WebCache.h"
 @interface AddFriendTableViewController ()<UITextFieldDelegate>
 @property(nonatomic,strong)NSArray *friendList;
 
@@ -93,25 +93,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageCell *cell = [MessageCell messageCellWithTableView:tableView];
-    cell.acceptBtn.hidden = YES;
-    cell.jujueBtn.hidden = NO;
-    [cell.jujueBtn setTitle:@"添加" forState:UIControlStateNormal];
-    cell.jujueBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [cell.jujueBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [cell.jujueBtn setBackgroundColor:NavBackGroundColor];
+    AddFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addFriendCellID"];
+    
+    if (!cell) {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"AddFriendCell" owner:self options:nil]lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    [cell.acceptBtn setTitle:@"添加" forState:UIControlStateNormal];
+    cell.acceptBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [cell.acceptBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [cell.acceptBtn setBackgroundColor:NavBackGroundColor];
 
-    [cell.jujueBtn addTarget:self action:@selector(addFriend:) forControlEvents:UIControlEventTouchUpInside];
-    cell.jujueBtn.tag = indexPath.row;
+    [cell.acceptBtn addTarget:self action:@selector(addFriend:) forControlEvents:UIControlEventTouchUpInside];
+    cell.acceptBtn.tag = indexPath.row;
     
     
     if (self.friendList.count!=0) {
         
+           cell.titlelab.text = self.friendList[indexPath.row][@"nickname"];
         
-        cell.titlelab.text = self.friendList[indexPath.row][@"nickname"];
-        cell.desLab.text = self.friendList[indexPath.row][@"account"];
-        
-        NSString *header_S = [[cell.desLab.text componentsSeparatedByString:@"_"] firstObject];
+        NSString *header_S = [[self.friendList[indexPath.row][@"account"] componentsSeparatedByString:@"_"] firstObject];
         
 
         

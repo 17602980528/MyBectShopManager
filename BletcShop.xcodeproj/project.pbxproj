@@ -460,6 +460,8 @@
 		D93027E21CFEB641007447D2 /* star_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D93027E01CFEB641007447D2 /* star_default.png */; };
 		D93027E41CFEBC82007447D2 /* checkbox_ture.png in Resources */ = {isa = PBXBuildFile; fileRef = D93027E31CFEBC82007447D2 /* checkbox_ture.png */; };
 		D9329CD01D49AFFE00BC84F4 /* 代金券.png in Resources */ = {isa = PBXBuildFile; fileRef = D9329CCF1D49AFFE00BC84F4 /* 代金券.png */; };
+		D932B2761ECC51BD0052CC37 /* AddFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D932B2741ECC51BD0052CC37 /* AddFriendCell.m */; };
+		D932B2771ECC51BD0052CC37 /* AddFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D932B2751ECC51BD0052CC37 /* AddFriendCell.xib */; };
 		D932F3E31CCDB6B800B33505 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D932F3E21CCDB6B800B33505 /* VPImageCropperViewController.m */; };
 		D9345E5B1E7636C2006B2AC1 /* LZDCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9345E5A1E7636C2006B2AC1 /* LZDCenterViewController.m */; };
 		D9345E5F1E766DDE006B2AC1 /* DefaultAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9345E5D1E766DDE006B2AC1 /* DefaultAddressVC.m */; };
@@ -1812,6 +1814,9 @@
 		D93027E01CFEB641007447D2 /* star_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_default.png; sourceTree = "<group>"; };
 		D93027E31CFEBC82007447D2 /* checkbox_ture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_ture.png; sourceTree = "<group>"; };
 		D9329CCF1D49AFFE00BC84F4 /* 代金券.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "代金券.png"; sourceTree = "<group>"; };
+		D932B2731ECC51BD0052CC37 /* AddFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendCell.h; sourceTree = "<group>"; };
+		D932B2741ECC51BD0052CC37 /* AddFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendCell.m; sourceTree = "<group>"; };
+		D932B2751ECC51BD0052CC37 /* AddFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendCell.xib; sourceTree = "<group>"; };
 		D932F3E11CCDB6B800B33505 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
 		D932F3E21CCDB6B800B33505 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		D9345E591E7636C2006B2AC1 /* LZDCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZDCenterViewController.h; sourceTree = "<group>"; };
@@ -5355,6 +5360,9 @@
 			children = (
 				D980B66E1D78066D00CC6637 /* AddFriendTableViewController.h */,
 				D980B66F1D78066D00CC6637 /* AddFriendTableViewController.m */,
+				D932B2731ECC51BD0052CC37 /* AddFriendCell.h */,
+				D932B2741ECC51BD0052CC37 /* AddFriendCell.m */,
+				D932B2751ECC51BD0052CC37 /* AddFriendCell.xib */,
 			);
 			name = "添加好友";
 			sourceTree = "<group>";
@@ -6624,6 +6632,7 @@
 				189411431D8052FE00314E11 /* playvedio.jpg in Resources */,
 				D9F1358A1DEE696700D2703D /* AddAdminCell.xib in Resources */,
 				D94C5F411D9133700063EB27 /* LLL.png in Resources */,
+				D932B2771ECC51BD0052CC37 /* AddFriendCell.xib in Resources */,
 				18F032041E5ED79300ACD261 /* points2.jpg in Resources */,
 				1852FB0D1D55C962009CF1B2 /* 代金券-11.png in Resources */,
 				185ABD831D80227900BD8097 /* button_background_disabled@2x.png in Resources */,
@@ -7352,6 +7361,7 @@
 				D936F5831D473CBF00424B22 /* MyCashCouponViewController.m in Sources */,
 				D9D50DB31D87DE0E00A5E469 /* Emoji.m in Sources */,
 				D9764E801DD591A500B088DE /* AddBankAccountVC.m in Sources */,
+				D932B2761ECC51BD0052CC37 /* AddFriendCell.m in Sources */,
 				D980B6691D77FBAB00CC6637 /* ContactCell.m in Sources */,
 				D94869EB1D17DE05003D1972 /* SearchTableViewController.m in Sources */,
 				D9F135891DEE696700D2703D /* AddAdminCell.m in Sources */,
