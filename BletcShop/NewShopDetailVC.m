@@ -20,16 +20,18 @@
     UIButton *collectBtn;
     NSDictionary *wholeInfoDic;
     UIButton *title_old_btn;
-    float           _webHight;
+//    float           _webHight;
 
-    UIWebView *web_view;
+//    UIWebView *web_view;
     
+    UIView *old_view;
 
 }
 @property BOOL state;
 @property(nonatomic,strong)NSMutableArray *cardArray;//卡
 @property(nonatomic,strong) UITableView *shopTableView;
 @property(nonatomic,strong)NSArray *pictureAndTextArray;
+@property(nonatomic,strong)NSArray *insureImage_A;
 
 @property (nonatomic, strong) SRVideoPlayer *videoPlayer;
 @property(strong,nonatomic)UIButton *playImageView;
@@ -49,7 +51,13 @@
     }
     return _cardArray;
 }
-
+-(NSArray *)insureImage_A{
+    if (!_insureImage_A) {
+        
+        _insureImage_A = [NSArray array];
+    }
+    return _insureImage_A;
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     self.state = NO;
@@ -75,24 +83,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    _webHight = 0.0f;
+//    _webHight = 0.0f;
+//    
+//    
+//    web_view = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 100)];
+//    web_view.delegate = self;
+//    web_view.scrollView.bounces=NO;
+//    web_view.scrollView.scrollEnabled = NO;
+//    
+//    NSString *urlStr =[[NSString alloc]init];
+//    urlStr = [[NSString alloc]initWithFormat:@"http://%@/VipCard/risk_control.html",SOCKETHOST ];
+//    NSURL *url = [NSURL URLWithString:urlStr];
+//    
+//    // 2. 把URL告诉给服务器,请求,从m.baidu.com请求数据
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    
+//    // 3. 发送请求给服务器
+//    [web_view loadRequest:request];
+//
     
-    
-    web_view = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 755)];
-    web_view.delegate = self;
-    web_view.scrollView.bounces=NO;
-    web_view.scrollView.scrollEnabled = NO;
-    
-    NSString *urlStr =[[NSString alloc]init];
-    urlStr = [[NSString alloc]initWithFormat:@"http://%@/VipCard/risk_control.html",SOCKETHOST ];
-    NSURL *url = [NSURL URLWithString:urlStr];
-    
-    // 2. 把URL告诉给服务器,请求,从m.baidu.com请求数据
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    // 3. 发送请求给服务器
-    [web_view loadRequest:request];
-
     
     [self initTableView];
 
@@ -105,7 +114,7 @@
 -(void)initTableView{
     
     
-    UITableView *table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-49) style:UITableViewStyleGrouped];
+    UITableView *table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-49) style:UITableViewStylePlain];
     table.delegate = self;
     table.dataSource = self;
     table.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -118,20 +127,62 @@
     UIView *footView=[[UIView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT-64-49, SCREENWIDTH, 49)];
     footView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:footView];
+    NSArray *array = @[@"联系商家",@"立即购买",@"立即收藏"];
     
-    collectBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    collectBtn.frame=CGRectMake(0, 0, (SCREENWIDTH)/2, 49);
-    [collectBtn setTitle:@"立即收藏" forState:UIControlStateNormal];
-    [collectBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [footView addSubview:collectBtn];
-    [collectBtn addTarget:self action:@selector(favorateAction) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *buyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    buyBtn.frame=CGRectMake((SCREENWIDTH)/2, 0, (SCREENWIDTH)/2, 49);
-    buyBtn.backgroundColor=NavBackGroundColor;
-    [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
-    [buyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [footView addSubview:buyBtn];
-    [buyBtn addTarget:self action:@selector(buyBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    for (int i = 0; i <array.count; i++) {
+        
+        UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(i*(SCREENWIDTH/array.count), 0, SCREENWIDTH/array.count, 49)];
+        [footView addSubview:backView];
+        
+        UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake((backView.width-21)/2, 7, 21, 21)];
+        imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_n",array[i]]];
+
+        [backView addSubview:imgView];
+        
+       UIButton* Btn=[UIButton buttonWithType:UIButtonTypeCustom];
+        Btn.frame=CGRectMake(0, imgView.bottom+5,backView.width, 10);
+        Btn.titleLabel.font=[UIFont systemFontOfSize:10];
+        [Btn setTitle:array[i] forState:UIControlStateNormal];
+        [Btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [backView addSubview:Btn];
+        
+        
+        
+        if (i==0) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(call:)];
+            [backView addGestureRecognizer:tap];
+            [Btn setTitleColor:NavBackGroundColor forState:0];
+            imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_h",array[i]]];
+
+            old_view = backView;
+        }
+        if (i==1) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buyBtnClick:)];
+            [backView addGestureRecognizer:tap];
+        }
+
+        if (i==2) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(favorateAction:)];
+            [backView addGestureRecognizer:tap];
+            collectBtn = Btn;
+        }
+
+        
+    }
+    
+//    collectBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    collectBtn.frame=CGRectMake(0, 0, (SCREENWIDTH)/2, 49);
+//    [collectBtn setTitle:@"立即收藏" forState:UIControlStateNormal];
+//    [collectBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [footView addSubview:collectBtn];
+//    [collectBtn addTarget:self action:@selector(favorateAction) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *buyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    buyBtn.frame=CGRectMake((SCREENWIDTH)/2, 0, (SCREENWIDTH)/2, 49);
+//    buyBtn.backgroundColor=NavBackGroundColor;
+//    [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+//    [buyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [footView addSubview:buyBtn];
+//    [buyBtn addTarget:self action:@selector(buyBtnClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -148,9 +199,9 @@
     }else if(indexPath.section==1){
         NSArray *arr = wholeInfoDic[@"commodity_list"];
         if (arr.count!=0) {
-            return 150;
+            return 150+41+5;
         }else{
-            return 40;
+            return 40+41+5;
             
         }
     }else if (indexPath.section==2){
@@ -170,7 +221,10 @@
 //            UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
 //            
 //            return cell.frame.size.height;
-            return _webHight;
+            
+//            return _webHight;
+            return SCREENWIDTH*2/3;
+
         
         }else{
             if (indexPath.row!=0) {
@@ -222,7 +276,8 @@
             
             return 1;
         }else if (title_old_btn.tag ==2){
-            return 1;
+            return _insureImage_A.count;
+//            return 1;
         }else{
             return self.pictureAndTextArray.count? _pictureAndTextArray.count+1:1;
  
@@ -277,13 +332,39 @@
         }
     }else if(indexPath.section==1){
         
+        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+        titlelabel.textAlignment=NSTextAlignmentCenter;
+        titlelabel.font = [UIFont systemFontOfSize:15.0];
+        titlelabel.text=@"全部商品";
+        [cell addSubview:titlelabel];
+        
+        UIView *line3 = [[UIView alloc]init];
+        line3.backgroundColor = RGB(225, 225, 225);
+        line3.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
+        [cell addSubview:line3];
+       
+        
         UIView *productView = [self creatproductView];
         
+        CGRect frame = productView.frame;
+        frame.origin.y = 41+5;
+        productView.frame = frame;
         [cell addSubview:productView];
       
         return cell;
     }else if (indexPath.section==2){
         
+        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+        titlelabel.textAlignment=NSTextAlignmentCenter;
+        titlelabel.font = [UIFont systemFontOfSize:15.0];
+        titlelabel.text=@"商家介绍";
+        [cell addSubview:titlelabel];
+        
+        UIView *line3 = [[UIView alloc]init];
+        line3.backgroundColor = RGB(225, 225, 225);
+        line3.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
+        [cell addSubview:line3];
+
         UILabel *label2=[[UILabel alloc]init];
         label2.numberOfLines=0;
         label2.font = [UIFont systemFontOfSize:13.0];
@@ -298,7 +379,7 @@
         if (inroString.length == 0 )
         {
             label2.hidden=YES;
-            line.frame = CGRectMake(10, 0, SCREENWIDTH-20, 1);
+            line.frame = CGRectMake(10, 41+5, SCREENWIDTH-20, 1);
             
         }else{
             label2.hidden=NO;
@@ -307,7 +388,7 @@
             CGFloat labelHeight = [label2.text getTextHeightWithShowWidth:SCREENWIDTH AndTextFont:label2.font AndInsets:5];
             
             NSLog(@"labelHeight===%f",labelHeight);
-            label2.frame=CGRectMake(10, 12,SCREENWIDTH-20 , labelHeight);
+            label2.frame=CGRectMake(10, 41+5,SCREENWIDTH-20 , labelHeight);
             line.frame = CGRectMake(10, label2.bottom, SCREENWIDTH, 1);
             
         }
@@ -321,6 +402,9 @@
     
     else if (indexPath.section==3){
         UITableViewCell *DetailCell;
+//        [cell addSubview:web_view];
+//        web_view.hidden = YES;
+
         
         if (title_old_btn.tag ==1) {
             
@@ -331,9 +415,17 @@
             
         }else if (title_old_btn.tag ==2){
             
+            UIImageView *imgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*2/3)];
+            [cell addSubview:imgView];
+            if (_insureImage_A.count!=0) {
+
+                NSDictionary *dic = _insureImage_A[indexPath.row];
+                
+                NSURL * nurl1=[[NSURL alloc] initWithString:[[INSURE_IMAGE stringByAppendingString:dic[@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+                [imgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+            }
             
-            [cell addSubview:web_view];
-            web_view.hidden = NO;
+//            web_view.hidden = NO;
            
             
             DetailCell = cell;
@@ -370,34 +462,43 @@
                 
                 NSDictionary *dic = evaluate_list[indexPath.row];
                 
-                UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(13, 10, 30, 30)];
+                UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(13, 16, 38, 38)];
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,dic[@"headimage"]]] placeholderImage:[UIImage imageNamed:@"3.1-02"]];
                 imageView.contentMode=UIViewContentModeScaleAspectFill;
-                imageView.layer.cornerRadius = imageView.width/2;
+                imageView.layer.cornerRadius = 2;
                 imageView.layer.masksToBounds = YES;
                 [cell addSubview:imageView];
                 
-                UILabel *nameLabel=[[UILabel alloc]initWithFrame:CGRectMake(53, 18, SCREENWIDTH-53, 13)];
+                UILabel *nameLabel=[[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, 15, SCREENWIDTH-53, 11)];
                 nameLabel.text=dic[@"nickname"];
                 nameLabel.textAlignment=NSTextAlignmentLeft;
-                nameLabel.font=[UIFont systemFontOfSize:13.0f];
+                nameLabel.font=[UIFont systemFontOfSize:11.0f];
                 [cell addSubview:nameLabel];
                 
-                UILabel *contentLb = [[UILabel alloc]initWithFrame:CGRectMake(10, 45, SCREENWIDTH-20, 20)];
-                [contentLb setFont:[UIFont fontWithName:@"HelveticaNeue" size:13.0f]];
+                UILabel *contentLb = [[UILabel alloc]initWithFrame:CGRectMake(nameLabel.left, nameLabel.bottom+6, SCREENWIDTH-16-nameLabel.left, 20)];
+                [contentLb setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0f]];
                 contentLb.numberOfLines = 0;
                 [contentLb setLineBreakMode:NSLineBreakByWordWrapping];
                 contentLb.text =dic[@"content"];
-                CGRect frame = [cell frame];
-                CGRect labelSize = [contentLb.text boundingRectWithSize:CGSizeMake(contentLb.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:13.0f],NSFontAttributeName, nil] context:nil];
+                [cell addSubview:contentLb];
+
+                CGRect labelSize = [contentLb.text boundingRectWithSize:CGSizeMake(contentLb.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:12.0f],NSFontAttributeName, nil] context:nil];
                 contentLb.frame = CGRectMake(contentLb.frame.origin.x, contentLb.frame.origin.y, labelSize.size.width, labelSize.size.height);
                 
-                frame.size.height = contentLb.bottom+5;
+                
+                UILabel *timeLab = [[UILabel alloc]initWithFrame:CGRectMake(contentLb.left, contentLb.bottom+10, 200, 10)];
+                timeLab.text = dic[@"datetime"];
+                timeLab.textColor =RGB(51,51,51);
+                timeLab.font =[UIFont systemFontOfSize:9];
+                [cell addSubview:timeLab];
+                
+                
+                CGRect frame = [cell frame];
+                frame.size.height = timeLab.bottom+3;
                 cell.frame = frame;
-                [cell addSubview:contentLb];
                 
                 if (indexPath.row!=evaluate_list.count-1) {
-                    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(10, contentLb.bottom+4, SCREENWIDTH, 1)];
+                    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(10, timeLab.bottom+2, SCREENWIDTH, 1)];
                     line.backgroundColor = RGB(225, 225, 225);
                     [cell addSubview:line];
                 }
@@ -414,6 +515,7 @@
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
     if (section==4) {
         
         NSArray *arr = wholeInfoDic[@"evaluate_list"];
@@ -429,15 +531,48 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section==0) {
-        return SCREENWIDTH*9/16+45+6+44+48+45-20;
-    }else if (section==1 ||section==2||section==3||section==4){
+        return 0.01;
+//        return SCREENWIDTH*9/16+45+6+44+48+45-20;
+//    }else if (section==1 ||section==2||section==3||section==4){
+    }else if (section==3||section==4){
+
         return 41;
     }else{
-        return 10;
+        return 0.01;
     }
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    if(section==0||section==1 ||section==3){
+//        
+//        UIView *backView = [[UIView alloc]init];
+//        backView.frame = CGRectMake(0, 0, SCREENWIDTH, 41);
+//        
+//        backView.backgroundColor = [UIColor whiteColor];
+//        
+//        
+//        
+//        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+//        titlelabel.textAlignment=NSTextAlignmentCenter;
+//        titlelabel.font = [UIFont systemFontOfSize:15.0];
+//        titlelabel.text=@"全部商品";
+//        [backView addSubview:titlelabel];
+//        
+//        UIView *line = [[UIView alloc]init];
+//        line.backgroundColor = RGB(225, 225, 225);
+//        line.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
+//        [backView addSubview:line];
+//        
+//        
+//        if (section==1) {
+//            titlelabel.text = @"商家详情";
+//        }
+//        if (section==3) {
+//            titlelabel.text = @"会员评价";
+//        }
+//        return backView;
+//    }else
+    
     if (section==4) {
         
        
@@ -466,106 +601,108 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section==0) {
         
-        UIView *backView = [[UIView alloc]init];
-        backView.backgroundColor = [UIColor whiteColor];
-        UIView *line = [[UIView alloc]init];
-        line.backgroundColor = RGB(225, 225, 225);
-        [backView addSubview:line];
+//        UIView *backView = [[UIView alloc]init];
+//        backView.backgroundColor = [UIColor whiteColor];
+//        UIView *line = [[UIView alloc]init];
+//        line.backgroundColor = RGB(225, 225, 225);
+//        [backView addSubview:line];
+//        
+//        UILabel *nameLabel = [[UILabel alloc]init];
+//        nameLabel.backgroundColor = [UIColor clearColor];
+//        nameLabel.numberOfLines = 0;
+//        nameLabel.textAlignment = NSTextAlignmentLeft;
+//        nameLabel.font = [UIFont systemFontOfSize:17];
+//        nameLabel.tag = 1000;
+//        [backView addSubview:nameLabel];
+//        
+//        if ([self.videoID isEqualToString:@""]) {
+//            UIImageView *shopImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
+//            [backView addSubview:shopImageView];
+//
+//            NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_ADDIMAGE stringByAppendingString:[NSString getTheNoNullStr:[wholeInfoDic  objectForKey:@"image_url"] andRepalceStr:@""]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+//            [shopImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+//            
+//           
+//        }else{
+//            UIView *playerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
+//            [backView addSubview:playerView];
+//
+//            NSString *url = [NSString stringWithFormat:@"%@%@",VEDIO_URL,self.videoID];
+//            NSLog(@"VEDIO_URL===%@",url);
+//            self.videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview];
+//            _videoPlayer.videoName = @"";
+//            _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
+//            [_videoPlayer pause];
+//        }
+//        
+//        nameLabel.frame=CGRectMake(12, SCREENWIDTH*9/16+5, SCREENWIDTH-12, 40);
+//        line.frame=CGRectMake(10, nameLabel.bottom+5, SCREENWIDTH, 1);
+//        
+//        nameLabel.text = [wholeInfoDic objectForKey:@"store"];
+//        
+//       //评价星星
+//        UILabel *starLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, line.bottom+7, 110, 30)];
+//        starLabel.backgroundColor = [UIColor clearColor];
+//        starLabel.textAlignment = NSTextAlignmentLeft;
+//        starLabel.font = [UIFont systemFontOfSize:15];
+//        starLabel.tag = 1000;
+//        DLStarRatingControl* dlCtrl = [[DLStarRatingControl alloc]initWithFrame:CGRectMake(0, 7, 110, 35) andStars:5 isFractional:YES star:[UIImage imageNamed:@"result_small_star_disable_iphone"] highlightStar:[UIImage imageNamed:@"redstar"]];
+//        dlCtrl.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+//        dlCtrl.userInteractionEnabled = NO;
+//        
+//          dlCtrl.rating = [[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"stars"] andRepalceStr:@"0"] floatValue];
+//        
+//        [starLabel addSubview:dlCtrl];
+//        [backView addSubview:starLabel];
+//        
+//        
+//        UILabel *lab1=[[UILabel alloc]initWithFrame:CGRectMake(200,line.bottom+15, SCREENWIDTH-200, 14)];
+//        lab1.textAlignment=NSTextAlignmentLeft;
+//        lab1.text=[[NSString alloc]initWithFormat:@"已售:%@",[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"sold"] andRepalceStr:@"0"]];
+//        lab1.font=[UIFont systemFontOfSize:13.0f];
+//        [backView addSubview:lab1];
+//
+//        UILabel *points=[[UILabel alloc]initWithFrame:CGRectMake(150, line.bottom+7, 50, 30)];
+//        points.textColor=[UIColor redColor];
+//        points.font=[UIFont systemFontOfSize:15.0f];
+//        points.text=[NSString stringWithFormat:@"%.1f",dlCtrl.rating];
+//        [backView addSubview:points];
+//        
+//        UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(10, line.bottom+43, SCREENWIDTH, 1)];
+//        line1.backgroundColor = RGB(225, 225, 225);
+//        [backView addSubview:line1];
+//        
+//        
+//        UIImageView *addressimg = [[UIImageView alloc]initWithFrame:CGRectMake(13, line1.bottom+15, 13, 16)];
+//        addressimg.image = [UIImage imageNamed:@"location"];
+//        [backView addSubview:addressimg];
+//        
+//        UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, line1.bottom+17, SCREENWIDTH-30, 14)];
+//        addressLabel.font = [UIFont systemFontOfSize:13];
+//        addressLabel.text = [wholeInfoDic objectForKey:@"address"];
+//        addressLabel.userInteractionEnabled = YES;
+//        UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMapView)];
+//        [addressLabel addGestureRecognizer:tapGesture];
+//        [backView addSubview:addressLabel];
+//        
+//        UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(10, line1.bottom+43, SCREENWIDTH, 1)];
+//        line2.backgroundColor = RGB(225, 225, 225);
+//        [backView addSubview:line2];
+//        
+//        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, line2.bottom, SCREENWIDTH, 40)];
+//        titlelabel.textAlignment=NSTextAlignmentCenter;
+//        titlelabel.font = [UIFont systemFontOfSize:15.0];
+//        titlelabel.text=@"会员卡";
+//
+//        [backView addSubview:titlelabel];
+//        
+//        backView.frame = CGRectMake(0, 0, SCREENWIDTH, titlelabel.bottom+5);
+//        return backView;
+        return nil;
         
-        UILabel *nameLabel = [[UILabel alloc]init];
-        nameLabel.backgroundColor = [UIColor clearColor];
-        nameLabel.numberOfLines = 0;
-        nameLabel.textAlignment = NSTextAlignmentLeft;
-        nameLabel.font = [UIFont systemFontOfSize:17];
-        nameLabel.tag = 1000;
-        [backView addSubview:nameLabel];
-        
-        if ([self.videoID isEqualToString:@""]) {
-            UIImageView *shopImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
-            [backView addSubview:shopImageView];
+    }
+        else if(section==1||section==4 ||section==2){
 
-            NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_ADDIMAGE stringByAppendingString:[NSString getTheNoNullStr:[wholeInfoDic  objectForKey:@"image_url"] andRepalceStr:@""]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-            [shopImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-            
-           
-        }else{
-            UIView *playerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
-            [backView addSubview:playerView];
-
-            NSString *url = [NSString stringWithFormat:@"%@%@",VEDIO_URL,self.videoID];
-            NSLog(@"VEDIO_URL===%@",url);
-            self.videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview];
-            _videoPlayer.videoName = @"";
-            _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
-            [_videoPlayer pause];
-        }
-        
-        nameLabel.frame=CGRectMake(12, SCREENWIDTH*9/16+5, SCREENWIDTH-12, 40);
-        line.frame=CGRectMake(10, nameLabel.bottom+5, SCREENWIDTH, 1);
-        
-        nameLabel.text = [wholeInfoDic objectForKey:@"store"];
-        
-       //评价星星
-        UILabel *starLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, line.bottom+7, 110, 30)];
-        starLabel.backgroundColor = [UIColor clearColor];
-        starLabel.textAlignment = NSTextAlignmentLeft;
-        starLabel.font = [UIFont systemFontOfSize:15];
-        starLabel.tag = 1000;
-        DLStarRatingControl* dlCtrl = [[DLStarRatingControl alloc]initWithFrame:CGRectMake(0, 7, 110, 35) andStars:5 isFractional:YES star:[UIImage imageNamed:@"result_small_star_disable_iphone"] highlightStar:[UIImage imageNamed:@"redstar"]];
-        dlCtrl.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        dlCtrl.userInteractionEnabled = NO;
-        
-          dlCtrl.rating = [[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"stars"] andRepalceStr:@"0"] floatValue];
-        
-        [starLabel addSubview:dlCtrl];
-        [backView addSubview:starLabel];
-        
-        
-        UILabel *lab1=[[UILabel alloc]initWithFrame:CGRectMake(200,line.bottom+15, SCREENWIDTH-200, 14)];
-        lab1.textAlignment=NSTextAlignmentLeft;
-        lab1.text=[[NSString alloc]initWithFormat:@"已售:%@",[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"sold"] andRepalceStr:@"0"]];
-        lab1.font=[UIFont systemFontOfSize:13.0f];
-        [backView addSubview:lab1];
-
-        UILabel *points=[[UILabel alloc]initWithFrame:CGRectMake(150, line.bottom+7, 50, 30)];
-        points.textColor=[UIColor redColor];
-        points.font=[UIFont systemFontOfSize:15.0f];
-        points.text=[NSString stringWithFormat:@"%.1f",dlCtrl.rating];
-        [backView addSubview:points];
-        
-        UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(10, line.bottom+43, SCREENWIDTH, 1)];
-        line1.backgroundColor = RGB(225, 225, 225);
-        [backView addSubview:line1];
-        
-        
-        UIImageView *addressimg = [[UIImageView alloc]initWithFrame:CGRectMake(13, line1.bottom+15, 13, 16)];
-        addressimg.image = [UIImage imageNamed:@"location"];
-        [backView addSubview:addressimg];
-        
-        UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, line1.bottom+17, SCREENWIDTH-30, 14)];
-        addressLabel.font = [UIFont systemFontOfSize:13];
-        addressLabel.text = [wholeInfoDic objectForKey:@"address"];
-        addressLabel.userInteractionEnabled = YES;
-        UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMapView)];
-        [addressLabel addGestureRecognizer:tapGesture];
-        [backView addSubview:addressLabel];
-        
-        UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(10, line1.bottom+43, SCREENWIDTH, 1)];
-        line2.backgroundColor = RGB(225, 225, 225);
-        [backView addSubview:line2];
-        
-        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, line2.bottom, SCREENWIDTH, 40)];
-        titlelabel.textAlignment=NSTextAlignmentCenter;
-        titlelabel.font = [UIFont systemFontOfSize:15.0];
-        titlelabel.text=@"会员卡";
-
-        [backView addSubview:titlelabel];
-        
-        backView.frame = CGRectMake(0, 0, SCREENWIDTH, titlelabel.bottom+5);
-        return backView;
-        
-    }else if(section==1||section==4 ||section==2){
-        
         UIView *backView = [[UIView alloc]init];
         backView.frame = CGRectMake(0, 0, SCREENWIDTH, 41);
 
@@ -591,8 +728,15 @@
         if (section==4) {
             titlelabel.text = @"会员评价";
         }
-        return backView;
-    } else if(section==3){
+            
+            if (section==4) {
+                return backView;
+            }else{
+                return nil;
+            }
+            
+    }
+    else if(section==3){
         
         UIView *backView = [[UIView alloc]init];
         backView.frame = CGRectMake(0, 0, SCREENWIDTH, 41);
@@ -608,6 +752,7 @@
             titleBtn.tag = i;
             [titleBtn addTarget:self action:@selector(titleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             [backView addSubview:titleBtn];
+            
             
              if (i==title_old_btn.tag) {
                     title_old_btn = titleBtn;
@@ -705,18 +850,18 @@
     phoneContent.text=[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"store_number"] andRepalceStr:[wholeInfoDic objectForKey:@"phone"]];
     [backView addSubview:phoneContent];
     
-    UIButton *contactBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    contactBtn.frame=CGRectMake(13, CGRectGetMaxY(phoneContent.frame)+30, SCREENWIDTH-26, 45);
-    [contactBtn setTitle:@"联系商家" forState:UIControlStateNormal];
-    [contactBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    contactBtn.layer.borderColor=[[UIColor grayColor]CGColor];
-    contactBtn.titleLabel.font=[UIFont systemFontOfSize:17.0f];
-    contactBtn.layer.borderWidth=1.0f;
-    [backView addSubview:contactBtn];
-    [contactBtn addTarget:self action:@selector(call) forControlEvents:UIControlEventTouchUpInside];
-
+//    UIButton *contactBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    contactBtn.frame=CGRectMake(13, CGRectGetMaxY(phoneContent.frame)+30, SCREENWIDTH-26, 45);
+//    [contactBtn setTitle:@"联系商家" forState:UIControlStateNormal];
+//    [contactBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    contactBtn.layer.borderColor=[[UIColor grayColor]CGColor];
+//    contactBtn.titleLabel.font=[UIFont systemFontOfSize:17.0f];
+//    contactBtn.layer.borderWidth=1.0f;
+//    [backView addSubview:contactBtn];
+//    [contactBtn addTarget:self action:@selector(call) forControlEvents:UIControlEventTouchUpInside];
+//
     
-    backView.frame = CGRectMake(0, 0, SCREENWIDTH, contactBtn.bottom +20);
+    backView.frame = CGRectMake(0, 0, SCREENWIDTH, phoneContent.bottom +20);
     return backView;
 }
 //创建我的商品view
@@ -929,7 +1074,22 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
--(void)call{
+-(void)call:(UITapGestureRecognizer*)tap{
+    if (old_view !=tap.view) {
+      UIImageView*imgView = tap.view.subviews[0];
+        UIButton *btn = tap.view.subviews[1];
+        [btn setTitleColor:NavBackGroundColor forState:0];
+        imgView.image =[UIImage imageNamed:[NSString stringWithFormat:@"%@_h",btn.titleLabel.text]];
+
+        
+        UIImageView*imgView_old = old_view.subviews[0];
+        UIButton *btn_old = old_view.subviews[1];
+        [btn_old setTitleColor:[UIColor blackColor] forState:0];
+        imgView_old.image =[UIImage imageNamed:[NSString stringWithFormat:@"%@_n",btn_old.titleLabel.text]];
+
+        
+        old_view = tap.view;
+    }
     
     UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:@"拨打电话" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"store_number"] andRepalceStr:[wholeInfoDic objectForKey:@"phone"]] otherButtonTitles:nil, nil];
     [sheet showInView:self.shopTableView];
@@ -948,24 +1108,18 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
     
-//        CGFloat documentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"content\").offsetHeight;"] floatValue];
-    
-//    CGFloat documentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
-//    CGFloat documentWidht = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetWidth"] floatValue];
-    
-//    documentHeight = documentHeight/documentWidht*SCREENWIDTH;
-    
-   CGFloat documentHeight =webView.scrollView.contentSize.height;
-    NSLog(@"webViewDidFinishLoad------%lf",documentHeight);
-    
-    if (_webHight != (float)documentHeight) {
-        _webHight=(float)documentHeight;
-        
-        web_view.frame = CGRectMake(0, 0, SCREENWIDTH, _webHight);
-        NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:3];
-        [self.shopTableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
 
-    }
+//   CGFloat documentHeight =webView.scrollView.contentSize.height;
+//    NSLog(@"webViewDidFinishLoad------%lf",documentHeight);
+    
+//    if (_webHight != (float)documentHeight) {
+//        _webHight=(float)documentHeight;
+//        
+//        web_view.frame = CGRectMake(0, 0, SCREENWIDTH, _webHight);
+//        NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:3];
+//        [self.shopTableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
+//
+//    }
 
   }
 
@@ -981,7 +1135,7 @@
          self.cardArray=result[@"card_list"];
          wholeInfoDic=[result copy];
 //         [self.shopTableView reloadData];
-         
+         [self creatTableViewHeadView];
          [self postRequestGetInfo];
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
          //         [self noIntenet];
@@ -991,8 +1145,134 @@
 }
 
 
+
+-(void)creatTableViewHeadView{
+    
+    UIView *backView = [[UIView alloc]init];
+    backView.backgroundColor = [UIColor whiteColor];
+    UIView *line = [[UIView alloc]init];
+    line.backgroundColor = RGB(225, 225, 225);
+    [backView addSubview:line];
+    
+    UILabel *nameLabel = [[UILabel alloc]init];
+    nameLabel.backgroundColor = [UIColor clearColor];
+    nameLabel.numberOfLines = 0;
+    nameLabel.textAlignment = NSTextAlignmentLeft;
+    nameLabel.font = [UIFont systemFontOfSize:17];
+    nameLabel.tag = 1000;
+    [backView addSubview:nameLabel];
+    
+    if ([self.videoID isEqualToString:@""]) {
+        UIImageView *shopImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
+        [backView addSubview:shopImageView];
+        
+        NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_ADDIMAGE stringByAppendingString:[NSString getTheNoNullStr:[wholeInfoDic  objectForKey:@"image_url"] andRepalceStr:@""]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+        [shopImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+        
+        
+    }else{
+        UIView *playerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
+        [backView addSubview:playerView];
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@",VEDIO_URL,self.videoID];
+        NSLog(@"VEDIO_URL===%@",url);
+        self.videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview];
+        _videoPlayer.videoName = @"";
+        _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
+        [_videoPlayer pause];
+    }
+    
+    nameLabel.frame=CGRectMake(12, SCREENWIDTH*9/16+5, SCREENWIDTH-12, 40);
+    line.frame=CGRectMake(10, nameLabel.bottom+5, SCREENWIDTH, 1);
+    
+    nameLabel.text = [wholeInfoDic objectForKey:@"store"];
+    
+    //评价星星
+    UILabel *starLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, line.bottom+7, 110, 30)];
+    starLabel.backgroundColor = [UIColor clearColor];
+    starLabel.textAlignment = NSTextAlignmentLeft;
+    starLabel.font = [UIFont systemFontOfSize:15];
+    starLabel.tag = 1000;
+    DLStarRatingControl* dlCtrl = [[DLStarRatingControl alloc]initWithFrame:CGRectMake(0, 7, 110, 35) andStars:5 isFractional:YES star:[UIImage imageNamed:@"result_small_star_disable_iphone"] highlightStar:[UIImage imageNamed:@"redstar"]];
+    dlCtrl.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    dlCtrl.userInteractionEnabled = NO;
+    
+    dlCtrl.rating = [[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"stars"] andRepalceStr:@"0"] floatValue];
+    
+    [starLabel addSubview:dlCtrl];
+    [backView addSubview:starLabel];
+    
+    
+    UILabel *lab1=[[UILabel alloc]initWithFrame:CGRectMake(200,line.bottom+15, SCREENWIDTH-200, 14)];
+    lab1.textAlignment=NSTextAlignmentLeft;
+    lab1.text=[[NSString alloc]initWithFormat:@"已售:%@",[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"sold"] andRepalceStr:@"0"]];
+    lab1.font=[UIFont systemFontOfSize:13.0f];
+    [backView addSubview:lab1];
+    
+    UILabel *points=[[UILabel alloc]initWithFrame:CGRectMake(150, line.bottom+7, 50, 30)];
+    points.textColor=[UIColor redColor];
+    points.font=[UIFont systemFontOfSize:15.0f];
+    points.text=[NSString stringWithFormat:@"%.1f",dlCtrl.rating];
+    [backView addSubview:points];
+    
+    UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(10, line.bottom+43, SCREENWIDTH, 1)];
+    line1.backgroundColor = RGB(225, 225, 225);
+    [backView addSubview:line1];
+    
+    
+    UIImageView *addressimg = [[UIImageView alloc]initWithFrame:CGRectMake(13, line1.bottom+15, 13, 16)];
+    addressimg.image = [UIImage imageNamed:@"location"];
+    [backView addSubview:addressimg];
+    
+    UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, line1.bottom+17, SCREENWIDTH-30, 14)];
+    addressLabel.font = [UIFont systemFontOfSize:13];
+    addressLabel.text = [wholeInfoDic objectForKey:@"address"];
+    addressLabel.userInteractionEnabled = YES;
+    UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMapView)];
+    [addressLabel addGestureRecognizer:tapGesture];
+    [backView addSubview:addressLabel];
+    
+    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(10, line1.bottom+43, SCREENWIDTH, 1)];
+    line2.backgroundColor = RGB(225, 225, 225);
+    [backView addSubview:line2];
+    
+    UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, line2.bottom, SCREENWIDTH, 40)];
+    titlelabel.textAlignment=NSTextAlignmentCenter;
+    titlelabel.font = [UIFont systemFontOfSize:15.0];
+    titlelabel.text=@"会员卡";
+    
+    [backView addSubview:titlelabel];
+    
+    backView.frame = CGRectMake(0, 0, SCREENWIDTH, titlelabel.bottom+5);
+
+    UIView *line3 = [[UIView alloc]init];
+    line3.backgroundColor = RGB(225, 225, 225);
+    line3.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
+    [backView addSubview:line3];
+
+    self.shopTableView.tableHeaderView = backView;
+}
 //立即购买
--(void)buyBtnClick{
+-(void)buyBtnClick:(UITapGestureRecognizer*)tap{
+    
+    if (old_view !=tap.view) {
+        UIImageView*imgView = tap.view.subviews[0];
+        UIButton *btn = tap.view.subviews[1];
+        [btn setTitleColor:NavBackGroundColor forState:0];
+        imgView.image =[UIImage imageNamed:[NSString stringWithFormat:@"%@_h",btn.titleLabel.text]];
+
+        
+        UIButton *btn_old = old_view.subviews[1];
+        [btn_old setTitleColor:[UIColor blackColor] forState:0];
+        UIImageView*imgView_old = old_view.subviews[0];
+        imgView_old.image =[UIImage imageNamed:[NSString stringWithFormat:@"%@_n",btn_old.titleLabel.text]];
+       
+        
+        
+        old_view = tap.view;
+    }
+
+    
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     if (!appdelegate.IsLogin) {
         LandingController *landVc = [[LandingController alloc]init];
@@ -1021,8 +1301,24 @@
 
 //收藏点击
 
--(void)favorateAction
-{
+-(void)favorateAction:(UITapGestureRecognizer*)tap{
+
+if (old_view !=tap.view) {
+    UIImageView*imgView = tap.view.subviews[0];
+    UIButton *btn = tap.view.subviews[1];
+    [btn setTitleColor:NavBackGroundColor forState:0];
+    imgView.image =[UIImage imageNamed:[NSString stringWithFormat:@"%@_h",btn.titleLabel.text]];
+
+    
+    UIImageView*imgView_old = old_view.subviews[0];
+    UIButton *btn_old = old_view.subviews[1];
+    [btn_old setTitleColor:[UIColor blackColor] forState:0];
+    imgView_old.image =[UIImage imageNamed:[NSString stringWithFormat:@"%@_n",btn_old.titleLabel.text]];
+
+    
+    old_view = tap.view;
+}
+
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     if (!appdelegate.IsLogin) {
         LandingController *landingView = [[LandingController alloc]init];
@@ -1123,12 +1419,35 @@
         self.pictureAndTextArray = result;
         
         [self.shopTableView reloadData];
+        
+        [self getInsuranceImgs];
 
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"%@", error);
         
     }];
+    
+}
+-(void)getInsuranceImgs{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/Source/insurance",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:[self.infoDic objectForKey:@"muid"] forKey:@"muid"];
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"postRequestGetInfo%@", result);
+        self.insureImage_A = result;
+        
+        [self.shopTableView reloadData];
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
     
 }
 //获取收藏状态

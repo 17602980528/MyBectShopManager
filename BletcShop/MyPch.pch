@@ -90,7 +90,7 @@
 
 #define VEDIO_URL @"http://101.201.100.191/cnconsum/Public/Uploads/video/"
 
-
+#define INSURE_IMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/insureImage/"
 
  /*************************************************************/
 
