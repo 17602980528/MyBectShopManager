@@ -59,10 +59,14 @@
     if (indexPath.row==selectedRow) {
         cell.backView.layer.borderColor=[RGB(226, 102, 102)CGColor];
         cell.choseImg.image=[UIImage imageNamed:@"quan3"];
+        cell.rightImg.image = [UIImage imageNamed:@"形状 2"];
+
         cell.titleLab.textColor=RGB(226, 102, 102);
     }else{
         cell.backView.layer.borderColor=[RGB(117, 91, 91)CGColor];
         cell.choseImg.image=[UIImage imageNamed:@"quan4"];
+        cell.rightImg.image = [UIImage imageNamed:@"形状 1 拷贝"];
+
         cell.titleLab.textColor=RGB(117, 91, 91);
     }
    

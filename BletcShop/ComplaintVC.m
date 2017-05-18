@@ -24,7 +24,7 @@
 
 -(NSArray *)complaint_A{
     if (!_complaint_A) {
-        _complaint_A = @[@"欺诈",@"不实信息",@"侵权（冒充他人）",@"其他"];
+        _complaint_A = @[@"商家倒闭",@"商家跑路",@"店铺迁址",@"其他"];
         
     }
     return _complaint_A;

@@ -803,6 +803,8 @@
 		D987BB311E791FAC008AE24D /* ProfessionEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D987BB2F1E791FAC008AE24D /* ProfessionEditVC.xib */; };
 		D987BB361E792C8E008AE24D /* UserInfoEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D987BB341E792C8E008AE24D /* UserInfoEditVC.m */; };
 		D987BB371E792C8E008AE24D /* UserInfoEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D987BB351E792C8E008AE24D /* UserInfoEditVC.xib */; };
+		D9883A4F1ECD391800B06D24 /* 形状 1 拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = D9883A4D1ECD391800B06D24 /* 形状 1 拷贝.png */; };
+		D9883A501ECD391800B06D24 /* 形状 2.png in Resources */ = {isa = PBXBuildFile; fileRef = D9883A4E1ECD391800B06D24 /* 形状 2.png */; };
 		D98B7B691DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D98B7B681DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.m */; };
 		D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D98E5B8E1E5150FC009D56BF /* GetDiscountCouponVC.m */; };
 		D98E5B901E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D98E5B8E1E5150FC009D56BF /* GetDiscountCouponVC.m */; };
@@ -2402,6 +2404,8 @@
 		D987BB331E792C8E008AE24D /* UserInfoEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEditVC.h; sourceTree = "<group>"; };
 		D987BB341E792C8E008AE24D /* UserInfoEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEditVC.m; sourceTree = "<group>"; };
 		D987BB351E792C8E008AE24D /* UserInfoEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoEditVC.xib; sourceTree = "<group>"; };
+		D9883A4D1ECD391800B06D24 /* 形状 1 拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 1 拷贝.png"; sourceTree = "<group>"; };
+		D9883A4E1ECD391800B06D24 /* 形状 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 2.png"; sourceTree = "<group>"; };
 		D98B7B671DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReveiveMoneyQRInfoVC.h; sourceTree = "<group>"; };
 		D98B7B681DF5374E0017EC20 /* ReveiveMoneyQRInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReveiveMoneyQRInfoVC.m; sourceTree = "<group>"; };
 		D98E5B8D1E5150FC009D56BF /* GetDiscountCouponVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetDiscountCouponVC.h; path = BletcShop/GetDiscountCouponVC.h; sourceTree = SOURCE_ROOT; };
@@ -3576,6 +3580,8 @@
 				D96E1B751ECAD94B00084453 /* ChoseSeriesVC.m */,
 				D96E1B761ECAD94B00084453 /* ChoseSeriesVC.xib */,
 				181F9C981ECBFF82003A62AE /* xilietishi.png */,
+				D9883A4D1ECD391800B06D24 /* 形状 1 拷贝.png */,
+				D9883A4E1ECD391800B06D24 /* 形状 2.png */,
 				D96E1B791ECAD9EF00084453 /* ChoseSeriesCellT.h */,
 				D96E1B7A1ECAD9EF00084453 /* ChoseSeriesCellT.m */,
 				D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */,
@@ -6984,6 +6990,7 @@
 				1CF6E4651C619C5D0001159C /* 5-01.png in Resources */,
 				D94DF24E1CAE0AA4000D5B69 /* star.png in Resources */,
 				1A83127B1D885444001BC3B6 /* chat_receiver_audio_playing002@2x.png in Resources */,
+				D9883A501ECD391800B06D24 /* 形状 2.png in Resources */,
 				18F032071E5ED79300ACD261 /* tempProducts_02.jpg in Resources */,
 				1CBE67CF1C5828CD00706AE9 /* icon_chose_arrow_nor@2x.png in Resources */,
 				D9345E601E766DDE006B2AC1 /* DefaultAddressVC.xib in Resources */,
@@ -7071,6 +7078,7 @@
 				18EB36C31D4B5A7C0087CE1A /* 反1-02.png in Resources */,
 				D99E9CF11DFAB62C009D67F4 /* 消息home.png in Resources */,
 				D97ED8051D926EFC00E29C7E /* vip_cash_icon_n.png in Resources */,
+				D9883A4F1ECD391800B06D24 /* 形状 1 拷贝.png in Resources */,
 				18518D591E7945A000067D95 /* s_money_n@3x.png in Resources */,
 				D947E4651D7D3BBA00F9FEE8 /* 聊天键盘-icon-选择照片@2x.png in Resources */,
 				1C9E82411C60557E0007BF02 /* 5(8)@2x.png in Resources */,
