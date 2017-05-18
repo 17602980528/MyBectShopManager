@@ -89,10 +89,9 @@
     _recommend_person = [[UITextField alloc]initWithFrame:CGRectMake(10, passwordText2.bottom, topView.width-20, 50)];
     _recommend_person.placeholder = @"请输入您推荐人手机号";
     _recommend_person.font = [UIFont systemFontOfSize:15];
-    _recommend_person.delegate = self;
-//    _recommend_person.keyboardType = UIKeyboardTypeNumberPad;
+//    _recommend_person.delegate = self;
     [topView addSubview:_recommend_person];
-
+    _recommend_person.hidden=YES;
     
     
     
@@ -122,6 +121,7 @@
     line5.backgroundColor = [UIColor grayColor];
     line5.alpha = 0.3;
     [topView addSubview:line5];
+    line5.hidden=YES;
     
     UIButton *timeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     timeBtn.frame = CGRectMake(_phoneText.right+5, 10, topView.width-_phoneText.right-10,30);
@@ -374,7 +374,7 @@
     
     [params setObject:_phoneText.text forKey:@"phone"];
     [params setObject:_passText.text forKey:@"passwd"];
-    [params setObject:_recommend_person.text forKey:@"referrer"];
+    [params setObject:@"无人推荐" forKey:@"referrer"];//_recommend_person.text
     
 
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
