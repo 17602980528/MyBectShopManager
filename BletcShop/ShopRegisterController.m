@@ -103,13 +103,13 @@
     self.passwordText2 = passwordText2;
     [landView addSubview:passwordText2];
     
-    UITextField *showQuanTF=[[UITextField alloc]initWithFrame:CGRectMake(10, passwordText2.bottom, SCREENWIDTH-30, 50)];
-    showQuanTF.placeholder=@"有无推荐人";
-    showQuanTF.delegate=self;
-    showQuanTF.keyboardType=UIKeyboardTypeNumberPad;
-    showQuanTF.font=[UIFont systemFontOfSize:15.0f];
-    [landView addSubview:showQuanTF];
-    self.showQuanTextfield=showQuanTF;
+//    UITextField *showQuanTF=[[UITextField alloc]initWithFrame:CGRectMake(10, passwordText2.bottom, SCREENWIDTH-30, 50)];
+//    showQuanTF.placeholder=@"有无推荐人";
+//    showQuanTF.delegate=self;
+//    showQuanTF.keyboardType=UIKeyboardTypeNumberPad;
+//    showQuanTF.font=[UIFont systemFontOfSize:15.0f];
+//    [landView addSubview:showQuanTF];
+//    self.showQuanTextfield=showQuanTF;
     //
     
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, landView.width, 0.3)];
@@ -133,10 +133,10 @@
     line4.alpha = 0.3;
     [landView addSubview:line4];
     //+++++++++
-    UIView *line5=[[UIView alloc]initWithFrame:CGRectMake(0, showQuanTF.bottom, landView.width, 0.3)];
-    line5.backgroundColor=[UIColor grayColor];
-    line5.alpha=0.3;
-    [landView addSubview:line5];
+//    UIView *line5=[[UIView alloc]initWithFrame:CGRectMake(0, showQuanTF.bottom, landView.width, 0.3)];
+//    line5.backgroundColor=[UIColor grayColor];
+//    line5.alpha=0.3;
+//    [landView addSubview:line5];
     //
     
     UIButton *LandBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -157,73 +157,75 @@
     }
     return YES;
 }
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField==self.showQuanTextfield) {
-        [self NewAddVipAction:textField];
-        
-    }
-    return YES;
-}
--(void)NewAddVipAction:(UITextField *)tf
-{
-    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] init];
-    alertView.tag=10;
-    // Add some custom content to the alert view
-    [alertView setContainerView:[self createDemoView:tf]];
-    
-    // Modify the parameters
-    
-    [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"是", @"否", nil]];
-    
-    [alertView setDelegate:self];
-    
-    // You may use a Block, rather than a delegate.
-    [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
-        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, (int)[alertView tag]);
-        
-        [alertView close];
-    }];
-    
-    [alertView setUseMotionEffects:true];
-    
-    // And launch the dialog
-    [alertView show];
-}
-- (UIView *)createDemoView:(UITextField *)tf2
-{
-    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 150)];
-    self.demoView = demoView;
-    demoView.frame=CGRectMake(0, 0, 290, 50);
-    UILabel *numlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, demoView.width, 50)];
-    numlabel.textAlignment = NSTextAlignmentCenter;
-    numlabel.text = @"您通过在线用户推荐,入驻平台?";
-    numlabel.font = [UIFont systemFontOfSize:16];
-    [demoView addSubview:numlabel];
-    return demoView;
-}
-- (void)customIOS7dialogButtonTouchUpInside: (CustomIOSAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
-{
-    if (alertView.tag==10&&buttonIndex==1) {
-        self.showQuanTextfield.text = @"无人推荐";
-        [alertView close];
-        [self.showQuanTextfield resignFirstResponder];
-        [self.showQuanTextfield endEditing:YES];
-    }else if (alertView.tag==10&&buttonIndex==0){
-        self.showQuanTextfield.text =@"";
-        self.showQuanTextfield.placeholder = @"请输入推荐人手机号码";
-        [alertView close];
-        //[self.showQuanTextfield becomeFirstResponder];
-        
-    }
-    NSLog(@"Delegate: Button at position %d is clicked on alertView %d.", (int)buttonIndex, (int)[alertView tag]);
-    [alertView close];
-}
+//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//    if (textField==self.showQuanTextfield) {
+//        [self NewAddVipAction:textField];
+//        
+//    }
+//    return YES;
+//}
+//-(void)NewAddVipAction:(UITextField *)tf
+//{
+//    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] init];
+//    alertView.tag=10;
+//    // Add some custom content to the alert view
+//    [alertView setContainerView:[self createDemoView:tf]];
+//    
+//    // Modify the parameters
+//    
+//    [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"是", @"否", nil]];
+//    
+//    [alertView setDelegate:self];
+//    
+//    // You may use a Block, rather than a delegate.
+//    [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
+//        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, (int)[alertView tag]);
+//        
+//        [alertView close];
+//    }];
+//    
+//    [alertView setUseMotionEffects:true];
+//    
+//    // And launch the dialog
+//    [alertView show];
+//}
+//- (UIView *)createDemoView:(UITextField *)tf2
+//{
+//    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 150)];
+//    self.demoView = demoView;
+//    demoView.frame=CGRectMake(0, 0, 290, 50);
+//    UILabel *numlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, demoView.width, 50)];
+//    numlabel.textAlignment = NSTextAlignmentCenter;
+//    numlabel.text = @"您通过在线用户推荐,入驻平台?";
+//    numlabel.font = [UIFont systemFontOfSize:16];
+//    [demoView addSubview:numlabel];
+//    return demoView;
+//}
+//- (void)customIOS7dialogButtonTouchUpInside: (CustomIOSAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
+//{
+//    if (alertView.tag==10&&buttonIndex==1) {
+//        self.showQuanTextfield.text = @"无人推荐";
+//        [alertView close];
+//        [self.showQuanTextfield resignFirstResponder];
+//        [self.showQuanTextfield endEditing:YES];
+//    }else if (alertView.tag==10&&buttonIndex==0){
+//        self.showQuanTextfield.text =@"";
+//        self.showQuanTextfield.placeholder = @"请输入推荐人手机号码";
+//        [alertView close];
+//        //[self.showQuanTextfield becomeFirstResponder];
+//        
+//    }
+//    NSLog(@"Delegate: Button at position %d is clicked on alertView %d.", (int)buttonIndex, (int)[alertView tag]);
+//    [alertView close];
+//}
 
 -(void)nextAction
 {
          
         
-        if ([self.phoneText.text isEqualToString:@""]||[self.passwordText.text isEqualToString:@""]||[self.passwordText2.text isEqualToString:@""]||[self.showQuanTextfield.text isEqualToString:@""]) {
+        if ([self.phoneText.text isEqualToString:@""]||[self.passwordText.text isEqualToString:@""]||[self.passwordText2.text isEqualToString:@""]) {
+            
+//                    if ([self.phoneText.text isEqualToString:@""]||[self.passwordText.text isEqualToString:@""]||[self.passwordText2.text isEqualToString:@""]||[self.showQuanTextfield.text isEqualToString:@""]) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
             hud.mode = MBProgressHUDModeText;
@@ -296,7 +298,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.phoneText.text forKey:@"phone"];
     [params setObject:self.passwordText.text forKey:@"passwd"];
-    [params setObject:self.showQuanTextfield.text forKey:@"referrer"];
+    [params setObject:@"无人推荐" forKey:@"referrer"];
     
     __block ShopRegisterController *tempSelf = self;
     

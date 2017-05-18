@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface QRcodeUIViewController : UIViewController
+@property (nonatomic,copy)NSString *codeString;// <#Description#>
 
 @end

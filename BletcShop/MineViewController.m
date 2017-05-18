@@ -563,6 +563,7 @@
     
     if (sender.tag == 0) {
         QRcodeUIViewController *VC= [[QRcodeUIViewController alloc]init];
+        VC.codeString = codeString;
         [self.navigationController pushViewController:VC animated:YES];
         
         

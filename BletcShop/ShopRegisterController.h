@@ -17,7 +17,7 @@
 @property(nonatomic,strong)UITextField *proText;
 @property(nonatomic,strong)UITextField *passwordText;
 @property(nonatomic,strong)UITextField *passwordText2;
-@property(nonatomic,strong)UITextField *showQuanTextfield;
+//@property(nonatomic,strong)UITextField *showQuanTextfield;
 @property(nonatomic,strong)UIButton *getCodeBtn;
 @property(nonatomic,strong)UIButton *valBtn;
 @property BOOL ifCIASuccess;

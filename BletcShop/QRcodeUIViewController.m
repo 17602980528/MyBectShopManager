@@ -23,20 +23,20 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"二维码";
+    self.navigationItem.title = @"分享二维码";
 
     self.QRView = [[UIView alloc]initWithFrame:CGRectMake(20, 50, SCREENWIDTH-40, SCREENWIDTH-40)];
     [self.view addSubview:_QRView];
     
-    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-
-
-        NSString *codeString = [NSString stringWithFormat:@"http://101.201.100.191/VipCard/APP_HTML/register.html?phone=%@",appdelegate.userInfoDic[@"phone"]];
-
+//    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+//
+//
+//        NSString *codeString = [NSString stringWithFormat:@"http://101.201.100.191/VipCard/APP_HTML/register.html?phone=%@",appdelegate.userInfoDic[@"phone"]];
+//
 
     
     
-    [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.2, SCREENWIDTH*0.2) logoImageWithCornerRadius:0];
+    [HGDQQRCodeView creatQRCodeWithURLString:self.codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.2, SCREENWIDTH*0.2) logoImageWithCornerRadius:0];
     
     
     
