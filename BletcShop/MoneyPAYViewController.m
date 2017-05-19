@@ -165,7 +165,9 @@
     [params setObject:self.card_dic[@"card_level"] forKey:@"cardLevel"];
     
     [params setObject:@"储值卡" forKey:@"cardType"];
-    [params setObject:textTF.text forKey:@"sum"];
+    NSString *payMoneyString = [NSString stringWithFormat:@"%.2f",[textTF.text floatValue]*[self.card_dic[@"rule"] floatValue]/100];
+    
+    [params setObject:payMoneyString forKey:@"sum"];
     
     NSLog(@"params===%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)

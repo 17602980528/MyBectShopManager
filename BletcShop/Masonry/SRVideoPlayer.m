@@ -14,6 +14,7 @@
 #import "SRVideoOperationTip.h"
 #import "SRVideoTopBar.h"
 #import "SRVideoBottomBar.h"
+#import "UIImageView+WebCache.h"
 
 #define SRVideoPlayerImageName(fileName) [@"SRVideoPlayer.bundle" stringByAppendingPathComponent:fileName]
 
@@ -68,6 +69,9 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
 @property (nonatomic, strong) UIView                  *touchView;
 @property (nonatomic, strong) UIButton                *replayBtn;
 
+@property(nonatomic,strong)UIImageView*firstImgView;
+
+@property(nonatomic,strong) UIImage*firstImg;
 @end
 
 @implementation SRVideoPlayer
@@ -81,6 +85,13 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
 
 #pragma mark - Lazy Load
 
+-(UIImageView *)firstImgView{
+    if (!_firstImgView) {
+        _firstImgView = [[UIImageView alloc]init];
+        _firstImgView.hidden = NO;
+    }
+    return _firstImgView;
+}
 - (SRVideoLayerView *)videoLayerView {
     
     if (!_videoLayerView) {
@@ -170,6 +181,9 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
     if (!_replayBtn) {
         _replayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_replayBtn setImage:[UIImage imageNamed:SRVideoPlayerImageName(@"replay")] forState:UIControlStateNormal];
+//        [_replayBtn setImage:self.firstImg forState:UIControlStateNormal];
+//        _replayBtn.imageView.contentMode = UIViewContentModeRedraw;
+        
         [_replayBtn addTarget:self action:@selector(replayAction) forControlEvents:UIControlEventTouchUpInside];
         _replayBtn.hidden = NO;
     }
@@ -178,12 +192,14 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
 
 #pragma mark - Init Methods
 
-+ (instancetype)playerWithVideoURL:(NSURL *)videoURL playerView:(UIView *)playerView playerSuperView:(UIView *)playerSuperView {
++ (instancetype)playerWithVideoURL:(NSURL *)videoURL playerView:(UIView *)playerView playerSuperView:(UIView *)playerSuperView andImgUrl:(NSString*)imgurl {
     
-    return [[SRVideoPlayer alloc] initWithVideoURL:videoURL playerView:playerView playerSuperView:playerSuperView];
+    return  [[SRVideoPlayer alloc]initWithVideoURL:videoURL playerView:playerView playerSuperView:playerSuperView andImgUrl:imgurl];
+    
+//    return [[SRVideoPlayer alloc] initWithVideoURL:videoURL playerView:playerView playerSuperView:playerSuperView];
 }
 
-- (instancetype)initWithVideoURL:(NSURL *)videoURL playerView:(UIView *)playerView playerSuperView:(UIView *)playerSuperView {
+- (instancetype)initWithVideoURL:(NSURL *)videoURL playerView:(UIView *)playerView playerSuperView:(UIView *)playerSuperView  andImgUrl:(NSString*)imgurl{
     
     if (self = [super init]) {
         _videoURL = videoURL;
@@ -196,6 +212,12 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
         _playerViewOriginalRect = playerView.frame;
         _playerSuperView = playerSuperView;
         
+//      self.firstImg =  [self getVideoPreViewImage:videoURL];
+//        self.firstImgView.image = _firstImg;
+        NSURL * nurl1=[NSURL URLWithString:imgurl];
+        NSLog(@"self.imgUrl------%@",imgurl);
+        
+        [self.firstImgView sd_setImageWithURL:nurl1 placeholderImage:nil];
         [self setupUIConstraints];
         
         [self setupCurrentOrientation];
@@ -247,6 +269,17 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
 //        make.height.mas_equalTo(44);
 //    }];
     
+    
+    [_playerView addSubview:self.firstImgView];
+    
+    [self.firstImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(weakSelf.playerView);
+        make.width.equalTo(weakSelf.playerView);
+        make.height.equalTo(weakSelf.playerView);
+        
+        
+    }];
+    
     [_playerView addSubview:self.bottomBar];
     [self.bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
@@ -280,7 +313,13 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
     
     [_playerView addSubview:self.replayBtn];
     [self.replayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(weakSelf.playerView);
+//        make.center.equalTo(weakSelf.playerView);
+        make.top.equalTo(weakSelf.playerView);
+        make.left.equalTo(weakSelf.playerView);
+        make.width.equalTo(weakSelf.playerView);
+        make.height.mas_equalTo(weakSelf.playerView.frame.size.height-44);
+        
+    
     }];
 }
 
@@ -319,8 +358,9 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
     switch (_playerEndAction) {
         case SRVideoPlayerEndActionStop:
             self.topBar.hidden    = YES;
-            self.bottomBar.hidden = YES;
+            self.bottomBar.hidden = NO;
             self.replayBtn.hidden = NO;
+            self.firstImgView.hidden = NO;;
             break;
         case SRVideoPlayerEndActionLoop:
             [self replayAction];
@@ -447,7 +487,7 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
     self.topBar.hidden    = NO;
     self.bottomBar.hidden = NO;
     self.replayBtn.hidden = YES;
-
+    self.firstImgView.hidden = YES;
     [self timingHideBottomBarTime];
     [self play];
 }
@@ -862,4 +902,21 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
     _topBar.titleLabel.text = videoName;
 }
 
+
+- (UIImage*) getVideoPreViewImage:(NSURL *)url
+{
+   
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
+    AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+
+    gen.appliesPreferredTrackTransform = YES;
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *img = [[UIImage alloc] initWithCGImage:image];
+    CGImageRelease(image);
+
+    return img;
+}
 @end

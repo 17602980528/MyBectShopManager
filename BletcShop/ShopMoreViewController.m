@@ -13,6 +13,8 @@
 #import "ShopUserInfoViewController.h"
 #import "BackChooseStateViewController.h"
 #import "NewNextViewController.h"
+
+#import "AuthFailShopVC.h"
 @interface ShopMoreViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSArray *data;
 @property(nonatomic,weak)UITableView *setTable;
@@ -49,7 +51,7 @@
             _data = @[@[@"我的账户"],@[@"退出",@"切换账号"],@[@"意见反馈"]];
             
         }else{
-            _data = @[@[@"我的账户",@"认证信息"],@[@"退出",@"切换账号"],@[@"意见反馈"]];
+            _data = @[@[@"我的账户",@"认证信息"],@[@"退出",@"切换账号"],@[@"意见反馈",@"商户未认证"]];
             
         }
     }
@@ -150,11 +152,19 @@
     }
 
     
-    else if (indexPath.section == 2 && indexPath.row == 0)
+    else if (indexPath.section == 2 )
     {
-        FeedBackViewController *feedBackView = [[FeedBackViewController alloc]init];
-        [self.navigationController pushViewController:feedBackView animated:YES];
-    }
+        
+        if (indexPath.row==0) {
+            FeedBackViewController *feedBackView = [[FeedBackViewController alloc]init];
+            [self.navigationController pushViewController:feedBackView animated:YES];
+
+        }else{
+
+            AuthFailShopVC *VC = [[AuthFailShopVC alloc]init];
+            [self presentViewController:VC animated:YES completion:nil];
+        }
+      }
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 

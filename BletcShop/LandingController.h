@@ -12,6 +12,13 @@
 #import <arpa/inet.h>
 #import <unistd.h>
 #import "AsyncSocket.h"
+
+@protocol LandingDelegate <NSObject>
+
+-(void)reloadAPI;
+
+
+@end
 @interface LandingController : UIViewController<UITextFieldDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) AsyncSocket *socket; // socket
@@ -25,4 +32,7 @@
 //@property BOOL ifCIASuccess;
 @property BOOL ifRemeber;
 @property(nonatomic,weak)UIButton *valBtn;
+
+@property (nonatomic , assign) id<LandingDelegate> delegate;// 刷新
+
 @end

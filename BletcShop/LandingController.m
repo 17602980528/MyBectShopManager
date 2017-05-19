@@ -528,7 +528,10 @@
                         appdelegate.IsLogin = YES;
                         //                        [appdelegate socketConnectHost];
                         
-                        
+                        if (self.delegate && [self.delegate respondsToSelector:@selector(reloadAPI)]) {
+                            [self.delegate reloadAPI];
+                            
+                        }
                         
                     });
                     
@@ -620,6 +623,8 @@
 //登录成功提示
 - (void)landingSuc
 {
+    
+  
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     // Set the annular determinate mode to show task progress.
@@ -995,6 +1000,7 @@
                          //                        [appdelegate socketConnectHost];
                          
                          
+                       
                          
                      });
                      

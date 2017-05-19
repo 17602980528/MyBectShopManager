@@ -15,7 +15,7 @@
 #import "NewShopCardListCell.h"
 #import "SRVideoPlayer.h"
 #import "ApriseVC.h"
-@interface NewShopDetailVC ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIWebViewDelegate>
+@interface NewShopDetailVC ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIWebViewDelegate,LandingDelegate,UIScrollViewDelegate>
 {
     UIButton *collectBtn;
     NSDictionary *wholeInfoDic;
@@ -26,6 +26,8 @@
     
     UIView *old_view;
 
+    
+    CGFloat scrollViewOffSet;
 }
 @property BOOL state;
 @property(nonatomic,strong)NSMutableArray *cardArray;//卡
@@ -83,6 +85,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    scrollViewOffSet = 0.0f;
 //    _webHight = 0.0f;
 //    
 //    
@@ -187,16 +190,25 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section ==0) {
+    
+    if (indexPath.section==0) {
+        
+        return 122;
+        
+    }else
+    if (indexPath.section ==1) {
         
         if (self.cardArray.count>0)
         {
+            if (indexPath.row==0) {
+                return 41;
+            }else
             
             return 70+1;
         }else
-            return 40+1;
+            return 40+1+41;
 
-    }else if(indexPath.section==1){
+    }else if(indexPath.section==2){
         NSArray *arr = wholeInfoDic[@"commodity_list"];
         if (arr.count!=0) {
             return 150+41+5;
@@ -204,12 +216,12 @@
             return 40+41+5;
             
         }
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==3){
          UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         
         return cell.frame.size.height;
     }
-    else if(indexPath.section==3){
+    else if(indexPath.section==4){
         if (title_old_btn.tag==1) {
             
             UIView *content_View = [self initcontentView];
@@ -248,7 +260,7 @@
         }
         
         
-    }else if(indexPath.section==4)
+    }else if(indexPath.section==5)
     
     {
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -262,14 +274,22 @@
     else return 0.01;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 6;
+    return 7;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
     if (section==0) {
+        
+        NSArray *coupon_list = wholeInfoDic[@"coupon_list"];
+        
+        return coupon_list.count ?1:0;
+
+    }
+    if (section==1) {
         return self.cardArray.count ?self.cardArray.count:1;
-    }else if (section==1 ||section==2){
+    }else if (section==2 ||section==3){
         return 1;
-    }else  if(section==3){
+    }else  if(section==4){
         
         if (title_old_btn.tag==1) {
             
@@ -282,7 +302,7 @@
             return self.pictureAndTextArray.count? _pictureAndTextArray.count+1:1;
  
         }
-    }else if(section==4){
+    }else if(section==5){
         NSArray *evaluate_list = wholeInfoDic[@"evaluate_list"];
         
         return evaluate_list.count ?evaluate_list.count:1;
@@ -314,33 +334,69 @@
 
     if (indexPath.section==0) {
         
+        [cell addSubview:[self creatCouponsView]];
+    }
+    
+    if (indexPath.section==1) {
+        
       if (_cardArray.count!=0) {
-          
-          NewShopCardListCell *card_cell = [self creatCardListCell:indexPath];
-          
-          
-          
-          return card_cell;
+          if (indexPath.row==0) {
+              UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10, 71.5, 30)];
+              titleimg.image = [UIImage imageNamed:@"会员卡"];
+              
+              [cell addSubview:titleimg];
+              
+              UIView *line3 = [[UIView alloc]init];
+              line3.backgroundColor = RGB(225, 225, 225);
+              line3.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
+              [cell addSubview:line3];
 
+              return cell;
+              
+          }else{
+              NewShopCardListCell *card_cell = [self creatCardListCell:indexPath];
+              
+              
+              
+              return card_cell;
+ 
+          }
+          
+        
 
         }else{
-            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREENWIDTH, 40)];
+            
+            UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10, 71.5, 30)];
+            titleimg.image = [UIImage imageNamed:@"会员卡"];
+            
+            [cell addSubview:titleimg];
+        
+            UIView *line3 = [[UIView alloc]init];
+            line3.backgroundColor = RGB(225, 225, 225);
+            line3.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
+            [cell addSubview:line3];
+            
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, line3.bottom+0, SCREENWIDTH, 40)];
             [cell addSubview:label];
             label.font = [UIFont systemFontOfSize:14];
             label.text = @"本店暂无可购买的卡";
             return cell;
         }
-    }else if(indexPath.section==1){
+    }else if(indexPath.section==2){
         
-        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
-        titlelabel.textAlignment=NSTextAlignmentCenter;
-        titlelabel.font = [UIFont systemFontOfSize:15.0];
-        titlelabel.text=@"全部商品";
-        [cell addSubview:titlelabel];
+//        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+//        titlelabel.textAlignment=NSTextAlignmentCenter;
+//        titlelabel.font = [UIFont systemFontOfSize:15.0];
+//        titlelabel.text=@"全部商品";
+        
+        UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, 10, 71.5, 30)];
+        titleimg.image = [UIImage imageNamed:@"全部商品"];
+
+        [cell addSubview:titleimg];
         
         UIView *line3 = [[UIView alloc]init];
         line3.backgroundColor = RGB(225, 225, 225);
-        line3.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
+        line3.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
         [cell addSubview:line3];
        
         
@@ -352,17 +408,20 @@
         [cell addSubview:productView];
       
         return cell;
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==3){
         
-        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
-        titlelabel.textAlignment=NSTextAlignmentCenter;
-        titlelabel.font = [UIFont systemFontOfSize:15.0];
-        titlelabel.text=@"商家介绍";
-        [cell addSubview:titlelabel];
+//        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+//        titlelabel.textAlignment=NSTextAlignmentCenter;
+//        titlelabel.font = [UIFont systemFontOfSize:15.0];
+//        titlelabel.text=@"商家介绍";
+        UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, 10, 71.5, 30)];
+        titleimg.image = [UIImage imageNamed:@"商家详情"];
+
+        [cell addSubview:titleimg];
         
         UIView *line3 = [[UIView alloc]init];
         line3.backgroundColor = RGB(225, 225, 225);
-        line3.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
+        line3.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
         [cell addSubview:line3];
 
         UILabel *label2=[[UILabel alloc]init];
@@ -400,7 +459,7 @@
         
     }
     
-    else if (indexPath.section==3){
+    else if (indexPath.section==4){
         UITableViewCell *DetailCell;
 //        [cell addSubview:web_view];
 //        web_view.hidden = YES;
@@ -448,7 +507,7 @@
         
         
         return DetailCell;
-    }else if(indexPath.section==4){
+    }else if(indexPath.section==5){
         {
             NSArray *evaluate_list = wholeInfoDic[@"evaluate_list"];
             if (evaluate_list.count==0)
@@ -516,7 +575,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    if (section==4) {
+    if (section==5) {
         
         NSArray *arr = wholeInfoDic[@"evaluate_list"];
         if(arr.count>0) {
@@ -531,10 +590,13 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section==0) {
-        return 0.01;
+        
+        NSArray *coupon_list = wholeInfoDic[@"coupon_list"];
+        
+        return coupon_list.count ?10:0.01;
 //        return SCREENWIDTH*9/16+45+6+44+48+45-20;
 //    }else if (section==1 ||section==2||section==3||section==4){
-    }else if (section==3||section==4){
+    }else if (section==4||section==5){
 
         return 41;
     }else{
@@ -573,7 +635,7 @@
 //        return backView;
 //    }else
     
-    if (section==4) {
+    if (section==5) {
         
        
 
@@ -701,7 +763,7 @@
         return nil;
         
     }
-        else if(section==1||section==4 ||section==2){
+        else if(section==2||section==3 ||section==5){
 
         UIView *backView = [[UIView alloc]init];
         backView.frame = CGRectMake(0, 0, SCREENWIDTH, 41);
@@ -710,33 +772,37 @@
         
         
 
-        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
-        titlelabel.textAlignment=NSTextAlignmentCenter;
-        titlelabel.font = [UIFont systemFontOfSize:15.0];
-        titlelabel.text=@"全部商品";
-        [backView addSubview:titlelabel];
+//        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+//        titlelabel.textAlignment=NSTextAlignmentCenter;
+//        titlelabel.font = [UIFont systemFontOfSize:15.0];
+//        titlelabel.text=@"全部商品";
+//        [backView addSubview:titlelabel];
+            
+            UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, 10, 71.5, 30)];
+            titleimg.image = [UIImage imageNamed:@"会员口碑"];
+            [backView addSubview:titleimg];
         
         UIView *line = [[UIView alloc]init];
         line.backgroundColor = RGB(225, 225, 225);
-        line.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
+        line.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
         [backView addSubview:line];
         
         
-        if (section==2) {
-            titlelabel.text = @"商家详情";
-        }
-        if (section==4) {
-            titlelabel.text = @"会员评价";
-        }
+//        if (section==2) {
+//            titlelabel.text = @"商家详情";
+//        }
+//        if (section==4) {
+//            titlelabel.text = @"会员评价";
+//        }
             
-            if (section==4) {
+            if (section==5) {
                 return backView;
             }else{
                 return nil;
             }
             
     }
-    else if(section==3){
+    else if(section==4){
         
         UIView *backView = [[UIView alloc]init];
         backView.frame = CGRectMake(0, 0, SCREENWIDTH, 41);
@@ -780,7 +846,7 @@
         title_old_btn = sender;
     }
     
-    NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:3];
+    NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:4];
     [self.shopTableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
 }
 -(UIView*)initcontentView{
@@ -864,6 +930,168 @@
     backView.frame = CGRectMake(0, 0, SCREENWIDTH, phoneContent.bottom +20);
     return backView;
 }
+
+
+
+-(void)reloadAPI{
+    [self postRequestWholeInfo];
+}
+-(void)getTheCoupons:(UITapGestureRecognizer*)tap{
+    NSLog(@"领取优惠券");
+    
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    if (!appdelegate.IsLogin) {
+        LandingController *landVc = [[LandingController alloc]init];
+        landVc.delegate =self;
+        [self.navigationController pushViewController:landVc animated:YES];
+    }else
+    {
+        
+       
+        
+//        UIButton *btn = [tap.view.superview.subviews lastObject];
+        
+        UIScrollView *scroview =(UIScrollView*)tap.view.superview.superview;
+        
+        scrollViewOffSet = scroview.contentOffset.x;
+        
+        
+        NSArray *coupon_list = wholeInfoDic[@"coupon_list"];
+        NSDictionary *dic = coupon_list[tap.view.tag];
+        
+        if ([dic[@"received"] isEqualToString:@"true"]) {
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = @"已经领取过了!";
+            hud.label.font = [UIFont systemFontOfSize:13];
+            [hud hideAnimated:YES afterDelay:2];
+        }else{
+            
+            [self postReceiveConponRequest:dic];
+            
+        }
+
+    }
+    
+}
+//优惠券View
+-(UIView*)creatCouponsView{
+    
+    
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 122)];
+    
+    UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10, 71.5, 30)];
+    titleimg.image = [UIImage imageNamed:@"优惠券"];
+    
+    [backView addSubview:titleimg];
+    
+    UIView *line = [[UIView alloc]init];
+    line.backgroundColor = RGB(225, 225, 225);
+    line.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
+    [backView addSubview:line];
+
+    
+    
+    
+    NSArray* coupon_list = wholeInfoDic[@"coupon_list"];
+    
+//    if (commodity_list.count==0) {
+//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREENWIDTH, 40)];
+//        label.font = [UIFont systemFontOfSize:14];
+//        label.text = @"本店暂无商品";
+//        
+//        return label;
+//    }else{
+    
+        UIScrollView *scroView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, line.bottom, SCREENWIDTH, 79)];
+        scroView.showsVerticalScrollIndicator = NO;
+        scroView.showsHorizontalScrollIndicator = NO;
+    scroView.delegate = self;
+    [backView addSubview:scroView];
+    
+        
+        for (int i = 0; i < coupon_list.count; i ++) {
+            NSDictionary *dic_comm = coupon_list[i];
+            UIView *b_v = [[UIView alloc]initWithFrame:CGRectMake(12+i*120, 8, 113, 63)];
+            [scroView addSubview:b_v];
+            scroView.contentSize = CGSizeMake(b_v.right+10, 0);
+
+            
+            UIImageView *ImgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, b_v.width, b_v.height)];
+            ImgView.image = [UIImage imageNamed:@"优惠券背景"];
+            ImgView.tag = i;
+            ImgView.userInteractionEnabled = YES;
+//            NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCE_PRODUCT stringByAppendingString:dic_comm[@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+//            [ImgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3"]];
+            [b_v addSubview:ImgView];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getTheCoupons:)];
+            [ImgView addGestureRecognizer:tap];
+            
+            
+            UILabel *title_lab = [[UILabel alloc]initWithFrame:CGRectMake(60, 12, 36, 11)];
+            title_lab.text =@"优惠券";
+            title_lab.textAlignment =NSTextAlignmentCenter;
+            title_lab.textColor = RGB(255,255,255);
+            title_lab.font = [UIFont systemFontOfSize:11];
+            [b_v addSubview:title_lab];
+            
+            UILabel *condition_lab = [[UILabel alloc]initWithFrame:CGRectMake(title_lab.left-5, title_lab.bottom+1, b_v.width-title_lab.left+5, 8)];
+            condition_lab.text =[NSString stringWithFormat:@"满%@元可用",dic_comm[@"pri_condition"]];
+            condition_lab.textAlignment =NSTextAlignmentCenter;
+            condition_lab.textColor = RGB(255,255,255);
+            condition_lab.font = [UIFont systemFontOfSize:8];
+            [b_v addSubview:condition_lab];
+            
+            
+            UILabel *price_lab = [[UILabel alloc]initWithFrame:CGRectMake(5, 12,title_lab.left-2-5, 20)];
+            price_lab.text =[NSString stringWithFormat:@"%@",dic_comm[@"sum"]];
+            price_lab.textAlignment =NSTextAlignmentRight;
+            price_lab.textColor = RGB(255,255,255);
+            price_lab.font = [UIFont boldSystemFontOfSize:22];
+
+            [b_v addSubview:price_lab];
+            
+            CGFloat ww = [price_lab.text boundingRectWithSize:price_lab.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName :price_lab.font} context:nil].size.width;
+            
+            UILabel *img_lab = [[UILabel alloc]initWithFrame:CGRectMake(price_lab.right-ww-7, 11,6, 7)];
+            img_lab.text =@"¥";
+            img_lab.textAlignment =NSTextAlignmentRight;
+            img_lab.textColor = RGB(255,255,255);
+            img_lab.font = [UIFont systemFontOfSize:9];
+            
+            [b_v addSubview:img_lab];
+            
+            UILabel *lingquLab = [[UILabel alloc]initWithFrame:CGRectMake((b_v.width-82)/2, 41, 82, 14)];
+            
+            lingquLab.backgroundColor = [UIColor whiteColor];
+            lingquLab.layer.cornerRadius =2;
+            lingquLab.clipsToBounds = YES;
+            lingquLab.font = [UIFont systemFontOfSize:10];
+            lingquLab.textAlignment = NSTextAlignmentCenter;
+            lingquLab.textColor = RGB(131,175,155);
+            [b_v addSubview:lingquLab];
+            
+            
+            if ([dic_comm[@"received"] isEqualToString:@"true"]) {
+                lingquLab.text =@"已领取";
+
+            }else{
+                lingquLab.text =@"立即领取";
+ 
+            }
+            
+           
+        }
+    
+    scroView.contentOffset = CGPointMake(scrollViewOffSet, 0);
+    scrollViewOffSet = 0.0f;
+        
+        return backView;
+//    }
+    
+    
+}
 //创建我的商品view
 -(UIView*)creatproductView{
     
@@ -927,7 +1155,7 @@
         
     }
     
-    NSDictionary  *dic = _cardArray[indexPath.row];
+    NSDictionary  *dic = _cardArray[indexPath.row-1];
     card_cell.cardImg.backgroundColor=[UIColor colorWithHexString:[dic objectForKey:@"card_temp_color"]];
     
     card_cell.vipLab.text = [NSString stringWithFormat:@"VIP%@",[dic objectForKey:@"level"]];
@@ -1125,10 +1353,22 @@
 
 //获取商家所有信息
 -(void)postRequestWholeInfo{
+    
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/infoGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[self.infoDic objectForKey:@"muid"] forKey:@"muid"];
+    
+    if (appdelegate.IsLogin) {
+        [params setValue:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    }else{
+        [params setValue:@"null" forKey:@"uuid"];
+ 
+    }
+    
     [params setObject:@"1" forKey:@"index"];
+    
+    NSLog(@"paramer ===%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          NSLog(@"result====%@", result);
@@ -1176,8 +1416,14 @@
         
         NSString *url = [NSString stringWithFormat:@"%@%@",VEDIO_URL,self.videoID];
         NSLog(@"VEDIO_URL===%@",url);
-        self.videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview];
+        
+        NSString *imgUrl =   [[SHOPIMAGE_ADDIMAGE stringByAppendingString:[NSString getTheNoNullStr:[wholeInfoDic  objectForKey:@"image_url"] andRepalceStr:@""]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        
+        
+        self.videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview andImgUrl:imgUrl];
         _videoPlayer.videoName = @"";
+
+        
         _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
         [_videoPlayer pause];
     }
@@ -1228,27 +1474,32 @@
     addressLabel.font = [UIFont systemFontOfSize:13];
     addressLabel.text = [wholeInfoDic objectForKey:@"address"];
     addressLabel.userInteractionEnabled = YES;
+    addressLabel.numberOfLines=2;
     UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMapView)];
     [addressLabel addGestureRecognizer:tapGesture];
     [backView addSubview:addressLabel];
     
-    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(10, line1.bottom+43, SCREENWIDTH, 1)];
-    line2.backgroundColor = RGB(225, 225, 225);
-    [backView addSubview:line2];
+//    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(10, line1.bottom+43, SCREENWIDTH, 1)];
+//    line2.backgroundColor = RGB(225, 225, 225);
+//    [backView addSubview:line2];
     
-    UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, line2.bottom, SCREENWIDTH, 40)];
-    titlelabel.textAlignment=NSTextAlignmentCenter;
-    titlelabel.font = [UIFont systemFontOfSize:15.0];
-    titlelabel.text=@"会员卡";
-    
-    [backView addSubview:titlelabel];
-    
-    backView.frame = CGRectMake(0, 0, SCREENWIDTH, titlelabel.bottom+5);
+//    UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, line2.bottom+10, 71.5, 30)];
+////    titlelabel.textAlignment=NSTextAlignmentCenter;
+////    titlelabel.font = [UIFont systemFontOfSize:15.0];
+////    titlelabel.text=@"会员卡";
+//    titleimg.image = [UIImage imageNamed:@"会员卡"];
+//    
+//    
+//    
+//    [backView addSubview:titleimg];
+//    
+//
+//    UIView *line3 = [[UIView alloc]init];
+//    line3.backgroundColor = RGB(225, 225, 225);
+//    line3.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
+//    [backView addSubview:line3];
 
-    UIView *line3 = [[UIView alloc]init];
-    line3.backgroundColor = RGB(225, 225, 225);
-    line3.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
-    [backView addSubview:line3];
+    backView.frame = CGRectMake(0, 0, SCREENWIDTH, addressLabel.bottom+17);
 
     self.shopTableView.tableHeaderView = backView;
 }
@@ -1418,7 +1669,6 @@ if (old_view !=tap.view) {
         NSLog(@"postRequestGetInfo%@", result);
         self.pictureAndTextArray = result;
         
-        [self.shopTableView reloadData];
         
         [self getInsuranceImgs];
 
@@ -1477,6 +1727,54 @@ if (old_view !=tap.view) {
          NSLog(@"%@", error);
      }];
     
+}
+
+//领取优惠券;
+
+-(void)postReceiveConponRequest:(NSDictionary *)dic{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/receive",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:dic[@"muid"] forKey:@"muid"];
+    [params setObject:dic[@"coupon_id"] forKey:@"coupon_id"];
+    
+    NSLog(@"------%@",params);
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"%@",result);
+        if ([result[@"result_code"] integerValue]==1) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"领取成功", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            [hud hideAnimated:YES afterDelay:1.f];
+            
+            
+            [self postRequestWholeInfo];
+        }else if([result[@"result_code"] integerValue]==1062){
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"限领1份", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+            [hud hideAnimated:YES afterDelay:1.f];
+//            [self postGetCouponRequest];
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    
+//    scrollViewOffSet = scrollView.contentOffset.x;
 }
 
 @end

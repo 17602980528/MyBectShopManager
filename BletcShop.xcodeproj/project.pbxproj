@@ -903,6 +903,7 @@
 		D9A06B641D8679C30037795B /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A06B551D8679C30037795B /* libopencore-amrnb.a */; };
 		D9A06B651D8679C30037795B /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A06B591D8679C30037795B /* libopencore-amrwb.a */; };
 		D9A06B681D86A73B0037795B /* ToolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A06B671D86A73B0037795B /* ToolManager.m */; };
+		D9A1BB361ECEE4E900CF1318 /* AuthFailShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A1BB351ECEE4E900CF1318 /* AuthFailShopVC.m */; };
 		D9A6E46C1D4F3BB8008A3C29 /* AddVipCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A6E46B1D4F3BB8008A3C29 /* AddVipCardViewController.m */; };
 		D9A6E46F1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A6E46E1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m */; };
 		D9A8ABE31E0246C200D4597F /* MyRedBagVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABE21E0246C200D4597F /* MyRedBagVC.m */; };
@@ -2555,6 +2556,8 @@
 		D9A06B591D8679C30037795B /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
 		D9A06B661D86A73B0037795B /* ToolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolManager.h; sourceTree = "<group>"; };
 		D9A06B671D86A73B0037795B /* ToolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolManager.m; sourceTree = "<group>"; };
+		D9A1BB341ECEE4E900CF1318 /* AuthFailShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthFailShopVC.h; sourceTree = "<group>"; };
+		D9A1BB351ECEE4E900CF1318 /* AuthFailShopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthFailShopVC.m; sourceTree = "<group>"; };
 		D9A6E46A1D4F3BB8008A3C29 /* AddVipCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddVipCardViewController.h; sourceTree = "<group>"; };
 		D9A6E46B1D4F3BB8008A3C29 /* AddVipCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddVipCardViewController.m; sourceTree = "<group>"; };
 		D9A6E46D1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceCardPictureViewController.h; sourceTree = "<group>"; };
@@ -5797,6 +5800,8 @@
 			isa = PBXGroup;
 			children = (
 				18D7C4801D5B114800AEF545 /* 新注册 */,
+				D9A1BB341ECEE4E900CF1318 /* AuthFailShopVC.h */,
+				D9A1BB351ECEE4E900CF1318 /* AuthFailShopVC.m */,
 			);
 			name = "商户端注册";
 			sourceTree = "<group>";
@@ -7691,6 +7696,7 @@
 				D932F3E31CCDB6B800B33505 /* VPImageCropperViewController.m in Sources */,
 				D99760EF1E690575008E21FE /* SawtoothView.m in Sources */,
 				D9195D231E8225C600FB4367 /* UploadImageVC.m in Sources */,
+				D9A1BB361ECEE4E900CF1318 /* AuthFailShopVC.m in Sources */,
 				1CDCCD1E1C7594040094E70D /* AFURLResponseSerialization.m in Sources */,
 				D95353D11E5C27680004E42C /* GoToPayForAdvertistTableVC.m in Sources */,
 				D9B3A5B81D74255700F3F27E /* UIImageView+EMHighlightedWebCache.m in Sources */,

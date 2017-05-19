@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, SRVideoPlayerEndAction) {
  */
 @property (nonatomic, copy) NSString *videoName;
 
+
+
 /**
  Create a SRVideoPlayer object with videoURL, playerView and playerSuperView.
 
@@ -46,7 +48,7 @@ typedef NS_ENUM(NSInteger, SRVideoPlayerEndAction) {
  @param playerSuperView PlayerView's super view.
  @return                A SRVideoPlayer object
  */
-+ (instancetype)playerWithVideoURL:(NSURL *)videoURL playerView:(UIView *)playerView playerSuperView:(UIView *)playerSuperView;
++ (instancetype)playerWithVideoURL:(NSURL *)videoURL playerView:(UIView *)playerView playerSuperView:(UIView *)playerSuperView andImgUrl:(NSString*)imgurl ;
 
 - (void)play;
 
@@ -55,5 +57,6 @@ typedef NS_ENUM(NSInteger, SRVideoPlayerEndAction) {
 - (void)resume;
 
 - (void)destroyPlayer;
+
 
 @end

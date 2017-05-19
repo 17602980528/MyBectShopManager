@@ -62,7 +62,7 @@
             [self.view addSubview:playerView];
             NSString *url = [NSString stringWithFormat:@"%@%@",VEDIO_URL,self.videoID];
             NSLog(@"VEDIO_URL===%@",url);
-            _videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview];
+            _videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview andImgUrl:nil];
             _videoPlayer.videoName = @"";
             _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
             [_videoPlayer pause];
