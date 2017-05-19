@@ -22,6 +22,7 @@
 @property(nonatomic,weak)UITextField *passText;
 @property(nonatomic,weak)UIButton *stateBtn;
 @property(nonatomic,strong)NSArray *array_code;
+@property(nonatomic,strong)NSArray *array_test;//测试号码
 @end
 
 @implementation LandingController
@@ -41,7 +42,7 @@
     self.socketHost = SOCKETHOST;//@"http://192.168.0.117";
     self.navigationItem.title = @"登录";
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.ifCIASuccess=NO;
+    //    self.ifCIASuccess=NO;
     self.ifRemeber = NO;
     self.view.userInteractionEnabled = YES;
     
@@ -57,7 +58,8 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     
-    
+    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    _array_test=app.superAccoutArray;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
     [self.view addGestureRecognizer:singleTap];
@@ -66,7 +68,7 @@
 }
 -(void)_initUI
 {
-
+    
     UIView *landView = [[UIView alloc]initWithFrame:CGRectMake(0, 95, SCREENHEIGHT, 150)];
     [self.view addSubview:landView];
     
@@ -102,19 +104,19 @@
     self.proText = proText;
     [landView addSubview:proText];
     
-//    UIButton *proBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    proBtn.frame = CGRectMake(SCREENWIDTH-100, UserText.bottom+10, 70, 30);;
-//    self.valBtn = proBtn;
-//    [proBtn setTitle:@"点击验证" forState:UIControlStateNormal];
-//    [proBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [proBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-//    [proBtn setBackgroundColor:NavBackGroundColor];
-//    proBtn.layer.cornerRadius = 10;
-//    [proBtn addTarget:self action:@selector(validationCode) forControlEvents:UIControlEventTouchUpInside];
-//    proBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-//    
-//    [landView addSubview:proBtn];
-
+    //    UIButton *proBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    proBtn.frame = CGRectMake(SCREENWIDTH-100, UserText.bottom+10, 70, 30);;
+    //    self.valBtn = proBtn;
+    //    [proBtn setTitle:@"点击验证" forState:UIControlStateNormal];
+    //    [proBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //    [proBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    //    [proBtn setBackgroundColor:NavBackGroundColor];
+    //    proBtn.layer.cornerRadius = 10;
+    //    [proBtn addTarget:self action:@selector(validationCode) forControlEvents:UIControlEventTouchUpInside];
+    //    proBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    //
+    //    [landView addSubview:proBtn];
+    
     UITextField *passText = [[UITextField alloc]initWithFrame:CGRectMake(10, proText.bottom, SCREENWIDTH-20, 50)];
     passText.secureTextEntry = YES;
     passText.font = [UIFont systemFontOfSize:15];
@@ -190,35 +192,35 @@
     [self.view addSubview:degistView];
     
     
-//    UILabel *degistLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 5, 100, 20)];
-//    degistLabel.text=@"还没有账号?";
-//    degistLabel.textAlignment=1;
-//    degistLabel.textColor=[UIColor grayColor];
-//    degistLabel.font=[UIFont systemFontOfSize:13.0f];
-//    [degistView addSubview:degistLabel];
-//    
-//    UIButton *CreatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    CreatBtn.frame = CGRectMake(100, 0, 80, 30);
-//    [CreatBtn setTitle:@"现在注册" forState:UIControlStateNormal];
-//    [CreatBtn setTitleColor:NavBackGroundColor forState:UIControlStateNormal];
-//    CreatBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-//    CreatBtn.layer.borderWidth=1.0;
-//    CreatBtn.layer.borderColor=[NavBackGroundColor CGColor];
-//    //CreatBtn.layer.cornerRadius = 10;
-//    [CreatBtn addTarget:self action:@selector(CreatAction) forControlEvents:UIControlEventTouchUpInside];
-//    [degistView addSubview:CreatBtn];
-
+    //    UILabel *degistLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 5, 100, 20)];
+    //    degistLabel.text=@"还没有账号?";
+    //    degistLabel.textAlignment=1;
+    //    degistLabel.textColor=[UIColor grayColor];
+    //    degistLabel.font=[UIFont systemFontOfSize:13.0f];
+    //    [degistView addSubview:degistLabel];
+    //
+    //    UIButton *CreatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    CreatBtn.frame = CGRectMake(100, 0, 80, 30);
+    //    [CreatBtn setTitle:@"现在注册" forState:UIControlStateNormal];
+    //    [CreatBtn setTitleColor:NavBackGroundColor forState:UIControlStateNormal];
+    //    CreatBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    //    CreatBtn.layer.borderWidth=1.0;
+    //    CreatBtn.layer.borderColor=[NavBackGroundColor CGColor];
+    //    //CreatBtn.layer.cornerRadius = 10;
+    //    [CreatBtn addTarget:self action:@selector(CreatAction) forControlEvents:UIControlEventTouchUpInside];
+    //    [degistView addSubview:CreatBtn];
+    
     
     UIView *otherLoginView = [[UIView alloc]initWithFrame:CGRectMake(0, degistView.top, SCREENWIDTH, 100)];
     
     [self.view addSubview:otherLoginView];
     
     
-
+    
     UIView*hengxian=[[UIView alloc]initWithFrame:CGRectMake(12, 10-0.5, SCREENWIDTH-24, 1)];
     hengxian.backgroundColor=RGB(234, 234, 234);
     [otherLoginView addSubview:hengxian];
-
+    
     UILabel *labb = [[UILabel alloc]initWithFrame:CGRectMake((SCREENWIDTH-110)/2, 0, 110, 20)];
     labb.text = @"其他方式登录";
     labb.backgroundColor = [UIColor whiteColor];
@@ -247,7 +249,7 @@
         thirdlab.font = [UIFont systemFontOfSize:13];
         thirdlab.textAlignment  = NSTextAlignmentCenter;
         [otherLoginView addSubview:thirdlab];
-
+        
         if (i==0) {
             imagev.image =[UIImage imageNamed:@"icon-qq"];
             thirdlab.text = @"QQ";
@@ -256,21 +258,21 @@
         if (i==1) {
             imagev.image =[UIImage imageNamed:@"icon-weixin"];
             thirdlab.text = @"微信";
-
+            
         }
         
         if (i==2) {
             imagev.image =[UIImage imageNamed:@"icon-weibo"];
             thirdlab.text = @"新浪";
-
+            
         }
-
+        
         [otherLoginView addSubview:imagev];
         
         [otherLoginView bringSubviewToFront:buttonlog];
         
     }
-
+    
     
     UIButton *questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     questionBtn.frame = CGRectMake(0, SCREENHEIGHT-64-44, SCREENWIDTH, 30);
@@ -289,7 +291,7 @@
     [self.navigationController pushViewController:VC animated:YES];
     
     
-
+    
 }
 -(void)logOtherway:(UIButton*)sender{
     
@@ -308,14 +310,14 @@
         case 1:
             platType = UMSocialPlatformType_WechatSession;
             type = @"wechat";
-
+            
             break;
         case 2:
             platType = UMSocialPlatformType_Sina;
             type = @"sina";
-
+            
             break;
-
+            
         default:
             break;
     }
@@ -324,7 +326,7 @@
         
         UMSocialUserInfoResponse *resp = result;
         NSLog(@"error--------%@",error);
-
+        
         
         // 第三方登录数据(为空表示平台未提供)
         // 授权数据
@@ -344,11 +346,11 @@
         
         if (resp.uid.length>0) {
             [self getIfBind:resp.uid andType:type];
-
+            
         }
-    
         
-    
+        
+        
     }];
     
     
@@ -368,20 +370,20 @@
 -(void)LandingAction:(UIButton *)btn
 {
     
-
+    
     
 #ifdef DEBUG
-
+    
     if ([self.userText.text  isEqualToString: @""]||[self.passText.text isEqualToString:@""]) {
         [self textExample];
     }else{
         [self postRequest];
-
+        
     }
-
+    
     NSLog(@"==DEBUG==");
 #else
-
+    
     if ([pgy_OR_AppStore isEqualToString:@"1"]) {
         
         if ([self.userText.text  isEqualToString: @""]||[self.passText.text isEqualToString:@""]) {
@@ -395,6 +397,8 @@
         
         if ([self.userText.text  isEqualToString: @""]||[self.passText.text isEqualToString:@""]) {
             [self textExample];
+        }else if([self checkPhoneNumIfExistsInTestList]){
+            [self postRequest];
         }else if ([self.proText.text  isEqualToString: @""]) {
             
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -419,17 +423,24 @@
             
             
         }
-
+        
     }
     
     
-   
-
+    
+    
 #endif
     
 }
-
-
+-(BOOL)checkPhoneNumIfExistsInTestList{
+    for (int i=0; i<_array_test.count; i++) {
+        NSDictionary *dic=_array_test[i];
+        if ([self.userText.text isEqualToString:dic[@"phone"]]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 //手机号登录
 -(void)PhoneAction
 {
@@ -448,11 +459,11 @@
     //商户端若是登录状态,则退出后再登录商户端
     
     DebugLog(@"是否登录环信===%d",[EMClient sharedClient].isLoggedIn);
-
+    
     AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     [app loginOutBletcShop];
-
+    
     
     
     [self showHudInView:self.view hint:@"正在登陆..."];
@@ -462,7 +473,7 @@
     [params setObject:self.userText.text forKey:@"phone"];
     [params setObject:self.passText.text forKey:@"passwd"];
     
-
+    
     
     NSLog(@"params-----%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
@@ -472,20 +483,20 @@
         NSArray *arr = result[@"info"];
         
         NSDictionary *user_dic = arr[0];
-
+        
         if ([[result objectForKey:@"result_code"]  isEqualToString: @"login_access"]) {
             NSLog(@"成功");
             
             
             
             //登录环信
-
+            
             [[EMClient sharedClient]loginWithUsername:user_dic[@"uuid"] password:@"000000" completion:^(NSString *aUsername, EMError *aError) {
                 if (!aError) {
                     NSLog(@"登录成功");
                     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [self hideHud];
-
+                        
                         [self saveInfo:user_dic[@"uuid"]];
                         [self landingSuc];
                         
@@ -510,14 +521,14 @@
                         
                         [defaults setValue:user_dic[@"passwd"] forKey:@"userpwd"];
                         [defaults synchronize];
-
+                        
                         
                         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
                         appdelegate.userInfoDic = [NSMutableDictionary dictionaryWithDictionary:user_dic];
                         appdelegate.IsLogin = YES;
-//                        [appdelegate socketConnectHost];
-
-
+                        //                        [appdelegate socketConnectHost];
+                        
+                        
                         
                     });
                     
@@ -538,31 +549,31 @@
             
             
             
-
-
-                                        
+            
+            
+            
         }else if ([[result objectForKey:@"result_code"] isEqualToString:@"passwd_wrong"])
         {
             [self hideHud];
-
+            
             [self passwd_wrong];
-       
+            
         }else if ([[result objectForKey:@"result_code"] isEqualToString:@"incomplete"]){
             [self hideHud];
-
+            
             UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"您已注册成功，是否完善信息？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
             [alertView show];
-
-
+            
+            
         }else{
             [self hideHud];
-
+            
             [self use_notfound];
         }
-
+        
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self hideHud];
-
+        
         [self noIntenet];
         NSLog(@"%@", error);
     }];
@@ -579,7 +590,7 @@
         wholeInfo.passWord=self.passText.text;
         
         [self.navigationController pushViewController:wholeInfo animated:YES];
-
+        
         
     }
 }
@@ -600,7 +611,7 @@
     hud.mode = MBProgressHUDModeText;
     hud.label.text = NSLocalizedString(@"用户名或密码不能为空", @"HUD message title");
     hud.label.font = [UIFont systemFontOfSize:13];
-//    [hud setColor:[UIColor blackColor]];
+    //    [hud setColor:[UIColor blackColor]];
     hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
     hud.userInteractionEnabled = YES;
     
@@ -616,7 +627,7 @@
     hud.label.text = NSLocalizedString(@"登录成功", @"HUD message title");
     hud.label.font = [UIFont systemFontOfSize:13];
     // Move to bottm center.
-//    hud.offset = CGPointMake(0.f, );
+    //    hud.offset = CGPointMake(0.f, );
     hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
     [hud hideAnimated:YES afterDelay:2.f];
     [self.navigationController popViewControllerAnimated:YES];
@@ -661,7 +672,7 @@
     hud.label.text = NSLocalizedString(@"请检查网络连接", @"HUD message title");
     hud.label.font = [UIFont systemFontOfSize:13];
     // Move to bottm center.
-//        hud.offset = CGPointMake(0.f,MBProgressMaxOffset);
+    //        hud.offset = CGPointMake(0.f,MBProgressMaxOffset);
     hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
     [hud hideAnimated:YES afterDelay:2.f];
     
@@ -752,7 +763,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 _array_code = result;
-
+                
             });
             
         } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -760,8 +771,8 @@
             [alertView show];
             
         }];
-
-
+        
+        
     }else{
         UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码格式有误" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
         [alertView show];
@@ -774,18 +785,18 @@
     
     if (_array_code[0] == _proText.text) {
         
-//        self.ifCIASuccess = YES;
-            [self postRequest];
-
-//        [self.valBtn setTitle:@"验证成功" forState:UIControlStateNormal];
-//        [self.valBtn setBackgroundColor:tableViewBackgroundColor];
-//        self.valBtn.userInteractionEnabled = NO;
+        //        self.ifCIASuccess = YES;
+        [self postRequest];
+        
+        //        [self.valBtn setTitle:@"验证成功" forState:UIControlStateNormal];
+        //        [self.valBtn setBackgroundColor:tableViewBackgroundColor];
+        //        self.valBtn.userInteractionEnabled = NO;
         return;
     }else     {
         [self alert:@"验证码输入错误"];
     }
     
-
+    
 }
 - (void)alert:(NSString *)msg {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -835,10 +846,10 @@
             Person *p = [Person modalWith:arr[0][@"nickname"] imgStr:arr[0][@"headimage"]  idstring:arr[0][@"account"]];
             
             [Database savePerdon:p];
-
+            
         }
         
-           } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
     
@@ -853,7 +864,7 @@
 
 /**
  查询是否绑定UID
-
+ 
  @param uid <#uid description#>
  @param type <#type description#>
  */
@@ -864,7 +875,7 @@
     [paramer setValue:uid forKey:@"uid"];
     
     [paramer setValue:type forKey:@"type"];
-
+    
     NSLog(@"paramer====%@",paramer);
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"resutl ======%@",result);
@@ -873,12 +884,12 @@
             //绑定账号直接登录
             NSString *phone = [NSString getTheNoNullStr:result[@"phone"] andRepalceStr:@"null"];
             NSString *passwd = [NSString getTheNoNullStr:result[@"passwd"] andRepalceStr:@"null"];
-
+            
             
             
             [self showHudInView:self.view hint:@"正在登陆..."];
             
-
+            
             
             [self postRequestLogin:phone andPassWord:passwd];
         }
@@ -895,7 +906,7 @@
             [self.navigationController pushViewController:VC animated:YES];
             
             
-
+            
             
         }
         
@@ -920,7 +931,7 @@
     AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     [app loginOutBletcShop];
-
+    
     
     
     NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/login",BASEURL];
@@ -1027,10 +1038,10 @@
          }
          
      }failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        NSLog(@"%@", error);
-    }];
+         
+         
+         NSLog(@"%@", error);
+     }];
     
 }
 

@@ -72,8 +72,8 @@
     NSInteger whichInter;
     
     MBProgressHUD *shophud;
-
-
+    
+    
 }
 @property(nonatomic,weak)UIView *choseView;
 @property (nonatomic,strong) UIView *view1;
@@ -117,8 +117,9 @@
     if ([self exist]) {
         NSLog(@"数据库存在");
     }
-//    [NSThread sleepForTimeInterval:5];
-   
+    //    [NSThread sleepForTimeInterval:5];
+    _superAccoutArray=[NSArray array];
+    [self superAccountTextListGet];
     self.whoPay = 0;
     self.payMoney = 0.0;
     self.paymentType = 0;
@@ -130,7 +131,7 @@
     self.shopArray = [[NSMutableArray alloc]init];
     self.areaListArray = [[NSArray alloc]init];
     self.shopPersonInfo = [[NSMutableArray alloc]init];
-
+    
     self.menuString = [[NSString alloc]init];
     //self.menuString = @"all";
     self.userPassWordString = [[NSString alloc]init];
@@ -164,9 +165,9 @@
     NSString *app_Version = [infoDic objectForKey:@"CFBundleShortVersionString"];
     
     if(![[NSUserDefaults standardUserDefaults] boolForKey:app_Version]) {
-    
+        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:app_Version];
-//        DebugLog("app_Version===%@",app_Version);
+        //        DebugLog("app_Version===%@",app_Version);
         WelcomViewController *WelcomVC = [[WelcomViewController alloc]init];
         self.window.rootViewController = WelcomVC;
     }else {
@@ -174,7 +175,7 @@
         LZDRootViewController *VC = [[LZDRootViewController alloc]init];
         self.window.rootViewController = VC;
         
-     
+        
         
         
         {
@@ -184,11 +185,11 @@
             
             if (![[defaults objectForKey:@"remeber"] isEqualToString:@"yes"] && ![[defaults objectForKey:@"remeberShop"] isEqualToString:@"yes"]) {
                 [self _initChose];
-
+                
             }else{
                 
                 //,记住密码商户登录
-
+                
                 if ([[defaults objectForKey:@"remeberShop"] isEqualToString:@"yes"])
                 {
                     if ([defaults objectForKey:@"phone"]&&[defaults objectForKey:@"passwd"]&&[defaults objectForKey:@"log_type"])
@@ -209,24 +210,24 @@
                 
                 //,记住密码用户登录
                 
-                    if ([[defaults objectForKey:@"remeber"] isEqualToString:@"yes"]) {
-                        
-
-                        
-                        if ([defaults objectForKey:@"userID"]&&[defaults objectForKey:@"userpwd"])
-                        {
-                            NSString *userID = [defaults valueForKey:@"userID"];
-                            NSString *userPassWordString = [defaults valueForKey:@"userpwd"];
-                            NSLog(@"remeber--user = %@-%@",userID,userPassWordString);
-                            if (![userID isEqualToString:@""]&&![userPassWordString isEqualToString:@""]) {
-                                [self postRequestLogin:userID andPassWord:userPassWordString];
-                            }
+                if ([[defaults objectForKey:@"remeber"] isEqualToString:@"yes"]) {
+                    
+                    
+                    
+                    if ([defaults objectForKey:@"userID"]&&[defaults objectForKey:@"userpwd"])
+                    {
+                        NSString *userID = [defaults valueForKey:@"userID"];
+                        NSString *userPassWordString = [defaults valueForKey:@"userpwd"];
+                        NSLog(@"remeber--user = %@-%@",userID,userPassWordString);
+                        if (![userID isEqualToString:@""]&&![userPassWordString isEqualToString:@""]) {
+                            [self postRequestLogin:userID andPassWord:userPassWordString];
                         }
-                        
                     }
                     
-                    
                 }
+                
+                
+            }
             
             
             
@@ -236,38 +237,38 @@
         //加载广页
         [self initAdvertisePage];
         
-     }
-
+    }
     
-
-/***************************************************************/
+    
+    
+    /***************************************************************/
     
     
     //验证码
     [CIA initWithAppId:@"f27c526d9cff4775a922a9d22ad7ee3b" authKey:@"a783e81e94fb4a6aab191a1d1209ab91"];
     
     //这里主要是针对iOS 8.0,相应的8.1,8.2等版本各程序员可自行发挥，如果苹果以后推出更高版本还不会使用这个注册方式就不得而知了……
-
-//    #ifdef __IPHONE_8_0
+    
+    //    #ifdef __IPHONE_8_0
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         [application registerForRemoteNotifications];
-
+        
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-//        DebugLog("--[application respondsToSelector:@selector(registerForRemoteNotifications)]---");
-
+        //        DebugLog("--[application respondsToSelector:@selector(registerForRemoteNotifications)]---");
+        
     }  else {
         UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
-//        DebugLog(@"--registerForRemoteNotificationTypes---");
-
+        //        DebugLog(@"--registerForRemoteNotificationTypes---");
+        
     }
-//#else
-//    UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
-//#endif
+    //#else
+    //    UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+    //    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+    //#endif
     
-        // 要使用百度地图，请先启动BaiduMapManager
+    // 要使用百度地图，请先启动BaiduMapManager
     _mapManager = [[BMKMapManager alloc]init];
     
     BOOL ret = [_mapManager start:@"szRrpYb78QCwCY0oHUv0DUENV61Ho2ZP" generalDelegate:self];
@@ -283,7 +284,7 @@
     //启动LocationService
     [_locService startUserLocationService];
     //_locationDelegate = nil;
-//按比例适配屏幕
+    //按比例适配屏幕
     AppDelegate *myDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
     if(SCREENHEIGHT == 667){
         
@@ -302,10 +303,10 @@
     }
     
     
-// 1.获得网络监控的管理者
+    // 1.获得网络监控的管理者
     AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
     
-// 2.设置网络状态改变后的处理
+    // 2.设置网络状态改变后的处理
     [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         // 当网络状态改变了, 就会调用这个block
         switch (status) {
@@ -328,7 +329,7 @@
         }
     }];
     
-// 3.开始监控
+    // 3.开始监控
     [mgr startMonitoring];
     
     
@@ -336,21 +337,21 @@
     
     [[UMSocialManager defaultManager] openLog:YES];
     
-//    [[UMSocialManager defaultManager] setAppKey:@"57b151fe67e58ec90a000bca"];
+    //    [[UMSocialManager defaultManager] setAppKey:@"57b151fe67e58ec90a000bca"];
     [[UMSocialManager defaultManager]setUmSocialAppkey:@"57b151fe67e58ec90a000bca"];
     
     [[UMSocialManager defaultManager]setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx9ff00c1974e22928" appSecret:@"aaf33e2246f133e4d30ebc1ab6db2dfa" redirectURL:@"http://mobile.umeng.com/social"];
     
     
-//    [UMSocialWechatHandler setWXAppId:@"wx9ff00c1974e22928" appSecret:@"aaf33e2246f133e4d30ebc1ab6db2dfa" url:@"http://www.umeng.com/social"];
+    //    [UMSocialWechatHandler setWXAppId:@"wx9ff00c1974e22928" appSecret:@"aaf33e2246f133e4d30ebc1ab6db2dfa" url:@"http://www.umeng.com/social"];
     
     [[UMSocialManager defaultManager]setPlaform:UMSocialPlatformType_Sina appKey:@"3250560160" appSecret:@"25ee0d2e21e73af9162c801381171e14" redirectURL:@"www.cnconsum.com"];
     
-//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3250560160" secret:@"25ee0d2e21e73af9162c801381171e14" RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    //    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3250560160" secret:@"25ee0d2e21e73af9162c801381171e14" RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
     
     [[UMSocialManager defaultManager]setPlaform:UMSocialPlatformType_QQ appKey:@"1105439953" appSecret:@"XmlGFpPTvzYfOjOe" redirectURL:@"http://mobile.umeng.com/social"];
-
-
+    
+    
     //爱奇艺
     
     _VCOPClientInstance = [[VCOPClient alloc] initWithAppKey:kQIYIAppKey appSecret:kQIYIAppSecret];
@@ -382,11 +383,11 @@
     EMOptions *options = [EMOptions optionsWithAppkey:@"kb0824#vipcard"];
     
     
-//    options.apnsCertName = @"push_d";
+    //    options.apnsCertName = @"push_d";
 #else
     EMOptions *options = [EMOptions optionsWithAppkey:@"kb0824#vipcard"];
     
-//    options.apnsCertName = @"release";
+    //    options.apnsCertName = @"release";
     
 #endif
     
@@ -399,16 +400,16 @@
     [[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
     
     [[EMClient sharedClient].groupManager addDelegate:self delegateQueue:nil];
-     // 自动登录
+    // 自动登录
     if ([[EMClient sharedClient].options isAutoLogin]) {
         NSLog(@"正在自动登录");
     }
-
+    
     
     [[EMClient sharedClient]getPushNotificationOptionsFromServerWithCompletion:^(EMPushOptions *aOptions, EMError *aError) {
         
-//        aOptions.displayStyle=EMPushDisplayStyleMessageSummary;
-//        DebugLog("aOptions----%@",aOptions);
+        //        aOptions.displayStyle=EMPushDisplayStyleMessageSummary;
+        //        DebugLog("aOptions----%@",aOptions);
     }];
     
 }
@@ -419,13 +420,13 @@
  */
 -(void)didLoginFromOtherDevice{
     DebugLog(@"didLoginFromOtherDevice");
-
+    
     
     
 #ifdef DEBUG
     
 #else
-
+    
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *sellerID = [defaults objectForKey:@"phone"];
@@ -437,63 +438,63 @@
     
     appdelegate.socketCutBy=1;
     [appdelegate cutOffSocket];
-
+    
     
     if (userID) {
-
-
-
+        
+        
+        
         [defaults removeObjectForKey:@"userID"];
         [defaults removeObjectForKey:@"userpwd"];
         [defaults removeObjectForKey:@"remeber"];
         [defaults synchronize];
         
-       
+        
         appdelegate.userInfoDic = nil;
         
         
-
+        
         
         UIViewController *view =[self topViewController];
         
-
+        
         
         if (view.tabBarController.selectedIndex==2) {
             
             UINavigationController *select_nav = view.tabBarController.selectedViewController;
-
+            
             
             [view.tabBarController.selectedViewController popToRootViewControllerAnimated:YES];
             
-//            LandingController *LandVC = [[LandingController alloc]init];
+            //            LandingController *LandVC = [[LandingController alloc]init];
             
             DebugLog(@"====%@",select_nav.topViewController);
             
             [select_nav.topViewController viewWillAppear:YES];
-
-            [select_nav.topViewController showHint:@"您的账户已在别处登录"];
-
             
-
+            [select_nav.topViewController showHint:@"您的账户已在别处登录"];
+            
+            
+            
             
         }else{
-           UINavigationController *select_nav = view.tabBarController.selectedViewController;
+            UINavigationController *select_nav = view.tabBarController.selectedViewController;
             
             
             view.tabBarController.selectedIndex = 2;
             
-
             
-         UINavigationController *nav =   view.tabBarController.childViewControllers[2];
+            
+            UINavigationController *nav =   view.tabBarController.childViewControllers[2];
             [select_nav popToRootViewControllerAnimated:NO];
             
             [nav.topViewController showHint:@"您的账户已在别处登录"];
-
-
+            
+            
             
         }
-
-
+        
+        
         
     }else{
         
@@ -504,15 +505,15 @@
         
         [defaults synchronize];
         
-     
-
+        
+        
         ShopLandController *shopvc = [[ShopLandController alloc]init];
         
         self.window.rootViewController = shopvc;
         [shopvc showHint:@"您的账户已在别处登录"];
-
+        
     }
-
+    
     
     
 #endif
@@ -524,22 +525,22 @@
     
     
     NSDictionary *dic =[[NSUserDefaults standardUserDefaults]objectForKey:@"FriendRequest"];
-
+    
     NSMutableDictionary *dic2 = [NSMutableDictionary dictionaryWithDictionary:dic];
     if (!dic2) {
         dic2= [NSMutableDictionary dictionary];
     }
     
-
+    
     
     [dic2 setObject:@{@"userName":aUsername,@"message":aMessage} forKey:aUsername];
     
     
     [[NSUserDefaults standardUserDefaults]setObject:dic2 forKey:@"FriendRequest"];
     [[NSUserDefaults standardUserDefaults]synchronize];
-
     
- 
+    
+    
     
     
     NSLog(@"- appdelegate-aUsername-%@===aMessage==%@",aUsername,aMessage);
@@ -553,9 +554,9 @@
     
     if (!aError) {
         
-//        DebugLog("自动登录成功==%@",[[EMClient sharedClient] currentUsername]);
+        //        DebugLog("自动登录成功==%@",[[EMClient sharedClient] currentUsername]);
     }else{
-//        DebugLog("自动登录失败");
+        //        DebugLog("自动登录失败");
     }
     
 }
@@ -579,7 +580,7 @@
         case EMConnectionDisconnected:
         {
             NSLog(@"EMConnectionState未连接");
-
+            
         }
             break;
             
@@ -619,7 +620,7 @@
             NSLog(@"bbbbbbbbbbbbbbbbbb");
             
             
-
+            
         }
         else if (self.IsLogin==YES) {
             NSString
@@ -629,15 +630,15 @@
             *dataStream  = [str
                             dataUsingEncoding:NSUTF8StringEncoding];
             
-                [self._asyncSocket
-                 writeData:dataStream withTimeout:1
-                 
-                 tag:1];
+            [self._asyncSocket
+             writeData:dataStream withTimeout:1
+             
+             tag:1];
             
-
+            
             [__asyncSocket disconnect];
             
-                       
+            
             self.IsLogin = NO;
             NSLog(@"eeeeeeeeeeeeeeeeeeeeeeeeeeee");
         }
@@ -645,14 +646,14 @@
     }
     
     
-
+    
     
 }
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
-//    if (_locationDelegate!=nil) {
-//        [_locationDelegate didUpdateBMKUserLocation:userLocation];
-//    }
+    //    if (_locationDelegate!=nil) {
+    //        [_locationDelegate didUpdateBMKUserLocation:userLocation];
+    //    }
     self.userLocation = userLocation;
     
     //_geocodesearch.delegate = self;
@@ -669,36 +670,36 @@
     
     //根据经纬度反向地理编译出地址信
     
-//    [self.geocoder reverseGeocodeLocation:currentLocation
-//     
-//                   completionHandler:^(NSArray *placemarks, NSError *error) {
-//                       
-//                       if (error == nil &&
-//                           
-//                           [placemarks count] > 0){
-//                           
-//                           CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//                           
-//                           NSLog(@"address dictionary %@",[placemark.addressDictionary objectForKey:@"State"]);
-//                           
-//                       }
-//                       
-//                       else if (error == nil &&
-//                                
-//                                [placemarks count] == 0){
-//                           
-//                           NSLog(@"No results were returned.");
-//                           
-//                       }
-//                       
-//                       else if (error != nil){
-//                           
-//                           NSLog(@"An error occurred = %@", error);
-//                           
-//                       }
-//                       
-//                   }];
-
+    //    [self.geocoder reverseGeocodeLocation:currentLocation
+    //
+    //                   completionHandler:^(NSArray *placemarks, NSError *error) {
+    //
+    //                       if (error == nil &&
+    //
+    //                           [placemarks count] > 0){
+    //
+    //                           CLPlacemark *placemark = [placemarks objectAtIndex:0];
+    //
+    //                           NSLog(@"address dictionary %@",[placemark.addressDictionary objectForKey:@"State"]);
+    //
+    //                       }
+    //
+    //                       else if (error == nil &&
+    //
+    //                                [placemarks count] == 0){
+    //
+    //                           NSLog(@"No results were returned.");
+    //
+    //                       }
+    //
+    //                       else if (error != nil){
+    //
+    //                           NSLog(@"An error occurred = %@", error);
+    //
+    //                       }
+    //
+    //                   }];
+    
     [_locService stopUserLocationService];
 }
 #pragma mark 代理方法返回反地理编码结果
@@ -708,22 +709,22 @@
         
         printf("result.address===%s\n",[result.address UTF8String]);
         NSLog(@"cbcbcbc%@ - %@", result.addressDetail.city, result.address);
-//        if ([result.address isEqualToString:@""]||[result.address isEqualToString:@"(null"]) {
-//            
-//        }else
-            self.addressInfo = result.address;
+        //        if ([result.address isEqualToString:@""]||[result.address isEqualToString:@"(null"]) {
+        //
+        //        }else
+        self.addressInfo = result.address;
         self.addressDistrite = result.addressDetail.district;
         self.province =result.addressDetail.province;
         self.city =result.addressDetail.city;
         self.districtString =result.addressDetail.district;
         NSLog(@"cbcbcbc%@", result.addressDetail.district);
-//        if([result.addressDetail.city rangeOfString:@"市"].location !=NSNotFound)//_roaldSearchText
-//        {
-//            NSRange range = [result.addressDetail.city rangeOfString:@"市"];
-//            
-//            self.cityChoice = [result.addressDetail.city substringToIndex:range.location];;
-//        }else
-            self.cityChoice = result.addressDetail.city;
+        //        if([result.addressDetail.city rangeOfString:@"市"].location !=NSNotFound)//_roaldSearchText
+        //        {
+        //            NSRange range = [result.addressDetail.city rangeOfString:@"市"];
+        //
+        //            self.cityChoice = [result.addressDetail.city substringToIndex:range.location];;
+        //        }else
+        self.cityChoice = result.addressDetail.city;
         NSLog(@"self.cityChoice=======%@",self.cityChoice);
         
         NSBundle *bundle = [NSBundle mainBundle];
@@ -742,10 +743,10 @@
         self.areaListArray = [[NSArray alloc] initWithArray: [allCityss objectForKey: self.cityChoice]];
         for (int i=0; i<[self.areaListArray count]; i++)
         {
-//            NSLog(@"self.areaListArray%@",self.areaListArray[i]);
+            //            NSLog(@"self.areaListArray%@",self.areaListArray[i]);
         }
         
-//        self.areaListArray = self.areaListArray;
+        //        self.areaListArray = self.areaListArray;
     }else{
         //self.address.text = @"找不到相对应的位置信息";
     }
@@ -887,11 +888,11 @@
     if (view.tag==0) {
         upImg.image = [UIImage imageNamed:@"登陆-04"];
         downImg.image = [UIImage imageNamed:@"登陆-05"];
-
+        
     }else{
         upImg.image = [UIImage imageNamed:@"登陆-05"];
         downImg.image = [UIImage imageNamed:@"登陆-04"];
-
+        
     }
     
 }
@@ -919,42 +920,42 @@
         self.window.rootViewController = mainTB;
         
     }else{
-            //          动画完成进行跳转页面
-            [_locService startUserLocationService];
+        //          动画完成进行跳转页面
+        [_locService startUserLocationService];
         
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSLog(@"remeberShop--YES or NO---%@===%@===%@===%@",[defaults objectForKey:@"remeberShop"],[defaults objectForKey:@"phone"],[defaults objectForKey:@"passwd"],[defaults objectForKey:@"log_type"]);
-            
-            
-            if ([[defaults objectForKey:@"remeberShop"] isEqualToString:@"yes"])
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSLog(@"remeberShop--YES or NO---%@===%@===%@===%@",[defaults objectForKey:@"remeberShop"],[defaults objectForKey:@"phone"],[defaults objectForKey:@"passwd"],[defaults objectForKey:@"log_type"]);
+        
+        
+        if ([[defaults objectForKey:@"remeberShop"] isEqualToString:@"yes"])
+        {
+            if ([defaults objectForKey:@"phone"]&&[defaults objectForKey:@"passwd"]&&[defaults objectForKey:@"log_type"])
             {
-                if ([defaults objectForKey:@"phone"]&&[defaults objectForKey:@"passwd"]&&[defaults objectForKey:@"log_type"])
-                {
-                    NSString *phone = [defaults valueForKey:@"phone"];
-                    NSString *userPassWordString = [defaults valueForKey:@"passwd"];
-                    NSString *log_type = [defaults valueForKey:@"log_type"];
-                    
-//                    ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
-//                    self.window.rootViewController = tabBarVC;
-                    
-                    [self postRequestSeller:phone andPassWord:userPassWordString andState:log_type];
-                }else
-                {
-                    [self.choseView removeFromSuperview];
-                    ShopLandController *shopvc = [[ShopLandController alloc]init];
-                    
-                    BaseNavigationController *NAVVC = [[BaseNavigationController alloc]initWithRootViewController:shopvc];
-                    
-                    self.window.rootViewController = NAVVC;
-                }
-            }else{
+                NSString *phone = [defaults valueForKey:@"phone"];
+                NSString *userPassWordString = [defaults valueForKey:@"passwd"];
+                NSString *log_type = [defaults valueForKey:@"log_type"];
+                
+                //                    ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
+                //                    self.window.rootViewController = tabBarVC;
+                
+                [self postRequestSeller:phone andPassWord:userPassWordString andState:log_type];
+            }else
+            {
                 [self.choseView removeFromSuperview];
                 ShopLandController *shopvc = [[ShopLandController alloc]init];
-                 BaseNavigationController*NAVVC = [[BaseNavigationController alloc]initWithRootViewController:shopvc];
-
+                
+                BaseNavigationController *NAVVC = [[BaseNavigationController alloc]initWithRootViewController:shopvc];
+                
                 self.window.rootViewController = NAVVC;
             }
+        }else{
+            [self.choseView removeFromSuperview];
+            ShopLandController *shopvc = [[ShopLandController alloc]init];
+            BaseNavigationController*NAVVC = [[BaseNavigationController alloc]initWithRootViewController:shopvc];
             
+            self.window.rootViewController = NAVVC;
+        }
+        
     }
     
     
@@ -971,7 +972,7 @@
     UIImageView *imageV =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
     imageV.userInteractionEnabled = YES;
     imageV.contentMode =  UIViewContentModeScaleAspectFill;
-
+    
     [advise_back addSubview:imageV];
     
     
@@ -981,7 +982,7 @@
     [jump_btn setTitleColor:[UIColor whiteColor] forState:0];
     jump_btn.titleLabel.font =[UIFont systemFontOfSize:14];
     jump_btn.backgroundColor=RGBA_COLOR(197, 197, 197, 0.7);
-
+    
     jump_btn.alpha = 0.7;
     jump_btn.layer.cornerRadius= SCREENWIDTH*0.0098;
     jump_btn.clipsToBounds = YES;
@@ -992,50 +993,50 @@
     [self TimeNumAction];
     
     
-//    NSString *url = @"http://101.201.100.191/VipCard/upload/SourceImage/ad_image.png";
+    //    NSString *url = @"http://101.201.100.191/VipCard/upload/SourceImage/ad_image.png";
     
-//    [imageV sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"ad_image.jpg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    //    [imageV sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"ad_image.jpg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     
-//    }];
+    //    }];
     
     
-//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGestureClick:)];
+    //    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGestureClick:)];
     
     
     NSString *url = [NSString stringWithFormat:@"%@MerchantType/advert/leadGet",BASEURL];
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
     
     [paramer setValue:@"西安市雁塔区" forKey:@"eare"];
-
     
-//    imageV.image = [UIImage imageNamed:@"启动页(1)"];
-
+    
+    //    imageV.image = [UIImage imageNamed:@"启动页(1)"];
+    
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"leadGet-----%@",result);
         [imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",STAR_ADVERTIMAGE,result[@"image_url"]]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (!image) {
                 
                 [UIImage imageNamed:@"ad_image"];
-            
-//                [imageV addGestureRecognizer:tapGesture];
+                
+                //                [imageV addGestureRecognizer:tapGesture];
             }
             
         }];
-
-
-
+        
+        
+        
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"leadGet--error---%@",error);
         imageV.image = [UIImage imageNamed:@"ad_image"];
-
+        
     }];
-
+    
 }
 -(void)jumpClick{
     [advise_back removeFromSuperview];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+    
     if ([[defaults objectForKey:@"remeber"] isEqualToString:@"yes"]) {
         MainTabBarController *mainTB = [[MainTabBarController alloc]init];
         self.window.rootViewController = mainTB;
@@ -1046,28 +1047,28 @@
         ShopTabBarController *tabBarVC = [[ShopTabBarController alloc]init];
         self.window.rootViewController = tabBarVC;
     }
-//    else{
-//        //
-//        [self _initChose];
-//    }
+    //    else{
+    //        //
+    //        [self _initChose];
+    //    }
     
     //获得版本号
     //倒计时结束，关闭
     if (self.timer) {
         dispatch_source_cancel(self.timer);
-
+        
     }
     self.timer = nil;
-
+    
     [self getVersion_code];
-
+    
 }
 //-(void)tapGestureClick:(UITapGestureRecognizer*)tap{
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-//    
+//
 //    if (self.timer) {
 //        dispatch_source_cancel(self.timer);
-//        
+//
 //    }
 //    self.timer = nil;
 //
@@ -1080,25 +1081,25 @@
 //    backImg.frame=CGRectMake(9, 30, 12, 20);
 //    backImg.image=[UIImage imageNamed:@"arraw_left"];
 //    [advise_back addSubview:backImg];
-//    
+//
 //     UILabel*label=[[UILabel alloc]initWithFrame:CGRectMake(backImg.right, 0, SCREENWIDTH-backImg.right, 44)];
 //    label.text=@"https://www.baidu.com";
 //    label.font=[UIFont boldSystemFontOfSize:16];
 //    label.textAlignment=NSTextAlignmentCenter;
 //    label.textColor=[UIColor blackColor];
 //    [topView addSubview:label];
-//    
+//
 //    UIButton*backTi=[UIButton buttonWithType:UIButtonTypeCustom];
 //    backTi.frame=CGRectMake(0, 0, SCREENWIDTH*0.2, 44);
 //    [backTi addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
 //    [topView addSubview:backTi];
-//    
+//
 //    UIWebView *web_view = [[UIWebView alloc]initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT-64)];
 //    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:label.text]];
 //    [web_view loadRequest:request];
 //    [advise_back addSubview:web_view];
 //
-//    
+//
 //}
 //-(void)backClick{
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -1152,7 +1153,7 @@
     }else{
         NSLog(@"__asyncSocket连接成功");
     }
-
+    
 }
 
 - (void)socket:(GCDAsyncSocket *)sock willDisconnectWithError:(NSError *)err
@@ -1190,7 +1191,7 @@
                                      userInfo:nil repeats:YES];//
     //在longConnectToSocket方法中进行长连接需要向服务器发送的讯息
     [self.connectTimer fire];
-
+    
     
     //[sock readDataToData:[AsyncSocket CRLFData] withTimeout:-1 tag:0];
 }
@@ -1208,34 +1209,34 @@
         self.messagePay =[[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding];
         if([self.messagePay isEqualToString:@"*#heart#*"])
         {
-//            NSLog(@"self.messagePayheart%@",self.messagePay);
+            //            NSLog(@"self.messagePayheart%@",self.messagePay);
             return;
         }
         if (self.messagePay.length>4) {
             self.messagePayAll = [[NSString alloc]initWithString:self.messagePay];
         }
-//        NSLog(@"self.messagePay%@",self.messagePay);
+        //        NSLog(@"self.messagePay%@",self.messagePay);
         if([self.messagePay rangeOfString:PAY_NP].location ==NSNotFound)
         {
-//            NSLog(@"%@",msg);
+            //            NSLog(@"%@",msg);
         }
         else{
             //返回数据解析
-//            NSArray * infoArray= [msg componentsSeparatedByString:PAY_UORC];//根据su拆分成多个字符串
-//            if (infoArray.count>0) {
-//                for (int i=0; i<infoArray.count; i++) {
-//                    //获取每个数组里的项目和价格-(项目sm价格)
-//                    
-//                }
-//            }
+            //            NSArray * infoArray= [msg componentsSeparatedByString:PAY_UORC];//根据su拆分成多个字符串
+            //            if (infoArray.count>0) {
+            //                for (int i=0; i<infoArray.count; i++) {
+            //                    //获取每个数组里的项目和价格-(项目sm价格)
+            //
+            //                }
+            //            }
             UIViewController *view = [self getCurrentRootViewController];
             NSLog(@"view%@",view);
             
             [self getShopName];//获取商户名
             [self NewAlertView];
-
+            
         }
-
+        
     }
     
     else
@@ -1251,13 +1252,13 @@
 {
     
     NSLog(@"didDisconnect===%@",err);
-//    if (self.shopIsLogin) {
-//        [self socketConnectHostShop];
-//        
-//    }
+    //    if (self.shopIsLogin) {
+    //        [self socketConnectHostShop];
+    //
+    //    }
     
     
-//    [self socketConnectHost];
+    //    [self socketConnectHost];
 }
 
 
@@ -1276,23 +1277,23 @@
     
     
     if(self.IsLogin){
-    [self._asyncSocket
-     writeData:dataStream withTimeout:1
-     
-     tag:1];
+        [self._asyncSocket
+         writeData:dataStream withTimeout:1
+         
+         tag:1];
     }else if (self.shopIsLogin)
     {
         [self.asyncSocketShop
          writeData:dataStream withTimeout:1
          
          tag:1];
-
+        
     }
     
 }
 - (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag{
     
-     NSLog(@"didReadData`111");
+    NSLog(@"didReadData`111");
 }
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tagg {
     [sock readDataWithTimeout:-1 tag:0];
@@ -1315,8 +1316,8 @@
         
         NSLog(@"result----%@",result);
         shopName_lab.text = result[@"store"];
-
-
+        
+        
         
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -1331,7 +1332,7 @@
 {
     CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] init];
     self.alertView = alertView;
-
+    
     
     [alertView setContainerView:[self createDemoView]];
     
@@ -1358,18 +1359,18 @@
     NSLog(@"type====%@",_type);
     if ([_type isEqualToString:@"t"]) {
         
-
+        
         
         if([self.messagePay rangeOfString:PAY_NP].location !=NSNotFound)
         {
             demoView.frame =CGRectMake(0, 0, 290, 80);
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 290, 40)];
-          NSString *String_1 =  [[self.messagePay componentsSeparatedByString:PAY_TYPE] lastObject];
-           NSArray *array_1 = [String_1 componentsSeparatedByString:PAY_USCS];
-
+            NSString *String_1 =  [[self.messagePay componentsSeparatedByString:PAY_TYPE] lastObject];
+            NSArray *array_1 = [String_1 componentsSeparatedByString:PAY_USCS];
+            
             self.payShopName = array_1[0];
             
-
+            
             label.textAlignment = NSTextAlignmentCenter;
             label.font = [UIFont boldSystemFontOfSize:13];
             [demoView addSubview:label];
@@ -1377,7 +1378,7 @@
             shopName_lab = label;
             
             NSString *detail = [array_1 lastObject];
-
+            
             UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, 110, 40)];
             label1.textAlignment = NSTextAlignmentCenter;
             label1.font = [UIFont boldSystemFontOfSize:13];
@@ -1389,10 +1390,10 @@
             [demoView addSubview:priceLabel];
             
             
-
+            
             priceLabel.text = [[detail componentsSeparatedByString:PAY_NP] lastObject];
             self.payMoney = [priceLabel.text floatValue];;
-           
+            
             UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, 290, 0.3)];
             line1.backgroundColor = [UIColor grayColor];
             line1.alpha = 0.3;
@@ -1416,22 +1417,22 @@
                 self.payMoney = 0.0;
                 demoView.frame =CGRectMake(0, 0, 290, 80);
                 UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 290, 40)];
-
+                
                 self.payShopName = [array_1 firstObject];
-
+                
                 NSLog(@"self.payShopName----%@",self.payShopName);
-//                label.text = @"修改昵称";
+                //                label.text = @"修改昵称";
                 label.textAlignment = NSTextAlignmentCenter;
                 label.font = [UIFont boldSystemFontOfSize:13];
                 [demoView addSubview:label];
                 
                 shopName_lab = label;
-
+                
                 UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, 110, 40)];
                 label1.textAlignment = NSTextAlignmentCenter;
                 label1.font = [UIFont boldSystemFontOfSize:13];
                 [demoView addSubview:label1];
-
+                
                 label1.text = [[[array_1 lastObject]componentsSeparatedByString:PAY_NP] firstObject];
                 
                 UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(170, 40, 110, 40)];
@@ -1444,13 +1445,13 @@
                     self.payMoney = [priceAll floatValue];
                     NSLog(@"===self.messagePay===%@",self.messagePay);
                     NSLog(@"WWWWWWWWWW%@",priceAll);
-
+                    
                 }else{
                     NSString *priceAll =priceLabel.text;
                     self.payMoney = [priceAll floatValue];
-
+                    
                 }
-
+                
                 UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, 290, 0.3)];
                 line1.backgroundColor = [UIColor grayColor];
                 line1.alpha = 0.3;
@@ -1463,8 +1464,8 @@
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 290, 40)];
             
             shopName_lab = label;
-
-
+            
+            
             self.payShopName = [array_1 firstObject];
             //label.text = @"修改昵称";
             NSLog(@"self.payShopName--%@",self.payShopName);
@@ -1496,13 +1497,13 @@
                     
                     if ([priceLabel.text containsString:@"元"]) {
                         allPrice =[[priceLabel.text componentsSeparatedByString:@"元"]firstObject];
-                
+                        
                         
                     }else{
                         allPrice =priceLabel.text;
                         
                     }
-
+                    
                     
                     UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40*(i+1), 290, 0.3)];
                     line1.backgroundColor = [UIColor grayColor];
@@ -1511,7 +1512,7 @@
                 }
                 else{
                     NSString *tt_sm = infoArray[i];
-
+                    
                     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 40*(i+1), 110, 40)];
                     label.text = [[tt_sm componentsSeparatedByString:PAY_NP] firstObject];
                     label.textAlignment = NSTextAlignmentCenter;
@@ -1522,7 +1523,7 @@
                     priceLabel.textAlignment = NSTextAlignmentCenter;
                     priceLabel.font = [UIFont boldSystemFontOfSize:13];
                     [demoView addSubview:priceLabel];
-
+                    
                     priceLabel.text = [[tt_sm componentsSeparatedByString:PAY_NP] lastObject];
                     
                     if ([priceLabel.text containsString:@"元"]) {
@@ -1533,7 +1534,7 @@
                         allPrice =priceLabel.text;
                         
                     }
-
+                    
                     
                     UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40*(i+1), 290, 0.3)];
                     line1.backgroundColor = [UIColor grayColor];
@@ -1551,13 +1552,13 @@
 - (void)customIOS7dialogButtonTouchUpInside: (CustomIOSAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
 {
     [alertView close];
-
+    
     if (alertView.tag==0&&buttonIndex==1) {
-
+        
     }
     else if (alertView.tag==0&&buttonIndex==0)
     {
-
+        
         
         [self postSocketPayAction];
         
@@ -1583,14 +1584,14 @@
     {
         [params setObject:@"储值卡" forKey:@"type"];
     }
-
+    
     NSLog(@"params===%@",params);
     
     
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
-
+         
          self.payCardArray = [result copy];
          
          NSLog(@"self.payCardArray%@", self.payCardArray);
@@ -1603,28 +1604,28 @@
          NSLog(@"canPayCardView.messagePay%@",self.messagePayAll);
          CanPayCardViewController *canPayCardView = [[CanPayCardViewController alloc]init];
          canPayCardView.payCardArray = self.payCardArray;
-//         canPayCardView.messagePay = self.messagePayAll;
-//         canPayCardView.cardType = self.type;
-//         canPayCardView.payMoney = self.payMoney;
-//         canPayCardView.payShopName = self.payShopName;
+         //         canPayCardView.messagePay = self.messagePayAll;
+         //         canPayCardView.cardType = self.type;
+         //         canPayCardView.payMoney = self.payMoney;
+         //         canPayCardView.payShopName = self.payShopName;
          
-//         NSString *type = [[NSString alloc]init];
-//         if ([type isEqualToString:@"t"]){
-//             type =@"计次卡";
-//         }else
-//         {
-//             type =@"储值卡";
-//         }
-//         canPayCardView.cardType = type;
+         //         NSString *type = [[NSString alloc]init];
+         //         if ([type isEqualToString:@"t"]){
+         //             type =@"计次卡";
+         //         }else
+         //         {
+         //             type =@"储值卡";
+         //         }
+         //         canPayCardView.cardType = type;
          [view.navigationController pushViewController:canPayCardView animated:YES];
          if ([view isKindOfClass:[MainTabBarController class]]) {
              MainTabBarController *view1 = [[MainTabBarController alloc]init];
              CanPayCardViewController *canPayCardView = [[CanPayCardViewController alloc]init];
              canPayCardView.payCardArray = self.payCardArray;
-//             canPayCardView.messagePay = self.messagePayAll;
-//             canPayCardView.cardType = self.type;
-//             canPayCardView.payMoney = self.payMoney;
-//             canPayCardView.payShopName = self.payShopName;
+             //             canPayCardView.messagePay = self.messagePayAll;
+             //             canPayCardView.cardType = self.type;
+             //             canPayCardView.payMoney = self.payMoney;
+             //             canPayCardView.payShopName = self.payShopName;
              NSArray *arrControllers = [view1 viewControllers];
              NSLog(@"view1 = %@",arrControllers);
              BaseNavigationController *oldNavigationController = [arrControllers objectAtIndex:0];
@@ -1673,11 +1674,11 @@
     while (topVC.presentedViewController) {
         topVC = topVC.presentedViewController;
     }
-//    if([topVC isKindOfClass:[MainTabBarController class]])
-//    {
-//        return topVC;
-//        //return [(MainTabBarController *)topVC selectedViewController];
-//    }
+    //    if([topVC isKindOfClass:[MainTabBarController class]])
+    //    {
+    //        return topVC;
+    //        //return [(MainTabBarController *)topVC selectedViewController];
+    //    }
     return topVC;
 }
 
@@ -1685,7 +1686,7 @@
 //登录成功提示
 - (void)landingSuc:(NSMutableDictionary*)mut_dic
 {
-//    [self socketConnectHostShop];
+    //    [self socketConnectHostShop];
     
     
     NSLog(@"-mut_dic-----%@",mut_dic);
@@ -1694,7 +1695,7 @@
     
     self.shopperIsLog = YES;
     [self repeatLoadAPI];
-
+    
     
 }
 
@@ -1742,7 +1743,7 @@
 
 /**
  商户登录
-
+ 
  @param name       账号
  @param password   密码
  @param sellerState 商户状态,注册者还是管理员
@@ -1751,20 +1752,20 @@
 {
     ShopTabBarController *shopvc = [[ShopTabBarController alloc]init];
     self.window.rootViewController = shopvc;
-
     
-//    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    //    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     
     shophud =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
     shophud.label.text = @"正在登陆...";
-
+    
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/login",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:name forKey:@"phone"];
     [params setObject:password forKey:@"passwd"];
     [params setObject:log_type forKey:@"login_type"];
-
+    
     NSLog(@"postRequestSeller-----%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
@@ -1774,7 +1775,7 @@
              NSLog(@"成功");
              
              NSDictionary *userInfo = result[@"info"];
-
+             
              
              [[EMClient sharedClient]loginWithUsername:userInfo[@"muid"] password:@"000000" completion:^(NSString *aUsername, EMError *aError) {
                  if (!aError) {
@@ -1783,7 +1784,7 @@
                      
                      dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                          
-                       
+                         
                          
                          
                          NSUserDefaults *use_name = [NSUserDefaults standardUserDefaults];
@@ -1805,7 +1806,7 @@
                          
                          
                          [self landingSuc:shopUser_dic];
-
+                         
                      });
                      
                  }else{
@@ -1813,7 +1814,7 @@
                      ShopLandController *shopvc = [[ShopLandController alloc]init];
                      self.window.rootViewController = shopvc;
                      NSLog(@"商户登录失败==%@",aError.errorDescription);
-                                    }
+                 }
              }];
              
              
@@ -1850,7 +1851,7 @@
     [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code, NSDictionary *data) {
         
         DebugLog(@"handlePaymentResult----%@",code);
-
+        
         
         [[NSNotificationCenter defaultCenter]postNotificationName:ORDER_PAY_NOTIFICATION object:code];
         
@@ -1879,15 +1880,15 @@
             else {
                 //验签失败，交易结果数据被篡改，商户app后台查询交易结果
             }
-
-//            if (self.paymentType==4) {
-//                NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
-//                
-//                [card_dic setValue:self.payCardType forKey:@"card_level"];
-//                self.cardInfo_dic =  card_dic;
-//                
-//            }
-
+            
+            //            if (self.paymentType==4) {
+            //                NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
+            //
+            //                [card_dic setValue:self.payCardType forKey:@"card_level"];
+            //                self.cardInfo_dic =  card_dic;
+            //
+            //            }
+            
             //            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"返回", nil];
             //            [alertView show];
         }
@@ -1904,7 +1905,7 @@
         [[AlipaySDK defaultService]processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
             NSString * str = resultDic[@"result"];
             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
-
+            
             NSLog(@"[[AlipaySDK defaultService]processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic)----%@",resultDic);
             if (orderState==9000) {
                 if (self.whoPay==4) {
@@ -1912,7 +1913,7 @@
                     
                     [card_dic setValue:self.payCardType forKey:@"card_level"];
                     self.cardInfo_dic =  card_dic;
-
+                    
                     
                 }
                 
@@ -1932,15 +1933,15 @@
             
             if (orderState==9000)
             {
-
-//                if (self.whoPay==4) {
-//                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
-//                    
-//                    [card_dic setValue:self.payCardType forKey:@"card_level"];
-//                    self.cardInfo_dic =  card_dic;
-//                    
-//                }
-
+                
+                //                if (self.whoPay==4) {
+                //                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
+                //
+                //                    [card_dic setValue:self.payCardType forKey:@"card_level"];
+                //                    self.cardInfo_dic =  card_dic;
+                //
+                //                }
+                
                 
             }
             NSLog(@"memo = %@",str);
@@ -1953,33 +1954,33 @@
             NSLog(@"platformapi==result = %@",resultDic);
             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
             if (orderState==9000) {
-
-//                if (self.whoPay==4) {
-//                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
-//                    
-//                    [card_dic setValue:self.payCardType forKey:@"card_level"];
-//                    self.cardInfo_dic =  card_dic;
-//                    
-//                }
-
+                
+                //                if (self.whoPay==4) {
+                //                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
+                //
+                //                    [card_dic setValue:self.payCardType forKey:@"card_level"];
+                //                    self.cardInfo_dic =  card_dic;
+                //
+                //                }
+                
                 
             }
             
         }];
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
-
+            
             
             NSLog(@"[[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic)---%@",resultDic);
             if (orderState==9000) {
-//                if (self.whoPay==4) {
-//                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
-//                    
-//                    [card_dic setValue:self.payCardType forKey:@"card_level"];
-//                    self.cardInfo_dic =  card_dic;
-//                    
-//                }
-
+                //                if (self.whoPay==4) {
+                //                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
+                //
+                //                    [card_dic setValue:self.payCardType forKey:@"card_level"];
+                //                    self.cardInfo_dic =  card_dic;
+                //
+                //                }
+                
                 
             }
         }];
@@ -1987,17 +1988,17 @@
     }
     
     NSLog(@"UMSocialSnsService----%@",url);
-
+    
     
     if ([[UMSocialManager defaultManager]handleOpenURL:url]) {
         return  [[UMSocialManager defaultManager]handleOpenURL:url];
     }
-//        if ([UMSocialSnsService handleOpenURL:url]) {
-//            
-//            return  [UMSocialSnsService handleOpenURL:url];
-//            
-//        }
-
+    //        if ([UMSocialSnsService handleOpenURL:url]) {
+    //
+    //            return  [UMSocialSnsService handleOpenURL:url];
+    //
+    //        }
+    
     
     
     return YES;
@@ -2009,13 +2010,13 @@
 {
     
     NSLog(@"=9.0====%@",url);
-
+    
     [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code, NSDictionary *data) {
         
         DebugLog(@"handlePaymentResult----%@",code);
         
         [[NSNotificationCenter defaultCenter]postNotificationName:ORDER_PAY_NOTIFICATION object:code];
-
+        
         //结果code为成功时，先校验签名，校验成功后做后续处理
         if([code isEqualToString:@"success"]) {
             
@@ -2041,17 +2042,17 @@
             else {
                 //验签失败，交易结果数据被篡改，商户app后台查询交易结果
             }
-//            if (self.paymentType==4) {
-//                NSMutableDictionary *cardMutab_dic = [[NSMutableDictionary alloc]initWithDictionary:self.cardInfo_dic];
-//                [cardMutab_dic setValue:self.payCardType forKey:@"card_level"];
-//                
-//
-//
-//                self.cardInfo_dic = cardMutab_dic;
-//
-//            }
-//            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"返回", nil];
-//            [alertView show];
+            //            if (self.paymentType==4) {
+            //                NSMutableDictionary *cardMutab_dic = [[NSMutableDictionary alloc]initWithDictionary:self.cardInfo_dic];
+            //                [cardMutab_dic setValue:self.payCardType forKey:@"card_level"];
+            //
+            //
+            //
+            //                self.cardInfo_dic = cardMutab_dic;
+            //
+            //            }
+            //            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"返回", nil];
+            //            [alertView show];
         }
         else if([code isEqualToString:@"fail"]) {
             //交易失败
@@ -2068,20 +2069,20 @@
             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
             NSLog(@"[[AlipaySDK defaultService]processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic)----%@",resultDic);
             if (orderState==9000) {
-//                if (self.whoPay==4) {
-//                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
-//                    
-//                    [card_dic setValue:self.payCardType forKey:@"card_level"];
-//                    self.cardInfo_dic =  card_dic;
-//                    
-//                }
+                //                if (self.whoPay==4) {
+                //                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
+                //
+                //                    [card_dic setValue:self.payCardType forKey:@"card_level"];
+                //                    self.cardInfo_dic =  card_dic;
+                //
+                //                }
                 
             }
             NSLog(@"processAuth_V2Result==result = %@",str);
         }];
         //跳转支付宝钱包进行支付，处理支付结果，这个只是辅佐订单支付结果回调
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-
+            
             
             NSLog(@"processOrderWithPaymentResult=result = %@",resultDic);
             NSString * str = resultDic[@"memo"];
@@ -2092,13 +2093,13 @@
             
             if (orderState==9000)
             {
-//                if (self.whoPay==4) {
-//                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
-//                    
-//                    [card_dic setValue:self.payCardType forKey:@"card_level"];
-//                    self.cardInfo_dic =  card_dic;
-//                    
-//                }
+                //                if (self.whoPay==4) {
+                //                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
+                //
+                //                    [card_dic setValue:self.payCardType forKey:@"card_level"];
+                //                    self.cardInfo_dic =  card_dic;
+                //
+                //                }
                 
             }
             NSLog(@"memo = %@",str);
@@ -2111,29 +2112,29 @@
             NSLog(@"platformapi==result = %@",resultDic);
             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
             if (orderState==9000) {
-//                if (self.whoPay==4) {
-//                    
-//                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
-//                    
-//                    [card_dic setValue:self.payCardType forKey:@"card_level"];
-//                    self.cardInfo_dic =  card_dic;
-//                }
+                //                if (self.whoPay==4) {
+                //
+                //                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
+                //
+                //                    [card_dic setValue:self.payCardType forKey:@"card_level"];
+                //                    self.cardInfo_dic =  card_dic;
+                //                }
                 
             }
-
+            
         }];
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
             
             NSLog(@"[[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic)---%@",resultDic);
             if (orderState==9000) {
-//                if (self.whoPay==4) {
-//                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
-//                    
-//                    [card_dic setValue:self.payCardType forKey:@"card_level"];
-//                    self.cardInfo_dic =  card_dic;
-//                    
-//                }
+                //                if (self.whoPay==4) {
+                //                    NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:self.cardInfo_dic];
+                //
+                //                    [card_dic setValue:self.payCardType forKey:@"card_level"];
+                //                    self.cardInfo_dic =  card_dic;
+                //
+                //                }
                 
             }
         }];
@@ -2145,13 +2146,13 @@
     if ([[UMSocialManager defaultManager]handleOpenURL:url]) {
         return  [[UMSocialManager defaultManager]handleOpenURL:url];
     }
-
-//    if ([UMSocialSnsService handleOpenURL:url]) {
-//        
-//        return  [UMSocialSnsService handleOpenURL:url];
-//        
-//    }
-
+    
+    //    if ([UMSocialSnsService handleOpenURL:url]) {
+    //
+    //        return  [UMSocialSnsService handleOpenURL:url];
+    //
+    //    }
+    
     
     return YES;
 }
@@ -2164,7 +2165,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     
     [[EMClient sharedClient] applicationDidEnterBackground:application];
-
+    
     if (backgroundTask == UIBackgroundTaskInvalid)
     {
         backgroundTask = [[UIApplication sharedApplication]
@@ -2177,7 +2178,7 @@
                                   if (count == 1) {
                                       
                                       msg = [NSString stringWithFormat:@"您的视频\"%@\"上传未完成，点击继续上传!",[[_VCOPClientInstance getUploadingVideoList] objectAtIndex:0]];
-//                                      DebugLog("msg : %s",msg);
+                                      //                                      DebugLog("msg : %s",msg);
                                   }
                                   
                                   //                                  [Tools scheduleLocalNotification:msg withAction:@"继续上传" userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:3],@"tag",[NSNumber numberWithInt:-1],@"index", nil]];
@@ -2186,7 +2187,7 @@
                               backgroundTask = UIBackgroundTaskInvalid;
                           }];
     }
-
+    
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -2194,18 +2195,18 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
     [[EMClient sharedClient] applicationWillEnterForeground:application];
-
+    
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
-
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-//    DebugLog("applicationWillTerminate");
+    //    DebugLog("applicationWillTerminate");
     [[SDImageCache sharedImageCache]clearDisk];
     [[SDImageCache sharedImageCache]clearMemory];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -2239,7 +2240,7 @@
             
             UIViewController *topVC = [self topViewController];
             
-           
+            
             
             if ([topVC isKindOfClass:[CommenDataViewController class]]) {
                 CommenDataViewController *VC = (CommenDataViewController*)topVC;
@@ -2253,7 +2254,7 @@
             }
             
         }
-
+        
     }else{
         
         if (buttonIndex==1) {
@@ -2263,9 +2264,9 @@
             [view.navigationController popToViewController:[view.navigationController.viewControllers objectAtIndex:view.navigationController.viewControllers.count-3] animated:YES];
             //[view.navigationController popViewControllerAnimated:YES];
         }
- 
+        
     }
- 
+    
     
     
 }
@@ -2333,9 +2334,9 @@
                             NSString *userPassWordString = [defaults valueForKey:@"passwd"];
                             NSString *log_type = [defaults valueForKey:@"log_type"];
                             
-
-                                [self postRequestSeller:phone andPassWord:userPassWordString andState:log_type];
-                         }else
+                            
+                            [self postRequestSeller:phone andPassWord:userPassWordString andState:log_type];
+                        }else
                         {
                             [self.choseView removeFromSuperview];
                             ShopLandController *shopvc = [[ShopLandController alloc]init];
@@ -2358,7 +2359,7 @@
                     gesture.view.center = center;
                     //self.imageView.image=[UIImage imageNamed:@""];
                 } completion:^(BOOL finished) {
-                                       //          动画完成进行跳转页面
+                    //          动画完成进行跳转页面
                     [_locService startUserLocationService];
                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                     if ([[defaults objectForKey:@"remeber"] isEqualToString:@"yes"]) {
@@ -2377,7 +2378,7 @@
                     
                     MainTabBarController *mainTB = [[MainTabBarController alloc]init];
                     self.window.rootViewController = mainTB;
-
+                    
                 }];
             }
             else{
@@ -2404,18 +2405,18 @@
  */
 -(void)getVersion_code{
     NSDictionary *infoDic = [[NSBundle mainBundle]infoDictionary];
-        // app版本
-      NSString *app_Version = [infoDic objectForKey:@"CFBundleShortVersionString"];
+    // app版本
+    NSString *app_Version = [infoDic objectForKey:@"CFBundleShortVersionString"];
     
     
     NSString *url = [NSString stringWithFormat:@"%@Extra/source/version",BASEURL];
-
+    
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
     [paramer setValue:@"ios" forKey:@"type"];
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"===--%@",result);
-     NSLog(@" app版本  %ld",(long)[app_Version compare:result[@"version"] options:NSNumericSearch]);
+        NSLog(@" app版本  %ld",(long)[app_Version compare:result[@"version"] options:NSNumericSearch]);
         
         if ([app_Version compare:result[@"version"] options:NSNumericSearch] < 0) {
             
@@ -2424,9 +2425,9 @@
             UIView *backView = [[UIView alloc]init];
             backView.layer.cornerRadius =7;
             backView.clipsToBounds = YES;
-
+            
             [LZDAleterView setContainerView:backView];
-
+            
             UIButton *titlebtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kWeChatScreenWidth*0.8, 40)];
             [titlebtn setTitle:@"下载更新" forState:0];
             
@@ -2449,13 +2450,13 @@
             [backView addSubview:contentLab];
             
             backView.frame= CGRectMake(0, 0, titlebtn.width, contentLab.bottom);
-                [LZDAleterView setParentView:self.window];
-
+            [LZDAleterView setParentView:self.window];
+            
             [LZDAleterView setButtonTitles:[NSMutableArray arrayWithObjects:@"取消",@"去更新",  nil]];
             
             
             [LZDAleterView setUseMotionEffects:YES];
-
+            
             [LZDAleterView show];
             
             [LZDAleterView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
@@ -2469,7 +2470,7 @@
             }];
         }
         
- 
+        
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -2498,14 +2499,14 @@
             }else{
                 NSLog(@"创表失败");
             }
-
+            
         }else{
             
         }
         
     }
     return NO;
-
+    
     
 }
 
@@ -2527,7 +2528,7 @@
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
     
     NSLog(@"didReceiveRemoteNotification---%@",userInfo);
-
+    
 }
 
 /**
@@ -2535,40 +2536,40 @@
  */
 -(void)TimeNumAction
 {
-
-        __block int timeout = 3; //倒计时时间
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-         self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-        dispatch_source_set_timer(self.timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
-        dispatch_source_set_event_handler(self.timer, ^{
+    
+    __block int timeout = 3; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(self.timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(self.timer, ^{
+        
+        if(timeout<=0){
             
-            if(timeout<=0){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self jumpClick];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self jumpClick];
-
-                });
-            }else{
-                int seconds = timeout % 60 ;
-                NSString *strTime = [NSString stringWithFormat:@"%d跳过", seconds];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    //设置界面的按钮显示 根据自己需求设置
-                    [self.jump_btn setTitle:strTime forState:0];
-                    NSLog(@"____%@",strTime);
-
-                    
-                });
-                timeout--;
-            }
-        });
-        dispatch_resume(_timer);
-//    }
+            });
+        }else{
+            int seconds = timeout % 60 ;
+            NSString *strTime = [NSString stringWithFormat:@"%d跳过", seconds];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                [self.jump_btn setTitle:strTime forState:0];
+                NSLog(@"____%@",strTime);
+                
+                
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+    //    }
 }
 
 
 -(void)loginOutBletcShop{
     
-
+    
     if (self.repateTimer) {
         dispatch_source_cancel(self.repateTimer);
         
@@ -2576,21 +2577,21 @@
     self.repateTimer = nil;
     
     
-
-
+    
+    
     EMError *aError = [[EMClient sharedClient]logout:YES];
     if (aError) {
         [self loginOutBletcShop];
         NSLog(@"环信退出失败==%@",aError.errorDescription);
-
+        
     }else{
         NSLog(@"环信退出成功");
- 
+        
     }
     
-
-
-
+    
+    
+    
     
     
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
@@ -2599,7 +2600,7 @@
     [defaults removeObjectForKey:@"passwd"];
     [defaults removeObjectForKey:@"log_type"];
     [defaults removeObjectForKey:@"remeberShop"];
-
+    
     
     [defaults removeObjectForKey:@"userID"];
     [defaults removeObjectForKey:@"userpwd"];
@@ -2607,7 +2608,7 @@
     
     
     [defaults removeObjectForKey:@"shopselectedIndex"];
-
+    
     [defaults synchronize];
     self.socketCutBy=1;
     [self cutOffSocket];
@@ -2616,25 +2617,25 @@
 
 // 本地通知回调函数，当应用程序在前台时调用
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-//    NSLog(@"noti:%@======%ld",notification,(long)application.applicationState);
+    //    NSLog(@"noti:%@======%ld",notification,(long)application.applicationState);
     
     
     
     // 更新显示的徽章个数
-
+    
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-
-       
+    
+    
     // 在不需要再推送时，可以取消推送
     [self cancelLocalNotificationWithKey:@"mykey"];
     
-
+    
     UIViewController *topVC = [self topViewController];
-
+    
     if (application.applicationState==UIApplicationStateInactive) {
         NSLog(@"点击通知进入程序");
         //     获取通知所带的数据
-
+        
         if ([topVC isKindOfClass:[CommenDataViewController class]]) {
             CommenDataViewController *VC = (CommenDataViewController*)topVC;
             [VC totalDataRequest:@"consum" dateType:@"day" page:@"0"];
@@ -2646,9 +2647,9 @@
             
             [topVC.navigationController pushViewController:commenDataVC animated:YES];
         }
-       
         
-           }
+        
+    }
     if (application.applicationState==UIApplicationStateActive) {
         NSLog(@"程序在前台");
         if ([topVC isKindOfClass:[CommenDataViewController class]]) {
@@ -2665,20 +2666,20 @@
                                                   otherButtonTitles:@"查看",nil];
             alert.tag = 3333;
             [alert show];
-
+            
         }
-       
+        
         
         
     }
     
-  
-
     
-
     
-   
-  }
+    
+    
+    
+    
+}
 
 
 //重复调用接口,查询数据
@@ -2700,28 +2701,28 @@
         
         [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
             [self cancelLocalNotificationWithKey:@"key"];
-
-//            NSLog(@"重复调用接口,查询数据===%@===paramer==%@",result,paramer);
-
+            
+            //            NSLog(@"重复调用接口,查询数据===%@===paramer==%@",result,paramer);
+            
             if ([result[@"flag"] intValue]==1) {
                 [self registerLocalNotification:result[@"num"]];//
-
+                
             }
             
         } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
             
         }];
-
+        
         
     });
     dispatch_resume(_repateTimer);
-
+    
 }
 
 -(void)registerLocalNotification:(NSString*)numCount{
-
+    
     UILocalNotification *notification = [[UILocalNotification alloc] init];
- 
+    
     // 时区
     notification.timeZone = [NSTimeZone defaultTimeZone];
     // 设置重复的间隔
@@ -2730,7 +2731,7 @@
     // 通知内容
     notification.alertBody =  [NSString stringWithFormat:@"您有%@条新的订单,请注意查收",numCount];
     NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
-
+    
     notification.applicationIconBadgeNumber = (badge+1);
     // 通知被触发时播放的声音
     notification.soundName = UILocalNotificationDefaultSoundName;
@@ -2740,7 +2741,7 @@
     
     
     // 执行通知注册
-//    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    //    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     [[UIApplication sharedApplication]presentLocalNotificationNow:notification];
 }
 
@@ -2764,5 +2765,19 @@
     }
 }
 
-
+-(void)superAccountTextListGet{
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@Extra/source/superAccount",BASEURL];
+    
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"===--%@",result);
+        if (result) {
+            _superAccoutArray=result;
+        }
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+}
 @end

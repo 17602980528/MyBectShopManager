@@ -100,7 +100,7 @@
 @property (nonatomic , assign) BOOL shopIsLogin;// <#Description#>
 
 @property(nonatomic,retain)NSArray *areaListArray;//区域
- @property(nonatomic,strong)CLGeocoder *geocoder;
+@property(nonatomic,strong)CLGeocoder *geocoder;
 
 
 @property (nonatomic,retain)CustomIOSAlertView *alertView;
@@ -137,7 +137,7 @@
 @property(nonnull,retain)NSString *city;
 
 @property int paymentType;
-
+@property(nonatomic,strong)NSArray *  superAccoutArray;
 
 /**
  *  退出登录

@@ -5595,7 +5595,6 @@
 			children = (
 				D987BB2D1E791FAC008AE24D /* ProfessionEditVC.h */,
 				D987BB2E1E791FAC008AE24D /* ProfessionEditVC.m */,
-				1C07697B1C7C324400F3D29B /* LandingController.m */,
 				D987BB2F1E791FAC008AE24D /* ProfessionEditVC.xib */,
 				D987BB331E792C8E008AE24D /* UserInfoEditVC.h */,
 				D987BB341E792C8E008AE24D /* UserInfoEditVC.m */,
@@ -5753,6 +5752,7 @@
 			isa = PBXGroup;
 			children = (
 				1C07697A1C7C324400F3D29B /* LandingController.h */,
+				1C07697B1C7C324400F3D29B /* LandingController.m */,
 				D98E5C231E5156D7009D56BF /* LoginQuestionViewController.h */,
 				D98E5C241E5156D7009D56BF /* LoginQuestionViewController.m */,
 				D98E5C251E5156D7009D56BF /* LoginQuestionViewController.xib */,

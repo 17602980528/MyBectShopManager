@@ -21,6 +21,7 @@
 @property(nonatomic,weak)UITextField *userText;
 @property(nonatomic,weak)UITextField *passText;
 @property(nonatomic,weak)UIButton *stateBtn;
+@property(nonatomic,strong)NSArray *array_test;//测试号码
 @end
 
 @implementation ShopLandController
@@ -54,6 +55,9 @@
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
     [self.view addGestureRecognizer:singleTap];
     
+    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    _array_test=app.superAccoutArray;
+    
     [self _initUI];
 }
 
@@ -78,7 +82,7 @@
     UIView *landView = [[UIView alloc]initWithFrame:CGRectMake(0, (SCREENHEIGHT-300)/2, SCREENHEIGHT, 150)];
     [self.view addSubview:landView];
     
-//    UITextField *UserText = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, 375-20, 50)];
+    //    UITextField *UserText = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, 375-20, 50)];
     UserText = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, SCREENWIDTH-20, 50)];
     UserText.placeholder = @"手机号";
     UserText.keyboardType = UIKeyboardTypeNumberPad;
@@ -116,7 +120,7 @@
     passText.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.passText = passText;
     [landView addSubview:passText];
-
+    
     
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, landView.width, 0.3)];
     line.backgroundColor = [UIColor grayColor];
@@ -207,7 +211,7 @@
     [questionBtn setTitleColor:RGB(51, 51, 51) forState:0];
     [questionBtn addTarget:self action:@selector(questionClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:questionBtn];
-
+    
     
     
 }
@@ -225,11 +229,11 @@
     btn.selected =! btn.selected;
     NSLog(@"勾选");
     if (btn.selected == YES) {
-         NSLog(@"勾选111");
+        NSLog(@"勾选111");
         self.ifRemeber = YES;
     }else if(btn.selected == NO)
     {
-         NSLog(@"勾选");
+        NSLog(@"勾选");
         self.ifRemeber = NO;
     }
     
@@ -321,7 +325,7 @@
             
         }];
         
-
+        
     }else{
         UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码格式有误" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
         [alertView show];
@@ -338,7 +342,7 @@
     if ([pgy_OR_AppStore isEqualToString:@"1"]) {
         [self postRequest];
     }else{
-       
+        
         if (_data_code[0] == _proText.text) {
             
             [self postRequest];
@@ -348,14 +352,16 @@
         }else    if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
             [self postRequest];
             
+        }else if([self checkPhoneNumIfExistsInTestList]){
+            [self postRequest];
         }else{
             [self alert:@"验证码输入错误"];
             
         }
-
+        
         
     }
-
+    
     NSLog(@"=%@==%@",_data_code,_proText.text);
     
     
@@ -371,41 +377,41 @@
 -(void)addAlert
 {
     //ChoiceAdminAlertView
-//    ChoiceAdminAlertView *noticeView=[[ChoiceAdminAlertView alloc]init];
-//    self.choiceAlertView = noticeView;
-//    noticeView.delegate=self;
-//    noticeView.frame=CGRectMake(10, SCREENHEIGHT/2-60, SCREENWIDTH-20, 110);
-//    noticeView.backgroundColor=[UIColor colorWithRed:28.0f/255.0f green:52.0f/255.0f blue:51.f/255.0f alpha:1.0f];
-//    UIView *line=[[UIView alloc]initWithFrame:CGRectMake(0, 50, SCREENWIDTH, 1)];
-//    line.backgroundColor=[UIColor whiteColor];
-//    line.alpha=0.3;
-//    [noticeView addSubview:line];
-//    UIView *line2=[[UIView alloc]initWithFrame:CGRectMake((SCREENWIDTH-20)/2, 55, 1, 50)];
-//    line2.backgroundColor=[UIColor whiteColor];
-//    line2.alpha=0.3;
-//    [noticeView addSubview:line2];
-//
-//    [self.view addSubview:noticeView];
+    //    ChoiceAdminAlertView *noticeView=[[ChoiceAdminAlertView alloc]init];
+    //    self.choiceAlertView = noticeView;
+    //    noticeView.delegate=self;
+    //    noticeView.frame=CGRectMake(10, SCREENHEIGHT/2-60, SCREENWIDTH-20, 110);
+    //    noticeView.backgroundColor=[UIColor colorWithRed:28.0f/255.0f green:52.0f/255.0f blue:51.f/255.0f alpha:1.0f];
+    //    UIView *line=[[UIView alloc]initWithFrame:CGRectMake(0, 50, SCREENWIDTH, 1)];
+    //    line.backgroundColor=[UIColor whiteColor];
+    //    line.alpha=0.3;
+    //    [noticeView addSubview:line];
+    //    UIView *line2=[[UIView alloc]initWithFrame:CGRectMake((SCREENWIDTH-20)/2, 55, 1, 50)];
+    //    line2.backgroundColor=[UIColor whiteColor];
+    //    line2.alpha=0.3;
+    //    [noticeView addSubview:line2];
+    //
+    //    [self.view addSubview:noticeView];
     
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请选择登录身份" delegate:self cancelButtonTitle:nil otherButtonTitles:@"注册人",@"管理员", nil];
     alertView.tag=999;
     [alertView show];
     
-//    UIAlertController *alterController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请选择登录身份" preferredStyle:UIAlertControllerStyleAlert];
-//    alterController.view.tintColor = NavBackGroundColor;
-//    
-//    UIAlertAction *resig_btn = [UIAlertAction actionWithTitle:@"注册人" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        
-//    }];
-//    
-//    UIAlertAction *manage_btn = [UIAlertAction actionWithTitle:@"管理员" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        
-//    }];
-//    [alterController addAction:resig_btn];
-//    [alterController addAction:manage_btn];
-//    [self presentViewController:alterController animated:YES completion:nil];
-//    
+    //    UIAlertController *alterController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请选择登录身份" preferredStyle:UIAlertControllerStyleAlert];
+    //    alterController.view.tintColor = NavBackGroundColor;
+    //
+    //    UIAlertAction *resig_btn = [UIAlertAction actionWithTitle:@"注册人" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //
+    //    }];
+    //
+    //    UIAlertAction *manage_btn = [UIAlertAction actionWithTitle:@"管理员" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //
+    //    }];
+    //    [alterController addAction:resig_btn];
+    //    [alterController addAction:manage_btn];
+    //    [self presentViewController:alterController animated:YES completion:nil];
+    //
     
 }
 //-(void)ChoiceAdminClick:(NSInteger)state
@@ -426,7 +432,7 @@
         [self textExample];
     }else if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
         [self addAlert];
-     }else
+    }else
     {
         [self addAlert];
     }
@@ -454,9 +460,9 @@
     
     [self showHudInView:self.view hint:@"正在登陆..."];
     
-
+    
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/login",BASEURL];
-
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.userText.text forKey:@"phone"];
     [params setObject:self.passText.text forKey:@"passwd"];
@@ -468,112 +474,112 @@
     }
     
     DebugLog(@"params===%@==url=%@",params,url);
-
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
-    {
-        
-        NSDictionary *result_dic = (NSDictionary*)result;
-        
-        NSDictionary *userInfo = result_dic[@"info"];
-        
-        NSLog(@"商户登录请求result==%@", result);
-
     
-            if ([result_dic[@"result_code"] isEqualToString:@"incomplete"]||[result_dic[@"result_code"] isEqualToString:@"user_auth_fail"]||[result_dic[@"result_code"] isEqualToString:@"user_not_auth"]||[result_dic[@"result_code"]  isEqualToString: @"login_access"]||[result_dic[@"result_code"]  isEqualToString: @"auditing"]){
-
-
-            //登录环信
-            
-            [[EMClient sharedClient]loginWithUsername:userInfo[@"muid"] password:@"000000" completion:^(NSString *aUsername, EMError *aError) {
-                if (!aError) {
-                    NSLog(@"商户登录成功");
-
-                    [app repeatLoadAPI];
-                    
-
-                    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        
-                        [self saveInfo:[NSString stringWithFormat:@"%@",userInfo[@"muid"]]];
-                        
-                        
-                        app.shopIsLogin = YES;
-                        app.shopInfoDic =(NSMutableDictionary*)userInfo;
-                        NSUserDefaults *use_name = [NSUserDefaults standardUserDefaults];
-                        
-                        if (self.ifRemeber) {
-                            [use_name setObject:@"yes" forKey:@"remeberShop"];
-                            [[EMClient sharedClient].options setIsAutoLogin:YES];
-                            
-                        }else
-                        {
-                            [use_name setObject:@"no" forKey:@"remeberShop"];
-                            [[EMClient sharedClient].options setIsAutoLogin:NO];
-                            
-                        }
-
-
-                        
-                        [use_name setValue:userInfo[@"admin_account"] forKey:@"phone"];
-                        [use_name setValue:userInfo[@"admin_passwd"] forKey:@"passwd"];
-                        
-                        if (self.state==0) {
-                           
-                            [use_name setValue:@"register" forKey:@"log_type"];
-
-                        }
-                        else if (self.state==1) {
-                            [use_name setValue:@"admin" forKey:@"log_type"];
-                            
-                        }
-                        
-
-
-                        
-                    //本地保存商户信息
-                        [use_name setObject:userInfo forKey:userInfo[@"muid"]];
-                      //信息是否完善
-                        [use_name setObject:result_dic[@"result_code"] forKey:@"wangyongle"];
-                        [use_name synchronize];
-//                        [app socketConnectHostShop];
-                        
-                        [self landingSuc];
-                    });
-                    
-                }else{
-                    NSLog(@"商户登录失败==%@",aError.errorDescription);
-                    [self hideHud];
-
-                    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    hud.mode = MBProgressHUDModeText;
-                    hud.label.text = NSLocalizedString(aError.errorDescription, @"HUD message title");
-                    hud.label.font = [UIFont systemFontOfSize:13];
-                    [hud hideAnimated:YES afterDelay:3.f];
-                }
-            }];
-
-            [self hideHud];
-
-            
-        }
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         
+         NSDictionary *result_dic = (NSDictionary*)result;
+         
+         NSDictionary *userInfo = result_dic[@"info"];
+         
+         NSLog(@"商户登录请求result==%@", result);
+         
+         
+         if ([result_dic[@"result_code"] isEqualToString:@"incomplete"]||[result_dic[@"result_code"] isEqualToString:@"user_auth_fail"]||[result_dic[@"result_code"] isEqualToString:@"user_not_auth"]||[result_dic[@"result_code"]  isEqualToString: @"login_access"]||[result_dic[@"result_code"]  isEqualToString: @"auditing"]){
+             
+             
+             //登录环信
+             
+             [[EMClient sharedClient]loginWithUsername:userInfo[@"muid"] password:@"000000" completion:^(NSString *aUsername, EMError *aError) {
+                 if (!aError) {
+                     NSLog(@"商户登录成功");
+                     
+                     [app repeatLoadAPI];
+                     
+                     
+                     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                         
+                         [self saveInfo:[NSString stringWithFormat:@"%@",userInfo[@"muid"]]];
+                         
+                         
+                         app.shopIsLogin = YES;
+                         app.shopInfoDic =(NSMutableDictionary*)userInfo;
+                         NSUserDefaults *use_name = [NSUserDefaults standardUserDefaults];
+                         
+                         if (self.ifRemeber) {
+                             [use_name setObject:@"yes" forKey:@"remeberShop"];
+                             [[EMClient sharedClient].options setIsAutoLogin:YES];
+                             
+                         }else
+                         {
+                             [use_name setObject:@"no" forKey:@"remeberShop"];
+                             [[EMClient sharedClient].options setIsAutoLogin:NO];
+                             
+                         }
+                         
+                         
+                         
+                         [use_name setValue:userInfo[@"admin_account"] forKey:@"phone"];
+                         [use_name setValue:userInfo[@"admin_passwd"] forKey:@"passwd"];
+                         
+                         if (self.state==0) {
+                             
+                             [use_name setValue:@"register" forKey:@"log_type"];
+                             
+                         }
+                         else if (self.state==1) {
+                             [use_name setValue:@"admin" forKey:@"log_type"];
+                             
+                         }
+                         
+                         
+                         
+                         
+                         //本地保存商户信息
+                         [use_name setObject:userInfo forKey:userInfo[@"muid"]];
+                         //信息是否完善
+                         [use_name setObject:result_dic[@"result_code"] forKey:@"wangyongle"];
+                         [use_name synchronize];
+                         //                        [app socketConnectHostShop];
+                         
+                         [self landingSuc];
+                     });
+                     
+                 }else{
+                     NSLog(@"商户登录失败==%@",aError.errorDescription);
+                     [self hideHud];
+                     
+                     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                     hud.mode = MBProgressHUDModeText;
+                     hud.label.text = NSLocalizedString(aError.errorDescription, @"HUD message title");
+                     hud.label.font = [UIFont systemFontOfSize:13];
+                     [hud hideAnimated:YES afterDelay:3.f];
+                 }
+             }];
+             
+             [self hideHud];
+             
+             
+         }
          else if ([result_dic[@"result_code"] isEqualToString:@"passwd_wrong"])
-        {
-            [self hideHud];
-            
-            [self passwd_wrong];
-        }else if ([result_dic[@"result_code"] isEqualToString:@"user_not_found"])
-        {
-            [self hideHud];
-            
-            [self use_notfound];
-
-        }
-        
-        
-    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self noIntenet];
-        [self hideHud];
-        NSLog(@"%@", error);
-    }];
+         {
+             [self hideHud];
+             
+             [self passwd_wrong];
+         }else if ([result_dic[@"result_code"] isEqualToString:@"user_not_found"])
+         {
+             [self hideHud];
+             
+             [self use_notfound];
+             
+         }
+         
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [self noIntenet];
+         [self hideHud];
+         NSLog(@"%@", error);
+     }];
     
 }
 ////完善信息界面
@@ -608,14 +614,14 @@
 //登录成功提示
 - (void)landingSuc
 {
-
+    
     NSLog(@"self.userText.text length%ld",[self.userText.text length]);
     ShopTabBarController *shopvc = [[ShopTabBarController alloc]init];
-//    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//    appdelegate.shopPersonInfo = array;
+    //    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    //    appdelegate.shopPersonInfo = array;
     
     [self presentViewController:shopvc animated:YES completion:nil];
-
+    
     
 }
 
@@ -735,8 +741,8 @@
         self.state = buttonIndex;
         NSLog(@"sdsdsdsss%ld",(long)buttonIndex);
         [self validationCode];
- 
-      }
+        
+    }
 }
 
 //保存用户信息到本地
@@ -755,10 +761,10 @@
             Person *p = [Person modalWith:arr[0][@"nickname"] imgStr:arr[0][@"headimage"]  idstring:arr[0][@"account"]];
             
             [Database savePerdon:p];
-
+            
         }
         
-           } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
     
@@ -770,7 +776,16 @@
     ChangePasswordViewController *changeVC=[[ChangePasswordViewController alloc]init];
     changeVC.type=@"m";
     [self presentViewController:changeVC animated:YES completion:nil];
-
+    
 }
 
+-(BOOL)checkPhoneNumIfExistsInTestList{
+    for (int i=0; i<_array_test.count; i++) {
+        NSDictionary *dic=_array_test[i];
+        if ([self.userText.text isEqualToString:dic[@"phone"]]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 @end
