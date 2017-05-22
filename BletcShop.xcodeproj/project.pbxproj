@@ -112,6 +112,7 @@
 		185ABD891D80227900BD8097 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 185ABD7B1D80227900BD8097 /* Item.m */; };
 		185E51431E5D26D9009F0C01 /* PublishAdvertSecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E51421E5D26D9009F0C01 /* PublishAdvertSecondVC.m */; };
 		185E51461E5D2E10009F0C01 /* PublishTopScrollAdvertVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E51451E5D2E10009F0C01 /* PublishTopScrollAdvertVC.m */; };
+		187E94BE1ED2D8FF007EF19F /* OFFLINEVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187E94BD1ED2D8FF007EF19F /* OFFLINEVC.m */; };
 		189411411D8050BB00314E11 /* PictureDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189411401D8050BB00314E11 /* PictureDetailViewController.m */; };
 		189411431D8052FE00314E11 /* playvedio.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 189411421D8052FE00314E11 /* playvedio.jpg */; };
 		189411481D80573200314E11 /* FirstViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 189411451D80573200314E11 /* FirstViewController.mm */; };
@@ -1317,6 +1318,8 @@
 		185E51421E5D26D9009F0C01 /* PublishAdvertSecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishAdvertSecondVC.m; sourceTree = "<group>"; };
 		185E51441E5D2E10009F0C01 /* PublishTopScrollAdvertVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishTopScrollAdvertVC.h; sourceTree = "<group>"; };
 		185E51451E5D2E10009F0C01 /* PublishTopScrollAdvertVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishTopScrollAdvertVC.m; sourceTree = "<group>"; };
+		187E94BC1ED2D8FF007EF19F /* OFFLINEVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFFLINEVC.h; sourceTree = "<group>"; };
+		187E94BD1ED2D8FF007EF19F /* OFFLINEVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OFFLINEVC.m; sourceTree = "<group>"; };
 		1894113F1D8050BB00314E11 /* PictureDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureDetailViewController.h; sourceTree = "<group>"; };
 		189411401D8050BB00314E11 /* PictureDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureDetailViewController.m; sourceTree = "<group>"; };
 		189411421D8052FE00314E11 /* playvedio.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = playvedio.jpg; sourceTree = "<group>"; };
@@ -4787,6 +4790,8 @@
 				D977C1451EC97BE800CA5AF5 /* WechatIMG16.png */,
 				D936F5811D473CBF00424B22 /* MyCashCouponViewController.h */,
 				D936F5821D473CBF00424B22 /* MyCashCouponViewController.m */,
+				187E94BC1ED2D8FF007EF19F /* OFFLINEVC.h */,
+				187E94BD1ED2D8FF007EF19F /* OFFLINEVC.m */,
 			);
 			name = "我的代金券";
 			sourceTree = "<group>";
@@ -7319,6 +7324,7 @@
 				D9ABB1AD1EC9408E00FBE080 /* ApriseVC.m in Sources */,
 				079386C91C55BC5E0021B385 /* MoreViewController.m in Sources */,
 				D9B3A5B11D74255700F3F27E /* EMSDWebImagePrefetcher.m in Sources */,
+				187E94BE1ED2D8FF007EF19F /* OFFLINEVC.m in Sources */,
 				18EDCF6B1D460358004C40B7 /* ShopAllInfoViewController.m in Sources */,
 				1CB53C191C573BA7002B6CC1 /* CardVipCell.m in Sources */,
 				D9C4CDEA1DE4161E009C76C1 /* MyOrderDetailVC.m in Sources */,
