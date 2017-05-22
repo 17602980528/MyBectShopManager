@@ -7,8 +7,6 @@
 //
 
 #import "BusinessViewController.h"
-#import "BussinessView.h"
-#import "TwoBussinessView.h"
 #import "ShopManagerViewController.h"
 #import "AdvertViewController.h"
 #import "RjgmViewController.h"
@@ -33,7 +31,7 @@
 #import "AddCouponHomeVC.h"
 //#import "AdvertisementHomeVC.h"
 
-
+#import "AuthFailShopVC.h"
 
 #import "PushAdverViewController.h"
 
@@ -291,60 +289,165 @@
 }
 
 
+#pragma  mark 会员卡管理,数据报表
+
 -(void)topbtnClick:(UIButton*)sender{
     
-    switch (sender.tag) {
-        case 0:
-        {
-            AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    NSString *stateStr = app.shopInfoDic[@"state"];
+    
+    
+    //        NSString *stateStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"wangyongle"];
+    
+    
+    
+    
+#ifdef DEBUG
+//    stateStr = @"complete_not_auth";
+    
+    
+#else
+    
+    
+#endif
+    
+    //管理会员卡
+    if (sender.tag==0) {
+        if ([stateStr isEqualToString:@"incomplete"]) {
+            //去完善信息界面
             
-            NSString *bankAccount = [NSString getTheNoNullStr:app.shopInfoDic[@"account"] andRepalceStr:@""];
-            NSString *bankName = [NSString getTheNoNullStr:app.shopInfoDic[@"name"] andRepalceStr:@""];
-            NSString *bankAddress = [NSString getTheNoNullStr:app.shopInfoDic[@"bank"] andRepalceStr:@""];
-
-            NSLog(@"-----%ld==%@==%@",bankAccount.length,bankName,bankAddress);
-            if ((bankAccount.length!=19 && bankAccount.length!=16)||bankName.length==0||bankAddress.length==0){
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"信息不完善,是否去完善或认证?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去完善",@"去认证", nil];
+            
+            altView.tag =9998;
+            [altView show];
+            
+            
+            
+        }else
+            
+            if ([stateStr isEqualToString:@"null"]) {
+                //去完善信息界面
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"尚未审核,是否去修改?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
                 
-                [self showTiShi:@"银行卡信息不完整，请填写" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
+                altView.tag =9998;
+                [altView show];
                 
                 
+            }else if ([stateStr isEqualToString:@"complete_not_auth"]){
+                
+                [self showTiShi:@"用户信息不完善是否去完善?" LeftBtn_s:@"取消" RightBtn_s:@"去完善"];
+                
+                //            [self use_examine];
+            }else if ([stateStr isEqualToString:@"false"]){
+                
+                
+                
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核未通过，请重新修改" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
+                
+                altView.tag =9998;
+                [altView show];
+                
+                
+                
+            }else if ([stateStr isEqualToString:@"auditing"]){
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"正在审核中" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                
+                [altView show];
+                
+            }else if ([stateStr isEqualToString:@"true"]){
+                
+                
+                    [self vipManagerView];
+                    
+                    
+                    
                 
             }
-            else{
-                
-                [self vipManagerView];
-                
-            }
 
-        }
-            break;
-            
-        case 1:
-        {
-
-            [self gotoDataTable];
-
-            
-        }
-            break;
-            
-
-        default:
-            break;
     }
+    
+    //数据报表
+    if (sender.tag==1) {
+        if ([stateStr isEqualToString:@"incomplete"]) {
+            //去完善信息界面
+            
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"信息不完善,是否去完善或认证?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去完善",@"去认证", nil];
+            
+            altView.tag =9998;
+            [altView show];
+            
+            
+            
+        }else
+            
+            if ([stateStr isEqualToString:@"null"]) {
+                //去完善信息界面
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"尚未审核,是否去修改?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
+                
+                altView.tag =9998;
+                [altView show];
+                
+                
+            }else if ([stateStr isEqualToString:@"complete_not_auth"]){
+                
+
+                
+                          [self gotoDataTable];
+                
+                
+            }else if ([stateStr isEqualToString:@"false"]){
+                
+                
+                
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核未通过，请重新修改" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
+                
+                altView.tag =9998;
+                [altView show];
+                
+                
+                
+            }else if ([stateStr isEqualToString:@"auditing"]){
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"正在审核中" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                
+                [altView show];
+                
+            }else if ([stateStr isEqualToString:@"true"]){
+                
+                
+                [self gotoDataTable];
+                
+                
+                
+                
+            }
+        
+    }
+    
+    
+    
+
 }
+
+#pragma mark 小分类点击
 
 -(void)goMineBussy:(UIButton*)sender{
     
     
+    
+    AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
 
-        NSString *stateStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"wangyongle"];
+    NSString *stateStr = app.shopInfoDic[@"state"];
+    
+    
+//        NSString *stateStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"wangyongle"];
     
     
 
     
 #ifdef DEBUG
-    stateStr = @"login_access";
+//    stateStr = @"";
 
 
 #else
@@ -353,22 +456,35 @@
 #endif
     
     
-    
-        if ([stateStr isEqualToString:@"incomplete"]) {
-            //去完善信息界面
-            [self showTiShi:@"信息不完善,是否去完善?" LeftBtn_s:@"取消" RightBtn_s:@"确定"];
+    if ([stateStr isEqualToString:@"incomplete"]) {
+        //去完善信息界面
+        
+        UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"信息不完善,是否去完善或认证?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去完善",@"去认证", nil];
+        
+        altView.tag =9998;
+        [altView show];
 
+        
+        
+    }else
+    
+        if ([stateStr isEqualToString:@"null"]) {
+            //去完善信息界面
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"尚未审核,是否去修改?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
+            
+            altView.tag =9998;
+            [altView show];
             
             
-        }else if ([stateStr isEqualToString:@"user_not_auth"]){
+        }else if ([stateStr isEqualToString:@"false"]){
             
-            [self showTiShi:@"用户尚未审核，我们将在三个工作日，完成审核" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
             
-//            [self use_examine];
-        }else if ([stateStr isEqualToString:@"user_auth_fail"]){
             
-            [self showTiShi:@"审核未通过，请重新修改" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核未通过，请重新修改" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
             
+            altView.tag =9998;
+            [altView show];
+
            
 
         }else if ([stateStr isEqualToString:@"auditing"]){
@@ -376,7 +492,7 @@
             
             [altView show];
             
-        }else if ([stateStr isEqualToString:@"login_access"]){
+        }else if ([stateStr isEqualToString:@"true"] ||[stateStr isEqualToString:@"complete_not_auth"]){
 
             
             
@@ -478,10 +594,27 @@
 
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag==9999&&buttonIndex==1) {
-        NewNextViewController *firstVC=[[NewNextViewController alloc]init];
+    if (alertView.tag==9999) {
+        if (buttonIndex==1) {
+            NewNextViewController *firstVC=[[NewNextViewController alloc]init];
+            
+            [self presentViewController:firstVC animated:YES completion:nil];
+        }
+       
+    }else if(alertView.tag==9998){
         
-        [self presentViewController:firstVC animated:YES completion:nil];
+        if (buttonIndex==1) {
+            NewNextViewController *firstVC=[[NewNextViewController alloc]init];
+            
+            [self presentViewController:firstVC animated:YES completion:nil];
+        }
+        
+        if (buttonIndex==2) {
+            AuthFailShopVC *firstVC=[[AuthFailShopVC alloc]init];
+            
+            [self presentViewController:firstVC animated:YES completion:nil];
+        }
+
     }
     
        

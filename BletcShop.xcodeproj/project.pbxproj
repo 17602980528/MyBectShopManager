@@ -396,7 +396,6 @@
 		1CF6E4651C619C5D0001159C /* 5-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E4641C619C5D0001159C /* 5-01.png */; };
 		1CF6E4671C619D0F0001159C /* 6-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E4661C619D0F0001159C /* 6-01.png */; };
 		1CF6E4691C619D890001159C /* 4-011.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E4681C619D890001159C /* 4-011.png */; };
-		1CF6E46C1C61A8570001159C /* BussinessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF6E46B1C61A8570001159C /* BussinessView.m */; };
 		1CF6E46E1C61DD610001159C /* yuyue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E46D1C61DD610001159C /* yuyue@2x.png */; };
 		1CF6E4701C61DDD10001159C /* cheshi.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E46F1C61DDD10001159C /* cheshi.png */; };
 		1CF6E47B1C61E4350001159C /* shenji@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E4721C61E4340001159C /* shenji@2x.png */; };
@@ -408,7 +407,6 @@
 		1CF6E4811C61E4350001159C /* huiyuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E4781C61E4350001159C /* huiyuan@2x.png */; };
 		1CF6E4821C61E4350001159C /* dianpu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E4791C61E4350001159C /* dianpu@2x.png */; };
 		1CF6E4831C61E4350001159C /* guanliyuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E47A1C61E4350001159C /* guanliyuan@2x.png */; };
-		1CF6E4861C61EDFE0001159C /* TwoBussinessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF6E4851C61EDFE0001159C /* TwoBussinessView.m */; };
 		1CF6E4881C61F1C90001159C /* huiyuanzhi.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6E4871C61F1C90001159C /* huiyuanzhi.png */; };
 		D91395B11CF4589400509491 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D91395B01CF4589400509491 /* mapapi.bundle */; };
 		D9195D1A1E8218F200FB4367 /* PictureAndVeidoDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9195D191E8218F200FB4367 /* PictureAndVeidoDetailVC.m */; };
@@ -1733,8 +1731,6 @@
 		1CF6E4641C619C5D0001159C /* 5-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "5-01.png"; path = "../BletcShop/5-01.png"; sourceTree = "<group>"; };
 		1CF6E4661C619D0F0001159C /* 6-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "6-01.png"; path = "../BletcShop/6-01.png"; sourceTree = "<group>"; };
 		1CF6E4681C619D890001159C /* 4-011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-011.png"; sourceTree = "<group>"; };
-		1CF6E46A1C61A8570001159C /* BussinessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BussinessView.h; sourceTree = "<group>"; };
-		1CF6E46B1C61A8570001159C /* BussinessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BussinessView.m; sourceTree = "<group>"; };
 		1CF6E46D1C61DD610001159C /* yuyue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yuyue@2x.png"; path = "../BletcShop/yuyue@2x.png"; sourceTree = "<group>"; };
 		1CF6E46F1C61DDD10001159C /* cheshi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cheshi.png; path = ../BletcShop/cheshi.png; sourceTree = "<group>"; };
 		1CF6E4721C61E4340001159C /* shenji@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shenji@2x.png"; sourceTree = "<group>"; };
@@ -1746,8 +1742,6 @@
 		1CF6E4781C61E4350001159C /* huiyuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huiyuan@2x.png"; sourceTree = "<group>"; };
 		1CF6E4791C61E4350001159C /* dianpu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dianpu@2x.png"; sourceTree = "<group>"; };
 		1CF6E47A1C61E4350001159C /* guanliyuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guanliyuan@2x.png"; sourceTree = "<group>"; };
-		1CF6E4841C61EDFE0001159C /* TwoBussinessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoBussinessView.h; sourceTree = "<group>"; };
-		1CF6E4851C61EDFE0001159C /* TwoBussinessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoBussinessView.m; sourceTree = "<group>"; };
 		1CF6E4871C61F1C90001159C /* huiyuanzhi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = huiyuanzhi.png; sourceTree = "<group>"; };
 		D91395B01CF4589400509491 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		D9195D181E8218F200FB4367 /* PictureAndVeidoDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureAndVeidoDetailVC.h; sourceTree = "<group>"; };
@@ -4334,10 +4328,6 @@
 				D9CDFBB61CC4DB8C0054EBE3 /* ShopManagerViewController.h */,
 				D9CDFBB71CC4DB8C0054EBE3 /* ShopManagerViewController.m */,
 				D925E6421CC60EEC0020CEC7 /* 多种业务界面 */,
-				1CF6E46A1C61A8570001159C /* BussinessView.h */,
-				1CF6E46B1C61A8570001159C /* BussinessView.m */,
-				1CF6E4841C61EDFE0001159C /* TwoBussinessView.h */,
-				1CF6E4851C61EDFE0001159C /* TwoBussinessView.m */,
 				1CDA9E181C5A15F800DFE518 /* BusinessViewController.h */,
 				1CDA9E191C5A15F800DFE518 /* BusinessViewController.m */,
 				D9E5C3D61E5EBED6006BA2B1 /* PushAdverViewController.h */,
@@ -7623,7 +7613,6 @@
 				079386C31C55BC220021B385 /* ShoppingViewController.m in Sources */,
 				D986A1C21DE55EC0007B798B /* GetMoneyFailVC.m in Sources */,
 				D9B3A5BB1D74255700F3F27E /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
-				1CF6E46C1C61A8570001159C /* BussinessView.m in Sources */,
 				1859E7C11D86991B00647514 /* CheckDataViewController.m in Sources */,
 				D940403B1CBDEB7100EC98EA /* CardManagerViewController.m in Sources */,
 				D9F3A3C61D791DCA00F06E0C /* LZDBASEViewController.m in Sources */,
@@ -7659,7 +7648,6 @@
 				D9B3A5BF1D74255700F3F27E /* PSTCollectionViewData.m in Sources */,
 				D97EE7F21D94D966009BFD77 /* NewMiddleViewController.m in Sources */,
 				D958AD641E654CF200B0776F /* JHChart.m in Sources */,
-				1CF6E4861C61EDFE0001159C /* TwoBussinessView.m in Sources */,
 				D987872E1E272A3200C7A828 /* ComplaintDetailVC.m in Sources */,
 				D9FCAD761D61C0C1007E375D /* ShareViewController.m in Sources */,
 				D93A3AA51CDC3DD60010F72B /* DelayShopViewController.m in Sources */,

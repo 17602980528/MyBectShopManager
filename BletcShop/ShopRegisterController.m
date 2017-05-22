@@ -540,7 +540,7 @@
          
          NSLog(@"商户登录请求result==%@", result);
          
-         if ([result_dic[@"result_code"] isEqualToString:@"incomplete"]||[result_dic[@"result_code"] isEqualToString:@"user_auth_fail"]||[result_dic[@"result_code"] isEqualToString:@"user_not_auth"]||[result_dic[@"result_code"]  isEqualToString: @"login_access"]||[result_dic[@"result_code"]  isEqualToString: @"auditing"]){
+         if ([result_dic[@"result_code"] isEqualToString:@"incomplete"]||[result_dic[@"result_code"] isEqualToString:@"user_auth_fail"]||[result_dic[@"result_code"] isEqualToString:@"user_not_auth"]||[result_dic[@"result_code"]  isEqualToString: @"login_access"]||[result_dic[@"result_code"]  isEqualToString: @"auditing"]||[result_dic[@"result_code"]  isEqualToString: @"complete_not_auth"]){
              
              //登录环信
              

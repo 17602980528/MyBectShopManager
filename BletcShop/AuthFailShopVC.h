@@ -32,20 +32,20 @@
 @property BOOL ifImageView5;
 @property BOOL ifImageView6;
 //需要传递的参数
-@property(nonatomic,copy)NSString *phoneStr;//手机号
-@property(nonatomic,copy)NSString *pswStr;//密码
-@property (nonatomic,retain)NSString *nibNameString;//昵称
-@property(nonatomic,copy)NSString *tuijianStr;//推荐人
-@property(nonatomic,copy)NSString *nameStr;//姓名
-@property(nonatomic,copy)NSString *addressStr;//住宅地址
-@property(nonatomic,copy)NSString *identyStr;//身份证号
-@property(nonatomic,copy)NSString *kaihuStr;//开户行
-@property(nonatomic,copy)NSString *zhanghaoStr;//银行账号
-@property(nonatomic,copy)NSString *searchStr;//手机授权查询
+//@property(nonatomic,copy)NSString *phoneStr;//手机号
+//@property(nonatomic,copy)NSString *pswStr;//密码
+//@property (nonatomic,retain)NSString *nibNameString;//昵称
+//@property(nonatomic,copy)NSString *tuijianStr;//推荐人
+//@property(nonatomic,copy)NSString *nameStr;//姓名
+//@property(nonatomic,copy)NSString *addressStr;//住宅地址
+//@property(nonatomic,copy)NSString *identyStr;//身份证号
+//@property(nonatomic,copy)NSString *kaihuStr;//开户行
+//@property(nonatomic,copy)NSString *zhanghaoStr;//银行账号
+//@property(nonatomic,copy)NSString *searchStr;//手机授权查询
 
 //本页面需要传往下个页面的元素
 @property(nonatomic,retain)UILabel *locationLab;//当前地区
-@property(nonatomic,strong)UITextField *detailAddressTF;//详细地址
+@property(nonatomic,strong)UITextField *detailAddressTF;//街道
 @property(nonatomic,strong)UITextField *adddetailnewAddressTF;//详细地址----real
 @property(nonatomic,strong)UITextField *company_nameTF;//公司名称
 @property(nonatomic,strong)UITextField *company_styleTF;

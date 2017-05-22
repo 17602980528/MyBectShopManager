@@ -78,39 +78,39 @@
 
 -(void)choseClick:(UIButton*)sender{
     
-    NSString *stateStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"wangyongle"];
+//    NSString *stateStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"wangyongle"];
+//    
+//#ifdef DEBUG
+//    stateStr = @"login_access";
+//    
+//    
+//#else
+//    
+//    
+//#endif
+//    
+//    if ([stateStr isEqualToString:@"incomplete"]) {
+//        //去完善信息界面
+//        [self showTiShi:@"信息不完善,是否去完善?" LeftBtn_s:@"取消" RightBtn_s:@"确定"];
+//        
+//    }else if ([stateStr isEqualToString:@"user_not_auth"]){
+//        
+//        [self showTiShi:@"用户尚未审核，我们将在三个工作日，完成审核" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
+//        
+//        //            [self use_examine];
+//    }else if ([stateStr isEqualToString:@"user_auth_fail"]){
+//        
+//        [self showTiShi:@"审核未通过，请重新修改" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
+//        
+//        
+//        
+//    }else if ([stateStr isEqualToString:@"user_auth_fail"]){
+//        //正在审核中
+//        UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"正在审核中" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+//        [altView show];
+//        
+//    }else if ([stateStr isEqualToString:@"login_access"]){
     
-#ifdef DEBUG
-    stateStr = @"login_access";
-    
-    
-#else
-    
-    
-#endif
-    
-    if ([stateStr isEqualToString:@"incomplete"]) {
-        //去完善信息界面
-        [self showTiShi:@"信息不完善,是否去完善?" LeftBtn_s:@"取消" RightBtn_s:@"确定"];
-        
-    }else if ([stateStr isEqualToString:@"user_not_auth"]){
-        
-        [self showTiShi:@"用户尚未审核，我们将在三个工作日，完成审核" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
-        
-        //            [self use_examine];
-    }else if ([stateStr isEqualToString:@"user_auth_fail"]){
-        
-        [self showTiShi:@"审核未通过，请重新修改" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
-        
-        
-        
-    }else if ([stateStr isEqualToString:@"user_auth_fail"]){
-        //正在审核中
-        UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"正在审核中" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-        [altView show];
-        
-    }else if ([stateStr isEqualToString:@"login_access"]){
-        
         switch (sender.tag) {
                 
             case 0:
@@ -134,7 +134,7 @@
                 break;
         }
         
-    }
+//    }
     
     
 }
