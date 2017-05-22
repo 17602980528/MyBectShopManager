@@ -15,27 +15,21 @@
 
 {
     UITableView *table_View;
-
+    SDRefreshFooterView *_refreshFooter;
+    SDRefreshHeaderView *_refreshheader;
 }
 @property(nonatomic,strong)UIView *headerView;//头view
-@property(nonatomic,strong)NSArray *data_A;//存放数据,传递给下级界面
-
+@property(nonatomic,strong)NSMutableArray *dataAray;//存放数据,传递给下级界面
+@property(nonatomic)NSInteger page;
 @end
 
 @implementation AdvertiseViewController
 
-
--(NSArray *)data_A{
-    if (!_data_A) {
-        _data_A = [NSArray array];
-    }
-    return _data_A;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    _page=1;
+    _dataAray = [[NSMutableArray alloc]initWithCapacity:0];
     
     table_View = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-self.tabBarController.tabBar.frame.size.height) style:UITableViewStyleGrouped];
     table_View.dataSource = self;
@@ -45,6 +39,30 @@
     table_View.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview: table_View];
 
+    _refreshheader = [SDRefreshHeaderView refreshView];
+    [_refreshheader addToScrollView:table_View];
+    _refreshheader.isEffectedByNavigationController = NO;
+    
+    __block AdvertiseViewController *tempSelf=self;
+    _refreshheader.beginRefreshingOperation = ^{
+        tempSelf.page=1;
+        [tempSelf.dataAray removeAllObjects];
+        //请求数据
+        [tempSelf getDate];
+    };
+    
+    
+    _refreshFooter = [SDRefreshFooterView refreshView];
+    [_refreshFooter addToScrollView:table_View];
+    _refreshFooter.beginRefreshingOperation =^{
+        tempSelf.page++;
+        //数据请求
+        NSLog(@"====>>>>%ld",tempSelf.page);
+        [tempSelf getDate];
+        
+    };
+
+    
 //    [self creatHeaderView];
     
     [self getDate];
@@ -55,18 +73,22 @@
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/getList",BASEURL];
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
     [paramer setValue:self.activityId forKey:@"advert_id"];
-    
+    [paramer setValue:[NSString stringWithFormat:@"%ld",_page] forKey:@"index"];
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          NSLog(@"=====%@",result);
-
-         
-         self.data_A= (NSArray*)result;
-         
+         if (result&&[result count]>0) {
+             for (int i=0; i<[result count]; i++) {
+                 [_dataAray addObject:result[i]];
+             }
+         }
+         [_refreshFooter endRefreshing];
+         [_refreshheader endRefreshing];
          [table_View reloadData];
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         
+         [_refreshFooter endRefreshing];
+         [_refreshheader endRefreshing];
          NSLog(@"%@", error);
      }];
     
@@ -127,8 +149,8 @@
 //    return self.headerView.height;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ([[self.data_A firstObject] isKindOfClass:[NSDictionary class]]) {
-        return self.data_A.count;
+    if ([[_dataAray firstObject] isKindOfClass:[NSDictionary class]]) {
+        return _dataAray.count;
         
     }else{
         return 0;
@@ -168,12 +190,12 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
-        if (_data_A.count !=0) {
-            NSDictionary *dic = _data_A[indexPath.row];
+        if (_dataAray.count !=0) {
+            NSDictionary *dic = _dataAray[indexPath.row];
             cell.headname.text = dic[@"title"];
             cell.headContent.text = dic[@"info"];
             
-            [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",THIER_ADVERTIMAGE,dic[@"image_url"]]] placeholderImage:[UIImage imageNamed:@"5-01"]];
+            [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",THIER_ADVERTIMAGE,dic[@"image_url"]]] placeholderImage:[UIImage imageNamed:@"icon3"]];
             
         }
         return cell;
@@ -196,7 +218,7 @@
 //-(void)goLookClick:(UIButton*)sender{
 //    
 //    NSLog(@"----%ld",sender.tag);
-    NSMutableDictionary *shopInfoDic = [self.data_A objectAtIndex:indexPath.row];
+    NSMutableDictionary *shopInfoDic = [_dataAray objectAtIndex:indexPath.row];
     
     NewShopDetailVC *vc= [self startSellerView:shopInfoDic];
     vc.videoID=[NSString getTheNoNullStr:shopInfoDic[@"video"] andRepalceStr:@""];
@@ -229,8 +251,8 @@
 //         [tempSelf.navigationController pushViewController:vc animated:YES];
 //     }];
 //    //
-    if ([self.data_A[indexPath.row][@"pay_type"] isEqualToString:@"click"]) {
-        [self postRemainClickCount:self.data_A[indexPath.row]];
+    if ([_dataAray[indexPath.row][@"pay_type"] isEqualToString:@"click"]) {
+        [self postRemainClickCount:_dataAray[indexPath.row]];
     }
     
 }
