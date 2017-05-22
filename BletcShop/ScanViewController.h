@@ -12,5 +12,11 @@
 
 
 @interface ScanViewController : UIViewController
+@property(nonatomic)NSString *shopOrUser;
+@property(nonatomic,assign)id delegate;
+@end
+@protocol ScanViewControllerDelegate <NSObject>
 
+@optional
+-(void)sendResult:(NSString *)state;
 @end

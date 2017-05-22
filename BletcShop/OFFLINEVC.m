@@ -22,10 +22,7 @@
     self.QRView = [[UIView alloc]initWithFrame:CGRectMake(20, 50, SCREENWIDTH-40, SCREENWIDTH-40)];
     [self.view addSubview:_QRView];
     
-    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSDictionary *dic = @{@"muid":appdelegate.shopInfoDic[@"muid"],@"uuid":self.dic[@"uuid"],@"coupon_id":self.dic[@"coupon_id"]};
-    
-    NSString *codeString = [NSString dictionaryToJson:dic];
+    NSString *codeString = [NSString dictionaryToJson:self.dic];
 
     [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.2, SCREENWIDTH*0.2) logoImageWithCornerRadius:0];
     

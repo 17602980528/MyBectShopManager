@@ -16,7 +16,7 @@
 #import "ReveiveMoneyQRInfoVC.h"
 
 
-@interface ChargeCenterVC ()
+@interface ChargeCenterVC ()<ScanViewControllerDelegate>
 {
     NSArray *arr;
 }
@@ -151,8 +151,13 @@
 
 -(void)saoMa{
     ScanViewController *VC = [[ScanViewController alloc]init];
+    VC.shopOrUser=@"shop";
+    VC.delegate=self;
     [self.navigationController pushViewController:VC animated:YES];
 
 }
-
+-(void)sendResult:(NSString *)state{
+    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:state message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alertView show];
+}
 @end

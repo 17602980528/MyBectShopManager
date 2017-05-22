@@ -1536,6 +1536,7 @@
     NSLog(@"闹铃");
     if (sender.tag==0) {
         ScanViewController *VC = [[ScanViewController alloc]init];
+        VC.shopOrUser=@"user";
         [self.navigationController pushViewController:VC animated:YES];
 
     }else{

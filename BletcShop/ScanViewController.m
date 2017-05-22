@@ -382,9 +382,10 @@
             }else{
                 
                 AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                if (appdelegate.shopIsLogin) {
+                if ([self.shopOrUser isEqualToString:@"shop"]) {
                     //
                     NSLog(@"商户端扫码");
+                    [self payForCoupons:dic];
                 }else{
                     if (appdelegate.IsLogin) {
                         [self getCardListInfo:dic];
@@ -477,7 +478,33 @@
     
     
 }
+-(void)payForCoupons:(NSDictionary*)dic{
+    NSString *url = [NSString stringWithFormat:@"%@UserType/card/filter",BASEURL];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:dic[@"muid"] forKey:@"muid"];
+    [paramer setValue:dic[@"uuid"] forKey:@"uuid"];
+    [paramer setValue:dic[@"coupon_id"] forKey:@"coupon_id"];
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        printf("result====%s",[[NSString dictionaryToJson:result] UTF8String]);
+        if (result) {
+             [self.navigationController popoverPresentationController];
+            if ([_delegate respondsToSelector:@selector(sendResult:)]) {
+                if ( [result[@"result_code"] integerValue]==1) {
+                     [_delegate sendResult:@"消费成功"];
+                }else{
+                     [_delegate sendResult:@"消费失败"];
+                }
+               
+            }
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+         [self.navigationController popoverPresentationController];
+    }];
 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
