@@ -11,6 +11,7 @@
 #import "CouponIntroduceVC.h"
 #import "CouponCell.h"
 #import "UIImageView+WebCache.h"
+#import "OFFLINEVC.h"
 @interface MyCashCouponViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -172,27 +173,30 @@
     
     
     if ([_couponArray[indexPath.row][@"validate"] isEqualToString:@"true"]) {
-        if (self.useCoupon ==100) {
-            
-            if (self.delegate && [_delegate respondsToSelector:@selector(sendValue:)]) {
-                [_delegate sendValue:_couponArray[indexPath.row]];
+        
+        if ([_couponArray[indexPath.row][@"validate"] isEqualToString:@"ONLINE"]||[_couponArray[indexPath.row][@"validate"] isEqualToString:@"null"]) {
+            if (self.useCoupon ==100) {
                 
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }else{
-            
-            
+            if (self.delegate && [_delegate respondsToSelector:@selector(sendValue:)]) {
+                    [_delegate sendValue:_couponArray[indexPath.row]];
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }else{
                 CouponIntroduceVC *vc=[[CouponIntroduceVC alloc]init];
                 vc.infoDic=_couponArray[indexPath.row];
                 vc.index=0;
                 [self.navigationController pushViewController:vc animated:YES];
                 
-            
-        }
+            }
 
-        
+        }else{
+            //OFFLINEVC
+            OFFLINEVC *vc=[[OFFLINEVC alloc]init];
+            vc.dic=_couponArray[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
-    
 }
 
 

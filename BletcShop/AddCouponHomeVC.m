@@ -170,9 +170,10 @@
         NSLog(@"%@",result);
         if ([result count]>0) {
             _dataArray=result;
-            [_tableView reloadData];
+        }else{
+            _dataArray=@[];
         }
-        
+         [_tableView reloadData];
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"%@", error);
