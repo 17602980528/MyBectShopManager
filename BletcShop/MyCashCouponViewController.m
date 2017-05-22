@@ -174,7 +174,7 @@
     
     if ([_couponArray[indexPath.row][@"validate"] isEqualToString:@"true"]) {
         
-        if ([_couponArray[indexPath.row][@"validate"] isEqualToString:@"ONLINE"]||[_couponArray[indexPath.row][@"validate"] isEqualToString:@"null"]) {
+        if ([_couponArray[indexPath.row][@"coupon_type"] isEqualToString:@"ONLINE"]||[_couponArray[indexPath.row][@"coupon_type"] isEqualToString:@"null"]) {
             if (self.useCoupon ==100) {
                 
             if (self.delegate && [_delegate respondsToSelector:@selector(sendValue:)]) {
