@@ -125,6 +125,8 @@
     table.showsVerticalScrollIndicator = NO;
     self.shopTableView = table;
     [self.view addSubview:table];
+    
+    [self creatTableViewHeadView];
 }
 -(void)initFootView{
     UIView *footView=[[UIView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT-64-49, SCREENWIDTH, 49)];
@@ -286,7 +288,7 @@
 
     }
     if (section==1) {
-        return self.cardArray.count ?self.cardArray.count:1;
+        return self.cardArray.count ?self.cardArray.count+1:1;
     }else if (section==2 ||section==3){
         return 1;
     }else  if(section==4){
@@ -1402,6 +1404,7 @@
     nameLabel.tag = 1000;
     [backView addSubview:nameLabel];
     
+    NSLog(@"--creatTableViewHeadView---");
     if ([self.videoID isEqualToString:@""]) {
         UIImageView *shopImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
         [backView addSubview:shopImageView];

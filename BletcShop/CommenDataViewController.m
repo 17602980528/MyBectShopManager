@@ -217,7 +217,7 @@
         
         NSURL * url=[[NSURL alloc] initWithString:[[HEADIMAGE stringByAppendingString:imgStr]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         [imgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"user.png"] options:SDWebImageRetryFailed];
-        topLab.text=_mutableArray[indexPath.row][@"order_code"];
+        topLab.text=_mutableArray[indexPath.row][@"name"];
         bottomLab.text=_mutableArray[indexPath.row][@"datetime"];
         rightLab.text=_mutableArray[indexPath.row][@"sum"];
         

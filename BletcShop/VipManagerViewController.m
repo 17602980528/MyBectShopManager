@@ -23,7 +23,6 @@
 
 @property (nonatomic,retain)UIView *demoView;//弹出视图
 @property (nonatomic,retain)UIImageView *imageView;
-@property (nonatomic,retain)CustomIOSAlertView *alertView;
 @property (nonatomic,retain)UILabel *cardTypeLabel;//店员类型label
 @property (nonatomic,retain)UILabel *cardLevelLabel;//店员类型label
 @property (nonatomic,retain)NSArray *typeArray;
@@ -34,6 +33,8 @@
 @implementation VipManagerViewController
 {
     UITableView *TabSc;
+    SDRefreshHeaderView *refreshHeader;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -60,6 +61,9 @@
     self.levelArray= @[@"普卡",@"银卡",@"金卡",@"白金卡",@"钻卡",@"黑金卡"];;
     
     
+    [self _initUI2];
+
+    
 }
 
 -(void)postRequest
@@ -70,13 +74,15 @@
     [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
+        [refreshHeader endRefreshing];
         NSLog(@"result===%@", result);
         self.data = result;
-        [self _initUI2];
+        
+        [TabSc reloadData];
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [refreshHeader endRefreshing];
+
         NSLog(@"%@", error);
         
     }];
@@ -85,15 +91,26 @@
 
 -(void)_initUI2
 {
-    for (UIView *view in self.view.subviews) {
-        [view removeFromSuperview];
-    }
+   
     TabSc = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,SCREENHEIGHT-64) style:UITableViewStyleGrouped];
     TabSc.backgroundColor=RGB(240, 240, 240);
     TabSc.delegate = self;
     TabSc.dataSource = self;
     TabSc.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:TabSc];
+    
+    
+    refreshHeader = [SDRefreshHeaderView refreshView];
+    [refreshHeader addToScrollView:TabSc];
+    refreshHeader.isEffectedByNavigationController = NO;
+    
+    __block typeof(self) tempSelf = self;
+    
+    refreshHeader.beginRefreshingOperation = ^{
+        //请求数据
+        [tempSelf postRequest];
+    };
+    
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

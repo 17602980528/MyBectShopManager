@@ -244,7 +244,6 @@
 
 -(void)initScrollView{
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT-64)];
-    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, 60+200+totalHeight*5+50);
     _scrollView.showsVerticalScrollIndicator=NO;
     
     [self.view addSubview:_scrollView];
@@ -275,7 +274,7 @@
     _realNameTF.placeholder=@"真实姓名";
     [_scrollView addSubview:_realNameTF];
     
-    UIView *lineView_name=[[UIView alloc]initWithFrame:CGRectMake(10, label.bottom+5, SCREENWIDTH-20, 0.3)];
+    UIView *lineView_name=[[UIView alloc]initWithFrame:CGRectMake(10, label.bottom+5, SCREENWIDTH-20, 1)];
     lineView_name.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView_name];
     
@@ -302,7 +301,7 @@
     [_scrollView addSubview:_idenCardText];
 
     
-    UIView *lineView_ident=[[UIView alloc]initWithFrame:CGRectMake(10, _idenCardText.bottom+5, SCREENWIDTH-20, 0.3)];
+    UIView *lineView_ident=[[UIView alloc]initWithFrame:CGRectMake(10, label_ident.bottom+5, SCREENWIDTH-20, 1)];
     lineView_ident.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView_ident];
     
@@ -339,7 +338,7 @@
     _locationLab.text=[[NSString alloc] initWithFormat:@"%@%@%@",appdelegate.province,appdelegate.city,appdelegate.addressDistrite];
     
     
-    UIView *lineView1=[[UIView alloc]initWithFrame:CGRectMake(10, _locationLab.bottom+5, SCREENWIDTH-20, 0.3)];
+    UIView *lineView1=[[UIView alloc]initWithFrame:CGRectMake(10, _locationLab.bottom+5, SCREENWIDTH-20, 1)];
     lineView1.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView1];
     
@@ -377,7 +376,7 @@
     
     [_scrollView addSubview:_detailAddressTF];
     
-    UIView *lineView_detailaddress=[[UIView alloc]initWithFrame:CGRectMake(10, _detailAddressTF.bottom+5, SCREENWIDTH-20, 0.3)];
+    UIView *lineView_detailaddress=[[UIView alloc]initWithFrame:CGRectMake(10, _detailAddressTF.bottom+5, SCREENWIDTH-20, 1)];
     lineView_detailaddress.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView_detailaddress];
 
@@ -401,7 +400,7 @@
     _adddetailnewAddressTF.placeholder=@"详细地点";
     [_scrollView addSubview:_adddetailnewAddressTF];
     
-    UIView *lineViewnew=[[UIView alloc]initWithFrame:CGRectMake(10, _adddetailnewAddressTF.bottom+5, SCREENWIDTH-20, 0.3)];
+    UIView *lineViewnew=[[UIView alloc]initWithFrame:CGRectMake(10, _adddetailnewAddressTF.bottom+5, SCREENWIDTH-20, 1)];
     lineViewnew.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineViewnew];
     
@@ -423,7 +422,7 @@
 //    _company_nameTF.placeholder=@"企业名称";
 //    [_scrollView addSubview:_company_nameTF];
     
-//    UIView *lineViewnewcom=[[UIView alloc]initWithFrame:CGRectMake(10, _company_nameTF.bottom+5, SCREENWIDTH-20, 0.3)];
+//    UIView *lineViewnewcom=[[UIView alloc]initWithFrame:CGRectMake(10, _company_nameTF.bottom+5, SCREENWIDTH-20, 1)];
 //    lineViewnewcom.backgroundColor=[UIColor lightGrayColor];
 //    [_scrollView addSubview: lineViewnewcom];
     //
@@ -446,7 +445,7 @@
 //    _company_styleTF.placeholder=@"企业性质";
 //    [_scrollView addSubview:_company_styleTF];
 //    
-//    UIView *lineViewnewcoms=[[UIView alloc]initWithFrame:CGRectMake(10, _company_styleTF.bottom+5, SCREENWIDTH-20, 0.3)];
+//    UIView *lineViewnewcoms=[[UIView alloc]initWithFrame:CGRectMake(10, _company_styleTF.bottom+5, SCREENWIDTH-20, 1)];
 //    lineViewnewcoms.backgroundColor=[UIColor lightGrayColor];
 //    [_scrollView addSubview: lineViewnewcoms];
     
@@ -462,7 +461,7 @@
     [_scrollView addSubview:xingLab3];
     
 
-    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(30, 15+lineViewnew.bottom, 110, 40)];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(30, 5+lineViewnew.bottom, 110, 40)];
     label3.font=[UIFont systemFontOfSize:15.0f];
     label3.text=@"店铺名称";
     [_scrollView addSubview:label3];
@@ -475,7 +474,7 @@
     
     [_scrollView addSubview:_agencyNameTF];
     
-    UIView *lineView3=[[UIView alloc]initWithFrame:CGRectMake(10, _agencyNameTF.bottom+5, SCREENWIDTH-20, 0.3)];
+    UIView *lineView3=[[UIView alloc]initWithFrame:CGRectMake(10, _agencyNameTF.bottom+5, SCREENWIDTH-20, 1)];
     lineView3.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView3];
     
@@ -500,7 +499,7 @@
     self.store_textf.text=shopInfoDic[@"store_number"];
     [_scrollView addSubview:self.store_textf];
     
-    UIView *lineViewe=[[UIView alloc]initWithFrame:CGRectMake(10, _store_textf.bottom+5, SCREENWIDTH-20, 0.3)];
+    UIView *lineViewe=[[UIView alloc]initWithFrame:CGRectMake(10, _store_textf.bottom+5, SCREENWIDTH-20, 1)];
     lineViewe.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineViewe];
     
@@ -519,7 +518,7 @@
     label4.text=@"所属行业";
     [_scrollView addSubview:label4];
     
-    UIView *lineView4=[[UIView alloc]initWithFrame:CGRectMake(10, label4.bottom+5, SCREENWIDTH-20, 0.3)];
+    UIView *lineView4=[[UIView alloc]initWithFrame:CGRectMake(10, label4.bottom+5, SCREENWIDTH-20, 1)];
     lineView4.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView4];
     
@@ -582,7 +581,7 @@
 //    [_scrollView addSubview:_noneBtn];
 //    [_noneBtn addTarget:self action:@selector(btn1Click:) forControlEvents:UIControlEventTouchUpInside];
     
-    _imageView1=[[UIImageView alloc]initWithFrame:CGRectMake(120, 5+lineView4.bottom, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView1=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 5+lineView4.bottom, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView1.userInteractionEnabled=YES;
     _imageView1.image=[UIImage imageNamed:@"mohu-09"];
     [_scrollView addSubview:_imageView1];
@@ -597,11 +596,11 @@
 //    _reasonTF.layer.borderColor=[[UIColor grayColor]CGColor];
 //    _reasonTF.font=[UIFont systemFontOfSize:13.0f];
 //    [_scrollView addSubview:_reasonTF];
-//    
+//    9927.84
 //    self.reasonTF.delegate=self;
     
     //
-    UILabel *underLab=[[UILabel alloc]initWithFrame:CGRectMake(120, _imageView1.bottom, (SCREENWIDTH-150)/2, 40)];
+    UILabel *underLab=[[UILabel alloc]initWithFrame:CGRectMake(_imageView1.left, _imageView1.bottom, (SCREENWIDTH-150)/2, 40)];
     underLab.tag=900;
     underLab.text=@"营业执照照片";
     underLab.font=[UIFont systemFontOfSize:15.0f];
@@ -610,7 +609,7 @@
     [_scrollView addSubview:underLab];
     
     
-    UIView *lineView5=[[UIView alloc]initWithFrame:CGRectMake(10, underLab.bottom, SCREENWIDTH-20, 0.3)];
+    UIView *lineView5=[[UIView alloc]initWithFrame:CGRectMake(10, underLab.bottom, SCREENWIDTH-20, 1)];
     lineView5.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView5];
     
@@ -728,7 +727,7 @@
     [_imageView5 addGestureRecognizer:tapGesture5];
     
     
-    UILabel *under_red2 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, _imageView5.bottom, (SCREENWIDTH-150)/2, 40)];
+    UILabel *under_red2 =[[UILabel alloc]initWithFrame:CGRectMake(_imageView5.left, _imageView5.bottom, (SCREENWIDTH-150)/2, 40)];
     under_red2.text=@"经营场地照片";
     under_red2.font=[UIFont systemFontOfSize:14.0f];
     under_red2.textAlignment=1;
@@ -840,6 +839,9 @@
     
     
     _scrollView.contentSize=CGSizeMake(SCREENWIDTH, goNext.bottom+20);
+    
+    
+   
     
 }
 #pragma mark --界面完结

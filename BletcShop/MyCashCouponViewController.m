@@ -170,25 +170,29 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.useCoupon ==100) {
-        
-        if (self.delegate && [_delegate respondsToSelector:@selector(sendValue:)]) {
-            [_delegate sendValue:_couponArray[indexPath.row]];
+    
+    if ([_couponArray[indexPath.row][@"validate"] isEqualToString:@"true"]) {
+        if (self.useCoupon ==100) {
             
-            [self.navigationController popViewControllerAnimated:YES];
+            if (self.delegate && [_delegate respondsToSelector:@selector(sendValue:)]) {
+                [_delegate sendValue:_couponArray[indexPath.row]];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }else{
+            
+            
+                CouponIntroduceVC *vc=[[CouponIntroduceVC alloc]init];
+                vc.infoDic=_couponArray[indexPath.row];
+                vc.index=0;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            
         }
-    }else{
-        
-        if ([_couponArray[indexPath.row][@"validate"] isEqualToString:@"true"]) {
-            
-            CouponIntroduceVC *vc=[[CouponIntroduceVC alloc]init];
-            vc.infoDic=_couponArray[indexPath.row];
-            vc.index=0;
-            [self.navigationController pushViewController:vc animated:YES];
 
-        }
-       
+        
     }
+    
 }
 
 

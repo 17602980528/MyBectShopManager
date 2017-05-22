@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CustomIOSAlertView.h"
-@interface VipManagerViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,CustomIOSAlertViewDelegate,UITextFieldDelegate>
+@interface VipManagerViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 
 
