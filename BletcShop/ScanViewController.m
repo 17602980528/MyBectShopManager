@@ -479,7 +479,7 @@
     
 }
 -(void)payForCoupons:(NSDictionary*)dic{
-    NSString *url = [NSString stringWithFormat:@"%@UserType/card/filter",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/coupon/scan",BASEURL];
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
     [paramer setValue:dic[@"muid"] forKey:@"muid"];
     [paramer setValue:dic[@"uuid"] forKey:@"uuid"];
@@ -488,7 +488,7 @@
         
         printf("result====%s",[[NSString dictionaryToJson:result] UTF8String]);
         if (result) {
-             [self.navigationController popoverPresentationController];
+             [self.navigationController popViewControllerAnimated:YES];
             if ([_delegate respondsToSelector:@selector(sendResult:)]) {
                 if ( [result[@"result_code"] integerValue]==1) {
                      [_delegate sendResult:@"消费成功"];
@@ -501,7 +501,7 @@
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
-         [self.navigationController popoverPresentationController];
+         [self.navigationController popViewControllerAnimated:YES];
     }];
 
 }
