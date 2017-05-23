@@ -117,9 +117,9 @@
     [self.view addSubview:navView];
     [navView addSubview:btns];
     
-    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-50, 18, 100, 44)];
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0, 18, SCREENWIDTH, 44)];
     label.font=[UIFont systemFontOfSize:19.0f];
-    label.text=@"店铺认证";
+    label.text=@"预付保险认证";
     label.textAlignment=1;
     label.textColor=[UIColor whiteColor];
     [navView addSubview:label];

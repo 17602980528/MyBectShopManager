@@ -318,7 +318,7 @@
         if ([stateStr isEqualToString:@"incomplete"]) {
             //去完善信息界面
             
-            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"信息不完善,是否去完善或认证?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去完善",@"去认证", nil];
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"店铺上未认证!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"预付保险认证",@"快速认证", nil];
             
             altView.tag =9998;
             [altView show];
@@ -329,7 +329,7 @@
             
             if ([stateStr isEqualToString:@"null"]) {
                 //去完善信息界面
-                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"尚未审核,是否去修改?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"尚未审核,是否去修改?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"预付保险认证",@"快速认证", nil];
                 
                 altView.tag =9998;
                 [altView show];
@@ -337,14 +337,14 @@
                 
             }else if ([stateStr isEqualToString:@"complete_not_auth"]){
                 
-                [self showTiShi:@"用户信息不完善是否去完善?" LeftBtn_s:@"取消" RightBtn_s:@"去完善"];
+                [self showTiShi:@"尚未完成预付保险认证!" LeftBtn_s:@"取消" RightBtn_s:@"去认证"];
                 
                 //            [self use_examine];
             }else if ([stateStr isEqualToString:@"false"]){
                 
                 
                 
-                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核未通过，请重新修改" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核未通过，请重新修改" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"预付保险认证",@"快速认证", nil];
                 
                 altView.tag =9998;
                 [altView show];
@@ -459,7 +459,7 @@
     if ([stateStr isEqualToString:@"incomplete"]) {
         //去完善信息界面
         
-        UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"信息不完善,是否去完善或认证?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去完善",@"去认证", nil];
+        UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"店铺上未认证!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"预付保险认证",@"快速认证", nil];
         
         altView.tag =9998;
         [altView show];
@@ -470,7 +470,7 @@
     
         if ([stateStr isEqualToString:@"null"]) {
             //去完善信息界面
-            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"尚未审核,是否去修改?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"尚未审核,是否去修改?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"预付保险认证",@"快速认证", nil];
             
             altView.tag =9998;
             [altView show];
@@ -480,7 +480,7 @@
             
             
             
-            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核未通过，请重新修改" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改完善信息",@"修改认证信息", nil];
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核未通过，请重新修改" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"预付保险认证",@"快速认证", nil];
             
             altView.tag =9998;
             [altView show];

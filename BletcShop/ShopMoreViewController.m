@@ -34,26 +34,26 @@
     if (_data == nil) {
         
 
-        AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-        
-        NSString *bankAccount = [NSString getTheNoNullStr:app.shopInfoDic[@"account"] andRepalceStr:@""];
-        NSString *bankName = [NSString getTheNoNullStr:app.shopInfoDic[@"name"] andRepalceStr:@""];
-        NSString *bankAddress = [NSString getTheNoNullStr:app.shopInfoDic[@"bank"] andRepalceStr:@""];
-        
+//        AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+//        
+//        NSString *bankAccount = [NSString getTheNoNullStr:app.shopInfoDic[@"account"] andRepalceStr:@""];
+//        NSString *bankName = [NSString getTheNoNullStr:app.shopInfoDic[@"name"] andRepalceStr:@""];
+//        NSString *bankAddress = [NSString getTheNoNullStr:app.shopInfoDic[@"bank"] andRepalceStr:@""];
+//        
+//
+//        NSString *log_success = [[NSUserDefaults standardUserDefaults]objectForKey:@"wangyongle"];
 
-        NSString *log_success = [[NSUserDefaults standardUserDefaults]objectForKey:@"wangyongle"];
-
         
-        if ([log_success isEqualToString:@"login_access"] && bankAccount.length==19 && bankName.length!=0 && bankAddress!=0) {
-            
-            
+//        if ([log_success isEqualToString:@"login_access"] && bankAccount.length==19 && bankName.length!=0 && bankAddress!=0) {
+//            
+        
 
             _data = @[@[@"我的账户"],@[@"退出",@"切换账号"],@[@"意见反馈"]];
             
-        }else{
-            _data = @[@[@"我的账户",@"认证信息"],@[@"退出",@"切换账号"],@[@"意见反馈",@"商户未认证"]];
-            
-        }
+//        }else{
+//            _data = @[@[@"我的账户",@"认证信息"],@[@"退出",@"切换账号"],@[@"意见反馈",@"商户未认证"]];
+//            
+//        }
     }
     return _data;
 }

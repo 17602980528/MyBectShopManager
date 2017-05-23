@@ -52,7 +52,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    self.navigationItem.title=@"店铺认证";
     
     [self getStreest];
     
@@ -78,7 +77,7 @@
     
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-50, 18, 100, 44)];
     label.font=[UIFont systemFontOfSize:19.0f];
-    label.text=@"店铺认证";
+    label.text=@"快速认证";
     label.textAlignment=1;
     label.textColor=[UIColor whiteColor];
     [navView addSubview:label];
