@@ -1764,6 +1764,12 @@ if (old_view !=tap.view) {
             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
             [hud hideAnimated:YES afterDelay:1.f];
 //            [self postGetCouponRequest];
+        }else if([result[@"result_code"] integerValue]==0){
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = NSLocalizedString(@"已被领取完了!", @"HUD message title");
+            hud.label.font = [UIFont systemFontOfSize:13];
+            [hud hideAnimated:YES afterDelay:1.f];
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {

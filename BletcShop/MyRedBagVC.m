@@ -38,14 +38,14 @@
     
     self.navigationItem.title = @"我的红包";
     self.view.backgroundColor = [UIColor whiteColor];
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithTitle:@"提现" style:UIBarButtonItemStylePlain target:self action:@selector(withdrawCash)];
-    self.navigationItem.rightBarButtonItem=item;
+//    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithTitle:@"提现" style:UIBarButtonItemStylePlain target:self action:@selector(withdrawCash)];
+//    self.navigationItem.rightBarButtonItem=item;
     [self creatTopView];
     
 }
--(void)bunosSuccess{
-    [self getDataWithMore:@""];
-}
+//-(void)bunosSuccess{
+//    [self getDataWithMore:@""];
+//}
 //去提现页面
 -(void)withdrawCash{
     if ([allMoney_lab.text floatValue]<=100) {
