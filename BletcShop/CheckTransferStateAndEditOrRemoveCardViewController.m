@@ -210,14 +210,14 @@
          if (result) {
 
              
-             CGFloat realmoney= [self.dic[@"card_remain"]floatValue]*[result[@"rate"] integerValue]/100.0f;
+             CGFloat realmoney= [self.dic[@"card_remain"]floatValue]*[[NSString getTheNoNullStr:result[@"rate"] andRepalceStr:@""] integerValue]/100.0f;
              cardRealMoney.text=[NSString stringWithFormat:@"￥: %.2f",realmoney];
              
              if (self.index ==0) {
-                 cardDiscount.text=[NSString stringWithFormat:@"转让折扣： %.1f折",[result[@"rate"] integerValue]/10.0f];
+                 cardDiscount.text=[NSString stringWithFormat:@"转让折扣： %.1f折",[[NSString getTheNoNullStr:result[@"rate"] andRepalceStr:@""] integerValue]/10.0f];
 
              }else{
-                 cardDiscount.text=[NSString stringWithFormat:@"分享收益率： %@%%",result[@"rate"]];
+                 cardDiscount.text=[NSString stringWithFormat:@"分享收益率： %@%%",[NSString getTheNoNullStr:result[@"rate"] andRepalceStr:@""]];
                  cardRealMoney.text = @"";
 
              }

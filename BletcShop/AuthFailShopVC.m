@@ -15,7 +15,7 @@
 #import "JFAreaDataManager.h"
 #import "ValuePickerView.h"
 
-@interface AuthFailShopVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
+@interface AuthFailShopVC ()<UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 {
     NSArray *nameArray;
     CGFloat totalHeight;
@@ -40,6 +40,14 @@
 @end
 
 @implementation AuthFailShopVC
+
+-(NSMutableArray *)tradeArray{
+    if (!_tradeArray) {
+        _tradeArray = [[NSMutableArray alloc]initWithObjects:@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所", nil];
+    }
+    return _tradeArray;
+}
+
 
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
@@ -547,35 +555,47 @@
 
 
 -(void)tapChooseClick:(UITapGestureRecognizer *)tap{
-    if (_areaTableView==nil) {
-        _areaTableView=[[UITableView alloc]initWithFrame:CGRectMake(110, _kindLab.bottom, 100, 200) style:UITableViewStylePlain];
-        _areaTableView.delegate=self;
-        _areaTableView.dataSource=self;
-        [_scrollView addSubview:_areaTableView];
-        self.tradeArray = [[NSMutableArray alloc]initWithObjects:@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所",@"全部分类", nil];
-    }
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.tradeArray.count;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-        cell.backgroundColor = RGB(234, 234, 234);
-    }
-    cell.textLabel.text=self.tradeArray[indexPath.row];
-    cell.textLabel.font=[UIFont systemFontOfSize:13.0f];
-    return cell;
-}
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    pickView.dataSource=self.tradeArray;
+    __weak AuthFailShopVC *wealSelf=self;
+    pickView.valueDidSelect = ^(NSString *value) {
+        
+        wealSelf.kindLab.text =  [[value componentsSeparatedByString:@"/"] firstObject];
+        
+    };
+    [pickView show];
     
-    _areaTableView.frame=CGRectMake(110, 64+190+44, 100, 0);
-    [_areaTableView removeFromSuperview];
-    _areaTableView=nil;
-    self.kindLab.text=self.tradeArray[indexPath.row];
+
+    
+//    if (_areaTableView==nil) {
+//        _areaTableView=[[UITableView alloc]initWithFrame:CGRectMake(110, _kindLab.bottom, 100, 200) style:UITableViewStylePlain];
+//        _areaTableView.delegate=self;
+//        _areaTableView.dataSource=self;
+//        [_scrollView addSubview:_areaTableView];
+//        self.tradeArray = [[NSMutableArray alloc]initWithObjects:@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所",@"全部分类", nil];
+//    }
 }
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    
+//    return self.tradeArray.count;
+//}
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
+//    if (cell==nil) {
+//        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+//        cell.backgroundColor = RGB(234, 234, 234);
+//    }
+//    cell.textLabel.text=self.tradeArray[indexPath.row];
+//    cell.textLabel.font=[UIFont systemFontOfSize:13.0f];
+//    return cell;
+//}
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    _areaTableView.frame=CGRectMake(110, 64+190+44, 100, 0);
+//    [_areaTableView removeFromSuperview];
+//    _areaTableView=nil;
+//    self.kindLab.text=self.tradeArray[indexPath.row];
+//}
 
 -(void)downLoadImageAndSeeIfExists{
     

@@ -82,7 +82,8 @@
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         [hud hideAnimated:YES];
-        
+        [self.couponArray removeAllObjects];
+
         DebugLog(@"result---%@",result);
         if ([result count]==0) {
             
@@ -90,7 +91,6 @@
 
         }else{
             NSArray *arr = (NSArray*)result;
-            [self.couponArray removeAllObjects];
             
             if (self.useCoupon ==100) {
                 for (NSDictionary *dic in arr) {

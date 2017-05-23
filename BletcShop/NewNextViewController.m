@@ -365,8 +365,14 @@
         textField.tag=203;
         textField.font=[UIFont systemFontOfSize:13.0f];
         [cell addSubview:textField];
+        
+        if (self.phonePswText.text&&![self.phonePswText.text isEqualToString:@""]) {
+            textField.text=self.phonePswText.text;
+        }else{
+            textField.text = [NSString getTheNoNullStr:shopInfoDic[@"phone_search_pwd"] andRepalceStr:@""];
+        }
+        
 
-        textField.text = [NSString getTheNoNullStr:shopInfoDic[@"phone_search_pwd"] andRepalceStr:@""];
         
         self.phonePswText=textField;
     }else if (indexPath.row==9){

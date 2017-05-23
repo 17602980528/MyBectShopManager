@@ -546,8 +546,14 @@
 
         case 6:
         {
-            CreditThanViewController *creditView = [[CreditThanViewController alloc]init];
-             [self.navigationController pushViewController:creditView animated:YES];
+            
+            UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂未开放!" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];
+            
+            [altView show];
+            
+            
+//            CreditThanViewController *creditView = [[CreditThanViewController alloc]init];
+//             [self.navigationController pushViewController:creditView animated:YES];
 
         }
             break;
