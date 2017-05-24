@@ -83,7 +83,7 @@
     // 判断为空进行初始化  --（当拉动页面显示超过主页面内容的时候就会重用之前的cell，而不会再次初始化）
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifier];
-        cell.backgroundColor = RGB(240, 240, 240);
+        //cell.backgroundColor = RGB(240, 240, 240);
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
     }

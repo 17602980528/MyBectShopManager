@@ -153,6 +153,11 @@
             cell.showImg.hidden = NO ;
 
         }
+        if ([dic[@"coupon_type"] isEqualToString:@"ONLINE"]||[dic[@"coupon_type"] isEqualToString:@"null"]) {
+            cell.onlineState.image=[UIImage imageNamed:@"线上角标"];
+        }else{
+            cell.onlineState.image=[UIImage imageNamed:@"线下角标"];
+        }
         
     }
     

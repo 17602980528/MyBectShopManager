@@ -136,5 +136,10 @@
  
     self.showImg = validateImg;
     
+    UIImageView *onlineImageView=[[UIImageView alloc]initWithFrame:CGRectMake(backView.width-40, 0, 40, 40)];
+    onlineImageView.image=[UIImage imageNamed:@"线上角标"];
+    [backView addSubview:onlineImageView];
+    self.onlineState=onlineImageView;
+    
 }
 @end

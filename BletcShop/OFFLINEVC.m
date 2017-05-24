@@ -27,6 +27,14 @@
 
     [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.2, SCREENWIDTH*0.2) logoImageWithCornerRadius:0];
     
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(12, self.QRView.bottom+30, SCREENWIDTH-24, 40)];
+    label.text=@"提示：该二维码仅供用户进店消费时，提供给商户扫描，商户扫描成功后，可抵扣对应面额的现金优惠。";
+    label.numberOfLines=0;
+    label.font=[UIFont systemFontOfSize:13.0f];
+    label.textAlignment=NSTextAlignmentCenter;
+    label.textColor=[UIColor blueColor];
+    [self.view addSubview:label];
+    
 }
 
 - (void)didReceiveMemoryWarning {

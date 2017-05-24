@@ -128,7 +128,12 @@
             cell.showImg.hidden = NO ;
             
         }
-
+        
+        if ([_dataArray[indexPath.row][@"coupon_type"] isEqualToString:@"ONLINE"]||[_dataArray[indexPath.row][@"coupon_type"] isEqualToString:@"null"]) {
+            cell.onlineState.image=[UIImage imageNamed:@"线上角标"];
+        }else{
+            cell.onlineState.image=[UIImage imageNamed:@"线下角标"];
+        }
 
     }
     

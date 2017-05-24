@@ -180,16 +180,16 @@
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     //
     UIButton *sender=[cell viewWithTag:666];
-    if ([_dataArray[indexPath.row][@"received"] isEqualToString:@"false"]) {
-        sender.backgroundColor=[UIColor colorWithRed:237/255.0f green:71/255.0f blue:59/255.0f alpha:1.0f];
-        [sender setTitle:@"立即领取" forState:UIControlStateNormal];
-        [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }else{
+    if ([_dataArray[indexPath.row][@"received"] isEqualToString:@"true"]) {
         [sender setTitle:@"立即使用" forState:UIControlStateNormal];
         [sender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         sender.backgroundColor=[UIColor whiteColor];
         sender.layer.borderWidth=1.0f;
         sender.layer.borderColor=[[UIColor redColor]CGColor];
+    }else{
+        sender.backgroundColor=[UIColor colorWithRed:237/255.0f green:71/255.0f blue:59/255.0f alpha:1.0f];
+        [sender setTitle:@"立即领取" forState:UIControlStateNormal];
+        [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     //距离
     CLLocationCoordinate2D c1 = CLLocationCoordinate2DMake([[[_dataArray objectAtIndex:indexPath.row] objectForKey:@"latitude"] doubleValue], [[[_dataArray objectAtIndex:indexPath.row] objectForKey:@"longtitude"] doubleValue]);

@@ -128,6 +128,8 @@
 		189F4CF71D508EF300461830 /* ActiveMoreRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F4CF61D508EF200461830 /* ActiveMoreRuleViewController.m */; };
 		18A4B6F21D33933B00EFBCC1 /* 椭圆-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A4B6F01D33933B00EFBCC1 /* 椭圆-02.png */; };
 		18A4B6F31D33933B00EFBCC1 /* 椭圆-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A4B6F11D33933B00EFBCC1 /* 椭圆-01.png */; };
+		18A72C5B1ED563E9005FDF87 /* 线上角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A72C5A1ED563E8005FDF87 /* 线上角标.png */; };
+		18A72C5D1ED563F0005FDF87 /* 线下角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A72C5C1ED563F0005FDF87 /* 线下角标.png */; };
 		18BCCDCA1D3C9EE8005E145D /* back_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC41D3C9EE8005E145D /* back_04.png */; };
 		18BCCDCB1D3C9EE8005E145D /* merchant_ed1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC51D3C9EE8005E145D /* merchant_ed1.png */; };
 		18BCCDCC1D3C9EE8005E145D /* merchant_es1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC61D3C9EE8005E145D /* merchant_es1.png */; };
@@ -1344,6 +1346,8 @@
 		189F4CF61D508EF200461830 /* ActiveMoreRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveMoreRuleViewController.m; sourceTree = "<group>"; };
 		18A4B6F01D33933B00EFBCC1 /* 椭圆-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆-02.png"; sourceTree = "<group>"; };
 		18A4B6F11D33933B00EFBCC1 /* 椭圆-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆-01.png"; sourceTree = "<group>"; };
+		18A72C5A1ED563E8005FDF87 /* 线上角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "线上角标.png"; sourceTree = "<group>"; };
+		18A72C5C1ED563F0005FDF87 /* 线下角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "线下角标.png"; sourceTree = "<group>"; };
 		18BCCDC41D3C9EE8005E145D /* back_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_04.png; sourceTree = "<group>"; };
 		18BCCDC51D3C9EE8005E145D /* merchant_ed1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = merchant_ed1.png; sourceTree = "<group>"; };
 		18BCCDC61D3C9EE8005E145D /* merchant_es1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = merchant_es1.png; sourceTree = "<group>"; };
@@ -4778,6 +4782,8 @@
 				D94B52521D4AE6D800C067B3 /* 代金券-01.jpg */,
 				D94B52541D4AEA4500C067B3 /* 代金券-03.png */,
 				D977C1451EC97BE800CA5AF5 /* WechatIMG16.png */,
+				18A72C5A1ED563E8005FDF87 /* 线上角标.png */,
+				18A72C5C1ED563F0005FDF87 /* 线下角标.png */,
 				D936F5811D473CBF00424B22 /* MyCashCouponViewController.h */,
 				D936F5821D473CBF00424B22 /* MyCashCouponViewController.m */,
 				187E94BC1ED2D8FF007EF19F /* OFFLINEVC.h */,
@@ -6658,6 +6664,7 @@
 				D92C632E1CC8DA08006768C6 /* delete.png in Resources */,
 				D9D50DBB1D87DE3200A5E469 /* lxh_beicui.png in Resources */,
 				D923D99C1D2B7F59009422EB /* data.png in Resources */,
+				18A72C5D1ED563F0005FDF87 /* 线下角标.png in Resources */,
 				D9541EA61E1FA994003022E5 /* 商消乐002.png in Resources */,
 				D9AB25411D88E4ED000E9288 /* VoiceSearchFeedback019@2x.png in Resources */,
 				D9AE75351D2E382B00269EC5 /* welcom_3.png in Resources */,
@@ -6847,6 +6854,7 @@
 				1CF6E47D1C61E4350001159C /* zijin@2x.png in Resources */,
 				D96555451E33306B0096D815 /* 登陆-04(2).png in Resources */,
 				D9E28FC51D2F75A9004514DF /* icon2.png in Resources */,
+				18A72C5B1ED563E9005FDF87 /* 线上角标.png in Resources */,
 				D9FF0D9B1D53304C00443312 /* 图标-13new.png in Resources */,
 				D96E1B7D1ECAD9EF00084453 /* ChoseSeriesCellT.xib in Resources */,
 				D947E4631D7D3BBA00F9FEE8 /* 聊天键盘-icon-选择照片-点击@2x.png in Resources */,
