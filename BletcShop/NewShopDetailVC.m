@@ -1779,6 +1779,17 @@ if (old_view !=tap.view) {
     }];
     
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section==1) {
+        if (indexPath.row!=0) {
+            NewBuyCardViewController *buyVC=[[NewBuyCardViewController alloc]init];
+            buyVC.cardListArray=self.cardArray;
+            buyVC.shop_name =[wholeInfoDic objectForKey:@"store"];
+            buyVC.selectRow=indexPath.row-1;
+            [self.navigationController pushViewController:buyVC animated:YES];
+        }
+    }
+}
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     

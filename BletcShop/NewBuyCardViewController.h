@@ -31,5 +31,5 @@ enum OrderTypes{
 @property(nonatomic,copy)NSString *pay_Type;
 
 @property (nonatomic,copy)NSString *shop_name;// 店名
-
+@property(nonatomic) NSInteger selectRow;
 @end
