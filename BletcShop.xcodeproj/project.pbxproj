@@ -706,6 +706,9 @@
 		D96846561CC9F4E400146956 /* ShopManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96846551CC9F4E400146956 /* ShopManagerTableViewCell.m */; };
 		D968465A1CC9FCAB00146956 /* VipManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96846591CC9FCAB00146956 /* VipManagerTableViewCell.m */; };
 		D968465D1CC9FCD000146956 /* VipManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D968465C1CC9FCD000146956 /* VipManagerViewController.m */; };
+		D96981571ED57A3D00A44142 /* 引导页1.png in Resources */ = {isa = PBXBuildFile; fileRef = D96981541ED57A3D00A44142 /* 引导页1.png */; };
+		D96981581ED57A3D00A44142 /* 引导页2.png in Resources */ = {isa = PBXBuildFile; fileRef = D96981551ED57A3D00A44142 /* 引导页2.png */; };
+		D96981591ED57A3D00A44142 /* 引导页3.png in Resources */ = {isa = PBXBuildFile; fileRef = D96981561ED57A3D00A44142 /* 引导页3.png */; };
 		D9699E501D348EF7001DEC06 /* 小标-22.png in Resources */ = {isa = PBXBuildFile; fileRef = D9699E4D1D348EF7001DEC06 /* 小标-22.png */; };
 		D9699E511D348EF7001DEC06 /* 小标-21.png in Resources */ = {isa = PBXBuildFile; fileRef = D9699E4E1D348EF7001DEC06 /* 小标-21.png */; };
 		D9699E541D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9699E531D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.m */; };
@@ -2251,6 +2254,9 @@
 		D96846591CC9FCAB00146956 /* VipManagerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VipManagerTableViewCell.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D968465B1CC9FCD000146956 /* VipManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipManagerViewController.h; sourceTree = "<group>"; };
 		D968465C1CC9FCD000146956 /* VipManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VipManagerViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
+		D96981541ED57A3D00A44142 /* 引导页1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页1.png"; sourceTree = "<group>"; };
+		D96981551ED57A3D00A44142 /* 引导页2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页2.png"; sourceTree = "<group>"; };
+		D96981561ED57A3D00A44142 /* 引导页3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页3.png"; sourceTree = "<group>"; };
 		D9699E4D1D348EF7001DEC06 /* 小标-22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小标-22.png"; sourceTree = "<group>"; };
 		D9699E4E1D348EF7001DEC06 /* 小标-21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小标-21.png"; sourceTree = "<group>"; };
 		D9699E521D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyBagChoiceTypeViewController.h; sourceTree = "<group>"; };
@@ -3035,10 +3041,7 @@
 			isa = PBXGroup;
 			children = (
 				189ED03D1E8CD50900A762C7 /* BletcShop.entitlements */,
-				1836B83A1E559D5000B587A6 /* Active_top1.jpg */,
-				1836B83C1E559D5600B587A6 /* Active_top2.jpg */,
-				1836B83E1E559D5B00B587A6 /* Active_top3.jpg */,
-				1836B8401E559DD700B587A6 /* Active_top4.jpg */,
+				D969815A1ED57CFD00A44142 /* imgS */,
 				079386821C55B5CA0021B385 /* AppDelegate.h */,
 				079386831C55B5CA0021B385 /* AppDelegate.mm */,
 				18302A2B1DAC8B0E00E6EF8C /* CanPayCardViewController.h */,
@@ -5261,6 +5264,20 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
+		D969815A1ED57CFD00A44142 /* imgS */ = {
+			isa = PBXGroup;
+			children = (
+				1836B83A1E559D5000B587A6 /* Active_top1.jpg */,
+				1836B83C1E559D5600B587A6 /* Active_top2.jpg */,
+				1836B83E1E559D5B00B587A6 /* Active_top3.jpg */,
+				1836B8401E559DD700B587A6 /* Active_top4.jpg */,
+				D96981541ED57A3D00A44142 /* 引导页1.png */,
+				D96981551ED57A3D00A44142 /* 引导页2.png */,
+				D96981561ED57A3D00A44142 /* 引导页3.png */,
+			);
+			name = imgS;
+			sourceTree = "<group>";
+		};
 		D971FAB81E2DE7E900C5387C /* 搜索页面 */ = {
 			isa = PBXGroup;
 			children = (
@@ -7013,6 +7030,7 @@
 				D9AB25421D88E4ED000E9288 /* VoiceSearchFeedback020@2x.png in Resources */,
 				D9699E7B1D34D382001DEC06 /* hair_01.png in Resources */,
 				1C9E82311C603B7A0007BF02 /* 首页最上面@2x.png in Resources */,
+				D96981591ED57A3D00A44142 /* 引导页3.png in Resources */,
 				D987872F1E272A3200C7A828 /* ComplaintDetailVC.xib in Resources */,
 				18F27EEB1D640E84002DD03A /* 头像-3.png in Resources */,
 				18F0320A1E5ED79300ACD261 /* tempProducts_05.jpg in Resources */,
@@ -7168,6 +7186,8 @@
 				D98FDF8B1E601C660057C206 /* AD_ad_qs@3x.png in Resources */,
 				D986A1BE1DE5436B007B798B /* GetMoneySuccessVC.xib in Resources */,
 				D97F60191D62F770000EE794 /* 注册-04.png in Resources */,
+				D96981571ED57A3D00A44142 /* 引导页1.png in Resources */,
+				D96981581ED57A3D00A44142 /* 引导页2.png in Resources */,
 				D95BAE4C1D542FD500ED0CDC /* award_02.png in Resources */,
 				D93C0D571D251E7B001A1AC1 /* 小标-04.png in Resources */,
 				D9BB4DE41E051DB800971BCC /* 关闭.png in Resources */,

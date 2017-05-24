@@ -43,7 +43,7 @@
     [appdelegate _initChose];
 }
 -(void)makeBannerView{
-     imageArray = @[@"便捷",@"很多",@"安全"];
+     imageArray = @[@"引导页1",@"引导页2",@"引导页3"];
 //    imageArray = @[@"引导页-01",@"引导页-02",@"引导页-03-01"];
 
     _scrollView.contentSize = CGSizeMake(SCREENWIDTH*imageArray.count,_scrollView.frame.size.height);
@@ -66,10 +66,13 @@
 //            [_loginBt setBackgroundImage:[UIImage imageNamed:@"entrance_default"] forState:UIControlStateSelected];
 //            _loginBt.layer.borderColor =[UIColor colorWithHexString:@"f29118"].CGColor;
 //            _loginBt.layer.borderWidth = 1;
-            _loginBt.backgroundColor = NavBackGroundColor;
+//            _loginBt.backgroundColor = NavBackGroundColor;
+            _loginBt.layer.borderColor = RGB(238, 179, 152).CGColor;
+            _loginBt.layer.borderWidth = 1;
+
             _loginBt.layer.cornerRadius = 15;
-            [_loginBt setTitle:@"点击进入" forState:0];
-            [_loginBt setTitleColor:[UIColor whiteColor] forState:0];
+            [_loginBt setTitle:@"GO" forState:0];
+            [_loginBt setTitleColor:RGB(238, 179, 152) forState:0];
             _loginBt.titleLabel.font = [UIFont systemFontOfSize:18];
             
             [_loginBt addTarget:self action:@selector(firstView) forControlEvents:UIControlEventTouchUpInside];
