@@ -40,7 +40,7 @@
     [super viewDidLoad];
     self.socketPort = 30001;
     self.socketHost = SOCKETHOST;//@"http://192.168.0.117";
-    self.navigationItem.title = @"登录";
+    self.navigationItem.title = @"用户登录";
     self.view.backgroundColor = [UIColor whiteColor];
     //    self.ifCIASuccess=NO;
     self.ifRemeber = NO;

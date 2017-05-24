@@ -52,9 +52,10 @@
     [btn addTarget:self action:@selector(backRegist) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:navView];
     [navView addSubview:btn];
-    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-35, 18, 70, 44)];
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0, 18, SCREENWIDTH, 44)];
+    label.textAlignment = NSTextAlignmentCenter;
     label.font=[UIFont systemFontOfSize:19.0f];
-    label.text=@"注册";
+    label.text=@"商户注册";
     label.textAlignment=1;
     label.textColor=[UIColor whiteColor];
     [navView addSubview:label];

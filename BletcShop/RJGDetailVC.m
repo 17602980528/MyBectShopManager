@@ -159,12 +159,14 @@
     static NSString*identifier = @"identifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     UILabel *money_lab;
+    UILabel *state_lab;
+
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
         UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 48, SCREENWIDTH, 1)];
         line.backgroundColor =RGB(234, 234, 234);
         [cell.contentView addSubview:line];
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH-10, 49)];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 6, SCREENWIDTH-10, 15)];
         lab.textColor= [UIColor blackColor];
         lab.font = [UIFont systemFontOfSize:15];
         lab.textAlignment = NSTextAlignmentRight;
@@ -172,14 +174,33 @@
         
         cell.backgroundColor = RGB(243, 243, 243);
         money_lab = lab;
+        
+        
+        UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(0, lab.bottom+6, SCREENWIDTH-10, 15)];
+        lab1.textColor= [UIColor blackColor];
+        lab1.font = [UIFont systemFontOfSize:11];
+        lab1.textAlignment = NSTextAlignmentRight;
+        [cell.contentView addSubview:lab1];
+        
+        cell.backgroundColor = RGB(243, 243, 243);
+        state_lab = lab1;
     }
     
     
     if (self.data_array.count>0) {
         NSDictionary *dic = _data_array[indexPath.row];
-        money_lab.text = dic[@"sum"];
+        money_lab.text = [NSString stringWithFormat:@"%@元",dic[@"sum"]];
         cell.textLabel.text = dic[@"tradenu"];
         cell.detailTextLabel.text = dic[@"datetime"];
+        if ([[NSString getTheNoNullStr:dic[@"state"] andRepalceStr:@""]  isEqualToString:@"wait"]) {
+            state_lab.text = @"处理中";
+        }else if ([[NSString getTheNoNullStr:dic[@"state"] andRepalceStr:@""]  isEqualToString:@"access"]){
+            state_lab.text = @"已转账";
+
+        }else{
+            state_lab.text = @"出错!!!";
+
+        }
 
     }
      return cell;
@@ -199,6 +220,7 @@
         
         NSDictionary *dic = [NSDictionary dictionary];
         dic = [result copy];
+        NSLog(@"------%@",dic);
         
         if (dic.count>0) {
             remain_lab.text = [NSString stringWithFormat:@"%@元",dic[@"remain"]];

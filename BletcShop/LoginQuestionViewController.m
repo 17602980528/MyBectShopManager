@@ -83,6 +83,10 @@
                     [self addAlert];
                         }
             
+        }else  if ([result_D[@"result_code"] isEqualToString:@"not_found"] ){
+            
+            [self use_notfound];
+            
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {

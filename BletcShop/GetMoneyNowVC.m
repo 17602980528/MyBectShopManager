@@ -180,7 +180,7 @@
     [params setObject:text_Field.text forKey:@"sum"];
     [params setObject:[[self.bankArray objectAtIndex:0] objectForKey:@"name"] forKey:@"name"];
     [params setObject:[[self.bankArray objectAtIndex:0] objectForKey:@"bank"] forKey:@"bank"];
-    [params setObject:[[self.bankArray objectAtIndex:0] objectForKey:@"number"] forKey:@"acount"];
+    [params setObject:[[self.bankArray objectAtIndex:0] objectForKey:@"number"] forKey:@"account"];
     NSDateFormatter* matter = [[NSDateFormatter alloc]init];
     [matter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate* date  = [NSDate date];
