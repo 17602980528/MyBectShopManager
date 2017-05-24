@@ -157,6 +157,8 @@
 		18D7C4911D5B12BA00AEF545 /* mohu-13.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D7C4881D5B12BA00AEF545 /* mohu-13.png */; };
 		18D7C4921D5B12BA00AEF545 /* mohu-14.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D7C4891D5B12BA00AEF545 /* mohu-14.png */; };
 		18D7C4941D5B12C700AEF545 /* zijie.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D7C4931D5B12C700AEF545 /* zijie.png */; };
+		18D846491ED570510048F010 /* 下角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D846471ED570510048F010 /* 下角标.png */; };
+		18D8464A1ED570510048F010 /* 上角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D846481ED570510048F010 /* 上角标.png */; };
 		18D89C641D51CE1000717B11 /* GoShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D89C631D51CE1000717B11 /* GoShopViewController.m */; };
 		18D89C671D51EF4900717B11 /* select_false.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D89C651D51EF4900717B11 /* select_false.png */; };
 		18D89C681D51EF4900717B11 /* select_true.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D89C661D51EF4900717B11 /* select_true.png */; };
@@ -1387,6 +1389,8 @@
 		18D7C4881D5B12BA00AEF545 /* mohu-13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mohu-13.png"; sourceTree = "<group>"; };
 		18D7C4891D5B12BA00AEF545 /* mohu-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mohu-14.png"; sourceTree = "<group>"; };
 		18D7C4931D5B12C700AEF545 /* zijie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zijie.png; sourceTree = "<group>"; };
+		18D846471ED570510048F010 /* 下角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下角标.png"; sourceTree = "<group>"; };
+		18D846481ED570510048F010 /* 上角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上角标.png"; sourceTree = "<group>"; };
 		18D89C621D51CE1000717B11 /* GoShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoShopViewController.h; sourceTree = "<group>"; };
 		18D89C631D51CE1000717B11 /* GoShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoShopViewController.m; sourceTree = "<group>"; };
 		18D89C651D51EF4900717B11 /* select_false.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_false.png; sourceTree = "<group>"; };
@@ -4753,6 +4757,8 @@
 		D9345E581E76368A006B2AC1 /* 会员中心新 */ = {
 			isa = PBXGroup;
 			children = (
+				18D846471ED570510048F010 /* 下角标.png */,
+				18D846481ED570510048F010 /* 上角标.png */,
 				D9345E591E7636C2006B2AC1 /* LZDCenterViewController.h */,
 				D9345E5A1E7636C2006B2AC1 /* LZDCenterViewController.m */,
 				D990FF021E7B773B00BF7E40 /* IntegralMallViewController.h */,
@@ -6933,6 +6939,7 @@
 				18F27F051D640E84002DD03A /* 头像-29.png in Resources */,
 				18F032051E5ED79300ACD261 /* tempActiverty.jpg in Resources */,
 				1CF2836F1C58899900F3952A /* FirstLikeCell.xib in Resources */,
+				18D8464A1ED570510048F010 /* 上角标.png in Resources */,
 				D94DF2631CAE0DB8000D5B69 /* result_small_star_highlight.png in Resources */,
 				18EB36C81D4B5E180087CE1A /* -1-01.png in Resources */,
 				18F27F061D640E84002DD03A /* 头像-30.png in Resources */,
@@ -7046,6 +7053,7 @@
 				18EB36B81D4B4B5B0087CE1A /* 未标题-1-03.png in Resources */,
 				D987BB271E790B59008AE24D /* UserInfoHeaderCell.xib in Resources */,
 				D9ED52061D2A467700267729 /* grey_add.png in Resources */,
+				18D846491ED570510048F010 /* 下角标.png in Resources */,
 				D981FD051E2616080026E4B2 /* UShare进阶.html in Resources */,
 				D9AB253E1D88E4ED000E9288 /* VoiceSearchFeedback016@2x.png in Resources */,
 				18F27EFD1D640E84002DD03A /* 头像-21.png in Resources */,
