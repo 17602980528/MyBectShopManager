@@ -273,6 +273,12 @@
     yueLabel.font = [UIFont systemFontOfSize:25];
     [upView addSubview:yueLabel];
     
+    
+    UILabel *discountLab = [[UILabel alloc]initWithFrame:CGRectMake(typeAndeLevel.left, yueLabel.top, 100, yueLabel.height)];
+    discountLab.font= yueLabel.font;
+    discountLab.textColor = yueLabel.textColor;
+    [upView addSubview:discountLab];
+    
     //商家名称
     UILabel *shopName=[[UILabel alloc]initWithFrame:CGRectMake(12, 9, upView.width-91-12, 31)];
     shopName.text=[NSString getTheNoNullStr:dic[@"store"] andRepalceStr:@""];
@@ -310,6 +316,8 @@
         
         
     }else{
+        discountLab.text = [NSString stringWithFormat:@"%g折",[dic[@"rule"] floatValue]/10];
+        
         yueLabel.text = [[NSString alloc]initWithFormat:@"余额:%@",dic[@"card_remain"]];
     }
     

@@ -79,7 +79,11 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [_videoPlayer destroyPlayer];
+   
+    if (![self.navigationController.viewControllers containsObject:self]) {
+        [_videoPlayer destroyPlayer];
+
+    }
 }
 
 - (void)viewDidLoad {
@@ -104,6 +108,7 @@
 //    // 3. 发送请求给服务器
 //    [web_view loadRequest:request];
 //
+    
     
     
     [self initTableView];

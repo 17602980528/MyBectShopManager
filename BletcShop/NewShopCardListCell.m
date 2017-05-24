@@ -42,9 +42,9 @@
     self.content_lab = content_lab;
 
     content_lab.font = [UIFont systemFontOfSize:14];
-    content_lab.numberOfLines = 2;
+    content_lab.numberOfLines =1;
 //    CGFloat height_lab =  [UILabel getSizeWithLab:content_lab andMaxSize:CGSizeMake(SCREENWIDTH-85-70, 50)].height;
-    content_lab.frame = CGRectMake(imageView.right+10, imageView.top, SCREENWIDTH-85-70, 23);
+    content_lab.frame = CGRectMake(imageView.right+10, imageView.top, SCREENWIDTH-85-70-2, 23);
     [self addSubview:content_lab];
     
     

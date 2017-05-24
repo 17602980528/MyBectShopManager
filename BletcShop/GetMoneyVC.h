@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^GetMoneyVCBlock)();
 
 @interface GetMoneyVC : UIViewController
 @property (nonatomic,copy)NSString *sum_string;//可提取余额
 @property (nonatomic,copy)NSString *acount;//卡号
+@property (nonatomic,copy)GetMoneyVCBlock block;//
 
 
 @end

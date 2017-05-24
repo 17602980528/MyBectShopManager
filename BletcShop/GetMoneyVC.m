@@ -135,21 +135,47 @@
 }
 
 -(void)rigmAction
+
 {
+    NSString *ss = [NSString stringWithFormat:@"确定提现%@元",_moneyText.text];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:ss preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"提现" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self postRequest];
+        
+    }];
+
+    
+    [alertController addAction:cancel];
+    [alertController addAction:sure];
+    
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+    
+    
+   }
+
+-(void)postRequest{
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/withdrawApp",BASEURL];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
-//    [params setObject:[appdelegate.shopUserInfoArray objectAtIndex:0] forKey:@"merchant"];
+    //    [params setObject:[appdelegate.shopUserInfoArray objectAtIndex:0] forKey:@"merchant"];
     [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
     [params setObject:self.moneyText.text forKey:@"sum"];
     
-//    NSDateFormatter* matter = [[NSDateFormatter alloc]init];
-//    [matter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSDate* date  = [NSDate date];
-//    NSString *NowDate = [matter stringFromDate:date];
-//    [params setObject:NowDate forKey:@"date"];
+    //    NSDateFormatter* matter = [[NSDateFormatter alloc]init];
+    //    [matter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    //    NSDate* date  = [NSDate date];
+    //    NSString *NowDate = [matter stringFromDate:date];
+    //    [params setObject:NowDate forKey:@"date"];
     
     NSLog(@"params==%@", params);
     
@@ -159,7 +185,7 @@
         NSDictionary *dic = (NSDictionary *)result;
         if ([dic[@"result_code"] intValue]==1) {
             
-            [self showTiShi:@"提现申请成功,三个工作日到账,是否退出当前页面?" LeftBtn_s:@"返回" RightBtn_s:@"取消"];
+            [self showTiShi:@"提现申请成功,三个工作日到账?" LeftBtn_s:@"确定" RightBtn_s:@""];
             
             
         }
@@ -168,8 +194,8 @@
         
     }];
     
-}
 
+}
 -(void)tishi:(NSString*)str{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
@@ -182,7 +208,7 @@
 -(void)showTiShi:(NSString *)content LeftBtn_s:(NSString*)left RightBtn_s:(NSString*)right{
     
     
-    UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:content delegate:self cancelButtonTitle:left otherButtonTitles:right, nil];
+    UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:content delegate:self cancelButtonTitle:left otherButtonTitles: nil];
     
     altView.tag =9999;
     [altView show];
@@ -191,6 +217,8 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag ==9999) {
         if (buttonIndex==0) {
+            
+            self.block();
             
             [self.navigationController popViewControllerAnimated:YES];
         }

@@ -14,4 +14,7 @@
 
 @property (nonatomic,retain)UITextField *moneyText;
 @property (nonatomic,retain)UIView *demoView;
+
+
+
 @end

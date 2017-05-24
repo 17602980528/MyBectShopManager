@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    self.navigationItem.title=@"优惠券";
+    
+    
     NSLog(@"%@",self.infoDic);
     _backgroundView.layer.cornerRadius=5.0f;
     _backgroundView.clipsToBounds=YES;
@@ -33,7 +35,17 @@
     _couponMoneyLable.text=[NSString stringWithFormat:@"%@元代金券",self.infoDic[@"sum"]];
     _pulishCountLable.text=[NSString stringWithFormat:@"发行数量：%@",self.infoDic[@"remain"]];
     _couponRemainLable.text=[NSString stringWithFormat:@"剩余数量：%@",self.infoDic[@"remain"]];
-    _couponUseLimitLable.text=[NSString stringWithFormat:@"使用条件：满%@元可用",self.infoDic[@"pri_condition"]];
+    if ([self.infoDic[@"coupon_type"] isEqualToString:@"OFFLINE"]) {
+        _couponUseLimitLable.text=[NSString stringWithFormat:@"使用条件：进店使用,满%@可用",self.infoDic[@"pri_condition"]];
+
+    }else if ([self.infoDic[@"coupon_type"] isEqualToString:@"ONLINE"]){
+        _couponUseLimitLable.text=[NSString stringWithFormat:@"使用条件：限办卡使用,满%@可用",self.infoDic[@"pri_condition"]];
+
+    }else{
+        _couponUseLimitLable.text=[NSString stringWithFormat:@"使用条件：满%@可用",self.infoDic[@"pri_condition"]];
+
+    }
+    
     _canUseTimeLable.text=[NSString stringWithFormat:@"有效期：%@～%@",self.infoDic[@"date_start"],self.infoDic[@"date_end"]];
     _useNoticeLable.text=[NSString getTheNoNullStr:self.infoDic[@"content"] andRepalceStr:@"无相关介绍"];
   

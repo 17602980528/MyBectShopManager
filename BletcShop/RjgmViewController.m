@@ -12,6 +12,13 @@
 #import "GetMoneyVC.h"
 
 @interface RjgmViewController ()
+{
+    NSDictionary *data_dic;
+}
+
+@property(nonatomic,strong)UILabel *sum_Lab;
+@property(nonatomic,strong)UILabel *insure_Lab;
+@property(nonatomic,strong)UILabel *award_Lab;
 
 @end
 
@@ -70,10 +77,15 @@
         [self.navigationController pushViewController:VC animated:YES];
     };
 
+    
+    [self creatSubViews];
+    
     [self postRequestMoney];
 
-
+    
 }
+
+
 -(void)postRequestMoney
 {
     
@@ -89,8 +101,13 @@
         [self hideHud];
         NSDictionary *dic = (NSDictionary*)result;
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            data_dic = dic;
             [self initRjgmViewWithDic:dic];
+            
 
+        });
+        
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -99,18 +116,18 @@
     
 }
 
--(void)initRjgmViewWithDic:(NSDictionary*)dic
-{
+
+-(void)creatSubViews{
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, SCREENWIDTH, 252-64)];
     backView.backgroundColor = NavBackGroundColor;
     [self.view addSubview:backView];
     
     UILabel *sum_Lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 100-20, SCREENWIDTH, 44)];
-    sum_Lab.text = dic[@"remain"];
     sum_Lab.textColor =[UIColor whiteColor];
     sum_Lab.font = [UIFont boldSystemFontOfSize:40];
     sum_Lab.textAlignment = NSTextAlignmentCenter;
     [backView addSubview:sum_Lab];
+    self.sum_Lab = sum_Lab;
     
     UILabel *title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 69-20, SCREENWIDTH, 16)];
     title_lab.text = @"账户余额";
@@ -126,9 +143,9 @@
         
         UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 18, 18)];
         imgV.layer.cornerRadius = 9;
-
-    
-       
+        
+        
+        
         [View addSubview:imgV];
         UILabel * name_lab =[[UILabel alloc]initWithFrame:CGRectMake(imgV.right+10, 0, SCREENWIDTH, View.height)];
         name_lab.text = name_A[i];
@@ -141,17 +158,17 @@
         count_lab.font = [UIFont systemFontOfSize:17];
         count_lab.textColor = NavBackGroundColor;
         if (i==0) {
-            count_lab.text =[NSString getTheNoNullStr:dic[@"deposit"] andRepalceStr:@"0.00元"];
             UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, View.height-1, SCREENWIDTH, 1)];
             line.backgroundColor =RGB(234, 234, 234);
             [View addSubview:line];
             imgV.image = [UIImage imageNamed:@"money_icon_pr_n"];
+            self.insure_Lab = count_lab;
         }
         if (i==1) {
-            count_lab.text = dic[@"award"];
-            imgV.image = [UIImage imageNamed:@"money_icon_bo_n"];
 
+            imgV.image = [UIImage imageNamed:@"money_icon_bo_n"];
             
+            self.award_Lab = count_lab;
         }
         
         
@@ -175,22 +192,34 @@
         NSString *bankName = [NSString getTheNoNullStr:app.shopInfoDic[@"name"] andRepalceStr:@""];
         NSString *bankAddress = [NSString getTheNoNullStr:app.shopInfoDic[@"bank"] andRepalceStr:@""];
         
-        NSLog(@"----%@--%@--%@",bankAccount,bankName,bankAddress);
+        NSLog(@"----%@--%@--%@==%@",bankAccount,bankName,bankAddress,data_dic);
         if ( bankAccount.length!=19 || bankName.length==0 || bankAddress==0) {
             
             [self showTiShi:@"银行卡信息不完整，请填写" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
         }else{
             
             GetMoneyVC *VC = [[GetMoneyVC alloc]init];
-            VC.sum_string= dic[@"remain"];
+            VC.sum_string= data_dic[@"remain"];
+            VC.block = ^(){
+                [self postRequestMoney];
+            };
+            
             [self.navigationController pushViewController:VC animated:YES];
         }
-
         
         
-       
+        
+        
     };
     
+    
+    
+}
+-(void)initRjgmViewWithDic:(NSDictionary*)dic
+{
+        self.sum_Lab.text = dic[@"remain"];
+       self.insure_Lab.text =[NSString getTheNoNullStr:dic[@"deposit"] andRepalceStr:@"0.00元"];
+       self.award_Lab.text = [NSString getTheNoNullStr:dic[@"award"] andRepalceStr:@"0.00元"];
     
     
 }

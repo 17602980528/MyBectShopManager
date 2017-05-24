@@ -198,6 +198,12 @@
             yueLabel.font = [UIFont systemFontOfSize:27];
             [cardImageView addSubview:yueLabel];
 
+            
+            UILabel *discountLab = [[UILabel alloc]initWithFrame:CGRectMake(typeAndeLevel.left, yueLabel.top, 100, yueLabel.height)];
+            discountLab.font= yueLabel.font;
+            discountLab.textColor = yueLabel.textColor;
+            [cardImageView addSubview:discountLab];
+            
             if ([[cardInfo_dic objectForKey:@"card_type"] isEqualToString:@"计次卡"]) {
                 NSString *oneString = [cardInfo_dic objectForKey:@"price"];//单价
                 //
@@ -215,6 +221,8 @@
                 
                 
             }else{
+                discountLab.text = [NSString stringWithFormat:@"%g折",[cardInfo_dic[@"rule"] floatValue]/10];
+
                 yueLabel.text = [[NSString alloc]initWithFormat:@"余额:%@",cardInfo_dic[@"card_remain"]];
             }
 
@@ -226,7 +234,7 @@
             [cardImageView addSubview:downView];
 
             
-            UILabel *deadLine =[[UILabel alloc]initWithFrame:CGRectMake(15, downView.top-40, cardImageView.width, 40)];
+            UILabel *deadLine =[[UILabel alloc]initWithFrame:CGRectMake(15, downView.top-25, cardImageView.width, 25)];
             NSString *deadString = cardInfo_dic[@"date_end"];
             if (deadString.length>10) {
                 deadString = [deadString substringToIndex:10];
