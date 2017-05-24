@@ -388,7 +388,16 @@
                     [self payForCoupons:dic];
                 }else{
                     if (appdelegate.IsLogin) {
-                        [self getCardListInfo:dic];
+                        if (dic[@"coupon_id"]) {
+                            
+                            ErrorQRViewController *VC = [[ErrorQRViewController alloc]init];
+                            VC.errorString = @"内容无法识别!";
+                            [self.navigationController pushViewController:VC animated:YES];
+                            
+                        }else{
+                            [self getCardListInfo:dic];
+
+                        }
                         
                     }else{
                         
@@ -481,7 +490,9 @@
 -(void)payForCoupons:(NSDictionary*)dic{
     NSString *url = [NSString stringWithFormat:@"%@MerchantType/coupon/scan",BASEURL];
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
-    [paramer setValue:dic[@"muid"] forKey:@"muid"];
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    [paramer setValue:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
     [paramer setValue:dic[@"uuid"] forKey:@"uuid"];
     [paramer setValue:dic[@"coupon_id"] forKey:@"coupon_id"];
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
