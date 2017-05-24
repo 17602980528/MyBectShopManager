@@ -582,15 +582,11 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    if (section==5) {
+    if (section>=5) {
         
-        NSArray *arr = wholeInfoDic[@"evaluate_list"];
-        if(arr.count>0) {
-            return 40;
-        }else{
+      
             return 0.1;
-        }
-
+   
         
     }else
     return 10;
@@ -606,67 +602,11 @@
     }else if (section==4||section==5){
 
         return 41;
-    }else{
+    } else{
         return 0.01;
     }
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//    if(section==0||section==1 ||section==3){
-//        
-//        UIView *backView = [[UIView alloc]init];
-//        backView.frame = CGRectMake(0, 0, SCREENWIDTH, 41);
-//        
-//        backView.backgroundColor = [UIColor whiteColor];
-//        
-//        
-//        
-//        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
-//        titlelabel.textAlignment=NSTextAlignmentCenter;
-//        titlelabel.font = [UIFont systemFontOfSize:15.0];
-//        titlelabel.text=@"全部商品";
-//        [backView addSubview:titlelabel];
-//        
-//        UIView *line = [[UIView alloc]init];
-//        line.backgroundColor = RGB(225, 225, 225);
-//        line.frame= CGRectMake(10, titlelabel.bottom, SCREENWIDTH, 1);
-//        [backView addSubview:line];
-//        
-//        
-//        if (section==1) {
-//            titlelabel.text = @"商家详情";
-//        }
-//        if (section==3) {
-//            titlelabel.text = @"会员评价";
-//        }
-//        return backView;
-//    }else
-    
-    if (section==5) {
-        
-       
-
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame =CGRectMake(0, 0, SCREENWIDTH, 40);
-        button.backgroundColor = [UIColor whiteColor];
-        [button setTitle:@"查看更多评价" forState:0];
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
-        [button setTitleColor:RGB(51, 51, 51) forState:0];
-        [button addTarget:self action:@selector(scanMoreInfo) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 1)];
-        line.backgroundColor = RGB(225, 225, 225);
-        [button addSubview:line];
-        
-        NSArray *arr = wholeInfoDic[@"evaluate_list"];
-        if(arr.count>0) {
-            return button;
-        }else{
-            return nil;
-        }
-    }else
-        return nil;
-}
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section==0) {
         
@@ -1384,6 +1324,8 @@
 //         [self.shopTableView reloadData];
          [self creatTableViewHeadView];
          [self postRequestGetInfo];
+         
+         [self creatTableFootView];
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
          //         [self noIntenet];
          NSLog(@"%@", error);
@@ -1391,7 +1333,43 @@
     
 }
 
+-(void)creatTableFootView{
+    
+    NSArray *arr = wholeInfoDic[@"evaluate_list"];
 
+   
+    
+ 
+    if(arr.count>0) {
+        
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 50)];
+        view.backgroundColor = RGB(234, 234, 234);
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame =CGRectMake(0, 0, SCREENWIDTH, 40);
+        button.backgroundColor = [UIColor whiteColor];
+        [button setTitle:@"查看更多评价" forState:0];
+        button.titleLabel.font = [UIFont systemFontOfSize:14];
+        [button setTitleColor:RGB(51, 51, 51) forState:0];
+        [button addTarget:self action:@selector(scanMoreInfo) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:button];
+        
+        
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, button.top, SCREENWIDTH, 1)];
+        line.backgroundColor = RGB(225, 225, 225);
+        [view addSubview:line];
+      
+        self.shopTableView.tableFooterView = view;
+        
+    }else{
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+        view.backgroundColor = RGB(234, 234, 234);
+        self.shopTableView.tableFooterView = view;
+
+    }
+
+    
+}
 
 -(void)creatTableViewHeadView{
     

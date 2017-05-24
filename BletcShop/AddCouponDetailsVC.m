@@ -34,6 +34,7 @@
     _shopNameLable.text=self.infoDic[@"store"];
     _couponMoneyLable.text=[NSString stringWithFormat:@"%@元代金券",self.infoDic[@"sum"]];
     _pulishCountLable.text=[NSString stringWithFormat:@"发行数量：%@",self.infoDic[@"remain"]];
+    _pulishCountLable.hidden = YES;
     _couponRemainLable.text=[NSString stringWithFormat:@"剩余数量：%@",self.infoDic[@"remain"]];
     if ([self.infoDic[@"coupon_type"] isEqualToString:@"OFFLINE"]) {
         _couponUseLimitLable.text=[NSString stringWithFormat:@"使用条件：进店使用,满%@可用",self.infoDic[@"pri_condition"]];
