@@ -966,7 +966,7 @@
 
             
             UIImageView *ImgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, b_v.width, b_v.height)];
-            ImgView.image = [UIImage imageNamed:@"优惠券背景"];
+           // ImgView.image = [UIImage imageNamed:@"优惠券背景"];
             ImgView.tag = i;
             ImgView.userInteractionEnabled = YES;
 //            NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCE_PRODUCT stringByAppendingString:dic_comm[@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
@@ -975,6 +975,11 @@
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getTheCoupons:)];
             [ImgView addGestureRecognizer:tap];
             
+            if ([dic_comm[@"coupon_type"] isEqualToString:@"OFFLINE"]) {
+                ImgView.image=[UIImage imageNamed:@"优惠券背景线下"];
+            }else{
+                ImgView.image=[UIImage imageNamed:@"优惠券背景线上"];
+            }
             
             UILabel *title_lab = [[UILabel alloc]initWithFrame:CGRectMake(60, 12, 36, 11)];
             title_lab.text =@"优惠券";
