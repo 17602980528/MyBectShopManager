@@ -340,15 +340,20 @@
     NSArray *arr ;
     
     arr=_dataArray;
-    
-    if ([arr[sender.row][@"card_type"] isEqualToString:@"计次卡"]) {
-        CountPAYViewController *countVC=[[CountPAYViewController alloc]init];
-        countVC.card_dic=[arr objectAtIndex:sender.row];
-        [self.navigationController pushViewController:countVC animated:YES];
+    if ([arr[sender.row][@"state"] isEqualToString:@"transfer"]) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"会员卡转让中" message:@"" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+        [alert show];
     }else{
-        MoneyPAYViewController *moneyVC=[[MoneyPAYViewController alloc]init];
-        moneyVC.card_dic=[arr objectAtIndex:sender.row];
-        [self.navigationController pushViewController:moneyVC animated:YES];
+        if ([arr[sender.row][@"card_type"] isEqualToString:@"计次卡"]) {
+            CountPAYViewController *countVC=[[CountPAYViewController alloc]init];
+            countVC.card_dic=[arr objectAtIndex:sender.row];
+            [self.navigationController pushViewController:countVC animated:YES];
+        }else{
+            MoneyPAYViewController *moneyVC=[[MoneyPAYViewController alloc]init];
+            moneyVC.card_dic=[arr objectAtIndex:sender.row];
+            [self.navigationController pushViewController:moneyVC animated:YES];
+        }
+
     }
     
 }
