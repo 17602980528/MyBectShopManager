@@ -186,7 +186,7 @@
     UIButton *sender=[cell viewWithTag:666];
     UIImageView *tip=[cell viewWithTag:1213];
     if([_dataArray[indexPath.row][@"coupon_type"] isEqualToString:@"OFFLINE"]){
-        tip.image=[UIImage imageNamed:@"下角标"];
+        tip.image=[UIImage imageNamed:@"下角标ss"];
     }else{
          tip.image=[UIImage imageNamed:@"上角标"];
     }

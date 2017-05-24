@@ -129,7 +129,6 @@
 		18A4B6F21D33933B00EFBCC1 /* 椭圆-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A4B6F01D33933B00EFBCC1 /* 椭圆-02.png */; };
 		18A4B6F31D33933B00EFBCC1 /* 椭圆-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A4B6F11D33933B00EFBCC1 /* 椭圆-01.png */; };
 		18A72C5B1ED563E9005FDF87 /* 线上角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A72C5A1ED563E8005FDF87 /* 线上角标.png */; };
-		18A72C5D1ED563F0005FDF87 /* 线下角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A72C5C1ED563F0005FDF87 /* 线下角标.png */; };
 		18BCCDCA1D3C9EE8005E145D /* back_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC41D3C9EE8005E145D /* back_04.png */; };
 		18BCCDCB1D3C9EE8005E145D /* merchant_ed1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC51D3C9EE8005E145D /* merchant_ed1.png */; };
 		18BCCDCC1D3C9EE8005E145D /* merchant_es1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC61D3C9EE8005E145D /* merchant_es1.png */; };
@@ -159,6 +158,10 @@
 		18D7C4941D5B12C700AEF545 /* zijie.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D7C4931D5B12C700AEF545 /* zijie.png */; };
 		18D846491ED570510048F010 /* 下角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D846471ED570510048F010 /* 下角标.png */; };
 		18D8464A1ED570510048F010 /* 上角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D846481ED570510048F010 /* 上角标.png */; };
+		18D8464C1ED591630048F010 /* 线下角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D8464B1ED591630048F010 /* 线下角标.png */; };
+		18D8464F1ED591C90048F010 /* 优惠券背景线下.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D8464D1ED591C90048F010 /* 优惠券背景线下.png */; };
+		18D846501ED591C90048F010 /* 优惠券背景线上.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D8464E1ED591C90048F010 /* 优惠券背景线上.png */; };
+		18D846581ED5935E0048F010 /* 下角标ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D846571ED5935E0048F010 /* 下角标ss.png */; };
 		18D89C641D51CE1000717B11 /* GoShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D89C631D51CE1000717B11 /* GoShopViewController.m */; };
 		18D89C671D51EF4900717B11 /* select_false.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D89C651D51EF4900717B11 /* select_false.png */; };
 		18D89C681D51EF4900717B11 /* select_true.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D89C661D51EF4900717B11 /* select_true.png */; };
@@ -1352,7 +1355,6 @@
 		18A4B6F01D33933B00EFBCC1 /* 椭圆-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆-02.png"; sourceTree = "<group>"; };
 		18A4B6F11D33933B00EFBCC1 /* 椭圆-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆-01.png"; sourceTree = "<group>"; };
 		18A72C5A1ED563E8005FDF87 /* 线上角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "线上角标.png"; sourceTree = "<group>"; };
-		18A72C5C1ED563F0005FDF87 /* 线下角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "线下角标.png"; sourceTree = "<group>"; };
 		18BCCDC41D3C9EE8005E145D /* back_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_04.png; sourceTree = "<group>"; };
 		18BCCDC51D3C9EE8005E145D /* merchant_ed1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = merchant_ed1.png; sourceTree = "<group>"; };
 		18BCCDC61D3C9EE8005E145D /* merchant_es1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = merchant_es1.png; sourceTree = "<group>"; };
@@ -1394,6 +1396,10 @@
 		18D7C4931D5B12C700AEF545 /* zijie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zijie.png; sourceTree = "<group>"; };
 		18D846471ED570510048F010 /* 下角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下角标.png"; sourceTree = "<group>"; };
 		18D846481ED570510048F010 /* 上角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上角标.png"; sourceTree = "<group>"; };
+		18D8464B1ED591630048F010 /* 线下角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "线下角标.png"; sourceTree = "<group>"; };
+		18D8464D1ED591C90048F010 /* 优惠券背景线下.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "优惠券背景线下.png"; sourceTree = "<group>"; };
+		18D8464E1ED591C90048F010 /* 优惠券背景线上.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "优惠券背景线上.png"; sourceTree = "<group>"; };
+		18D846571ED5935E0048F010 /* 下角标ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "下角标ss.png"; path = "../../../apple/Desktop/下角标ss.png"; sourceTree = "<group>"; };
 		18D89C621D51CE1000717B11 /* GoShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoShopViewController.h; sourceTree = "<group>"; };
 		18D89C631D51CE1000717B11 /* GoShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoShopViewController.m; sourceTree = "<group>"; };
 		18D89C651D51EF4900717B11 /* select_false.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_false.png; sourceTree = "<group>"; };
@@ -3343,6 +3349,7 @@
 		180C3D601E514E8100BC9177 /* 领取优惠券 */ = {
 			isa = PBXGroup;
 			children = (
+				18D846571ED5935E0048F010 /* 下角标ss.png */,
 				D98E5B8D1E5150FC009D56BF /* GetDiscountCouponVC.h */,
 				D98E5B8E1E5150FC009D56BF /* GetDiscountCouponVC.m */,
 			);
@@ -4463,6 +4470,8 @@
 				D9501DD11DD024450090A911 /* home首页 */,
 				D9501DD21DD04A7A0090A911 /* 广告专区 */,
 				189411421D8052FE00314E11 /* playvedio.jpg */,
+				18D8464D1ED591C90048F010 /* 优惠券背景线下.png */,
+				18D8464E1ED591C90048F010 /* 优惠券背景线上.png */,
 				D9ABB19F1EC93EF900FBE080 /* NewShopDetailVC.h */,
 				D9ABB1A01EC93EF900FBE080 /* NewShopDetailVC.m */,
 				D9ABB1A61EC9406E00FBE080 /* 查看更多评价 */,
@@ -4792,7 +4801,7 @@
 				D94B52541D4AEA4500C067B3 /* 代金券-03.png */,
 				D977C1451EC97BE800CA5AF5 /* WechatIMG16.png */,
 				18A72C5A1ED563E8005FDF87 /* 线上角标.png */,
-				18A72C5C1ED563F0005FDF87 /* 线下角标.png */,
+				18D8464B1ED591630048F010 /* 线下角标.png */,
 				D936F5811D473CBF00424B22 /* MyCashCouponViewController.h */,
 				D936F5821D473CBF00424B22 /* MyCashCouponViewController.m */,
 				187E94BC1ED2D8FF007EF19F /* OFFLINEVC.h */,
@@ -6687,7 +6696,6 @@
 				D92C632E1CC8DA08006768C6 /* delete.png in Resources */,
 				D9D50DBB1D87DE3200A5E469 /* lxh_beicui.png in Resources */,
 				D923D99C1D2B7F59009422EB /* data.png in Resources */,
-				18A72C5D1ED563F0005FDF87 /* 线下角标.png in Resources */,
 				D9541EA61E1FA994003022E5 /* 商消乐002.png in Resources */,
 				D9AB25411D88E4ED000E9288 /* VoiceSearchFeedback019@2x.png in Resources */,
 				D9AE75351D2E382B00269EC5 /* welcom_3.png in Resources */,
@@ -6808,6 +6816,7 @@
 				D94DF25F1CAE0DB8000D5B69 /* result_small_star_disable.png in Resources */,
 				18F27EEA1D640E84002DD03A /* 头像-2.png in Resources */,
 				18D7C48C1D5B12BA00AEF545 /* mohu-08.png in Resources */,
+				18D8464C1ED591630048F010 /* 线下角标.png in Resources */,
 				180CC7C01E64110D002F5E35 /* 收费标准.png in Resources */,
 				1CF283991C58C48900F3952A /* merchant_default.png in Resources */,
 				D94DF25E1CAE0DB8000D5B69 /* result_small_star_disable_iphone@2x.png in Resources */,
@@ -6833,6 +6842,7 @@
 				1852FB041D55C962009CF1B2 /* 代金券-02.png in Resources */,
 				D947E45B1D7D3AE700F9FEE8 /* 聊天键盘-icon-拍照-点击@2x.png in Resources */,
 				18F032081E5ED79300ACD261 /* tempProducts_03.jpg in Resources */,
+				18D846501ED591C90048F010 /* 优惠券背景线上.png in Resources */,
 				D93C0D5D1D251E7B001A1AC1 /* 小标-12.png in Resources */,
 				18D7C48E1D5B12BA00AEF545 /* mohu-10.png in Resources */,
 				D92302601D1528BB008FB9A9 /* entrance_default.png in Resources */,
@@ -7056,6 +7066,7 @@
 				D9541EA01E1F65B1003022E5 /* 登陆-05.png in Resources */,
 				D9FF0D981D53304C00443312 /* 图标-10new.png in Resources */,
 				18E000581E5C40D7004884CC /* adver_sample.png in Resources */,
+				18D8464F1ED591C90048F010 /* 优惠券背景线下.png in Resources */,
 				181F9C991ECBFF82003A62AE /* xilietishi.png in Resources */,
 				D9D315DB1E07C9E5009FB465 /* QQ20161219-0.png in Resources */,
 				D94DF2601CAE0DB8000D5B69 /* result_small_star_disable@2x.png in Resources */,
@@ -7063,6 +7074,7 @@
 				D9F1301A1D8E8E3700E82F38 /* zhoubianHL@2x.png in Resources */,
 				D94DF23C1CAE08F7000D5B69 /* share.png in Resources */,
 				D92302521D14E5A8008FB9A9 /* welcom_2.jpg in Resources */,
+				18D846581ED5935E0048F010 /* 下角标ss.png in Resources */,
 				D97F601B1D62F770000EE794 /* 注册-06.png in Resources */,
 				1C2ED1241C5B5868003EE93B /* 1-02(1)@2x.png in Resources */,
 				D949C15B1CBF7E4D0091D8FC /* bankcard.png in Resources */,
