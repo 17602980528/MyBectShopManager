@@ -36,7 +36,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"注册";
+    self.navigationItem.title = @"用户注册";
     self.view.backgroundColor = [UIColor whiteColor];
     
     //    打开触摸 添加单击手势
