@@ -60,7 +60,6 @@
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
     _scrollView.scrollEnabled=YES;
     _scrollView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
-    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, SCREENHEIGHT);
     [self.view addSubview:_scrollView];
     
     UITapGestureRecognizer *tapBgView=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tfDismiss:)];
@@ -223,6 +222,11 @@
     completeAddAction.layer.cornerRadius=5.0f;
     completeAddAction.clipsToBounds=YES;
     [completeAddAction addTarget:self action:@selector(completeAddActionEvents) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    _scrollView.contentSize=CGSizeMake(SCREENWIDTH, completeAddAction.bottom+20);
+
     
     [self _inittable];
 
