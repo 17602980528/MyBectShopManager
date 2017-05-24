@@ -165,7 +165,7 @@
      date_end => 结束日期
      content => 优惠券内容
      */
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/get",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/merchantGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     [params setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];

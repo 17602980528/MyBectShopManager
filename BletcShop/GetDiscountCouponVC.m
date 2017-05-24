@@ -270,7 +270,7 @@
 //获取发布优惠券商家列表
 -(void)postGetCouponRequest{
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/get",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/marketGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     if (appdelegate.IsLogin) {
