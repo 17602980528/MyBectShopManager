@@ -102,16 +102,16 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
         
-    }else if (alertView.tag==999) {
-        //支付成功提示框
-        if (buttonIndex==0) {
-            [self.navigationController popViewControllerAnimated:YES];
-            
-            
-        }
-        
-    }else{
-        
+//    }else if (alertView.tag==999) {
+//        //支付成功提示框
+//        if (buttonIndex==0) {
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//            
+//        }
+//        
+//    }else{
+//        
         
     }
     
@@ -178,10 +178,23 @@
              SoundPaly *sound=[SoundPaly sharedManager:@"sms-received1" type:@"caf"];
              [sound play];
              
-             UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功,是否返回上一页面?" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:@"取消", nil];
-             altView.tag =999;
              
-             [altView show];
+             
+             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付成功,是否返回上一页面?" preferredStyle:UIAlertControllerStyleAlert];
+             UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                 [self.navigationController popViewControllerAnimated:YES];
+
+             }];
+             
+             UIAlertAction *sure = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+             }];
+             [alertController addAction:cancle];
+             [alertController addAction:sure];
+             
+             
+             [self presentViewController:alertController animated:YES completion:nil];
+
+
              //提交消费记录,先获取店铺名
              //             [self getShopName];
              

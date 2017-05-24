@@ -12,7 +12,7 @@
 #import "GetMoneyFailVC.h"
 
 
-@interface GetMoneyNowVC ()<UITextFieldDelegate>
+@interface GetMoneyNowVC ()<UITextFieldDelegate,UIAlertViewDelegate>
 {
     UILabel *bankName;
     UILabel *bankAccount;
@@ -91,11 +91,13 @@
         }
         if (i==1) {
             
-             text_Field = [[UITextField alloc]initWithFrame:CGRectMake(SCREENWIDTH-115, 45+(45-30)/2, 100, 30)];
+             text_Field = [[UITextField alloc]initWithFrame:CGRectMake(SCREENWIDTH-265, 45+(45-30)/2, 250, 30)];
             text_Field.textAlignment= NSTextAlignmentRight;
-            text_Field.placeholder= @"输入提现金额";
+            text_Field.placeholder= @"提现金额(100的整数倍)";
+            text_Field.keyboardType = UIKeyboardTypeNumberPad;
             text_Field.textColor= RGB(51,51,51);
             text_Field.font = [UIFont systemFontOfSize:16];
+            text_Field.clearsOnBeginEditing = YES;
             text_Field.delegate= self;
             [View2 addSubview:text_Field];
         }
@@ -122,8 +124,10 @@
 
 }
 -(void)sureClick{
-    NSLog(@"立即提现");
-    if (text_Field.text.length==0) {
+    NSLog(@"立即提现===%@",text_Field.text);
+    [text_Field resignFirstResponder];
+    
+    if ([text_Field.text intValue]==0) {
         [self tishi:@"请输入金额!"];
        
 
@@ -133,7 +137,29 @@
     }else
         
     if ([self.moneyString floatValue]>=[text_Field.text floatValue]) {
-        [self postSocketGetMoney];
+        
+        NSString *ss = [NSString stringWithFormat:@"本次提现金额%@元",text_Field.text];
+        
+        
+
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:ss message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"提现" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self postSocketGetMoney];
+        }];
+        [alertController addAction:cancle];
+        [alertController addAction:sure];
+        
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        NSLog(@"立即===%@",text_Field.text);
+
+        
 
     }else{
         [self tishi:@"余额不足!"];
@@ -269,13 +295,41 @@
     
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    int sss = [textField.text intValue]/100;
+    
+    text_Field.text = [NSString stringWithFormat:@"%d",sss*100];
 
+    
+}
+
+//-(void)textFieldChange:(UITextField*)textField{
+//    
+//    if (textField.text.length>=3) {
+//        int sss = [textField.text intValue]/100;
+//        
+//        text_Field.text = [NSString stringWithFormat:@"%d",sss*100];
+//    }
+//    
+//    
+//}
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     return YES;
 }
 
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==1) {
+        [self postSocketGetMoney];
+    }
+}
 -(void)tishi:(NSString *)tishi{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
