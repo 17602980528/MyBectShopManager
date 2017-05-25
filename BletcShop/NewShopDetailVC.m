@@ -88,7 +88,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = RGB(234, 234, 234);
     scrollViewOffSet = 0.0f;
 //    _webHight = 0.0f;
 //    
@@ -126,7 +126,7 @@
     table.delegate = self;
     table.dataSource = self;
     table.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    table.backgroundColor = RGB(234, 234, 234);
     table.showsVerticalScrollIndicator = NO;
     self.shopTableView = table;
     [self.view addSubview:table];
