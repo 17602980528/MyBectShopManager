@@ -144,6 +144,10 @@
 		18CB32D91D6C2B2B005A9D64 /* UIBarButtonItem+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32CF1D6C2B2B005A9D64 /* UIBarButtonItem+Extends.m */; };
 		18CB32DA1D6C2B2B005A9D64 /* UIImage+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32D11D6C2B2B005A9D64 /* UIImage+Extends.m */; };
 		18CB32DB1D6C2B2B005A9D64 /* UINavigationController+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CB32D31D6C2B2B005A9D64 /* UINavigationController+Extends.m */; };
+		18D43E461ED6D4EC0077861A /* NSTimer+addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D43E411ED6D4EC0077861A /* NSTimer+addition.m */; };
+		18D43E471ED6D4EC0077861A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D43E431ED6D4EC0077861A /* UIView+Frame.m */; };
+		18D43E481ED6D4EC0077861A /* WYWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D43E451ED6D4EC0077861A /* WYWebProgressLayer.m */; };
+		18D43E4E1ED6DC9C0077861A /* 帮助中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D43E4D1ED6DC9C0077861A /* 帮助中心@2x.png */; };
 		18D7C47E1D5B113800AEF545 /* NewLastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7C4781D5B113800AEF545 /* NewLastViewController.m */; };
 		18D7C47F1D5B113800AEF545 /* XieYiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7C47A1D5B113800AEF545 /* XieYiViewController.m */; };
 		18D7C48A1D5B12BA00AEF545 /* mohu-06.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D7C4811D5B12BA00AEF545 /* mohu-06.png */; };
@@ -1382,6 +1386,13 @@
 		18CB32D31D6C2B2B005A9D64 /* UINavigationController+Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Extends.m"; sourceTree = "<group>"; };
 		18CB32D41D6C2B2B005A9D64 /* HKModelMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKModelMarco.h; sourceTree = "<group>"; };
 		18CB32D51D6C2B2B005A9D64 /* HKViewMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKViewMarco.h; sourceTree = "<group>"; };
+		18D43E401ED6D4EC0077861A /* NSTimer+addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+addition.h"; sourceTree = "<group>"; };
+		18D43E411ED6D4EC0077861A /* NSTimer+addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+addition.m"; sourceTree = "<group>"; };
+		18D43E421ED6D4EC0077861A /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		18D43E431ED6D4EC0077861A /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		18D43E441ED6D4EC0077861A /* WYWebProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYWebProgressLayer.h; sourceTree = "<group>"; };
+		18D43E451ED6D4EC0077861A /* WYWebProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYWebProgressLayer.m; sourceTree = "<group>"; };
+		18D43E4D1ED6DC9C0077861A /* 帮助中心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "帮助中心@2x.png"; sourceTree = "<group>"; };
 		18D7C4771D5B113800AEF545 /* NewLastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLastViewController.h; sourceTree = "<group>"; };
 		18D7C4781D5B113800AEF545 /* NewLastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLastViewController.m; sourceTree = "<group>"; };
 		18D7C4791D5B113800AEF545 /* XieYiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XieYiViewController.h; sourceTree = "<group>"; };
@@ -3267,6 +3278,7 @@
 		079386FE1C55E9700021B385 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18D43E4D1ED6DC9C0077861A /* 帮助中心@2x.png */,
 				D98011C91DF7AAE800CE09CA /* 5383.wav */,
 				D94B86E61D6BED5D00E15A70 /* app_icon3.png */,
 				D97F601F1D6306F4000EE794 /* 分享.jpg */,
@@ -5101,6 +5113,12 @@
 				D9C0E9601DCC891500FD1199 /* HomeShopModel.m */,
 				18C038991E693C8B005F7AA9 /* HotNewsVC.h */,
 				18C0389A1E693C8B005F7AA9 /* HotNewsVC.m */,
+				18D43E401ED6D4EC0077861A /* NSTimer+addition.h */,
+				18D43E411ED6D4EC0077861A /* NSTimer+addition.m */,
+				18D43E421ED6D4EC0077861A /* UIView+Frame.h */,
+				18D43E431ED6D4EC0077861A /* UIView+Frame.m */,
+				18D43E441ED6D4EC0077861A /* WYWebProgressLayer.h */,
+				18D43E451ED6D4EC0077861A /* WYWebProgressLayer.m */,
 			);
 			name = "home首页";
 			sourceTree = "<group>";
@@ -6686,6 +6704,7 @@
 				D9CF3FA91D7687FA00D9D0EC /* danghan.png in Resources */,
 				D9FF0D911D53304C00443312 /* 图标-03new.png in Resources */,
 				D9345E6B1E769805006B2AC1 /* TopActiveListTableVC.xib in Resources */,
+				18D43E4E1ED6DC9C0077861A /* 帮助中心@2x.png in Resources */,
 				18F4BF6A1D41BB21003F0F66 /* c_se.png in Resources */,
 				D95BAE511D542FD500ED0CDC /* award_07.png in Resources */,
 				D981FD0C1E2616080026E4B2 /* WeiboSDK.bundle in Resources */,
@@ -7345,6 +7364,7 @@
 				D94DF24C1CAE0AA4000D5B69 /* DLStarRatingControl.m in Sources */,
 				D95A87691E728ADF00BDAC75 /* JFAreaDataManager.m in Sources */,
 				D947E4871D7D710200F9FEE8 /* FMResultSet.m in Sources */,
+				18D43E471ED6D4EC0077861A /* UIView+Frame.m in Sources */,
 				1CDA9E111C5A142900DFE518 /* ShopVipController.m in Sources */,
 				18F4CD491D6FD6BD008FBAD1 /* MoneyPAYViewController.m in Sources */,
 				D94112E51CE968D8008E231F /* Product.m in Sources */,
@@ -7397,6 +7417,7 @@
 				D9B3A5A51D74255700F3F27E /* MWPhoto.m in Sources */,
 				18BE63BB1E681F1D001563C6 /* ConvertCostVC.m in Sources */,
 				18E3DA1A1D8287450089597B /* ChangePasswordViewController.m in Sources */,
+				18D43E461ED6D4EC0077861A /* NSTimer+addition.m in Sources */,
 				D92C632B1CC8C8D4006768C6 /* AdminViewController.m in Sources */,
 				D958AD691E654CF200B0776F /* JHPieItemsView.m in Sources */,
 				183577411EC40AFF00F321F1 /* CheckOldPassVC.m in Sources */,
@@ -7450,6 +7471,7 @@
 				D94743931CE56A6000D1D3EE /* LNLocationGeocoder.m in Sources */,
 				D98E5BFE1E515210009D56BF /* MASConstraintMaker.m in Sources */,
 				18543E4B1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m in Sources */,
+				18D43E481ED6D4EC0077861A /* WYWebProgressLayer.m in Sources */,
 				D98ECBC91D9CC52200BEDD57 /* LZDAddVipCell.m in Sources */,
 				D9ACF1AF1E24CB4200BCC877 /* thirdlogVC.m in Sources */,
 				D9345E6A1E769805006B2AC1 /* TopActiveListTableVC.m in Sources */,
