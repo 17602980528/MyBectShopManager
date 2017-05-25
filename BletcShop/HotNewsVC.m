@@ -11,6 +11,8 @@
 @interface HotNewsVC ()<UIWebViewDelegate>
 {
     MBProgressHUD *hud;
+    UIWebView *_webView;
+    UILabel *label;
 }
 @end
 
@@ -19,15 +21,48 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    self.navigationItem.title=@"商消乐头条";
-    hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.userInteractionEnabled = YES;
     
-    UIWebView *_webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
+     _webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
     _webView.delegate=self;
     [self.view addSubview:_webView];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:
-                                                        self.href]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.href]]];
+    
+    
+    if ([self.href containsString:@"http://www.cnconsum.com/cnconsum/helpCenter/"]) {
+        _webView.frame = CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT-64);
+        
+        
+        UIView *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 64)];
+        navView.backgroundColor = NavBackGroundColor;
+        [self.view addSubview:navView];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 18, 70, 44)];
+        [btn setTitle:@"返回" forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:navView];
+        [navView addSubview:btn];
+        
+         label=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-50, 18, 100, 44)];
+        label.font=[UIFont systemFontOfSize:19.0f];
+        label.text=@"常见问题";
+        label.textAlignment=1;
+        label.textColor=[UIColor whiteColor];
+        [navView addSubview:label];
+
+        
+       
+    }
+    
+}
+-(void)backClick{
+    NSLog(@"======%d===%d",_webView.canGoBack,_webView.canGoForward);
+    
+    [_webView goBack];
+    if (!_webView.canGoBack) {
+           [self dismissViewControllerAnimated:YES completion:nil];
+
+    }
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [hud hideAnimated:YES afterDelay:0.0f];

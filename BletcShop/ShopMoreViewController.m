@@ -14,7 +14,7 @@
 #import "BackChooseStateViewController.h"
 #import "NewNextViewController.h"
 
-#import "AuthFailShopVC.h"
+#import "HotNewsVC.h"
 @interface ShopMoreViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSArray *data;
 @property(nonatomic,weak)UITableView *setTable;
@@ -48,7 +48,7 @@
 //            
         
 
-            _data = @[@[@"我的账户"],@[@"退出",@"切换账号"],@[@"意见反馈"]];
+            _data = @[@[@"我的账户"],@[@"退出",@"切换账号"],@[@"意见反馈",@"帮助中心"]];
             
 //        }else{
 //            _data = @[@[@"我的账户",@"认证信息"],@[@"退出",@"切换账号"],@[@"意见反馈",@"商户未认证"]];
@@ -161,7 +161,9 @@
 
         }else{
 
-            AuthFailShopVC *VC = [[AuthFailShopVC alloc]init];
+            HotNewsVC *VC = [[HotNewsVC alloc]init];
+            VC.title = @"帮助中心";
+            VC.href = @"http://www.cnconsum.com/cnconsum/helpCenter/merchant";
             [self presentViewController:VC animated:YES completion:nil];
         }
       }

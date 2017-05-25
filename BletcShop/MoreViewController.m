@@ -25,6 +25,7 @@
 
 #import "SDImageCache.h"
 #import "ContactSeverViewController.h"
+#import "HotNewsVC.h"
 @interface MoreViewController()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)NSArray *data;
@@ -53,7 +54,7 @@
 {
     if (_data == nil) {
 //        _data = @[@[@"联系共同会员",@"邀请好友使用"],@[@"退出",@"切换用户"],@[@"意见反馈"]];
-        _data = @[@[@"切换用户"],@[@"清理缓存",@"意见反馈",@"联系客服"]];
+        _data = @[@[@"切换用户"],@[@"清理缓存",@"意见反馈",@"联系客服",@"帮助中心"]];
 
     }
     return _data;
@@ -160,9 +161,17 @@
         }else if (indexPath.row==1){
             FeedBackViewController *feedBackView = [[FeedBackViewController alloc]init];
             [self.navigationController pushViewController:feedBackView animated:YES];
-        }else{
+        }else if (indexPath.row==2){
             ContactSeverViewController *severVC=[[ContactSeverViewController alloc]init];
             [self.navigationController pushViewController:severVC animated:YES];
+        }else{
+            
+            HotNewsVC *VC = [[HotNewsVC alloc]init];
+            VC.title = @"帮助中心";
+            VC.href = @"http://www.cnconsum.com/cnconsum/helpCenter/user";
+
+            [self presentViewController:VC animated:YES completion:nil];
+            
         }
         
     }

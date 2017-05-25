@@ -186,6 +186,15 @@
             
             [cell addSubview:cardImageView];
             
+            
+            UILabel *code_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, cardImageView.width-5, 9)];
+            code_lab.textColor = RGB(255,255,255);
+            code_lab.textAlignment = NSTextAlignmentRight;
+            code_lab.text = [NSString stringWithFormat:@"%@",cardInfo_dic[@"card_code"]];
+            code_lab.font = [UIFont systemFontOfSize:9];
+            [cardImageView addSubview:code_lab];
+
+            
             UILabel *typeAndeLevel = [[UILabel alloc]initWithFrame:CGRectMake(12, 30, cardImageView.width-12, 23)];
             typeAndeLevel.textColor = RGB(255,255,255);
             typeAndeLevel.text = [NSString stringWithFormat:@"%@(%@)",cardInfo_dic[@"card_type"],cardInfo_dic[@"card_level"]];

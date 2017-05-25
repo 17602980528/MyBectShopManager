@@ -1638,6 +1638,7 @@
 - (void)gyChangeTextView:(GYChangeTextView *)textView didTapedAtIndex:(NSInteger)index {
     NSLog(@"%ld",index);
     HotNewsVC *vc=[[HotNewsVC alloc]init];
+    vc.title = @"商消乐头条";
     vc.href=self.advertiseHeaderList[index][@"href"];
     [self.navigationController pushViewController:vc animated:YES];
 }
