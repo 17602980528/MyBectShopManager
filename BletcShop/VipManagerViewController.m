@@ -220,19 +220,19 @@
     NSDictionary *dic=self.data[indexPath.row];
     NSString *state=dic[@"display_state"];
     if ([state isEqualToString:@"on"]) {
-        [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"off"];
+        [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"off" cardLevel:dic[@"level"]];
     }else{
-        [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"on"];
+        [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"on" cardLevel:dic[@"level"]];
     }
 }
--(void)postRequestGetCardsLists:(NSString *)muid code:(NSString *)code display_state:(NSString *)state{
+-(void)postRequestGetCardsLists:(NSString *)muid code:(NSString *)code display_state:(NSString *)state cardLevel:(NSString *)level{
     
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/card/turn",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:muid forKey:@"muid"];
     [params setObject:code forKey:@"code"];
     [params setObject:state forKey:@"display_state"];
-    
+    [params setObject:level forKey:@"level"];
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"result===%@", result);
