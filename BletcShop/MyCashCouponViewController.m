@@ -95,7 +95,7 @@
             if (self.useCoupon ==100) {
                 for (NSDictionary *dic in arr) {
                     
-                    if ([dic[@"pri_condition"] floatValue] >= [self.moneyString floatValue]) {
+                    if ([dic[@"pri_condition"] floatValue] <= [self.moneyString floatValue]) {
                         [self.couponArray addObject:dic];
 
                     }
@@ -145,7 +145,7 @@
         [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,dic[@"image_url"]]]];
         cell.shopNamelab.text=dic[@"store"];
         cell.couponMoney.text=dic[@"sum"];
-        cell.deadTime.text= [NSString stringWithFormat:@"%@~%@",dic[@"date_start"],dic[@"date_end"]];
+        cell.deadTime.text= [NSString stringWithFormat:@"有效期:%@~%@",dic[@"date_start"],dic[@"date_end"]];
         cell.limitLab.text=dic[@"content"];
         if ([dic[@"validate"] isEqualToString:@"true"]) {
             cell.showImg.hidden = YES ;

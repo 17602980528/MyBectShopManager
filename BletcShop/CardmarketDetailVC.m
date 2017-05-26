@@ -745,6 +745,12 @@
             }
             
         }
+    }else{
+        
+        self.block();
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
     }
     
 }

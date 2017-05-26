@@ -13,6 +13,9 @@ static NSString *identifier = @"couponCellId";
 
 @interface CouponCell : UITableViewCell
 
+@property(nonatomic,strong)CAGradientLayer *gradientLayer;
+
+
 @property (nonatomic , strong) UILabel *shopNamelab;// 店名
 
 @property (nonatomic , strong) UILabel *couponMoney;// 价格

@@ -515,6 +515,9 @@
     [_refreshheader endRefreshing];
     
     CardmarketDetailVC *VC = [[CardmarketDetailVC alloc]init];
+    VC.block = ^{
+        [self getDataWithMore:@""];
+    };
     
     VC.model = self.data_A[indexPath.row];
     [self.navigationController pushViewController:VC animated:YES];

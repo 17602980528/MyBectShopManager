@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 enum OrderTypes{
     points,//红包
-    Wares//优惠券
+    Wares,//商户优惠券
+    plat_Ware//平台优惠券
 };
 @interface NewBuyCardViewController : UIViewController
 @property (nonatomic,retain)UITableView *myTable;
@@ -25,10 +26,12 @@ enum OrderTypes{
 
 @property (nonatomic , strong) NSDictionary *coup_dic;// 优惠券信息
 
+@property (nonatomic , strong) NSDictionary *plat_coup_dic;// 平台优惠券信息
+
 @property (nonatomic , strong) NSDictionary *card_dic;// 卡的信息
 @property(nonatomic,strong)NSArray *cardListArray;
 
-@property(nonatomic,copy)NSString *pay_Type;
+//@property(nonatomic,copy)NSString *pay_Type;
 
 @property (nonatomic,copy)NSString *shop_name;// 店名
 @property(nonatomic) NSInteger selectRow;

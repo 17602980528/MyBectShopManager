@@ -93,7 +93,7 @@
             
              text_Field = [[UITextField alloc]initWithFrame:CGRectMake(SCREENWIDTH-265, 45+(45-30)/2, 250, 30)];
             text_Field.textAlignment= NSTextAlignmentRight;
-            text_Field.placeholder= @"提现金额(100的整数倍)";
+            text_Field.placeholder= @"输入提现金额";
             text_Field.keyboardType = UIKeyboardTypeNumberPad;
             text_Field.textColor= RGB(51,51,51);
             text_Field.font = [UIFont systemFontOfSize:16];
@@ -295,14 +295,14 @@
     
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    int sss = [textField.text intValue]/100;
-    
-    text_Field.text = [NSString stringWithFormat:@"%d",sss*100];
-
-    
-}
+//-(void)textFieldDidEndEditing:(UITextField *)textField{
+//    
+//    int sss = [textField.text intValue]/100;
+//    
+//    text_Field.text = [NSString stringWithFormat:@"%d",sss*100];
+//
+//    
+//}
 
 //-(void)textFieldChange:(UITextField*)textField{
 //    

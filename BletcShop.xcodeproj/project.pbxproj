@@ -1040,6 +1040,8 @@
 		D9C4CDEA1DE4161E009C76C1 /* MyOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C4CDE91DE4161E009C76C1 /* MyOrderDetailVC.m */; };
 		D9C4CDED1DE44587009C76C1 /* ValuePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C4CDEC1DE44587009C76C1 /* ValuePickerView.m */; };
 		D9C7D45E1E2F3BEB00ADB6A1 /* MoneybagDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C7D45D1E2F3BEB00ADB6A1 /* MoneybagDetailVC.m */; };
+		D9CACCFC1ED7BEBF002DC49A /* PlatCouponsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CACCFA1ED7BEBF002DC49A /* PlatCouponsVC.m */; };
+		D9CACCFD1ED7BEBF002DC49A /* PlatCouponsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CACCFB1ED7BEBF002DC49A /* PlatCouponsVC.xib */; };
 		D9CDFB691CC47F7C0054EBE3 /* BDMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CDFB681CC47F7C0054EBE3 /* BDMapViewController.m */; };
 		D9CDFBB51CC4CE5B0054EBE3 /* CustomIOSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CDFBB41CC4CE5B0054EBE3 /* CustomIOSAlertView.m */; };
 		D9CDFBB81CC4DB8C0054EBE3 /* ShopManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CDFBB71CC4DB8C0054EBE3 /* ShopManagerViewController.m */; };
@@ -2795,6 +2797,9 @@
 		D9C4CDEC1DE44587009C76C1 /* ValuePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuePickerView.m; sourceTree = "<group>"; };
 		D9C7D45C1E2F3BEB00ADB6A1 /* MoneybagDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneybagDetailVC.h; sourceTree = "<group>"; };
 		D9C7D45D1E2F3BEB00ADB6A1 /* MoneybagDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneybagDetailVC.m; sourceTree = "<group>"; };
+		D9CACCF91ED7BEBF002DC49A /* PlatCouponsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatCouponsVC.h; sourceTree = "<group>"; };
+		D9CACCFA1ED7BEBF002DC49A /* PlatCouponsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatCouponsVC.m; sourceTree = "<group>"; };
+		D9CACCFB1ED7BEBF002DC49A /* PlatCouponsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlatCouponsVC.xib; sourceTree = "<group>"; };
 		D9CDFB671CC47F7C0054EBE3 /* BDMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMapViewController.h; sourceTree = "<group>"; };
 		D9CDFB681CC47F7C0054EBE3 /* BDMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMapViewController.m; sourceTree = "<group>"; };
 		D9CDFBB31CC4CE5B0054EBE3 /* CustomIOSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomIOSAlertView.h; path = ../../CustomIOSAlertView.h; sourceTree = "<group>"; };
@@ -4204,6 +4209,9 @@
 				D986A1B41DE542C7007B798B /* 提现成功与失败 */,
 				1CB53C071C571FC8002B6CC1 /* MyMoneybagController.h */,
 				1CB53C081C571FC8002B6CC1 /* MyMoneybagController.m */,
+				D9CACCF91ED7BEBF002DC49A /* PlatCouponsVC.h */,
+				D9CACCFA1ED7BEBF002DC49A /* PlatCouponsVC.m */,
+				D9CACCFB1ED7BEBF002DC49A /* PlatCouponsVC.xib */,
 				D95F03221DD95D5500F9DC2F /* GetMoneyNowVC.h */,
 				D95F03231DD95D5500F9DC2F /* GetMoneyNowVC.m */,
 				D95F03251DD9664900F9DC2F /* BankListViewController.h */,
@@ -6843,6 +6851,7 @@
 				D94DF25E1CAE0DB8000D5B69 /* result_small_star_disable_iphone@2x.png in Resources */,
 				D95869391E4DA4EE00E91A47 /* ResetPhoneNextVC.xib in Resources */,
 				18F032031E5ED79300ACD261 /* points.jpg in Resources */,
+				D9CACCFD1ED7BEBF002DC49A /* PlatCouponsVC.xib in Resources */,
 				1C2ED1271C5B5868003EE93B /* 2-02(1)@2x.png in Resources */,
 				D95BAE4D1D542FD500ED0CDC /* award_03.png in Resources */,
 				18D7C4911D5B12BA00AEF545 /* mohu-13.png in Resources */,
@@ -7699,6 +7708,7 @@
 				D980B6701D78066D00CC6637 /* AddFriendTableViewController.m in Sources */,
 				D9EE55681DC9CC090024C830 /* shareCardModel.m in Sources */,
 				D9B3A5A31D74255700F3F27E /* MWGridCell.m in Sources */,
+				D9CACCFC1ED7BEBF002DC49A /* PlatCouponsVC.m in Sources */,
 				D958AD6D1E654CF200B0776F /* JHShowInfoView.m in Sources */,
 				D947E4761D7D4CB000F9FEE8 /* UIView+SDExtension.m in Sources */,
 				D9DEED211CACED7C00ACDD00 /* SDWebImageManager+MJ.m in Sources */,

@@ -38,17 +38,17 @@
     
     self.navigationItem.title = @"我的红包";
     self.view.backgroundColor = [UIColor whiteColor];
-//    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithTitle:@"提现" style:UIBarButtonItemStylePlain target:self action:@selector(withdrawCash)];
-//    self.navigationItem.rightBarButtonItem=item;
+    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithTitle:@"提现" style:UIBarButtonItemStylePlain target:self action:@selector(withdrawCash)];
+    self.navigationItem.rightBarButtonItem=item;
     [self creatTopView];
     
 }
-//-(void)bunosSuccess{
-//    [self getDataWithMore:@""];
-//}
+-(void)bunosSuccess{
+    [self getDataWithMore:@""];
+}
 //去提现页面
 -(void)withdrawCash{
-    if ([allMoney_lab.text floatValue]<=100) {
+    if ([allMoney_lab.text floatValue]<100) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         //hud.frame = CGRectMake(0, 64, 375, 667);
         // Set the annular determinate mode to show task progress.
@@ -62,9 +62,9 @@
         [hud hideAnimated:YES afterDelay:1.f];
     }else{
         BonusCashViewController *bonusCashVC=[[BonusCashViewController alloc]init];
-        float lastMoney=[allMoney_lab.text floatValue]-100;
+        int lastMoney=[allMoney_lab.text floatValue]/100;
         bonusCashVC.delegate=self;
-        bonusCashVC.moneyString=[NSString stringWithFormat:@"%.1f",lastMoney];
+        bonusCashVC.moneyString=[NSString stringWithFormat:@"%d",lastMoney*100];
         [self.navigationController pushViewController:bonusCashVC animated:YES];
     }
 }
@@ -201,6 +201,7 @@
         [paramer setValue:[NSString stringWithFormat:@"%d",++currentIndex] forKey:@"page"];
         
     }else{
+        [self.data_A removeAllObjects];
         currentIndex = 1;
         [paramer setValue:@"1" forKey:@"page"];
         
@@ -212,6 +213,7 @@
         [_footRefresh endRefreshing];
         [_headerRefresh endRefreshing];
         
+        NSLog(@"=====%@",result);
         if (result) {
             allMoney_lab.text = [NSString getTheNoNullStr:[NSString stringWithFormat:@"%@元",result[@"sum"]] andRepalceStr:@"0.00元"];
             NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:allMoney_lab.text];

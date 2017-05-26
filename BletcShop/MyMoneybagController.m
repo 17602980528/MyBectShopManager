@@ -20,6 +20,7 @@
 #import "GetMoneyViewController.h"
 #import "GetMoneyNowVC.h"
 #import "MoneybagDetailVC.h"
+#import "PlatCouponsVC.h"
 
 @interface MyMoneybagController ()
 {
@@ -380,14 +381,17 @@
 }
 
 -(void)priviBtnCard{
+
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    
-    hud.label.text = NSLocalizedString(@"暂未开放!", @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    [hud hideAnimated:YES afterDelay:1.f];
+    PlatCouponsVC *VC = [[PlatCouponsVC alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeText;
+//    
+//    hud.label.text = NSLocalizedString(@"暂未开放!", @"HUD message title");
+//    hud.label.font = [UIFont systemFontOfSize:13];
+//    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+//    [hud hideAnimated:YES afterDelay:1.f];
     
 }
 

@@ -8,7 +8,7 @@
 
 #import "BonusCashViewController.h"
 
-@interface BonusCashViewController ()
+@interface BonusCashViewController ()<UITextFieldDelegate>
 {
     UILabel *allMoney_lab;
     UITextField *text_Field;
@@ -54,10 +54,13 @@
         }
         if (i==1) {
             
-            text_Field = [[UITextField alloc]initWithFrame:CGRectMake(SCREENWIDTH-115, 45+(45-30)/2, 100, 30)];
+            text_Field = [[UITextField alloc]initWithFrame:CGRectMake(SCREENWIDTH-215, 45+(45-30)/2, 200, 30)];
             text_Field.textAlignment= NSTextAlignmentRight;
-            text_Field.placeholder= @"输入提现金额";
+            text_Field.delegate = self;
+            text_Field.placeholder= @"提现金额(100的整数倍)";
             text_Field.textColor= RGB(51,51,51);
+            text_Field.keyboardType = UIKeyboardTypeNumberPad;
+            text_Field.clearsOnBeginEditing = YES;
             text_Field.font = [UIFont systemFontOfSize:16];
             [View2 addSubview:text_Field];
         }
@@ -76,10 +79,45 @@
     [self.view addSubview: button];
 
 }
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    int sss = [textField.text intValue]/100;
+    
+    text_Field.text = [NSString stringWithFormat:@"%d",sss*100];
+    
+    
+}
+
 //提现
 -(void)sureClick{
+    
+    [text_Field resignFirstResponder];
+
     if ([text_Field.text floatValue]<=[allMoney_lab.text floatValue]) {
-        [self postRequest];
+        
+        
+        NSString *ss = [NSString stringWithFormat:@"本次提现金额%@元",text_Field.text];
+        
+        
+        
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:ss message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"提现" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self postRequest];
+        }];
+        [alertController addAction:cancle];
+        [alertController addAction:sure];
+        
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        
+        
     }else{
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         //hud.frame = CGRectMake(0, 64, 375, 667);
@@ -94,9 +132,9 @@
         [hud hideAnimated:YES afterDelay:1.f];
     }
 }
+
 -(void)postRequest
 {
-//    NSString *url =[[NSString alloc]initWithFormat:@"http://101.201.100.191/cnconsum/App/UserType/user/withdrawRedPacket"];
     NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/withdrawRedPacket",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];

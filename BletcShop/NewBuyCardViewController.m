@@ -13,6 +13,9 @@
 #import "MoneyBagChoiceTypeViewController.h"
 #import "MyCashCouponViewController.h"
 
+#import "PlatCouponsVC.h"
+
+
 #import "LandingController.h"
 
 #import "CardInfoViewController.h"
@@ -35,12 +38,18 @@
     }
     return _coup_dic;
 }
+-(NSDictionary *)plat_coup_dic{
+    if (!_plat_coup_dic) {
+        _plat_coup_dic = [NSDictionary dictionary];
+    }
+    return _plat_coup_dic;
+}
 - (void)sendValue:(NSDictionary *)value
 {
     self.coup_dic = value;
     
     NSLog(@"ddddddd%@",self.coup_dic);
-    self.pay_Type=@"cp";
+//    self.pay_Type=@"cp";
     self.Type = Wares;
     self.canUsePoint =0;
     
@@ -132,7 +141,7 @@
     self.canUsePoint = 0;
     //    _selectRow=0;
     payKind=0;
-    self.pay_Type=@"null";
+//    self.pay_Type=@"null";
     
     UITableView *tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-49) style:UITableViewStyleGrouped];
     tableView.delegate=self;
@@ -256,7 +265,7 @@
     if (section==0) {
         return self.cardListArray.count;
     }else if (section==1){
-        return 2;
+        return 3;
     }else{
         return 2;
     }
@@ -395,7 +404,7 @@
     }else if (indexPath.section==1){
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 0, 90, 50)];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 0, 200, 50)];
         label.font = [UIFont systemFontOfSize:15];
         [cell addSubview:label];
         
@@ -438,11 +447,11 @@
             {
                 contentlabel.text =@"不可使用红包";
             }
-        }else
+        }else if(indexPath.row==1)
         {
-            label.text = @"使用代金券";
+            label.text = @"使用商家优惠券";
             if (self.coup_dic.count>0) {
-                contentlabel.text = [[NSString alloc]initWithFormat:@"%@代金券",self.coup_dic[@"sum"]];
+                contentlabel.text = [[NSString alloc]initWithFormat:@"%@元优惠券",self.coup_dic[@"sum"]];
                 if (self.Type == Wares) {
                     imageView.image = [UIImage imageNamed:@"checkbox_yes"];
                 }else{
@@ -453,8 +462,28 @@
             
             if(([self.moneyString floatValue]<1)&&self.moneyString)
             {
-                contentlabel.text = @"不可用代金券";
+                contentlabel.text = @"不可用优惠券";
             }
+            
+        }else if(indexPath.row==2){
+            
+            label.text = @"使用商消乐优惠券";
+            if (self.plat_coup_dic.count>0) {
+                contentlabel.text = [[NSString alloc]initWithFormat:@"%@元优惠券",self.plat_coup_dic[@"sum"]];
+                if (self.Type == plat_Ware) {
+                    imageView.image = [UIImage imageNamed:@"checkbox_yes"];
+                }else{
+                    contentlabel.text =@"";
+                    
+                }
+            }
+            
+            if(([self.moneyString floatValue]<1)&&self.moneyString)
+            {
+                contentlabel.text = @"不可用优惠券";
+            }
+
+            
             
         }
         
@@ -508,10 +537,29 @@
     }
     if (indexPath.section==1)
     {
-        if(indexPath.row == 1)
+        
+        if(indexPath.row == 0)
+        {
+            if(!((([self.moneyString floatValue])/2)<1)){
+//                self.pay_Type=@"rp";
+                if (self.Type == points) {
+                    self.Type = 888;
+                    
+                }else{
+                    self.Type = points;
+                    
+                }
+                self.coup_dic=nil;
+                self.plat_coup_dic = nil;
+                [self.myTable reloadData];
+            }
+        }else if(indexPath.row == 1)
         {
             if(!([self.moneyString floatValue]<1))
             {
+                
+                self.plat_coup_dic = nil;
+
                 if (self.Type == Wares) {
                     self.Type = 888;
                     [self.myTable reloadData];
@@ -529,21 +577,60 @@
                 
             }
             
-        }
-        else if(indexPath.row == 0)
-        {
-            if(!((([self.moneyString floatValue])/2)<1)){
-                self.pay_Type=@"rp";
-                if (self.Type == points) {
+        }else if(indexPath.row ==2){
+            
+            
+            
+            if(!([self.moneyString floatValue]<1))
+            {
+                self.coup_dic=nil;
+
+                if (self.Type == plat_Ware) {
                     self.Type = 888;
+                    [self.myTable reloadData];
+                    
                     
                 }else{
-                    self.Type = points;
                     
+                    PlatCouponsVC *VC = [[PlatCouponsVC alloc]init];
+                    VC.block = ^(NSDictionary *couponInfo) {
+                        
+                       self.plat_coup_dic = couponInfo;
+                        self.Type = plat_Ware;
+
+//                        self.pay_Type=@"scp";
+
+                        NSLog(@"=====%@",self.plat_coup_dic);
+                        
+                        
+                        self.canUsePoint =0;
+                        
+                        NSString* price =self.plat_coup_dic[@"sum"];
+                        
+                        if ([self.moneyString floatValue]>=[price floatValue]) {
+                            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
+                            
+                        }
+
+                        
+                        [self.myTable reloadData];
+
+                        
+                    };
+                    VC.moneyString = self.moneyString;
+                    VC.useCoupon = 100;
+                    VC.muid =  self.cardListArray[_selectRow][@"merchant"];
+                    
+                    
+                    [self.navigationController pushViewController:VC animated:YES];
+
                 }
-                self.coup_dic=[NSDictionary dictionaryWithObject:@"0元" forKey:@"type"];
-                [self.myTable reloadData];
+                
+                
             }
+
+            
+            
         }
         
     }
@@ -568,7 +655,25 @@
             
         }
         
+    }else if(self.Type==plat_Ware)
+    {
+        NSString* price =self.plat_coup_dic[@"sum"];
+        //        if (!(([self.moneyString floatValue]*10/100)<[price floatValue])) {
+        //            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
+        //        }else
+        //        {
+        //            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]*90/100)];
+        //
+        //        }
+        
+        
+        if ([self.moneyString floatValue]>=[price floatValue]) {
+            self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
+            
+        }
+        
     }
+
     
     else if(self.Type==points)
     {
@@ -747,15 +852,24 @@
     [params setObject:@"办卡" forKey:@"type"];
     //实际支付价格.没有×100
     [params setObject:self.moneyString forKey:@"sum"];
+
     if (self.Type==Wares)
     {
+        //使用商户自己的优惠券,sum为抵扣后的值,即实际支付的价格,其他不变
+        [params setObject:[self.contentLabel.text substringFromIndex:4] forKey:@"sum"];
+
         [params setObject:@"cp" forKey:@"pay_type"];
         [params setObject:self.coup_dic[@"coupon_id"] forKey:@"content"];
     }
     else if (self.Type == points)
-    {
+    {//使用红包
         [params setObject:@"rp" forKey:@"pay_type"];
         [params setObject:[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint] forKey:@"content"];
+    }else if(self.Type ==plat_Ware){
+        //使用平台优惠券
+        [params setObject:@"scp" forKey:@"pay_type"];
+        [params setObject:self.plat_coup_dic[@"id"] forKey:@"content"];
+
     }else
     {
         [params setObject:@"null" forKey:@"pay_type"];
@@ -829,18 +943,22 @@
     order.outTradeNO = outtrade; //订单ID（由商家自行制定）
     order.subject = @"办卡"; //商品标题
     
-    if (self.Type==Wares) {
+       if (self.Type==Wares) {
         
-        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",self.pay_Type,@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"],self.coup_dic[@"sum"]];
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"cp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],[self.contentLabel.text substringFromIndex:4],self.coup_dic[@"coupon_id"]];
         
-    }else if (self.Type == points) {
+    }else if (self.Type==plat_Ware) {
+            
+            order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"scp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"],self.coup_dic[@"id"]];
+            
+        }else if (self.Type == points) {
         
         
-        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",self.pay_Type,@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"],[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint]];
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"rp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"],[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint]];
         
     }else{
         
-        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@",self.pay_Type,@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"]];
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@",@"null",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"]];
     }
     
     NSLog(@"order.body====%@",order.body);

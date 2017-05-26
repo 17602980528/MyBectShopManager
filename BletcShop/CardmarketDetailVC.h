@@ -12,6 +12,12 @@
 
 #import "CardMarketModel.h"
 @interface CardmarketDetailVC : UIViewController
+
+typedef void(^CardmarketDetailVCBlock)();
+
 @property (nonatomic , strong) CardMarketModel *model;// <#Description#>
+
+
+@property (nonatomic,copy)CardmarketDetailVCBlock block;// <#Description#>
 
 @end

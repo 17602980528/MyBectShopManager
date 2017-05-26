@@ -11,6 +11,7 @@
 #import "CouponCell.h"
 #import "SawtoothView.h"
 
+
 @implementation CouponCell
 
 
@@ -68,6 +69,8 @@
     gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(topView.frame), CGRectGetHeight(topView.frame));
     
     [topView.layer addSublayer:gradientLayer];
+    
+    self.gradientLayer = gradientLayer;
     
 
     SawtoothView *bottomView = [SawtoothView new];
@@ -140,6 +143,16 @@
     onlineImageView.image=[UIImage imageNamed:@"线上角标"];
     [backView addSubview:onlineImageView];
     self.onlineState=onlineImageView;
+    
+}
+-(void)setShopNamelab:(UILabel *)shopNamelab{
+    _shopNamelab = shopNamelab;
+}
+
+-(void)setGradientLayer:(CAGradientLayer *)gradientLayer{
+    
+    _gradientLayer = gradientLayer;
+
     
 }
 @end
