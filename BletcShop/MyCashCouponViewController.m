@@ -85,17 +85,15 @@
         [self.couponArray removeAllObjects];
 
         DebugLog(@"result---%@",result);
-        if ([result count]==0) {
-            
-          [self initNoneActiveView];
-
-        }else{
+     
             NSArray *arr = (NSArray*)result;
             
             if (self.useCoupon ==100) {
                 for (NSDictionary *dic in arr) {
                     
-                    if ([dic[@"pri_condition"] floatValue] <= [self.moneyString floatValue]) {
+                    if ([dic[@"pri_condition"] floatValue] <= [self.moneyString floatValue] && [dic[@"pri_condition"] isEqualToString:@"true"]) {
+                        
+                        
                         [self.couponArray addObject:dic];
 
                     }
@@ -110,6 +108,12 @@
                 }
  
             }
+            
+      
+        
+        if ([self.couponArray count]==0) {
+            
+            [self initNoneActiveView];
             
         }
         

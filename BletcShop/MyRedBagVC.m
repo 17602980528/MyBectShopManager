@@ -54,7 +54,7 @@
         // Set the annular determinate mode to show task progress.
         hud.mode = MBProgressHUDModeText;
         
-        hud.label.text = NSLocalizedString(@"红包金额大于100方可提现", @"HUD message title");
+        hud.label.text = NSLocalizedString(@"红包金额满100方可提现", @"HUD message title");
         hud.label.font = [UIFont systemFontOfSize:13];
         // Move to bottm center.
         //    hud.offset = CGPointMake(0.f, );

@@ -57,10 +57,11 @@
 ( 0.0784314 0.584314 0.854902 1 ),( 0.270588 0.172549 0.396078 1 )
 ( 0.631373 0.619608 0.329412 1 ),( 0.756863 0.717647 0.435294 1 )
 
+         cell.gradientLayer.colors = @[(__bridge id)RGB( arc4random()%200,  arc4random()%200,  arc4random()%200).CGColor,(__bridge id)RGB( arc4random()%256,  arc4random()%256,  arc4random()%256).CGColor];
+
          
          */
    
-        cell.gradientLayer.colors = @[(__bridge id)RGB( arc4random()%200,  arc4random()%200,  arc4random()%200).CGColor,(__bridge id)RGB( arc4random()%256,  arc4random()%256,  arc4random()%256).CGColor];
         
         NSLog(@"colors===%@",cell.gradientLayer.colors);
         NSDictionary *dic = self.couponArray[indexPath.row];
@@ -75,7 +76,7 @@
         cell.shopNamelab.font = [UIFont systemFontOfSize:27];
         cell.couponMoney.text=dic[@"sum"];
         cell.deadTime.text= [NSString stringWithFormat:@"有效期:%@~%@",dic[@"date_start"],dic[@"date_end"]];
-        cell.limitLab.text=[NSString stringWithFormat:@"满%@%@",dic[@"pri_condition"],dic[@"content"]];
+        cell.limitLab.text=[NSString stringWithFormat:@"满%@元%@",dic[@"pri_condition"],dic[@"content"]];
 //        if ([dic[@"validate"] isEqualToString:@"true"]) {
             cell.showImg.hidden = YES ;
 //        }else{

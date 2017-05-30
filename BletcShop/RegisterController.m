@@ -374,7 +374,7 @@
     
     [params setObject:_phoneText.text forKey:@"phone"];
     [params setObject:_passText.text forKey:@"passwd"];
-    [params setObject:@"17629002328" forKey:@"referrer"];//_recommend_person.text
+    [params setObject:@"无人推荐" forKey:@"referrer"];//_recommend_person.text
     
 
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
