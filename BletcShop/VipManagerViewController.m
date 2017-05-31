@@ -215,14 +215,52 @@
 }
 //上下架
 -(void)onOrOffButtonClick:(UIButton *)sender{
+    
+ 
+    
     UITableViewCell *cell=(UITableViewCell *)[[sender superview]superview];
     NSIndexPath *indexPath=[TabSc indexPathForCell:cell];
     NSDictionary *dic=self.data[indexPath.row];
     NSString *state=dic[@"display_state"];
+    
+    
+    
     if ([state isEqualToString:@"on"]) {
-        [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"off" cardLevel:dic[@"level"]];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定下架该会员卡?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        UIAlertAction*sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"off" cardLevel:dic[@"level"]];
+
+        }];
+        
+        [alertController addAction:cancel];
+        [alertController addAction:sure];
+        [self presentViewController:alertController animated:YES completion:^{
+            
+        }];
+        
+
     }else{
-        [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"on" cardLevel:dic[@"level"]];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定上架该会员卡?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        UIAlertAction*sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self postRequestGetCardsLists:dic[@"merchant"] code:dic[@"code"] display_state:@"on" cardLevel:dic[@"level"]];
+            
+        }];
+        
+        [alertController addAction:cancel];
+        [alertController addAction:sure];
+        [self presentViewController:alertController animated:YES completion:^{
+            
+        }];
+
     }
 }
 -(void)postRequestGetCardsLists:(NSString *)muid code:(NSString *)code display_state:(NSString *)state cardLevel:(NSString *)level{

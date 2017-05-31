@@ -1138,6 +1138,14 @@
     
     card_cell.cardPriceLable.text = [NSString stringWithFormat:@"￥%@",[dic objectForKey:@"price"]];
     
+    NSMutableAttributedString *attr_price = [[NSMutableAttributedString alloc]initWithString:card_cell.cardPriceLable.text];
+    
+    
+    [attr_price setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10]} range:NSMakeRange(0, 1)];
+    
+    card_cell.cardPriceLable.attributedText = attr_price;
+    
+    
     
     NSString *discounts=[NSString getTheNoNullStr:[dic objectForKey:@"rule"] andRepalceStr:@"0"];
     CGFloat dis=[discounts floatValue]/10.0f;
@@ -1789,11 +1797,35 @@ if (old_view !=tap.view) {
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==1) {
         if (indexPath.row!=0) {
-            NewBuyCardViewController *buyVC=[[NewBuyCardViewController alloc]init];
-            buyVC.cardListArray=self.cardArray;
-            buyVC.shop_name =[wholeInfoDic objectForKey:@"store"];
-            buyVC.selectRow=indexPath.row-1;
-            [self.navigationController pushViewController:buyVC animated:YES];
+            
+            
+            
+            AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+            if (!appdelegate.IsLogin) {
+                LandingController *landVc = [[LandingController alloc]init];
+                [self.navigationController pushViewController:landVc animated:YES];
+            }else
+            {
+                if (self.cardArray.count>0) {
+                    NewBuyCardViewController *buyVC=[[NewBuyCardViewController alloc]init];
+                    buyVC.cardListArray=self.cardArray;
+                    buyVC.shop_name =[wholeInfoDic objectForKey:@"store"];
+                    buyVC.selectRow=indexPath.row-1;
+                    [self.navigationController pushViewController:buyVC animated:YES];
+                }else{
+                    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hud.mode = MBProgressHUDModeText;
+                    
+                    hud.label.text = NSLocalizedString(@"本店暂无卡出售", @"HUD message title");
+                    hud.label.font = [UIFont systemFontOfSize:13];
+                    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                    [hud hideAnimated:YES afterDelay:2.f];
+                }
+                
+            }
+
+            
+           
         }
     }
 }

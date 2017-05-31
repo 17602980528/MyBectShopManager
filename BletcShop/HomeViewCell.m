@@ -31,7 +31,7 @@
 @property(nonatomic,weak)UILabel *seller_Label;//销量
 @property(nonatomic,weak)UILabel *give_Lab;//赠送描述
 @property(nonatomic,weak)UILabel *coupon_Lable;
-
+@property(nonatomic,weak)UILabel *brandLabel;//行业分类
 @end
 @implementation HomeViewCell
 
@@ -157,7 +157,7 @@
     brandLabel.font=[UIFont systemFontOfSize:11.0f];
     [self addSubview:brandLabel];
     brandLabel.backgroundColor=[UIColor colorWithRed:255/255.0 green:210/255.0 blue:0 alpha:1];
-    
+    self.brandLabel = brandLabel;
     
     
     

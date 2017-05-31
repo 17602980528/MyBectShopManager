@@ -15,6 +15,7 @@
 #import "JFAreaDataManager.h"
 #import "ValuePickerView.h"
 
+#import "ShopLandController.h"
 @interface AuthFailShopVC ()<UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 {
     NSArray *nameArray;
@@ -540,7 +541,23 @@
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@" KKRequestDataService ==%@", result);
+        if ([result[@"result_code"] intValue]==1) {
+            UIAlertView *altView =[[UIAlertView alloc]initWithTitle:@"提示" message:@"您已提交成功是否重新登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [altView show];
+        }else{
+            
+            
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = @"请求失败...";
+            hud.label.font = [UIFont systemFontOfSize:13];
+            [hud hideAnimated:YES afterDelay:2.f];
+        }
         
+        
+       
+
         
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -550,6 +567,49 @@
     }];
     
     
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag ==999) {
+       
+        if (buttonIndex == 0)//确认跳转设置
+        {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }
+        else if (buttonIndex == 1)//永不提示
+        {
+            //存入本地
+            NSString * isPositioning = @"永不提示";
+            NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:isPositioning forKey:@"isPositioning"];
+        }
+        else//残忍拒绝
+        {
+            //取消不做提示
+        }
+        
+        
+        
+    }else{
+        if (buttonIndex==1) {
+            
+            
+            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            
+            [app loginOutBletcShop];
+            
+            ShopLandController *shopvc = [[ShopLandController alloc]init];
+            
+            app.window.rootViewController = shopvc;
+            
+            
+            
+        }
+  
+    }
 }
 
 
@@ -1063,14 +1123,42 @@
     }
     
     if (textField ==self.detailAddressTF) {
-        pickView.dataSource=self.streetArray;
-        __weak AuthFailShopVC *wealSelf=self;
-        pickView.valueDidSelect = ^(NSString *value) {
+        if (_streetArray.count==0) {
             
-            wealSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
+          
+            CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+            if (kCLAuthorizationStatusDenied == status || kCLAuthorizationStatusRestricted == status)
+            {
+                //读取本地数据
+                NSString * isPositioning = [[NSUserDefaults standardUserDefaults] valueForKey:@"isPositioning"];
+                if (isPositioning == nil)//提示
+                {
+                    UIAlertView * positioningAlertivew = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"为了更好的体验,请到设置->隐私->定位服务中开启!【商消乐】定位服务,已便获取附近信息!" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"永不提示",@"残忍拒绝",nil];
+                    positioningAlertivew.tag = 999;
+                    [positioningAlertivew show];
+                }
+            }else//开启的
+            {
+                //需要删除本地字符
+                NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+                [userDefaults removeObjectForKey:@"isPositioning"];
+                [userDefaults synchronize];  
+            }
+
             
-        };
-        [pickView show];
+            
+        }else{
+            pickView.dataSource=self.streetArray;
+            __weak AuthFailShopVC *wealSelf=self;
+            pickView.valueDidSelect = ^(NSString *value) {
+                
+                wealSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
+                
+            };
+            [pickView show];
+ 
+        }
+        
         
         return NO;
     }

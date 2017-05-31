@@ -41,32 +41,47 @@
     UILabel *content_lab = [[UILabel alloc]init];
     self.content_lab = content_lab;
 
-    content_lab.font = [UIFont systemFontOfSize:14];
+    content_lab.font = [UIFont systemFontOfSize:13];
     content_lab.numberOfLines =1;
+    content_lab.textColor = RGB(51,51,51);
+    
 //    CGFloat height_lab =  [UILabel getSizeWithLab:content_lab andMaxSize:CGSizeMake(SCREENWIDTH-85-70, 50)].height;
-    content_lab.frame = CGRectMake(imageView.right+10, imageView.top, SCREENWIDTH-85-70-2, 23);
+    content_lab.frame = CGRectMake(imageView.right+10, imageView.top, SCREENWIDTH-(imageView.right+10), 13);
     [self addSubview:content_lab];
     
     
-    UILabel *cardPriceLable=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-120-15, 23-5, 120, 14)];
-    cardPriceLable.textAlignment=NSTextAlignmentRight;
-    cardPriceLable.font=[UIFont systemFontOfSize:14.0f];
+    UILabel *cardPriceLable=[[UILabel alloc]initWithFrame:CGRectMake(content_lab.left, imageView.bottom-12, 120, 14)];
+    cardPriceLable.textAlignment=NSTextAlignmentLeft;
+    cardPriceLable.font=[UIFont systemFontOfSize:15.0f];
     cardPriceLable.textColor=[UIColor redColor];
     [self addSubview:cardPriceLable];
     
     self.cardPriceLable = cardPriceLable;
     
-    UILabel *discountLable=[[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH-120-15, cardPriceLable.bottom+5, 120, 14)];
-    discountLable.font=[UIFont systemFontOfSize:13.0f];
-    discountLable.textColor=[UIColor grayColor];
-    discountLable.textAlignment=NSTextAlignmentRight;
+    UILabel *discountLable=[[UILabel alloc]initWithFrame:CGRectMake(content_lab.left, content_lab.bottom+5, 30, 13)];
+    discountLable.font=[UIFont systemFontOfSize:10.0f];
+    discountLable.textColor=[UIColor whiteColor];
+    discountLable.backgroundColor = RGB(240,153,68);
+    discountLable.layer.cornerRadius = 3;
+    discountLable.layer.masksToBounds = YES;
+    discountLable.textAlignment=NSTextAlignmentCenter;
     [self addSubview:discountLable];
     self.discountLable = discountLable;
-    UILabel *timeLable=[[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, content_lab.bottom+3, content_lab.width, 20)];
-    timeLable.font=[UIFont systemFontOfSize:13.0f];
-    timeLable.textColor=[UIColor grayColor];
+    
+    
+    UILabel *timeLable=[[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, imageView.bottom-8, SCREENWIDTH-(imageView.right+10+50), 8)];
+    timeLable.font=[UIFont systemFontOfSize:8.0f];
+    timeLable.textColor=RGB(148,148,148);
+    timeLable.textAlignment =NSTextAlignmentRight;
     [self addSubview:timeLable];
     
     self.timeLable = timeLable;
+    
+    
+    
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 70, SCREENWIDTH, 1)];
+    line.backgroundColor = RGB(234, 234, 234);
+    [self addSubview:line];
+    
 }
 @end
