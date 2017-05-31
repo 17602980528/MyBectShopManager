@@ -1543,6 +1543,7 @@
             NewBuyCardViewController *buyVC=[[NewBuyCardViewController alloc]init];
             buyVC.cardListArray=self.cardArray;
             buyVC.shop_name =[wholeInfoDic objectForKey:@"store"];
+            buyVC.selectRow = 9999;
             [self.navigationController pushViewController:buyVC animated:YES];
         }else{
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

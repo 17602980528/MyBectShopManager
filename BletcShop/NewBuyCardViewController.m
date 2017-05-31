@@ -139,7 +139,17 @@
     self.allPoint = [[NSString alloc]init];
     self.Type = 888;
     self.canUsePoint = 0;
-    //    _selectRow=0;
+    NSLog(@"000====%ld",(long)_selectRow);
+    
+    NSMutableArray *mutab_A = [NSMutableArray array];
+    if (_selectRow!=9999) {
+        [mutab_A addObject:self.cardListArray[_selectRow]];
+        self.cardListArray  = [mutab_A mutableCopy];
+        _selectRow=0;
+
+    }
+ 
+    
     payKind=0;
 //    self.pay_Type=@"null";
     
@@ -168,7 +178,7 @@
     
     [self postRequestPoints];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_selectRow inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.myTable.delegate tableView:self.myTable didSelectRowAtIndexPath:indexPath];
     
 }
