@@ -148,6 +148,7 @@
     tableView.dataSource=self;
     tableView.bounces=YES;
     tableView.showsVerticalScrollIndicator = NO;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.myTable = tableView;
     [self.view addSubview:tableView];
     
@@ -236,7 +237,13 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
-        return 84;
+        
+        
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        
+        return cell?cell.frame.size.height :84;
+        
+//                return 84;
     }else if (indexPath.section==1){
         //        return 0.01;
         return 50;
@@ -281,6 +288,11 @@
     label.font=[UIFont systemFontOfSize:16.0f];
     label.textAlignment=NSTextAlignmentLeft;
     [view2 addSubview:label];
+    
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 40-1, SCREENWIDTH, 1)];
+    line.backgroundColor = RGB(234, 234, 234);
+    [view2 addSubview:line];
+
     if (section==0) {
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 14, 14)];
         imageView.image=[UIImage imageNamed:@"店铺管理"];
@@ -327,7 +339,7 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor whiteColor];
@@ -339,6 +351,7 @@
         [view removeFromSuperview];
     }
     if (indexPath.section==0) {
+
         UIButton *stateBtn=[UIButton buttonWithType:UIButtonTypeCustom];
         stateBtn.frame=CGRectMake(5, (36*2+12-30)/2, 30, 30);
         if (indexPath.row==_selectRow) {
@@ -385,14 +398,9 @@
         UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, 15, SCREENWIDTH-imageView.right-70-15, 30)];
         lable.text = [NSString getTheNoNullStr:self.cardListArray[indexPath.row][@"content"] andRepalceStr:@"暂无优惠!"];
         lable.textColor = RGB(51,51,51);
-        lable.font = [UIFont systemFontOfSize:15];
-        lable.numberOfLines=3;
+        lable.font = [UIFont systemFontOfSize:13];
+        lable.numberOfLines=0;
         [cell addSubview:lable];
-        
-        CGFloat labHight = [lable.text boundingRectWithSize:CGSizeMake(lable.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.height;
-        CGRect frame = lable.frame;
-        frame.size.height = labHight;
-        lable.frame = frame;
         
         
         UILabel *priceLable=[[UILabel alloc]initWithFrame:CGRectMake(0, 15, SCREENWIDTH-13, 58)];
@@ -401,9 +409,44 @@
         priceLable.font=[UIFont systemFontOfSize:15.0f];
         [cell addSubview:priceLable];
         
+        
+        CGFloat price_width = [priceLable.text boundingRectWithSize:CGSizeMake(priceLable.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.width;
+
+        
+        
+        
+        
+        CGFloat labHight = [lable.text boundingRectWithSize:CGSizeMake(SCREENWIDTH-imageView.right-10-price_width-13, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.height;
+        CGRect frame = lable.frame;
+        frame.size.height = labHight;
+        frame.size.width = SCREENWIDTH-imageView.right-10-price_width-13;
+        frame.origin.y =  labHight<84? (84 -labHight)/2 :5;
+        lable.frame = frame;
+        
+        
+        CGRect cellFrame = cell.frame;
+        cellFrame.size.height = labHight>84 ? lable.bottom+5 :84;
+        cell.frame = cellFrame;
+        
+        
+        CGRect price_frame = priceLable.frame ;
+        price_frame.origin.y = (cell.height -58)/2;
+        priceLable.frame = price_frame;
+        
+
+        
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, cell.height-1, SCREENWIDTH, 1)];
+        line.backgroundColor = RGB(234, 234, 234);
+        [cell addSubview:line];
+        
+        
     }else if (indexPath.section==1){
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+        UIImageView *imageView_red = [[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH-18-7.5, (50-15)/2, 7.5, 15)];
+        imageView_red.image = [UIImage imageNamed:@"arraw_right"];
+        [cell addSubview:imageView_red];
+        
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 0, 200, 50)];
         label.font = [UIFont systemFontOfSize:15];
         [cell addSubview:label];
@@ -419,6 +462,12 @@
         [cell addSubview:contentlabel];
         
         contentlabel.textAlignment = NSTextAlignmentRight;
+        
+        
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 50-1, SCREENWIDTH, 1)];
+        line.backgroundColor = RGB(234, 234, 234);
+        [cell addSubview:line];
+
         
         if (indexPath.row==0) {
             label.text = @"使用红包";
@@ -495,6 +544,11 @@
         payLable.font=[UIFont systemFontOfSize:15.0f];
         UIButton *stateBtn=[UIButton buttonWithType:UIButtonTypeCustom];
         stateBtn.frame=CGRectMake(SCREENWIDTH-30-18, 12, 30, 30);
+        
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 54-1, SCREENWIDTH, 1)];
+        line.backgroundColor = RGB(234, 234, 234);
+        [cell addSubview:line];
+
         if (indexPath.row==payKind) {
             [stateBtn setImage:[UIImage imageNamed:@"settlement_choose_n"] forState:UIControlStateNormal];
         }else{

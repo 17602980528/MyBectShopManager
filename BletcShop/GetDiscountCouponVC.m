@@ -284,6 +284,10 @@
         if ([result count]>0) {
             _dataArray=result;
             [_tableView reloadData];
+        }else{
+            
+            [self initNoneActiveView];
+            
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -337,14 +341,18 @@
     }];
 
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
-@end
+//无活动显示无活动
+-(void)initNoneActiveView{
+    self.view.backgroundColor=RGB(240, 240, 240);
+    
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-92, 63, 184, 117)];
+    imageView.image=[UIImage imageNamed:@"CC588055F2B4764AA006CD2B6ACDD25C.jpg"];
+    [self.view addSubview:imageView];
+    
+    UILabel *noticeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(imageView.frame)+46, SCREENWIDTH, 30)];
+    noticeLabel.font=[UIFont systemFontOfSize:15.0f];
+    noticeLabel.textColor=RGB(153, 153, 153);
+    noticeLabel.textAlignment=NSTextAlignmentCenter;
+    noticeLabel.text=@"没有可用的代金券哦";
+    [self.view addSubview:noticeLabel];
+}@end

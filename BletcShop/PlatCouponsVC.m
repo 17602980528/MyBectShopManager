@@ -120,11 +120,7 @@
         [self.couponArray removeAllObjects];
         
         DebugLog(@"result---%@",result);
-        if ([result count]==0) {
-            
-            [self initNoneActiveView];
-            
-        }else{
+      
             NSArray *arr = (NSArray*)result;
             
             if (self.useCoupon ==100) {
@@ -145,6 +141,12 @@
                 }
                 
             }
+            
+      
+        
+        if ([_couponArray count]==0) {
+            
+            [self initNoneActiveView];
             
         }
         

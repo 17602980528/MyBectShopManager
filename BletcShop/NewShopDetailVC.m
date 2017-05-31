@@ -1067,7 +1067,12 @@
         for (int i = 0; i < commodity_list.count; i ++) {
             NSDictionary *dic_comm = commodity_list[i];
             UIView *b_v = [[UIView alloc]initWithFrame:CGRectMake(110*i+10, 0, 100, 140)];
+            b_v.tag = i;
             [commodity_scroView addSubview:b_v];
+            
+            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(productClick:)];
+            
+            [b_v addGestureRecognizer:tap];
             
             UIImageView *ImgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, b_v.width, b_v.width)];
             NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCE_PRODUCT stringByAppendingString:dic_comm[@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
@@ -1075,14 +1080,23 @@
             [b_v addSubview:ImgView];
             
             
-            UILabel *title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.bottom, ImgView.width, 20)];
+            UILabel *title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.bottom, ImgView.width, 30)];
             title_lab.text =dic_comm[@"name"];
+            title_lab.numberOfLines=2;
             title_lab.textAlignment =NSTextAlignmentCenter;
             title_lab.textColor = RGB(51, 51, 51);
             title_lab.font = [UIFont systemFontOfSize:12];
             [b_v addSubview:title_lab];
             
-            UILabel *price_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, title_lab.bottom, ImgView.width, 15)];
+            CGFloat title_height = [title_lab.text boundingRectWithSize:CGSizeMake(ImgView.width, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:title_lab.font} context:nil].size.height;
+            CGRect  frame = title_lab.frame;
+            frame.size.height = title_height<20?29:title_height;
+            title_lab.frame = frame;
+            
+            
+            
+            
+            UILabel *price_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, title_lab.bottom, ImgView.width, b_v.height - title_lab.bottom)];
             price_lab.text =[NSString stringWithFormat:@"¥%@",dic_comm[@"price"]];
             price_lab.textAlignment =NSTextAlignmentCenter;
             price_lab.textColor = RGB(253,89,88);
@@ -1247,6 +1261,10 @@
     
 }
 
+-(void)productClick:(UITapGestureRecognizer*)tap{
+    
+    NSLog(@"productClick===%ld",tap.view.tag);
+}
 -(void)scanMoreInfo{
     
     ApriseVC *vc=[[ApriseVC alloc]init];
