@@ -455,6 +455,8 @@
     _adddetailnewAddressTF.font=[UIFont systemFontOfSize:13.0f];
     _adddetailnewAddressTF.text=[NSString getTheNoNullStr:shopInfoDic[@"full_add"] andRepalceStr:@""];
     _adddetailnewAddressTF.placeholder=@"详细地点";
+    _adddetailnewAddressTF.delegate=self;
+    _adddetailnewAddressTF.returnKeyType=UIReturnKeyDone;
     [_scrollView addSubview:_adddetailnewAddressTF];
     
     UIView *lineViewnew=[[UIView alloc]initWithFrame:CGRectMake(10, 150, SCREENWIDTH-20, 0.3)];
@@ -477,6 +479,8 @@
     _company_nameTF.font=[UIFont systemFontOfSize:13.0f];
     _company_nameTF.text=[NSString getTheNoNullStr:shopInfoDic[@"company_name"] andRepalceStr:@""];
     _company_nameTF.placeholder=@"企业名称";
+    _company_nameTF.delegate=self;
+    _company_nameTF.returnKeyType=UIReturnKeyDone;
     [_scrollView addSubview:_company_nameTF];
     
     UIView *lineViewnewcom=[[UIView alloc]initWithFrame:CGRectMake(10, 150+50, SCREENWIDTH-20, 0.3)];
@@ -527,7 +531,8 @@
     _agencyNameTF=[[UITextField alloc]initWithFrame:CGRectMake(140, 105+50+100, SCREENWIDTH-140, 40)];
     _agencyNameTF.font=[UIFont systemFontOfSize:13.0f];
     _agencyNameTF.placeholder=@"店铺名称";
-
+    _agencyNameTF.delegate=self;
+    _agencyNameTF.returnKeyType=UIReturnKeyDone;
     _agencyNameTF.text=shopInfoDic[@"store"];
 
     [_scrollView addSubview:_agencyNameTF];
@@ -554,6 +559,8 @@
     self.store_textf=[[UITextField alloc]initWithFrame:CGRectMake(140, 105+50+50+100, SCREENWIDTH-140, 40)];
     self.store_textf.font=[UIFont systemFontOfSize:13.0f];
     self.store_textf.placeholder=@"联系方式";
+    self.store_textf.delegate=self;
+    self.store_textf.returnKeyType=UIReturnKeyDone;
     self.store_textf.text=shopInfoDic[@"store_number"];
     [_scrollView addSubview:self.store_textf];
     
@@ -649,6 +656,7 @@
     _reasonTF=[[UITextField alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _reasonTF.placeholder=@"关于营业执照情况说明";
     _reasonTF.layer.borderWidth=1;
+    _reasonTF.returnKeyType=UIReturnKeyDone;
     _reasonTF.layer.borderColor=[[UIColor grayColor]CGColor];
     _reasonTF.font=[UIFont systemFontOfSize:13.0f];
     [_scrollView addSubview:_reasonTF];
@@ -997,6 +1005,9 @@
 
 -(void)tapChooseClick:(UITapGestureRecognizer *)tap{
     
+    for (UITextField *tf in _scrollView.subviews) {
+        [tf resignFirstResponder];
+    }
     
     pickView.dataSource=self.tradeArray;
     __weak typeof(self)  wealSelf = self;
@@ -1566,6 +1577,9 @@
     }
     
     if (textField ==self.detailAddressTF) {
+        for (UITextField *tf in _scrollView.subviews) {
+            [tf resignFirstResponder];
+        }
         pickView.dataSource=self.streetArray;
         __weak NewMiddleViewController *wealSelf=self;
         pickView.valueDidSelect = ^(NSString *value) {
@@ -1579,6 +1593,9 @@
     }
     
     if (textField ==self.company_styleTF) {
+        for (UITextField *tf in _scrollView.subviews) {
+            [tf resignFirstResponder];
+        }
         pickView.dataSource=@[@"国有企业",@"集体企业",@"联营企业",@"股份合作制企业",@"私营企业",@"个体户",@"合作企业",@"有限责任公司",@"股份有限公司"];
         __weak NewMiddleViewController *wealSelf=self;
         pickView.valueDidSelect = ^(NSString *value) {
@@ -1616,7 +1633,12 @@
     return YES;
 }
 
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];//取消第一响应者
+    
+    return YES;
+}
 
 
 @end

@@ -203,8 +203,12 @@
     UILabel *nickLab=[cell viewWithTag:100];
     UILabel *name=[cell viewWithTag:200];
     UITextField *nametf=[cell viewWithTag:300];
+    nametf.delegate=self;
+    nametf.returnKeyType=UIReturnKeyDone;
     UILabel *phone=[cell viewWithTag:400];
     UITextField *phonetf=[cell viewWithTag:500];
+    phonetf.delegate=self;
+    phonetf.returnKeyType=UIReturnKeyDone;
     UIButton *backBtn=[cell viewWithTag:600];
     UIButton *nextBtn=[cell viewWithTag:700];
     UIButton *chooseButton=[cell viewWithTag:800];
@@ -473,5 +477,10 @@
     }
 }
 
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];//取消第一响应者
+    
+    return YES;
+}
 @end

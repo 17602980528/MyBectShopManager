@@ -132,6 +132,8 @@
     _realNameTF.font=[UIFont systemFontOfSize:13.0f];
     _realNameTF.text=[NSString getTheNoNullStr:shopInfoDic[@"name"] andRepalceStr:@""];
     _realNameTF.placeholder=@"真实姓名";
+    _realNameTF.returnKeyType=UIReturnKeyDone;
+    _realNameTF.delegate=self;
     [_scrollView addSubview:_realNameTF];
     
     UIView *lineView_name=[[UIView alloc]initWithFrame:CGRectMake(10, label.bottom+5, SCREENWIDTH-20, 1)];
@@ -158,6 +160,8 @@
     _idenCardText.font=[UIFont systemFontOfSize:13.0f];
     _idenCardText.text=[NSString getTheNoNullStr:shopInfoDic[@"id"] andRepalceStr:@""];
     _idenCardText.placeholder=@"身份证号码";
+    _idenCardText.returnKeyType=UIReturnKeyDone;
+    _idenCardText.delegate=self;
     [_scrollView addSubview:_idenCardText];
 
     
@@ -258,6 +262,8 @@
     _adddetailnewAddressTF.font=[UIFont systemFontOfSize:13.0f];
     _adddetailnewAddressTF.text=[NSString getTheNoNullStr:shopInfoDic[@"full_add"] andRepalceStr:@""];
     _adddetailnewAddressTF.placeholder=@"详细地点";
+    _adddetailnewAddressTF.delegate=self;
+    _adddetailnewAddressTF.returnKeyType=UIReturnKeyDone;
     [_scrollView addSubview:_adddetailnewAddressTF];
     
     UIView *lineViewnew=[[UIView alloc]initWithFrame:CGRectMake(10, _adddetailnewAddressTF.bottom+5, SCREENWIDTH-20, 1)];
@@ -285,7 +291,8 @@
     _agencyNameTF=[[UITextField alloc]initWithFrame:CGRectMake(140, label3.top, SCREENWIDTH-140, 40)];
     _agencyNameTF.font=[UIFont systemFontOfSize:13.0f];
     _agencyNameTF.placeholder=@"店铺名称";
-    
+    _agencyNameTF.delegate=self;
+    _agencyNameTF.returnKeyType=UIReturnKeyDone;
     _agencyNameTF.text=shopInfoDic[@"store"];
     
     [_scrollView addSubview:_agencyNameTF];
@@ -313,6 +320,8 @@
     self.store_textf.font=[UIFont systemFontOfSize:13.0f];
     self.store_textf.placeholder=@"联系方式";
     self.store_textf.text=shopInfoDic[@"store_number"];
+    self.store_textf.delegate=self;
+    self.store_textf.returnKeyType=UIReturnKeyDone;
     [_scrollView addSubview:self.store_textf];
     
     UIView *lineViewe=[[UIView alloc]initWithFrame:CGRectMake(10, _store_textf.bottom+5, SCREENWIDTH-20, 1)];
@@ -615,7 +624,9 @@
 
 
 -(void)tapChooseClick:(UITapGestureRecognizer *)tap{
-    
+    for (UITextField *tf in _scrollView.subviews) {
+        [tf resignFirstResponder];
+    }
     pickView.dataSource=self.tradeArray;
     __weak AuthFailShopVC *wealSelf=self;
     pickView.valueDidSelect = ^(NSString *value) {
@@ -1148,6 +1159,9 @@
             
             
         }else{
+            for (UITextField *tf in _scrollView.subviews) {
+                [tf resignFirstResponder];
+            }
             pickView.dataSource=self.streetArray;
             __weak AuthFailShopVC *wealSelf=self;
             pickView.valueDidSelect = ^(NSString *value) {
@@ -1280,6 +1294,11 @@
     
 
 }
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];//取消第一响应者
+    
+    return YES;
+}
 
 @end

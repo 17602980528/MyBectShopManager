@@ -94,13 +94,18 @@
     passwordText.font = [UIFont systemFontOfSize:15];
     passwordText.placeholder = @"请输入您的密码(6位以上数字字母组合)";
     passwordText.clearButtonMode = UITextFieldViewModeWhileEditing;
+    passwordText.returnKeyType=UIReturnKeyDone;
+    passwordText.delegate=self;
     self.passwordText = passwordText;
     [landView addSubview:passwordText];
+    
     UITextField *passwordText2 = [[UITextField alloc]initWithFrame:CGRectMake(10, passwordText.bottom, SCREENWIDTH-30, 50)];
     passwordText2.secureTextEntry = YES;
     passwordText2.font = [UIFont systemFontOfSize:15];
     passwordText2.placeholder = @"请重复密码(6位以上数字字母组合)";
     passwordText2.clearButtonMode = UITextFieldViewModeWhileEditing;
+    passwordText2.returnKeyType=UIReturnKeyDone;
+    passwordText2.delegate=self;
     self.passwordText2 = passwordText2;
     [landView addSubview:passwordText2];
     
@@ -158,75 +163,13 @@
     }
     return YES;
 }
-//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-//    if (textField==self.showQuanTextfield) {
-//        [self NewAddVipAction:textField];
-//        
-//    }
-//    return YES;
-//}
-//-(void)NewAddVipAction:(UITextField *)tf
-//{
-//    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] init];
-//    alertView.tag=10;
-//    // Add some custom content to the alert view
-//    [alertView setContainerView:[self createDemoView:tf]];
-//    
-//    // Modify the parameters
-//    
-//    [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"是", @"否", nil]];
-//    
-//    [alertView setDelegate:self];
-//    
-//    // You may use a Block, rather than a delegate.
-//    [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
-//        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, (int)[alertView tag]);
-//        
-//        [alertView close];
-//    }];
-//    
-//    [alertView setUseMotionEffects:true];
-//    
-//    // And launch the dialog
-//    [alertView show];
-//}
-//- (UIView *)createDemoView:(UITextField *)tf2
-//{
-//    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 150)];
-//    self.demoView = demoView;
-//    demoView.frame=CGRectMake(0, 0, 290, 50);
-//    UILabel *numlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, demoView.width, 50)];
-//    numlabel.textAlignment = NSTextAlignmentCenter;
-//    numlabel.text = @"您通过在线用户推荐,入驻平台?";
-//    numlabel.font = [UIFont systemFontOfSize:16];
-//    [demoView addSubview:numlabel];
-//    return demoView;
-//}
-//- (void)customIOS7dialogButtonTouchUpInside: (CustomIOSAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
-//{
-//    if (alertView.tag==10&&buttonIndex==1) {
-//        self.showQuanTextfield.text = @"无人推荐";
-//        [alertView close];
-//        [self.showQuanTextfield resignFirstResponder];
-//        [self.showQuanTextfield endEditing:YES];
-//    }else if (alertView.tag==10&&buttonIndex==0){
-//        self.showQuanTextfield.text =@"";
-//        self.showQuanTextfield.placeholder = @"请输入推荐人手机号码";
-//        [alertView close];
-//        //[self.showQuanTextfield becomeFirstResponder];
-//        
-//    }
-//    NSLog(@"Delegate: Button at position %d is clicked on alertView %d.", (int)buttonIndex, (int)[alertView tag]);
-//    [alertView close];
-//}
+
 
 -(void)nextAction
 {
          
         
         if ([self.phoneText.text isEqualToString:@""]||[self.passwordText.text isEqualToString:@""]||[self.passwordText2.text isEqualToString:@""]) {
-            
-//                    if ([self.phoneText.text isEqualToString:@""]||[self.passwordText.text isEqualToString:@""]||[self.passwordText2.text isEqualToString:@""]||[self.showQuanTextfield.text isEqualToString:@""]) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
             hud.mode = MBProgressHUDModeText;
@@ -716,6 +659,11 @@
     
     
 }
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];//取消第一响应者
+    
+    return YES;
+}
 
 @end

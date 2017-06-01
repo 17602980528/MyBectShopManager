@@ -207,6 +207,8 @@
         UITextField *textField=[[UITextField alloc]initWithFrame:CGRectMake(140, 5, SCREENWIDTH-140, 40)];
         textField.placeholder=@"长度不超过16位";
         textField.tag=200;
+        textField.delegate=self;
+        textField.returnKeyType=UIReturnKeyDone;
         textField.font=[UIFont systemFontOfSize:13.0f];
         [cell addSubview:textField];
 
@@ -237,6 +239,7 @@
         textField.delegate=self;
         textField.placeholder=@"请输入您的真实姓名";
         textField.tag=202;
+        textField.returnKeyType=UIReturnKeyDone;
         textField.font=[UIFont systemFontOfSize:13.0f];
         [cell addSubview:textField];
         
@@ -254,6 +257,7 @@
         textField.delegate=self;
         textField.placeholder=@"请输入您现在具体住宅地址";
         textField.tag=203;
+         textField.returnKeyType=UIReturnKeyDone;
         textField.font=[UIFont systemFontOfSize:13.0f];
         [cell addSubview:textField];
         
@@ -272,6 +276,7 @@
         textField.delegate=self;
         textField.placeholder=@"请输入真实有效的18位身份证号";
         textField.tag=204;
+         textField.returnKeyType=UIReturnKeyDone;
         textField.font=[UIFont systemFontOfSize:13.0f];
         [cell addSubview:textField];
         
@@ -332,6 +337,7 @@
         textField.delegate=self;
         textField.placeholder=@"请输入开户行";
         textField.tag=203;
+         textField.returnKeyType=UIReturnKeyDone;
         textField.font=[UIFont systemFontOfSize:13.0f];
         [cell addSubview:textField];
         
@@ -348,6 +354,7 @@
         textField.delegate=self;
         textField.placeholder=@"法人本人,目前仅支持建行储蓄卡";
         textField.tag=203;
+         textField.returnKeyType=UIReturnKeyDone;
         textField.font=[UIFont systemFontOfSize:13.0f];
         [cell addSubview:textField];
 
@@ -1001,5 +1008,10 @@
     [use_name synchronize];
 
 }
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];//取消第一响应者
+    
+    return YES;
+}
 @end
