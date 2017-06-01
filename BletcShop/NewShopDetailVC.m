@@ -1174,6 +1174,7 @@
 
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 5, SCREENWIDTH, SCREENWIDTH*2/3-10)];
         imageView.tag=100;
+//        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [cell addSubview:imageView];
         
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0,(SCREENWIDTH*2/3)-80 , SCREENWIDTH, 100)];
@@ -1186,6 +1187,7 @@
         [cell addSubview:label];
         UIImageView *imageView2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 5, SCREENWIDTH/2, 140)];
         imageView2.tag=300;
+
         [cell addSubview:imageView2];
     }
     UIImageView *imgView=[cell viewWithTag:100];
@@ -1204,7 +1206,8 @@
         label.frame=CGRectMake(0, SCREENWIDTH*2/3-lableHeight-5, SCREENWIDTH, lableHeight);
     }else{
         NSDictionary *dic = self.pictureAndTextArray[indexPath.row-1];
-        
+       
+
         NSString *newStr=dic[@"content"];
         CGFloat lableHeight=[newStr getTextHeightWithShowWidth:SCREENWIDTH AndTextFont:[UIFont systemFontOfSize:13.0f] AndInsets:5];
         CGFloat labelHeight2=[newStr getTextHeightWithShowWidth:SCREENWIDTH/2 AndTextFont:[UIFont systemFontOfSize:13.0f] AndInsets:5];
@@ -1214,6 +1217,10 @@
         NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:dic[@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         [imgView2 sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
         [imgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+
+        
+        imgView2.contentMode = UIViewContentModeScaleAspectFit;
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
 
         
         if([dic[@"type"] isEqualToString:@"0"]){

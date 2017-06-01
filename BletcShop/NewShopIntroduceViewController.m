@@ -326,7 +326,8 @@
                 
               
                 UIImageView *imageView3=[[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-270)/4+i%3*120, 36, 90, 90)];
-                imageView3.backgroundColor=[UIColor redColor];
+                imageView3.contentMode = UIViewContentModeScaleAspectFit;
+
                 [textDetailView addSubview:imageView3];
                 NSURL * nurl2=[[NSURL alloc] initWithString:[[SHOPIMAGE_New stringByAppendingString:[result[i]  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
                 [imageView3 sd_setImageWithURL:nurl2 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];

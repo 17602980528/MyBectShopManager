@@ -97,6 +97,7 @@
         [cell addSubview:label];
         UIImageView *imageView2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH/2, (SCREENWIDTH/2-10)*2/3)];
         imageView2.tag=300;
+
         [cell addSubview:imageView2];
         
 //        UILabel *lab=[[UILabel alloc]init];
@@ -132,6 +133,10 @@
         label.text=newStr;
         label.frame=CGRectMake(0, SCREENWIDTH*2/3-lableHeight, SCREENWIDTH, lableHeight);
     }else{
+        
+        imgView2.contentMode = UIViewContentModeScaleAspectFit;
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
+
         lab.hidden=YES;
         NSString *newStr=dataArr[indexPath.row-1][@"content"];
         CGFloat lableHeight=[newStr getTextHeightWithShowWidth:SCREENWIDTH AndTextFont:[UIFont systemFontOfSize:13.0f] AndInsets:5];

@@ -43,7 +43,7 @@ static const CGFloat minWidth = 60;
 }
 
 #pragma mark - Public
-- (UIImage *)clipImg {
+- (UIImage *)clipImg{
     
     CGFloat scale = [UIScreen mainScreen].scale * self.baseImgView.image.size.width/self.baseImgView.frame.size.width;
     
@@ -55,9 +55,28 @@ static const CGFloat minWidth = 60;
     UIImage *clippedImg = [UIImage imageWithCGImage:cgImg];
     
     CGImageRelease(cgImg);
+    
+    
+//  return   [ self imageFromView:self atFrame:self.clipperView.frame];
+    
     return clippedImg;
 }
 
+//- (UIImage *)imageFromView: (UIView *) theView   atFrame:(CGRect)r
+//{
+//    UIGraphicsBeginImageContext(r.size);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+////    CGContextSaveGState(context);
+////    UIRectClip(r);
+//    [self.baseImgView.layer renderInContext:context];
+//    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    NSLog(@"theImage====%lf==%lf",theImage.size.width,theImage.size.height);
+//    
+//    return  theImage;
+//    
+//}
 #pragma mark - Touches
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     NSSet *allTouches = [event allTouches];
@@ -134,18 +153,24 @@ static const CGFloat minWidth = 60;
     CGFloat height = self.baseImgView.frame.size.height;
     CGFloat width = self.baseImgView.frame.size.width;
     
-    if (width < self.clipperView.frame.size.width) {
-        width = self.clipperView.frame.size.width;
-        height = width / self.baseImgView.frame.size.width * height;
-    }
+    
+    NSLog(@"------%lf-%lf",width,height);
+
+//    if (width < self.clipperView.frame.size.width) {
+//        width = self.clipperView.frame.size.width;
+//        height = width / self.baseImgView.frame.size.width * height;
+//    }
     
     if (height < self.clipperView.frame.size.height) {
         height = self.clipperView.frame.size.height;
         width = height / self.baseImgView.frame.size.height * width;
+    }else{
+        
     }
     
     if(x > self.clipperView.frame.origin.x) {
-        x = self.clipperView.frame.origin.x;
+        x = (self.clipperView.frame.size.width - width)/2;
+//        x = self.clipperView.frame.origin.x;
     } else if (x <(self.clipperView.frame.origin.x + self.clipperView.frame.size.width - width)) {
         x = self.clipperView.frame.origin.x + self.clipperView.frame.size.width - width;
     }
@@ -195,6 +220,8 @@ static const CGFloat minWidth = 60;
     CGPoint touch2 = [[touches objectAtIndex:1] locationInView:self];
     
     CGFloat distance = [self distanceBetweenTwoPoints:touch1 toPoint:touch2];
+    
+
     if (scaleDistance>0) {
         CGRect imgFrame=view.frame;
         
@@ -207,10 +234,15 @@ static const CGFloat minWidth = 60;
             scaleDistance=distance;
         }
         
+        
+        
+        
         imgFrame.size.height=CGRectGetHeight(view.frame)*imgFrame.size.width/CGRectGetWidth(view.frame);
         float addwidth=imgFrame.size.width-view.frame.size.width;
         float addheight=imgFrame.size.height-view.frame.size.height;
         
+        
+
         if (imgFrame.size.width != 0 && imgFrame.size.height != 0) {
             view.frame=CGRectMake(imgFrame.origin.x-addwidth/2.0f, imgFrame.origin.y-addheight/2.0f, imgFrame.size.width, imgFrame.size.height);
         }

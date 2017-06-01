@@ -113,7 +113,7 @@
 
 - (IBAction)uploadImgClick:(UITapGestureRecognizer *)sender {
     
-    self.clipperType = ClipperTypeImgStay;
+    self.clipperType = ClipperTypeImgMove;
     self.systemEditing = NO;
     self.isSystemType = NO;
     [self takePhoto];
@@ -295,18 +295,12 @@
             
             NSLog(@"postRequestGetInfo%@", result);
             NSDictionary *dic = result;
+            
             if ([[NSString stringWithFormat:@"%@",[dic objectForKey:@"result_code"]] isEqualToString:@"1"]) {
-                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                hud.frame = CGRectMake(0, 64, 375, 667);
-                // Set the annular determinate mode to show task progress.
-                hud.mode = MBProgressHUDModeText;
+                [self tishi:@"信息上传成功,等待审核"];
+            }else{
                 
-                hud.label.text = NSLocalizedString(@"信息上传成功,等待审核", @"HUD message title");
-                hud.label.font = [UIFont systemFontOfSize:13];
-                // Move to bottm center.
-                //    hud.offset = CGPointMake(0.f, );
-                hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-                [hud hideAnimated:YES afterDelay:4.f];
+                [self tishi:@"信息上传失败!"];
                 
             }
             
@@ -335,18 +329,11 @@
             NSLog(@"postRequestGetInfo%@", result);
             NSDictionary *dic = result;
             if ([[NSString stringWithFormat:@"%@",[dic objectForKey:@"result_code"]] isEqualToString:@"1"]) {
-                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                hud.frame = CGRectMake(0, 64, 375, 667);
-                // Set the annular determinate mode to show task progress.
-                hud.mode = MBProgressHUDModeText;
+                [self tishi:@"信息上传成功,等待审核"];
+            }else{
                 
-                hud.label.text = NSLocalizedString(@"信息上传成功,等待审核", @"HUD message title");
-                hud.label.font = [UIFont systemFontOfSize:13];
-                // Move to bottm center.
-                //    hud.offset = CGPointMake(0.f, );
-                hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-                [hud hideAnimated:YES afterDelay:4.f];
-                
+                [self tishi:@"信息上传失败!"];
+
             }
             
         } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -361,6 +348,20 @@
     
 }
 
+
+-(void)tishi:(NSString*)tishi{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.frame = CGRectMake(0, 64, 375, 667);
+    // Set the annular determinate mode to show task progress.
+    hud.mode = MBProgressHUDModeText;
+    
+    hud.label.text = NSLocalizedString(tishi, @"HUD message title");
+    hud.label.font = [UIFont systemFontOfSize:13];
+    // Move to bottm center.
+    //    hud.offset = CGPointMake(0.f, );
+    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+    [hud hideAnimated:YES afterDelay:4.f];
+}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
