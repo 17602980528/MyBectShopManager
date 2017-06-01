@@ -114,6 +114,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section==0) {
+        
+        if (indexPath.row==0) {
+            return 0.01;
+        }else
         return 50;
     }else if(indexPath.section==1||indexPath.section==2){
         return 50;
@@ -182,23 +186,23 @@
     if (indexPath.section==0) {
         if (self.okButton.selected) {
             if (indexPath.row==0) {
-                UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 80, 50)];
-                label.text = @"会员卡编号:";
-                label.font = [UIFont systemFontOfSize:14];
-                [cell addSubview:label];
-                //                UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
-                //                nameText.delegate = self;
-                //                [nameText setInputAccessoryView:toolView];
-                //                nameText.text = self.codeText.text;
-                //                self.codeText = nameText;
-                //                nameText.placeholder = @"请输入会员卡编号";
-                //                nameText.font = [UIFont systemFontOfSize:14];
-                //                nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
-                //                [cell addSubview:nameText];
-                UILabel *codeLable=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
-                codeLable.font=[UIFont systemFontOfSize:14.0f];
-                codeLable.text=self.codeDic[@"id"];
-                [cell addSubview:codeLable];
+//                UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 80, 50)];
+//                label.text = @"会员卡编号:";
+//                label.font = [UIFont systemFontOfSize:14];
+//                [cell addSubview:label];
+//                //                UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
+//                //                nameText.delegate = self;
+//                //                [nameText setInputAccessoryView:toolView];
+//                //                nameText.text = self.codeText.text;
+//                //                self.codeText = nameText;
+//                //                nameText.placeholder = @"请输入会员卡编号";
+//                //                nameText.font = [UIFont systemFontOfSize:14];
+//                //                nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
+//                //                [cell addSubview:nameText];
+//                UILabel *codeLable=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
+//                codeLable.font=[UIFont systemFontOfSize:14.0f];
+//                codeLable.text=self.codeDic[@"id"];
+//                [cell addSubview:codeLable];
                 
             }
             else if (indexPath.row==1) {
@@ -400,24 +404,24 @@
         }
         else{
             if (indexPath.row==0) {
-                UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 80, 50)];
-                label.text = @"会员卡编号:";
-                label.font = [UIFont systemFontOfSize:14];
-                [cell addSubview:label];
-                
-                //                UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
-                //                nameText.delegate = self;
-                //                [nameText setInputAccessoryView:toolView];
-                //                nameText.text = self.codeText.text;
-                //                self.codeText = nameText;
-                //                nameText.placeholder = @"请输入会员卡编号";
-                //                nameText.font = [UIFont systemFontOfSize:14];
-                //                nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
-                //                [cell addSubview:nameText];
-                UILabel *codeLable=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
-                codeLable.font=[UIFont systemFontOfSize:14.0f];
-                codeLable.text=self.codeDic[@"id"];
-                [cell addSubview:codeLable];
+//                UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 80, 50)];
+//                label.text = @"会员卡编号:";
+//                label.font = [UIFont systemFontOfSize:14];
+//                [cell addSubview:label];
+//                
+//                //                UITextField *nameText = [[UITextField alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
+//                //                nameText.delegate = self;
+//                //                [nameText setInputAccessoryView:toolView];
+//                //                nameText.text = self.codeText.text;
+//                //                self.codeText = nameText;
+//                //                nameText.placeholder = @"请输入会员卡编号";
+//                //                nameText.font = [UIFont systemFontOfSize:14];
+//                //                nameText.clearButtonMode = UITextFieldViewModeWhileEditing;
+//                //                [cell addSubview:nameText];
+//                UILabel *codeLable=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREENWIDTH-100, 40)];
+//                codeLable.font=[UIFont systemFontOfSize:14.0f];
+//                codeLable.text=self.codeDic[@"id"];
+//                [cell addSubview:codeLable];
                 
             }
             else if (indexPath.row==1) {
