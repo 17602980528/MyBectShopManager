@@ -785,7 +785,7 @@
     }
     
     UIView *choseView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    choseView.backgroundColor = [UIColor whiteColor];
+    choseView.backgroundColor = RGB(242, 241, 241);
     [self.window addSubview:choseView];
     self.choseView = choseView;
     
@@ -808,10 +808,14 @@
     
     
     UIButton *interBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    interBtn.frame = CGRectMake(92, SCREENHEIGHT-44-20, SCREENWIDTH-92*2, 44);
-    interBtn.backgroundColor = NavBackGroundColor;
-    [interBtn setTitle:@"进入商消乐" forState:0];
-    interBtn.layer.cornerRadius =interBtn.height/2;
+    interBtn.frame = CGRectMake((SCREENWIDTH-(479/2))/2, SCREENHEIGHT-42-20, 479/2, 42);
+//    interBtn.backgroundColor = NavBackGroundColor;
+//    [interBtn setTitle:@"进入商消乐" forState:0];
+    [interBtn setImage:[UIImage imageNamed:@"choseImg"] forState:0];
+    [interBtn setImage:[UIImage imageNamed:@"choseImg"] forState:1];
+
+    
+//    interBtn.layer.cornerRadius =interBtn.height/2;
     interBtn.layer.masksToBounds = YES;
     
     [interBtn addTarget:self action:@selector(interClick) forControlEvents:UIControlEventTouchUpInside];
@@ -843,6 +847,10 @@
         userImg.layer.cornerRadius = userImg.width/2;
         userImg.layer.masksToBounds = YES;
         [view_two addSubview:userImg];
+        
+       
+
+        
         UILabel *name_lab = [[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-30, userImg.bottom+16, 200, 20)];
         name_lab.font = [UIFont systemFontOfSize:18];
         name_lab.textColor = RGB(51, 51, 51);
@@ -854,16 +862,20 @@
         
         
         if (i==0) {
-            userImg.image = [UIImage imageNamed:@"登陆  头像-01"];
-            name_lab.text = @"我是消费者";
-            select_img.image = [UIImage imageNamed:@"登陆-04"];
-            upImg = select_img;
+            userImg.image = [UIImage imageNamed:@"user_s"];
+//            name_lab.text = @"我是消费者";
+//            select_img.image = [UIImage imageNamed:@"登陆-04"];
+            upImg = userImg;
+            
+            UIImageView *selectImg = [[UIImageView alloc]initWithFrame:CGRectMake(5, userImg.bottom+(view_two.height-userImg.bottom-30*(SCREENWIDTH-10)/1100)/2 ,SCREENWIDTH-10 , 30*(SCREENWIDTH-10)/1100)];
+            selectImg.image = [UIImage imageNamed:@"select_img"];
+            [view_two addSubview:selectImg];
             
         }else{
-            userImg.image = [UIImage imageNamed:@"登陆  头像-02"];
-            name_lab.text = @"我是商户";
-            select_img.image = [UIImage imageNamed:@"登陆-05"];
-            downImg = select_img;
+            userImg.image = [UIImage imageNamed:@"shoper_n"];
+//            name_lab.text = @"我是商户";
+//            select_img.image = [UIImage imageNamed:@"登陆-05"];
+            downImg = userImg;
             
         }
         
@@ -886,12 +898,12 @@
     whichInter = view.tag;
     
     if (view.tag==0) {
-        upImg.image = [UIImage imageNamed:@"登陆-04"];
-        downImg.image = [UIImage imageNamed:@"登陆-05"];
+        upImg.image = [UIImage imageNamed:@"user_s"];
+        downImg.image = [UIImage imageNamed:@"shoper_n"];
         
     }else{
-        upImg.image = [UIImage imageNamed:@"登陆-05"];
-        downImg.image = [UIImage imageNamed:@"登陆-04"];
+        upImg.image = [UIImage imageNamed:@"user_n"];
+        downImg.image = [UIImage imageNamed:@"shoper_s"];
         
     }
     

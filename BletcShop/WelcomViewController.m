@@ -49,7 +49,6 @@
     _scrollView.contentSize = CGSizeMake(SCREENWIDTH*imageArray.count,_scrollView.frame.size.height);
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
-    
     _scrollView.delegate = self;
     for (int i = 0; i<imageArray.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0+SCREENWIDTH*i, 0, SCREENWIDTH, _scrollView.frame.size.height)];
@@ -100,14 +99,38 @@
         int current = scrollView.contentOffset.x/SCREENWIDTH;
         UIPageControl* pageContrl = (UIPageControl*)[self.view viewWithTag:200];
         pageContrl.currentPage = current;
+        NSLog(@"scrollViewDidEndDecelerating----%f",scrollView.contentOffset.x);
 
+        
     }
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    NSLog(@"scrollViewDidScroll----%f",scrollView.contentOffset.x);
 
+    
+    if (scrollView.contentOffset.x > (imageArray.count-1)*SCREENWIDTH+50) {
+        
+        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        [appdelegate _initChose];
+        
+        [UIView animateWithDuration:2 animations:^{
+                       CGRect frame =  self.scrollView.frame;
+                       frame.origin.x = SCREENWIDTH;
+                       self.scrollView.frame = frame;
+            
+                   } completion:^(BOOL finished) {
+                       [self.scrollView removeFromSuperview];
+            
+         }];
+
+    }
+    
+}
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
-    NSLog(@"----%f",scrollView.contentOffset.x);
+    NSLog(@"scrollViewWillBeginDragging----%f",scrollView.contentOffset.x);
 //    if (scrollView.contentOffset.x >= (imageArray.count-1)*SCREENWIDTH) {
 //        
 //        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
