@@ -75,6 +75,10 @@
     
     
 }
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 
 {
@@ -807,6 +811,9 @@
 //}
 -(void)choiceLevelAction:(UIButton *)sender
 {
+    [self.MyAddtable endEditing:YES];
+
+    
     self.pickerView.dataSource =self.levelArray;
     __weak typeof(self) weakSelf = self;
     self.pickerView.valueDidSelect = ^(NSString *value){
@@ -1060,6 +1067,8 @@
 
 -(void)choiceDeadLine:(UIButton*)sender{
     
+    [self.MyAddtable endEditing:YES];
+
     self.pickerView.dataSource =self.deadLine_A;
     __weak typeof(self) weakSelf= self;
     

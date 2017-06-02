@@ -48,7 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.ifCIASuccess=NO;
-    self.ifRemeber = NO;
+    self.ifRemeber = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"登录";
     self.view.userInteractionEnabled = YES;
@@ -154,7 +154,7 @@
     //是否记住用户名密码
     UIButton *ChoseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     ChoseBtn.frame = CGRectMake(30, LandBtn.bottom+15, 15, 15);
-    ChoseBtn.selected=NO;
+    ChoseBtn.selected=YES;
     [ChoseBtn setImage:[UIImage imageNamed:@"xuan"] forState:UIControlStateNormal];
     [ChoseBtn setImage:[UIImage imageNamed:@"xuan1"] forState:UIControlStateSelected];
     [ChoseBtn addTarget:self action:@selector(ChoseAction:) forControlEvents:UIControlEventTouchUpInside];

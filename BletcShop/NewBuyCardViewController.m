@@ -497,7 +497,7 @@
                 float diXian =self.canUsePoint;
                 if(!((([self.moneyString floatValue])/2)<1))
                 {
-                    contentlabel.text = [[NSString alloc]initWithFormat:@"可用%.f红包抵用%.2f元现金",self.canUsePoint,diXian ];
+                    contentlabel.text = [[NSString alloc]initWithFormat:@"可用%.2f红包抵用%.2f元现金",self.canUsePoint,diXian ];
                 }else
                     contentlabel.text =@"不可使用红包";
                 
