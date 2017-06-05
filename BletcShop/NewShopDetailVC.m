@@ -37,10 +37,18 @@
 
 @property (nonatomic, strong) SRVideoPlayer *videoPlayer;
 @property(strong,nonatomic)UIButton *playImageView;
-
+@property(strong,nonatomic)NSDictionary *deadLine_dic;
 @end
 
 @implementation NewShopDetailVC
+
+-(NSDictionary *)deadLine_dic{
+    if (!_deadLine_dic) {
+        _deadLine_dic = @{@"0.5":@"半年",@"1":@"一年",@"2":@"两年",@"3":@"三年",@"0":@"无限期"};
+    }
+    
+    return _deadLine_dic;
+}
 -(NSArray *)pictureAndTextArray{
     if (!_pictureAndTextArray) {
         _pictureAndTextArray = [NSArray array];
@@ -1159,7 +1167,7 @@
     if ([[NSString getTheNoNullStr:[dic objectForKey:@"indate"] andRepalceStr:@"0"] isEqualToString:@"0"]) {
         card_cell.timeLable.text=[NSString stringWithFormat:@"有效期: 无期限(%@)",[NSString getTheNoNullStr:[dic objectForKey:@"type"] andRepalceStr:@"---"]];
     }else{
-        card_cell.timeLable.text=[NSString stringWithFormat:@"有效期: %@年(%@)",[NSString getTheNoNullStr:[dic objectForKey:@"indate"] andRepalceStr:@"0"],[NSString getTheNoNullStr:[dic objectForKey:@"type"] andRepalceStr:@"---"]];
+        card_cell.timeLable.text=[NSString stringWithFormat:@"有效期: %@(%@)",self.deadLine_dic[[NSString getTheNoNullStr:[dic objectForKey:@"indate"] andRepalceStr:@"0"]],[NSString getTheNoNullStr:[dic objectForKey:@"type"] andRepalceStr:@"---"]];
     }
     
     return card_cell;

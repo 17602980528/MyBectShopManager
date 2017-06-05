@@ -48,7 +48,7 @@
 //            
         
 
-            _data = @[@[@"我的账户"],@[@"退出",@"切换账号"],@[@"意见反馈",@"帮助中心"]];
+            _data = @[@[@"我的账户"],@[@"切换账号"],@[@"意见反馈",@"帮助中心"]];
             
 //        }else{
 //            _data = @[@[@"我的账户",@"认证信息"],@[@"退出",@"切换账号"],@[@"意见反馈",@"商户未认证"]];
@@ -128,11 +128,13 @@
         
         
     }if (indexPath.section ==1) {
-        if (indexPath.row==0) {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出应用?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
-            
-            [alert show];
-        }else if (indexPath.row==1){
+//        if (indexPath.row==0) {
+//            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出应用?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
+//            
+//            [alert show];
+//        }else
+        
+            if (indexPath.row==0){
             
           
             AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];

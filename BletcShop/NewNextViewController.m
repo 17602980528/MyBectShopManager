@@ -290,7 +290,7 @@
     }else if (indexPath.row==4){
         nickLab.text=nameArray[5];
 
-        UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(160, 0, SCREENWIDTH-160, 50)];
+        UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(140, 0, SCREENWIDTH-140, 50)];
         label.textColor=[UIColor grayColor];
         label.font=[UIFont systemFontOfSize:13.0f];
         label.text=@"照片仅用于审核，将严格保密";
