@@ -17,6 +17,8 @@
 {
     UITableView *_tableView;
     NSArray *_dataArray;
+    UIImageView *imageView;
+    UILabel *noticeLabel;
 }
 @end
 
@@ -165,6 +167,12 @@
      date_end => 结束日期
      content => 优惠券内容
      */
+    if (imageView) {
+        [imageView removeFromSuperview];
+    }
+    if (noticeLabel) {
+        [noticeLabel removeFromSuperview];
+    }
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/merchantGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -177,6 +185,8 @@
             _dataArray=result;
         }else{
             _dataArray=@[];
+            [self initNoneActiveView];
+
         }
          [_tableView reloadData];
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -186,6 +196,20 @@
     }];
     
     
+}
+-(void)initNoneActiveView{
+    self.view.backgroundColor=RGB(240, 240, 240);
+    
+    imageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-92, 63, 184, 117)];
+    imageView.image=[UIImage imageNamed:@"CC588055F2B4764AA006CD2B6ACDD25C.jpg"];
+    [self.view addSubview:imageView];
+    
+    noticeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(imageView.frame)+46, SCREENWIDTH, 30)];
+    noticeLabel.font=[UIFont systemFontOfSize:15.0f];
+    noticeLabel.textColor=RGB(153, 153, 153);
+    noticeLabel.textAlignment=NSTextAlignmentCenter;
+    noticeLabel.text=@"没有可用的代金券哦";
+    [self.view addSubview:noticeLabel];
 }
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
     _delete_dic=_dataArray[indexPath.row];
@@ -198,6 +222,7 @@
     }];
     return @[deleteAction];
 }
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex==1) {
