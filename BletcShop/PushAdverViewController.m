@@ -28,15 +28,15 @@
 }
 - (IBAction)pushAdverBtn:(UITapGestureRecognizer *)sender {
     
-    AdvertisementHomeVC *advertisementHomeVC=[[AdvertisementHomeVC alloc]init];
+    AdverListViewController *advertisementHomeVC=[[AdverListViewController alloc]init];
     [self.navigationController pushViewController:advertisementHomeVC animated:YES];
     
 }
 - (IBAction)adverListBtn:(UITapGestureRecognizer*)sender {
     
-    
-    AdverListViewController *advertisementHomeVC=[[AdverListViewController alloc]init];
+    AdvertisementHomeVC *advertisementHomeVC=[[AdvertisementHomeVC alloc]init];
     [self.navigationController pushViewController:advertisementHomeVC animated:YES];
+   
 }
 - (IBAction)adverconfuse:(UIButton *)sender {
     
