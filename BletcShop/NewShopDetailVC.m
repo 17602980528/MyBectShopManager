@@ -1197,6 +1197,7 @@
         label.hidden=NO;
         imgView2.hidden=YES;
         imgView.hidden=NO;
+        imgView.contentMode =  UIViewContentModeScaleToFill;
         imgView.image=[UIImage imageNamed:@"icon3"];
         NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_ADDIMAGE stringByAppendingString:[self.infoDic objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         [imgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];

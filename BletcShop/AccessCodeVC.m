@@ -55,7 +55,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title=@"获取支付验证码";
+    self.navigationItem.title=@"重置支付密码";
      AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     _phone.text=appdelegate.userInfoDic[@"phone"];
     

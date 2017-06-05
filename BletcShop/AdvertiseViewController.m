@@ -70,6 +70,7 @@
 }
 -(void)getDate{
     
+    [self showHUd];
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/getList",BASEURL];
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
     [paramer setValue:self.activityId forKey:@"advert_id"];
@@ -83,10 +84,13 @@
                  [_dataAray addObject:result[i]];
              }
          }
+         [self hideHud];
          [_refreshFooter endRefreshing];
          [_refreshheader endRefreshing];
          [table_View reloadData];
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [self hideHud];
+
          [_refreshFooter endRefreshing];
          [_refreshheader endRefreshing];
          NSLog(@"%@", error);

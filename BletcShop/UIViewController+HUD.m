@@ -64,6 +64,17 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     [hud hide:YES afterDelay:2];
 }
 
+
+-(void)showHUd{
+    
+    UIView *view = [[UIApplication sharedApplication].delegate window];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.userInteractionEnabled = NO;
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.removeFromSuperViewOnHide = YES;
+    [self setHUD:hud];
+
+}
 - (void)hideHud{
     [[self HUD] hide:YES];
 }

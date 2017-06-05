@@ -35,6 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"支付密码";
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     if ([appdelegate.userInfoDic[@"pay_passwd"] isEqualToString:@"未设置"]) {
         _payPassTitle.text=@"设置支付密码";

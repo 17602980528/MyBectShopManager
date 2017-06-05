@@ -54,26 +54,28 @@
         button.userInteractionEnabled=YES;
         [button addTarget:self action:@selector(resetNewPwd) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"两次密码输入不符,请重新输入" message:nil delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles:nil];
-        [alertView show];
+        
+        
+        
+        
+        
+        
+        UIAlertController *alertController  =[UIAlertController alertControllerWithTitle:@"两次密码输入不符,请重新输入" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *suer = [UIAlertAction actionWithTitle:@"重新输入" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.pasView clearUpPassword];
+
+            
+            
+        }];
+        
+        [alertController addAction:suer];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
     }
 }
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //
-    if (alertView.tag==100) {
-        
-        NSInteger index = 0;
-        for (UIViewController *VC in self.navigationController.viewControllers) {
-            if ([VC isKindOfClass:[LZDUserInfoVC class]]||[VC isKindOfClass:[MoneyPAYViewController class]]||[VC isKindOfClass:[CountPAYViewController class]]) {
-                index = [self.navigationController.viewControllers indexOfObject:VC];
-            }
-        }
-        [self.navigationController popToViewController:self.navigationController.viewControllers[index] animated:YES];
-        
-    }else{
-        [self.pasView clearUpPassword];
-    }
-}
+
 -(void)observationPassLength:(NSString *)pwd{
     if (pwd.length<6) {
      button.backgroundColor=RGB(228, 228, 228);
@@ -105,9 +107,30 @@
              
              appdelegate.userInfoDic = mutab_dic;
              
-             UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"支付密码已设置成功" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-             alertView.tag=100;
-             [alertView show];
+             UIAlertController *alertController  =[UIAlertController alertControllerWithTitle:@"支付密码已设置成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction *suer = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                 
+                 NSInteger index = 0;
+                 for (UIViewController *VC in self.navigationController.viewControllers) {
+                     if ([VC isKindOfClass:[LZDUserInfoVC class]]||[VC isKindOfClass:[MoneyPAYViewController class]]||[VC isKindOfClass:[CountPAYViewController class]]) {
+                         index = [self.navigationController.viewControllers indexOfObject:VC];
+                     }
+                 }
+                 [self.navigationController popToViewController:self.navigationController.viewControllers[index] animated:YES];
+                 
+
+                 
+             }];
+             
+             [alertController addAction:suer];
+             
+             [self presentViewController:alertController animated:YES completion:nil];
+             
+             
+//             UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"支付密码已设置成功" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//             alertView.tag=100;
+//             [alertView show];
              
          }else
          {

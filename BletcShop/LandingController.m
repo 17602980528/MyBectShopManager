@@ -525,6 +525,9 @@
                         
                         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
                         appdelegate.userInfoDic = [NSMutableDictionary dictionaryWithDictionary:user_dic];
+                        
+                        [appdelegate repeatLoadAPI];
+                        
                         appdelegate.IsLogin = YES;
                         //                        [appdelegate socketConnectHost];
                         

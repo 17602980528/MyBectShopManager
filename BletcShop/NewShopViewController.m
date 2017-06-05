@@ -50,6 +50,8 @@
 }
 -(void)getDate{
     
+    
+    [self showHUd];
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/getList",BASEURL];
     
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
@@ -60,6 +62,7 @@
      {
          NSLog(@"=====%@===%@",[result class],result);
          
+         [self hideHud];
          
              self.data_A= (NSArray*)result;
              
@@ -70,7 +73,8 @@
          
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         
+         [self hideHud];
+
          NSLog(@"%@", error);
      }];
 

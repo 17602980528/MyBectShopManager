@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"密码管理";
 }
 
 - (void)didReceiveMemoryWarning {

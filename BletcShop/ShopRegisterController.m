@@ -498,6 +498,8 @@
                          
                          app.shopIsLogin = YES;
                          app.shopInfoDic =(NSMutableDictionary*)userInfo;
+                         [app repeatLoadAPI];
+
                          NSUserDefaults *use_name = [NSUserDefaults standardUserDefaults];
                          
                          if (self.ifRemeber) {
