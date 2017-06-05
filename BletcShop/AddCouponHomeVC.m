@@ -208,7 +208,7 @@
     noticeLabel.font=[UIFont systemFontOfSize:15.0f];
     noticeLabel.textColor=RGB(153, 153, 153);
     noticeLabel.textAlignment=NSTextAlignmentCenter;
-    noticeLabel.text=@"没有可用的代金券哦";
+    noticeLabel.text=@"您还没有添加代金券哦！";
     [self.view addSubview:noticeLabel];
 }
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
