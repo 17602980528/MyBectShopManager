@@ -110,7 +110,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 7;
+    return 5;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -214,7 +214,7 @@
     UIButton *chooseButton=[cell viewWithTag:800];
     UILabel *readLab=[cell viewWithTag:900];
     UILabel *agreeLab=[cell viewWithTag:1000];
-    if (indexPath.row==0||indexPath.row==2||indexPath.row==4||indexPath.row==6) {
+    if (indexPath.row==0||indexPath.row==2||indexPath.row==4) {
         xing.hidden=YES;
         nickLab.hidden=NO;
         name.hidden=YES;
@@ -231,8 +231,6 @@
         }else if (indexPath.row==2){
             nickLab.text=@"紧急联系人（直系亲属）";
         }else if (indexPath.row==4){
-            nickLab.text=@"紧急联系人（其他联系人）";
-        }else if (indexPath.row==6){
             nickLab.text=@"备注：授权贵公司在联系不到本人的情况下可联络本人紧急联系人";
             nickLab.font=[UIFont systemFontOfSize:13.0f];
             nickLab.textColor=[UIColor grayColor];
@@ -279,13 +277,6 @@
             self.tf4=phonetf;
             self.tf4.text=shopInfoDic[@"srel_phone"];
         }
-        if (indexPath.row==5) {
-            self.tf5=nametf;
-            self.tf5.text=shopInfoDic[@"trel_name"];
-            self.tf6=phonetf;
-            self.tf6.text=shopInfoDic[@"trel_phone"];
-
-        }
     }
     return cell;
 }
@@ -296,7 +287,7 @@
     return 0.01;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==6) {
+    if (indexPath.row==4) {
         return 200;
     }else{
         return 50;
@@ -324,8 +315,8 @@
         [hud hideAnimated:YES afterDelay:4.f];
     }else{
         //此处已得到用户所有资料，可上传服务器
-        if (self.tf2.text.length!=0 || self.tf4.text.length!=0||self.tf6.text.length!=0) {
-            if ([ToolManager validateMobile:self.tf2.text] ||[ToolManager validateMobile:self.tf4.text] || [ToolManager validateMobile:self.tf6.text]) {
+        if (self.tf2.text.length!=0 || self.tf4.text.length!=0) {
+            if ([ToolManager validateMobile:self.tf2.text] ||[ToolManager validateMobile:self.tf4.text]) {
                 [self saveInfomation];
 
                 
@@ -361,8 +352,6 @@
     [shopInfoDic setValue:self.tf2.text forKey:@"frel_phone"];//联系人1电话号
     [shopInfoDic setValue:self.tf3.text forKey:@"srel_name"];//联系人2
     [shopInfoDic setValue:self.tf4.text forKey:@"srel_phone"];//联系人2电话号
-    [shopInfoDic setValue:self.tf5.text forKey:@"trel_name"];//联系人3
-    [shopInfoDic setValue:self.tf6.text forKey:@"trel_phone"];//联系人3电话号
     
     [userDefault setObject:shopInfoDic forKey:shopInfoDic[@"muid"]];
     [userDefault synchronize];
@@ -383,8 +372,6 @@
     [params setObject:self.tf2.text forKey:@"frel_phone"];
     [params setObject:self.tf3.text forKey:@"srel_name"];
     [params setObject:self.tf4.text forKey:@"srel_phone"];
-    [params setObject:self.tf5.text forKey:@"trel_name"];
-    [params setObject:self.tf6.text forKey:@"trel_phone"];
    
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSDictionary *res_dic = (NSDictionary *)result;

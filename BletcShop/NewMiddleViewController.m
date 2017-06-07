@@ -39,7 +39,7 @@
 @implementation NewMiddleViewController
 -(NSMutableArray *)tradeArray{
     if (!_tradeArray) {
-        _tradeArray = [[NSMutableArray alloc]initWithObjects:@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所", nil];
+        _tradeArray = [[NSMutableArray alloc]initWithObjects:@"美容",@"美发",@"养发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所", nil];
     }
     return _tradeArray;
 }
@@ -738,59 +738,59 @@
     lineView6.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView6];
     //hang7-----
-    UILabel *xingLab7=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+totalHeight*2+50+50+100, 20, 20)];
-    xingLab7.font=[UIFont systemFontOfSize:20.0f];
-    xingLab7.textColor=[UIColor redColor];
-    xingLab7.textAlignment=1;
-    xingLab7.text=@"*";
-    [_scrollView addSubview:xingLab7];
-    
-    //名称
-    UILabel *label7=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*2+50+50+100, 110, 40)];
-    label7.font=[UIFont systemFontOfSize:15.0f];
-    label7.text=@"法人照片";
-    [_scrollView addSubview:label7];
-    //tupian4
-    _imageView4=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*2+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
-    _imageView4.image=[UIImage imageNamed:@"mohu-12"];
-    _imageView4.userInteractionEnabled=YES;
-    [_scrollView addSubview:_imageView4];
-    UITapGestureRecognizer *tapGesture4=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
-    [_imageView4 addGestureRecognizer:tapGesture4];
-    //照片下端红色文字
-    UILabel *under_red1 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*2+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
-    under_red1.text=@"法人正面照片";
-    under_red1.font=[UIFont systemFontOfSize:14.0f];
-    under_red1.textAlignment=1;
-    under_red1.textColor=[UIColor redColor];
-    [_scrollView addSubview:under_red1];
-    
-    UIView *lineView7=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*3+50+50+100, SCREENWIDTH-20, 0.6)];
-    lineView7.backgroundColor=[UIColor lightGrayColor];
-    [_scrollView addSubview: lineView7];
+//    UILabel *xingLab7=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+totalHeight*2+50+50+100, 20, 20)];
+//    xingLab7.font=[UIFont systemFontOfSize:20.0f];
+//    xingLab7.textColor=[UIColor redColor];
+//    xingLab7.textAlignment=1;
+//    xingLab7.text=@"*";
+//    [_scrollView addSubview:xingLab7];
+//    
+//    //名称
+//    UILabel *label7=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*2+50+50+100, 110, 40)];
+//    label7.font=[UIFont systemFontOfSize:15.0f];
+//    label7.text=@"法人照片";
+//    [_scrollView addSubview:label7];
+//    //tupian4
+//    _imageView4=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*2+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+//    _imageView4.image=[UIImage imageNamed:@"mohu-12"];
+//    _imageView4.userInteractionEnabled=YES;
+//    [_scrollView addSubview:_imageView4];
+//    UITapGestureRecognizer *tapGesture4=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
+//    [_imageView4 addGestureRecognizer:tapGesture4];
+//    //照片下端红色文字
+//    UILabel *under_red1 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*2+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
+//    under_red1.text=@"法人正面照片";
+//    under_red1.font=[UIFont systemFontOfSize:14.0f];
+//    under_red1.textAlignment=1;
+//    under_red1.textColor=[UIColor redColor];
+//    [_scrollView addSubview:under_red1];
+//    
+//    UIView *lineView7=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*3+50+50+100, SCREENWIDTH-20, 0.6)];
+//    lineView7.backgroundColor=[UIColor lightGrayColor];
+//    [_scrollView addSubview: lineView7];
     
     //hang8-----
-    UILabel *xingLab8=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+totalHeight*3+50+50+100, 20, 20)];
+    UILabel *xingLab8=[[UILabel alloc]initWithFrame:CGRectMake(10, 215+totalHeight*2+50+50+100, 20, 20)];
     xingLab8.font=[UIFont systemFontOfSize:20.0f];
     xingLab8.textColor=[UIColor redColor];
     xingLab8.textAlignment=1;
     xingLab8.text=@"*";
     [_scrollView addSubview:xingLab8];
     
-    UILabel *label8=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*3+50+50+100, 110, 40)];
+    UILabel *label8=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*2+50+50+100, 110, 40)];
     label8.font=[UIFont systemFontOfSize:14.0f];
     label8.text=@"经营场地照片";
     [_scrollView addSubview:label8];
     
     //tupian5
-    _imageView5=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*3+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView5=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*2+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView5.image=[UIImage imageNamed:@"mohu-13"];
     _imageView5.userInteractionEnabled=YES;
     [_scrollView addSubview:_imageView5];
     UITapGestureRecognizer *tapGesture5=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
     [_imageView5 addGestureRecognizer:tapGesture5];
     //照片下端红色文字
-    UILabel *under_red2 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*3+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
+    UILabel *under_red2 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*2+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
     under_red2.text=@"经营场地照片";
     under_red2.font=[UIFont systemFontOfSize:14.0f];
     under_red2.textAlignment=1;
@@ -810,28 +810,28 @@
 //    [_scrollView addSubview:xingLab9];
 
     
-    UILabel *label9=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*4+50+50+100, 110, 40)];
+    UILabel *label9=[[UILabel alloc]initWithFrame:CGRectMake(30, 205+totalHeight*3+50+50+100, 110, 40)];
     label9.font=[UIFont systemFontOfSize:14.0f];
 
     label9.text=@"营业地水电票";
     [_scrollView addSubview:label9];
     
     //tupian6
-    _imageView6=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*4+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView6=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+totalHeight*3+50+50+100, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView6.image=[UIImage imageNamed:@"mohu-14"];
     _imageView6.userInteractionEnabled=YES;
     [_scrollView addSubview:_imageView6];
     UITapGestureRecognizer *tapGesture6=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
     [_imageView6 addGestureRecognizer:tapGesture6];
     //照片下端红色文字
-    UILabel *under_red3 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*4+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
+    UILabel *under_red3 =[[UILabel alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 220+50+totalHeight*3+((SCREENWIDTH-150)/2)*116/176+50+100, (SCREENWIDTH-150)/2, 40)];
     under_red3.text=@"水电票据照片";
     under_red3.font=[UIFont systemFontOfSize:14.0f];
     under_red3.textAlignment=1;
     under_red3.textColor=[UIColor redColor];
     [_scrollView addSubview:under_red3];
     
-    UIView *lineView9=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*5+50+50+100, SCREENWIDTH-20, 0.6)];
+    UIView *lineView9=[[UIView alloc]initWithFrame:CGRectMake(10, 200+totalHeight*4+50+50+100, SCREENWIDTH-20, 0.6)];
     lineView9.backgroundColor=[UIColor lightGrayColor];
     [_scrollView addSubview: lineView9];
     
@@ -839,7 +839,7 @@
     
     //最后一行，返回上一级，或者进入下一级页面
     UIButton *from=[UIButton buttonWithType:UIButtonTypeCustom];
-    from.frame=CGRectMake(SCREENWIDTH/2-110, 210+totalHeight*5+50+50+100, 100, 40);
+    from.frame=CGRectMake(SCREENWIDTH/2-110, 210+totalHeight*4+50+50+100, 100, 40);
     from.backgroundColor=[UIColor whiteColor];
     [from setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [from setTitle:@"上一步" forState:UIControlStateNormal];
@@ -851,7 +851,7 @@
     [_scrollView addSubview:from];
     
     UIButton *goNext=[UIButton buttonWithType:UIButtonTypeCustom];
-    goNext.frame=CGRectMake(SCREENWIDTH/2+5, 210+totalHeight*5+50+50+100, 100, 40);
+    goNext.frame=CGRectMake(SCREENWIDTH/2+5, 210+totalHeight*4+50+50+100, 100, 40);
     goNext.backgroundColor=[UIColor redColor];
     [goNext setTitle:@"下一步" forState:UIControlStateNormal];
     [goNext setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -912,9 +912,9 @@
 -(void)goNext:(UIButton *)sender{
     if (self.haveBtn.selected==YES) {
 
-        if ([self.locationLab.text isEqualToString:@""]||[self.detailAddressTF.text isEqualToString:@""]||[self.store_textf.text isEqualToString:@""]||[self.agencyNameTF.text isEqualToString:@""]||[self.kindLab.text isEqualToString:@""]||self.ifImageView1==NO||self.ifImageView4==NO||self.ifImageView5==NO||[_company_nameTF.text isEqualToString:@""]||[_company_styleTF.text isEqualToString:@""]) {
+        if ([self.locationLab.text isEqualToString:@""]||[self.detailAddressTF.text isEqualToString:@""]||[self.store_textf.text isEqualToString:@""]||[self.agencyNameTF.text isEqualToString:@""]||[self.kindLab.text isEqualToString:@""]||self.ifImageView1==NO||self.ifImageView5==NO||[_company_nameTF.text isEqualToString:@""]||[_company_styleTF.text isEqualToString:@""]) {
 
-            //MBProgressHUD *hud判断如果有一项没填就出提示
+            //MBProgressHUD *hud判断如果有一项没填就出提示||self.ifImageView4==NO
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.frame = CGRectMake(0, 64, 375, 667);
             // Set the annular determinate mode to show task progress.
