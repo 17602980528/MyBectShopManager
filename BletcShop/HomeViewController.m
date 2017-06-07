@@ -1207,6 +1207,8 @@
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
          [_refreshheader endRefreshing];
          [_refreshFooter endRefreshing];
+         [data_hud hideAnimated:YES];
+
          NSLog(@"%@", error);
      }];
 }
@@ -1244,6 +1246,8 @@
          
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [data_hud hideAnimated:YES];
+
          [_refreshheader endRefreshing];
          [_refreshFooter endRefreshing];
          NSLog(@"%@", error);
@@ -1281,6 +1285,8 @@
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
          [_refreshheader endRefreshing];
          [_refreshFooter endRefreshing];
+         [data_hud hideAnimated:YES];
+
          NSLog(@"%@", error);
      }];
     
@@ -1349,7 +1355,8 @@
          
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         
+         [data_hud hideAnimated:YES];
+
          [_refreshheader endRefreshing];
          [_refreshFooter endRefreshing];
                   NSLog(@"postRequestAdv1==%@", error);
@@ -1416,6 +1423,7 @@
 
          [_refreshheader endRefreshing];
          [_refreshFooter endRefreshing];
+         [data_hud hideAnimated:YES];
 
          NSLog(@"%@", error);
      }];

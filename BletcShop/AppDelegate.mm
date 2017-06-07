@@ -2832,7 +2832,7 @@
         [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
             [self cancelLocalNotificationWithKey:@"key"];
             
-            //            NSLog(@"重复调用接口,查询数据===%@===paramer==%@",result,paramer);
+//                    NSLog(@"重复调用接口,查询数据===%@===paramer==%@",result,paramer);
             
             if ([result[@"flag"] intValue]==1) {
                 [self registerLocalNotification:result[@"num"]];//

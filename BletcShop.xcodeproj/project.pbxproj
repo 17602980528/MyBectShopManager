@@ -1094,6 +1094,13 @@
 		D9E5C3DE1E5EC0E6006BA2B1 /* AdverListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E5C3DD1E5EC0E6006BA2B1 /* AdverListViewController.m */; };
 		D9E5C3E21E5EC14B006BA2B1 /* AdverShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E5C3E11E5EC14B006BA2B1 /* AdverShowViewController.m */; };
 		D9E802D91DD16C1400758C00 /* GYChangeTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E802D81DD16C1400758C00 /* GYChangeTextView.m */; };
+		D9EC40BA1EE6846A004BEDB8 /* GeneralCardSeriseListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EC40B81EE6846A004BEDB8 /* GeneralCardSeriseListVC.m */; };
+		D9EC40BB1EE6846A004BEDB8 /* GeneralCardSeriseListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EC40B91EE6846A004BEDB8 /* GeneralCardSeriseListVC.xib */; };
+		D9EC40C01EE685AD004BEDB8 /* GeneralCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EC40BE1EE685AD004BEDB8 /* GeneralCell.m */; };
+		D9EC40C11EE685AD004BEDB8 /* GeneralCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EC40BF1EE685AD004BEDB8 /* GeneralCell.xib */; };
+		D9EC40C71EE69564004BEDB8 /* GeneralSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EC40C61EE69564004BEDB8 /* GeneralSectionHeader.m */; };
+		D9EC40CB1EE6B31E004BEDB8 /* SHOPVIPCARDVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EC40C91EE6B31E004BEDB8 /* SHOPVIPCARDVC.m */; };
+		D9EC40CC1EE6B31E004BEDB8 /* SHOPVIPCARDVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EC40CA1EE6B31E004BEDB8 /* SHOPVIPCARDVC.xib */; };
 		D9ED52021D2A461800267729 /* add_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = D9ED52011D2A461800267729 /* add_yellow.png */; };
 		D9ED52051D2A467700267729 /* grey_red.png in Resources */ = {isa = PBXBuildFile; fileRef = D9ED52031D2A467700267729 /* grey_red.png */; };
 		D9ED52061D2A467700267729 /* grey_add.png in Resources */ = {isa = PBXBuildFile; fileRef = D9ED52041D2A467700267729 /* grey_add.png */; };
@@ -2888,6 +2895,17 @@
 		D9E5C3E11E5EC14B006BA2B1 /* AdverShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdverShowViewController.m; sourceTree = "<group>"; };
 		D9E802D71DD16C1400758C00 /* GYChangeTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYChangeTextView.h; sourceTree = "<group>"; };
 		D9E802D81DD16C1400758C00 /* GYChangeTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYChangeTextView.m; sourceTree = "<group>"; };
+		D9EC40B71EE6846A004BEDB8 /* GeneralCardSeriseListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralCardSeriseListVC.h; sourceTree = "<group>"; };
+		D9EC40B81EE6846A004BEDB8 /* GeneralCardSeriseListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralCardSeriseListVC.m; sourceTree = "<group>"; };
+		D9EC40B91EE6846A004BEDB8 /* GeneralCardSeriseListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralCardSeriseListVC.xib; sourceTree = "<group>"; };
+		D9EC40BD1EE685AD004BEDB8 /* GeneralCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralCell.h; sourceTree = "<group>"; };
+		D9EC40BE1EE685AD004BEDB8 /* GeneralCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralCell.m; sourceTree = "<group>"; };
+		D9EC40BF1EE685AD004BEDB8 /* GeneralCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralCell.xib; sourceTree = "<group>"; };
+		D9EC40C51EE69564004BEDB8 /* GeneralSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralSectionHeader.h; sourceTree = "<group>"; };
+		D9EC40C61EE69564004BEDB8 /* GeneralSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralSectionHeader.m; sourceTree = "<group>"; };
+		D9EC40C81EE6B31E004BEDB8 /* SHOPVIPCARDVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOPVIPCARDVC.h; sourceTree = "<group>"; };
+		D9EC40C91EE6B31E004BEDB8 /* SHOPVIPCARDVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOPVIPCARDVC.m; sourceTree = "<group>"; };
+		D9EC40CA1EE6B31E004BEDB8 /* SHOPVIPCARDVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHOPVIPCARDVC.xib; sourceTree = "<group>"; };
 		D9ED52011D2A461800267729 /* add_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_yellow.png; sourceTree = "<group>"; };
 		D9ED52031D2A467700267729 /* grey_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grey_red.png; path = ../BletcShop/grey_red.png; sourceTree = "<group>"; };
 		D9ED52041D2A467700267729 /* grey_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grey_add.png; path = ../BletcShop/grey_add.png; sourceTree = "<group>"; };
@@ -4748,6 +4766,7 @@
 		D925E6421CC60EEC0020CEC7 /* 多种业务界面 */ = {
 			isa = PBXGroup;
 			children = (
+				D9EC40B61EE68391004BEDB8 /* 会员卡管理 */,
 				D9EF43071E80B91000D7C84A /* 商家介绍 */,
 				D9BB4DD71E04EA6B00971BCC /* 新的预约 */,
 				D9F2E92D1E03D864008F6517 /* 店铺管理 */,
@@ -6461,6 +6480,32 @@
 			path = GYChangeTextView;
 			sourceTree = "<group>";
 		};
+		D9EC40B61EE68391004BEDB8 /* 会员卡管理 */ = {
+			isa = PBXGroup;
+			children = (
+				D9EC40C81EE6B31E004BEDB8 /* SHOPVIPCARDVC.h */,
+				D9EC40C91EE6B31E004BEDB8 /* SHOPVIPCARDVC.m */,
+				D9EC40CA1EE6B31E004BEDB8 /* SHOPVIPCARDVC.xib */,
+				D9EC40B71EE6846A004BEDB8 /* GeneralCardSeriseListVC.h */,
+				D9EC40B81EE6846A004BEDB8 /* GeneralCardSeriseListVC.m */,
+				D9EC40B91EE6846A004BEDB8 /* GeneralCardSeriseListVC.xib */,
+				D9EC40BC1EE68576004BEDB8 /* cell单元格 */,
+			);
+			name = "会员卡管理";
+			sourceTree = "<group>";
+		};
+		D9EC40BC1EE68576004BEDB8 /* cell单元格 */ = {
+			isa = PBXGroup;
+			children = (
+				D9EC40BD1EE685AD004BEDB8 /* GeneralCell.h */,
+				D9EC40BE1EE685AD004BEDB8 /* GeneralCell.m */,
+				D9EC40BF1EE685AD004BEDB8 /* GeneralCell.xib */,
+				D9EC40C51EE69564004BEDB8 /* GeneralSectionHeader.h */,
+				D9EC40C61EE69564004BEDB8 /* GeneralSectionHeader.m */,
+			);
+			name = "cell单元格";
+			sourceTree = "<group>";
+		};
 		D9EE555F1DC9B1980024C830 /* 共享卡片 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6875,6 +6920,7 @@
 				18F032081E5ED79300ACD261 /* tempProducts_03.jpg in Resources */,
 				18D846501ED591C90048F010 /* 优惠券背景线上.png in Resources */,
 				D93C0D5D1D251E7B001A1AC1 /* 小标-12.png in Resources */,
+				D9EC40CC1EE6B31E004BEDB8 /* SHOPVIPCARDVC.xib in Resources */,
 				18D7C48E1D5B12BA00AEF545 /* mohu-10.png in Resources */,
 				D92302601D1528BB008FB9A9 /* entrance_default.png in Resources */,
 				D987BB2C1E790CD7008AE24D /* UserInfoCell.xib in Resources */,
@@ -7141,6 +7187,7 @@
 				D9FF0D921D53304C00443312 /* 图标-04new.png in Resources */,
 				D95BAE5D1D542FD500ED0CDC /* award_19.png in Resources */,
 				D9ED52051D2A467700267729 /* grey_red.png in Resources */,
+				D9EC40BB1EE6846A004BEDB8 /* GeneralCardSeriseListVC.xib in Resources */,
 				D949EC351CE1C4A40023B6D6 /* area.plist in Resources */,
 				18F27EF41D640E84002DD03A /* 头像-12.png in Resources */,
 				1C2ED1281C5B5868003EE93B /* 8-02@2x.png in Resources */,
@@ -7256,6 +7303,7 @@
 				D95BAE541D542FD500ED0CDC /* award_10.png in Resources */,
 				D95BAE561D542FD500ED0CDC /* award_12.png in Resources */,
 				D98FDF841E601C280057C206 /* AD_ad_is@2x.png in Resources */,
+				D9EC40C11EE685AD004BEDB8 /* GeneralCell.xib in Resources */,
 				D9699E511D348EF7001DEC06 /* 小标-21.png in Resources */,
 				D9AB25381D88E4ED000E9288 /* VoiceSearchFeedback010@2x.png in Resources */,
 				1C31F8141C632A4E00CB1A9E /* tianjiavip@2x.png in Resources */,
@@ -7439,6 +7487,7 @@
 				D9B650071E9724A0007DF5DC /* ShopManagerDataReportVC.m in Sources */,
 				1A9B3AD21D77123D00919CDC /* Message.m in Sources */,
 				D9A6E46C1D4F3BB8008A3C29 /* AddVipCardViewController.m in Sources */,
+				D9EC40C71EE69564004BEDB8 /* GeneralSectionHeader.m in Sources */,
 				D9ABB1A11EC93EF900FBE080 /* NewShopDetailVC.m in Sources */,
 				D9B3BB9E1DE7FFEB00CC8B0D /* NewProductTableViewCell.m in Sources */,
 				1CB53C0F1C572004002B6CC1 /* FriendController.m in Sources */,
@@ -7512,6 +7561,7 @@
 				D9DEED1B1CACED7C00ACDD00 /* NSData+ImageContentType.m in Sources */,
 				079387131C5620290021B385 /* Mycell.m in Sources */,
 				D9B3A5B01D74255700F3F27E /* EMSDWebImageManager.m in Sources */,
+				D9EC40BA1EE6846A004BEDB8 /* GeneralCardSeriseListVC.m in Sources */,
 				184C72131EC31A770065EE65 /* ChangePayPassLastVC.m in Sources */,
 				D9195D1A1E8218F200FB4367 /* PictureAndVeidoDetailVC.m in Sources */,
 				D9A6E46F1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m in Sources */,
@@ -7595,6 +7645,7 @@
 				D947E4931D7D729000F9FEE8 /* Person.m in Sources */,
 				D9DEED241CACED7C00ACDD00 /* UIButton+WebCache.m in Sources */,
 				18F065141EA0983000D62B5F /* ValuePickerViewEric.m in Sources */,
+				D9EC40CB1EE6B31E004BEDB8 /* SHOPVIPCARDVC.m in Sources */,
 				D94113581CE9A3D7008E231F /* base64.m in Sources */,
 				D98ECBCF1D9CE7A700BEDD57 /* AddVIPModel.m in Sources */,
 				D9B3A5B31D74255700F3F27E /* NSData+EMImageContentType.m in Sources */,
@@ -7771,6 +7822,7 @@
 				D96E1B7C1ECAD9EF00084453 /* ChoseSeriesCellT.m in Sources */,
 				D9937D7F1DDFF22C0001B575 /* PayMentController.m in Sources */,
 				1CDCCD1A1C7594040094E70D /* AFNetworkReachabilityManager.m in Sources */,
+				D9EC40C01EE685AD004BEDB8 /* GeneralCell.m in Sources */,
 				D9B3A5BE1D74255700F3F27E /* PSTCollectionViewController.m in Sources */,
 				D932F3E31CCDB6B800B33505 /* VPImageCropperViewController.m in Sources */,
 				D99760EF1E690575008E21FE /* SawtoothView.m in Sources */,

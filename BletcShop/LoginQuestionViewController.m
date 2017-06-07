@@ -254,6 +254,7 @@
                          
                          [self saveInfo:[NSString stringWithFormat:@"%@",userInfo[@"muid"]]];
                          
+                         [app repeatLoadAPI];
                          
                          app.shopInfoDic =(NSMutableDictionary*)userInfo;
                          NSUserDefaults *use_name = [NSUserDefaults standardUserDefaults];

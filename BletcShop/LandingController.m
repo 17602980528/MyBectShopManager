@@ -83,27 +83,28 @@
     UserText.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.userText = UserText;
     [landView addSubview:UserText];
-    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    phoneBtn.frame = CGRectMake(SCREENWIDTH-100, 10, 100, 30);
-    [phoneBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [phoneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [phoneBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    [phoneBtn setBackgroundColor:NavBackGroundColor];
-    phoneBtn.layer.cornerRadius = 10;
-    self.getCodeBtn = phoneBtn;
-    [phoneBtn addTarget:self action:@selector(getProCode) forControlEvents:UIControlEventTouchUpInside];
-    phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [landView addSubview:phoneBtn];
     
-    UITextField *proText = [[UITextField alloc]initWithFrame:CGRectMake(10, UserText.bottom, SCREENWIDTH-10, 50)];
-    proText.delegate = self;
-    proText.keyboardType = UIKeyboardTypeNumberPad;
-    proText.font = [UIFont systemFontOfSize:15];
-    proText.placeholder = @"请输入您的验证码";
-    proText.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.proText = proText;
-    [landView addSubview:proText];
+//    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    phoneBtn.frame = CGRectMake(SCREENWIDTH-100, 10, 100, 30);
+//    [phoneBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+//    [phoneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [phoneBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+//    [phoneBtn setBackgroundColor:NavBackGroundColor];
+//    phoneBtn.layer.cornerRadius = 10;
+//    self.getCodeBtn = phoneBtn;
+//    [phoneBtn addTarget:self action:@selector(getProCode) forControlEvents:UIControlEventTouchUpInside];
+//    phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [landView addSubview:phoneBtn];
     
+//    UITextField *proText = [[UITextField alloc]initWithFrame:CGRectMake(10, UserText.bottom, SCREENWIDTH-10, 50)];
+//    proText.delegate = self;
+//    proText.keyboardType = UIKeyboardTypeNumberPad;
+//    proText.font = [UIFont systemFontOfSize:15];
+//    proText.placeholder = @"请输入您的验证码";
+//    proText.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    self.proText = proText;
+//    [landView addSubview:proText];
+//    
     //    UIButton *proBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     //    proBtn.frame = CGRectMake(SCREENWIDTH-100, UserText.bottom+10, 70, 30);;
     //    self.valBtn = proBtn;
@@ -117,7 +118,7 @@
     //
     //    [landView addSubview:proBtn];
     
-    UITextField *passText = [[UITextField alloc]initWithFrame:CGRectMake(10, proText.bottom, SCREENWIDTH-20, 50)];
+    UITextField *passText = [[UITextField alloc]initWithFrame:CGRectMake(10, UserText.bottom, SCREENWIDTH-20, 50)];
     passText.secureTextEntry = YES;
     passText.font = [UIFont systemFontOfSize:15];
     passText.placeholder = @"密码";
@@ -140,10 +141,10 @@
     line2.backgroundColor = [UIColor grayColor];
     line2.alpha = 0.3;
     [landView addSubview:line2];
-    UIView *line3 = [[UIView alloc]initWithFrame:CGRectMake(0, proText.bottom, landView.width, 0.3)];
-    line3.backgroundColor = [UIColor grayColor];
-    line3.alpha = 0.3;
-    [landView addSubview:line3];
+//    UIView *line3 = [[UIView alloc]initWithFrame:CGRectMake(0, proText.bottom, landView.width, 0.3)];
+//    line3.backgroundColor = [UIColor grayColor];
+//    line3.alpha = 0.3;
+//    [landView addSubview:line3];
     UIButton *LandBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     LandBtn.frame = CGRectMake(30, landView.bottom+10, SCREENWIDTH-60, 40);
     [LandBtn setTitle:@"登录" forState:UIControlStateNormal];
@@ -399,30 +400,33 @@
             [self textExample];
         }else if([self checkPhoneNumIfExistsInTestList]){
             [self postRequest];
-        }else if ([self.proText.text  isEqualToString: @""]) {
-            
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"请输入验证码", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-            hud.userInteractionEnabled = YES;
-            
-            [hud hideAnimated:YES afterDelay:2.f];
-            
-        }
+//        }else if ([self.proText.text  isEqualToString: @""]) {
+//            
+//            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//            
+//            hud.mode = MBProgressHUDModeText;
+//            hud.label.text = NSLocalizedString(@"请输入验证码", @"HUD message title");
+//            hud.label.font = [UIFont systemFontOfSize:13];
+//            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+//            hud.userInteractionEnabled = YES;
+//            
+//            [hud hideAnimated:YES afterDelay:2.f];
+//            
+//        }
         
         else if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
             [self postRequest];
+        }else{
+            [self postRequest];
+ 
         }
-        else if (![self.proText.text  isEqualToString: @""])
-        {
-            
-            [self validationCode];
-            
-            
-        }
+//        else if (![self.proText.text  isEqualToString: @""])
+//        {
+//            
+//            [self validationCode];
+//            
+//            
+//        }
         
     }
     
@@ -526,7 +530,6 @@
                         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
                         appdelegate.userInfoDic = [NSMutableDictionary dictionaryWithDictionary:user_dic];
                         
-                        [appdelegate repeatLoadAPI];
                         
                         appdelegate.IsLogin = YES;
                         //                        [appdelegate socketConnectHost];

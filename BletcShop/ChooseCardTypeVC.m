@@ -8,6 +8,7 @@
 
 #import "ChooseCardTypeVC.h"
 #import "ChoseSeriesVC.h"
+#import "SHOPVIPCARDVC.h"
 @interface ChooseCardTypeVC ()
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
@@ -38,10 +39,24 @@
     _selectResult=@"计次卡";
 }
 
+-(void)addtBtnAction{
+    
+    SHOPVIPCARDVC *VC = [[SHOPVIPCARDVC alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"选卡类型";
     _selectResult=@"储值卡";
+    
+    UIButton *menuBt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [menuBt addTarget:self action:@selector(addtBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [menuBt setImage:[UIImage imageNamed:@"add_yellow"] forState:UIControlStateNormal];
+    [menuBt setImage:[UIImage imageNamed:@"add_yellow"] forState:UIControlStateHighlighted];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:menuBt];
+    self.navigationItem.rightBarButtonItem = item;
+    
+    
 }
 - (IBAction)gotoNextVC:(id)sender {
     ChoseSeriesVC *choseSeriesVC=[[ChoseSeriesVC alloc]init];

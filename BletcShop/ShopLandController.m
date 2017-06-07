@@ -91,29 +91,29 @@
     UserText.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.userText = UserText;
     [landView addSubview:UserText];
-    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    phoneBtn.frame = CGRectMake(SCREENWIDTH-100, 10, 100, 30);
-    [phoneBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [phoneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [phoneBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    [phoneBtn setBackgroundColor:NavBackGroundColor];
-    phoneBtn.layer.cornerRadius = 10;
-    self.getCodeBtn = phoneBtn;
-    [phoneBtn addTarget:self action:@selector(getProCode) forControlEvents:UIControlEventTouchUpInside];
-    phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [landView addSubview:phoneBtn];
+//    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    phoneBtn.frame = CGRectMake(SCREENWIDTH-100, 10, 100, 30);
+//    [phoneBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+//    [phoneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [phoneBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+//    [phoneBtn setBackgroundColor:NavBackGroundColor];
+//    phoneBtn.layer.cornerRadius = 10;
+//    self.getCodeBtn = phoneBtn;
+//    [phoneBtn addTarget:self action:@selector(getProCode) forControlEvents:UIControlEventTouchUpInside];
+//    phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [landView addSubview:phoneBtn];
+//    
+//    UITextField *proText = [[UITextField alloc]initWithFrame:CGRectMake(10, UserText.bottom, SCREENWIDTH-10, 50)];
+//    proText.delegate = self;
+//    proText.keyboardType = UIKeyboardTypeNumberPad;
+//    proText.font = [UIFont systemFontOfSize:15];
+//    proText.placeholder = @"请输入您的验证码";
+//    proText.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    self.proText = proText;
+//    [landView addSubview:proText];
     
-    UITextField *proText = [[UITextField alloc]initWithFrame:CGRectMake(10, UserText.bottom, SCREENWIDTH-10, 50)];
-    proText.delegate = self;
-    proText.keyboardType = UIKeyboardTypeNumberPad;
-    proText.font = [UIFont systemFontOfSize:15];
-    proText.placeholder = @"请输入您的验证码";
-    proText.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.proText = proText;
-    [landView addSubview:proText];
     
-    
-    UITextField *passText = [[UITextField alloc]initWithFrame:CGRectMake(10, proText.bottom, SCREENWIDTH-20, 50)];
+    UITextField *passText = [[UITextField alloc]initWithFrame:CGRectMake(10, UserText.bottom, SCREENWIDTH-20, 50)];
     passText.secureTextEntry = YES;
     passText.font = [UIFont systemFontOfSize:15];
     passText.placeholder = @"密码";
@@ -131,10 +131,10 @@
     line1.backgroundColor = [UIColor grayColor];
     line1.alpha = 0.3;
     [landView addSubview:line1];
-    UIView *line11 = [[UIView alloc]initWithFrame:CGRectMake(0, proText.bottom, landView.width, 0.3)];
-    line11.backgroundColor = [UIColor grayColor];
-    line11.alpha = 0.3;
-    [landView addSubview:line11];
+//    UIView *line11 = [[UIView alloc]initWithFrame:CGRectMake(0, proText.bottom, landView.width, 0.3)];
+//    line11.backgroundColor = [UIColor grayColor];
+//    line11.alpha = 0.3;
+//    [landView addSubview:line11];
     UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, passText.bottom, landView.width, 0.3)];
     line2.backgroundColor = [UIColor grayColor];
     line2.alpha = 0.3;
@@ -344,21 +344,21 @@
         [self postRequest];
     }else{
         
-        if (_data_code[0] == _proText.text) {
-            
+//        if (_data_code[0] == _proText.text) {
+        
             [self postRequest];
             
-            
-            return;
-        }else    if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
-            [self postRequest];
-            
-        }else if([self checkPhoneNumIfExistsInTestList]){
-            [self postRequest];
-        }else{
-            [self alert:@"验证码输入错误"];
-            
-        }
+//            
+//            return;
+//        }else    if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
+//            [self postRequest];
+//            
+//        }else if([self checkPhoneNumIfExistsInTestList]){
+//            [self postRequest];
+//        }else{
+//            [self alert:@"验证码输入错误"];
+//            
+//        }
         
         
     }
@@ -395,33 +395,30 @@
     //    [self.view addSubview:noticeView];
     
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请选择登录身份" delegate:self cancelButtonTitle:nil otherButtonTitles:@"注册人",@"管理员", nil];
-    alertView.tag=999;
-    [alertView show];
+
     
-    //    UIAlertController *alterController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请选择登录身份" preferredStyle:UIAlertControllerStyleAlert];
-    //    alterController.view.tintColor = NavBackGroundColor;
-    //
-    //    UIAlertAction *resig_btn = [UIAlertAction actionWithTitle:@"注册人" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //    }];
-    //
-    //    UIAlertAction *manage_btn = [UIAlertAction actionWithTitle:@"管理员" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //    }];
-    //    [alterController addAction:resig_btn];
-    //    [alterController addAction:manage_btn];
-    //    [self presentViewController:alterController animated:YES completion:nil];
-    //
+        UIAlertController *alterController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请选择登录身份" preferredStyle:UIAlertControllerStyleAlert];
+//        alterController.view.tintColor = NavBackGroundColor;
+    
+        UIAlertAction *resig_btn = [UIAlertAction actionWithTitle:@"注册人" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            self.state = 0;
+            [self validationCode];
+    
+        }];
+    
+        UIAlertAction *manage_btn = [UIAlertAction actionWithTitle:@"管理员" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            self.state = 1;
+            [self validationCode];
+    
+        }];
+        [alterController addAction:resig_btn];
+        [alterController addAction:manage_btn];
+        [self presentViewController:alterController animated:YES completion:nil];
+    
     
 }
-//-(void)ChoiceAdminClick:(NSInteger)state
-//{
-//    self.state = state;
-//    NSLog(@"sdsdsdsss%ld",(long)state);
-//    [self validationCode];
-////    [self postRequest];
-//}
+
 //登录点击事件
 -(void)LandingAction:(UIButton *)btn
 {
@@ -438,11 +435,7 @@
         [self addAlert];
     }
 }
-//手机号登录
--(void)PhoneAction
-{
-    
-}
+
 //注册
 -(void)CreatAction
 {
@@ -583,13 +576,7 @@
      }];
     
 }
-////完善信息界面
-//-(void)completeInfo{
-//    NewNextViewController *wholeInfo=[[NewNextViewController alloc]init];
-//    wholeInfo.phoneString=self.userText.text;
-//    wholeInfo.pswString=self.passText.text;
-//    [self presentViewController:wholeInfo animated:YES completion:nil];
-//}
+
 //判断是否textField输入数字
 - (BOOL)isPureInt:(NSString*)string{
     NSScanner* scan = [NSScanner scannerWithString:string]; //定义一个NSScanner，扫描string
@@ -735,14 +722,6 @@
     }else if(self.stateBtn.selected == NO)
     {
         self.ifRemeber = NO;
-    }
-}
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag==999) {
-        self.state = buttonIndex;
-        NSLog(@"sdsdsdsss%ld",(long)buttonIndex);
-        [self validationCode];
-        
     }
 }
 
