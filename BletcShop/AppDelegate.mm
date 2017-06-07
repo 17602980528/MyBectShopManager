@@ -778,128 +778,13 @@
 
 
 #pragma mark 选择商户还是用户
--(void)_initChose
-{
-    for (UIView *view in self.window.subviews) {
-        [view removeFromSuperview];
-    }
-    
-    UIView *choseView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    choseView.backgroundColor = RGB(242, 241, 241);
-    [self.window addSubview:choseView];
-    self.choseView = choseView;
-    
-    //    UIImageView *backImg =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    //    backImg.image = [UIImage imageNamed:@"登陆-01(2)"];
-    //    [choseView addSubview:backImg];
-    
-    
-    
-    UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 64)];
-    topView.backgroundColor =NavBackGroundColor;
-    [choseView addSubview:topView];
-    
-    UILabel*label=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, SCREENWIDTH, 44)];
-    label.text=@"选择身份";
-    label.font=[UIFont systemFontOfSize:19];
-    label.textAlignment=NSTextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    [topView addSubview:label];
-    
-    
-    UIButton *interBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    interBtn.frame = CGRectMake((SCREENWIDTH-(479/2))/2, SCREENHEIGHT-42-20, 479/2, 42);
-//    interBtn.backgroundColor = NavBackGroundColor;
-//    [interBtn setTitle:@"进入商消乐" forState:0];
-    [interBtn setImage:[UIImage imageNamed:@"choseImg"] forState:0];
-    [interBtn setImage:[UIImage imageNamed:@"choseImg"] forState:1];
-
-    
-//    interBtn.layer.cornerRadius =interBtn.height/2;
-    interBtn.layer.masksToBounds = YES;
-    
-    [interBtn addTarget:self action:@selector(interClick) forControlEvents:UIControlEventTouchUpInside];
-    [choseView addSubview:interBtn];
-    
-    CGFloat height_v = (interBtn.top-(topView.bottom+25.5))/2;
-    
-    //    if (SCREENWIDTH ==320) {
-    //        height_v= 207.25;
-    //    }
-    //
-    whichInter = 0;
-    
-    for (int i = 0; i <2; i ++) {
-        UIView *view_two = [[UIView alloc]initWithFrame:CGRectMake(0, topView.bottom+25.5+height_v*i, SCREENWIDTH, height_v)];
-        view_two.tag = i;
-        
-        [choseView addSubview:view_two];
-        
-        //用户
-        // 320 ---140
-        CGFloat weithImg = height_v-36-20;
-        
-        //        if (SCREENWIDTH ==320) {
-        //            weithImg= 148;
-        //        }
-        NSLog(@"SCREENWIDTH,weithImg-height_v--%lf---%lf===%lf",SCREENWIDTH,weithImg,height_v);
-        UIImageView *userImg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-weithImg)/2, 0, weithImg, weithImg)];
-        userImg.layer.cornerRadius = userImg.width/2;
-        userImg.layer.masksToBounds = YES;
-        [view_two addSubview:userImg];
-        
-       
-
-        
-        UILabel *name_lab = [[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-30, userImg.bottom+16, 200, 20)];
-        name_lab.font = [UIFont systemFontOfSize:18];
-        name_lab.textColor = RGB(51, 51, 51);
-        [view_two addSubview:name_lab];
-        
-        UIImageView*select_img = [[UIImageView alloc]initWithFrame:CGRectMake(name_lab.left-25, name_lab.top, 20, 20)];
-        select_img.layer.cornerRadius = select_img.width/2;
-        [view_two addSubview:select_img];
-        
-        
-        if (i==0) {
-            userImg.image = [UIImage imageNamed:@"user_s"];
-//            name_lab.text = @"我是消费者";
-//            select_img.image = [UIImage imageNamed:@"登陆-04"];
-            upImg = userImg;
-            
-            UIImageView *selectImg = [[UIImageView alloc]initWithFrame:CGRectMake(5, userImg.bottom+(view_two.height-userImg.bottom-30*(SCREENWIDTH-10)/1100)/2 ,SCREENWIDTH-10 , 30*(SCREENWIDTH-10)/1100)];
-            selectImg.image = [UIImage imageNamed:@"select_img"];
-            [view_two addSubview:selectImg];
-            
-        }else{
-            userImg.image = [UIImage imageNamed:@"shoper_n"];
-//            name_lab.text = @"我是商户";
-//            select_img.image = [UIImage imageNamed:@"登陆-05"];
-            downImg = userImg;
-            
-        }
-        
-        
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(choiceWhichTag:)];
-        [view_two addGestureRecognizer:tap];
-        
-        
-    }
-    
-    
-    
-    
-}
-
-//-(void)_initChose
-//{
+//-(void)_initChose{
 //    for (UIView *view in self.window.subviews) {
 //        [view removeFromSuperview];
 //    }
 //    
 //    UIView *choseView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-//    choseView.backgroundColor = [UIColor whiteColor];
+//    choseView.backgroundColor = RGB(242, 241, 241);
 //    [self.window addSubview:choseView];
 //    self.choseView = choseView;
 //    
@@ -922,10 +807,14 @@
 //    
 //    
 //    UIButton *interBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    interBtn.frame = CGRectMake(92, SCREENHEIGHT-44-20, SCREENWIDTH-92*2, 44);
-//    interBtn.backgroundColor = NavBackGroundColor;
-//    [interBtn setTitle:@"进入商消乐" forState:0];
-//    interBtn.layer.cornerRadius =interBtn.height/2;
+//    interBtn.frame = CGRectMake((SCREENWIDTH-(479/2))/2, SCREENHEIGHT-42-20, 479/2, 42);
+////    interBtn.backgroundColor = NavBackGroundColor;
+////    [interBtn setTitle:@"进入商消乐" forState:0];
+//    [interBtn setImage:[UIImage imageNamed:@"choseImg"] forState:0];
+//    [interBtn setImage:[UIImage imageNamed:@"choseImg"] forState:1];
+//
+//    
+////    interBtn.layer.cornerRadius =interBtn.height/2;
 //    interBtn.layer.masksToBounds = YES;
 //    
 //    [interBtn addTarget:self action:@selector(interClick) forControlEvents:UIControlEventTouchUpInside];
@@ -957,6 +846,10 @@
 //        userImg.layer.cornerRadius = userImg.width/2;
 //        userImg.layer.masksToBounds = YES;
 //        [view_two addSubview:userImg];
+//        
+//       
+//
+//        
 //        UILabel *name_lab = [[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-30, userImg.bottom+16, 200, 20)];
 //        name_lab.font = [UIFont systemFontOfSize:18];
 //        name_lab.textColor = RGB(51, 51, 51);
@@ -968,16 +861,20 @@
 //        
 //        
 //        if (i==0) {
-//            userImg.image = [UIImage imageNamed:@"登陆  头像-01"];
-//            name_lab.text = @"我是消费者";
-//            select_img.image = [UIImage imageNamed:@"登陆-04"];
-//            upImg = select_img;
+//            userImg.image = [UIImage imageNamed:@"user_s"];
+////            name_lab.text = @"我是消费者";
+////            select_img.image = [UIImage imageNamed:@"登陆-04"];
+//            upImg = userImg;
+//            
+//            UIImageView *selectImg = [[UIImageView alloc]initWithFrame:CGRectMake(5, userImg.bottom+(view_two.height-userImg.bottom-30*(SCREENWIDTH-10)/1100)/2 ,SCREENWIDTH-10 , 30*(SCREENWIDTH-10)/1100)];
+//            selectImg.image = [UIImage imageNamed:@"select_img"];
+//            [view_two addSubview:selectImg];
 //            
 //        }else{
-//            userImg.image = [UIImage imageNamed:@"登陆  头像-02"];
-//            name_lab.text = @"我是商户";
-//            select_img.image = [UIImage imageNamed:@"登陆-05"];
-//            downImg = select_img;
+//            userImg.image = [UIImage imageNamed:@"shoper_n"];
+////            name_lab.text = @"我是商户";
+////            select_img.image = [UIImage imageNamed:@"登陆-05"];
+//            downImg = userImg;
 //            
 //        }
 //        
@@ -994,38 +891,139 @@
 //    
 //}
 
-//-(void)choiceWhichTag:(UITapGestureRecognizer*)gestureRecongnizer{
-//    UIView *view = gestureRecongnizer.view;
-//    
-//    whichInter = view.tag;
-//    
-//    if (view.tag==0) {
-//        upImg.image = [UIImage imageNamed:@"登陆-04"];
-//        downImg.image = [UIImage imageNamed:@"登陆-05"];
-//        
-//    }else{
-//        upImg.image = [UIImage imageNamed:@"登陆-05"];
-//        downImg.image = [UIImage imageNamed:@"登陆-04"];
-//        
-//    }
-//    
-//}
+-(void)_initChose{
+    for (UIView *view in self.window.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    UIView *choseView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    choseView.backgroundColor = [UIColor whiteColor];
+    [self.window addSubview:choseView];
+    self.choseView = choseView;
+    
+    //    UIImageView *backImg =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    //    backImg.image = [UIImage imageNamed:@"登陆-01(2)"];
+    //    [choseView addSubview:backImg];
+    
+    
+    
+    UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 64)];
+    topView.backgroundColor =NavBackGroundColor;
+    [choseView addSubview:topView];
+    
+    UILabel*label=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, SCREENWIDTH, 44)];
+    label.text=@"选择身份";
+    label.font=[UIFont systemFontOfSize:19];
+    label.textAlignment=NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    [topView addSubview:label];
+    
+    
+    UIButton *interBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    interBtn.frame = CGRectMake(92, SCREENHEIGHT-44-20, SCREENWIDTH-92*2, 44);
+    interBtn.backgroundColor = NavBackGroundColor;
+    [interBtn setTitle:@"进入商消乐" forState:0];
+    interBtn.layer.cornerRadius =interBtn.height/2;
+    interBtn.layer.masksToBounds = YES;
+    
+    [interBtn addTarget:self action:@selector(interClick) forControlEvents:UIControlEventTouchUpInside];
+    [choseView addSubview:interBtn];
+    
+    CGFloat height_v = (interBtn.top-(topView.bottom+25.5))/2;
+    
+    //    if (SCREENWIDTH ==320) {
+    //        height_v= 207.25;
+    //    }
+    //
+    whichInter = 0;
+    
+    for (int i = 0; i <2; i ++) {
+        UIView *view_two = [[UIView alloc]initWithFrame:CGRectMake(0, topView.bottom+25.5+height_v*i, SCREENWIDTH, height_v)];
+        view_two.tag = i;
+        
+        [choseView addSubview:view_two];
+        
+        //用户
+        // 320 ---140
+        CGFloat weithImg = height_v-36-20;
+        
+        //        if (SCREENWIDTH ==320) {
+        //            weithImg= 148;
+        //        }
+        NSLog(@"SCREENWIDTH,weithImg-height_v--%lf---%lf===%lf",SCREENWIDTH,weithImg,height_v);
+        UIImageView *userImg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-weithImg)/2, 0, weithImg, weithImg)];
+        userImg.layer.cornerRadius = userImg.width/2;
+        userImg.layer.masksToBounds = YES;
+        [view_two addSubview:userImg];
+        UILabel *name_lab = [[UILabel alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-30, userImg.bottom+16, 200, 20)];
+        name_lab.font = [UIFont systemFontOfSize:18];
+        name_lab.textColor = RGB(51, 51, 51);
+        [view_two addSubview:name_lab];
+        
+        UIImageView*select_img = [[UIImageView alloc]initWithFrame:CGRectMake(name_lab.left-25, name_lab.top, 20, 20)];
+        select_img.layer.cornerRadius = select_img.width/2;
+        [view_two addSubview:select_img];
+        
+        
+        if (i==0) {
+            userImg.image = [UIImage imageNamed:@"登陆  头像-01"];
+            name_lab.text = @"我是消费者";
+            select_img.image = [UIImage imageNamed:@"登陆-04"];
+            upImg = select_img;
+            
+        }else{
+            userImg.image = [UIImage imageNamed:@"登陆  头像-02"];
+            name_lab.text = @"我是商户";
+            select_img.image = [UIImage imageNamed:@"登陆-05"];
+            downImg = select_img;
+            
+        }
+        
+        
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(choiceWhichTag:)];
+        [view_two addGestureRecognizer:tap];
+        
+        
+    }
+    
+    
+    
+    
+}
+
 -(void)choiceWhichTag:(UITapGestureRecognizer*)gestureRecongnizer{
     UIView *view = gestureRecongnizer.view;
     
     whichInter = view.tag;
     
     if (view.tag==0) {
-        upImg.image = [UIImage imageNamed:@"user_s"];
-        downImg.image = [UIImage imageNamed:@"shoper_n"];
+        upImg.image = [UIImage imageNamed:@"登陆-04"];
+        downImg.image = [UIImage imageNamed:@"登陆-05"];
         
     }else{
-        upImg.image = [UIImage imageNamed:@"user_n"];
-        downImg.image = [UIImage imageNamed:@"shoper_s"];
+        upImg.image = [UIImage imageNamed:@"登陆-05"];
+        downImg.image = [UIImage imageNamed:@"登陆-04"];
         
     }
     
 }
+//-(void)choiceWhichTag:(UITapGestureRecognizer*)gestureRecongnizer{
+//    UIView *view = gestureRecongnizer.view;
+//    
+//    whichInter = view.tag;
+//    
+//    if (view.tag==0) {
+//        upImg.image = [UIImage imageNamed:@"user_s"];
+//        downImg.image = [UIImage imageNamed:@"shoper_n"];
+//        
+//    }else{
+//        upImg.image = [UIImage imageNamed:@"user_n"];
+//        downImg.image = [UIImage imageNamed:@"shoper_s"];
+//        
+//    }
+//    
+//}
 
 -(void)interClick{
     if (whichInter==0) {
