@@ -10,7 +10,7 @@
 #import "SoundPaly.h"
 #import "ChangePayPassVC.h"
 #import "PayCustomView.h"
-#import "CheckOldPassVC.h"
+#import "AccessCodeVC.h"
 @interface MoneyPAYViewController ()<UIAlertViewDelegate,PayCustomViewDelegate>
 {
     UITextField *textTF;
@@ -277,7 +277,7 @@
     [self checkPayPassWd:pass];
 }
 -(void)forgetPayPass{
-    CheckOldPassVC *vc=[[CheckOldPassVC alloc]init];
+    AccessCodeVC *vc=[[AccessCodeVC alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {

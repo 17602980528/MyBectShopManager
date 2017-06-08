@@ -134,7 +134,7 @@
              
          }else
          {
-             UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:result[@"result_code"] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+             UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"%@",result[@"result_code"]] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
              [alertView show];
          }
          
