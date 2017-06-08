@@ -44,12 +44,37 @@
 
 -(NSMutableArray *)tradeArray{
     if (!_tradeArray) {
-        _tradeArray = [[NSMutableArray alloc]initWithObjects:@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所", nil];
+        _tradeArray = [NSMutableArray array];
     }
     return _tradeArray;
 }
 
-
+-(void)getIndustryArray{
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/Source/tradeIconGet",BASEURL];
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         
+         
+         [self.tradeArray removeAllObjects];
+         for (NSDictionary *dic in result) {
+             if (![dic[@"text"] isEqualToString:@"全部"]) {
+                 [self.tradeArray addObject:dic[@"text"]];
+             }
+         }
+         NSLog(@"-----%@",result);
+         
+         
+         
+         
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         
+     }];
+    
+    
+    
+}
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
     UIImage * result;
@@ -61,7 +86,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    
+    [self getIndustryArray];
     [self getStreest];
     
     [self initTopView];
@@ -384,7 +409,7 @@
     
     
     
-    _imageView1=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 5+lineView4.bottom, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView1=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, 15+lineView4.bottom, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView1.userInteractionEnabled=YES;
     _imageView1.image=[UIImage imageNamed:@"mohu-09"];
     [_scrollView addSubview:_imageView1];
@@ -423,7 +448,7 @@
     [_scrollView addSubview:label8];
     
    
-    _imageView5=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, label8.top, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
+    _imageView5=[[UIImageView alloc]initWithFrame:CGRectMake(120+10+(SCREENWIDTH-150)/2, xingLab8.top, (SCREENWIDTH-150)/2, ((SCREENWIDTH-150)/2)*116/176)];
     _imageView5.image=[UIImage imageNamed:@"mohu-13"];
     _imageView5.userInteractionEnabled=YES;
     [_scrollView addSubview:_imageView5];
@@ -475,8 +500,8 @@
 }
 
 -(void)sureBtnClcik{
-    if ([self.realNameTF.text isEqualToString:@""]||[self.idenCardText.text isEqualToString:@""]||[self.locationLab.text isEqualToString:@""]||[self.detailAddressTF.text isEqualToString:@""]||[self.adddetailnewAddressTF.text isEqualToString:@""]||[self.store_textf.text isEqualToString:@""]||[self.agencyNameTF.text isEqualToString:@""]||[self.kindLab.text isEqualToString:@""]||self.ifImageView1==NO||self.ifImageView5==NO) {
-        
+    if ([self.realNameTF.text isEqualToString:@""]||[self.idenCardText.text isEqualToString:@""]||[self.locationLab.text isEqualToString:@""]||[self.detailAddressTF.text isEqualToString:@""]||[self.adddetailnewAddressTF.text isEqualToString:@""]||[self.store_textf.text isEqualToString:@""]||[self.agencyNameTF.text isEqualToString:@""]||[self.kindLab.text isEqualToString:@""]) {
+//        ||self.ifImageView1==NO||self.ifImageView5==NO
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.label.text = NSLocalizedString(@"至少有一项信息填写不完成", @"HUD message title");
@@ -501,7 +526,7 @@
     
     
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/complete_not_auth",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/register/auth_quick",BASEURL];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
@@ -550,18 +575,27 @@
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@" KKRequestDataService ==%@", result);
-        if ([result[@"result_code"] intValue]==1) {
+        if ([result[@"result_code"] intValue]==1 ||[result[@"result_code"] intValue]==0) {
             UIAlertView *altView =[[UIAlertView alloc]initWithTitle:@"提示" message:@"您已提交成功是否重新登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             [altView show];
-        }else{
-            
-            
+        }else if([result[@"result_code"] intValue]==-1){
             
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.mode = MBProgressHUDModeText;
-            hud.label.text = @"请求失败...";
+            hud.label.text = [NSString stringWithFormat:@"%@",result[@"tip"]];
             hud.label.font = [UIFont systemFontOfSize:13];
             [hud hideAnimated:YES afterDelay:2.f];
+
+            
+         }else{
+                      
+          MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+          hud.mode = MBProgressHUDModeText;
+          hud.label.text = @"请求失败...";
+          hud.label.font = [UIFont systemFontOfSize:13];
+          [hud hideAnimated:YES afterDelay:2.f];
+
+            
         }
         
         
@@ -964,7 +998,7 @@
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
     
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/upload/upload",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/RegisterUpload/upload",BASEURL];
     
     
     
@@ -975,7 +1009,8 @@
     NSString *name = [[NSString alloc]initWithFormat:@"%@",shopInfoDic[@"muid"]];
     
     NSMutableDictionary *parmer = [NSMutableDictionary dictionary];
-    
+    [parmer setValue:name forKey:@"muid"];
+
     [parmer setValue:name forKey:@"name"];
     
     if (_indexTag==1) {
@@ -1043,7 +1078,7 @@
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         [appdelegate.locService startUserLocationService];
         [self.imageView5 setImage:savedImage];
-        [parmer setValue:@"add" forKey:@"type"];
+        [parmer setValue:@"address" forKey:@"type"];
     }else if (_indexTag==6){
         [self.imageView6 setImage:savedImage];
         [parmer setValue:@"wep" forKey:@"type"];

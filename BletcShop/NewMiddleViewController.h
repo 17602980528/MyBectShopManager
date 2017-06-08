@@ -52,7 +52,7 @@
 
 @property(nonatomic,retain)UITextField *agencyNameTF;//店铺名称
 @property(nonatomic,retain)UILabel *kindLab;//行业
-@property(nonatomic,retain)UITextField *reasonTF;//营业执照说明
+//@property(nonatomic,retain)UITextField *reasonTF;//营业执照说明
 
 @property (nonatomic , strong) UITextField *store_textf;// 联系方式
 

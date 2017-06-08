@@ -127,7 +127,7 @@
     self.landView = landView;
     [self.view addSubview:landView];
     NSArray *numArray=@[@"1",@"2",@"3"];
-    NSArray *nameArrays=@[@"填写店主信息",@"填写店铺信息",@"注册完成"];
+    NSArray *nameArrays=@[@"填写店主信息",@"填写店铺信息",@"紧急联系人"];
     UIView *topView=[[UIView alloc]initWithFrame:CGRectMake(-1, 64, SCREENWIDTH+2, 44)];
     topView.layer.borderColor=[[UIColor lightGrayColor]CGColor];
     topView.layer.borderWidth=1;
@@ -153,7 +153,7 @@
         if (i==0) {
             label2.textColor=[UIColor redColor];
             label1.backgroundColor=[UIColor redColor];
-            UIView *slidView=[[UIView alloc]initWithFrame:CGRectMake(0, 36, SCREENWIDTH/3, 8)];
+            UIView *slidView=[[UIView alloc]initWithFrame:CGRectMake(0, 40, SCREENWIDTH/3, 4)];
             slidView.backgroundColor=[UIColor redColor];
             [backView addSubview:slidView];
         }else{
@@ -205,7 +205,7 @@
 
         // 输入框
         UITextField *textField=[[UITextField alloc]initWithFrame:CGRectMake(140, 5, SCREENWIDTH-140, 40)];
-        textField.placeholder=@"长度不超过16位";
+        textField.placeholder=@"请输入注册人姓名";
         textField.tag=200;
         textField.delegate=self;
         textField.returnKeyType=UIReturnKeyDone;
@@ -232,12 +232,12 @@
 //        textField.text=self.personText.text;
 //        self.personText=textField;
     }else if (indexPath.row==5){
-        xing.hidden = YES;
+        // xing.hidden = YES;
         nickLab.text=nameArray[2];
 
         UITextField *textField=[[UITextField alloc]initWithFrame:CGRectMake(140, 5, SCREENWIDTH-140, 40)];
         textField.delegate=self;
-        textField.placeholder=@"请输入您的真实姓名";
+        textField.placeholder=@"请输入开户人姓名";
         textField.tag=202;
         textField.returnKeyType=UIReturnKeyDone;
         textField.font=[UIFont systemFontOfSize:13.0f];
@@ -246,8 +246,6 @@
 
         textField.text= [NSString getTheNoNullStr:shopInfoDic[@"name"] andRepalceStr:@""];
 
-        
-        textField.placeholder=@"请输入您的真实姓名";
         
         self.realNameTF=textField;
     }else if (indexPath.row==2){
@@ -267,7 +265,6 @@
 
        
 
-        textField.placeholder=@"请输入您现在具体住宅地址";
         self.addressTF=textField;
     }else if (indexPath.row==3){
         nickLab.text=nameArray[4];
@@ -285,7 +282,6 @@
 
 
         
-        textField.placeholder=@"请输入真实有效的18位身份证号";
         self.idenCardText=textField;
     }else if (indexPath.row==4){
         nickLab.text=nameArray[5];
@@ -331,7 +327,7 @@
     }
     else if (indexPath.row==6){
         nickLab.text=nameArray[6];
-        xing.hidden = YES;
+        // xing.hidden = YES;
 
         UITextField *textField=[[UITextField alloc]initWithFrame:CGRectMake(140, 5, SCREENWIDTH-140, 40)];
         textField.delegate=self;
@@ -347,12 +343,12 @@
         self.kaihuTF=textField;
     }else if (indexPath.row==7){
         nickLab.text=nameArray[7];
-        xing.hidden = YES;
+        // xing.hidden = YES;
 
         UITextField *textField=[[UITextField alloc]initWithFrame:CGRectMake(140, 5, SCREENWIDTH-140, 40)];
         textField.keyboardType=UIKeyboardTypeNumberPad;
         textField.delegate=self;
-        textField.placeholder=@"法人本人,目前仅支持建行储蓄卡";
+        textField.placeholder=@"目前仅支持建行储蓄卡";
         textField.tag=203;
          textField.returnKeyType=UIReturnKeyDone;
         textField.font=[UIFont systemFontOfSize:13.0f];
@@ -434,97 +430,64 @@
 -(void)btnClick:(UIButton *)sender{
 
     NSLog(@"%@1---%@2---%@3---",self.nickTextTF.text,self.addressTF.text,self.idenCardText.text);
-    if ([self.nickTextTF.text isEqualToString:@""]||[self.addressTF.text isEqualToString:@""]||[self.idenCardText.text isEqualToString:@""]||[self.phonePswText.text isEqualToString:@""]||self.ifImageView==NO||self.ifImageView1==NO||self.ifImageView2==NO) {
+    if ([self.nickTextTF.text isEqualToString:@""]||[self.addressTF.text isEqualToString:@""]||[self.idenCardText.text isEqualToString:@""]||[self.kaihuTF.text isEqualToString:@""]||[self.realNameTF.text isEqualToString:@""]||[self.zhanghaoTF.text isEqualToString:@""]||[self.phonePswText.text isEqualToString:@""]) {
+//        ||self.ifImageView==NO||self.ifImageView1==NO||self.ifImageView2==NO
         
-        //MBProgressHUD *hud判断如果有一项没填就出提示
+        [self tishi:@"至少一项不完善!"];
 
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text = NSLocalizedString(@"至少有一项信息填写不完成", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        // Move to bottm center.
-        //    hud.offset = CGPointMake(0.f, );
-        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-        [hud hideAnimated:YES afterDelay:2.f];
-    }else{
+           }else{
         if ([self.phonePswText.text isEqualToString:@"已拒绝，点击可修改。"]) {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.frame = CGRectMake(0, 64, 375, 667);
-            // Set the annular determinate mode to show task progress.
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"未授权手机查询，请授权", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            // Move to bottm center.
-            //    hud.offset = CGPointMake(0.f, );
-            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-            [hud hideAnimated:YES afterDelay:2.f];
-        }else if ([self.nickTextTF.text length]>16||[self isPureInt:self.nickTextTF.text]||[self isIncludeSpecialCharact:self.nickTextTF.text]){
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.frame = CGRectMake(0, 64, 375, 667);
-            // Set the annular determinate mode to show task progress.
-            hud.mode = MBProgressHUDModeText;
+            [self tishi:@"未授权手机查询，请授权"];
+
+          
             
-            hud.label.text = NSLocalizedString(@"昵称过长或包含特殊字符,请重新设置", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            // Move to bottm center.
-            //    hud.offset = CGPointMake(0.f, );
-            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-            [hud hideAnimated:YES afterDelay:3.f];
+        }else if ([self.nickTextTF.text length]>16||[self isPureInt:self.nickTextTF.text]||[self isIncludeSpecialCharact:self.nickTextTF.text]){
+            [self tishi:@"姓名过长或包含特殊字符,请重新设置"];
+
+           
         }else  if(![ToolManager validateIdentityCard:self.idenCardText.text])
         {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeText;
             
-            hud.label.text = NSLocalizedString(@"身份证格式不对,请重新输入", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-            [hud hideAnimated:YES afterDelay:3.f];
+            [self tishi:@"身份证格式不对,请重新输入"];
+
+          
             
         }
         
-        else  if(self.zhanghaoTF.text.length!=0){
+        else  if([self isPureInt:self.zhanghaoTF.text]){
             
-            if([self.zhanghaoTF.text length]!=19||![self isPureInt:self.zhanghaoTF.text])
+            if([self.zhanghaoTF.text length]==16||[self.zhanghaoTF.text length]==19)
             {
-                DebugLog(@"zhanghaoTF----%d-%ld",[self isPureInt:self.zhanghaoTF.text],self.zhanghaoTF.text.length);
-                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                hud.mode = MBProgressHUDModeText;
-                
-                hud.label.text = NSLocalizedString(@"银行卡格式不对", @"HUD message title");
-                hud.label.font = [UIFont systemFontOfSize:13];
-                hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-                [hud hideAnimated:YES afterDelay:3.f];
-                
-            }
-            
-            else  if(self.zhanghaoTF.text.length!=0){
-                
-                if([self.zhanghaoTF.text length]!=19||![self isPureInt:self.zhanghaoTF.text])
-                {
-                    DebugLog(@"zhanghaoTF----%d-%ld",[self isPureInt:self.zhanghaoTF.text],self.zhanghaoTF.text.length);
-                    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    hud.mode = MBProgressHUDModeText;
-                    
-                    hud.label.text = NSLocalizedString(@"银行卡格式不对", @"HUD message title");
-                    hud.label.font = [UIFont systemFontOfSize:13];
-                    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-                    [hud hideAnimated:YES afterDelay:3.f];
-                    
-                }else{
-                    
-                    [self saveInfo];
-                    [self saveRequest:999];
-                    NewMiddleViewController *middleVC=[[NewMiddleViewController alloc]init];
-                    middleVC.phoneStr=self.phoneString;
-                    middleVC.nibNameString=self.nickTextTF.text;
-                    [self presentViewController:middleVC animated:YES completion:nil];
-                    
-                }
+                [self saveRequest:0];
+
 
                 
             }else{
-                [self saveRequest:0];
+                [self tishi:@"银行卡格式不对"];
+
+//                [self saveInfo];
+//                NewMiddleViewController *middleVC=[[NewMiddleViewController alloc]init];
+//                middleVC.phoneStr=self.phoneString;
+//                middleVC.nibNameString=self.nickTextTF.text;
+//                [self presentViewController:middleVC animated:YES completion:nil];
             }
+            
+//            else  if(self.zhanghaoTF.text.length!=0){
+//                
+//                if([self.zhanghaoTF.text length]!=16||[self.zhanghaoTF.text length]!=19||![self isPureInt:self.zhanghaoTF.text])
+//                {
+//                    [self tishi:@"银行卡格式不对"];
+//                    
+//                }else{
+//                    
+//                   
+//                    
+//                }
+// 
+//                
+//            }else{
+//                [self saveRequest:0];
+//            }
 
         }
         else{
@@ -744,7 +707,7 @@
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
     
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/upload/upload",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/RegisterUpload/upload",BASEURL];
    
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -758,7 +721,8 @@
     
     [parmer setValue:name forKey:@"name"];
     
-    
+    [parmer setObject:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
+
     if (_indexTag==1) {
         [self.imageView setImage:savedImage];
         [parmer setValue:@"id_front" forKey:@"type"];
@@ -915,9 +879,10 @@
 -(void)saveRequest:(NSInteger)tag{
     //开始发起请求,请求成功，显示一下信息
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/complete_01",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/register/auth_01",BASEURL];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:shopInfoDic[@"muid"] forKey:@"muid"];
     [params setObject:self.phoneString forKey:@"phone"];
     [params setObject:self.nickTextTF.text forKey:@"bname"];
     [params setObject:self.realNameTF.text forKey:@"name"];
@@ -926,28 +891,30 @@
     [params setObject:self.kaihuTF.text forKey:@"bank"];
     [params setObject:self.zhanghaoTF.text forKey:@"account"];
     [params setObject:self.phonePswText.text forKey:@"psp"];
-    
+    if (tag==0) {
+        [params setValue:@"next" forKey:@"operate"];
+    }else if (tag==999){
+        [params setValue:@"save" forKey:@"operate"];
+    }
+
     //保存信息
     [self saveInfo];
 
     DebugLog(@"url==%@\n\n pareme==%@",url,params);
     
-    NSLog(@"paramer ===%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"NewNext==%@", result);
         
         if (tag ==999) {
+            if ([result[@"result_code"] intValue]==1){
+                [self tishi:@"已保存成功"];
+
+            }else{
+                [self tishi:@"保存失败"];
+
+            }
             
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            
-            hud.mode = MBProgressHUDModeText;
-            
-            hud.label.text = NSLocalizedString(@"已保存成功", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            
-            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-            [hud hideAnimated:YES afterDelay:3.f];
             
         }else if (tag==0){
             if ([result[@"result_code"] intValue]==1 ||[result[@"result_code"] intValue]==0 ) {
@@ -955,16 +922,14 @@
                 middleVC.phoneStr=self.phoneString;
                 middleVC.nibNameString=self.nickTextTF.text;
                 [self presentViewController:middleVC animated:YES completion:nil];
+            }else if([result[@"result_code"] intValue]==-1){
+                
+                [self tishi:[NSString stringWithFormat:@"%@",result[@"tip"]]];
+                
+               
             }else{
-                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                
-                hud.mode = MBProgressHUDModeText;
-                
-                hud.label.text = NSLocalizedString(@"提交失败", @"HUD message title");
-                hud.label.font = [UIFont systemFontOfSize:13];
-                
-                hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-                [hud hideAnimated:YES afterDelay:3.f];
+                [self tishi:@"提交失败"];
+
             }
             
         }
@@ -997,21 +962,25 @@
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
-    NSUserDefaults *use_name = [NSUserDefaults standardUserDefaults];
-    [use_name setObject:self.nickTextTF.text forKey:@"sellerNickName"];//商家昵称
-    [use_name setObject:self.realNameTF.text forKey:@"sellername"];//姓名
-    [use_name setObject:self.addressTF.text forKey:@"house_add"];//address
-    [use_name setObject:self.idenCardText.text forKey:@"sellerid"];//身份号码
-    [use_name setObject:self.kaihuTF.text forKey:@"sellerbank"];//开户行
-    [use_name setObject:self.zhanghaoTF.text forKey:@"selleraccount"];//银行卡号
-    [use_name setObject:self.phonePswText.text forKey:@"psp"];//手机授权
-    [use_name synchronize];
-
+    
+    [self saveInfo];
+    
+    
+   
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [textField resignFirstResponder];//取消第一响应者
     
     return YES;
+}
+
+-(void)tishi:(NSString *)ts{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = NSLocalizedString(ts, @"HUD message title");
+    hud.label.font = [UIFont systemFontOfSize:13];
+    [hud hideAnimated:YES afterDelay:2.f];
+
 }
 @end

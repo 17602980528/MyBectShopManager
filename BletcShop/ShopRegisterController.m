@@ -238,7 +238,7 @@
 
 -(void)postRequest{
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/register",BASEURL ];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/register/register",BASEURL ];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.phoneText.text forKey:@"phone"];
     [params setObject:self.passwordText.text forKey:@"passwd"];

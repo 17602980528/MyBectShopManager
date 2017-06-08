@@ -13,10 +13,6 @@
 #import "ToolManager.h"
 
 @interface NewLastViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIAlertViewDelegate>
-@end
-
-@interface NewLastViewController ()<UITableViewDelegate,UITableViewDataSource>
-
 {
     UIButton *tipButton;
     UITableView *_tableView;
@@ -24,6 +20,13 @@
     NSMutableDictionary *shopInfoDic;
 
 }
+
+@property(nonatomic,retain)UITextField *tf1;
+@property(nonatomic,retain)UITextField *tf2;
+@property(nonatomic,retain)UITextField *tf3;
+@property(nonatomic,retain)UITextField *tf4;
+@property(nonatomic,retain)UITextField *tf5;
+@property(nonatomic,retain)UITextField *tf6;
 @end
 
 @implementation NewLastViewController
@@ -60,7 +63,7 @@
     self.landView = landView;
     [self.view addSubview:landView];
     NSArray *numArray=@[@"1",@"2",@"3"];
-    NSArray *nameArray=@[@"填写店主信息",@"填写店铺信息",@"注册完成"];
+    NSArray *nameArray=@[@"填写店主信息",@"填写店铺信息",@"紧急联系人"];
     UIView *topView=[[UIView alloc]initWithFrame:CGRectMake(-1, 64, SCREENWIDTH+2, 44)];
     topView.layer.borderColor=[[UIColor lightGrayColor]CGColor];
     topView.layer.borderWidth=1;
@@ -86,7 +89,7 @@
         if (i==2) {
             label2.textColor=[UIColor redColor];
             label1.backgroundColor=[UIColor redColor];
-            UIView *slidView=[[UIView alloc]initWithFrame:CGRectMake(0, 36, SCREENWIDTH/3, 8)];
+            UIView *slidView=[[UIView alloc]initWithFrame:CGRectMake(0, 40, SCREENWIDTH/3, 4)];
             slidView.backgroundColor=[UIColor redColor];
             [backView addSubview:slidView];
         }else{
@@ -227,8 +230,12 @@
         readLab.hidden=YES;
         agreeLab.hidden=YES;
         if (indexPath.row==0) {
+            xing.hidden=NO;
+
             nickLab.text=@"紧急联系人（直系亲属）";
         }else if (indexPath.row==2){
+            xing.hidden=NO;
+
             nickLab.text=@"紧急联系人（直系亲属）";
         }else if (indexPath.row==4){
             nickLab.text=@"备注：授权贵公司在联系不到本人的情况下可联络本人紧急联系人";
@@ -306,36 +313,26 @@
 -(void)goRegister:(UIButton *)sender{
     //加判断，信息完整则显示提交成功，等待审核－－－否则就提示信息不完整
     if (tipButton.selected==NO) {
-        //MBProgressHUD *hud判断如果有一项没填就出提示
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text = NSLocalizedString(@"至少有一项信息填写不完成", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-        [hud hideAnimated:YES afterDelay:4.f];
+        
+        [self tishi:@"请阅读并同意商消乐入驻协议"];
+
+       
     }else{
         //此处已得到用户所有资料，可上传服务器
-        if (self.tf2.text.length!=0 || self.tf4.text.length!=0) {
-            if ([ToolManager validateMobile:self.tf2.text] ||[ToolManager validateMobile:self.tf4.text]) {
+        if (self.tf1.text.length!=0 && self.tf2.text.length!=0&& self.tf3.text.length!=0&& self.tf4.text.length!=0) {
+            if ([ToolManager validateMobile:self.tf2.text] &&[ToolManager validateMobile:self.tf4.text]) {
                 [self saveInfomation];
 
                 
             }else{
-                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                hud.frame = CGRectMake(0, 64, 375, 667);
-                // Set the annular determinate mode to show task progress.
-                hud.mode = MBProgressHUDModeText;
-                hud.label.text = NSLocalizedString(@"手机号码格式不对", @"HUD message title");
-                hud.label.font = [UIFont systemFontOfSize:13];
-                // Move to bottm center.
-                //    hud.offset = CGPointMake(0.f, );
-                hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-                [hud hideAnimated:YES afterDelay:3.f];
-            }
+                [self tishi:@"手机号码格式不对"];
+
+                
+                          }
             
         }else{
             
-            [self saveInfomation];
+            [self tishi:@"至少有一项信息填写不完成"];
 
         }
         
@@ -344,20 +341,7 @@
     
 }
 
--(void)saveInfo{
-    
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    
-    [shopInfoDic setValue:self.tf1.text forKey:@"frel_name"];//联系人1
-    [shopInfoDic setValue:self.tf2.text forKey:@"frel_phone"];//联系人1电话号
-    [shopInfoDic setValue:self.tf3.text forKey:@"srel_name"];//联系人2
-    [shopInfoDic setValue:self.tf4.text forKey:@"srel_phone"];//联系人2电话号
-    
-    [userDefault setObject:shopInfoDic forKey:shopInfoDic[@"muid"]];
-    [userDefault synchronize];
-    
-    
-}
+
 
 //接口3
 -(void)saveInfomation{
@@ -365,20 +349,25 @@
     [self saveInfo];
     
  
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/complete_03",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/register/auth_03",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.phoneStr forKey:@"phone"];
     [params setObject:self.tf1.text forKey:@"frel_name"];
     [params setObject:self.tf2.text forKey:@"frel_phone"];
     [params setObject:self.tf3.text forKey:@"srel_name"];
     [params setObject:self.tf4.text forKey:@"srel_phone"];
-   
+    [params setValue:@"save" forKey:@"operate"];
+
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSDictionary *res_dic = (NSDictionary *)result;
         if ([res_dic[@"result_code"] integerValue]==1||[res_dic[@"result_code"] integerValue]==0) {
             
             UIAlertView *altView =[[UIAlertView alloc]initWithTitle:@"提示" message:@"您已认证成功是否重新登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             [altView show];
+        }else{
+            
+            [self tishi:[NSString stringWithFormat:@"%@",res_dic[@"tip"]]];
+            
         }
         
         NSLog(@"%@", result);
@@ -440,6 +429,7 @@
 {
     [textField resignFirstResponder];
     [self.view endEditing:YES];
+    [self saveInfo];
     _tableView.frame =CGRectMake(0, 108, SCREENWIDTH, SCREENHEIGHT-108);
 }
 
@@ -458,10 +448,25 @@
          ShopLandController *shopvc = [[ShopLandController alloc]init];
         
         AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        
+        [appdelegate loginOutBletcShop];
         appdelegate.window.rootViewController = shopvc;
 
     }
+}
+
+-(void)saveInfo{
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    [shopInfoDic setValue:self.tf1.text forKey:@"frel_name"];//联系人1
+    [shopInfoDic setValue:self.tf2.text forKey:@"frel_phone"];//联系人1电话号
+    [shopInfoDic setValue:self.tf3.text forKey:@"srel_name"];//联系人2
+    [shopInfoDic setValue:self.tf4.text forKey:@"srel_phone"];//联系人2电话号
+    
+    [userDefault setObject:shopInfoDic forKey:shopInfoDic[@"muid"]];
+    [userDefault synchronize];
+    
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -469,5 +474,16 @@
     [textField resignFirstResponder];//取消第一响应者
     
     return YES;
+}
+
+-(void)tishi:(NSString*)ts{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    hud.mode = MBProgressHUDModeText;
+    
+    hud.label.text = NSLocalizedString(ts, @"HUD message title");
+    hud.label.font = [UIFont systemFontOfSize:13];
+    
+    [hud hideAnimated:YES afterDelay:3.f];
 }
 @end
