@@ -256,6 +256,10 @@
 		18F50E061D1E365800811CD1 /* -2-02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F50DEC1D1E365800811CD1 /* -2-02.jpg */; };
 		18F50E071D1E365800811CD1 /* -2-03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F50DED1D1E365800811CD1 /* -2-03.jpg */; };
 		18F6C16C1DAB7D50004E6FCA /* 1234567890.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F6C16B1DAB7D50004E6FCA /* 1234567890.jpg */; };
+		18FA58B11EE9520900F458F2 /* NewUserRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA58AF1EE9520900F458F2 /* NewUserRegistVC.m */; };
+		18FA58B21EE9520900F458F2 /* NewUserRegistVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58B01EE9520900F458F2 /* NewUserRegistVC.xib */; };
+		18FA58B61EE95C9800F458F2 /* NewUserAccessCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA58B41EE95C9800F458F2 /* NewUserAccessCodeVC.m */; };
+		18FA58B71EE95C9800F458F2 /* NewUserAccessCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58B51EE95C9800F458F2 /* NewUserAccessCodeVC.xib */; };
 		18FCAD481E56A16800FF57D0 /* BindCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCAD471E56A16800FF57D0 /* BindCustomView.m */; };
 		1A4173AB1D78708100A70601 /* CreatGroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4173AA1D78708100A70601 /* CreatGroupVC.m */; };
 		1A4173AE1D78717E00A70601 /* LZDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4173AD1D78717E00A70601 /* LZDTextView.m */; };
@@ -1533,6 +1537,12 @@
 		18F50DEC1D1E365800811CD1 /* -2-02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "-2-02.jpg"; sourceTree = "<group>"; };
 		18F50DED1D1E365800811CD1 /* -2-03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "-2-03.jpg"; sourceTree = "<group>"; };
 		18F6C16B1DAB7D50004E6FCA /* 1234567890.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 1234567890.jpg; path = ../BletcShop/1234567890.jpg; sourceTree = "<group>"; };
+		18FA58AE1EE9520900F458F2 /* NewUserRegistVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserRegistVC.h; sourceTree = "<group>"; };
+		18FA58AF1EE9520900F458F2 /* NewUserRegistVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserRegistVC.m; sourceTree = "<group>"; };
+		18FA58B01EE9520900F458F2 /* NewUserRegistVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserRegistVC.xib; sourceTree = "<group>"; };
+		18FA58B31EE95C9800F458F2 /* NewUserAccessCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserAccessCodeVC.h; sourceTree = "<group>"; };
+		18FA58B41EE95C9800F458F2 /* NewUserAccessCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserAccessCodeVC.m; sourceTree = "<group>"; };
+		18FA58B51EE95C9800F458F2 /* NewUserAccessCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserAccessCodeVC.xib; sourceTree = "<group>"; };
 		18FCAD461E56A16800FF57D0 /* BindCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindCustomView.h; sourceTree = "<group>"; };
 		18FCAD471E56A16800FF57D0 /* BindCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindCustomView.m; sourceTree = "<group>"; };
 		1A4173A91D78708100A70601 /* CreatGroupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatGroupVC.h; sourceTree = "<group>"; };
@@ -5861,6 +5871,12 @@
 				1C0BEF891C7DA14400519481 /* SuccessController.m */,
 				D94432BE1D18FC6800B45135 /* UserProtocolViewController.h */,
 				D94432BF1D18FC6800B45135 /* UserProtocolViewController.m */,
+				18FA58AE1EE9520900F458F2 /* NewUserRegistVC.h */,
+				18FA58AF1EE9520900F458F2 /* NewUserRegistVC.m */,
+				18FA58B01EE9520900F458F2 /* NewUserRegistVC.xib */,
+				18FA58B31EE95C9800F458F2 /* NewUserAccessCodeVC.h */,
+				18FA58B41EE95C9800F458F2 /* NewUserAccessCodeVC.m */,
+				18FA58B51EE95C9800F458F2 /* NewUserAccessCodeVC.xib */,
 			);
 			name = "注册";
 			sourceTree = "<group>";
@@ -6793,6 +6809,7 @@
 				1CF2839D1C58C48900F3952A /* more_default.png in Resources */,
 				18543E3C1ECAD8A500E0A4DA /* quan1.png in Resources */,
 				D95F032A1DD9841500F9DC2F /* Selected.png in Resources */,
+				18FA58B71EE95C9800F458F2 /* NewUserAccessCodeVC.xib in Resources */,
 				1852FB051D55C962009CF1B2 /* 代金券-03.png in Resources */,
 				1CDA9E001C59FAB300DFE518 /* ad_fast.jpg in Resources */,
 				18D7C4901D5B12BA00AEF545 /* mohu-12.png in Resources */,
@@ -6970,6 +6987,7 @@
 				D947E4631D7D3BBA00F9FEE8 /* 聊天键盘-icon-选择照片-点击@2x.png in Resources */,
 				D9195D291E82261F00FB4367 /* UploadVedioVC.xib in Resources */,
 				D987BB311E791FAC008AE24D /* ProfessionEditVC.xib in Resources */,
+				18FA58B21EE9520900F458F2 /* NewUserRegistVC.xib in Resources */,
 				D947E4501D7D0EB100F9FEE8 /* group_participant_add@2x.png in Resources */,
 				D98011D41DF7B0DD00CE09CA /* ErrorQRViewController.xib in Resources */,
 				1C9E824A1C6058550007BF02 /* erweima@2x.png in Resources */,
@@ -7532,6 +7550,7 @@
 				18543E4B1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m in Sources */,
 				18D43E481ED6D4EC0077861A /* WYWebProgressLayer.m in Sources */,
 				D98ECBC91D9CC52200BEDD57 /* LZDAddVipCell.m in Sources */,
+				18FA58B11EE9520900F458F2 /* NewUserRegistVC.m in Sources */,
 				D9ACF1AF1E24CB4200BCC877 /* thirdlogVC.m in Sources */,
 				D9345E6A1E769805006B2AC1 /* TopActiveListTableVC.m in Sources */,
 				D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */,
@@ -7600,6 +7619,7 @@
 				1CDA9E171C5A15B000DFE518 /* MyProtuctsController.m in Sources */,
 				180D872D1E5ABBBF00E7FFB4 /* AddCouponVC.m in Sources */,
 				D98E5C261E5156D7009D56BF /* LoginQuestionViewController.m in Sources */,
+				18FA58B61EE95C9800F458F2 /* NewUserAccessCodeVC.m in Sources */,
 				1828C7E51E272D4A00480DB9 /* CardEricShareViewController.m in Sources */,
 				18CB32DA1D6C2B2B005A9D64 /* UIImage+Extends.m in Sources */,
 				D96E1B771ECAD94B00084453 /* ChoseSeriesVC.m in Sources */,

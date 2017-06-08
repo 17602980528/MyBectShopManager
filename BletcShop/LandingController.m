@@ -17,6 +17,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 
 #import "thirdlogVC.h"
+#import "NewUserRegistVC.h"
 @interface LandingController ()
 @property(nonatomic,weak)UITextField *userText;
 @property(nonatomic,weak)UITextField *passText;
@@ -454,7 +455,7 @@
 -(void)CreatAction
 {
     NSLog(@"注册");
-    RegisterController *regisVc = [[RegisterController alloc]init];
+    NewUserRegistVC *regisVc = [[NewUserRegistVC alloc]init];
     [self.navigationController pushViewController:regisVc animated:YES];
 }
 //登录请求
