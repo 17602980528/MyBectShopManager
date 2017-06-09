@@ -75,7 +75,7 @@
     _phoneTF.delegate=self;
     _phoneTF.returnKeyType=UIReturnKeyDone;
     _phoneTF.clearButtonMode=UITextFieldViewModeWhileEditing;
-    [self setTextFieldLeftImageView:_phoneTF leftImageName:@"手机号码"];
+    [self setTextFieldLeftImageView:_phoneTF leftImageName:@"手机"];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
     [self.view addGestureRecognizer:singleTap];

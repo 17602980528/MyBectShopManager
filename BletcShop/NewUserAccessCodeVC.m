@@ -124,7 +124,7 @@
     self.navigationItem.title=@"获取验证码";
     _proCodeTF.delegate=self;
     _proCodeTF.returnKeyType=UIReturnKeyDone;
-    [self setTextFieldLeftImageView:_proCodeTF leftImageName:@"钥匙串"];
+    [self setTextFieldLeftImageView:_proCodeTF leftImageName:@"钥匙"];
 #ifdef DEBUG
     
 #else

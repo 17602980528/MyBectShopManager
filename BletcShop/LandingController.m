@@ -79,11 +79,14 @@
     
     UserText = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, SCREENWIDTH-20, 50)];
     UserText.placeholder = @"手机号";
+    
     UserText.keyboardType = UIKeyboardTypeNumberPad;
     UserText.font = [UIFont systemFontOfSize:15];
     UserText.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.userText = UserText;
     [landView addSubview:UserText];
+    
+    [self setTextFieldLeftImageView:UserText leftImageName:@"手机"];
     
 //    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    phoneBtn.frame = CGRectMake(SCREENWIDTH-100, 10, 100, 30);
@@ -130,6 +133,8 @@
     self.passText = passText;
     [landView addSubview:passText];
     
+     [self setTextFieldLeftImageView:passText leftImageName:@"锁"];
+
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, landView.width, 0.3)];
     line.backgroundColor = [UIColor grayColor];
     line.alpha = 0.3;
@@ -557,23 +562,11 @@
                 
             }];
             
-            
-            
-            
-            
-            
         }else if ([[result objectForKey:@"result_code"] isEqualToString:@"passwd_wrong"])
         {
             [self hideHud];
             
             [self passwd_wrong];
-            
-        }else if ([[result objectForKey:@"result_code"] isEqualToString:@"incomplete"]){
-            [self hideHud];
-            
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"您已注册成功，是否完善信息？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
-            [alertView show];
-            
             
         }else{
             [self hideHud];
@@ -1057,5 +1050,24 @@
      }];
     
 }
+- (void)setTextFieldLeftImageView:(UITextField *)textField leftImageName:(NSString *)imageName
+    {
+        // 设置左边图片
+        UIImageView *leftView     = [[UIImageView alloc] init];
+        leftView.image            = [UIImage imageNamed:imageName];
+        leftView.bounds = CGRectMake(0, 0, 30, 30);
+        //    leftView.height = 30;
+        //    leftView.width = 30;
+        
+        // 设置leftView的内容居中
+        leftView.contentMode      = UIViewContentModeCenter;
+        textField.leftView        = leftView;
+        
+        // 设置左边的view永远显示
+        textField.leftViewMode    = UITextFieldViewModeAlways;
+        
+        // 设置右边永远显示清除按钮
+        textField.clearButtonMode = UITextFieldViewModeAlways;
+    }
 
 @end

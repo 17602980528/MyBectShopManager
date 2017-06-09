@@ -196,8 +196,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"设置密码";
-    [self setTextFieldLeftImageView:_firstPass leftImageName:@"锁心"];
-    [self setTextFieldLeftImageView:_confirmPass leftImageName:@"锁心"];
+    [self setTextFieldLeftImageView:_firstPass leftImageName:@"锁"];
+    [self setTextFieldLeftImageView:_confirmPass leftImageName:@"锁"];
     _firstPass.returnKeyType=UIReturnKeyDone;
     _confirmPass.returnKeyType=UIReturnKeyDone;
     _firstPass.delegate=self;

@@ -26,6 +26,7 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tabView;
 @property(nonatomic,strong)NSArray *title_A;
+@property(nonatomic,strong)NSArray *title_headImage;
 @property (nonatomic,strong) UIImageView* imageView;
 @property long long int date;//发送图片的时间戳
 @property (strong, nonatomic) IBOutlet UIView *footView;
@@ -41,10 +42,16 @@
 -(NSArray *)title_A{
     if (!_title_A) {
         _title_A = @[@"实名认证",@"昵称",@"地址",@"手机号",@"邮箱",@"性别",@"生日",@"职业",@"教育",@"婚姻",@"爱好",@"密码管理"];
+        
     }
     return _title_A;
 }
-
+-(NSArray *)title_headImage{
+    if (!_title_headImage) {
+        _title_headImage=@[@"userInfo_confirm",@"userInfo_nick",@"userInfo_address",@"userInfo_phone",@"userInfo_mail",@"userInfo_sex",@"userInfo_birthday",@"userInfo_profession",@"userInfo_education",@"userInfo_marry",@"userInfo_love",@"userInfo_pass"];
+    }
+    return _title_headImage;
+}
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear: animated];
@@ -108,9 +115,18 @@
         NSArray *key_A = @[@"state",@"nickname",@"address",@"phone",@"mail",@"sex",@"age",@"occupation",@"education",@"mate",@"hobby",@"",@"",@"",@"",@""];
         
         cell.content_lab.text = appdelegate.userInfoDic[key_A[indexPath.row-1]];
+        cell.headImageView.image=[UIImage imageNamed:self.title_headImage[indexPath.row-1]];
         
-          return cell;
-        
+        if (indexPath.row==1) {
+            if ([appdelegate.userInfoDic[key_A[indexPath.row-1]] isEqualToString:@"not_auth"]) {
+                 cell.content_lab.text =@"未认证";
+            }else if ([appdelegate.userInfoDic[key_A[indexPath.row-1]] isEqualToString:@"access"]){
+                 cell.content_lab.text =@"认证通过";
+            }else{
+                 cell.content_lab.text =@"认证失败";
+            }
+        }
+         return cell;
     }
     
   }
@@ -121,9 +137,11 @@
     if (indexPath.row ==0) {
         [self changeUserImg];
     }
+    if (indexPath.row==1) {
+        NSLog(@"你好帅");
+    }
     
-    
-    if (indexPath.row ==1 || indexPath.row ==2 || indexPath.row ==4 || indexPath.row ==5 || indexPath.row ==6 || indexPath.row ==8|| indexPath.row ==9|| indexPath.row ==10) {
+    if (indexPath.row ==2 || indexPath.row ==3 || indexPath.row ==5 || indexPath.row ==6 || indexPath.row ==7 || indexPath.row ==9|| indexPath.row ==10|| indexPath.row ==11) {
         UserInfoEditVC *VC = [[UserInfoEditVC alloc]init];
         
         VC.resultBlock=^(NSDictionary*result) {
@@ -141,13 +159,13 @@
         [self.navigationController pushViewController:VC animated:YES];    }
     
     
-    if (indexPath.row ==3) {
+    if (indexPath.row ==4) {
         ResetPhoneViewController *VC = [[ResetPhoneViewController alloc]init];
         
         [self.navigationController pushViewController:VC animated:YES];
     }
     
-    if (indexPath.row ==11) {
+    if (indexPath.row ==12) {
         //ChangeLoginOrPayVC
         ChangeLoginOrPayVC *passVC=[[ChangeLoginOrPayVC alloc]init];
         [self.navigationController pushViewController:passVC animated:YES];
@@ -157,7 +175,7 @@
 
     }
     
-    if (indexPath.row ==7) {
+    if (indexPath.row ==8) {
         ProfessionEditVC *VC=[[ProfessionEditVC alloc]init];
         VC.prodessionBlock=^(NSDictionary*result) {
             
