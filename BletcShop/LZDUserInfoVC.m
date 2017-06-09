@@ -40,7 +40,7 @@
 @implementation LZDUserInfoVC
 -(NSArray *)title_A{
     if (!_title_A) {
-        _title_A = @[@"昵称",@"地址",@"手机号",@"邮箱",@"性别",@"生日",@"职业",@"教育",@"婚姻",@"爱好",@"密码管理"];
+        _title_A = @[@"实名认证",@"昵称",@"地址",@"手机号",@"邮箱",@"性别",@"生日",@"职业",@"教育",@"婚姻",@"爱好",@"密码管理"];
     }
     return _title_A;
 }
@@ -105,9 +105,9 @@
         }
         cell.title_lab.text = _title_A[indexPath.row-1];
         
-        NSArray *key_A = @[@"nickname",@"address",@"phone",@"mail",@"sex",@"age",@"occupation",@"education",@"mate",@"hobby",@"",@"",@"",@"",@""];
-        cell.content_lab.text = appdelegate.userInfoDic[key_A[indexPath.row-1]];
+        NSArray *key_A = @[@"state",@"nickname",@"address",@"phone",@"mail",@"sex",@"age",@"occupation",@"education",@"mate",@"hobby",@"",@"",@"",@"",@""];
         
+        cell.content_lab.text = appdelegate.userInfoDic[key_A[indexPath.row-1]];
         
           return cell;
         
