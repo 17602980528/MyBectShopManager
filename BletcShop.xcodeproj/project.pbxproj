@@ -524,6 +524,12 @@
 		D93C1A261EEA33E6006DA624 /* 手机@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A251EEA33E6006DA624 /* 手机@3x.png */; };
 		D93C1A291EEA3699006DA624 /* 锁@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A271EEA3699006DA624 /* 锁@3x.png */; };
 		D93C1A2A1EEA3699006DA624 /* 钥匙@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A281EEA3699006DA624 /* 钥匙@3x.png */; };
+		D93C1A311EEA7416006DA624 /* NewUserRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C1A2F1EEA7416006DA624 /* NewUserRegistVC.m */; };
+		D93C1A321EEA7416006DA624 /* NewUserRegistVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A301EEA7416006DA624 /* NewUserRegistVC.xib */; };
+		D93C1A361EEA7443006DA624 /* NewUserAccessCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C1A341EEA7443006DA624 /* NewUserAccessCodeVC.m */; };
+		D93C1A371EEA7443006DA624 /* NewUserAccessCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A351EEA7443006DA624 /* NewUserAccessCodeVC.xib */; };
+		D93C1A3B1EEA7465006DA624 /* NewUserSetPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C1A391EEA7465006DA624 /* NewUserSetPassVC.m */; };
+		D93C1A3C1EEA7465006DA624 /* NewUserSetPassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A3A1EEA7465006DA624 /* NewUserSetPassVC.xib */; };
 		D940403B1CBDEB7100EC98EA /* CardManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D940403A1CBDEB7100EC98EA /* CardManagerViewController.m */; };
 		D940403E1CBE156100EC98EA /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D940403D1CBE156100EC98EA /* RechargeViewController.m */; };
 		D94040411CBE29F100EC98EA /* UpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D94040401CBE29F100EC98EA /* UpgradeViewController.m */; };
@@ -1934,6 +1940,15 @@
 		D93C1A251EEA33E6006DA624 /* 手机@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "手机@3x.png"; sourceTree = "<group>"; };
 		D93C1A271EEA3699006DA624 /* 锁@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "锁@3x.png"; sourceTree = "<group>"; };
 		D93C1A281EEA3699006DA624 /* 钥匙@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钥匙@3x.png"; sourceTree = "<group>"; };
+		D93C1A2E1EEA7416006DA624 /* NewUserRegistVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserRegistVC.h; sourceTree = "<group>"; };
+		D93C1A2F1EEA7416006DA624 /* NewUserRegistVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserRegistVC.m; sourceTree = "<group>"; };
+		D93C1A301EEA7416006DA624 /* NewUserRegistVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserRegistVC.xib; sourceTree = "<group>"; };
+		D93C1A331EEA7443006DA624 /* NewUserAccessCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserAccessCodeVC.h; sourceTree = "<group>"; };
+		D93C1A341EEA7443006DA624 /* NewUserAccessCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserAccessCodeVC.m; sourceTree = "<group>"; };
+		D93C1A351EEA7443006DA624 /* NewUserAccessCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserAccessCodeVC.xib; sourceTree = "<group>"; };
+		D93C1A381EEA7465006DA624 /* NewUserSetPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserSetPassVC.h; sourceTree = "<group>"; };
+		D93C1A391EEA7465006DA624 /* NewUserSetPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserSetPassVC.m; sourceTree = "<group>"; };
+		D93C1A3A1EEA7465006DA624 /* NewUserSetPassVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserSetPassVC.xib; sourceTree = "<group>"; };
 		D94040391CBDEB7100EC98EA /* CardManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardManagerViewController.h; sourceTree = "<group>"; };
 		D940403A1CBDEB7100EC98EA /* CardManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardManagerViewController.m; sourceTree = "<group>"; };
 		D940403C1CBE156100EC98EA /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
@@ -4924,6 +4939,22 @@
 			name = "旧的废弃";
 			sourceTree = "<group>";
 		};
+		D93C1A2D1EEA73F8006DA624 /* 新用户注册 */ = {
+			isa = PBXGroup;
+			children = (
+				D93C1A2E1EEA7416006DA624 /* NewUserRegistVC.h */,
+				D93C1A2F1EEA7416006DA624 /* NewUserRegistVC.m */,
+				D93C1A301EEA7416006DA624 /* NewUserRegistVC.xib */,
+				D93C1A331EEA7443006DA624 /* NewUserAccessCodeVC.h */,
+				D93C1A341EEA7443006DA624 /* NewUserAccessCodeVC.m */,
+				D93C1A351EEA7443006DA624 /* NewUserAccessCodeVC.xib */,
+				D93C1A381EEA7465006DA624 /* NewUserSetPassVC.h */,
+				D93C1A391EEA7465006DA624 /* NewUserSetPassVC.m */,
+				D93C1A3A1EEA7465006DA624 /* NewUserSetPassVC.xib */,
+			);
+			name = "新用户注册";
+			sourceTree = "<group>";
+		};
 		D94112EE1CE9A3D7008E231F /* AlipaySDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -5900,6 +5931,7 @@
 		D9A00A031CA22F790018B7A4 /* 注册 */ = {
 			isa = PBXGroup;
 			children = (
+				D93C1A2D1EEA73F8006DA624 /* 新用户注册 */,
 				D94432C21D18FC9900B45135 /* BookItem.h */,
 				D94432C31D18FC9900B45135 /* BookItem.m */,
 				D94432C41D18FC9900B45135 /* TextStorage.h */,
@@ -6946,6 +6978,7 @@
 				18D8464C1ED591630048F010 /* 线下角标.png in Resources */,
 				180CC7C01E64110D002F5E35 /* 收费标准.png in Resources */,
 				1CF283991C58C48900F3952A /* merchant_default.png in Resources */,
+				D93C1A321EEA7416006DA624 /* NewUserRegistVC.xib in Resources */,
 				D94DF25E1CAE0DB8000D5B69 /* result_small_star_disable_iphone@2x.png in Resources */,
 				D95869391E4DA4EE00E91A47 /* ResetPhoneNextVC.xib in Resources */,
 				18F032031E5ED79300ACD261 /* points.jpg in Resources */,
@@ -7237,6 +7270,7 @@
 				D93C0D5C1D251E7B001A1AC1 /* 小标-10.png in Resources */,
 				18F27EF21D640E84002DD03A /* 头像-10.png in Resources */,
 				D9FF0D921D53304C00443312 /* 图标-04new.png in Resources */,
+				D93C1A371EEA7443006DA624 /* NewUserAccessCodeVC.xib in Resources */,
 				D93C1A241EE9588C006DA624 /* ShoerRegistThree.xib in Resources */,
 				D95BAE5D1D542FD500ED0CDC /* award_19.png in Resources */,
 				D9ED52051D2A467700267729 /* grey_red.png in Resources */,
@@ -7337,6 +7371,7 @@
 				18BE63BD1E681F3D001563C6 /* timg-3.jpeg in Resources */,
 				1C9E822E1C603B7A0007BF02 /* jiantou.png in Resources */,
 				D92302511D14E5A8008FB9A9 /* welcom_3.jpg in Resources */,
+				D93C1A3C1EEA7465006DA624 /* NewUserSetPassVC.xib in Resources */,
 				D98FDF871E601C280057C206 /* AD_ad_tb@3x.png in Resources */,
 				D97F60031D62BFF8000EE794 /* line@2x.png in Resources */,
 				18EB36C01D4B5A2E0087CE1A /* 反1-01.png in Resources */,
@@ -7410,6 +7445,7 @@
 				D93BE8671CFD6B6300000E0D /* FavorateViewController.m in Sources */,
 				D99760F41E695CFD008E21FE /* CityModel.m in Sources */,
 				D93C0D6E1D251FC1001A1AC1 /* BackChooseStateViewController.m in Sources */,
+				D93C1A361EEA7443006DA624 /* NewUserAccessCodeVC.m in Sources */,
 				D98E5C1A1E51524D009D56BF /* SRVideoLayerView.m in Sources */,
 				185E51461E5D2E10009F0C01 /* PublishTopScrollAdvertVC.m in Sources */,
 				D9B3BB9A1DE7E05700CC8B0D /* AddproductVC.m in Sources */,
@@ -7594,6 +7630,7 @@
 				D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */,
 				18F031F11E5EB8C100ACD261 /* ConvertRecordVC.m in Sources */,
 				189ED0431E8CD53600A762C7 /* KeyChainStore.m in Sources */,
+				D93C1A311EEA7416006DA624 /* NewUserRegistVC.m in Sources */,
 				D99C11A51DE28CF100E45B64 /* UPgradeVC.m in Sources */,
 				D987BB261E790B58008AE24D /* UserInfoHeaderCell.m in Sources */,
 				D9B3A5A11D74255700F3F27E /* AdView.m in Sources */,
@@ -7807,6 +7844,7 @@
 				D9955C6D1D488F4E00E1BF57 /* OrderInfomaViewController.m in Sources */,
 				D94743951CE56A6000D1D3EE /* LNSearchManager.m in Sources */,
 				18302A2D1DAC8B0E00E6EF8C /* CanPayCardViewController.m in Sources */,
+				D93C1A3B1EEA7465006DA624 /* NewUserSetPassVC.m in Sources */,
 				D9B3A5A81D74255700F3F27E /* MWTapDetectingView.m in Sources */,
 				18D7C47F1D5B113800AEF545 /* XieYiViewController.m in Sources */,
 				079386C31C55BC220021B385 /* ShoppingViewController.m in Sources */,
