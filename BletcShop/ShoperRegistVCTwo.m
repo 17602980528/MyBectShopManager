@@ -36,9 +36,11 @@
     
     ShoerRegistThree *VC = [[ShoerRegistThree alloc]init];
     VC.phone = self.phone;
+    VC.referralPhone = self.referralPhone;
     [self presentViewController:VC animated:YES completion:nil];
     
     if ([self.array_code[0] isEqualToString:self.codeTf.text]) {
+        
         
     }else{
         

@@ -11,6 +11,7 @@
 #import "ToolManager.h"
 @interface ShoperRegistVCOne ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
+@property (weak, nonatomic) IBOutlet UITextField *referralTF;
 
 @end
 
@@ -21,23 +22,43 @@
     
     [self setTextFieldLeftImageView:self.phoneTF leftImageName:@"手机"];
    
-    
+    [self setTextFieldLeftImageView:self.referralTF leftImageName:@"推荐人"];
+
     
 }
 - (IBAction)goBack:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)ert:(id)sender {
-//    if (![ToolManager validateMobile:self.phoneTF.text]) {
-//        [self showHint:@"手机号格式不正确!"];
-//        
-//        
-//    }else{
-        ShoperRegistVCTwo *VC = [[ShoperRegistVCTwo alloc]init];
-        VC.phone =self.phoneTF.text;
-        [self presentViewController:VC animated:YES completion:nil];
+    
+    if (self.referralTF.text.length!=0) {
+        if ( [ToolManager validateMobile:self.referralTF.text] && [ToolManager validateMobile:self.phoneTF.text]) {
+            
+            ShoperRegistVCTwo *VC = [[ShoperRegistVCTwo alloc]init];
+            VC.phone =self.phoneTF.text;
+            VC.referralPhone = self.referralTF.text;
+            [self presentViewController:VC animated:YES completion:nil];
+        }else{
+            
+            [self showHint:@"手机号格式不正确!"];
+        }
 
-//    }
+        
+    }else{
+        
+        if ( [ToolManager validateMobile:self.phoneTF.text]) {
+            
+            ShoperRegistVCTwo *VC = [[ShoperRegistVCTwo alloc]init];
+            VC.phone =self.phoneTF.text;
+            [self presentViewController:VC animated:YES completion:nil];
+        }else{
+            
+            [self showHint:@"手机号格式不正确!"];
+        }
+
+        
+    }
+
     
 }
 

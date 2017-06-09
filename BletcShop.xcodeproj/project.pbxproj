@@ -530,6 +530,7 @@
 		D93C1A261EEA33E6006DA624 /* 手机@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A251EEA33E6006DA624 /* 手机@3x.png */; };
 		D93C1A291EEA3699006DA624 /* 锁@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A271EEA3699006DA624 /* 锁@3x.png */; };
 		D93C1A2A1EEA3699006DA624 /* 钥匙@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A281EEA3699006DA624 /* 钥匙@3x.png */; };
+		D93C1A421EEA7E7C006DA624 /* 推荐人@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A411EEA7E7C006DA624 /* 推荐人@3x.png */; };
 		D940403B1CBDEB7100EC98EA /* CardManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D940403A1CBDEB7100EC98EA /* CardManagerViewController.m */; };
 		D940403E1CBE156100EC98EA /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D940403D1CBE156100EC98EA /* RechargeViewController.m */; };
 		D94040411CBE29F100EC98EA /* UpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D94040401CBE29F100EC98EA /* UpgradeViewController.m */; };
@@ -1949,6 +1950,7 @@
 		D93C1A251EEA33E6006DA624 /* 手机@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "手机@3x.png"; sourceTree = "<group>"; };
 		D93C1A271EEA3699006DA624 /* 锁@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "锁@3x.png"; sourceTree = "<group>"; };
 		D93C1A281EEA3699006DA624 /* 钥匙@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钥匙@3x.png"; sourceTree = "<group>"; };
+		D93C1A411EEA7E7C006DA624 /* 推荐人@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "推荐人@3x.png"; sourceTree = "<group>"; };
 		D94040391CBDEB7100EC98EA /* CardManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardManagerViewController.h; sourceTree = "<group>"; };
 		D940403A1CBDEB7100EC98EA /* CardManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardManagerViewController.m; sourceTree = "<group>"; };
 		D940403C1CBE156100EC98EA /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
@@ -3782,16 +3784,10 @@
 		18D7C4801D5B114800AEF545 /* 新注册 */ = {
 			isa = PBXGroup;
 			children = (
+				D93C1A401EEA77D2006DA624 /* 快速认证 */,
+				D93C1A3F1EEA77AE006DA624 /* 商户保险认证 */,
 				D93C1A2B1EEA46A8006DA624 /* 旧的废弃 */,
 				D93C1A151EE95145006DA624 /* 商户处注册 */,
-				D97EE7F61D950AF6009BFD77 /* NewNextViewController.h */,
-				D97EE7F71D950AF6009BFD77 /* NewNextViewController.m */,
-				D97EE7F01D94D966009BFD77 /* NewMiddleViewController.h */,
-				D97EE7F11D94D966009BFD77 /* NewMiddleViewController.m */,
-				18D7C4771D5B113800AEF545 /* NewLastViewController.h */,
-				18D7C4781D5B113800AEF545 /* NewLastViewController.m */,
-				18D7C4791D5B113800AEF545 /* XieYiViewController.h */,
-				18D7C47A1D5B113800AEF545 /* XieYiViewController.m */,
 			);
 			name = "新注册";
 			sourceTree = "<group>";
@@ -4917,6 +4913,7 @@
 				D93C1A271EEA3699006DA624 /* 锁@3x.png */,
 				D93C1A281EEA3699006DA624 /* 钥匙@3x.png */,
 				D93C1A251EEA33E6006DA624 /* 手机@3x.png */,
+				D93C1A411EEA7E7C006DA624 /* 推荐人@3x.png */,
 				D93C1A161EE9567C006DA624 /* ShoperRegistVCOne.h */,
 				D93C1A171EE9567C006DA624 /* ShoperRegistVCOne.m */,
 				D93C1A181EE9567C006DA624 /* ShoperRegistVCOne.xib */,
@@ -4953,6 +4950,30 @@
 				18FA58D11EEA769C00F458F2 /* NewUserSetPassVC.xib */,
 			);
 			name = "新用户注册";
+			sourceTree = "<group>";
+		};
+		D93C1A3F1EEA77AE006DA624 /* 商户保险认证 */ = {
+			isa = PBXGroup;
+			children = (
+				D97EE7F61D950AF6009BFD77 /* NewNextViewController.h */,
+				D97EE7F71D950AF6009BFD77 /* NewNextViewController.m */,
+				D97EE7F01D94D966009BFD77 /* NewMiddleViewController.h */,
+				D97EE7F11D94D966009BFD77 /* NewMiddleViewController.m */,
+				18D7C4771D5B113800AEF545 /* NewLastViewController.h */,
+				18D7C4781D5B113800AEF545 /* NewLastViewController.m */,
+				18D7C4791D5B113800AEF545 /* XieYiViewController.h */,
+				18D7C47A1D5B113800AEF545 /* XieYiViewController.m */,
+			);
+			name = "商户保险认证";
+			sourceTree = "<group>";
+		};
+		D93C1A401EEA77D2006DA624 /* 快速认证 */ = {
+			isa = PBXGroup;
+			children = (
+				D9A1BB341ECEE4E900CF1318 /* AuthFailShopVC.h */,
+				D9A1BB351ECEE4E900CF1318 /* AuthFailShopVC.m */,
+			);
+			name = "快速认证";
 			sourceTree = "<group>";
 		};
 		D94112EE1CE9A3D7008E231F /* AlipaySDK */ = {
@@ -5961,8 +5982,6 @@
 			isa = PBXGroup;
 			children = (
 				18D7C4801D5B114800AEF545 /* 新注册 */,
-				D9A1BB341ECEE4E900CF1318 /* AuthFailShopVC.h */,
-				D9A1BB351ECEE4E900CF1318 /* AuthFailShopVC.m */,
 			);
 			name = "商户端注册";
 			sourceTree = "<group>";
@@ -7031,6 +7050,7 @@
 				D93C0D631D251E7B001A1AC1 /* 小标-18.png in Resources */,
 				1CF2838F1C58C48900F3952A /* food.png in Resources */,
 				18F0320D1E5ED79300ACD261 /* tempProducts_08.png in Resources */,
+				D93C1A421EEA7E7C006DA624 /* 推荐人@3x.png in Resources */,
 				1835774B1EC437F900F321F1 /* AccessCodeVC.xib in Resources */,
 				1CF283911C58C48900F3952A /* health.png in Resources */,
 				D947E4661D7D3BBA00F9FEE8 /* 聊天键盘-icon-选择照片@3x.png in Resources */,

@@ -11,5 +11,6 @@
 @interface ShoperRegistVCTwo : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *codeTf;
 @property (nonatomic,copy)NSString *phone;// 手机号
+@property (nonatomic,copy)NSString *referralPhone;// 推荐人手机号
 
 @end

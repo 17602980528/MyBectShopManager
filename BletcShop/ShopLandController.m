@@ -94,6 +94,9 @@
     UserText.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.userText = UserText;
     [landView addSubview:UserText];
+    
+    [self setTextFieldLeftImageView:UserText leftImageName:@"手机"];
+    
 //    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    phoneBtn.frame = CGRectMake(SCREENWIDTH-100, 10, 100, 30);
 //    [phoneBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -124,7 +127,8 @@
     passText.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.passText = passText;
     [landView addSubview:passText];
-    
+    [self setTextFieldLeftImageView:passText leftImageName:@"锁"];
+
     
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, landView.width, 0.3)];
     line.backgroundColor = [UIColor grayColor];
@@ -698,4 +702,25 @@
     }
     return NO;
 }
+
+- (void)setTextFieldLeftImageView:(UITextField *)textField leftImageName:(NSString *)imageName
+{
+    // 设置左边图片
+    UIImageView *leftView     = [[UIImageView alloc] init];
+    leftView.image            = [UIImage imageNamed:imageName];
+    leftView.bounds = CGRectMake(0, 0, 30, 30);
+    //    leftView.height = 30;
+    //    leftView.width = 30;
+    
+    // 设置leftView的内容居中
+    leftView.contentMode      = UIViewContentModeCenter;
+    textField.leftView        = leftView;
+    
+    // 设置左边的view永远显示
+    textField.leftViewMode    = UITextFieldViewModeAlways;
+    
+    // 设置右边永远显示清除按钮
+    textField.clearButtonMode = UITextFieldViewModeAlways;
+}
+
 @end

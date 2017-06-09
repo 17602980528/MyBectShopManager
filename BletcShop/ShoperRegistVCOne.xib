@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShoperRegistVCOne">
             <connections>
                 <outlet property="phoneTF" destination="1XD-If-i96" id="EtF-C0-iej"/>
+                <outlet property="referralTF" destination="FpE-Kl-1hU" id="wXD-Ef-yJ3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -65,7 +66,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5k-a7-kEg">
-                    <rect key="frame" x="15" y="154" width="345" height="40"/>
+                    <rect key="frame" x="15" y="194" width="345" height="40"/>
                     <color key="backgroundColor" red="0.88627450980392153" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Oey-pi-cPV"/>
@@ -78,16 +79,29 @@
                         <action selector="ert:" destination="-1" eventType="touchUpInside" id="NPg-Mv-Faa"/>
                     </connections>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入推荐人手机号(可不填)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FpE-Kl-1hU">
+                    <rect key="frame" x="15" y="124" width="345" height="40"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="a5o-Kp-kpr"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1XD-If-i96" firstAttribute="top" secondItem="DAV-i6-ct2" secondAttribute="bottom" constant="20" id="2Et-tE-pAk"/>
+                <constraint firstItem="FpE-Kl-1hU" firstAttribute="width" secondItem="1XD-If-i96" secondAttribute="width" id="2Su-tR-ma2"/>
                 <constraint firstAttribute="trailing" secondItem="DAV-i6-ct2" secondAttribute="trailing" id="8al-9p-8hd"/>
-                <constraint firstItem="f5k-a7-kEg" firstAttribute="top" secondItem="1XD-If-i96" secondAttribute="bottom" constant="30" id="8bW-ug-NWW"/>
                 <constraint firstItem="1XD-If-i96" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="IfQ-kV-ySd"/>
+                <constraint firstItem="FpE-Kl-1hU" firstAttribute="top" secondItem="1XD-If-i96" secondAttribute="bottom" id="JG3-l1-DLN"/>
+                <constraint firstItem="FpE-Kl-1hU" firstAttribute="leading" secondItem="1XD-If-i96" secondAttribute="leading" id="VLm-NL-C5l"/>
                 <constraint firstAttribute="trailing" secondItem="f5k-a7-kEg" secondAttribute="trailing" constant="15" id="ZeW-CR-4Rk"/>
                 <constraint firstAttribute="trailing" secondItem="1XD-If-i96" secondAttribute="trailing" constant="15" id="d4a-Ip-ak3"/>
+                <constraint firstItem="FpE-Kl-1hU" firstAttribute="height" secondItem="1XD-If-i96" secondAttribute="height" id="dOs-G7-iWc"/>
                 <constraint firstItem="DAV-i6-ct2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="k3J-Iv-acH"/>
+                <constraint firstItem="f5k-a7-kEg" firstAttribute="top" secondItem="FpE-Kl-1hU" secondAttribute="bottom" constant="30" id="nBl-hL-2Yb"/>
                 <constraint firstItem="DAV-i6-ct2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="s2Y-zt-UrE"/>
                 <constraint firstItem="f5k-a7-kEg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="vPF-VS-RDo"/>
             </constraints>
