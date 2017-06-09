@@ -27,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"实名认证";
     [self setTextFieldLeftImageView:_realNameTF leftImageName:@"姓名she"];
     [self setTextFieldLeftImageView:_idCardNumTF leftImageName:@"身份she"];
 }
