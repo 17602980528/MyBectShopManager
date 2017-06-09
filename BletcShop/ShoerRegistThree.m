@@ -35,6 +35,8 @@
         [self showHint:@"密码不一致"];
     }else{
         
+        [_passWordTF resignFirstResponder];
+        [_surePassWordTF resignFirstResponder];
         [self postRequest];
         
     }
@@ -45,7 +47,10 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.phone forKey:@"phone"];
     [params setObject:self.passWordTF.text forKey:@"passwd"];
-    [params setObject:@"无人推荐" forKey:@"referrer"];
+    
+    
+    
+    [params setObject:self.referralPhone.length ?  self.referralPhone:@"无人推荐" forKey:@"referrer"];
     
     __block typeof(self) tempSelf = self;
     
@@ -181,31 +186,7 @@
     
 }
 
-//保存用户信息到本地
--(void)saveInfo:(NSString*)auserName{
-    NSString *url = [NSString stringWithFormat:@"%@Extra/IM/get",BASEURL];
-    
-    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
-    
-    [paramer setObject:auserName forKey:@"account"];
-    NSLog(@"-saveInfo--%@",paramer);
-    
-    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
-        NSArray *arr = (NSArray *)result;
-        
-        if (arr.count!=0) {
-            Person *p = [Person modalWith:arr[0][@"nickname"] imgStr:arr[0][@"headimage"]  idstring:arr[0][@"account"]];
-            
-            [Database savePerdon:p];
-        }
-        
-    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
-    
-    
-}
+
 //登录成功提示
 - (void)landingSuc
 {
