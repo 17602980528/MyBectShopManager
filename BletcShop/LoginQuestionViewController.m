@@ -229,7 +229,7 @@
     
 
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/login",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/login/login",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:name forKey:@"phone"];
     [params setObject:password forKey:@"passwd"];
@@ -241,7 +241,7 @@
          NSDictionary *userInfo = result[@"info"];
 
          NSLog(@"postRequestSeller-result%@", result);
-         if ([result[@"result_code"]  isEqualToString: @"login_access"] ||[result[@"result_code"]  isEqualToString: @"incomplete"] ||[result[@"result_code"]  isEqualToString: @"user_not_auth"]) {
+         if ([result[@"result_code"]  isEqualToString: @"access"]) {
              NSLog(@"成功");
              
              
@@ -291,9 +291,6 @@
              
            
              
-         }else if ([result[@"result_code"] isEqualToString:@"passwd_wrong"])
-         {
-             
          }else
          {
              [self.navigationController popViewControllerAnimated:YES];
@@ -313,7 +310,6 @@
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         appdelegate.shopInfoDic = mutdia;
     appdelegate.shopIsLogin= YES;
-    //    self.window.rootViewController = shopvc;
     [appdelegate repeatLoadAPI];
 
     [self presentViewController:shopvc animated:YES completion:nil];

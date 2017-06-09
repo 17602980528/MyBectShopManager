@@ -1888,7 +1888,7 @@
     shophud =[MBProgressHUD showHUDAddedTo:self.window animated:YES];
     shophud.label.text = @"正在登陆...";
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/login",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/login/login",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:name forKey:@"phone"];
     [params setObject:password forKey:@"passwd"];
@@ -1899,7 +1899,7 @@
      {
          
          NSLog(@"postRequestSeller-result%@", result);
-         if ([result[@"result_code"]  isEqualToString: @"login_access"] ||[result[@"result_code"]  isEqualToString: @"incomplete"] ||[result[@"result_code"]  isEqualToString: @"user_not_auth"]||[result[@"result_code"]  isEqualToString: @"user_auth_fail"]||[result[@"result_code"]  isEqualToString: @"auditing"]||[result[@"result_code"]  isEqualToString: @"complete_not_auth"]) {
+         if ([result[@"result_code"]  isEqualToString: @"access"]) {
              NSLog(@"成功");
              
              NSDictionary *userInfo = result[@"info"];
@@ -1946,18 +1946,12 @@
              }];
              
              
-         }else if ([result[@"result_code"] isEqualToString:@"passwd_wrong"])
-         {
-             ShopLandController *shopvc = [[ShopLandController alloc]init];
-             self.window.rootViewController = shopvc;
-             
          }else
          {
              ShopLandController *shopvc = [[ShopLandController alloc]init];
              self.window.rootViewController = shopvc;
          }
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         //[self noIntenet];
          NSLog(@"postRequestSeller-error%@", error);
          
          ShopLandController *shopvc = [[ShopLandController alloc]init];

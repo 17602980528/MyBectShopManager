@@ -515,6 +515,15 @@
 		D93C0D6A1D251E7B001A1AC1 /* health_11.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0D531D251E7B001A1AC1 /* health_11.png */; };
 		D93C0D6B1D251E7B001A1AC1 /* wash_06.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0D541D251E7B001A1AC1 /* wash_06.png */; };
 		D93C0D6E1D251FC1001A1AC1 /* BackChooseStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0D6C1D251FC1001A1AC1 /* BackChooseStateViewController.m */; };
+		D93C1A191EE9567C006DA624 /* ShoperRegistVCOne.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C1A171EE9567C006DA624 /* ShoperRegistVCOne.m */; };
+		D93C1A1A1EE9567C006DA624 /* ShoperRegistVCOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A181EE9567C006DA624 /* ShoperRegistVCOne.xib */; };
+		D93C1A1E1EE95832006DA624 /* ShoperRegistVCTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C1A1C1EE95832006DA624 /* ShoperRegistVCTwo.m */; };
+		D93C1A1F1EE95832006DA624 /* ShoperRegistVCTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A1D1EE95832006DA624 /* ShoperRegistVCTwo.xib */; };
+		D93C1A231EE9588C006DA624 /* ShoerRegistThree.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C1A211EE9588C006DA624 /* ShoerRegistThree.m */; };
+		D93C1A241EE9588C006DA624 /* ShoerRegistThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A221EE9588C006DA624 /* ShoerRegistThree.xib */; };
+		D93C1A261EEA33E6006DA624 /* 手机@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A251EEA33E6006DA624 /* 手机@3x.png */; };
+		D93C1A291EEA3699006DA624 /* 锁@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A271EEA3699006DA624 /* 锁@3x.png */; };
+		D93C1A2A1EEA3699006DA624 /* 钥匙@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C1A281EEA3699006DA624 /* 钥匙@3x.png */; };
 		D940403B1CBDEB7100EC98EA /* CardManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D940403A1CBDEB7100EC98EA /* CardManagerViewController.m */; };
 		D940403E1CBE156100EC98EA /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D940403D1CBE156100EC98EA /* RechargeViewController.m */; };
 		D94040411CBE29F100EC98EA /* UpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D94040401CBE29F100EC98EA /* UpgradeViewController.m */; };
@@ -1913,6 +1922,18 @@
 		D93C0D541D251E7B001A1AC1 /* wash_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wash_06.png; sourceTree = "<group>"; };
 		D93C0D6C1D251FC1001A1AC1 /* BackChooseStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackChooseStateViewController.m; sourceTree = "<group>"; };
 		D93C0D6D1D251FC1001A1AC1 /* BackChooseStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackChooseStateViewController.h; sourceTree = "<group>"; };
+		D93C1A161EE9567C006DA624 /* ShoperRegistVCOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoperRegistVCOne.h; sourceTree = "<group>"; };
+		D93C1A171EE9567C006DA624 /* ShoperRegistVCOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoperRegistVCOne.m; sourceTree = "<group>"; };
+		D93C1A181EE9567C006DA624 /* ShoperRegistVCOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoperRegistVCOne.xib; sourceTree = "<group>"; };
+		D93C1A1B1EE95832006DA624 /* ShoperRegistVCTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoperRegistVCTwo.h; sourceTree = "<group>"; };
+		D93C1A1C1EE95832006DA624 /* ShoperRegistVCTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoperRegistVCTwo.m; sourceTree = "<group>"; };
+		D93C1A1D1EE95832006DA624 /* ShoperRegistVCTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoperRegistVCTwo.xib; sourceTree = "<group>"; };
+		D93C1A201EE9588C006DA624 /* ShoerRegistThree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoerRegistThree.h; sourceTree = "<group>"; };
+		D93C1A211EE9588C006DA624 /* ShoerRegistThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoerRegistThree.m; sourceTree = "<group>"; };
+		D93C1A221EE9588C006DA624 /* ShoerRegistThree.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoerRegistThree.xib; sourceTree = "<group>"; };
+		D93C1A251EEA33E6006DA624 /* 手机@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "手机@3x.png"; sourceTree = "<group>"; };
+		D93C1A271EEA3699006DA624 /* 锁@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "锁@3x.png"; sourceTree = "<group>"; };
+		D93C1A281EEA3699006DA624 /* 钥匙@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钥匙@3x.png"; sourceTree = "<group>"; };
 		D94040391CBDEB7100EC98EA /* CardManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardManagerViewController.h; sourceTree = "<group>"; };
 		D940403A1CBDEB7100EC98EA /* CardManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardManagerViewController.m; sourceTree = "<group>"; };
 		D940403C1CBE156100EC98EA /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
@@ -3746,8 +3767,8 @@
 		18D7C4801D5B114800AEF545 /* 新注册 */ = {
 			isa = PBXGroup;
 			children = (
-				18302A281DAC8AE200E6EF8C /* ShopRegisterController.h */,
-				18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */,
+				D93C1A2B1EEA46A8006DA624 /* 旧的废弃 */,
+				D93C1A151EE95145006DA624 /* 商户处注册 */,
 				D97EE7F61D950AF6009BFD77 /* NewNextViewController.h */,
 				D97EE7F71D950AF6009BFD77 /* NewNextViewController.m */,
 				D97EE7F01D94D966009BFD77 /* NewMiddleViewController.h */,
@@ -4873,6 +4894,34 @@
 				D93BE8661CFD6B6300000E0D /* FavorateViewController.m */,
 			);
 			name = "我的收藏";
+			sourceTree = "<group>";
+		};
+		D93C1A151EE95145006DA624 /* 商户处注册 */ = {
+			isa = PBXGroup;
+			children = (
+				D93C1A271EEA3699006DA624 /* 锁@3x.png */,
+				D93C1A281EEA3699006DA624 /* 钥匙@3x.png */,
+				D93C1A251EEA33E6006DA624 /* 手机@3x.png */,
+				D93C1A161EE9567C006DA624 /* ShoperRegistVCOne.h */,
+				D93C1A171EE9567C006DA624 /* ShoperRegistVCOne.m */,
+				D93C1A181EE9567C006DA624 /* ShoperRegistVCOne.xib */,
+				D93C1A1B1EE95832006DA624 /* ShoperRegistVCTwo.h */,
+				D93C1A1C1EE95832006DA624 /* ShoperRegistVCTwo.m */,
+				D93C1A1D1EE95832006DA624 /* ShoperRegistVCTwo.xib */,
+				D93C1A201EE9588C006DA624 /* ShoerRegistThree.h */,
+				D93C1A211EE9588C006DA624 /* ShoerRegistThree.m */,
+				D93C1A221EE9588C006DA624 /* ShoerRegistThree.xib */,
+			);
+			name = "商户处注册";
+			sourceTree = "<group>";
+		};
+		D93C1A2B1EEA46A8006DA624 /* 旧的废弃 */ = {
+			isa = PBXGroup;
+			children = (
+				18302A281DAC8AE200E6EF8C /* ShopRegisterController.h */,
+				18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */,
+			);
+			name = "旧的废弃";
 			sourceTree = "<group>";
 		};
 		D94112EE1CE9A3D7008E231F /* AlipaySDK */ = {
@@ -6770,6 +6819,7 @@
 				D9AB253D1D88E4ED000E9288 /* VoiceSearchFeedback015@2x.png in Resources */,
 				D92C632E1CC8DA08006768C6 /* delete.png in Resources */,
 				D9D50DBB1D87DE3200A5E469 /* lxh_beicui.png in Resources */,
+				D93C1A1A1EE9567C006DA624 /* ShoperRegistVCOne.xib in Resources */,
 				D923D99C1D2B7F59009422EB /* data.png in Resources */,
 				D9541EA61E1FA994003022E5 /* 商消乐002.png in Resources */,
 				D9AB25411D88E4ED000E9288 /* VoiceSearchFeedback019@2x.png in Resources */,
@@ -6793,6 +6843,7 @@
 				1CF2839D1C58C48900F3952A /* more_default.png in Resources */,
 				18543E3C1ECAD8A500E0A4DA /* quan1.png in Resources */,
 				D95F032A1DD9841500F9DC2F /* Selected.png in Resources */,
+				D93C1A1F1EE95832006DA624 /* ShoperRegistVCTwo.xib in Resources */,
 				1852FB051D55C962009CF1B2 /* 代金券-03.png in Resources */,
 				1CDA9E001C59FAB300DFE518 /* ad_fast.jpg in Resources */,
 				18D7C4901D5B12BA00AEF545 /* mohu-12.png in Resources */,
@@ -6818,6 +6869,7 @@
 				1CEFFA751C7ED6DF00671471 /* xuan1.png in Resources */,
 				D93B7E5E1D23694F002AFBCC /* 点击-03.png in Resources */,
 				1A8312741D885176001BC3B6 /* chat_sender_audio_playing_full@2x.png in Resources */,
+				D93C1A261EEA33E6006DA624 /* 手机@3x.png in Resources */,
 				D93C0D651D251E7B001A1AC1 /* 小标-20.png in Resources */,
 				1CF283951C58C48900F3952A /* index2.png in Resources */,
 				18F032091E5ED79300ACD261 /* tempProducts_04.jpg in Resources */,
@@ -7185,6 +7237,7 @@
 				D93C0D5C1D251E7B001A1AC1 /* 小标-10.png in Resources */,
 				18F27EF21D640E84002DD03A /* 头像-10.png in Resources */,
 				D9FF0D921D53304C00443312 /* 图标-04new.png in Resources */,
+				D93C1A241EE9588C006DA624 /* ShoerRegistThree.xib in Resources */,
 				D95BAE5D1D542FD500ED0CDC /* award_19.png in Resources */,
 				D9ED52051D2A467700267729 /* grey_red.png in Resources */,
 				D9EC40BB1EE6846A004BEDB8 /* GeneralCardSeriseListVC.xib in Resources */,
@@ -7289,6 +7342,7 @@
 				18EB36C01D4B5A2E0087CE1A /* 反1-01.png in Resources */,
 				18F27EFF1D640E84002DD03A /* 头像-23.png in Resources */,
 				D98559481E1605C3003D9423 /* 启动页(1).png in Resources */,
+				D93C1A291EEA3699006DA624 /* 锁@3x.png in Resources */,
 				D923D99A1D2B621B009422EB /* merchant_introduce.png in Resources */,
 				D9AB253C1D88E4ED000E9288 /* VoiceSearchFeedback014@2x.png in Resources */,
 				1852FB031D55C962009CF1B2 /* 代金券-01.png in Resources */,
@@ -7308,6 +7362,7 @@
 				D9AB25381D88E4ED000E9288 /* VoiceSearchFeedback010@2x.png in Resources */,
 				1C31F8141C632A4E00CB1A9E /* tianjiavip@2x.png in Resources */,
 				D92C632F1CC8DA08006768C6 /* modify.png in Resources */,
+				D93C1A2A1EEA3699006DA624 /* 钥匙@3x.png in Resources */,
 				D9FF0DA21D53304C00443312 /* 图标-20new.png in Resources */,
 				1C9E82451C60557E0007BF02 /* 5(4)@2x.png in Resources */,
 				18EB36BA1D4B4B5B0087CE1A /* 未标题-1-05.png in Resources */,
@@ -7482,6 +7537,7 @@
 				D98E5C001E515210009D56BF /* MASLayoutConstraint.m in Sources */,
 				185ABD871D80227900BD8097 /* QYShowResultView.m in Sources */,
 				D920B95D1DD05164001AC7F5 /* AdvertiseCell.m in Sources */,
+				D93C1A231EE9588C006DA624 /* ShoerRegistThree.m in Sources */,
 				D986A1BD1DE5436B007B798B /* GetMoneySuccessVC.m in Sources */,
 				D96503E61CE06E1D006907EF /* GCDAsyncUdpSocket.m in Sources */,
 				D9B650071E9724A0007DF5DC /* ShopManagerDataReportVC.m in Sources */,
@@ -7534,6 +7590,7 @@
 				D98ECBC91D9CC52200BEDD57 /* LZDAddVipCell.m in Sources */,
 				D9ACF1AF1E24CB4200BCC877 /* thirdlogVC.m in Sources */,
 				D9345E6A1E769805006B2AC1 /* TopActiveListTableVC.m in Sources */,
+				D93C1A1E1EE95832006DA624 /* ShoperRegistVCTwo.m in Sources */,
 				D98E5B8F1E5150FC009D56BF /* GetDiscountCouponVC.m in Sources */,
 				18F031F11E5EB8C100ACD261 /* ConvertRecordVC.m in Sources */,
 				189ED0431E8CD53600A762C7 /* KeyChainStore.m in Sources */,
@@ -7675,6 +7732,7 @@
 				1A4173C31D787E1200A70601 /* ContactSelectionViewController.m in Sources */,
 				180B53681D4F401F00DE6641 /* MerchantDetailViewController.m in Sources */,
 				D97F60011D62BE95000EE794 /* ScanViewController.m in Sources */,
+				D93C1A191EE9567C006DA624 /* ShoperRegistVCOne.m in Sources */,
 				D958AD6F1E654CF200B0776F /* JHTableDataRowModel.m in Sources */,
 				182988451E723F4200164F32 /* SDCollectionViewCell.m in Sources */,
 				182988461E723F4200164F32 /* SDCycleScrollView.m in Sources */,
