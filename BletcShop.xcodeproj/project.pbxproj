@@ -260,6 +260,11 @@
 		18FA58B21EE9520900F458F2 /* NewUserRegistVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58B01EE9520900F458F2 /* NewUserRegistVC.xib */; };
 		18FA58B61EE95C9800F458F2 /* NewUserAccessCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA58B41EE95C9800F458F2 /* NewUserAccessCodeVC.m */; };
 		18FA58B71EE95C9800F458F2 /* NewUserAccessCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58B51EE95C9800F458F2 /* NewUserAccessCodeVC.xib */; };
+		18FA58BE1EEA32D600F458F2 /* 手机号码@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58BB1EEA32D600F458F2 /* 手机号码@3x.png */; };
+		18FA58BF1EEA32D600F458F2 /* 钥匙串@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58BC1EEA32D600F458F2 /* 钥匙串@3x.png */; };
+		18FA58C01EEA32D600F458F2 /* 锁心@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58BD1EEA32D600F458F2 /* 锁心@3x.png */; };
+		18FA58C41EEA457100F458F2 /* NewUserSetPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA58C21EEA457100F458F2 /* NewUserSetPassVC.m */; };
+		18FA58C51EEA457100F458F2 /* NewUserSetPassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58C31EEA457100F458F2 /* NewUserSetPassVC.xib */; };
 		18FCAD481E56A16800FF57D0 /* BindCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCAD471E56A16800FF57D0 /* BindCustomView.m */; };
 		1A4173AB1D78708100A70601 /* CreatGroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4173AA1D78708100A70601 /* CreatGroupVC.m */; };
 		1A4173AE1D78717E00A70601 /* LZDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4173AD1D78717E00A70601 /* LZDTextView.m */; };
@@ -1543,6 +1548,12 @@
 		18FA58B31EE95C9800F458F2 /* NewUserAccessCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserAccessCodeVC.h; sourceTree = "<group>"; };
 		18FA58B41EE95C9800F458F2 /* NewUserAccessCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserAccessCodeVC.m; sourceTree = "<group>"; };
 		18FA58B51EE95C9800F458F2 /* NewUserAccessCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserAccessCodeVC.xib; sourceTree = "<group>"; };
+		18FA58BB1EEA32D600F458F2 /* 手机号码@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "手机号码@3x.png"; sourceTree = "<group>"; };
+		18FA58BC1EEA32D600F458F2 /* 钥匙串@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钥匙串@3x.png"; sourceTree = "<group>"; };
+		18FA58BD1EEA32D600F458F2 /* 锁心@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "锁心@3x.png"; sourceTree = "<group>"; };
+		18FA58C11EEA457100F458F2 /* NewUserSetPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserSetPassVC.h; sourceTree = "<group>"; };
+		18FA58C21EEA457100F458F2 /* NewUserSetPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserSetPassVC.m; sourceTree = "<group>"; };
+		18FA58C31EEA457100F458F2 /* NewUserSetPassVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserSetPassVC.xib; sourceTree = "<group>"; };
 		18FCAD461E56A16800FF57D0 /* BindCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindCustomView.h; sourceTree = "<group>"; };
 		18FCAD471E56A16800FF57D0 /* BindCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindCustomView.m; sourceTree = "<group>"; };
 		1A4173A91D78708100A70601 /* CreatGroupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatGroupVC.h; sourceTree = "<group>"; };
@@ -4008,6 +4019,57 @@
 			path = "按钮所有图标";
 			sourceTree = "<group>";
 		};
+		18FA58B91EEA2FDD00F458F2 /* 新用户注册 */ = {
+			isa = PBXGroup;
+			children = (
+				18FA58BA1EEA32D600F458F2 /* 你好帅 */,
+				18FA58C61EEA4BAC00F458F2 /* 输入手机号吗 */,
+				18FA58C71EEA4BBD00F458F2 /* 输入验证码 */,
+			);
+			name = "新用户注册";
+			sourceTree = "<group>";
+		};
+		18FA58BA1EEA32D600F458F2 /* 你好帅 */ = {
+			isa = PBXGroup;
+			children = (
+				18FA58BB1EEA32D600F458F2 /* 手机号码@3x.png */,
+				18FA58BC1EEA32D600F458F2 /* 钥匙串@3x.png */,
+				18FA58BD1EEA32D600F458F2 /* 锁心@3x.png */,
+			);
+			path = "你好帅";
+			sourceTree = "<group>";
+		};
+		18FA58C61EEA4BAC00F458F2 /* 输入手机号吗 */ = {
+			isa = PBXGroup;
+			children = (
+				18FA58AE1EE9520900F458F2 /* NewUserRegistVC.h */,
+				18FA58AF1EE9520900F458F2 /* NewUserRegistVC.m */,
+				18FA58B01EE9520900F458F2 /* NewUserRegistVC.xib */,
+			);
+			name = "输入手机号吗";
+			sourceTree = "<group>";
+		};
+		18FA58C71EEA4BBD00F458F2 /* 输入验证码 */ = {
+			isa = PBXGroup;
+			children = (
+				18FA58B31EE95C9800F458F2 /* NewUserAccessCodeVC.h */,
+				18FA58B41EE95C9800F458F2 /* NewUserAccessCodeVC.m */,
+				18FA58B51EE95C9800F458F2 /* NewUserAccessCodeVC.xib */,
+				18FA58C81EEA4BE600F458F2 /* 设置密码完成注册 */,
+			);
+			name = "输入验证码";
+			sourceTree = "<group>";
+		};
+		18FA58C81EEA4BE600F458F2 /* 设置密码完成注册 */ = {
+			isa = PBXGroup;
+			children = (
+				18FA58C11EEA457100F458F2 /* NewUserSetPassVC.h */,
+				18FA58C21EEA457100F458F2 /* NewUserSetPassVC.m */,
+				18FA58C31EEA457100F458F2 /* NewUserSetPassVC.xib */,
+			);
+			name = "设置密码完成注册";
+			sourceTree = "<group>";
+		};
 		1A4173BD1D787BF400A70601 /* CommonViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -5871,12 +5933,7 @@
 				1C0BEF891C7DA14400519481 /* SuccessController.m */,
 				D94432BE1D18FC6800B45135 /* UserProtocolViewController.h */,
 				D94432BF1D18FC6800B45135 /* UserProtocolViewController.m */,
-				18FA58AE1EE9520900F458F2 /* NewUserRegistVC.h */,
-				18FA58AF1EE9520900F458F2 /* NewUserRegistVC.m */,
-				18FA58B01EE9520900F458F2 /* NewUserRegistVC.xib */,
-				18FA58B31EE95C9800F458F2 /* NewUserAccessCodeVC.h */,
-				18FA58B41EE95C9800F458F2 /* NewUserAccessCodeVC.m */,
-				18FA58B51EE95C9800F458F2 /* NewUserAccessCodeVC.xib */,
+				18FA58B91EEA2FDD00F458F2 /* 新用户注册 */,
 			);
 			name = "注册";
 			sourceTree = "<group>";
@@ -6871,6 +6928,7 @@
 				D93027E11CFEB641007447D2 /* star_selected.png in Resources */,
 				D95BAE531D542FD500ED0CDC /* award_09.png in Resources */,
 				1CB53C1A1C573BA7002B6CC1 /* CardVipCell.xib in Resources */,
+				18FA58BF1EEA32D600F458F2 /* 钥匙串@3x.png in Resources */,
 				D93C0D6A1D251E7B001A1AC1 /* health_11.png in Resources */,
 				1852FB0B1D55C962009CF1B2 /* 代金券-09.png in Resources */,
 				D949EC241CE192750023B6D6 /* cities.plist in Resources */,
@@ -7027,6 +7085,7 @@
 				18F27F031D640E84002DD03A /* 头像-27.png in Resources */,
 				1CF2839C1C58C48900F3952A /* mine_selected.png in Resources */,
 				1CF6E47F1C61E4350001159C /* tuihuo@2x.png in Resources */,
+				18FA58C51EEA457100F458F2 /* NewUserSetPassVC.xib in Resources */,
 				D9AB25401D88E4ED000E9288 /* VoiceSearchFeedback018@2x.png in Resources */,
 				D947E4511D7D0EB100F9FEE8 /* group_participant_addHL@2x.png in Resources */,
 				D9C0B1B11E8370E200217195 /* jiaopian(1).png in Resources */,
@@ -7294,6 +7353,7 @@
 				D98FDF8B1E601C660057C206 /* AD_ad_qs@3x.png in Resources */,
 				D986A1BE1DE5436B007B798B /* GetMoneySuccessVC.xib in Resources */,
 				D97F60191D62F770000EE794 /* 注册-04.png in Resources */,
+				18FA58BE1EEA32D600F458F2 /* 手机号码@3x.png in Resources */,
 				D96981571ED57A3D00A44142 /* 引导页1.png in Resources */,
 				D96981581ED57A3D00A44142 /* 引导页2.png in Resources */,
 				D95BAE4C1D542FD500ED0CDC /* award_02.png in Resources */,
@@ -7307,6 +7367,7 @@
 				18EB36C01D4B5A2E0087CE1A /* 反1-01.png in Resources */,
 				18F27EFF1D640E84002DD03A /* 头像-23.png in Resources */,
 				D98559481E1605C3003D9423 /* 启动页(1).png in Resources */,
+				18FA58C01EEA32D600F458F2 /* 锁心@3x.png in Resources */,
 				D923D99A1D2B621B009422EB /* merchant_introduce.png in Resources */,
 				D9AB253C1D88E4ED000E9288 /* VoiceSearchFeedback014@2x.png in Resources */,
 				1852FB031D55C962009CF1B2 /* 代金券-01.png in Resources */,
@@ -7846,6 +7907,7 @@
 				D9B3A5BE1D74255700F3F27E /* PSTCollectionViewController.m in Sources */,
 				D932F3E31CCDB6B800B33505 /* VPImageCropperViewController.m in Sources */,
 				D99760EF1E690575008E21FE /* SawtoothView.m in Sources */,
+				18FA58C41EEA457100F458F2 /* NewUserSetPassVC.m in Sources */,
 				D9195D231E8225C600FB4367 /* UploadImageVC.m in Sources */,
 				D9A1BB361ECEE4E900CF1318 /* AuthFailShopVC.m in Sources */,
 				1CDCCD1E1C7594040094E70D /* AFURLResponseSerialization.m in Sources */,

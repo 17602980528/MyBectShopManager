@@ -15,6 +15,12 @@
 
 @implementation NewUserRegistVC
 - (IBAction)accessCodeBtnClick:(id)sender {
+#ifdef DEBUG
+    //跳页面
+    NewUserAccessCodeVC *vc=[[NewUserAccessCodeVC alloc]init];
+    vc.phoneNum=_phoneTF.text;
+    [self.navigationController pushViewController:vc animated:YES];
+#else
     [_phoneTF resignFirstResponder];
     if (_phoneTF.text.length==11) {
         BOOL state = [NSString isMobileNum:_phoneTF.text];
@@ -32,24 +38,48 @@
         [alertView show];
     }
 
+#endif
+   
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.navigationItem.title=@"注册";
-    _phoneTF.delegate=self;
-    _phoneTF.clearButtonMode=UITextFieldViewModeWhileEditing;
-    
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
-    [self.view addGestureRecognizer:singleTap];
-    
-}
 -(void)fingerTapped:(UITapGestureRecognizer *)tap{
     [tap.view endEditing:YES];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     return YES;
+}
+- (void)setTextFieldLeftImageView:(UITextField *)textField leftImageName:(NSString *)imageName
+{
+    // 设置左边图片
+    UIImageView *leftView     = [[UIImageView alloc] init];
+    leftView.image            = [UIImage imageNamed:imageName];
+    leftView.bounds = CGRectMake(0, 0, 30, 30);
+    //    leftView.height = 30;
+    //    leftView.width = 30;
+    
+    // 设置leftView的内容居中
+    leftView.contentMode      = UIViewContentModeCenter;
+    textField.leftView        = leftView;
+    
+    // 设置左边的view永远显示
+    textField.leftViewMode    = UITextFieldViewModeAlways;
+    
+    // 设置右边永远显示清除按钮
+    textField.clearButtonMode = UITextFieldViewModeAlways;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title=@"填写手机号";
+    _phoneTF.delegate=self;
+    _phoneTF.returnKeyType=UIReturnKeyDone;
+    _phoneTF.clearButtonMode=UITextFieldViewModeWhileEditing;
+    [self setTextFieldLeftImageView:_phoneTF leftImageName:@"手机号码"];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
+    [self.view addGestureRecognizer:singleTap];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
