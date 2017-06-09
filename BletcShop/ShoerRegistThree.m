@@ -48,8 +48,6 @@
     [params setObject:self.phone forKey:@"phone"];
     [params setObject:self.passWordTF.text forKey:@"passwd"];
     
-    
-    
     [params setObject:self.referralPhone.length ?  self.referralPhone:@"无人推荐" forKey:@"referrer"];
     
     __block typeof(self) tempSelf = self;

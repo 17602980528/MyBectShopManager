@@ -54,7 +54,7 @@
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsr-RW-WJS">
-                    <rect key="frame" x="15" y="84" width="345" height="40"/>
+                    <rect key="frame" x="15" y="114" width="345" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="8F6-0b-X3e"/>
                     </constraints>
@@ -66,7 +66,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8b-Ji-eOZ">
-                    <rect key="frame" x="15" y="154" width="345" height="40"/>
+                    <rect key="frame" x="15" y="184" width="345" height="40"/>
                     <color key="backgroundColor" red="0.88627450980392153" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Q3u-hd-HqQ"/>
@@ -80,7 +80,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xr-QT-ktV">
-                    <rect key="frame" x="310" y="84" width="50" height="40"/>
+                    <rect key="frame" x="310" y="114" width="50" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="tRj-Bl-eqv"/>
                     </constraints>
@@ -92,23 +92,35 @@
                         <action selector="senderCodeClick:" destination="-1" eventType="touchUpInside" id="ZYd-if-VPq"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="为了安全，我们会向您的手机发送短信验证码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAh-1I-L1w">
+                    <rect key="frame" x="15" y="74" width="345" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="WpJ-6G-g89"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="O8b-Ji-eOZ" firstAttribute="top" secondItem="jsr-RW-WJS" secondAttribute="bottom" constant="30" id="G8f-fo-Ole"/>
+                <constraint firstItem="jsr-RW-WJS" firstAttribute="top" secondItem="wAh-1I-L1w" secondAttribute="bottom" constant="20" id="L1v-Qr-aEn"/>
                 <constraint firstItem="5xr-QT-ktV" firstAttribute="height" secondItem="jsr-RW-WJS" secondAttribute="height" id="NuL-lR-dvn"/>
                 <constraint firstAttribute="trailing" secondItem="jsr-RW-WJS" secondAttribute="trailing" constant="15" id="OX0-iI-8iy"/>
                 <constraint firstAttribute="trailing" secondItem="O8b-Ji-eOZ" secondAttribute="trailing" constant="15" id="See-Ni-Oxm"/>
-                <constraint firstItem="jsr-RW-WJS" firstAttribute="top" secondItem="4Ph-Px-LRo" secondAttribute="bottom" constant="20" id="UpA-oK-utE"/>
+                <constraint firstItem="wAh-1I-L1w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="VLu-C8-lo9"/>
                 <constraint firstAttribute="trailing" secondItem="4Ph-Px-LRo" secondAttribute="trailing" id="ZE5-OV-dyb"/>
+                <constraint firstItem="wAh-1I-L1w" firstAttribute="top" secondItem="4Ph-Px-LRo" secondAttribute="bottom" constant="10" id="cOw-s6-NOC"/>
                 <constraint firstItem="5xr-QT-ktV" firstAttribute="top" secondItem="jsr-RW-WJS" secondAttribute="top" id="hUa-MB-deQ"/>
                 <constraint firstItem="5xr-QT-ktV" firstAttribute="trailing" secondItem="jsr-RW-WJS" secondAttribute="trailing" id="r45-lf-SLK"/>
+                <constraint firstAttribute="trailing" secondItem="wAh-1I-L1w" secondAttribute="trailing" constant="15" id="sA5-uZ-Vpv"/>
                 <constraint firstItem="O8b-Ji-eOZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="vIE-Mh-1DS"/>
                 <constraint firstItem="jsr-RW-WJS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="yBH-dt-BXu"/>
                 <constraint firstItem="4Ph-Px-LRo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zcj-Hu-3Xd"/>
                 <constraint firstItem="4Ph-Px-LRo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zhK-Yw-2yi"/>
             </constraints>
-            <point key="canvasLocation" x="-142" y="-147"/>
+            <point key="canvasLocation" x="-289.5" y="-167.5"/>
         </view>
     </objects>
 </document>
