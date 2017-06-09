@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RailNameConfirmVC">
             <connections>
+                <outlet property="idCardNumTF" destination="HW6-l6-n2b" id="De9-BR-OTj"/>
+                <outlet property="realNameTF" destination="INU-au-xPo" id="Du2-39-eHc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,16 +21,70 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BEI-4i-nnt">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入您的真实姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="INU-au-xPo">
+                    <rect key="frame" x="15" y="57" width="345" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="KSA-UI-yzS"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="elP-U8-0mw"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入18位数身份证号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HW6-l6-n2b">
+                    <rect key="frame" x="15" y="102" width="345" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="3S0-Wp-nS8"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="aNJ-tz-3ow"/>
+                    </connections>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="认证成功后才能参与众筹项目的投资" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IfG-YP-alG">
+                    <rect key="frame" x="15" y="175" width="345" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="X6S-fl-bge"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.11764705882352941" green="0.54509803921568623" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8g1-SN-2LO">
+                    <rect key="frame" x="15" y="368" width="345" height="44"/>
+                    <color key="backgroundColor" red="0.8862745098" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="AcL-Zd-uYA"/>
+                    </constraints>
+                    <state key="normal" title="提交认证">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="commitConfirmBtnClick:" destination="-1" eventType="touchUpInside" id="gcH-ff-I1Y"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="BEI-4i-nnt" secondAttribute="trailing" id="9pZ-9t-IOa"/>
-                <constraint firstItem="BEI-4i-nnt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AwP-Oj-nv9"/>
-                <constraint firstItem="BEI-4i-nnt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fVt-FO-S5H"/>
-                <constraint firstAttribute="bottom" secondItem="BEI-4i-nnt" secondAttribute="bottom" id="r7C-gl-7C0"/>
+                <constraint firstAttribute="trailing" secondItem="INU-au-xPo" secondAttribute="trailing" constant="15" id="0Xh-0w-ZmV"/>
+                <constraint firstItem="IfG-YP-alG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="5Z4-3E-LaQ"/>
+                <constraint firstAttribute="trailing" secondItem="8g1-SN-2LO" secondAttribute="trailing" constant="15" id="8Qt-WA-t3t"/>
+                <constraint firstItem="INU-au-xPo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="90U-le-WTv"/>
+                <constraint firstAttribute="trailing" secondItem="IfG-YP-alG" secondAttribute="trailing" constant="15" id="GGt-dU-Ieg"/>
+                <constraint firstItem="HW6-l6-n2b" firstAttribute="top" secondItem="INU-au-xPo" secondAttribute="bottom" constant="5" id="Hew-wK-3p1"/>
+                <constraint firstItem="8g1-SN-2LO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Jwa-W5-0mI"/>
+                <constraint firstItem="HW6-l6-n2b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Qiq-yt-oDg"/>
+                <constraint firstItem="INU-au-xPo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="57" id="Urj-CJ-hqV"/>
+                <constraint firstAttribute="trailing" secondItem="HW6-l6-n2b" secondAttribute="trailing" constant="15" id="aRv-BQ-5jF"/>
+                <constraint firstItem="8g1-SN-2LO" firstAttribute="top" secondItem="IfG-YP-alG" secondAttribute="bottom" constant="173" id="c3c-tP-2f4"/>
+                <constraint firstItem="IfG-YP-alG" firstAttribute="top" secondItem="HW6-l6-n2b" secondAttribute="bottom" constant="33" id="qB2-B7-7q5"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="103.5"/>
         </view>

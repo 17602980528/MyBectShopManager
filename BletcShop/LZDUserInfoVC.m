@@ -17,7 +17,8 @@
 
 #import "NewModelImageViewController.h"
 #import "ChangeLoginOrPayVC.h"
-@interface LZDUserInfoVC ()<UITableViewDelegate,UITableViewDataSource,NewModelImageViewControllerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#import "RailNameConfirmVC.h"
+@interface LZDUserInfoVC ()<UITableViewDelegate,UITableViewDataSource,NewModelImageViewControllerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 
 {
     
@@ -53,9 +54,8 @@
     return _title_headImage;
 }
 -(void)viewWillAppear:(BOOL)animated{
-    
     [super viewWillAppear: animated];
-    [self.tabView reloadData];
+    [self postRequestAllInfoForUser];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,7 +71,7 @@
     self.tishiview.hidden = YES;
     [self.view addSubview:self.tishiview];
 
-
+   
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -86,8 +86,6 @@
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-
-    
     
     if (indexPath.row==0) {
         UserInfoHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userinfoHeadID"];
@@ -122,6 +120,9 @@
                  cell.content_lab.text =@"未认证";
             }else if ([appdelegate.userInfoDic[key_A[indexPath.row-1]] isEqualToString:@"access"]){
                  cell.content_lab.text =@"认证通过";
+            }else if([appdelegate.userInfoDic[key_A[indexPath.row-1]] isEqualToString:@"auditing"]){
+                
+                 cell.content_lab.text =@"审核中";
             }else{
                  cell.content_lab.text =@"认证失败";
             }
@@ -139,6 +140,17 @@
     }
     if (indexPath.row==1) {
         NSLog(@"你好帅");
+        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        if ([appdelegate.userInfoDic[@"state"] isEqualToString:@"not_auth"]) {
+            RailNameConfirmVC *confirmVC=[[RailNameConfirmVC alloc]init];
+            confirmVC.title=_title_A[indexPath.row-1];
+            [self.navigationController pushViewController:confirmVC animated:YES];
+        }else if ([appdelegate.userInfoDic[@"state"] isEqualToString:@"fail"]){
+            [self postRequest];
+        }else{
+           NSLog(@"你好帅");
+        }
+       
     }
     
     if (indexPath.row ==2 || indexPath.row ==3 || indexPath.row ==5 || indexPath.row ==6 || indexPath.row ==7 || indexPath.row ==9|| indexPath.row ==10|| indexPath.row ==11) {
@@ -468,11 +480,6 @@
     NSString *nameValue = [[NSString alloc]initWithFormat:@"%@_%lld",appdelegate.userInfoDic[@"uuid"],self.date ];
     NSLog(@"userInfoArray===%@",appdelegate.userInfoArray);
     
-    
-    
-    
-    
-    
     NSData *img_Data = [NSData dataWithContentsOfFile:fullPath];
     
     NSMutableDictionary *parmer = [NSMutableDictionary dictionary];
@@ -524,6 +531,58 @@
 - (IBAction)sureBtnClcik:(UIButton *)sender {
 
     self.tishiview.hidden = YES;
+
+}
+-(void)postRequest
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/info/getAuthResult",BASEURL];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         if (result) {
+             NSString *state=result[@"state"];
+             if ([state isEqualToString:@"auth_fail"]) {
+                UIAlertView *alert= [[UIAlertView alloc]initWithTitle:result[@"tip"] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新认证", nil];
+                [alert show];
+
+             }
+         }
+       
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"%@", error);
+         
+     }];
+    
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==1) {
+        RailNameConfirmVC *confirmVC=[[RailNameConfirmVC alloc]init];
+        confirmVC.title=@"实名认证";
+        [self.navigationController pushViewController:confirmVC animated:YES];
+    }
+}
+
+-(void)postRequestAllInfoForUser{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/info/get",BASEURL];
+    __block AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         if (result) {
+             NSLog(@"%@",result);
+             appdelegate.userInfoDic=[NSMutableDictionary dictionaryWithDictionary:result];
+             [self.tabView reloadData];
+         }
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"%@", error);
+         
+     }];
 
 }
 @end

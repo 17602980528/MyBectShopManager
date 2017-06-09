@@ -264,6 +264,8 @@
 		18FA58D71EEA769C00F458F2 /* NewUserSetPassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58D11EEA769C00F458F2 /* NewUserSetPassVC.xib */; };
 		18FA58DB1EEA89C000F458F2 /* RailNameConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA58D91EEA89C000F458F2 /* RailNameConfirmVC.m */; };
 		18FA58DC1EEA89C000F458F2 /* RailNameConfirmVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58DA1EEA89C000F458F2 /* RailNameConfirmVC.xib */; };
+		18FA58DE1EEA92C900F458F2 /* 姓名she@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58DD1EEA92C900F458F2 /* 姓名she@3x.png */; };
+		18FA58E01EEA92F500F458F2 /* 身份she@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58DF1EEA92F500F458F2 /* 身份she@3x.png */; };
 		18FCAD481E56A16800FF57D0 /* BindCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCAD471E56A16800FF57D0 /* BindCustomView.m */; };
 		1A4173AB1D78708100A70601 /* CreatGroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4173AA1D78708100A70601 /* CreatGroupVC.m */; };
 		1A4173AE1D78717E00A70601 /* LZDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4173AD1D78717E00A70601 /* LZDTextView.m */; };
@@ -1563,6 +1565,8 @@
 		18FA58D81EEA89C000F458F2 /* RailNameConfirmVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RailNameConfirmVC.h; sourceTree = "<group>"; };
 		18FA58D91EEA89C000F458F2 /* RailNameConfirmVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RailNameConfirmVC.m; sourceTree = "<group>"; };
 		18FA58DA1EEA89C000F458F2 /* RailNameConfirmVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RailNameConfirmVC.xib; sourceTree = "<group>"; };
+		18FA58DD1EEA92C900F458F2 /* 姓名she@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "姓名she@3x.png"; sourceTree = "<group>"; };
+		18FA58DF1EEA92F500F458F2 /* 身份she@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "身份she@3x.png"; sourceTree = "<group>"; };
 		18FCAD461E56A16800FF57D0 /* BindCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindCustomView.h; sourceTree = "<group>"; };
 		18FCAD471E56A16800FF57D0 /* BindCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindCustomView.m; sourceTree = "<group>"; };
 		1A4173A91D78708100A70601 /* CreatGroupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatGroupVC.h; sourceTree = "<group>"; };
@@ -5690,6 +5694,8 @@
 				18FA58D81EEA89C000F458F2 /* RailNameConfirmVC.h */,
 				18FA58D91EEA89C000F458F2 /* RailNameConfirmVC.m */,
 				18FA58DA1EEA89C000F458F2 /* RailNameConfirmVC.xib */,
+				18FA58DD1EEA92C900F458F2 /* 姓名she@3x.png */,
+				18FA58DF1EEA92F500F458F2 /* 身份she@3x.png */,
 				D987BB321E792C3D008AE24D /* 修改编辑信息 */,
 				D987BB221E790B28008AE24D /* 用户信息cell */,
 			);
@@ -6998,6 +7004,7 @@
 				1CF2839A1C58C48900F3952A /* merchant_selected.png in Resources */,
 				1CF2838B1C58C48900F3952A /* yujia.png in Resources */,
 				0793868C1C55B5CA0021B385 /* Assets.xcassets in Resources */,
+				18FA58E01EEA92F500F458F2 /* 身份she@3x.png in Resources */,
 				1C9E822C1C603B7A0007BF02 /* arraw_left@2x.png in Resources */,
 				18EB36A71D4B1F5D0087CE1A /* 滑动选择-05.png in Resources */,
 				D94DF25F1CAE0DB8000D5B69 /* result_small_star_disable.png in Resources */,
@@ -7346,6 +7353,7 @@
 				D93027DE1CFEB26B007447D2 /* share_grade_star.png in Resources */,
 				D97F60181D62F770000EE794 /* 注册-03.png in Resources */,
 				1C9E82571C60AD390007BF02 /* 0-01.png in Resources */,
+				18FA58DE1EEA92C900F458F2 /* 姓名she@3x.png in Resources */,
 				1CDA9E021C59FAB300DFE518 /* buyer.png in Resources */,
 				18BCCDCD1D3C9EE8005E145D /* user_ed1.png in Resources */,
 				D9D50DB91D87DE2800A5E469 /* d_aini@2x.png in Resources */,
