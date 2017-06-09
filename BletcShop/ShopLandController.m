@@ -17,6 +17,9 @@
 
 #import "LoginQuestionViewController.h"
 
+
+#import "ShoperRegistVCOne.h"
+
 @interface ShopLandController ()
 @property(nonatomic,weak)UITextField *userText;
 @property(nonatomic,weak)UITextField *passText;
@@ -440,7 +443,11 @@
 -(void)CreatAction
 {
     NSLog(@"注册");
-    ShopRegisterController *regisVc = [[ShopRegisterController alloc]init];
+    
+    
+    ShoperRegistVCOne *regisVc = [[ShoperRegistVCOne alloc]init];
+
+//    ShopRegisterController *regisVc = [[ShopRegisterController alloc]init];
     [self presentViewController:regisVc animated:YES completion:nil];
 }
 
@@ -455,7 +462,7 @@
     [self showHudInView:self.view hint:@"正在登陆..."];
     
     
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/login",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/login/login",BASEURL];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.userText.text forKey:@"phone"];
@@ -479,7 +486,7 @@
          NSLog(@"商户登录请求result==%@", result);
          
          
-         if ([result_dic[@"result_code"] isEqualToString:@"incomplete"]||[result_dic[@"result_code"] isEqualToString:@"user_auth_fail"]||[result_dic[@"result_code"] isEqualToString:@"user_not_auth"]||[result_dic[@"result_code"]  isEqualToString: @"login_access"]||[result_dic[@"result_code"]  isEqualToString: @"auditing"] ||[result_dic[@"result_code"]  isEqualToString: @"complete_not_auth"]){
+         if ([result_dic[@"result_code"]  isEqualToString: @"access"]){
              
              
              //登录环信
@@ -534,7 +541,6 @@
                          //信息是否完善
                          [use_name setObject:result_dic[@"result_code"] forKey:@"wangyongle"];
                          [use_name synchronize];
-                         //                        [app socketConnectHostShop];
                          
                          [self landingSuc];
                      });
@@ -543,34 +549,31 @@
                      NSLog(@"商户登录失败==%@",aError.errorDescription);
                      [self hideHud];
                      
-                     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                     hud.mode = MBProgressHUDModeText;
-                     hud.label.text = NSLocalizedString(aError.errorDescription, @"HUD message title");
-                     hud.label.font = [UIFont systemFontOfSize:13];
-                     [hud hideAnimated:YES afterDelay:3.f];
-                 }
+                     [self showHint:aError.errorDescription];
+                                      }
              }];
              
-             [self hideHud];
              
              
          }
-         else if ([result_dic[@"result_code"] isEqualToString:@"passwd_wrong"])
+         else if ([result_dic[@"result_code"] isEqualToString:@"fail"])
          {
              [self hideHud];
+
+             [self showHint:[NSString stringWithFormat:@"%@",result_dic[@"tip"]]];
              
-             [self passwd_wrong];
-         }else if ([result_dic[@"result_code"] isEqualToString:@"user_not_found"])
+             
+         }else
          {
              [self hideHud];
-             
-             [self use_notfound];
-             
+
+             [self showHint:@"登录失败!请重新尝试!"];
          }
          
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         [self noIntenet];
+         
+         [self showHint:@"请检查网路连接!"];
          [self hideHud];
          NSLog(@"%@", error);
      }];
@@ -613,81 +616,8 @@
     
 }
 
-//密码错误
-- (void)passwd_wrong
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.frame = CGRectMake(0, 64, 375, 667);
-    // Set the annular determinate mode to show task progress.
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"用户名或密码错误", @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    // Move to bottm center.
-    //    hud.offset = CGPointMake(0.f, );
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    [hud hideAnimated:YES afterDelay:3.f];
-    
-}
-- (void)use_notfound
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.frame = CGRectMake(0, 64, 375, 667);
-    // Set the annular determinate mode to show task progress.
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"用户不存在", @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    // Move to bottm center.
-    //    hud.offset = CGPointMake(0.f, );
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    [hud hideAnimated:YES afterDelay:3.f];
-    
-}
+
 //
-//审核
-- (void)use_examine
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.frame = CGRectMake(0, 64, 375, 667);
-    // Set the annular determinate mode to show task progress.
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"用户尚未审核，我们将在三个工作日，完成审核", @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    // Move to bottm center.
-    //    hud.offset = CGPointMake(0.f, );
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    [hud hideAnimated:YES afterDelay:3.f];
-    
-}
-//审核
-- (void)use_examine_fail
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.frame = CGRectMake(0, 64, 375, 667);
-    // Set the annular determinate mode to show task progress.
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"审核未通过，请重新注册", @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    // Move to bottm center.
-    //    hud.offset = CGPointMake(0.f, );
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    [hud hideAnimated:YES afterDelay:3.f];
-    
-}
-//没有网络连接提示
-- (void)noIntenet
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.frame = CGRectMake(0, 64, 375, 667);
-    // Set the annular determinate mode to show task progress.
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = NSLocalizedString(@"请检查网络连接", @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    // Move to bottm center.
-    //        hud.offset = CGPointMake(0.f,MBProgressMaxOffset);
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    [hud hideAnimated:YES afterDelay:2.f];
-    
-}
 //点击空白收起键盘X
 -(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer
 

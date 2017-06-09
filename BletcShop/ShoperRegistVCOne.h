@@ -1,13 +1,13 @@
 //
-//  NewUserRegistVC.h
+//  ShoperRegistVCOne.h
 //  BletcShop
 //
-//  Created by apple on 2017/6/8.
+//  Created by Bletc on 2017/6/8.
 //  Copyright © 2017年 bletc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface NewUserRegistVC : UIViewController
+@interface ShoperRegistVCOne : UIViewController
 
 @end
