@@ -31,7 +31,7 @@
 + (BOOL)isPureFloat:(NSString*)string;
 
 + (NSString*)dictionaryToJson:(NSDictionary *)dic;
-
++ (BOOL) isMobileNum:(NSString *)mobNum;
 @end
 
 
