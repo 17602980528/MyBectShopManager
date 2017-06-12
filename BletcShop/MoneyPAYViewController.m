@@ -180,15 +180,13 @@
              
              
              
-             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付成功,是否返回上一页面?" preferredStyle:UIAlertControllerStyleAlert];
-             UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付成功" preferredStyle:UIAlertControllerStyleAlert];
+             UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                  [self.navigationController popViewControllerAnimated:YES];
 
              }];
              
-             UIAlertAction *sure = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-             }];
-             [alertController addAction:cancle];
+            
              [alertController addAction:sure];
              
              

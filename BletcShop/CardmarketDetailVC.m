@@ -13,7 +13,7 @@
 #import "DataSigner.h"
 #import "UPPaymentControl.h"
 #import "LandingController.h"
-
+#import "RailNameConfirmVC.h"
 @interface CardmarketDetailVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UITableView *table_View;
@@ -438,12 +438,11 @@
             [alt show];
             
         }else{
-            [UIView animateWithDuration:0.5 animations:^{
-                CGRect frame = buyView.frame;
-                frame.origin.y = 0;
-                buyView.frame = frame;
-            }];
-
+            
+            
+            [self postGetAuthState];
+            
+           
         }
         
        
@@ -754,5 +753,79 @@
     }
     
 }
+
+-(void)postGetAuthState{
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/info/getAuthResult",BASEURL];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:[appdelegate.userInfoDic objectForKey:@"uuid"] forKey:@"uuid"];
+    
+    NSLog(@"paramer ==%@url==%@",params,url);
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         NSLog(@"result====%@", result);
+         NSDictionary *dic = [result copy];
+         if ([dic[@"state"] isEqualToString:@"access"]) {
+            
+             
+             [UIView animateWithDuration:0.5 animations:^{
+                 CGRect frame = buyView.frame;
+                 frame.origin.y = 0;
+                 buyView.frame = frame;
+             }];
+
+             
+             
+         }else if ([dic[@"state"] isEqualToString:@"fail"]||[dic[@"state"] isEqualToString:@"not_auth"]) {
+             
+             NSString *mes =@"实名认证失败,是否重新认证?";
+             
+             if ([dic[@"state"] isEqualToString:@"not_auth"]){
+                 
+                 mes =@"尚未实名认证,是否去认证?";
+             }
+             
+             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:mes preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                 
+             }];
+             UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"去认证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                 
+                 
+                 RailNameConfirmVC *VC = [[RailNameConfirmVC alloc]init];
+                 [self.navigationController pushViewController:VC animated:YES];
+                 
+             }];
+             
+             [alert addAction:cancelAction];
+             [alert addAction:sureAction];
+             
+             [self presentViewController:alert animated:YES completion:nil];
+             
+         }else if ([dic[@"state"] isEqualToString:@"auditing"]) {
+             
+             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证,正在审核中" preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                 
+             }];
+             [alert addAction:cancelAction];
+             
+             [self presentViewController:alert animated:YES completion:nil];
+             
+             
+         }else{
+             
+             [self showHint:@"未知错误!"];
+             
+         }
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         //         [self noIntenet];
+         NSLog(@"%@", error);
+     }];
+}
+
 
 @end

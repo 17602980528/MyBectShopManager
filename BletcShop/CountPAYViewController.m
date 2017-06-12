@@ -221,7 +221,7 @@
              SoundPaly *sound=[SoundPaly sharedManager:@"sms-received1" type:@"caf"];
              [sound play];
              
-             UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功,是否返回上一页面?" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:@"取消", nil];
+             UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
              altView.tag =999;
              
              [altView show];

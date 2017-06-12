@@ -86,7 +86,7 @@
     self.userText = UserText;
     [landView addSubview:UserText];
     
-    [self setTextFieldLeftImageView:UserText leftImageName:@"手机"];
+    [self setTextFieldLeftImageView:self.userText leftImageName:@"手机"];
     
 //    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    phoneBtn.frame = CGRectMake(SCREENWIDTH-100, 10, 100, 30);
@@ -418,7 +418,7 @@
 //            
 //            [hud hideAnimated:YES afterDelay:2.f];
 //            
-//        }
+        }
         
         else if ([self.userText.text  isEqual: @"111"]&&[self.passText.text isEqual:@"111"]) {
             [self postRequest];

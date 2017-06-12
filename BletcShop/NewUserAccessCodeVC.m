@@ -16,13 +16,15 @@
 
 @implementation NewUserAccessCodeVC
 - (IBAction)goNextBtnClick:(id)sender {
-#ifdef DEBUG
+    
+    
+//#ifdef DEBUG
     NewUserSetPassVC *vc=[[NewUserSetPassVC alloc]init];
     vc.phoneNum=self.phoneNum;
     [self.navigationController pushViewController:vc animated:YES];
-#else
-      [self validationCode];
-#endif
+//#else
+//      [self validationCode];
+//#endif
   
 }
 -(void)getProCode
@@ -125,11 +127,11 @@
     _proCodeTF.delegate=self;
     _proCodeTF.returnKeyType=UIReturnKeyDone;
     [self setTextFieldLeftImageView:_proCodeTF leftImageName:@"钥匙"];
-#ifdef DEBUG
-    
-#else
-    [self getProCode];
-#endif
+//#ifdef DEBUG
+//    
+//#else
+//    [self getProCode];
+//#endif
    
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
