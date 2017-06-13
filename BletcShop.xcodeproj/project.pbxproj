@@ -60,6 +60,12 @@
 		1836B83D1E559D5600B587A6 /* Active_top2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B83C1E559D5600B587A6 /* Active_top2.jpg */; };
 		1836B83F1E559D5B00B587A6 /* Active_top3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B83E1E559D5B00B587A6 /* Active_top3.jpg */; };
 		1836B8411E559DD700B587A6 /* Active_top4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1836B8401E559DD700B587A6 /* Active_top4.jpg */; };
+		1836D0641EEFB311002DA0F0 /* TimeLimitVipCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1836D0621EEFB311002DA0F0 /* TimeLimitVipCardVC.m */; };
+		1836D0651EEFB311002DA0F0 /* TimeLimitVipCardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1836D0631EEFB311002DA0F0 /* TimeLimitVipCardVC.xib */; };
+		1836D06C1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1836D06A1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.m */; };
+		1836D06D1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1836D06B1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.xib */; };
+		1836D0711EEFD66C002DA0F0 /* EricForTimeLimitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1836D06F1EEFD66C002DA0F0 /* EricForTimeLimitCell.m */; };
+		1836D0721EEFD66C002DA0F0 /* EricForTimeLimitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1836D0701EEFD66C002DA0F0 /* EricForTimeLimitCell.xib */; };
 		1843104A1E6F9C39005521BF /* AddCouponDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184310481E6F9C39005521BF /* AddCouponDetailsVC.m */; };
 		1843104B1E6F9C39005521BF /* AddCouponDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184310491E6F9C39005521BF /* AddCouponDetailsVC.xib */; };
 		184C72031EC2F9150065EE65 /* SYPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C72021EC2F9150065EE65 /* SYPasswordView.m */; };
@@ -1290,6 +1296,15 @@
 		1836B83C1E559D5600B587A6 /* Active_top2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top2.jpg; sourceTree = "<group>"; };
 		1836B83E1E559D5B00B587A6 /* Active_top3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top3.jpg; sourceTree = "<group>"; };
 		1836B8401E559DD700B587A6 /* Active_top4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Active_top4.jpg; sourceTree = "<group>"; };
+		1836D0611EEFB311002DA0F0 /* TimeLimitVipCardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLimitVipCardVC.h; sourceTree = "<group>"; };
+		1836D0621EEFB311002DA0F0 /* TimeLimitVipCardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLimitVipCardVC.m; sourceTree = "<group>"; };
+		1836D0631EEFB311002DA0F0 /* TimeLimitVipCardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeLimitVipCardVC.xib; sourceTree = "<group>"; };
+		1836D0691EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLimitCardHomeVC.h; sourceTree = "<group>"; };
+		1836D06A1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLimitCardHomeVC.m; sourceTree = "<group>"; };
+		1836D06B1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeLimitCardHomeVC.xib; sourceTree = "<group>"; };
+		1836D06E1EEFD66C002DA0F0 /* EricForTimeLimitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EricForTimeLimitCell.h; sourceTree = "<group>"; };
+		1836D06F1EEFD66C002DA0F0 /* EricForTimeLimitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EricForTimeLimitCell.m; sourceTree = "<group>"; };
+		1836D0701EEFD66C002DA0F0 /* EricForTimeLimitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EricForTimeLimitCell.xib; sourceTree = "<group>"; };
 		184310471E6F9C39005521BF /* AddCouponDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCouponDetailsVC.h; sourceTree = "<group>"; };
 		184310481E6F9C39005521BF /* AddCouponDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponDetailsVC.m; sourceTree = "<group>"; };
 		184310491E6F9C39005521BF /* AddCouponDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCouponDetailsVC.xib; sourceTree = "<group>"; };
@@ -3564,6 +3579,38 @@
 				183577491EC437F900F321F1 /* AccessCodeVC.xib */,
 			);
 			name = "获取支付验码";
+			sourceTree = "<group>";
+		};
+		1836D0661EEFB9A4002DA0F0 /* 限时卡 */ = {
+			isa = PBXGroup;
+			children = (
+				1836D0681EEFCC81002DA0F0 /* 限时卡首页 */,
+				1836D0671EEFCC6F002DA0F0 /* 限时卡添加页面 */,
+			);
+			name = "限时卡";
+			sourceTree = "<group>";
+		};
+		1836D0671EEFCC6F002DA0F0 /* 限时卡添加页面 */ = {
+			isa = PBXGroup;
+			children = (
+				1836D0611EEFB311002DA0F0 /* TimeLimitVipCardVC.h */,
+				1836D0621EEFB311002DA0F0 /* TimeLimitVipCardVC.m */,
+				1836D0631EEFB311002DA0F0 /* TimeLimitVipCardVC.xib */,
+			);
+			name = "限时卡添加页面";
+			sourceTree = "<group>";
+		};
+		1836D0681EEFCC81002DA0F0 /* 限时卡首页 */ = {
+			isa = PBXGroup;
+			children = (
+				1836D0691EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.h */,
+				1836D06A1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.m */,
+				1836D06B1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.xib */,
+				1836D06E1EEFD66C002DA0F0 /* EricForTimeLimitCell.h */,
+				1836D06F1EEFD66C002DA0F0 /* EricForTimeLimitCell.m */,
+				1836D0701EEFD66C002DA0F0 /* EricForTimeLimitCell.xib */,
+			);
+			name = "限时卡首页";
 			sourceTree = "<group>";
 		};
 		184310441E6F9B83005521BF /* 优惠券列表 */ = {
@@ -6603,6 +6650,7 @@
 				D9EC40B71EE6846A004BEDB8 /* GeneralCardSeriseListVC.h */,
 				D9EC40B81EE6846A004BEDB8 /* GeneralCardSeriseListVC.m */,
 				D9EC40B91EE6846A004BEDB8 /* GeneralCardSeriseListVC.xib */,
+				1836D0661EEFB9A4002DA0F0 /* 限时卡 */,
 				D9EC40BC1EE68576004BEDB8 /* cell单元格 */,
 			);
 			name = "会员卡管理";
@@ -6895,6 +6943,7 @@
 				D9C3A3011E9642890062B17D /* ChouJiangVC.xib in Resources */,
 				D9AB253F1D88E4ED000E9288 /* VoiceSearchFeedback017@2x.png in Resources */,
 				D9ACF1AC1E24A64300BCC877 /* icon-weixin.png in Resources */,
+				1836D0721EEFD66C002DA0F0 /* EricForTimeLimitCell.xib in Resources */,
 				D94DF2641CAE0DB8000D5B69 /* result_small_star_highlight@2x.png in Resources */,
 				1CDA9E011C59FAB300DFE518 /* ad_safe.jpg in Resources */,
 				D94C5F401D9133700063EB27 /* bbbLL.png in Resources */,
@@ -6991,6 +7040,7 @@
 				D96555431E33306B0096D815 /* 登陆-02(2).png in Resources */,
 				1C9E822D1C603B7A0007BF02 /* arraw_right@2x.png in Resources */,
 				1C2ED1161C5B1827003EE93B /* 1.1-02@2x.png in Resources */,
+				1836D0651EEFB311002DA0F0 /* TimeLimitVipCardVC.xib in Resources */,
 				D947E4531D7D164100F9FEE8 /* chatListCellHead.png in Resources */,
 				D93C0D601D251E7B001A1AC1 /* 小标-15.png in Resources */,
 				D96555461E33306B0096D815 /* 登陆-05(2).png in Resources */,
@@ -7183,6 +7233,7 @@
 				D94DF23B1CAE08F7000D5B69 /* location.png in Resources */,
 				D9541E9D1E1F65B1003022E5 /* 登陆-02.png in Resources */,
 				18EB36A31D4B1F5D0087CE1A /* 滑动选择-01.png in Resources */,
+				1836D06D1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.xib in Resources */,
 				18BCCDCB1D3C9EE8005E145D /* merchant_ed1.png in Resources */,
 				D93C0D6B1D251E7B001A1AC1 /* wash_06.png in Resources */,
 				18F27EF11D640E84002DD03A /* 头像-9.png in Resources */,
@@ -7500,6 +7551,7 @@
 				1CDCCD1B1C7594040094E70D /* AFSecurityPolicy.m in Sources */,
 				D9A8ABE31E0246C200D4597F /* MyRedBagVC.m in Sources */,
 				1CE8F3171C5EFB4B0004F52C /* ShopVipCell.m in Sources */,
+				1836D0711EEFD66C002DA0F0 /* EricForTimeLimitCell.m in Sources */,
 				D98E5C0C1E515210009D56BF /* View+MASAdditions.m in Sources */,
 				D9B3A5B51D74255700F3F27E /* UIImage+EMGIF.m in Sources */,
 				D9A06B5D1D8679C30037795B /* EMCDDeviceManager+Microphone.m in Sources */,
@@ -7754,6 +7806,7 @@
 				079386811C55B5CA0021B385 /* main.m in Sources */,
 				189411411D8050BB00314E11 /* PictureDetailViewController.m in Sources */,
 				1CE8F32B1C5F3C570004F52C /* ProtuctCell.m in Sources */,
+				1836D0641EEFB311002DA0F0 /* TimeLimitVipCardVC.m in Sources */,
 				D99292661D8FF5E600103914 /* CashListCell.m in Sources */,
 				D941135F1CE9A3D7008E231F /* RSADataVerifier.m in Sources */,
 				D9210BBC1CC732AC00010DF7 /* RjgmViewController.m in Sources */,
@@ -7852,6 +7905,7 @@
 				189411491D80573200314E11 /* SellerViewController.mm in Sources */,
 				D9DEED1E1CACED7C00ACDD00 /* SDWebImageDecoder.m in Sources */,
 				D958AD671E654CF200B0776F /* JHPieChart.m in Sources */,
+				1836D06C1EEFCCBE002DA0F0 /* TimeLimitCardHomeVC.m in Sources */,
 				D99627461DE67953007B7B34 /* NewRechargeSuccessVC.m in Sources */,
 				D94C5F311D90C53B0063EB27 /* GetMoneyVC.m in Sources */,
 				D9345E5F1E766DDE006B2AC1 /* DefaultAddressVC.m in Sources */,

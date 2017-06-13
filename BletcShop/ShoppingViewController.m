@@ -95,7 +95,7 @@
     
     currentCityDic = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentCityDic"] ? [[NSUserDefaults standardUserDefaults]objectForKey:@"currentCityDic"] :[[NSUserDefaults standardUserDefaults]objectForKey:@"locationCityDic"] ;
     
-    _classifys = [[NSMutableArray alloc]initWithArray:@[@"全部分类",@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所"]];
+    _classifys = [[NSMutableArray alloc]initWithArray:@[@"全部分类",@"美容",@"美发",@"养发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所"]];
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
@@ -179,6 +179,7 @@
         [self getData];
     }
     [_menu selectDefalutIndexPath];
+//     [self getIcons];
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -205,6 +206,7 @@
     [self _initView];
     [self _initTable];
     [self _initFootTab];
+   
 }
 
 
@@ -970,6 +972,26 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)getIcons{
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/Source/tradeIconGet",BASEURL];
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         NSLog(@"%@",result);
+         self.classifys=[[NSMutableArray alloc]initWithCapacity:0];
+         for (NSDictionary *dic in result) {
+             if (![dic[@"text"] isEqualToString:@"全部"]) {
+                  [self.classifys addObject:dic[@"text"]];
+             }
+         }
+         [self.classifys insertObject:@"全部分类" atIndex:0];
+         [_menu reloadData];
+    
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+         NSLog(@"%@", error);
+     }];
 }
 
 
