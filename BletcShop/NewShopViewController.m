@@ -15,19 +15,22 @@
 {
     
         UITableView *table_View;
+    SDRefreshFooterView *_refreshFooter;
+    SDRefreshHeaderView *_refreshheader;
         
     
 }
 
-@property(nonatomic,strong)NSArray *data_A;//存放数据,传递给下级界面
+@property(nonatomic,strong)NSMutableArray *data_A;//存放数据,传递给下级界面
+@property(nonatomic)NSInteger page;
 
 
 @end
 
 @implementation NewShopViewController
--(NSArray *)data_A{
+-(NSMutableArray *)data_A{
     if (!_data_A) {
-        _data_A = [NSArray array];
+        _data_A = [NSMutableArray array];
     }
     return _data_A;
 }
@@ -36,7 +39,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    
+    _page=1;
+
     table_View = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStyleGrouped];
     table_View.dataSource = self;
     table_View.delegate = self;
@@ -46,6 +50,31 @@
     [self.view addSubview: table_View];
     
     [self getDate];
+    
+    
+    _refreshheader = [SDRefreshHeaderView refreshView];
+    [_refreshheader addToScrollView:table_View];
+    _refreshheader.isEffectedByNavigationController = NO;
+    
+    __block typeof(self)tempSelf =self;
+    _refreshheader.beginRefreshingOperation = ^{
+        tempSelf.page=1;
+        [tempSelf.data_A removeAllObjects];
+        //请求数据
+        [tempSelf getDate];
+    };
+    
+    
+    _refreshFooter = [SDRefreshFooterView refreshView];
+    [_refreshFooter addToScrollView:table_View];
+    _refreshFooter.beginRefreshingOperation =^{
+        tempSelf.page++;
+        //数据请求
+        NSLog(@"====>>>>%ld",tempSelf.page);
+        [tempSelf getDate];
+        
+    };
+    
     
 }
 -(void)getDate{
@@ -57,15 +86,17 @@
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
     [paramer setValue:self.activityId forKey:@"advert_id"];
 
-    
+    [paramer setValue:[NSString stringWithFormat:@"%ld",_page] forKey:@"index"];
+
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
          NSLog(@"=====%@===%@",[result class],result);
-         
+         [_refreshFooter endRefreshing];
+         [_refreshheader endRefreshing];
          [self hideHud];
          
-             self.data_A= (NSArray*)result;
-             
+         [self.data_A  addObjectsFromArray:result];
+         
              [table_View reloadData];
 
 
@@ -74,7 +105,8 @@
          
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
          [self hideHud];
-
+         [_refreshFooter endRefreshing];
+         [_refreshheader endRefreshing];
          NSLog(@"%@", error);
      }];
 
@@ -137,7 +169,7 @@
         cell.headname.text = dic[@"title"];
         cell.headContent.text = dic[@"info"];
         
-        [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",THIER_ADVERTIMAGE,dic[@"image_url"]]] placeholderImage:[UIImage imageNamed:@"icon3"]];
+        [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,dic[@"image_url"]]] placeholderImage:[UIImage imageNamed:@"icon3"]];
         
     }
     return cell;
