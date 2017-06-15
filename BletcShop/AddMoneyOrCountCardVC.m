@@ -11,6 +11,9 @@
 #import "ValuePickerView.h"
 #import "ChoiceCardPictureViewController.h"
 #import "UIImageView+WebCache.h"
+
+#import "ChoseCardColorStyleViewVC.h"
+
 @interface AddMoneyOrCountCardVC ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate,ChoiceCardDelegate>{
     UIButton *oldbtn;
 }
@@ -223,8 +226,8 @@
     PUSH(ChoiceCardPictureViewController);
     vc.delegate = self;
     
-   
-    return;
+    
+//    PUSH(ChoseCardColorStyleViewVC)
 
     
 }

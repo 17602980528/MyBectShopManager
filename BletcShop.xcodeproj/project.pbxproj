@@ -752,6 +752,8 @@
 		D96E1B781ECAD94B00084453 /* ChoseSeriesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96E1B761ECAD94B00084453 /* ChoseSeriesVC.xib */; };
 		D96E1B7C1ECAD9EF00084453 /* ChoseSeriesCellT.m in Sources */ = {isa = PBXBuildFile; fileRef = D96E1B7A1ECAD9EF00084453 /* ChoseSeriesCellT.m */; };
 		D96E1B7D1ECAD9EF00084453 /* ChoseSeriesCellT.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */; };
+		D971EB321EF259FE0038614E /* ChoseCardColorStyleViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971EB301EF259FE0038614E /* ChoseCardColorStyleViewVC.m */; };
+		D971EB331EF259FE0038614E /* ChoseCardColorStyleViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */; };
 		D971FABB1E2DE82A00C5387C /* CardMarketSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */; };
 		D97338C11ED666600093A2FB /* 下角标ss.png in Resources */ = {isa = PBXBuildFile; fileRef = D97338C01ED666600093A2FB /* 下角标ss.png */; };
 		D97338C21ED666600093A2FB /* 下角标ss.png in Resources */ = {isa = PBXBuildFile; fileRef = D97338C01ED666600093A2FB /* 下角标ss.png */; };
@@ -2362,6 +2364,9 @@
 		D96E1B791ECAD9EF00084453 /* ChoseSeriesCellT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseSeriesCellT.h; sourceTree = "<group>"; };
 		D96E1B7A1ECAD9EF00084453 /* ChoseSeriesCellT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseSeriesCellT.m; sourceTree = "<group>"; };
 		D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseSeriesCellT.xib; sourceTree = "<group>"; };
+		D971EB2F1EF259FE0038614E /* ChoseCardColorStyleViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseCardColorStyleViewVC.h; sourceTree = "<group>"; };
+		D971EB301EF259FE0038614E /* ChoseCardColorStyleViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseCardColorStyleViewVC.m; sourceTree = "<group>"; };
+		D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseCardColorStyleViewVC.xib; sourceTree = "<group>"; };
 		D971FAB91E2DE82A00C5387C /* CardMarketSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMarketSearchVC.h; sourceTree = "<group>"; };
 		D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMarketSearchVC.m; sourceTree = "<group>"; };
 		D97338C01ED666600093A2FB /* 下角标ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "下角标ss.png"; path = "BletcShop/下角标ss.png"; sourceTree = SOURCE_ROOT; };
@@ -5498,6 +5503,16 @@
 			name = "系列cell";
 			sourceTree = "<group>";
 		};
+		D971EB341EF25A050038614E /* 选择会员卡颜色模板 */ = {
+			isa = PBXGroup;
+			children = (
+				D971EB2F1EF259FE0038614E /* ChoseCardColorStyleViewVC.h */,
+				D971EB301EF259FE0038614E /* ChoseCardColorStyleViewVC.m */,
+				D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */,
+			);
+			name = "选择会员卡颜色模板";
+			sourceTree = "<group>";
+		};
 		D971FAB81E2DE7E900C5387C /* 搜索页面 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6654,6 +6669,7 @@
 				D9EC40C81EE6B31E004BEDB8 /* SHOPVIPCARDVC.h */,
 				D9EC40C91EE6B31E004BEDB8 /* SHOPVIPCARDVC.m */,
 				D9EC40CA1EE6B31E004BEDB8 /* SHOPVIPCARDVC.xib */,
+				D971EB341EF25A050038614E /* 选择会员卡颜色模板 */,
 				D9698FA21EEFBB2E00D76F3F /* 计次储值卡 */,
 			);
 			name = "会员卡管理";
@@ -7460,6 +7476,7 @@
 				1C9E822E1C603B7A0007BF02 /* jiantou.png in Resources */,
 				D92302511D14E5A8008FB9A9 /* welcom_3.jpg in Resources */,
 				18FA58D71EEA769C00F458F2 /* NewUserSetPassVC.xib in Resources */,
+				D971EB331EF259FE0038614E /* ChoseCardColorStyleViewVC.xib in Resources */,
 				D98FDF871E601C280057C206 /* AD_ad_tb@3x.png in Resources */,
 				D97F60031D62BFF8000EE794 /* line@2x.png in Resources */,
 				18EB36C01D4B5A2E0087CE1A /* 反1-01.png in Resources */,
@@ -7966,6 +7983,7 @@
 				D98E5C041E515210009D56BF /* MASViewConstraint.m in Sources */,
 				D9195D1E1E82196F00FB4367 /* VedioViewController.m in Sources */,
 				D9C206011D1D001300761DC4 /* ShopAllInfoTableViewCell.m in Sources */,
+				D971EB321EF259FE0038614E /* ChoseCardColorStyleViewVC.m in Sources */,
 				181163921E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m in Sources */,
 				D992925F1D8FEE0000103914 /* RJGDetailVC.m in Sources */,
 				D9DEED1F1CACED7C00ACDD00 /* SDWebImageDownloader.m in Sources */,
