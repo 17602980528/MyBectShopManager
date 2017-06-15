@@ -773,6 +773,7 @@
 		D96E1B7D1ECAD9EF00084453 /* ChoseSeriesCellT.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */; };
 		D971EB321EF259FE0038614E /* ChoseCardColorStyleViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971EB301EF259FE0038614E /* ChoseCardColorStyleViewVC.m */; };
 		D971EB331EF259FE0038614E /* ChoseCardColorStyleViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */; };
+		D971EB3F1EF282170038614E /* CALayer+LZDLayColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D971EB3E1EF282170038614E /* CALayer+LZDLayColor.m */; };
 		D971FABB1E2DE82A00C5387C /* CardMarketSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */; };
 		D97338C11ED666600093A2FB /* 下角标ss.png in Resources */ = {isa = PBXBuildFile; fileRef = D97338C01ED666600093A2FB /* 下角标ss.png */; };
 		D97338C21ED666600093A2FB /* 下角标ss.png in Resources */ = {isa = PBXBuildFile; fileRef = D97338C01ED666600093A2FB /* 下角标ss.png */; };
@@ -971,7 +972,6 @@
 		D9A8ABE31E0246C200D4597F /* MyRedBagVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABE21E0246C200D4597F /* MyRedBagVC.m */; };
 		D9A8ABE61E02939A00D4597F /* NewShopIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABE51E02939A00D4597F /* NewShopIntroduceViewController.m */; };
 		D9A8ABEC1E02954200D4597F /* CardShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABE91E02954200D4597F /* CardShowViewController.m */; };
-		D9A8ABED1E02954200D4597F /* ContentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABEB1E02954200D4597F /* ContentDetailViewController.m */; };
 		D9A8ABF01E02959B00D4597F /* RoyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABEF1E02959B00D4597F /* RoyTableViewCell.m */; };
 		D9AB25191D88E482000E9288 /* EaseRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB25181D88E482000E9288 /* EaseRecordView.m */; };
 		D9AB252F1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AB251B1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png */; };
@@ -2414,6 +2414,8 @@
 		D971EB2F1EF259FE0038614E /* ChoseCardColorStyleViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseCardColorStyleViewVC.h; sourceTree = "<group>"; };
 		D971EB301EF259FE0038614E /* ChoseCardColorStyleViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseCardColorStyleViewVC.m; sourceTree = "<group>"; };
 		D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseCardColorStyleViewVC.xib; sourceTree = "<group>"; };
+		D971EB3D1EF282170038614E /* CALayer+LZDLayColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LZDLayColor.h"; sourceTree = "<group>"; };
+		D971EB3E1EF282170038614E /* CALayer+LZDLayColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LZDLayColor.m"; sourceTree = "<group>"; };
 		D971FAB91E2DE82A00C5387C /* CardMarketSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMarketSearchVC.h; sourceTree = "<group>"; };
 		D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMarketSearchVC.m; sourceTree = "<group>"; };
 		D97338C01ED666600093A2FB /* 下角标ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "下角标ss.png"; path = "BletcShop/下角标ss.png"; sourceTree = SOURCE_ROOT; };
@@ -2721,8 +2723,6 @@
 		D9A8ABE51E02939A00D4597F /* NewShopIntroduceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewShopIntroduceViewController.m; sourceTree = "<group>"; };
 		D9A8ABE81E02954200D4597F /* CardShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardShowViewController.h; sourceTree = "<group>"; };
 		D9A8ABE91E02954200D4597F /* CardShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardShowViewController.m; sourceTree = "<group>"; };
-		D9A8ABEA1E02954200D4597F /* ContentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentDetailViewController.h; sourceTree = "<group>"; };
-		D9A8ABEB1E02954200D4597F /* ContentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentDetailViewController.m; sourceTree = "<group>"; };
 		D9A8ABEE1E02959B00D4597F /* RoyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoyTableViewCell.h; sourceTree = "<group>"; };
 		D9A8ABEF1E02959B00D4597F /* RoyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoyTableViewCell.m; sourceTree = "<group>"; };
 		D9AB25171D88E482000E9288 /* EaseRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseRecordView.h; sourceTree = "<group>"; };
@@ -3295,6 +3295,8 @@
 				D97F60091D62DCAA000EE794 /* NSDictionary+Log.m */,
 				18EDCF6E1D46039D004C40B7 /* NSString+Addition.h */,
 				18EDCF6F1D46039D004C40B7 /* NSString+Addition.m */,
+				D971EB3D1EF282170038614E /* CALayer+LZDLayColor.h */,
+				D971EB3E1EF282170038614E /* CALayer+LZDLayColor.m */,
 				D9442ADB1D1E330A00956AB4 /* Singleton.h */,
 				D9442ADC1D1E330A00956AB4 /* Singleton.m */,
 				D973D58B1D9E4588003F82FB /* tanhao.png */,
@@ -6280,8 +6282,6 @@
 				18543E2C1ECAC3C700E0A4DA /* 会员卡首页 */,
 				D9A8ABE81E02954200D4597F /* CardShowViewController.h */,
 				D9A8ABE91E02954200D4597F /* CardShowViewController.m */,
-				D9A8ABEA1E02954200D4597F /* ContentDetailViewController.h */,
-				D9A8ABEB1E02954200D4597F /* ContentDetailViewController.m */,
 				D9A6E46D1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.h */,
 				D9A6E46E1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m */,
 			);
@@ -7744,6 +7744,7 @@
 				185ABD881D80227900BD8097 /* UploadHistoryViewController.m in Sources */,
 				1A4173C61D787E9A00A70601 /* EMRemarkImageView.m in Sources */,
 				D958AD681E654CF200B0776F /* JHPieForeBGView.m in Sources */,
+				D971EB3F1EF282170038614E /* CALayer+LZDLayColor.m in Sources */,
 				D9DEED361CACFCA100ACDD00 /* ShopImageTableViewCell.m in Sources */,
 				D9C4CDED1DE44587009C76C1 /* ValuePickerView.m in Sources */,
 				D9F3A3C91D794EC400F06E0C /* PublicGroupViewController.m in Sources */,
@@ -8165,7 +8166,6 @@
 				D96643741E0B821E0048EFDB /* BonusCashViewController.m in Sources */,
 				18F032111E5EE02700ACD261 /* HolidayActivertyVC.m in Sources */,
 				D95869381E4DA4EE00E91A47 /* ResetPhoneNextVC.m in Sources */,
-				D9A8ABED1E02954200D4597F /* ContentDetailViewController.m in Sources */,
 				D9698FA61EEFBDB200D76F3F /* AddMoneyOrCountCardVC.m in Sources */,
 				D96E1B7C1ECAD9EF00084453 /* ChoseSeriesCellT.m in Sources */,
 				D9937D7F1DDFF22C0001B575 /* PayMentController.m in Sources */,

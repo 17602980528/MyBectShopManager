@@ -1,6 +1,5 @@
 
 #import "CardShowViewController.h"
-#import "ContentDetailViewController.h"
 @interface CardShowViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSDictionary *deadLine_dic;
 @end

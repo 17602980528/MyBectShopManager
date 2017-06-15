@@ -140,7 +140,7 @@
 #import "NSDictionary+Log.h"
 #import "ToolManager.h"
 #import "getUUID.h"
-
+#import "CALayer+LZDLayColor.h"
 #import "Database.h"
 #define kWeChatPadding 10
 #define kWeChatScreenHeight [UIScreen mainScreen].bounds.size.height
