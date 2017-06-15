@@ -85,6 +85,8 @@
         GeneralCardSeriseListVC* vc = [[GeneralCardSeriseListVC alloc] init];
         vc.titleDic=cardKindArray[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        [self showHint:@"技术人员正在努力中..."];
     }
    
 }

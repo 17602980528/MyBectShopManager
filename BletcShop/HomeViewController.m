@@ -699,7 +699,7 @@
     }else{
        
         UIImageView *imgView = [[UIImageView alloc]initWithFrame:slipBackView.frame];
-        imgView.image = [UIImage imageNamed:@"Active_top4.jpg"];
+        imgView.image = [UIImage imageNamed:@"首页顶部海报"];
         [slipBackView addSubview:imgView];
     }
     

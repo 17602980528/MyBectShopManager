@@ -758,6 +758,7 @@
 		D971EB321EF259FE0038614E /* ChoseCardColorStyleViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971EB301EF259FE0038614E /* ChoseCardColorStyleViewVC.m */; };
 		D971EB331EF259FE0038614E /* ChoseCardColorStyleViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */; };
 		D971EB3F1EF282170038614E /* CALayer+LZDLayColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D971EB3E1EF282170038614E /* CALayer+LZDLayColor.m */; };
+		D971EB411EF287210038614E /* 首页顶部海报.png in Resources */ = {isa = PBXBuildFile; fileRef = D971EB401EF287210038614E /* 首页顶部海报.png */; };
 		D971FABB1E2DE82A00C5387C /* CardMarketSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */; };
 		D97338C11ED666600093A2FB /* 下角标ss.png in Resources */ = {isa = PBXBuildFile; fileRef = D97338C01ED666600093A2FB /* 下角标ss.png */; };
 		D97338C21ED666600093A2FB /* 下角标ss.png in Resources */ = {isa = PBXBuildFile; fileRef = D97338C01ED666600093A2FB /* 下角标ss.png */; };
@@ -2376,6 +2377,7 @@
 		D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseCardColorStyleViewVC.xib; sourceTree = "<group>"; };
 		D971EB3D1EF282170038614E /* CALayer+LZDLayColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LZDLayColor.h"; sourceTree = "<group>"; };
 		D971EB3E1EF282170038614E /* CALayer+LZDLayColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LZDLayColor.m"; sourceTree = "<group>"; };
+		D971EB401EF287210038614E /* 首页顶部海报.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页顶部海报.png"; sourceTree = "<group>"; };
 		D971FAB91E2DE82A00C5387C /* CardMarketSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMarketSearchVC.h; sourceTree = "<group>"; };
 		D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMarketSearchVC.m; sourceTree = "<group>"; };
 		D97338C01ED666600093A2FB /* 下角标ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "下角标ss.png"; path = "BletcShop/下角标ss.png"; sourceTree = SOURCE_ROOT; };
@@ -3271,6 +3273,7 @@
 				D94C5F3F1D9133700063EB27 /* LLL.png */,
 				D92302551D152443008FB9A9 /* user_ed.png */,
 				D92302561D152443008FB9A9 /* user_es.png */,
+				D971EB401EF287210038614E /* 首页顶部海报.png */,
 				D92302571D152443008FB9A9 /* merchant_es.png */,
 				D95F03281DD9841500F9DC2F /* Selected.png */,
 				D95F03291DD9841500F9DC2F /* Unselected.png */,
@@ -7455,6 +7458,7 @@
 				D9AB253A1D88E4ED000E9288 /* VoiceSearchFeedback012@2x.png in Resources */,
 				D94DF2521CAE0AA4000D5B69 /* star_highlighted.png in Resources */,
 				D9ABB1AE1EC9408E00FBE080 /* ApriseVC.xib in Resources */,
+				D971EB411EF287210038614E /* 首页顶部海报.png in Resources */,
 				18FA58D51EEA769C00F458F2 /* NewUserRegistVC.xib in Resources */,
 				D987BB371E792C8E008AE24D /* UserInfoEditVC.xib in Resources */,
 				18D7C48A1D5B12BA00AEF545 /* mohu-06.png in Resources */,

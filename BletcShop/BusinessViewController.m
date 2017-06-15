@@ -36,6 +36,8 @@
 #import "PushAdverViewController.h"
 
 
+#import "SHOPVIPCARDVC.h"
+
 @interface BusinessViewController ()<UIAlertViewDelegate>
 {
     NSArray *arr_imgS;
@@ -234,8 +236,10 @@
             NSLog(@"tgtgtgtgtg");
         }else
         {
-            VipManagerViewController *vipManagerView = [[VipManagerViewController alloc]init];
-            [self.navigationController pushViewController:vipManagerView animated:YES];
+//            VipManagerViewController *vipManagerView = [[VipManagerViewController alloc]init];
+//            [self.navigationController pushViewController:vipManagerView animated:YES];
+            
+            PUSH(SHOPVIPCARDVC)
         }
 
 }
