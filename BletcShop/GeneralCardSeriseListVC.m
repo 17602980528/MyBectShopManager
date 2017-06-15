@@ -12,12 +12,19 @@
 #import "AddMoneyOrCountCardVC.h"
 #import "LZDAddSeriseListVC.h"
 #import "UIImageView+WebCache.h"
+#import "NoVipCardCustomView.h"
+
+#import "CardShowViewController.h"
+
 //#define sectionNum 15
 @interface GeneralCardSeriseListVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIButton *old_btn;
+    
+    NoVipCardCustomView *noticeView;//没有会员卡提示View
 }
 @property (weak, nonatomic) IBOutlet UITableView *table_View;
+@property (weak, nonatomic) IBOutlet UIView *footbtnView;//底部按钮背景
 @property(nonatomic,strong)NSArray *data_A;
 @property(nonatomic,strong)NSMutableDictionary *fold_mutab_dic;
 @property (weak, nonatomic) IBOutlet UIButton *waitBtn;
@@ -58,7 +65,13 @@
     self.table_View.rowHeight = UITableViewAutomaticDimension;
     
     
+    noticeView=[[NoVipCardCustomView alloc]initWithFrame:CGRectMake(0.2*SCREENWIDTH,0.283*(SCREENHEIGHT-64), 0.6*SCREENWIDTH,0.616*0.6*SCREENWIDTH)];
+    [self.view addSubview:noticeView];
+    noticeView.hidden=YES;
     [self getDataRequestWithState:self.state_A[old_btn.tag]];
+    
+    
+    
 }
 
 
@@ -262,6 +275,11 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    PUSH(CardShowViewController)
+    vc.dic =_data_A[indexPath.section][@"card_list"][indexPath.row];
+}
+
 //未处理 已上架 已下架
 - (IBAction)footBtnClick:(UIButton *)sender {
     
@@ -422,10 +440,13 @@
             [self.fold_mutab_dic setValue:@"1" forKey:[NSString stringWithFormat:@"%ld",i]];
         }
 
+        noticeView.hidden = _data_A.count ;
+        self.footbtnView.hidden = !_data_A.count;
+        
         [self.table_View reloadData];
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        NSLog(@"error.description-----%@",error.description);
     }];
 
 

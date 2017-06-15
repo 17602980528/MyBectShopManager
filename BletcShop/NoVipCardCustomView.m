@@ -28,7 +28,7 @@
         self.centerLable.font=[UIFont systemFontOfSize:17.0f];
         self.centerLable.textColor=[UIColor whiteColor];
         self.centerLable.textAlignment=NSTextAlignmentCenter;
-        self.centerLable.text=@"提示：暂无套餐卡";
+        self.centerLable.text=@"提示：暂无会员卡";
         [self.bgImageView addSubview:self.centerLable];
         
         self.bottomLable=[[UILabel alloc]initWithFrame:CGRectMake(0,   self.centerLable.bottom+5, frame.size.width, 0.1*self.bgImageView.height)];

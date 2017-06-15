@@ -60,7 +60,7 @@
             <connections>
                 <outletCollection property="gestureRecognizers" destination="JuL-fG-LEV" appends="YES" id="LvD-mH-hTp"/>
             </connections>
-            <point key="canvasLocation" x="-183" y="171"/>
+            <point key="canvasLocation" x="97" y="31"/>
         </view>
         <view contentMode="scaleToFill" id="hjc-8q-jlX">
             <rect key="frame" x="0.0" y="0.0" width="437" height="158"/>
@@ -152,11 +152,18 @@
                         <constraint firstAttribute="height" constant="12" id="tnf-8O-5nQ"/>
                     </constraints>
                 </imageView>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon3.png" translatesAutoresizingMaskIntoConstraints="NO" id="VBU-vq-dRJ">
+                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon3.png" translatesAutoresizingMaskIntoConstraints="NO" id="VBU-vq-dRJ">
                     <rect key="frame" x="237" y="16" width="65" height="39"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="65" id="sXC-ie-9hk"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.BorderColorFromUIColor">
+                            <color key="value" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
