@@ -8,7 +8,7 @@
 
 #import "RailNameConfirmVC.h"
 #import "ToolManager.h"
-@interface RailNameConfirmVC ()<UITextFieldDelegate>
+@interface RailNameConfirmVC ()<UITextFieldDelegate,UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *realNameTF;
 @property (strong, nonatomic) IBOutlet UITextField *idCardNumTF;
 
@@ -78,7 +78,12 @@
      {
          NSLog(@"%@",result);
          if ([result[@"result_code"]integerValue]==1) {
-             [self alert:@"提交成功，等待审核"];
+             UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"提交成功，等待审核" message:nil preferredStyle:UIAlertControllerStyleAlert];
+             [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                 [self.navigationController popViewControllerAnimated:YES];
+             }]];
+             [self presentViewController:alertController animated:YES completion:nil];
+             
          }else{
               [self alert:@"提交失败"];
          }
