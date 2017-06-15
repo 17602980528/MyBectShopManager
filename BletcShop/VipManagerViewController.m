@@ -291,6 +291,8 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:dic[@"merchant"] forKey:@"muid"];
     [params setObject:dic[@"code"] forKey:@"code"];
+    [params setObject:dic[@"level"] forKey:@"level"];
+
     NSLog(@"%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
