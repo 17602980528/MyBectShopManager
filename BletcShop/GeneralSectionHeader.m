@@ -37,8 +37,7 @@
     self.titleLab = titleLab;
     
     UIImageView *addImg = [[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH-15-14, (44-15)/2, 15, 15)];
-    addImg.image = [UIImage imageNamed:@""];
-    addImg.backgroundColor = [UIColor redColor];
+    addImg.image = [UIImage imageNamed:@"lzdAddCardImg"];
     
     [self addSubview:addImg];
     

@@ -11,7 +11,7 @@
 #import "GeneralSectionHeader.h"
 #import "AddMoneyOrCountCardVC.h"
 #import "LZDAddSeriseListVC.h"
-
+#import "UIImageView+WebCache.h"
 //#define sectionNum 15
 @interface GeneralCardSeriseListVC ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -43,15 +43,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    NSLog(@"----%@",self.waitBtn);
     old_btn = self.waitBtn;
     
     self.navigationItem.title = self.titleDic[@"cardName"];
     
     UIButton *menuBt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
     [menuBt addTarget:self action:@selector(addtBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [menuBt setImage:[UIImage imageNamed:@"add_yellow"] forState:UIControlStateNormal];
-    [menuBt setImage:[UIImage imageNamed:@"add_yellow"] forState:UIControlStateHighlighted];
+    [menuBt setImage:[UIImage imageNamed:@"lzdAddSeriseImg"] forState:UIControlStateNormal];
+    [menuBt setImage:[UIImage imageNamed:@"lzdAddSeriseImg"] forState:UIControlStateHighlighted];
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:menuBt];
     self.navigationItem.rightBarButtonItem = item;
     
@@ -130,6 +129,19 @@
     cell.cardImg.backgroundColor = [UIColor colorWithHexString:dic[@"card_temp_color"]];
     cell.cardLevel.text = dic[@"level"];
     
+    
+   NSArray *cardTemp_A = [[NSUserDefaults standardUserDefaults]objectForKey:@"CARDIMGTEMP"];
+    
+    for (NSDictionary *tim_dic in cardTemp_A) {
+        if ([tim_dic[@"color"] isEqualToString:dic[@"card_temp_color"]]) {
+            NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCECARD stringByAppendingString:tim_dic[@"image"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+            
+            [cell.cardImg sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@""] options:SDWebImageRetryFailed];
+            cell.cardImg.backgroundColor = [UIColor whiteColor];
+
+            break ;
+        }
+    }
 
     if ([self.navigationItem.title isEqualToString:@"计次卡"]) {
         cell.cardDiscount.text = [NSString stringWithFormat:@"%@次",dic[@"rule"]];
@@ -407,7 +419,7 @@
         self.data_A = result;
         
         for (NSInteger i = 0; i <self.data_A.count; i ++) {
-            [self.fold_mutab_dic setValue:@"0" forKey:[NSString stringWithFormat:@"%ld",i]];
+            [self.fold_mutab_dic setValue:@"1" forKey:[NSString stringWithFormat:@"%ld",i]];
         }
 
         [self.table_View reloadData];

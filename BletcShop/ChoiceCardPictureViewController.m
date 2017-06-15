@@ -30,6 +30,10 @@
         NSArray *arr = [[NSArray alloc]init];
         arr = result;
         
+        [[NSUserDefaults standardUserDefaults]setObject:arr forKey:@"CARDIMGTEMP"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        
         for (int i=0; i<arr.count; i++) {
             
             [self.allCards addObject:[arr objectAtIndex:i]];

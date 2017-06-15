@@ -57,6 +57,19 @@
         self.cardImgType.backgroundColor = [UIColor colorWithHexString:_card_dic[@"card_temp_color"]];
         
    
+        NSArray *cardTemp_A = [[NSUserDefaults standardUserDefaults]objectForKey:@"CARDIMGTEMP"];
+        
+        for (NSDictionary *tim_dic in cardTemp_A) {
+            if ([tim_dic[@"color"] isEqualToString:_card_dic[@"card_temp_color"]]) {
+                NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCECARD stringByAppendingString:tim_dic[@"image"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+                
+                [self.cardImgType sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@""] options:SDWebImageRetryFailed];
+                self.cardImgType.backgroundColor = [UIColor whiteColor];
+
+                break ;
+            }
+        }
+
         
         
         [self.cardInfo_dic setValue:_card_dic[@"addition_sum"] forKey:@"addition"];

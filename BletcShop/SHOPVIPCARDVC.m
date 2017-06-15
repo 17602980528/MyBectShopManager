@@ -34,6 +34,8 @@
     
     [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     [self.view addSubview:collectionView];
+    
+    [self postRequestGetCard];
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
@@ -47,7 +49,7 @@
     UIView *view=[cell.contentView viewWithTag:1];
     if (view==nil) {
         view=[[UIView alloc]initWithFrame:cell.contentView.bounds];
-        view.backgroundColor=[UIColor colorWithRed:230/255.0f green:230/255.0f blue:230/255.0f alpha:1.0f];
+        view.backgroundColor = RGB(234,234,234);
         view.tag=1;
         view.autoresizingMask=UIViewAutoresizingFlexibleHeight;
         [cell.contentView addSubview:view];
@@ -79,24 +81,43 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    GeneralCardSeriseListVC* vc = [[GeneralCardSeriseListVC alloc] init];
-    vc.titleDic=cardKindArray[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.row==0||indexPath.row==1) {
+        GeneralCardSeriseListVC* vc = [[GeneralCardSeriseListVC alloc] init];
+        vc.titleDic=cardKindArray[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+   
 }
+
+//保存会员卡模板
+-(void)postRequestGetCard
+{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/card/cardTempGet",BASEURL];
+    
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"%@", result);
+        NSArray *arr = [[NSArray alloc]init];
+        arr = result;
+        
+        [[NSUserDefaults standardUserDefaults]setObject:arr forKey:@"CARDIMGTEMP"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        
+       
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
