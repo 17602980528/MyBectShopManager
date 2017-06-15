@@ -88,7 +88,7 @@
         vc.titleDic=cardKindArray[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        [self showHint:@"技术人员正在努力中..."];
+        [self showHint:@"程序猿哥哥正在努力中..."];
     }
    
 }

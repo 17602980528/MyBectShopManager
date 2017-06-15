@@ -34,11 +34,19 @@
     if (self.referralTF.text.length!=0) {
         if ( [ToolManager validateMobile:self.referralTF.text] && [ToolManager validateMobile:self.phoneTF.text]) {
             
-            ShoperRegistVCTwo *VC = [[ShoperRegistVCTwo alloc]init];
-            VC.phone =self.phoneTF.text;
-            VC.referralPhone = self.referralTF.text;
-            [self presentViewController:VC animated:YES completion:nil];
-        }else{
+           if(![_referralTF.text isEqualToString:_phoneTF.text]) {
+               
+               [self validationPhone];
+               
+             
+
+           }else{
+               
+               [self showHint:@"推荐人不能为自己!"];
+
+           }
+            
+                   }else {
             
             [self showHint:@"手机号格式不正确!"];
         }
@@ -48,9 +56,8 @@
         
         if ( [ToolManager validateMobile:self.phoneTF.text]) {
             
-            ShoperRegistVCTwo *VC = [[ShoperRegistVCTwo alloc]init];
-            VC.phone =self.phoneTF.text;
-            [self presentViewController:VC animated:YES completion:nil];
+            [self validationPhone];
+
         }else{
             
             [self showHint:@"手机号格式不正确!"];
@@ -61,6 +68,53 @@
 
     
 }
+
+
+-(void)validationPhone{
+    
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/register/register_check",BASEURL];
+    
+    
+    NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:_phoneTF.text forKey:@"phone"];
+    
+    [paramer setValue:_referralTF.text forKey:@"referrer"];
+
+    if (self.referralTF.text.length==0) {
+        [paramer setValue:@"无人推荐" forKey:@"referrer"];
+        
+    }
+    
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"====%@===%@",paramer,result);
+        
+        if ([result[@"result_code"] isEqualToString:@"phone_duplicate"]) {
+            [self showHint:@"手机号已注册,请直接登录"];
+        }else if ([result[@"result_code"] isEqualToString:@"referrer_not_found"]){
+            [self showHint:@"推荐人手机号不存在"];
+
+        }else{
+           
+            
+            ShoperRegistVCTwo *VC = [[ShoperRegistVCTwo alloc]init];
+            VC.phone =self.phoneTF.text;
+            
+            if (self.referralTF.text.length!=0) {
+                VC.referralPhone = self.referralTF.text;
+
+            }
+            
+            [self presentViewController:VC animated:YES completion:nil];
+            
+            
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
+}
+
 
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

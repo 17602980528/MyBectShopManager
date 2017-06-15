@@ -498,10 +498,18 @@
             self.block();
             
             [self.navigationController popViewControllerAnimated:YES];
+        }else if([result[@"result_code"]intValue]==0){
+            
+            if ([self.whoPush isEqualToString:@"编辑"]) {
+                [self showHint:@"修改成功"];
+                
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }else if([result[@"result_code"]intValue]==1062){
             
             [self showHint:@"重复添加,请选择其他级别"];
-        }else{
+        }else {
             
                 [self showHint:@"请求失败"];
                 

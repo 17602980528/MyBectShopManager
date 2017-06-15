@@ -15,20 +15,21 @@
 
 @implementation NewUserRegistVC
 - (IBAction)accessCodeBtnClick:(id)sender {
-#ifdef DEBUG
-    //跳页面
-    NewUserAccessCodeVC *vc=[[NewUserAccessCodeVC alloc]init];
-    vc.phoneNum=_phoneTF.text;
-    [self.navigationController pushViewController:vc animated:YES];
-#else
+//#ifdef DEBUG
+//    //跳页面
+//    NewUserAccessCodeVC *vc=[[NewUserAccessCodeVC alloc]init];
+//    vc.phoneNum=_phoneTF.text;
+//    [self.navigationController pushViewController:vc animated:YES];
+//#else
     [_phoneTF resignFirstResponder];
     if (_phoneTF.text.length==11) {
         BOOL state = [NSString isMobileNum:_phoneTF.text];
         if (state) {
             //跳页面
-            NewUserAccessCodeVC *vc=[[NewUserAccessCodeVC alloc]init];
-            vc.phoneNum=_phoneTF.text;
-            [self.navigationController pushViewController:vc animated:YES];
+//            NewUserAccessCodeVC *vc=[[NewUserAccessCodeVC alloc]init];
+//            vc.phoneNum=_phoneTF.text;
+//            [self.navigationController pushViewController:vc animated:YES];
+            [self validationPhone];
         }else{
             UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码格式不对" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
             [alertView show];
@@ -38,9 +39,47 @@
         [alertView show];
     }
 
-#endif
+//#endif
    
 }
+
+-(void)validationPhone{
+    
+    NSString *url = [NSString stringWithFormat:@"%@UserType/register/register_check",BASEURL];
+    
+    
+    NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:_phoneTF.text forKey:@"phone"];
+    
+    
+        [paramer setValue:@"无人推荐" forKey:@"referrer"];
+        
+    
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"====%@===%@",paramer,result);
+        
+        if ([result[@"result_code"] isEqualToString:@"phone_duplicate"]) {
+            [self showHint:@"手机号已注册,请直接登录"];
+        }else if ([result[@"result_code"] isEqualToString:@"referrer_not_found"]){
+            [self showHint:@"推荐人手机号不存在"];
+            
+        }else{
+            
+            
+            NewUserAccessCodeVC *vc=[[NewUserAccessCodeVC alloc]init];
+            vc.phoneNum=_phoneTF.text;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+        }
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+}
+
+
 
 -(void)fingerTapped:(UITapGestureRecognizer *)tap{
     [tap.view endEditing:YES];
