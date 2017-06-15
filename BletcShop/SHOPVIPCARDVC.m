@@ -8,6 +8,8 @@
 
 #import "SHOPVIPCARDVC.h"
 #import "GeneralCardSeriseListVC.h"
+#import "TimeLimitCardHomeVC.h"//限时卡&体验卡
+#import "PackageServiceVC.h"//套餐卡
 @interface SHOPVIPCARDVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 {
     NSArray *cardKindArray;
