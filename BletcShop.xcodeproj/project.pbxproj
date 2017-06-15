@@ -27,6 +27,9 @@
 		180CC7C01E64110D002F5E35 /* 收费标准.png in Resources */ = {isa = PBXBuildFile; fileRef = 180CC7BF1E64110D002F5E35 /* 收费标准.png */; };
 		180D872A1E5AB9C600E7FFB4 /* AddCouponHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */; };
 		180D872D1E5ABBBF00E7FFB4 /* AddCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */; };
+		180DC3841EF26ADB00DF9474 /* NoVipCardCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180DC3831EF26ADB00DF9474 /* NoVipCardCustomView.m */; };
+		180DC3871EF26B0A00DF9474 /* abc_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 180DC3851EF26B0A00DF9474 /* abc_card@2x.png */; };
+		180DC3881EF26B0A00DF9474 /* abc_card@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 180DC3861EF26B0A00DF9474 /* abc_card@3x.png */; };
 		181163921E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 181163911E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m */; };
 		181163961E7FBD9E00CA92A9 /* OffLineNoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 181163941E7FBD9E00CA92A9 /* OffLineNoticeVC.m */; };
 		181163971E7FBD9E00CA92A9 /* OffLineNoticeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181163951E7FBD9E00CA92A9 /* OffLineNoticeVC.xib */; };
@@ -1243,6 +1246,10 @@
 		180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponHomeVC.m; sourceTree = "<group>"; };
 		180D872B1E5ABBBF00E7FFB4 /* AddCouponVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCouponVC.h; sourceTree = "<group>"; };
 		180D872C1E5ABBBF00E7FFB4 /* AddCouponVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCouponVC.m; sourceTree = "<group>"; };
+		180DC3821EF26ADB00DF9474 /* NoVipCardCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoVipCardCustomView.h; sourceTree = "<group>"; };
+		180DC3831EF26ADB00DF9474 /* NoVipCardCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoVipCardCustomView.m; sourceTree = "<group>"; };
+		180DC3851EF26B0A00DF9474 /* abc_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "abc_card@2x.png"; sourceTree = "<group>"; };
+		180DC3861EF26B0A00DF9474 /* abc_card@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "abc_card@3x.png"; sourceTree = "<group>"; };
 		181163901E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenShowPublishAdvertInfosVC.h; sourceTree = "<group>"; };
 		181163911E7F664100CA92A9 /* CommenShowPublishAdvertInfosVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommenShowPublishAdvertInfosVC.m; sourceTree = "<group>"; };
 		181163931E7FBD9E00CA92A9 /* OffLineNoticeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffLineNoticeVC.h; sourceTree = "<group>"; };
@@ -3693,6 +3700,10 @@
 		18543E2C1ECAC3C700E0A4DA /* 会员卡首页 */ = {
 			isa = PBXGroup;
 			children = (
+				180DC3851EF26B0A00DF9474 /* abc_card@2x.png */,
+				180DC3861EF26B0A00DF9474 /* abc_card@3x.png */,
+				180DC3821EF26ADB00DF9474 /* NoVipCardCustomView.h */,
+				180DC3831EF26ADB00DF9474 /* NoVipCardCustomView.m */,
 				D968465B1CC9FCD000146956 /* VipManagerViewController.h */,
 				D968465C1CC9FCD000146956 /* VipManagerViewController.m */,
 				18543E321ECACA3E00E0A4DA /* ChooseCardTypeVC.h */,
@@ -7265,6 +7276,7 @@
 				1CF6E4821C61E4350001159C /* dianpu@2x.png in Resources */,
 				D9AB253B1D88E4ED000E9288 /* VoiceSearchFeedback013@2x.png in Resources */,
 				D981FD0F1E2616080026E4B2 /* read_me.txt in Resources */,
+				180DC3871EF26B0A00DF9474 /* abc_card@2x.png in Resources */,
 				D9AB25321D88E4ED000E9288 /* VoiceSearchFeedback004@2x.png in Resources */,
 				D97F60161D62F770000EE794 /* 注册-01.png in Resources */,
 				18543E381ECAD89200E0A4DA /* quan3.png in Resources */,
@@ -7488,6 +7500,7 @@
 				1852FB031D55C962009CF1B2 /* 代金券-01.png in Resources */,
 				182FAAA61D502FAD0018F872 /* custom3.png in Resources */,
 				D9AE75371D2E382B00269EC5 /* welcom_1.png in Resources */,
+				180DC3881EF26B0A00DF9474 /* abc_card@3x.png in Resources */,
 				D98011CA1DF7AAE800CE09CA /* 5383.wav in Resources */,
 				1C2ED1231C5B5868003EE93B /* 5-02@2x.png in Resources */,
 				D947E4641D7D3BBA00F9FEE8 /* 聊天键盘-icon-选择照片-点击@3x.png in Resources */,
@@ -7535,6 +7548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180DC3841EF26ADB00DF9474 /* NoVipCardCustomView.m in Sources */,
 				D97F5FFB1D62B597000EE794 /* QRcodeUIViewController.m in Sources */,
 				1843104A1E6F9C39005521BF /* AddCouponDetailsVC.m in Sources */,
 				D98ECBD81D9D0A9C00BEDD57 /* LZDCountsViewController.m in Sources */,
