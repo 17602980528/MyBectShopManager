@@ -149,6 +149,12 @@
 
 #define RGB(a,b,c) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:1]
 
+
+#define  PUSH(viewColler)  viewColler*vc =[[viewColler alloc]init];[self.navigationController pushViewController:vc animated:YES];
+
+#define  POP   [self.navigationController popViewControllerAnimated:YES];
+
+
 #define  ORDER_PAY_NOTIFICATION @"order_pay_result"
 
 

@@ -67,6 +67,8 @@
     }else{
         self.leftImg.image = [UIImage imageNamed:@"形状 1 拷贝"];
         self.titleLab.textColor = RGB(154,154,154);
+        self.leftImg.transform = CGAffineTransformMakeRotation(0);
+
 
 
     }
