@@ -77,6 +77,8 @@
         
         [self.cardInfo_dic setValue:_card_dic[@"addition_sum"] forKey:@"addition"];
         [self.cardInfo_dic setValue:_card_dic[@"level"] forKey:@"level"];
+        [self.cardInfo_dic setValue:_card_dic[@"level"] forKey:@"new_level"];
+
         [self.cardInfo_dic setValue:_card_dic[@"price"] forKey:@"price"];
         [_cardInfo_dic setObject:self.card_dic[@"merchant"] forKey:@"muid"];
         [self.cardInfo_dic setValue:_card_dic[@"indate"] forKey:@"indate"];
@@ -365,7 +367,13 @@
             _pickerView.valueDidSelect = ^(NSString *value) {
                 textField.text = [[value componentsSeparatedByString:@"/"] firstObject];
                 
-                [blockSelf.cardInfo_dic setValue:textField.text forKey:@"level"];
+                if ([blockSelf.whoPush isEqualToString:@"编辑"]) {
+                    [blockSelf.cardInfo_dic setValue:textField.text forKey:@"new_level"];
+
+                }else{
+                    [blockSelf.cardInfo_dic setValue:textField.text forKey:@"level"];
+
+                }
                 
             };
 

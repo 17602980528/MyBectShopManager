@@ -45,7 +45,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     hud.label.text = hint;
     hud.label.font = [UIFont systemFontOfSize:14];
 //    hud.margin = 10.f;
-//    hud.yOffset = 180;
+    hud.yOffset = 50;
     hud.removeFromSuperViewOnHide = YES;
     [hud hideAnimated:YES afterDelay:2];
 }
