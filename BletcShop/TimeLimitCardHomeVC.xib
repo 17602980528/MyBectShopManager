@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="finish" destination="RU0-cz-Mgb" id="MZV-qy-daF"/>
                 <outlet property="offMarket" destination="CQ4-b6-wZD" id="gHn-ee-gEQ"/>
+                <outlet property="operationState" destination="8fB-9C-PnO" id="QE1-vc-4LB"/>
                 <outlet property="tableView" destination="yQb-qT-kt9" id="uh5-I9-cLO"/>
                 <outlet property="totalCardLable" destination="n0R-7J-1S2" id="4Le-rF-Ngf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -33,7 +34,7 @@
                                 <constraint firstAttribute="width" constant="7" id="UfC-2L-Zes"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已添加" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fB-9C-PnO">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待处理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fB-9C-PnO">
                             <rect key="frame" x="20" y="0.0" width="65" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="65" id="ivQ-fU-Pm8"/>
@@ -82,6 +83,9 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="waitBtnClick:" destination="-1" eventType="touchUpInside" id="ODr-RC-3Dl"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RU0-cz-Mgb">
                     <rect key="frame" x="131.5" y="624" width="112" height="37"/>
@@ -92,6 +96,9 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onMarketBtnClick:" destination="-1" eventType="touchUpInside" id="XMk-o8-WdR"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQ4-b6-wZD">
                     <rect key="frame" x="253.5" y="624" width="111.5" height="37"/>
@@ -102,8 +109,11 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="offMarketBtnClick:" destination="-1" eventType="touchUpInside" id="hNE-S0-25l"/>
+                    </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yQb-qT-kt9">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yQb-qT-kt9">
                     <rect key="frame" x="0.0" y="44" width="375" height="573"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>

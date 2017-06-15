@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="packageOtherCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="packageOtherCell" id="KGk-i7-Jjw" customClass="PackageOtherTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选  卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R42-e5-YaR">
+                        <rect key="frame" x="18" y="12" width="120" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="Ugt-Dk-22n"/>
+                            <constraint firstAttribute="height" constant="20" id="bZ2-h6-7ys"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="x1x-zn-c6Z">
+                        <rect key="frame" x="290" y="15" width="7" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="Sfe-hO-QHs"/>
+                            <constraint firstAttribute="width" constant="7" id="xwk-zH-syU"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbq-0N-pwj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon3.png" translatesAutoresizingMaskIntoConstraints="NO" id="nSf-r7-NjH">
+                        <rect key="frame" x="168" y="5" width="65" height="33.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="42p-vy-Ywx"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Xbq-0N-pwj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6cW-8g-rL1"/>
+                    <constraint firstItem="x1x-zn-c6Z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="905-jf-wrp"/>
+                    <constraint firstItem="nSf-r7-NjH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="F7S-Ru-R9k"/>
+                    <constraint firstItem="nSf-r7-NjH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FTj-wc-fNw"/>
+                    <constraint firstAttribute="bottom" secondItem="nSf-r7-NjH" secondAttribute="bottom" constant="5" id="PqE-po-VP9"/>
+                    <constraint firstAttribute="trailing" secondItem="Xbq-0N-pwj" secondAttribute="trailing" id="UMR-e0-qKB"/>
+                    <constraint firstItem="R42-e5-YaR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XPw-Q1-xEf"/>
+                    <constraint firstItem="x1x-zn-c6Z" firstAttribute="leading" secondItem="nSf-r7-NjH" secondAttribute="trailing" constant="57" id="aka-Wo-oWn"/>
+                    <constraint firstAttribute="bottom" secondItem="Xbq-0N-pwj" secondAttribute="bottom" id="drP-hu-90p"/>
+                    <constraint firstItem="Xbq-0N-pwj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="giP-mY-Kwr"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="x1x-zn-c6Z" secondAttribute="trailing" constant="15" id="hnM-g6-V6z"/>
+                    <constraint firstItem="R42-e5-YaR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="jKZ-iE-ZVk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cardImageView" destination="nSf-r7-NjH" id="M2d-hP-Swh"/>
+                <outlet property="chooseCardBtn" destination="Xbq-0N-pwj" id="gJx-RB-TmS"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon3.png" width="227" height="152"/>
+        <image name="youjiantou" width="7" height="13"/>
+    </resources>
+</document>
