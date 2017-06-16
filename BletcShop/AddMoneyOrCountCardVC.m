@@ -504,6 +504,8 @@
                 [self showHint:@"修改成功"];
                 
             }
+            self.block();
+
             [self.navigationController popViewControllerAnimated:YES];
             
         }else if([result[@"result_code"]intValue]==1062){

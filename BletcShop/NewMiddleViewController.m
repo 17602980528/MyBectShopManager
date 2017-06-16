@@ -56,7 +56,7 @@
     NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/Source/tradeIconGet",BASEURL];
     [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
-         
+        
          
          [self.tradeArray removeAllObjects];
          for (NSDictionary *dic in result) {
@@ -572,13 +572,13 @@
 
     
     //4hang--------
-//    UILabel *xingLab4=[[UILabel alloc]initWithFrame:CGRectMake(10, 165+50+50+100, 20, 20)];
-//    xingLab4.font=[UIFont systemFontOfSize:20.0f];
-//    xingLab4.textColor=[UIColor redColor];
-//    xingLab4.text=@"*";
-//    xingLab4.textAlignment=1;
-//    [_scrollView addSubview:xingLab4];
-//    
+    UILabel *xingLab4=[[UILabel alloc]initWithFrame:CGRectMake(10, lineViewe.bottom+15, 20, 20)];
+    xingLab4.font=[UIFont systemFontOfSize:20.0f];
+    xingLab4.textColor=[UIColor redColor];
+    xingLab4.text=@"*";
+    xingLab4.textAlignment=1;
+    [_scrollView addSubview:xingLab4];
+    
     //名称
     UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(30, lineViewe.bottom+5, 110, 40)];
     label4.font=[UIFont systemFontOfSize:15.0f];

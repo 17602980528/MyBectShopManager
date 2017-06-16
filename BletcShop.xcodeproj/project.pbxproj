@@ -4958,7 +4958,7 @@
 				D9BB4DD71E04EA6B00971BCC /* 新的预约 */,
 				D9F2E92D1E03D864008F6517 /* 店铺管理 */,
 				D96846571CC9F4EB00146956 /* cell */,
-				D9A6E4691D4F3B65008A3C29 /* 会员制管理 */,
+				D9A6E4691D4F3B65008A3C29 /* 旧的会员卡管理 */,
 				180B53661D4F401F00DE6641 /* MerchantDetailViewController.h */,
 				180B53671D4F401F00DE6641 /* MerchantDetailViewController.m */,
 				D925E6431CC60F680020CEC7 /* AdvertViewController.h */,
@@ -6279,7 +6279,7 @@
 			path = "opencore-amrwb";
 			sourceTree = "<group>";
 		};
-		D9A6E4691D4F3B65008A3C29 /* 会员制管理 */ = {
+		D9A6E4691D4F3B65008A3C29 /* 旧的会员卡管理 */ = {
 			isa = PBXGroup;
 			children = (
 				18543E2C1ECAC3C700E0A4DA /* 会员卡首页 */,
@@ -6288,7 +6288,7 @@
 				D9A6E46D1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.h */,
 				D9A6E46E1D4F4C5C008A3C29 /* ChoiceCardPictureViewController.m */,
 			);
-			name = "会员制管理";
+			name = "旧的会员卡管理";
 			sourceTree = "<group>";
 		};
 		D9A8ABE01E02464000D4597F /* 我的红包 */ = {
