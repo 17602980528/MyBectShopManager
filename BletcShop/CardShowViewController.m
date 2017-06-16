@@ -56,6 +56,7 @@
         cell.detailTextLabel.text=self.dic[@"addition_sum"];
     }else if (indexPath.row==6){
         heights=[self.dic[@"content"] getTextHeightWithShowWidth:SCREENWIDTH-120 AndTextFont:[UIFont systemFontOfSize:15.0f] AndInsets:5];
+        heights= MAX(33, heights);
         cell.detailTextLabel.numberOfLines=0;
         cell.detailTextLabel.text=self.dic[@"content"];
     }
