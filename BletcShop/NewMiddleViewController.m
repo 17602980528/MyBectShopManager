@@ -15,7 +15,7 @@
 #import "JFAreaDataManager.h"
 #import "ValuePickerView.h"
 
-@interface NewMiddleViewController ()<UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
+@interface NewMiddleViewController ()<UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
     NSArray *nameArray;
     CGFloat totalHeight;
@@ -30,7 +30,9 @@
     
     
     NSMutableArray *eare_data;
-    ValuePickerView *pickView;
+    ValuePickerView *pickView_address;
+    ValuePickerView *pickView_trader;
+
 
 }
 @property(nonatomic,strong)NSArray *streetArray;
@@ -81,7 +83,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title=@"店铺认证";
-    pickView= [[ValuePickerView alloc]init];
+    pickView_trader = [[ValuePickerView alloc]init];
 
     [self getIndustryArray];
     AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -132,9 +134,11 @@
                         }
                         self.streetArray=[[NSArray alloc]initWithArray:arr];
                         
+                        pickView_address= [[ValuePickerView alloc]init];
+
                         NSLog(@"--------------%@",arr);
-                        pickView.dataSource = arr;
-                        pickView.valueDidSelect = ^(NSString *value) {
+                        pickView_address.dataSource = arr;
+                        pickView_address.valueDidSelect = ^(NSString *value) {
                             
                             
                             bloskSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
@@ -1011,14 +1015,15 @@
         [tf resignFirstResponder];
     }
     
-    pickView.dataSource=self.tradeArray;
+    
+    pickView_trader.dataSource=self.tradeArray;
     __weak typeof(self)  wealSelf = self;
-    pickView.valueDidSelect = ^(NSString *value) {
+    pickView_trader.valueDidSelect = ^(NSString *value) {
         
         wealSelf.kindLab.text =  [[value componentsSeparatedByString:@"/"] firstObject];
         
     };
-    [pickView show];
+    [pickView_trader show];
     
 //    if (_areaTableView==nil) {
 //        _areaTableView=[[UITableView alloc]initWithFrame:CGRectMake(110, _kindLab.bottom, 100, 200) style:UITableViewStylePlain];
@@ -1574,32 +1579,65 @@
 //    }
     
     if (textField ==self.detailAddressTF) {
-        for (UITextField *tf in _scrollView.subviews) {
-            [tf resignFirstResponder];
-        }
-        pickView.dataSource=self.streetArray;
-        __weak NewMiddleViewController *wealSelf=self;
-        pickView.valueDidSelect = ^(NSString *value) {
-            
-            wealSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
-            
-        };
-        [pickView show];
         
-        return NO;
+      
+            if (_streetArray.count==0) {
+                
+                
+                CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+                if (kCLAuthorizationStatusDenied == status || kCLAuthorizationStatusRestricted == status)
+                {
+                    //读取本地数据
+                    NSString * isPositioning = [[NSUserDefaults standardUserDefaults] valueForKey:@"isPositioning"];
+                    if (isPositioning == nil)//提示
+                    {
+                        UIAlertView * positioningAlertivew = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"为了更好的体验,请到设置->隐私->定位服务中开启!【商消乐】定位服务,已便获取附近信息!" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"永不提示",@"残忍拒绝",nil];
+                        positioningAlertivew.tag = 999;
+                        [positioningAlertivew show];
+                    }
+                }else//开启的
+                {
+                    //需要删除本地字符
+                    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+                    [userDefaults removeObjectForKey:@"isPositioning"];
+                    [userDefaults synchronize];
+                }
+                
+                
+                
+            }else{
+                for (UITextField *tf in _scrollView.subviews) {
+                    [tf resignFirstResponder];
+                }
+                pickView_address.dataSource=self.streetArray;
+                __weak typeof(self) wealSelf=self;
+                pickView_address.valueDidSelect = ^(NSString *value) {
+                    
+                    wealSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
+                    
+                };
+                [pickView_address show];
+                
+            }
+            
+        
+            return NO;
+       
+        
+       
     }
     
     if (textField ==self.company_styleTF) {
         for (UITextField *tf in _scrollView.subviews) {
             [tf resignFirstResponder];
         }
-        pickView.dataSource=@[@"国有企业",@"集体企业",@"联营企业",@"股份合作制企业",@"私营企业",@"个体户",@"合作企业",@"有限责任公司",@"股份有限公司"];
+        pickView_trader.dataSource=@[@"国有企业",@"集体企业",@"联营企业",@"股份合作制企业",@"私营企业",@"个体户",@"合作企业",@"有限责任公司",@"股份有限公司"];
         __weak NewMiddleViewController *wealSelf=self;
-        pickView.valueDidSelect = ^(NSString *value) {
+        pickView_trader.valueDidSelect = ^(NSString *value) {
             
             wealSelf.company_styleTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
         };
-        [pickView show];
+        [pickView_trader show];
         
         return NO;
     }
@@ -1629,6 +1667,37 @@
     
     return YES;
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag ==999) {
+        
+        if (buttonIndex == 0)//确认跳转设置
+        {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }
+        else if (buttonIndex == 1)//永不提示
+        {
+            //存入本地
+            NSString * isPositioning = @"永不提示";
+            NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:isPositioning forKey:@"isPositioning"];
+        }
+        else//残忍拒绝
+        {
+            //取消不做提示
+        }
+        
+        
+        
+    }
+
+
+}
+
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     

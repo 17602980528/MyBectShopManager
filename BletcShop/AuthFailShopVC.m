@@ -31,8 +31,9 @@
     
     
     NSMutableArray *eare_data;
-    ValuePickerView *pickView;
-    
+    ValuePickerView *pickView_address;
+    ValuePickerView *pickView_trader;
+
 }
 @property(nonatomic,strong)NSArray *streetArray;
 @property (nonatomic,strong)UITextField *idenCardText;//身份证
@@ -86,6 +87,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
+    pickView_trader = [[ValuePickerView alloc]init];
     [self getIndustryArray];
     [self getStreest];
     
@@ -661,46 +663,18 @@
     for (UITextField *tf in _scrollView.subviews) {
         [tf resignFirstResponder];
     }
-    pickView.dataSource=self.tradeArray;
+    pickView_trader.dataSource=self.tradeArray;
     __weak AuthFailShopVC *wealSelf=self;
-    pickView.valueDidSelect = ^(NSString *value) {
+    pickView_trader.valueDidSelect = ^(NSString *value) {
         
         wealSelf.kindLab.text =  [[value componentsSeparatedByString:@"/"] firstObject];
         
     };
-    [pickView show];
+    [pickView_trader show];
     
 
     
-//    if (_areaTableView==nil) {
-//        _areaTableView=[[UITableView alloc]initWithFrame:CGRectMake(110, _kindLab.bottom, 100, 200) style:UITableViewStylePlain];
-//        _areaTableView.delegate=self;
-//        _areaTableView.dataSource=self;
-//        [_scrollView addSubview:_areaTableView];
-//        self.tradeArray = [[NSMutableArray alloc]initWithObjects:@"美容",@"美发",@"美甲",@"足疗按摩",@"皮革养护",@"汽车服务",@"洗衣",@"瑜伽舞蹈",@"瘦身纤体",@"宠物店",@"电影院",@"运动健身",@"零售连锁",@"餐饮食品",@"医药",@"游乐场",@"娱乐KTV",@"婚纱摄影",@"游泳馆",@"超市购物",@"甜点饮品",@"酒店",@"教育培训",@"商务会所",@"全部分类", nil];
-//    }
 }
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    
-//    return self.tradeArray.count;
-//}
-//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-//    if (cell==nil) {
-//        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-//        cell.backgroundColor = RGB(234, 234, 234);
-//    }
-//    cell.textLabel.text=self.tradeArray[indexPath.row];
-//    cell.textLabel.font=[UIFont systemFontOfSize:13.0f];
-//    return cell;
-//}
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    _areaTableView.frame=CGRectMake(110, 64+190+44, 100, 0);
-//    [_areaTableView removeFromSuperview];
-//    _areaTableView=nil;
-//    self.kindLab.text=self.tradeArray[indexPath.row];
-//}
 
 -(void)downLoadImageAndSeeIfExists{
     
@@ -1197,14 +1171,14 @@
             for (UITextField *tf in _scrollView.subviews) {
                 [tf resignFirstResponder];
             }
-            pickView.dataSource=self.streetArray;
+            pickView_address.dataSource=self.streetArray;
             __weak AuthFailShopVC *wealSelf=self;
-            pickView.valueDidSelect = ^(NSString *value) {
+            pickView_address.valueDidSelect = ^(NSString *value) {
                 
                 wealSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
                 
             };
-            [pickView show];
+            [pickView_address show];
  
         }
         
@@ -1213,13 +1187,13 @@
     }
     
     if (textField ==self.company_styleTF) {
-        pickView.dataSource=@[@"国有企业",@"集体企业",@"联营企业",@"股份合作制企业",@"私营企业",@"个体户",@"合作企业",@"有限责任公司",@"股份有限公司"];
+        pickView_trader.dataSource=@[@"国有企业",@"集体企业",@"联营企业",@"股份合作制企业",@"私营企业",@"个体户",@"合作企业",@"有限责任公司",@"股份有限公司"];
         __weak AuthFailShopVC *wealSelf=self;
-        pickView.valueDidSelect = ^(NSString *value) {
+        pickView_trader.valueDidSelect = ^(NSString *value) {
             
             wealSelf.company_styleTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
         };
-        [pickView show];
+        [pickView_trader show];
         
         return NO;
     }
@@ -1298,11 +1272,11 @@
                             
                         }
                         self.streetArray=[[NSArray alloc]initWithArray:arr];
-                        pickView= [[ValuePickerView alloc]init];
+                        pickView_address= [[ValuePickerView alloc]init];
                         
                         NSLog(@"--------------%@",arr);
-                        pickView.dataSource = arr;
-                        pickView.valueDidSelect = ^(NSString *value) {
+                        pickView_address.dataSource = arr;
+                        pickView_address.valueDidSelect = ^(NSString *value) {
                             
                             
                             bloskSelf.detailAddressTF.text =  [[value componentsSeparatedByString:@"/"] firstObject];
