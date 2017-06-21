@@ -1591,7 +1591,7 @@
                     NSString * isPositioning = [[NSUserDefaults standardUserDefaults] valueForKey:@"isPositioning"];
                     if (isPositioning == nil)//提示
                     {
-                        UIAlertView * positioningAlertivew = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"为了更好的体验,请到设置->隐私->定位服务中开启!【商消乐】定位服务,已便获取附近信息!" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"永不提示",@"残忍拒绝",nil];
+                        UIAlertView * positioningAlertivew = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"为了获得商铺精确位置,请到设置->隐私->定位服务中开启【商消乐】定位服务,已便获取商铺位置信息!" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"永不提示",@"残忍拒绝",nil];
                         positioningAlertivew.tag = 999;
                         [positioningAlertivew show];
                     }
