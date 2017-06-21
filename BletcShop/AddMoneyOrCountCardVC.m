@@ -225,11 +225,11 @@
 }
 //选择卡的样式
 - (IBAction)selectCardImgType:(UITapGestureRecognizer *)sender {
-    PUSH(ChoiceCardPictureViewController);
-    vc.delegate = self;
+//    PUSH(ChoiceCardPictureViewController);
+//    vc.delegate = self;
     
     
-//    PUSH(ChoseCardColorStyleViewVC)
+    PUSH(ChoseCardColorStyleViewVC)
 
     
 }

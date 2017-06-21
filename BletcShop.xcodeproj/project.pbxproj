@@ -4523,11 +4523,11 @@
 		1CDA9E081C5A113000DFE518 /* 商户端 */ = {
 			isa = PBXGroup;
 			children = (
-				D98ECBC31D9CB26B00BEDD57 /* 新的结算中心 */,
 				1CDA9E0A1C5A119C00DFE518 /* 我的会员 */,
-				1CDA9E0E1C5A11E800DFE518 /* 更多 */,
-				1CDA9E0D1C5A11C600DFE518 /* 业务中心 */,
+				D98ECBC31D9CB26B00BEDD57 /* 新的结算中心 */,
 				1CDA9E0C1C5A11AD00DFE518 /* 我的商品 */,
+				1CDA9E0D1C5A11C600DFE518 /* 业务中心 */,
+				1CDA9E0E1C5A11E800DFE518 /* 更多 */,
 			);
 			name = "商户端";
 			sourceTree = "<group>";
