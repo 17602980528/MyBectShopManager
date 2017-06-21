@@ -87,8 +87,19 @@
         GeneralCardSeriseListVC* vc = [[GeneralCardSeriseListVC alloc] init];
         vc.titleDic=cardKindArray[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
-    }else{
-        [self showHint:@"程序猿哥哥正在努力中..."];
+    }else if(indexPath.row==2){
+        PUSH(PackageServiceVC)
+        vc.navigationItem.title = @"套餐卡";
+        
+//        [self showHint:@"程序猿哥哥正在努力中..."];
+    }else
+    {
+        PUSH(TimeLimitCardHomeVC)
+        vc.navigationItem.title = @"体验卡";
+
+        if (indexPath.row==4) {
+            vc.navigationItem.title = @"限时卡";
+        }
     }
    
 }
