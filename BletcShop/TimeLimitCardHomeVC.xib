@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,8 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimeLimitCardHomeVC">
             <connections>
-                <outlet property="finish" destination="RU0-cz-Mgb" id="MZV-qy-daF"/>
-                <outlet property="offMarket" destination="CQ4-b6-wZD" id="gHn-ee-gEQ"/>
                 <outlet property="operationState" destination="8fB-9C-PnO" id="QE1-vc-4LB"/>
                 <outlet property="tableView" destination="yQb-qT-kt9" id="uh5-I9-cLO"/>
                 <outlet property="totalCardLable" destination="n0R-7J-1S2" id="4Le-rF-Ngf"/>
@@ -84,10 +82,10 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="waitBtnClick:" destination="-1" eventType="touchUpInside" id="ODr-RC-3Dl"/>
+                        <action selector="threeBtnClick:" destination="-1" eventType="touchUpInside" id="vNu-ol-Sgy"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RU0-cz-Mgb">
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RU0-cz-Mgb">
                     <rect key="frame" x="131.5" y="624" width="112" height="37"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" title="已上架">
@@ -97,10 +95,10 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="onMarketBtnClick:" destination="-1" eventType="touchUpInside" id="XMk-o8-WdR"/>
+                        <action selector="threeBtnClick:" destination="-1" eventType="touchUpInside" id="5O8-fs-EKB"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQ4-b6-wZD">
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQ4-b6-wZD">
                     <rect key="frame" x="253.5" y="624" width="111.5" height="37"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" title="已下架">
@@ -110,7 +108,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="offMarketBtnClick:" destination="-1" eventType="touchUpInside" id="hNE-S0-25l"/>
+                        <action selector="threeBtnClick:" destination="-1" eventType="touchUpInside" id="aGX-Y9-4mc"/>
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yQb-qT-kt9">
@@ -149,7 +147,7 @@
                 <constraint firstItem="CQ4-b6-wZD" firstAttribute="height" secondItem="Jeh-xf-ZuQ" secondAttribute="height" id="xb4-hx-GDA"/>
                 <constraint firstItem="yQb-qT-kt9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="z9c-tG-2b3"/>
             </constraints>
-            <point key="canvasLocation" x="36.5" y="59.5"/>
+            <point key="canvasLocation" x="-131" y="9"/>
         </view>
     </objects>
     <resources>

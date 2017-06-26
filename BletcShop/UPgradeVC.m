@@ -75,7 +75,7 @@
 }
 - (IBAction)goUPGradeClick:(UIButton *)sender {
     
-    NSLog(@"升级");
+    NSLog(@"升级---%f",_cha);
     
     if ([self.price_lab.text floatValue]<self.cha)
     {
@@ -211,7 +211,8 @@
                 
             }
             
-            
+            [self performSelector:@selector(poptoview) withObject:nil afterDelay:4];
+
             
         }else
         {
@@ -226,7 +227,6 @@
             
             
         }
-        [self performSelector:@selector(poptoview) withObject:nil afterDelay:4];
         
         
         
@@ -284,7 +284,6 @@
         
         weakSelf.card_level.text = dic[@"level"];
         weakSelf.level = dic[@"level"];
-        weakSelf.price_lab.text = [NSString stringWithFormat:@"%.2f",[dic[@"price"] floatValue]];
         
         NSString *priceMy = weakSelf.card_dic[@"card_remain"];;
         

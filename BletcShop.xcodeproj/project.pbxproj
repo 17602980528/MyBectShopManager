@@ -732,6 +732,8 @@
 		D95F03271DD9664900F9DC2F /* BankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95F03261DD9664900F9DC2F /* BankListViewController.m */; };
 		D95F032A1DD9841500F9DC2F /* Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D95F03281DD9841500F9DC2F /* Selected.png */; };
 		D95F032B1DD9841500F9DC2F /* Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = D95F03291DD9841500F9DC2F /* Unselected.png */; };
+		D962A5591EFE6727009E92CD /* ExperienceCardTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D962A5571EFE6727009E92CD /* ExperienceCardTabVC.m */; };
+		D962A55A1EFE6727009E92CD /* ExperienceCardTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D962A5581EFE6727009E92CD /* ExperienceCardTabVC.xib */; };
 		D9631EA61EF0D5A8001DF558 /* LZDAddSeriseListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9631EA41EF0D5A8001DF558 /* LZDAddSeriseListVC.m */; };
 		D9631EA71EF0D5A8001DF558 /* LZDAddSeriseListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9631EA51EF0D5A8001DF558 /* LZDAddSeriseListVC.xib */; };
 		D9637DF71D59B4AB00C19D0B /* ChoiceAdminAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9637DF61D59B4AB00C19D0B /* ChoiceAdminAlertView.m */; };
@@ -773,7 +775,6 @@
 		D96E1B7D1ECAD9EF00084453 /* ChoseSeriesCellT.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96E1B7B1ECAD9EF00084453 /* ChoseSeriesCellT.xib */; };
 		D971EB321EF259FE0038614E /* ChoseCardColorStyleViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971EB301EF259FE0038614E /* ChoseCardColorStyleViewVC.m */; };
 		D971EB331EF259FE0038614E /* ChoseCardColorStyleViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */; };
-		D971EB3F1EF282170038614E /* CALayer+LZDLayColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D971EB3E1EF282170038614E /* CALayer+LZDLayColor.m */; };
 		D971EB411EF287210038614E /* 首页顶部海报.png in Resources */ = {isa = PBXBuildFile; fileRef = D971EB401EF287210038614E /* 首页顶部海报.png */; };
 		D971FABB1E2DE82A00C5387C /* CardMarketSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */; };
 		D97338C11ED666600093A2FB /* 下角标ss.png in Resources */ = {isa = PBXBuildFile; fileRef = D97338C01ED666600093A2FB /* 下角标ss.png */; };
@@ -788,6 +789,7 @@
 		D97B702C1E2C62AC00CEAFC1 /* CardMarketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D97B702A1E2C62AC00CEAFC1 /* CardMarketCell.m */; };
 		D97B70301E2C90FE00CEAFC1 /* CardMarketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D97B702F1E2C90FE00CEAFC1 /* CardMarketModel.m */; };
 		D97B70331E2CBBD400CEAFC1 /* CardmarketDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D97B70321E2CBBD400CEAFC1 /* CardmarketDetailVC.m */; };
+		D97CD7E01EFB90C9000C49ED /* CALayer+LZDLayColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D97CD7DF1EFB90C9000C49ED /* CALayer+LZDLayColor.m */; };
 		D97ED8041D926EFC00E29C7E /* vip_c_icon_n.png in Resources */ = {isa = PBXBuildFile; fileRef = D97ED8021D926EFC00E29C7E /* vip_c_icon_n.png */; };
 		D97ED8051D926EFC00E29C7E /* vip_cash_icon_n.png in Resources */ = {isa = PBXBuildFile; fileRef = D97ED8031D926EFC00E29C7E /* vip_cash_icon_n.png */; };
 		D97EE7F21D94D966009BFD77 /* NewMiddleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D97EE7F11D94D966009BFD77 /* NewMiddleViewController.m */; };
@@ -2356,6 +2358,9 @@
 		D95F03261DD9664900F9DC2F /* BankListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankListViewController.m; sourceTree = "<group>"; };
 		D95F03281DD9841500F9DC2F /* Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selected.png; sourceTree = "<group>"; };
 		D95F03291DD9841500F9DC2F /* Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Unselected.png; sourceTree = "<group>"; };
+		D962A5561EFE6727009E92CD /* ExperienceCardTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperienceCardTabVC.h; sourceTree = "<group>"; };
+		D962A5571EFE6727009E92CD /* ExperienceCardTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperienceCardTabVC.m; sourceTree = "<group>"; };
+		D962A5581EFE6727009E92CD /* ExperienceCardTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExperienceCardTabVC.xib; sourceTree = "<group>"; };
 		D9631EA31EF0D5A8001DF558 /* LZDAddSeriseListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZDAddSeriseListVC.h; sourceTree = "<group>"; };
 		D9631EA41EF0D5A8001DF558 /* LZDAddSeriseListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZDAddSeriseListVC.m; sourceTree = "<group>"; };
 		D9631EA51EF0D5A8001DF558 /* LZDAddSeriseListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LZDAddSeriseListVC.xib; sourceTree = "<group>"; };
@@ -2415,8 +2420,6 @@
 		D971EB2F1EF259FE0038614E /* ChoseCardColorStyleViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseCardColorStyleViewVC.h; sourceTree = "<group>"; };
 		D971EB301EF259FE0038614E /* ChoseCardColorStyleViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseCardColorStyleViewVC.m; sourceTree = "<group>"; };
 		D971EB311EF259FE0038614E /* ChoseCardColorStyleViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseCardColorStyleViewVC.xib; sourceTree = "<group>"; };
-		D971EB3D1EF282170038614E /* CALayer+LZDLayColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LZDLayColor.h"; sourceTree = "<group>"; };
-		D971EB3E1EF282170038614E /* CALayer+LZDLayColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LZDLayColor.m"; sourceTree = "<group>"; };
 		D971EB401EF287210038614E /* 首页顶部海报.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页顶部海报.png"; sourceTree = "<group>"; };
 		D971FAB91E2DE82A00C5387C /* CardMarketSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMarketSearchVC.h; sourceTree = "<group>"; };
 		D971FABA1E2DE82A00C5387C /* CardMarketSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMarketSearchVC.m; sourceTree = "<group>"; };
@@ -2437,6 +2440,8 @@
 		D97B702F1E2C90FE00CEAFC1 /* CardMarketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMarketModel.m; sourceTree = "<group>"; };
 		D97B70311E2CBBD400CEAFC1 /* CardmarketDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardmarketDetailVC.h; sourceTree = "<group>"; };
 		D97B70321E2CBBD400CEAFC1 /* CardmarketDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardmarketDetailVC.m; sourceTree = "<group>"; };
+		D97CD7DE1EFB90C9000C49ED /* CALayer+LZDLayColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LZDLayColor.h"; sourceTree = "<group>"; };
+		D97CD7DF1EFB90C9000C49ED /* CALayer+LZDLayColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LZDLayColor.m"; sourceTree = "<group>"; };
 		D97ED8021D926EFC00E29C7E /* vip_c_icon_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vip_c_icon_n.png; sourceTree = "<group>"; };
 		D97ED8031D926EFC00E29C7E /* vip_cash_icon_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vip_cash_icon_n.png; sourceTree = "<group>"; };
 		D97EE7F01D94D966009BFD77 /* NewMiddleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMiddleViewController.h; sourceTree = "<group>"; };
@@ -3297,8 +3302,8 @@
 				D97F60091D62DCAA000EE794 /* NSDictionary+Log.m */,
 				18EDCF6E1D46039D004C40B7 /* NSString+Addition.h */,
 				18EDCF6F1D46039D004C40B7 /* NSString+Addition.m */,
-				D971EB3D1EF282170038614E /* CALayer+LZDLayColor.h */,
-				D971EB3E1EF282170038614E /* CALayer+LZDLayColor.m */,
+				D97CD7DE1EFB90C9000C49ED /* CALayer+LZDLayColor.h */,
+				D97CD7DF1EFB90C9000C49ED /* CALayer+LZDLayColor.m */,
 				D9442ADB1D1E330A00956AB4 /* Singleton.h */,
 				D9442ADC1D1E330A00956AB4 /* Singleton.m */,
 				D973D58B1D9E4588003F82FB /* tanhao.png */,
@@ -3573,10 +3578,10 @@
 		180DC3A61EF2859500DF9474 /* 限时卡&体验卡 */ = {
 			isa = PBXGroup;
 			children = (
+				180DC3A71EF285C200DF9474 /* 体验卡&限时卡列表 */,
 				180DC3B41EF28BCB00DF9474 /* TimeLimitVipCardVC.h */,
 				180DC3B51EF28BDA00DF9474 /* TimeLimitVipCardVC.m */,
 				180DC3B61EF28BDA00DF9474 /* TimeLimitVipCardVC.xib */,
-				180DC3A71EF285C200DF9474 /* 体验卡&限时卡列表 */,
 			);
 			name = "限时卡&体验卡";
 			sourceTree = "<group>";
@@ -3584,6 +3589,7 @@
 		180DC3A71EF285C200DF9474 /* 体验卡&限时卡列表 */ = {
 			isa = PBXGroup;
 			children = (
+				D962A5501EFE6626009E92CD /* 体验卡详情 */,
 				180DC3AA1EF28A6000DF9474 /* TimeLimitCardHomeVC.h */,
 				180DC3AB1EF28A6000DF9474 /* TimeLimitCardHomeVC.m */,
 				180DC3AC1EF28A6000DF9474 /* TimeLimitCardHomeVC.xib */,
@@ -5546,6 +5552,16 @@
 			name = "活动动画";
 			sourceTree = "<group>";
 		};
+		D962A5501EFE6626009E92CD /* 体验卡详情 */ = {
+			isa = PBXGroup;
+			children = (
+				D962A5561EFE6727009E92CD /* ExperienceCardTabVC.h */,
+				D962A5571EFE6727009E92CD /* ExperienceCardTabVC.m */,
+				D962A5581EFE6727009E92CD /* ExperienceCardTabVC.xib */,
+			);
+			name = "体验卡详情";
+			sourceTree = "<group>";
+		};
 		D965552E1E332DF90096D815 /* 首页登录 */ = {
 			isa = PBXGroup;
 			children = (
@@ -7367,6 +7383,7 @@
 				D94DF2631CAE0DB8000D5B69 /* result_small_star_highlight.png in Resources */,
 				18EB36C81D4B5E180087CE1A /* -1-01.png in Resources */,
 				18F27F061D640E84002DD03A /* 头像-30.png in Resources */,
+				D962A55A1EFE6727009E92CD /* ExperienceCardTabVC.xib in Resources */,
 				1C2ED1211C5B5868003EE93B /* 3-02(1)@2x.png in Resources */,
 				D9FF0D901D53304C00443312 /* 图标-02new.png in Resources */,
 				1852FB0A1D55C962009CF1B2 /* 代金券-08.png in Resources */,
@@ -7674,6 +7691,7 @@
 			files = (
 				180DC3841EF26ADB00DF9474 /* NoVipCardCustomView.m in Sources */,
 				D97F5FFB1D62B597000EE794 /* QRcodeUIViewController.m in Sources */,
+				D962A5591EFE6727009E92CD /* ExperienceCardTabVC.m in Sources */,
 				1843104A1E6F9C39005521BF /* AddCouponDetailsVC.m in Sources */,
 				D98ECBD81D9D0A9C00BEDD57 /* LZDCountsViewController.m in Sources */,
 				D9BB4DDA1E04EA8200971BCC /* NewOrderShopViewController.m in Sources */,
@@ -7748,7 +7766,6 @@
 				185ABD881D80227900BD8097 /* UploadHistoryViewController.m in Sources */,
 				1A4173C61D787E9A00A70601 /* EMRemarkImageView.m in Sources */,
 				D958AD681E654CF200B0776F /* JHPieForeBGView.m in Sources */,
-				D971EB3F1EF282170038614E /* CALayer+LZDLayColor.m in Sources */,
 				D9DEED361CACFCA100ACDD00 /* ShopImageTableViewCell.m in Sources */,
 				D9C4CDED1DE44587009C76C1 /* ValuePickerView.m in Sources */,
 				D9F3A3C91D794EC400F06E0C /* PublicGroupViewController.m in Sources */,
@@ -8037,6 +8054,7 @@
 				1835774A1EC437F900F321F1 /* AccessCodeVC.m in Sources */,
 				D9C0E9611DCC891500FD1199 /* HomeShopModel.m in Sources */,
 				D97F5FFE1D62B690000EE794 /* HGDQQRCodeView.m in Sources */,
+				D97CD7E01EFB90C9000C49ED /* CALayer+LZDLayColor.m in Sources */,
 				182988411E723F4200164F32 /* TAAbstractDotView.m in Sources */,
 				189619441D92319D003BA40C /* ContactSeverViewController.m in Sources */,
 				D97B70331E2CBBD400CEAFC1 /* CardmarketDetailVC.m in Sources */,

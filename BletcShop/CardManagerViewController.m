@@ -177,7 +177,7 @@
             cardImageView.layer.borderWidth = 0.5;
             cardImageView.layer.borderColor = RGB(234, 234, 234).CGColor;
             
-            cardImageView.backgroundColor = [UIColor colorWithHexString:cardInfo_dic[@"card_temp_color"]];
+            cardImageView.backgroundColor = [UIColor colorWithHexString:[NSString getTheNoNullStr:cardInfo_dic[@"card_temp_color"] andRepalceStr:@""]];
             
 //            NSString *imageAddress=[NSString getTheNoNullStr:cardInfo_dic[@"card_image_url"] andRepalceStr:@"1"];
 //            NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCECARD stringByAppendingString:imageAddress] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
@@ -190,14 +190,14 @@
             UILabel *code_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, cardImageView.width-5, 9)];
             code_lab.textColor = RGB(255,255,255);
             code_lab.textAlignment = NSTextAlignmentRight;
-            code_lab.text = [NSString stringWithFormat:@"%@",cardInfo_dic[@"card_code"]];
+            code_lab.text = [NSString stringWithFormat:@"%@",[NSString getTheNoNullStr:cardInfo_dic[@"card_code"] andRepalceStr:@""]];
             code_lab.font = [UIFont systemFontOfSize:9];
             [cardImageView addSubview:code_lab];
 
             
             UILabel *typeAndeLevel = [[UILabel alloc]initWithFrame:CGRectMake(12, 30, cardImageView.width-12, 23)];
             typeAndeLevel.textColor = RGB(255,255,255);
-            typeAndeLevel.text = [NSString stringWithFormat:@"%@(%@)",cardInfo_dic[@"card_type"],cardInfo_dic[@"card_level"]];
+            typeAndeLevel.text = [NSString stringWithFormat:@"%@(%@)",[NSString getTheNoNullStr:cardInfo_dic[@"card_type"] andRepalceStr:@""],[NSString getTheNoNullStr:cardInfo_dic[@"card_level"] andRepalceStr:@""]];
             typeAndeLevel.font = [UIFont systemFontOfSize:22];
             [cardImageView addSubview:typeAndeLevel];
             
@@ -213,16 +213,16 @@
             discountLab.textColor = yueLabel.textColor;
             [cardImageView addSubview:discountLab];
             
-            if ([[cardInfo_dic objectForKey:@"card_type"] isEqualToString:@"计次卡"]) {
-                NSString *oneString = [cardInfo_dic objectForKey:@"price"];//单价
+            if ([[NSString getTheNoNullStr:[cardInfo_dic objectForKey:@"card_type"] andRepalceStr:@""] isEqualToString:@"计次卡"]) {
+                NSString *oneString = [NSString getTheNoNullStr:[cardInfo_dic objectForKey:@"price"] andRepalceStr:@""];//单价
                 //
-                NSString *allString = [cardInfo_dic objectForKey:@"card_remain"];//余额
+                NSString *allString = [NSString getTheNoNullStr:[cardInfo_dic objectForKey:@"card_remain"] andRepalceStr:@""];//余额
                 
                 
                 double onePrice = [oneString doubleValue];
                 double allPrice = [allString doubleValue];
                 
-                int cishu =[[cardInfo_dic objectForKey:@"rule"] intValue];
+                int cishu =[[NSString getTheNoNullStr:[cardInfo_dic objectForKey:@"rule"] andRepalceStr:@""] intValue];
                 
                 int time = (int)(allPrice/(onePrice/cishu));
                 //
@@ -230,9 +230,10 @@
                 
                 
             }else{
-                discountLab.text = [NSString stringWithFormat:@"%g折",[cardInfo_dic[@"rule"] floatValue]/10];
+                
+                discountLab.text = [NSString stringWithFormat:@"%g折",[[NSString getTheNoNullStr:cardInfo_dic[@"rule"] andRepalceStr:@""] floatValue]/10];
 
-                yueLabel.text = [[NSString alloc]initWithFormat:@"余额:%@",cardInfo_dic[@"card_remain"]];
+                yueLabel.text = [[NSString alloc]initWithFormat:@"余额:%@",[NSString getTheNoNullStr:[cardInfo_dic objectForKey:@"card_remain"] andRepalceStr:@""]];
             }
 
 

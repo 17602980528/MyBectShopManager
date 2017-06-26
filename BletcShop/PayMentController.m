@@ -25,11 +25,12 @@ enum OrderTypes{
 enum PayTypes {
     Alipay,
     UPPay,
+    WalletPay
 } ;
 @interface PayMentController ()<UITableViewDelegate,UITableViewDataSource,ViewControllerBDelegate,UIAlertViewDelegate>
 {
     NSArray *orderType_A;////1-买卡  2-续卡 3-充值 4-升级
-    NSString *message;
+    NSString *Moneymessage;
     
 }
 @property(nonatomic,weak)UITableView*table_view;
@@ -43,6 +44,9 @@ enum PayTypes {
 @property(nonatomic,copy)NSString *actualMoney;//实际应付金额;
 
 @property (nonatomic,retain)NSString *pay_Type;//（支付类型）=> “null"（不抵额）,"voucher”（用代金卷抵额）,“integral”（用乐点抵额）
+
+
+@property (nonatomic ,assign) float walletRemain;//钱包余额
 
 @end
 
@@ -65,14 +69,14 @@ enum PayTypes {
             
             self.actualMoney = [[NSString alloc]initWithFormat:@"实付款:¥%.2f",([self.moneyString floatValue]-[price floatValue])];
             
-            message = [NSString stringWithFormat:@"您使用优惠券抵付%.2f,实付款:¥%.2f",[price floatValue],[self.moneyString floatValue]-[price floatValue]];
+            Moneymessage = [NSString stringWithFormat:@"您使用优惠券抵付%.2f,实付款:¥%.2f",[price floatValue],[self.moneyString floatValue]-[price floatValue]];
 
         }else
         {
             self.actualMoney = [[NSString alloc]initWithFormat:@"实付款:¥%.2f",([self.moneyString floatValue]*90/100)];
             
             
-            message = [NSString stringWithFormat:@"您使用优惠券抵付%.2f,实付款:¥%.2f",([self.moneyString floatValue]*10/100),([self.moneyString floatValue]*90/100)];
+            Moneymessage = [NSString stringWithFormat:@"您使用优惠券抵付%.2f,实付款:¥%.2f",([self.moneyString floatValue]*10/100),([self.moneyString floatValue]*90/100)];
 
 
             
@@ -123,6 +127,18 @@ enum PayTypes {
     if (payResult) {
         
         
+        if (self.orderInfoType==4) {
+            AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+            
+            NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:appdelegate.cardInfo_dic];
+            
+            [card_dic setValue:appdelegate.payCardType forKey:@"card_level"];
+            appdelegate.cardInfo_dic =  card_dic;
+            
+        }
+
+        
+        
         PaySuccessVc *VC = [[PaySuccessVc alloc]init];
         VC.orderInfoType = self.orderInfoType;
         VC.card_dic = self.card_dic;
@@ -154,7 +170,9 @@ enum PayTypes {
     orderType_A = @[@"",@"办卡",@"续卡",@"充值",@"升级"];
     self.pay_Type =@"null";
     
-    message = [NSString stringWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]];
+    [self postSocketMoney];
+    
+    Moneymessage = [NSString stringWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]];
     
     self.actualMoney = [[NSString alloc]initWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]];
 
@@ -244,7 +262,7 @@ enum PayTypes {
     if (section==0 || section==1) {
         return 0;
     }else
-        return 2;
+        return 3;
 }
 
 
@@ -370,12 +388,12 @@ enum PayTypes {
                 image_select.image = [UIImage imageNamed:@"settlement_unchoose_n"];
                 
             }
-            imageView.image = [UIImage imageNamed:@"settlement_alipay_n"];
+            imageView.image = [UIImage imageNamed:@"支付宝支付L"];
             
             
-        }else{
+        }else if(indexPath.row ==1){
             lable.text = @"银联支付";
-            imageView.image = [UIImage imageNamed:@"settlement_unionpay_n"];
+            imageView.image = [UIImage imageNamed:@"银联支付L"];
             if (self.payType==UPPay) {
                 image_select.image = [UIImage imageNamed:@"settlement_choose_n"];
                 
@@ -385,6 +403,17 @@ enum PayTypes {
             }
             
             
+        }else if(indexPath.row ==2){
+            lable.text = @"钱包支付";
+            imageView.image = [UIImage imageNamed:@"钱包支付L"];
+            if (self.payType==WalletPay) {
+                image_select.image = [UIImage imageNamed:@"settlement_choose_n"];
+                
+            }else{
+                image_select.image = [UIImage imageNamed:@"settlement_unchoose_n"];
+                
+            }
+
         }
         
         UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 54-1, SCREENWIDTH, 1)];
@@ -401,52 +430,52 @@ enum PayTypes {
 {
     if (indexPath.section==1)
     {
-        if(indexPath.row == 0)
-        {
-            
-            if(!([self.moneyString floatValue]<1))
-            {
-                self.canUsePoint =0;
-                self.pay_Type =@"voucher";
-                
-                MyCashCouponViewController *choiceView = [[MyCashCouponViewController alloc]init];
-                
-                choiceView.useCoupon = 100;
-                choiceView.delegate = self;
-                [self.navigationController pushViewController:choiceView animated:YES];
-            }
-            
-        }
-        else if(indexPath.row == 1)
-        {
-            if(!((([self.moneyString floatValue])/2)<1)){
-                self.Type = points;
-                self.pay_Type =@"integral";
-                
-                [self.table_view reloadData];
-                
-                if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
-                {
-                    self.canUsePoint =(([self.moneyString floatValue])/2)*10;
-                }else
-                    self.canUsePoint =[self.allPoint floatValue];
-                
-                self.actualMoney = [[NSString alloc]initWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]-self.canUsePoint/10];
-                
-                message = [NSString stringWithFormat:@"您使用乐点抵付%.2f,实付款:¥%.2f",self.canUsePoint/10,[self.moneyString floatValue]-self.canUsePoint/10];
-                
-
-                
-            }else{
-                self.actualMoney = [[NSString alloc]initWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]];
-                
-                message = [NSString stringWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]];
-
-                
-            }
-            
-            
-        }
+//        if(indexPath.row == 0)
+//        {
+//            
+//            if(!([self.moneyString floatValue]<1))
+//            {
+//                self.canUsePoint =0;
+//                self.pay_Type =@"voucher";
+//                
+//                MyCashCouponViewController *choiceView = [[MyCashCouponViewController alloc]init];
+//                
+//                choiceView.useCoupon = 100;
+//                choiceView.delegate = self;
+//                [self.navigationController pushViewController:choiceView animated:YES];
+//            }
+//            
+//        }
+//        else if(indexPath.row == 1)
+//        {
+//            if(!((([self.moneyString floatValue])/2)<1)){
+//                self.Type = points;
+//                self.pay_Type =@"integral";
+//                
+//                [self.table_view reloadData];
+//                
+//                if(!(([self.allPoint integerValue]/10)<([self.moneyString floatValue])))
+//                {
+//                    self.canUsePoint =(([self.moneyString floatValue])/2)*10;
+//                }else
+//                    self.canUsePoint =[self.allPoint floatValue];
+//                
+//                self.actualMoney = [[NSString alloc]initWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]-self.canUsePoint/10];
+//                
+//                message = [NSString stringWithFormat:@"您使用乐点抵付%.2f,实付款:¥%.2f",self.canUsePoint/10,[self.moneyString floatValue]-self.canUsePoint/10];
+//                
+//
+//                
+//            }else{
+//                self.actualMoney = [[NSString alloc]initWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]];
+//                
+//                message = [NSString stringWithFormat:@"实付款:¥%.2f",[self.moneyString floatValue]];
+//
+//                
+//            }
+//            
+//            
+//        }
         
     }else if (indexPath.section ==2){
         
@@ -462,17 +491,40 @@ enum PayTypes {
     
     
     
-    if (self.payType==Alipay) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"支付", nil];
+    if (self.payType==Alipay || self.payType==UPPay) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:Moneymessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"支付", nil];
         alertView.tag = 1111;
         [alertView show];
         
+    }else  if (self.payType ==WalletPay) {
+        
+        
+        
+        if (self.walletRemain >=[self.moneyString floatValue]) {
+            
+            
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@,钱包余额充足,是否支付?",Moneymessage] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self payUseTheWallet];
+            }];
+            
+            
+            [alertVC addAction:cancelAction];
+            [alertVC addAction:sureAction];
+            
+            [self presentViewController:alertVC animated:YES completion:nil];
+            
+            
+        }else{
+            [self showHint:@"钱包余额不足,请充值!"];
+        }
+        
+        
     }
-    if (self.payType==UPPay) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"支付", nil];
-        alertView.tag = 1111;
-        [alertView show];
-    }
+
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -491,9 +543,122 @@ enum PayTypes {
                 
                [self postPaymentsRequest];
             }
+            
+            if (self.payType==WalletPay) {
+                
+                
+                [self payUseTheWallet];
+            }
 
+           
         }
     }
+    
+}
+/**
+ 
+ 使用钱包支付
+ */
+-(void)payUseTheWallet{
+    
+    [self showHudInView:self.view hint:@"加载中..."];
+
+    
+    NSString *url ;
+    
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    [params setObject:appdelegate.cardInfo_dic[@"merchant"] forKey:@"muid"];
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:appdelegate.cardInfo_dic[@"card_type"] forKey:@"cate"];
+    
+    //续卡
+    if (self.orderInfoType==2) {
+        
+        url = [NSString stringWithFormat:@"%@UserType/wallet/card_renew",BASEURL];
+        
+        [params setObject:appdelegate.cardInfo_dic[@"card_code"] forKey:@"cardCode"];
+        [params setObject:appdelegate.cardInfo_dic[@"card_level"] forKey:@"cardLevel"];
+        
+    }
+    //升级
+    if (self.orderInfoType==4) {
+        
+        url = [NSString stringWithFormat:@"%@UserType/wallet/card_upgrade",BASEURL];
+        
+        [params setObject:appdelegate.payCardType forKey:@"new_level"];
+        
+        [params setObject:appdelegate.cardInfo_dic[@"card_code"] forKey:@"cardCode"];
+        [params setObject:appdelegate.cardInfo_dic[@"card_level"] forKey:@"cardLevel"];
+        
+    }
+    
+    
+    
+    [params setObject:orderType_A[self.orderInfoType] forKey:@"type"];
+    //实际支付价格.没有×100
+    [params setObject:self.moneyString forKey:@"sum"];
+    [params setObject:self.pay_Type forKey:@"pay_type"];
+    
+    if ([self.pay_Type isEqualToString:@"voucher"]) {
+        [params setObject:self.coup_dic[@"type"] forKey:@"content"];
+        
+    }else if ([self.pay_Type isEqualToString:@"integral"]) {
+        
+        [params setObject:[NSString stringWithFormat:@"%.f",self.canUsePoint] forKey:@"content"];
+    }
+    else{
+    }
+    //实付金额×100
+    NSInteger actMoney1 =[[self.actualMoney substringFromIndex:5] floatValue]*100;
+    NSString *actMoney = [[NSString alloc]initWithFormat:@"%ld",actMoney1];
+    [params setObject:actMoney forKey:@"txnAmt"];
+    [params setObject:appdelegate.cardInfo_dic[@"card_temp_color"] forKey:@"image_url"];
+
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"result----%@",result);
+        
+        [self hideHud];
+        if ([result[@"result_code"] intValue]==1) {
+            
+            
+            if (self.orderInfoType==4) {
+                AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+                
+                NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:appdelegate.cardInfo_dic];
+                
+                [card_dic setValue:appdelegate.payCardType forKey:@"card_level"];
+                appdelegate.cardInfo_dic =  card_dic;
+                
+            }
+
+            
+            
+            PaySuccessVc *VC = [[PaySuccessVc alloc]init];
+            VC.orderInfoType = self.orderInfoType;
+            VC.card_dic = self.card_dic;
+            VC.type_new = self.level;
+            VC.money_str = [self.actualMoney substringFromIndex:5];
+            
+            
+            [self.navigationController pushViewController:VC animated:YES];
+            
+
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付失败,是否放弃当前交易?" delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:@"去支付", nil];
+            alert.tag =1111;
+            [alert show];
+        }
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideHud];
+
+    }];
+
     
 }
 /**
@@ -519,6 +684,7 @@ enum PayTypes {
     [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
     [params setObject:appdelegate.cardInfo_dic[@"card_type"] forKey:@"cate"];
     
+    appdelegate.whoPay = self.orderInfoType;
     //续卡
     if (self.orderInfoType==2) {
         
@@ -695,6 +861,19 @@ enum PayTypes {
              if (orderState==9000) {
                  //支付成功,这里放你们想要的操作
                  
+                 
+                 if (self.orderInfoType==4) {
+                     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+                     
+                     NSMutableDictionary  *card_dic = [NSMutableDictionary dictionaryWithDictionary:appdelegate.cardInfo_dic];
+                     
+                     [card_dic setValue:appdelegate.payCardType forKey:@"card_level"];
+                     appdelegate.cardInfo_dic =  card_dic;
+                     
+                 }
+
+                 
+                 
                  PaySuccessVc *VC = [[PaySuccessVc alloc]init];
                  VC.orderInfoType = self.orderInfoType;
                  VC.card_dic = self.card_dic;
@@ -737,4 +916,29 @@ enum PayTypes {
 }
 
 
+
+
+-(void)postSocketMoney
+{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountGet",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:@"remain" forKey:@"type"];
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"%@", result);
+        NSString *remain = [NSString getTheNoNullStr:result[@"remain"] andRepalceStr:@"0.00"];
+        
+        self.walletRemain = [[remain stringByReplacingOccurrencesOfString:@"元" withString:@""] floatValue];
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
 @end

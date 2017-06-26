@@ -227,13 +227,13 @@
             lable.text = @"支付宝支付";
             image_select.image = [UIImage imageNamed:@"settlement_choose_n"];
             
-            imageView.image = [UIImage imageNamed:@"settlement_alipay_n"];
+            imageView.image = [UIImage imageNamed:@"支付宝支付L"];
             
             selectBtn = button;
             
         }else{
             lable.text = @"银联支付";
-            imageView.image = [UIImage imageNamed:@"settlement_unionpay_n"];
+            imageView.image = [UIImage imageNamed:@"银联支付L"];
             image_select.image = [UIImage imageNamed:@"settlement_unchoose_n"];
             
         }

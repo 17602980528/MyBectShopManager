@@ -1611,19 +1611,18 @@
             [self.navigationController pushViewController:VC animated:YES];
         }
         if (sender.tag ==1) {
-            AdvertiseViewController *VC = [[AdvertiseViewController alloc]init];
-            VC.activityId =dic[@"id"];
-            VC.title = dic[@"theme"];
             
-            [self.navigationController pushViewController:VC animated:YES];
+            [self twoActiveClcik:dic];
+            
+          
         }
         if (sender.tag ==2) {
            
             //            [self showHint:@"暂未开通!"];
-            HolidayActivertyVC *holidayVC=[[HolidayActivertyVC alloc]init];
-            holidayVC.activityId=dic[@"id"];
-            holidayVC.title = dic[@"theme"];
-            [self.navigationController pushViewController:holidayVC animated:YES];
+            
+            [self twoActiveClcik:dic];
+
+          
             
         }
 
@@ -1922,6 +1921,65 @@
     }];
 
 }
+
+
+#pragma mark  美发专区 ,节日活动点击
+
+
+-(void)twoActiveClcik:(NSDictionary *)activityDic{
+    
+    
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/getList",BASEURL];
+    
+    
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:activityDic[@"id"] forKey:@"advert_id"];
+    
+    [paramer setValue:@"1" forKey:@"index"];
+    
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+     {
+         
+         
+         if ([result count]>0) {
+             
+             if ([activityDic[@"id"] intValue]==2) {
+                 AdvertiseViewController *VC = [[AdvertiseViewController alloc]init];
+                 VC.activityId =activityDic[@"id"];
+                 VC.title = activityDic[@"theme"];
+                 
+                 [self.navigationController pushViewController:VC animated:YES];
+                 
+             }else{
+                
+                 HolidayActivertyVC *holidayVC=[[HolidayActivertyVC alloc]init];
+                 holidayVC.activityId=activityDic[@"id"];
+                 holidayVC.title = activityDic[@"theme"];
+                 [self.navigationController pushViewController:holidayVC animated:YES];
+                 
+             }
+
+             
+             
+             
+         }else{
+             
+             
+             [self showHint:@"活动暂未开始!"];
+         }
+         
+        
+         
+         
+     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+         NSLog(@"%@", error);
+     }];
+    
+    
+}
+
+
 //弹出广告点击
 -(void)popImgClick{
     AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;

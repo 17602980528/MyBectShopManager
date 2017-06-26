@@ -139,14 +139,6 @@
             ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
         }
-    }else if (alertView.tag==999) {
-        //支付成功提示框
-        if (buttonIndex==0) {
-            [self.navigationController popViewControllerAnimated:YES];
-            
-            
-        }
-        
     }else{
         //得到输入框
         
@@ -221,10 +213,18 @@
              SoundPaly *sound=[SoundPaly sharedManager:@"sms-received1" type:@"caf"];
              [sound play];
              
-             UIAlertView *altView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-             altView.tag =999;
+             UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付成功" preferredStyle:UIAlertControllerStyleAlert];
+             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                 
+                 POP
+             }];
              
-             [altView show];
+             [alertVC addAction:cancelAction];
+             
+             [self presentViewController:alertVC animated:YES completion:nil];
+             
+
+             
              
              
              //发送订单详情,获取店名

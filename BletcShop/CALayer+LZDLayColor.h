@@ -10,7 +10,7 @@
 
 @interface CALayer (LZDLayColor)
 
-@property(nonatomic,weak)UIColor *BorderColorFromUIColor;
+- (void)setBorderColorFromUIColor:(UIColor *)color;
 
 
 @end

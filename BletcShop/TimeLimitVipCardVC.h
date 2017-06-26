@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface TimeLimitVipCardVC : UIViewController
-//选择的默认卡片
-@property (nonatomic,retain)NSDictionary *choiceCard;
+
+/**
+ 卡的信息
+ */
+@property (nonatomic , strong) NSDictionary *card_dic;
+
+
+@property(nonatomic,copy)  void(^block)();
 @end

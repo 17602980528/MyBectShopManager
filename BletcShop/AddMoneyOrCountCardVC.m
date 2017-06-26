@@ -16,6 +16,8 @@
 
 @interface AddMoneyOrCountCardVC ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate,ChoiceCardDelegate>{
     UIButton *oldbtn;
+    
+   CGFloat tabelViewOffsetY;
 }
 @property (weak, nonatomic) IBOutlet UITableView *table_View;
 @property(nonatomic,strong)NSMutableDictionary *title_Dic;
@@ -225,11 +227,11 @@
 }
 //选择卡的样式
 - (IBAction)selectCardImgType:(UITapGestureRecognizer *)sender {
-//    PUSH(ChoiceCardPictureViewController);
-//    vc.delegate = self;
+    PUSH(ChoiceCardPictureViewController);
+    vc.delegate = self;
     
     
-    PUSH(ChoseCardColorStyleViewVC)
+//    PUSH(ChoseCardColorStyleViewVC)
 
     
 }
@@ -425,16 +427,23 @@
    CGRect frame = [textView convertRect:textView.frame toView:self.view];
     
     CGFloat h =SCREENHEIGHT-(frame.origin.y+frame.size.height+64);
-    
+    tabelViewOffsetY =_table_View.contentOffset.y;
+   
     if (h<216) {
-        [self.table_View setContentOffset:CGPointMake(0, 216-h)];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.table_View setContentOffset:CGPointMake(0,  tabelViewOffsetY+216-h)];
+ 
+        }];
     }
     
     
 }
 -(void)textViewDidEndEditing:(UITextView *)textView{
     
-    [self.table_View setContentOffset:CGPointMake(0, 0)];
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.table_View setContentOffset:CGPointMake(0, tabelViewOffsetY)];
+
+    }];
     if (textView.text.length>0) {
         [self.cardInfo_dic setValue:textView.text forKey:@"content"];
 

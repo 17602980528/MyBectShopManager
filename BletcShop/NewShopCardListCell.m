@@ -19,7 +19,7 @@
     return self;
 }
 -(void)initSubviews{
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(12, 10, 80, 50)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(12, 10, 85, 50)];
     imageView.layer.cornerRadius = 5;
     imageView.layer.masksToBounds = YES;
     imageView.layer.borderWidth = 0.5;
@@ -28,11 +28,11 @@
     self.cardImg = imageView;
     [self addSubview:imageView];
     
-    UIView *bot_view = [[UIView alloc]initWithFrame:CGRectMake(0, 35, 80, 15)];
+    UIView *bot_view = [[UIView alloc]initWithFrame:CGRectMake(0, 35, imageView.width, 15)];
     bot_view.backgroundColor = [UIColor whiteColor];
     [imageView addSubview:bot_view];
     
-    UILabel *vipLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 35)];
+    UILabel *vipLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imageView.width, 35)];
     vipLab.textAlignment = NSTextAlignmentCenter;
     vipLab.textColor = [UIColor whiteColor];
     [imageView addSubview:vipLab];
@@ -58,7 +58,7 @@
     
     self.cardPriceLable = cardPriceLable;
     
-    UILabel *discountLable=[[UILabel alloc]initWithFrame:CGRectMake(content_lab.left, content_lab.bottom+5, 30, 13)];
+    UILabel *discountLable=[[UILabel alloc]initWithFrame:CGRectMake(content_lab.left, content_lab.bottom+5, 35, 13)];
     discountLable.font=[UIFont systemFontOfSize:10.0f];
     discountLable.textColor=[UIColor whiteColor];
     discountLable.backgroundColor = RGB(240,153,68);
@@ -84,4 +84,16 @@
     [self addSubview:line];
     
 }
+
+//-(void)setDiscountLable:(UILabel *)discountLable{
+//    _discountLable = discountLable;
+//    
+//    
+//   CGRect frame = _discountLable.frame ;
+//    
+//    CGFloat ww = [discountLable.text boundingRectWithSize:CGSizeMake(1000, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_discountLable.font} context:nil].size.width;
+//    
+//    frame.size.width = ww +5;
+//    _discountLable.frame = frame;
+//}
 @end

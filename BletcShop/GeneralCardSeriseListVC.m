@@ -206,7 +206,7 @@
     
     edit_Action.backgroundColor = RGB(175,175,175);
     
-    NSString *ti = old_btn.tag==2 ? @"下架":@"上架" ;
+    NSString *ti = old_btn.tag==1 ? @"下架":@"上架" ;
     
     
     
@@ -220,7 +220,7 @@
         
         UIAlertAction*sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            if (old_btn.tag==2) {
+            if (old_btn.tag==1) {
                 [self UpOrDownCard:dic andState:@"off"];
                 
             }else{
@@ -455,7 +455,7 @@
 #pragma mark 懒加载
 -(NSArray *)state_A{
     if (!_state_A) {
-        _state_A =  @[@"null",@"off",@"on"];
+        _state_A =  @[@"null",@"on",@"off"];
         
     }
     return _state_A;

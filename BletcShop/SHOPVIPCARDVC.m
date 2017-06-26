@@ -94,11 +94,16 @@
 //        [self showHint:@"程序猿哥哥正在努力中..."];
     }else
     {
-        PUSH(TimeLimitCardHomeVC)
-        vc.navigationItem.title = @"体验卡";
+        
+        if (indexPath.row==3) {
+            PUSH(TimeLimitCardHomeVC)
+            vc.navigationItem.title = @"体验卡";
 
+        }
+      
         if (indexPath.row==4) {
-            vc.navigationItem.title = @"限时卡";
+            [self showHint:@"程序猿哥哥正在努力中..."];
+        
         }
     }
    

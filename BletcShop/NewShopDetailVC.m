@@ -25,6 +25,7 @@
 
 //    UIWebView *web_view;
     
+    SDRefreshHeaderView *_refreshheader;
     UIView *old_view;
 
     
@@ -139,6 +140,20 @@
     table.showsVerticalScrollIndicator = NO;
     self.shopTableView = table;
     [self.view addSubview:table];
+    
+    
+    _refreshheader = [SDRefreshHeaderView refreshView];
+    [_refreshheader addToScrollView:table];
+    _refreshheader.isEffectedByNavigationController = NO;
+    
+    __block typeof(self)tempSelf =self;
+    _refreshheader.beginRefreshingOperation = ^{
+        //请求数据
+        [tempSelf postRequestWholeInfo];
+    };
+    
+    
+   
     
     [self creatTableViewHeadView];
 }
@@ -1158,12 +1173,28 @@
     
     NSString *discounts=[NSString getTheNoNullStr:[dic objectForKey:@"rule"] andRepalceStr:@"0"];
     CGFloat dis=[discounts floatValue]/10.0f;
-    card_cell.discountLable.text=[NSString stringWithFormat:@"%.1f折",dis];
+    card_cell.discountLable.text=[NSString stringWithFormat:@"%g折",dis];
+    
+    
     
     
     if ([[dic objectForKey:@"type"] isEqualToString:@"计次卡"]) {
         card_cell.discountLable.text=[NSString stringWithFormat:@"%@次",discounts];
+    }else{
+        
+        if (dis==10) {
+            card_cell.discountLable.text=@"无折扣";
+ 
+        }
     }
+    
+    
+    CGRect frame = card_cell.discountLable.frame ;
+    
+    CGFloat ww = [card_cell.discountLable.text boundingRectWithSize:CGSizeMake(1000, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:card_cell.discountLable.font} context:nil].size.width;
+    
+    frame.size.width = ww +5;
+    card_cell.discountLable.frame = frame;
     
     if ([[NSString getTheNoNullStr:[dic objectForKey:@"indate"] andRepalceStr:@"0"] isEqualToString:@"0"]) {
         card_cell.timeLable.text=[NSString stringWithFormat:@"有效期: 无期限(%@)",[NSString getTheNoNullStr:[dic objectForKey:@"type"] andRepalceStr:@"---"]];
@@ -1278,9 +1309,8 @@
     
     BDMapViewController *controller = [[BDMapViewController alloc]init];
     controller.title = @"查看位置";
-    controller.latitude = [[self.infoDic objectForKey:@"latitude"] doubleValue];
-    controller.longitude = [[self.infoDic objectForKey:@"longtitude"] doubleValue];
-    controller.infoDic= self.infoDic;
+    controller.latitude = [[wholeInfoDic objectForKey:@"latitude"] doubleValue];
+    controller.longitude = [[wholeInfoDic objectForKey:@"longtitude"] doubleValue];
     
     [self.navigationController pushViewController:controller animated:YES];
     
@@ -1320,7 +1350,6 @@
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
-        NSLog(@"%@",self.infoDic);
         NSMutableString* telStr = [[NSMutableString alloc]initWithString:@"tel://"];
         [telStr appendString:[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"store_number"] andRepalceStr:[wholeInfoDic objectForKey:@"phone"]]];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telStr]];
@@ -1349,6 +1378,8 @@
 //获取商家所有信息
 -(void)postRequestWholeInfo{
     
+    [self showHudInView:self.view hint:@"加载中..."];
+    
     AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/infoGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -1366,6 +1397,9 @@
     NSLog(@"paramer ===%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
      {
+         [_refreshheader endRefreshing];
+         [self hideHud];
+         
          NSLog(@"result====%@", result);
          self.cardArray=result[@"card_list"];
          wholeInfoDic=[result copy];
@@ -1375,6 +1409,9 @@
          
          [self creatTableFootView];
      } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [_refreshheader endRefreshing];
+         [self hideHud];
+
          //         [self noIntenet];
          NSLog(@"%@", error);
      }];
@@ -1504,7 +1541,7 @@
     addressimg.image = [UIImage imageNamed:@"location"];
     [backView addSubview:addressimg];
     
-    UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, line1.bottom+17, SCREENWIDTH-30, 14)];
+    UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, line1.bottom+7, SCREENWIDTH-30, 34)];
     addressLabel.font = [UIFont systemFontOfSize:13];
     addressLabel.text = [wholeInfoDic objectForKey:@"address"];
     addressLabel.userInteractionEnabled = YES;
@@ -1533,7 +1570,7 @@
 //    line3.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
 //    [backView addSubview:line3];
 
-    backView.frame = CGRectMake(0, 0, SCREENWIDTH, addressLabel.bottom+17);
+    backView.frame = CGRectMake(0, 0, SCREENWIDTH, addressLabel.bottom+7);
 
     self.shopTableView.tableHeaderView = backView;
 }

@@ -25,7 +25,7 @@
 #import "UPPaymentControl.h"
 #import "PaySuccessVc.h"
 @interface NewBuyCardViewController ()<UITableViewDelegate,UITableViewDataSource,ViewControllerBDelegate>
-
+@property (nonatomic ,assign) float walletRemain;//钱包余额
 @end
 
 @implementation NewBuyCardViewController
@@ -113,7 +113,14 @@
         PaySuccessVc *VC = [[PaySuccessVc alloc]init];
         VC.orderInfoType = self.orderInfoType;
         VC.card_dic = self.card_dic;
-        VC.money_str = [self.contentLabel.text substringFromIndex:4];
+        
+        if (self.Type== Wares) {
+            VC.money_str = [self.contentLabel.text substringFromIndex:4];
+
+        }else{
+            VC.money_str = self.card_dic[@"price"];
+ 
+        }
         
         [self.navigationController pushViewController:VC animated:YES];
         
@@ -140,6 +147,9 @@
     self.Type = 888;
     self.canUsePoint = 0;
     NSLog(@"000====%ld",(long)_selectRow);
+    
+    //获取钱包余额
+    [self postSocketMoney];
     
     NSMutableArray *mutab_A = [NSMutableArray array];
     if (_selectRow!=9999) {
@@ -243,7 +253,7 @@
 }
 //tableview---delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
@@ -255,9 +265,15 @@
         
 //                return 84;
     }else if (indexPath.section==1){
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        
+        return cell?cell.frame.size.height :84;
+        
+        
+    }else if (indexPath.section==2){
         //        return 0.01;
         return 50;
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==3){
         return 54;
     }
     return 0;
@@ -272,7 +288,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section==0) {
         return 49;
-    }else if(section==2){
+    }else if(section==3){
         return 43;
         //        return 0.01;
     }else
@@ -282,9 +298,11 @@
     if (section==0) {
         return self.cardListArray.count;
     }else if (section==1){
+        return 1;
+    }else if (section==2){
         return 3;
-    }else{
-        return 2;
+    }else if (section==3){
+        return 3;
     }
     return 2;
 }
@@ -303,6 +321,9 @@
     line.backgroundColor = RGB(234, 234, 234);
     [view2 addSubview:line];
 
+    
+    label.frame=CGRectMake(13, 7, SCREENWIDTH-13, 26);
+
     if (section==0) {
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 14, 14)];
         imageView.image=[UIImage imageNamed:@"店铺管理"];
@@ -311,11 +332,10 @@
         label.text=self.shop_name;
         
     }else if (section==1){
-        //        label.hidden = YES;
-        label.frame=CGRectMake(13, 7, SCREENWIDTH-13, 26);
-        label.text=@"优惠方式";
+        label.text=@"购买提示";
     }else if (section==2){
-        label.frame=CGRectMake(13, 7, SCREENWIDTH-13, 26);
+       label.text=@"优惠方式";
+    }else if (section==3){
         label.text=@"支付方式";
     }
     return view;
@@ -405,11 +425,11 @@
         //        [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon2.png"] options:SDWebImageRetryFailed];
         //
         
-        UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, 15, SCREENWIDTH-imageView.right-70-15, 30)];
+        UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, imageView.top, SCREENWIDTH-imageView.right-70-15, imageView.height)];
         lable.text = [NSString getTheNoNullStr:self.cardListArray[indexPath.row][@"content"] andRepalceStr:@"暂无优惠!"];
         lable.textColor = RGB(51,51,51);
         lable.font = [UIFont systemFontOfSize:13];
-        lable.numberOfLines=0;
+        lable.numberOfLines=2;
         [cell addSubview:lable];
         
         
@@ -426,16 +446,19 @@
         
         
         
-        CGFloat labHight = [lable.text boundingRectWithSize:CGSizeMake(SCREENWIDTH-imageView.right-10-price_width-13, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.height;
+//        CGFloat labHight = [lable.text boundingRectWithSize:CGSizeMake(SCREENWIDTH-imageView.right-10-price_width-13, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.height;
         CGRect frame = lable.frame;
-        frame.size.height = labHight;
+//        frame.size.height = labHight;
         frame.size.width = SCREENWIDTH-imageView.right-10-price_width-13;
-        frame.origin.y =  labHight<84? (84 -labHight)/2 :5;
+//        frame.origin.y =  labHight<84? (84 -labHight)/2 :5;
         lable.frame = frame;
         
         
         CGRect cellFrame = cell.frame;
-        cellFrame.size.height = labHight>84 ? lable.bottom+5 :84;
+        
+//        cellFrame.size.height = labHight>84 ? lable.bottom+5 :84;
+        cellFrame.size.height = 84;
+
         cell.frame = cellFrame;
         
         
@@ -451,6 +474,32 @@
         
         
     }else if (indexPath.section==1){
+        
+        
+        UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, SCREENWIDTH-30, 100)];
+        lable.text = [NSString getTheNoNullStr:self.cardListArray[_selectRow][@"content"] andRepalceStr:@"暂无优惠!"];
+        lable.textColor = RGB(51,51,51);
+        lable.font = [UIFont systemFontOfSize:13];
+        lable.numberOfLines=0;
+        [cell addSubview:lable];
+        
+        
+        CGFloat labHight = [lable.text boundingRectWithSize:CGSizeMake(lable.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.height;
+        
+        
+        CGRect frame = lable.frame;
+         frame.size.height = labHight;
+        lable.frame = frame;
+        
+        
+        CGRect cellFrame = cell.frame;
+        
+    cellFrame.size.height = lable.bottom+10;
+        
+        cell.frame = cellFrame;
+        
+    }
+    else if (indexPath.section==2){
         
 //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
         UIImageView *imageView_red = [[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH-18-7.5, (50-15)/2, 7.5, 15)];
@@ -546,7 +595,7 @@
             
         }
         
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==3){
         
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(13, 12, 30, 30)];
         UILabel *payLable=[[UILabel alloc]initWithFrame:CGRectMake(53, 12, 120, 30)];
@@ -572,11 +621,14 @@
         [cell addSubview:payLable];
         [cell addSubview:imageView];
         if (indexPath.row==0) {
-            imageView.image=[UIImage imageNamed:@"alipay_img.png"];
+            imageView.image=[UIImage imageNamed:@"支付宝支付L"];
             payLable.text=@"支付宝支付";
         }else if (indexPath.row==1){
-            imageView.image=[UIImage imageNamed:@"unionpay_img.png"];
+            imageView.image=[UIImage imageNamed:@"银联支付L"];
             payLable.text=@"银联支付";
+        }else if (indexPath.row==2){
+            imageView.image=[UIImage imageNamed:@"钱包支付L"];
+            payLable.text=@"钱包支付";
         }
     }
     return cell;
@@ -599,7 +651,7 @@
         
         appdelegate.cardInfo_dic=self.cardListArray[indexPath.row];
     }
-    if (indexPath.section==1)
+    if (indexPath.section==2)
     {
         
         if(indexPath.row == 0)
@@ -698,7 +750,7 @@
         }
         
     }
-    if (indexPath.section==2) {
+    if (indexPath.section==3) {
         payKind=indexPath.row;
         [self.myTable reloadData];
     }
@@ -882,10 +934,131 @@
         appdelegate.paymentType =1;
         
         [self postPaymentsRequest];
+    }else if (payKind==2){
+        
+        float actMoney1 =[[self.contentLabel.text substringFromIndex:4] floatValue];//实际支付钱
+
+        
+        if (self.walletRemain >=actMoney1) {
+            
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"钱包余额充足,是否支付?" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self payUseTheWallet];
+            }];
+
+            
+            [alertVC addAction:cancelAction];
+            [alertVC addAction:sureAction];
+            
+            [self presentViewController:alertVC animated:YES completion:nil];
+            
+            
+        }else{
+            [self showHint:@"钱包余额不足,请充值!"];
+        }
+        
     }
     
 }
 
+/**
+ 使用钱包支付
+ */
+
+-(void)payUseTheWallet{
+
+    
+    [self showHudInView:self.view hint:@"加载中..."];
+    NSString *url = [NSString stringWithFormat:@"%@UserType/wallet/card_buy",BASEURL];
+    
+    
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+
+    
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    [params setObject:appdelegate.cardInfo_dic[@"merchant"] forKey:@"muid"];
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:appdelegate.cardInfo_dic[@"code"] forKey:@"code"];
+    [params setObject:appdelegate.cardInfo_dic[@"level"] forKey:@"level"];
+    [params setObject:appdelegate.cardInfo_dic[@"type"] forKey:@"cate"];
+    
+    
+    [params setObject:@"办卡" forKey:@"type"];
+    //实际支付价格.没有×100
+    [params setObject:self.moneyString forKey:@"sum"];
+    
+    if (self.Type==Wares)
+    {
+        //使用商户自己的优惠券,sum为抵扣后的值,即实际支付的价 格,其他不变
+        [params setObject:[self.contentLabel.text substringFromIndex:4] forKey:@"sum"];
+        
+        [params setObject:@"cp" forKey:@"pay_type"];
+        [params setObject:self.coup_dic[@"coupon_id"] forKey:@"content"];
+    }
+    else if (self.Type == points)
+    {//使用红包
+        [params setObject:@"rp" forKey:@"pay_type"];
+        [params setObject:[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint] forKey:@"content"];
+    }else if(self.Type ==plat_Ware){
+        //使用平台优惠券
+        [params setObject:@"scp" forKey:@"pay_type"];
+        [params setObject:self.plat_coup_dic[@"id"] forKey:@"content"];
+        
+    }else
+    {
+        [params setObject:@"null" forKey:@"pay_type"];
+    }
+    //实付金额×100
+    NSInteger actMoney1 =[[self.contentLabel.text substringFromIndex:4] floatValue];
+    NSString *actMoney = [[NSString alloc]initWithFormat:@"%ld",actMoney1];
+    [params setObject:actMoney forKey:@"pay_sum"];
+    
+    NSString *colorS = appdelegate.cardInfo_dic[@"card_temp_color"];
+    
+    [params setObject:[colorS substringFromIndex:1] forKey:@"image_url"];
+    
+
+    NSLog(@"params----%@",params);
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"result----%@",result);
+
+        [self hideHud];
+        if ([result[@"result_code"] intValue]==1) {
+            
+            
+            PaySuccessVc *VC = [[PaySuccessVc alloc]init];
+            VC.orderInfoType = self.orderInfoType;
+            VC.card_dic = self.card_dic;
+            if (self.Type== Wares) {
+                VC.money_str = [self.contentLabel.text substringFromIndex:4];
+                
+            }else{
+                VC.money_str = self.card_dic[@"price"];
+                
+            }
+            
+            [self.navigationController pushViewController:VC animated:YES];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付失败,是否放弃当前交易?" delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:@"去支付", nil];
+            alert.tag =1111;
+            [alert show];
+        }
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideHud];
+
+        
+    }];
+
+    
+    
+}
 /**
  银联支付
  */
@@ -1063,7 +1236,13 @@
                  PaySuccessVc *VC = [[PaySuccessVc alloc]init];
                  VC.orderInfoType = self.orderInfoType;
                  VC.card_dic = self.card_dic;
-                 VC.money_str = [self.contentLabel.text substringFromIndex:4];
+                 if (self.Type== Wares) {
+                     VC.money_str = [self.contentLabel.text substringFromIndex:4];
+                     
+                 }else{
+                     VC.money_str = self.card_dic[@"price"];
+                     
+                 }
                  
                  [self.navigationController pushViewController:VC animated:YES];
                  
@@ -1111,15 +1290,41 @@
                 
                 [self postPaymentsRequest];
             }
+            if (payKind==2) {
+                
+                
+                [self payUseTheWallet];
+            }
             
         }
     }
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+-(void)postSocketMoney
+{
+    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountGet",BASEURL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:@"remain" forKey:@"type"];
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        NSLog(@"%@", result);
+        NSString *remain = [NSString getTheNoNullStr:result[@"remain"] andRepalceStr:@"0.00"];
+        
+        self.walletRemain = [[remain stringByReplacingOccurrencesOfString:@"元" withString:@""] floatValue];
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
 }
 
 

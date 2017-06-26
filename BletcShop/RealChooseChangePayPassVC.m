@@ -19,7 +19,7 @@
 - (IBAction)changePayClick:(id)sender {
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    if ([appdelegate.userInfoDic[@"pay_passwd"] isEqualToString:@"未设置"]) {
+    if ([appdelegate.userInfoDic[@"pay_passwd"] isEqualToString:@"未设置"]||[appdelegate.userInfoDic[@"pay_passwd"] isEqualToString:@""]) {
         ChangePayPassVC *passVC=[[ChangePayPassVC alloc]init];
         [self.navigationController pushViewController:passVC animated:YES];
     }else{
@@ -32,13 +32,13 @@
     AccessCodeVC *forgotVC=[[AccessCodeVC alloc]init];
     [self.navigationController pushViewController:forgotVC animated:YES];
 }
-
+//15129025544
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"支付密码";
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    if ([appdelegate.userInfoDic[@"pay_passwd"] isEqualToString:@"未设置"]) {
+    if ([appdelegate.userInfoDic[@"pay_passwd"] isEqualToString:@"未设置"] ||[appdelegate.userInfoDic[@"pay_passwd"] isEqualToString:@""]) {
         _payPassTitle.text=@"设置支付密码";
     }else{
         _payPassTitle.text=@"修改支付密码";

@@ -199,7 +199,7 @@
         //三区
         
         Myitem *item30 = [Myitem itemsWithImg:@"mine_re_n" title:@"我的推荐" vcClass:[FriendController class]];
-        Myitem *item31 = [Myitem itemsWithImg:@"mine_comm_n" title:@"乐社区" vcClass:[LZDBASEViewController class]];
+        Myitem *item31 = [Myitem itemsWithImg:@"mine_comm_n" title:@"我的好友" vcClass:[LZDBASEViewController class]];
         Myitem *item32 = [Myitem itemsWithImg:@"mine_inva_n" title:@"邀请好友使用" vcClass:[ShareViewController class]];
         Mygroup *group3 = [[Mygroup alloc]init];
         group3.items = @[item30,item31,item32];

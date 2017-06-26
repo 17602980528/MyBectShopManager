@@ -545,7 +545,7 @@
     controller.title = @"查看位置";
     controller.latitude = [[self.infoDic objectForKey:@"latitude"] doubleValue];
     controller.longitude = [[self.infoDic objectForKey:@"longtitude"] doubleValue];
-    controller.infoDic= self.infoDic;
+//    controller.infoDic= self.infoDic;
     
     [self.navigationController pushViewController:controller animated:YES];
     

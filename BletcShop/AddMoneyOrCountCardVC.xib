@@ -159,7 +159,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
-                        <userDefinedRuntimeAttribute type="color" keyPath="layer.BorderColorFromUIColor">
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
                             <color key="value" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>

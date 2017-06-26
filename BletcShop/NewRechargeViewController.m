@@ -107,7 +107,7 @@
     [backView addSubview:lineView1];
     
     UIImageView *imageView1=[[UIImageView alloc]initWithFrame:CGRectMake(12, 45+7, 30, 30)];
-    imageView1.image=[UIImage imageNamed:@"alipay_img.png"];
+    imageView1.image=[UIImage imageNamed:@"支付宝支付L"];
     [backView addSubview:imageView1];
     UILabel *alipayLab = [[UILabel alloc]initWithFrame:CGRectMake(imageView1.right+10, imageView1.top, 100, imageView1.height)];
     alipayLab.text = @"支付宝支付";
@@ -120,7 +120,7 @@
     [backView addSubview:lineView2];
     
     UIImageView *imageView2=[[UIImageView alloc]initWithFrame:CGRectMake(12, 90+7, 30, 30)];
-    imageView2.image=[UIImage imageNamed:@"unionpay_img.png"];
+    imageView2.image=[UIImage imageNamed:@"银联支付L"];
     [backView addSubview:imageView2];
     
     UILabel *uPpayLab = [[UILabel alloc]initWithFrame:CGRectMake(imageView2.right+10, imageView2.top, 100, imageView2.height)];

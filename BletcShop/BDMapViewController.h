@@ -23,7 +23,7 @@
 
 
 
-@property(nonatomic,strong)NSMutableDictionary *infoDic;// 商户信息
+//@property(nonatomic,strong)NSMutableDictionary *infoDic;// 商户信息
 
 
 
