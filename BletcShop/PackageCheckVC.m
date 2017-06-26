@@ -7,7 +7,7 @@
 //
 
 #import "PackageCheckVC.h"
-#import "PackageTableViewCell.h"
+#import "CardDetailShowProdictCell.h"
 #import "UIImageView+WebCache.h"
 @interface PackageCheckVC ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -64,11 +64,11 @@
         return 5;
     }else{
         if (productArray &&productArray.count>0) {
-             return productArray.count;
+            return productArray.count;
         }else{
             return 0;
         }
-       
+        
     }
 }
 
@@ -110,11 +110,11 @@
         [downView addSubview:shopName];
         
         return view;
-
+        
     }else{
         return nil;
     }
- 
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
@@ -156,21 +156,21 @@
         }
         
         return cell;
-
+        
     }else{
-                static NSString   * CellIdentiferId =  @"packageCell";
-                PackageTableViewCell  * cell = [tableView  dequeueReusableCellWithIdentifier :CellIdentiferId];
-                if (!cell){
-                    NSArray  * nibs = [[ NSBundle mainBundle ] loadNibNamed :@"PackageTableViewCell" owner :self options :nil ];
-                    cell = [  nibs lastObject ];
-                };
+        static NSString   * CellIdentiferId =  @"CardDetailShowCell";
+        CardDetailShowProdictCell  * cell = [tableView  dequeueReusableCellWithIdentifier :CellIdentiferId];
+        if (!cell){
+            NSArray  * nibs = [[ NSBundle mainBundle ] loadNibNamed :@"CardDetailShowProdictCell" owner :self options :nil ];
+            cell = [  nibs lastObject ];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        };
         cell.productName.text=[NSString stringWithFormat:@"%@",productArray[indexPath.row][@"name"]];
         cell.productPrice.text=[NSString stringWithFormat:@"%@元/次",productArray[indexPath.row][@"price"]];
         NSURL * nurl1=[[NSURL alloc] initWithString:[[NSString stringWithFormat:@"%@%@",PRODUCT_IMAGE,productArray[indexPath.row][@"image"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         [cell.productImage sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-        cell.chooseTip.image=[UIImage imageNamed:@"de_icon_checkbox_sl"];
-                return cell;
-
+        return cell;
+        
     }
     
 }
@@ -190,13 +190,13 @@
     // Dispose of any resources that can be recreated.
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -23,6 +23,8 @@
 		0793870D1C561D5E0021B385 /* Myitem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0793870C1C561D5E0021B385 /* Myitem.m */; };
 		079387101C561FBA0021B385 /* Mygroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0793870F1C561FBA0021B385 /* Mygroup.m */; };
 		079387131C5620290021B385 /* Mycell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079387121C5620290021B385 /* Mycell.m */; };
+		1804607F1F00E49900F6B443 /* CardDetailShowProdictCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804607D1F00E49900F6B443 /* CardDetailShowProdictCell.m */; };
+		180460801F00E49900F6B443 /* CardDetailShowProdictCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1804607E1F00E49900F6B443 /* CardDetailShowProdictCell.xib */; };
 		180B53681D4F401F00DE6641 /* MerchantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180B53671D4F401F00DE6641 /* MerchantDetailViewController.m */; };
 		180CC7C01E64110D002F5E35 /* 收费标准.png in Resources */ = {isa = PBXBuildFile; fileRef = 180CC7BF1E64110D002F5E35 /* 收费标准.png */; };
 		180D872A1E5AB9C600E7FFB4 /* AddCouponHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D87291E5AB9C600E7FFB4 /* AddCouponHomeVC.m */; };
@@ -1266,6 +1268,9 @@
 		0793870F1C561FBA0021B385 /* Mygroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mygroup.m; sourceTree = "<group>"; };
 		079387111C5620290021B385 /* Mycell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mycell.h; sourceTree = "<group>"; };
 		079387121C5620290021B385 /* Mycell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mycell.m; sourceTree = "<group>"; };
+		1804607C1F00E49900F6B443 /* CardDetailShowProdictCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardDetailShowProdictCell.h; sourceTree = "<group>"; };
+		1804607D1F00E49900F6B443 /* CardDetailShowProdictCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardDetailShowProdictCell.m; sourceTree = "<group>"; };
+		1804607E1F00E49900F6B443 /* CardDetailShowProdictCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardDetailShowProdictCell.xib; sourceTree = "<group>"; };
 		180B53661D4F401F00DE6641 /* MerchantDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantDetailViewController.h; sourceTree = "<group>"; };
 		180B53671D4F401F00DE6641 /* MerchantDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantDetailViewController.m; sourceTree = "<group>"; };
 		180CC7BF1E64110D002F5E35 /* 收费标准.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "收费标准.png"; sourceTree = "<group>"; };
@@ -3572,6 +3577,9 @@
 				182EF55D1F00BD7600ECDD7D /* PackageHomePageTableViewCell.h */,
 				182EF55E1F00BD7600ECDD7D /* PackageHomePageTableViewCell.m */,
 				182EF55F1F00BD7600ECDD7D /* PackageHomePageTableViewCell.xib */,
+				1804607C1F00E49900F6B443 /* CardDetailShowProdictCell.h */,
+				1804607D1F00E49900F6B443 /* CardDetailShowProdictCell.m */,
+				1804607E1F00E49900F6B443 /* CardDetailShowProdictCell.xib */,
 			);
 			name = "套餐卡首页";
 			sourceTree = "<group>";
@@ -7147,6 +7155,7 @@
 				D94C5F401D9133700063EB27 /* bbbLL.png in Resources */,
 				1CF283941C58C48900F3952A /* index1.png in Resources */,
 				1A8312791D885444001BC3B6 /* chat_receiver_audio_playing000@2x.png in Resources */,
+				180460801F00E49900F6B443 /* CardDetailShowProdictCell.xib in Resources */,
 				1A8312841D88544D001BC3B6 /* chat_sender_audio_playing_003@2x.png in Resources */,
 				D95BAE5A1D542FD500ED0CDC /* award_16.png in Resources */,
 				18BCCDCF1D3C9EE8005E145D /* welcome_logo.png in Resources */,
@@ -8066,6 +8075,7 @@
 				D98E5BFC1E515210009D56BF /* MASConstraint.m in Sources */,
 				1C0BEF871C7D56EF00519481 /* RegisterController.m in Sources */,
 				D95F03271DD9664900F9DC2F /* BankListViewController.m in Sources */,
+				1804607F1F00E49900F6B443 /* CardDetailShowProdictCell.m in Sources */,
 				D96503DA1CE02B21006907EF /* AsyncUdpSocket.m in Sources */,
 				18F05E6A1E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m in Sources */,
 				D97B702C1E2C62AC00CEAFC1 /* CardMarketCell.m in Sources */,
