@@ -123,7 +123,14 @@
         [[NSUserDefaults standardUserDefaults]setObject:arr forKey:@"CARDIMGTEMP"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
-        
+        NSMutableArray *newArray=[[NSMutableArray alloc]initWithCapacity:0];
+        for (int i=0; i<arr.count; i++) {
+            NSMutableDictionary *dic=[NSMutableDictionary dictionary];
+            [ dic setObject:arr[i][@"image"] forKey:arr[i][@"color"]];
+            [newArray addObject:dic];
+        }
+        [[NSUserDefaults standardUserDefaults]setObject:newArray forKey:@"CARDIMGTEMP_ERIC"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
        
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         

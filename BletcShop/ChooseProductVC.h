@@ -10,4 +10,12 @@
 
 @interface ChooseProductVC : UIViewController
 @property (nonatomic,retain)NSDictionary *choiceCard;
+@property (nonatomic,assign)id delegate;
+@property (strong,nonatomic)NSArray *normalArray;
+@property (strong,nonatomic)NSArray *recArray;
+@end
+@protocol ChooseProductVCDelegate <NSObject>
+
+-(void)weChoosedPruductDic:(NSArray *)array;
+
 @end

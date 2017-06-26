@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface PackageTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *chooseTip;
+@property (strong, nonatomic) IBOutlet UILabel *productName;
+@property (strong, nonatomic) IBOutlet UILabel *productPrice;
+@property (strong, nonatomic) IBOutlet UIImageView *productImage;
 
 @end

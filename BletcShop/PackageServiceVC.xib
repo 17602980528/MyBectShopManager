@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PackageServiceVC">
             <connections>
                 <outlet property="bgView" destination="wIG-UU-mrN" id="Vyg-RT-PcQ"/>
+                <outlet property="cardTotalCount" destination="EIM-tm-Whj" id="tU6-ia-hxA"/>
                 <outlet property="finish" destination="XYc-0l-xTV" id="sLl-p9-1fk"/>
                 <outlet property="offMarket" destination="54x-6V-nJV" id="zxT-Gj-KYj"/>
                 <outlet property="operationState" destination="E45-M8-Iqv" id="EvR-bf-l6w"/>
@@ -32,15 +33,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pIV-no-I0z">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="aCF-0i-4fc">
-                                    <rect key="frame" x="8" y="15" width="7" height="14"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="7" id="FTf-D5-imO"/>
-                                        <constraint firstAttribute="height" constant="14" id="awm-7i-n8z"/>
-                                    </constraints>
-                                </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待处理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E45-M8-Iqv">
-                                    <rect key="frame" x="20" y="0.0" width="65" height="44"/>
+                                    <rect key="frame" x="15" y="0.0" width="65" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="65" id="Vnn-8m-fkb"/>
                                     </constraints>
@@ -48,7 +42,7 @@
                                     <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIM-tm-Whj">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIM-tm-Whj">
                                     <rect key="frame" x="235" y="13.5" width="120" height="18"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="120" id="JdK-k1-UVB"/>
@@ -61,12 +55,10 @@
                             <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="E45-M8-Iqv" firstAttribute="top" secondItem="pIV-no-I0z" secondAttribute="top" id="2nk-zT-WG0"/>
-                                <constraint firstItem="E45-M8-Iqv" firstAttribute="leading" secondItem="aCF-0i-4fc" secondAttribute="trailing" constant="5" id="7BI-Hq-AaN"/>
-                                <constraint firstItem="aCF-0i-4fc" firstAttribute="centerY" secondItem="pIV-no-I0z" secondAttribute="centerY" id="B2b-qD-lBC"/>
                                 <constraint firstAttribute="bottom" secondItem="E45-M8-Iqv" secondAttribute="bottom" id="Lip-Lf-oNI"/>
                                 <constraint firstItem="EIM-tm-Whj" firstAttribute="centerY" secondItem="pIV-no-I0z" secondAttribute="centerY" id="MVt-Rz-A09"/>
                                 <constraint firstAttribute="trailing" secondItem="EIM-tm-Whj" secondAttribute="trailing" constant="20" id="b2Z-Xt-02A"/>
-                                <constraint firstItem="aCF-0i-4fc" firstAttribute="leading" secondItem="pIV-no-I0z" secondAttribute="leading" constant="8" id="dnw-UD-4IZ"/>
+                                <constraint firstItem="E45-M8-Iqv" firstAttribute="leading" secondItem="pIV-no-I0z" secondAttribute="leading" constant="15" id="ekU-rW-qFv"/>
                                 <constraint firstAttribute="height" constant="44" id="u04-cM-OJb"/>
                             </constraints>
                         </view>
@@ -162,7 +154,4 @@
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="youjiantou" width="7" height="13"/>
-    </resources>
 </document>

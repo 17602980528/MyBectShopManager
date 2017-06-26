@@ -31,7 +31,8 @@
 
 //新的接口
 #define BASEURL @"http://101.201.100.191/cnconsum/App/"
-
+//项目图片
+#define PRODUCT_IMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/optionImage/"
 //头像
 #define ICONIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/iconImage/"
 //轮播广告
