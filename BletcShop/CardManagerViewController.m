@@ -21,6 +21,10 @@
 #import "TransferOwnershipViewController.h"
 #import "CardEricShareViewController.h"
 #import "CheckTransferStateAndEditOrRemoveCardViewController.h"
+
+
+
+
 @interface CardManagerViewController ()
 {
     NSDictionary *cardInfo_dic;

@@ -215,7 +215,8 @@
              
              UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付成功" preferredStyle:UIAlertControllerStyleAlert];
              UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                 
+                 self.refresheDate();
+
                  POP
              }];
              

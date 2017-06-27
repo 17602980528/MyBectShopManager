@@ -182,6 +182,10 @@
              
              UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付成功" preferredStyle:UIAlertControllerStyleAlert];
              UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+               
+                 self.refresheDate();
+                 
+                 
                  [self.navigationController popViewControllerAnimated:YES];
 
              }];
@@ -206,66 +210,66 @@
 }
 //发送订单详情
 
--(void)getShopName{
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/accountGet",BASEURL];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:self.card_dic[@"merchant"] forKey:@"muid"];
-    [params setValue:@"store" forKey:@"type"];
-    
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
-        NSLog(@"result----%@",result);
-        
-        [self postOrderInfoWithShopName:result[@"store"]];
-        
-        
-    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
-    
-    
-}
--(void)postOrderInfoWithShopName:(NSString*)shopName
-{
-    
-    
-    
-    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/cnCmt",BASEURL];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:self.card_dic[@"user"] forKey:@"uuid"];
-    
-    
-    
-    NSString *orderInfoMessage = [[NSString alloc]initWithFormat:@"%@%@结算金额%@%@元",self.card_dic[@"merchant"],PAY_USCS,PAY_NP,textTF.text];
-    
-    [params setObject:orderInfoMessage forKey:@"content"];
-    
-    NSDateFormatter* matter = [[NSDateFormatter alloc]init];
-    [matter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate* date  = [NSDate date];
-    NSString *NowDate = [matter stringFromDate:date];
-    [params setObject:NowDate forKey:@"datetime"];
-    [params setObject:textTF.text forKey:@"sum"];
-    NSLog(@"params----%@",params);
-    
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
-     {
-         NSLog(@"result%@", result);
-         if ([result[@"result_code"] intValue]==1) {
-             ;
-             
-             
-         }
-         else
-             [self postOrderInfoWithShopName:shopName];
-         
-     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         //         [self noIntenet];
-         NSLog(@"%@", error);
-     }];
-    
-}
+//-(void)getShopName{
+//    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/accountGet",BASEURL];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    [params setValue:self.card_dic[@"merchant"] forKey:@"muid"];
+//    [params setValue:@"store" forKey:@"type"];
+//    
+//    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+//        
+//        NSLog(@"result----%@",result);
+//        
+//        [self postOrderInfoWithShopName:result[@"store"]];
+//        
+//        
+//    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        
+//    }];
+//    
+//    
+//}
+//-(void)postOrderInfoWithShopName:(NSString*)shopName
+//{
+//    
+//    
+//    
+//    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/cnCmt",BASEURL];
+//    
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    [params setObject:self.card_dic[@"user"] forKey:@"uuid"];
+//    
+//    
+//    
+//    NSString *orderInfoMessage = [[NSString alloc]initWithFormat:@"%@%@结算金额%@%@元",self.card_dic[@"merchant"],PAY_USCS,PAY_NP,textTF.text];
+//    
+//    [params setObject:orderInfoMessage forKey:@"content"];
+//    
+//    NSDateFormatter* matter = [[NSDateFormatter alloc]init];
+//    [matter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate* date  = [NSDate date];
+//    NSString *NowDate = [matter stringFromDate:date];
+//    [params setObject:NowDate forKey:@"datetime"];
+//    [params setObject:textTF.text forKey:@"sum"];
+//    NSLog(@"params----%@",params);
+//    
+//    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+//     {
+//         NSLog(@"result%@", result);
+//         if ([result[@"result_code"] intValue]==1) {
+//             ;
+//             
+//             
+//         }
+//         else
+//             [self postOrderInfoWithShopName:shopName];
+//         
+//     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//         //         [self noIntenet];
+//         NSLog(@"%@", error);
+//     }];
+//    
+//}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];

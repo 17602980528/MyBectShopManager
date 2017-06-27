@@ -976,9 +976,9 @@
         appdelegate.paymentType =1;
         
         
-        //购买套餐卡
+        //购买套餐卡 OR 体验卡
         
-        if (_selectIndexPath.section==2) {
+        if (_selectIndexPath.section==2 || _selectIndexPath.section==3) {
             
             [self postBuyMealCardREquest];
         }else{
@@ -998,7 +998,19 @@
                 
             }];
             UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self payUseTheWallet];
+                
+                
+                //购买套餐卡 OR 体验卡
+                
+                if (_selectIndexPath.section==2 || _selectIndexPath.section==3) {
+                    
+                    [self payUseTheWalletBuyMealOrExperienceCard];
+                }else{
+                    [self payUseTheWallet];
+                    
+                }
+
+                
             }];
 
             
@@ -1023,8 +1035,16 @@
 -(void)postBuyMealCardREquest{
     
     
-    NSString *url = @"http://101.201.100.191/unionpay/demo/api_05_app/MealCardBuy.php";
+    NSString *url;
     
+    if (_selectIndexPath.section==2) {
+        url = @"http://101.201.100.191/unionpay/demo/api_05_app/MealCardBuy.php";
+
+    }
+    if (_selectIndexPath.section==3) {
+        url = @"http://101.201.100.191/unionpay/demo/api_05_app/ExperienceCardBuy.php";
+        
+    }
     
     
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -1090,6 +1110,103 @@
         
     }];
 
+    
+}
+
+
+/**
+ 钱包购买套餐卡或体验卡
+ */
+
+-(void)payUseTheWalletBuyMealOrExperienceCard{
+    
+    
+    [self showHudInView:self.view hint:@"加载中..."];
+    
+    
+    NSString *url;
+    if (_selectIndexPath.section==2) {
+        url = [NSString stringWithFormat:@"%@UserType/wallet/meal_buy",BASEURL];
+
+    }
+    if (_selectIndexPath.section==3) {
+        url = [NSString stringWithFormat:@"%@UserType/wallet/experience_buy",BASEURL];
+ 
+    }
+    
+    
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    
+    [params setObject:self.card_dic[@"muid"] forKey:@"muid"];
+    [params setObject:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:_card_dic[@"code"] forKey:@"code"];
+    
+    
+    //实际支付价格.没有×100
+    
+    if (self.Type==Wares)
+    {
+        //使用商户自己的优惠券,sum为抵扣后的值,即实际支付的价格,其他不变
+        
+        [params setObject:@"cp" forKey:@"pay_type"];
+        [params setObject:self.coup_dic[@"coupon_id"] forKey:@"content"];
+    }
+    else if (self.Type == points)
+    {//使用红包
+        [params setObject:@"rp" forKey:@"pay_type"];
+        [params setObject:[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint] forKey:@"content"];
+    }else if(self.Type ==plat_Ware){
+        //使用平台优惠券
+        [params setObject:@"scp" forKey:@"pay_type"];
+        [params setObject:self.plat_coup_dic[@"id"] forKey:@"content"];
+        
+    }else
+    {
+        [params setObject:@"null" forKey:@"pay_type"];
+    }
+    //实付金额×100
+    NSInteger actMoney1 =[[self.contentLabel.text substringFromIndex:4] floatValue];
+    NSString *actMoney = [[NSString alloc]initWithFormat:@"%ld",actMoney1];
+    [params setObject:actMoney forKey:@"pay_sum"];
+    
+    
+    NSLog(@"params----%@==%@",params,url);
+    
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        NSLog(@"result----%@",result);
+        
+        [self hideHud];
+        if ([result[@"result_code"] intValue]==1) {
+            
+            
+            PaySuccessVc *VC = [[PaySuccessVc alloc]init];
+            VC.orderInfoType = self.orderInfoType;
+            VC.card_dic = self.card_dic;
+            if (self.Type== Wares) {
+                VC.money_str = [self.contentLabel.text substringFromIndex:4];
+                
+            }else{
+                VC.money_str = self.card_dic[@"price"];
+                
+            }
+            
+            [self.navigationController pushViewController:VC animated:YES];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付失败,是否放弃当前交易?" delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:@"去支付", nil];
+            alert.tag =1111;
+            [alert show];
+        }
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideHud];
+        
+        
+    }];
+    
+    
     
 }
 
@@ -1254,6 +1371,8 @@
     
     
     NSLog(@"params-----%@",params);
+    
+    
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"银联支付===%@", result);
@@ -1287,6 +1406,132 @@
     NSLog(@"UPPaymentResultBlock====%@",completionBlock);
     
 }
+
+
+
+/**
+ 使用支付宝买套餐卡或体验卡
+ */
+-(void)buyUseAlipayForMealOrExperience{
+    
+    
+    self.contentLabel.text = @"实付款:0.01";
+
+    
+    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    appdelegate.whoPay =1;//办卡
+    /*
+     *生成订单信息及签名
+     */
+    //将商品信息赋予AlixPayOrder的成员变量
+    Order *order = [[Order alloc] init];
+    order.partner = kAlipayPartner;
+    order.sellerID = kAlipaySeller;
+    int x= arc4random()%100000;
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYYMMddhhmmss"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    
+    
+    NSString *outtrade =[[NSString alloc]initWithFormat:@"%@%5d",dateString,x];
+    NSLog(@"%@",outtrade);
+    order.outTradeNO = outtrade; //订单ID（由商家自行制定）
+    order.subject = @"办卡"; //商品标题
+    
+    if (self.Type==Wares) {
+        
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@",@"cp",appdelegate.userInfoDic[@"uuid"],_card_dic[@"muid"],_card_dic[@"code"],self.coup_dic[@"coupon_id"]];
+        
+    }else if (self.Type==plat_Ware) {
+        
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@",@"scp",appdelegate.userInfoDic[@"uuid"],_card_dic[@"muid"],_card_dic[@"code"],self.coup_dic[@"id"]];
+        
+    }else if (self.Type == points) {
+        
+        
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@",@"rp",appdelegate.userInfoDic[@"uuid"],_card_dic[@"muid"],_card_dic[@"code"],[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint]];
+        
+    }else{
+        
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@",@"null",appdelegate.userInfoDic[@"uuid"],_card_dic[@"muid"],_card_dic[@"code"]];
+    }
+    
+    NSLog(@"order.body====%@",order.body);
+    order.totalFee = [self.contentLabel.text substringFromIndex:4]; //商品价格
+    
+    if (_selectIndexPath.section==2) {
+        order.notifyURL =  @"http://101.201.100.191/alipay/meal_card_buy.php"; //回调URL
+
+    }
+    if (_selectIndexPath.section==3) {
+        order.notifyURL =  @"http://101.201.100.191/alipay/experience_card_buy.php"; //回调URL
+
+    }
+
+    
+    order.service = @"mobile.securitypay.pay";
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    order.itBPay = @"30m";
+    order.showURL = @"m.alipay.com";
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+    NSString *appScheme = @"blectShop";
+    
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    id<DataSigner> signer = CreateRSADataSigner(kAlipayPrivateKey);
+    NSString *signedString = [signer signString:orderSpec];
+    
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+        
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic)
+         {
+             NSLog(@"BuyCardChoicePayViewControllerreslut = %@",resultDic);
+             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
+             if (orderState==9000) {
+                 
+                 PaySuccessVc *VC = [[PaySuccessVc alloc]init];
+                 VC.orderInfoType = self.orderInfoType;
+                 VC.card_dic = self.card_dic;
+                 if (self.Type== Wares) {
+                     VC.money_str = [self.contentLabel.text substringFromIndex:4];
+                     
+                 }else{
+                     VC.money_str = self.card_dic[@"price"];
+                     
+                 }
+                 
+                 [self.navigationController pushViewController:VC animated:YES];
+                 
+                 
+                 //                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"恭喜" message:@"您已成功支付啦!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                 //
+                 //                 [alert show];
+                 
+             }else{
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是否放弃当前交易?" delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:@"去支付", nil];
+                 alert.tag =1111;
+                 [alert show];
+                 
+             }
+             
+             
+             
+         }];
+        
+    }
+    
+}
+
 -(void)initAlipayInfo{
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     NSLog(@"appdelegate.cardInfo_dic==%@",appdelegate.cardInfo_dic);
@@ -1422,7 +1667,7 @@
                 
                 //购买套餐卡
                 
-                if (_selectIndexPath.section==2) {
+                if (_selectIndexPath.section==2||_selectIndexPath.section==3) {
                     
                     [self postBuyMealCardREquest];
                 }else{
@@ -1436,7 +1681,15 @@
             if (payKind==2) {
                 
                 
-                [self payUseTheWallet];
+                if (_selectIndexPath.section==2||_selectIndexPath.section==3) {
+                    
+                    [self payUseTheWalletBuyMealOrExperienceCard];
+                }else{
+                    [self payUseTheWallet];
+                    
+                }
+
+                
             }
             
         }

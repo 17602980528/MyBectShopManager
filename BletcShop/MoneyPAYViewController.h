@@ -16,5 +16,7 @@
  */
 @property (nonatomic , strong) NSDictionary *card_dic;
 
+@property (nonatomic,copy) void (^refresheDate)();// 返回时刷新数据
+
 
 @end

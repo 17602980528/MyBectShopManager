@@ -12,6 +12,9 @@
 #import "CardManagerViewController.h"
 #import "MoneyPAYViewController.h"
 #import "CountPAYViewController.h"
+
+#import "MealCardPayVC.h"//套餐卡支付
+
 @interface CardVipController()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,weak)UITableView *Cardtable;
 @property (nonatomic,retain)NSMutableArray *vipCardArray;
@@ -29,11 +32,8 @@
      NSInteger title_btn_tag;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [self postRequestVipCard];
-    self.navigationController.navigationBarHidden = NO;
-}
+
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,7 +46,8 @@
     topBackView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:topBackView];
 
-    
+    [self postRequestVipCard];
+
     
     [self initCatergray];
     [self _inittable];
@@ -327,42 +328,53 @@
     return cell;
     
 }
--(void)cardManager:(UIButton *)btn
-{
-    
-    NSDictionary *dic = [_dataArray objectAtIndex:btn.tag];
-    
-    
-    CardManagerViewController *cardManagerView = [[CardManagerViewController alloc]init];
-    
-    cardManagerView.card_dic =dic;
-    
-    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    
-    appdelegate.payCardType =dic[@"card_level"];
-    
-    appdelegate.cardInfo_dic =dic;
-    
-    
-    
-    [self.navigationController pushViewController:cardManagerView animated:YES];
-}
+
 -(void)cardPayManager:(LZDButton *)sender{
-    NSArray *arr ;
     
-    arr=_dataArray;
-    if ([arr[sender.row][@"state"] isEqualToString:@"transfer"]) {
+    NSDictionary *dic = _wholeDataArray[sender.section][sender.row];
+    
+    
+    if ([dic[@"state"] isEqualToString:@"transfer"]) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"会员卡转让中" message:@"" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
         [alert show];
     }else{
-        if ([arr[sender.row][@"card_type"] isEqualToString:@"计次卡"]) {
-            CountPAYViewController *countVC=[[CountPAYViewController alloc]init];
-            countVC.card_dic=[arr objectAtIndex:sender.row];
-            [self.navigationController pushViewController:countVC animated:YES];
-        }else{
-            MoneyPAYViewController *moneyVC=[[MoneyPAYViewController alloc]init];
-            moneyVC.card_dic=[arr objectAtIndex:sender.row];
-            [self.navigationController pushViewController:moneyVC animated:YES];
+        if (sender.section==0) {
+            PUSH(MoneyPAYViewController)
+            vc.refresheDate = ^{
+                [self postRequestVipCard];
+            };
+
+            vc.card_dic = dic;
+            
+           
+        }else if (sender.section==1){
+            
+            PUSH(CountPAYViewController)
+            vc.card_dic = dic;
+            vc.refresheDate = ^{
+                [self postRequestVipCard];
+            };
+
+            
+        }
+        else if (sender.section==2){
+            
+            PUSH(MealCardPayVC)
+            vc.card_dic = dic;
+            vc.refresheDate = ^{
+                [self postRequestVipCard];
+            };
+            
+            
+        }else if (sender.section==3){
+            
+            
+            
+        }
+        else if (sender.section==4){
+            
+            
+            
         }
 
     }

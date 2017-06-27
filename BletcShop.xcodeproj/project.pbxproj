@@ -990,6 +990,8 @@
 		D9A8ABE61E02939A00D4597F /* NewShopIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABE51E02939A00D4597F /* NewShopIntroduceViewController.m */; };
 		D9A8ABEC1E02954200D4597F /* CardShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABE91E02954200D4597F /* CardShowViewController.m */; };
 		D9A8ABF01E02959B00D4597F /* RoyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABEF1E02959B00D4597F /* RoyTableViewCell.m */; };
+		D9AA10B91F023BCA00F7EDE8 /* MealCardPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA10B71F023BCA00F7EDE8 /* MealCardPayVC.m */; };
+		D9AA10BA1F023BCA00F7EDE8 /* MealCardPayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9AA10B81F023BCA00F7EDE8 /* MealCardPayVC.xib */; };
 		D9AB25191D88E482000E9288 /* EaseRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB25181D88E482000E9288 /* EaseRecordView.m */; };
 		D9AB252F1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AB251B1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png */; };
 		D9AB25301D88E4ED000E9288 /* VoiceSearchFeedback002@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AB251C1D88E4ED000E9288 /* VoiceSearchFeedback002@2x.png */; };
@@ -2766,6 +2768,9 @@
 		D9A8ABE91E02954200D4597F /* CardShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardShowViewController.m; sourceTree = "<group>"; };
 		D9A8ABEE1E02959B00D4597F /* RoyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoyTableViewCell.h; sourceTree = "<group>"; };
 		D9A8ABEF1E02959B00D4597F /* RoyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoyTableViewCell.m; sourceTree = "<group>"; };
+		D9AA10B61F023BCA00F7EDE8 /* MealCardPayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealCardPayVC.h; sourceTree = "<group>"; };
+		D9AA10B71F023BCA00F7EDE8 /* MealCardPayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealCardPayVC.m; sourceTree = "<group>"; };
+		D9AA10B81F023BCA00F7EDE8 /* MealCardPayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MealCardPayVC.xib; sourceTree = "<group>"; };
 		D9AB25171D88E482000E9288 /* EaseRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseRecordView.h; sourceTree = "<group>"; };
 		D9AB25181D88E482000E9288 /* EaseRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EaseRecordView.m; sourceTree = "<group>"; };
 		D9AB251B1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VoiceSearchFeedback001@2x.png"; sourceTree = "<group>"; };
@@ -4420,6 +4425,7 @@
 				18F4CD4C1D6FD6F2008FBAD1 /* CardVipController.m */,
 				D94040391CBDEB7100EC98EA /* CardManagerViewController.h */,
 				D940403A1CBDEB7100EC98EA /* CardManagerViewController.m */,
+				D9AA10B51F023B7400F7EDE8 /* 套餐卡支付 */,
 				D940403C1CBE156100EC98EA /* RechargeViewController.h */,
 				D940403D1CBE156100EC98EA /* RechargeViewController.m */,
 				D99C11A21DE28CF100E45B64 /* UPgradeVC.h */,
@@ -6380,6 +6386,16 @@
 			name = "我的红包";
 			sourceTree = "<group>";
 		};
+		D9AA10B51F023B7400F7EDE8 /* 套餐卡支付 */ = {
+			isa = PBXGroup;
+			children = (
+				D9AA10B61F023BCA00F7EDE8 /* MealCardPayVC.h */,
+				D9AA10B71F023BCA00F7EDE8 /* MealCardPayVC.m */,
+				D9AA10B81F023BCA00F7EDE8 /* MealCardPayVC.xib */,
+			);
+			name = "套餐卡支付";
+			sourceTree = "<group>";
+		};
 		D9AB25161D88E482000E9288 /* RecordView */ = {
 			isa = PBXGroup;
 			children = (
@@ -7230,6 +7246,7 @@
 				1CF2838C1C58C48900F3952A /* all.png in Resources */,
 				D9FF0DA11D53304C00443312 /* 图标-19new.png in Resources */,
 				1CF2839B1C58C48900F3952A /* mine_default.png in Resources */,
+				D9AA10BA1F023BCA00F7EDE8 /* MealCardPayVC.xib in Resources */,
 				0793868F1C55B5CA0021B385 /* LaunchScreen.storyboard in Resources */,
 				D93C0D641D251E7B001A1AC1 /* 小标-19.png in Resources */,
 				D95A876B1E728ADF00BDAC75 /* shop_area.sqlite in Resources */,
@@ -8168,6 +8185,7 @@
 				D98E5B971E515142009D56BF /* CouponIntroduceVC.m in Sources */,
 				D9764E901DD5B62100B088DE /* THProgressView.m in Sources */,
 				18F4CD4A1D6FD6BD008FBAD1 /* CountPAYViewController.m in Sources */,
+				D9AA10B91F023BCA00F7EDE8 /* MealCardPayVC.m in Sources */,
 				D98787371E27517900C7A828 /* NewMessageCell.m in Sources */,
 				D949EC2C1CE192970023B6D6 /* BRecentCityCell.m in Sources */,
 				D99C11A91DE2D3BF00E45B64 /* NewRechargeViewController.m in Sources */,
