@@ -92,7 +92,7 @@
     realMoney.text=[NSString stringWithFormat:@"%.2f",lastMoney];
     [tf resignFirstResponder];
     if (tf.text.length>0) {
-        if ([tf.text floatValue]<=100) {
+        if ([tf.text floatValue]<=100 &&[tf.text floatValue]>0) {
             [self postRequest:self.dic[@"card_remain"] disCount:tf.text realMoney:realMoney.text];
         }else{
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

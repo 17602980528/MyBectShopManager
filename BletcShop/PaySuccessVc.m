@@ -97,7 +97,7 @@
     
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/accountGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:self.card_dic[@"merchant"] forKey:@"muid"];
+    [params setValue:self.card_dic[@"muid"] forKey:@"muid"];
     [params setValue:@"store" forKey:@"type"];
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {

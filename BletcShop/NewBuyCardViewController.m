@@ -26,11 +26,29 @@
 #import "PaySuccessVc.h"
 @interface NewBuyCardViewController ()<UITableViewDelegate,UITableViewDataSource,ViewControllerBDelegate>
 @property (nonatomic ,assign) float walletRemain;//钱包余额
+
+@property (nonatomic,strong)NSMutableArray *cardList_mutab;
 @end
 
 @implementation NewBuyCardViewController
 {
     NSInteger payKind;
+}
+
+-(NSMutableArray *)cardList_mutab{
+    if (!_cardList_mutab) {
+        _cardList_mutab = [NSMutableArray array];
+        
+        [_cardList_mutab addObject:self.cardList_Dic[@"value"]];
+        [_cardList_mutab addObject:self.cardList_Dic[@"count"]];
+        [_cardList_mutab addObject:self.cardList_Dic[@"meal"]];
+        [_cardList_mutab addObject:self.cardList_Dic[@"experience"]];
+
+        
+        
+    }
+    return _cardList_mutab;
+    
 }
 -(NSDictionary *)coup_dic{
     if (!_coup_dic) {
@@ -48,19 +66,12 @@
 {
     self.coup_dic = value;
     
-    NSLog(@"ddddddd%@",self.coup_dic);
-//    self.pay_Type=@"cp";
+
     self.Type = Wares;
     self.canUsePoint =0;
     
     NSString* price =self.coup_dic[@"sum"];
-    //    if (!(([self.moneyString floatValue]*10/100)<[price floatValue])) {
-    //        self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]-[price floatValue])];
-    //    }else
-    //    {
-    //        self.contentLabel.text = [[NSString alloc]initWithFormat:@"实付款:%.2f",([self.moneyString floatValue]*90/100)];
-    //
-    //    }
+
     
     
     if ([self.moneyString floatValue]>=[price floatValue]) {
@@ -146,22 +157,7 @@
     self.allPoint = [[NSString alloc]init];
     self.Type = 888;
     self.canUsePoint = 0;
-    NSLog(@"000====%ld",(long)_selectRow);
     
-    //获取钱包余额
-    [self postSocketMoney];
-    
-    NSMutableArray *mutab_A = [NSMutableArray array];
-    if (_selectRow!=9999) {
-        [mutab_A addObject:self.cardListArray[_selectRow]];
-        self.cardListArray  = [mutab_A mutableCopy];
-        _selectRow=0;
-
-    }
- 
-    
-    payKind=0;
-//    self.pay_Type=@"null";
     
     UITableView *tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-49) style:UITableViewStyleGrouped];
     tableView.delegate=self;
@@ -171,6 +167,7 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.myTable = tableView;
     [self.view addSubview:tableView];
+    
     
     UIButton *jiesuanBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     jiesuanBtn.frame=CGRectMake(SCREENWIDTH-75, SCREENHEIGHT-64-49, 75, 49);
@@ -185,38 +182,85 @@
     moneyLabel.textAlignment=NSTextAlignmentRight;
     moneyLabel.font=[UIFont systemFontOfSize:15.0f];
     [self.view addSubview:moneyLabel];
+
+    
+    
+    
+    
+    
+    
+    
+    
+    //获取钱包余额
+    [self postSocketMoney];
+    
+
+    
+    
+    if (_selectIndexPath.section!=999) {
+    
+        //当选单个卡时
+        
+        NSDictionary *dic = self.cardList_mutab[_selectIndexPath.section][_selectIndexPath.row];
+        
+        
+        for (int i = 0; i <_cardList_mutab.count; i ++) {
+            
+            [_cardList_mutab removeObjectAtIndex:i];
+
+            if (i==_selectIndexPath.section) {
+                [_cardList_mutab insertObject:@[dic] atIndex:i];
+                
+                
+            }else{
+                [_cardList_mutab insertObject:@[] atIndex:i];
+                
+            }
+        }
+        
+       
+        self.selectIndexPath = [NSIndexPath indexPathForRow:0 inSection:self.selectIndexPath.section];
+        
+        [self.myTable.delegate tableView:self.myTable didSelectRowAtIndexPath:_selectIndexPath];
+
+
+        
+    }else{
+        
+        NSInteger section = 0;
+        
+        for (int i = 0; i <self.cardList_mutab.count; i ++) {
+            if ([_cardList_mutab[i] count]) {
+                section=i;
+                
+                NSLog(@"-----------------------%ld",section);
+                break;
+            }
+        }
+        
+        
+        _selectIndexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+        
+        [self.myTable.delegate tableView:self.myTable didSelectRowAtIndexPath:_selectIndexPath];
+        
+
+    }
+ 
+    NSLog(@"--------_%@",self.cardList_mutab);
+    
+    payKind=0;
+//    self.pay_Type=@"null";
+    
+  
+    
     
     [self postRequestPoints];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.myTable.delegate tableView:self.myTable didSelectRowAtIndexPath:indexPath];
+    
     
 }
 -(void)postRequestPoints
 {
-    
-    //    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/user/accountGet",BASEURL];
-    //
-    //
-    //    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    //    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    //    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
-    //    [params setObject:@"integral" forKey:@"type"];
-    //
-    //
-    //
-    //    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-    //
-    //        NSLog(@"%@", result);
-    //
-    //        self.allPoint = result[@"integral"];
-    //
-    //
-    //    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-    //
-    //        NSLog(@"%@", error);
-    //
-    //    }];
     
     NSString *url =[NSString stringWithFormat:@"%@UserType/user/getRedPacket",BASEURL];
     NSMutableDictionary *paramer =[NSMutableDictionary dictionary];
@@ -253,10 +297,10 @@
 }
 //tableview---delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 4+3;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==0) {
+    if (indexPath.section==0 ||indexPath.section==1 ||indexPath.section==2 ||indexPath.section==3 ) {
         
         
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -264,44 +308,45 @@
         return cell?cell.frame.size.height :84;
         
 //                return 84;
-    }else if (indexPath.section==1){
+    }else if (indexPath.section==1+3){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         
         return cell?cell.frame.size.height :84;
         
         
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==2+3){
         //        return 0.01;
         return 50;
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==3+3){
         return 54;
     }
     return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    //    if (section==1) {
-    //        return 0.01;
-    //    }else
+        if (section==1 ||section==2||section==3) {
+            return 0.01;
+        }else
     return 50;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section==0) {
+    if (section==0+3) {
         return 49;
-    }else if(section==3){
+    }else if(section==3+3){
         return 43;
         //        return 0.01;
     }else
         return 0.01;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section==0) {
-        return self.cardListArray.count;
-    }else if (section==1){
+    if (section==0 ||section==1||section==2||section==3) {
+        return [self.cardList_mutab[section] count];
+        
+    }else if (section==1+3){
         return 1;
-    }else if (section==2){
+    }else if (section==2+3){
         return 3;
-    }else if (section==3){
+    }else if (section==3+3){
         return 3;
     }
     return 2;
@@ -331,18 +376,21 @@
         label.frame=CGRectMake(37, 7, SCREENWIDTH-37, 26);
         label.text=self.shop_name;
         
-    }else if (section==1){
+    }else if (section==1+3){
         label.text=@"购买提示";
-    }else if (section==2){
+    }else if (section==2+3){
        label.text=@"优惠方式";
-    }else if (section==3){
+    }else if (section==3+3){
         label.text=@"支付方式";
     }
+    if (section==1 ||section==2||section==3) {
+        return nil;
+    }else
     return view;
 }
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    if (section==0) {
+    if (section==0+3) {
         UIView *view = [UIView new];
         UIView*backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,49)];
         backView.backgroundColor=[UIColor whiteColor];
@@ -380,104 +428,110 @@
     for (UIView *view in cell.subviews) {
         [view removeFromSuperview];
     }
-    if (indexPath.section==0) {
-
-        UIButton *stateBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        stateBtn.frame=CGRectMake(5, (36*2+12-30)/2, 30, 30);
-        if (indexPath.row==_selectRow) {
-            [stateBtn setImage:[UIImage imageNamed:@"settlement_choose_n"] forState:UIControlStateNormal];
-        }else{
-            [stateBtn setImage:[UIImage imageNamed:@"settlement_unchoose_n"] forState:UIControlStateNormal];
+    if (indexPath.section==0 || indexPath.section==1 ||indexPath.section==2 ||indexPath.section==3) {
+        NSArray *arr = self.cardList_mutab[indexPath.section];
+        if (arr.count!=0) {
+            
+            UIButton *stateBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+            stateBtn.frame=CGRectMake(5, (36*2+12-30)/2, 30, 30);
+            if (indexPath==_selectIndexPath) {
+                [stateBtn setImage:[UIImage imageNamed:@"settlement_choose_n"] forState:UIControlStateNormal];
+            }else{
+                [stateBtn setImage:[UIImage imageNamed:@"settlement_unchoose_n"] forState:UIControlStateNormal];
+            }
+            stateBtn.tag=100;
+            [cell addSubview:stateBtn];
+            
+            UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(37, 12, 102, 60)];
+            imageView.backgroundColor = [UIColor colorWithHexString:arr[indexPath.row][@"template"]];
+            imageView.layer.cornerRadius = 5;
+            imageView.layer.masksToBounds = YES;
+            imageView.layer.borderWidth = 0.5;
+            imageView.layer.borderColor = RGB(180, 180, 180).CGColor;
+            
+            [cell addSubview:imageView];
+            
+            
+            UIView *bot_view = [[UIView alloc]initWithFrame:CGRectMake(0, 40, 102, 20)];
+            bot_view.backgroundColor = [UIColor whiteColor];
+            [imageView addSubview:bot_view];
+            
+            UILabel *vipLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 102, 40)];
+            vipLab.text = [NSString stringWithFormat:@"VIP%@",arr[indexPath.row][@"level"]];
+            vipLab.textAlignment = NSTextAlignmentCenter;
+            vipLab.textColor = [UIColor whiteColor];
+            [imageView addSubview:vipLab];
+            
+            NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:vipLab.text];
+            
+            [attr setAttributes:@{NSForegroundColorAttributeName:RGB(253,171,65),NSFontAttributeName:[UIFont boldSystemFontOfSize:17]} range:NSMakeRange(0, 3)];
+            
+            [attr setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} range:NSMakeRange(3, vipLab.text.length-3)];
+            
+            vipLab.attributedText = attr;
+            
+            
+            //        NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCECARD stringByAppendingString:[[self.cardListArray objectAtIndex:indexPath.row] objectForKey:@"card_image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+            //        [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon2.png"] options:SDWebImageRetryFailed];
+            //
+            
+            UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, imageView.top, SCREENWIDTH-imageView.right-70-15, imageView.height)];
+            lable.text = [NSString getTheNoNullStr:arr[indexPath.row][@"des"] andRepalceStr:@"暂无优惠!"];
+            lable.textColor = RGB(51,51,51);
+            lable.font = [UIFont systemFontOfSize:13];
+            lable.numberOfLines=2;
+            [cell addSubview:lable];
+            
+            
+            UILabel *priceLable=[[UILabel alloc]initWithFrame:CGRectMake(0, 15, SCREENWIDTH-13, 58)];
+            priceLable.text=[NSString stringWithFormat:@"￥%@",arr[indexPath.row][@"price"]];
+            priceLable.textAlignment=NSTextAlignmentRight;
+            priceLable.font=[UIFont systemFontOfSize:15.0f];
+            [cell addSubview:priceLable];
+            
+            
+            CGFloat price_width = [priceLable.text boundingRectWithSize:CGSizeMake(priceLable.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.width;
+            
+            
+            
+            
+            
+            //        CGFloat labHight = [lable.text boundingRectWithSize:CGSizeMake(SCREENWIDTH-imageView.right-10-price_width-13, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.height;
+            CGRect frame = lable.frame;
+            //        frame.size.height = labHight;
+            frame.size.width = SCREENWIDTH-imageView.right-10-price_width-13;
+            //        frame.origin.y =  labHight<84? (84 -labHight)/2 :5;
+            lable.frame = frame;
+            
+            
+            CGRect cellFrame = cell.frame;
+            
+            //        cellFrame.size.height = labHight>84 ? lable.bottom+5 :84;
+            cellFrame.size.height = 84;
+            
+            cell.frame = cellFrame;
+            
+            
+            CGRect price_frame = priceLable.frame ;
+            price_frame.origin.y = (cell.height -58)/2;
+            priceLable.frame = price_frame;
+            
+            
+            
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, cell.height-1, SCREENWIDTH, 1)];
+            line.backgroundColor = RGB(234, 234, 234);
+            [cell addSubview:line];
+            
         }
-        stateBtn.tag=100;
-        [cell addSubview:stateBtn];
-        
-        UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(37, 12, 102, 60)];
-        imageView.backgroundColor = [UIColor colorWithHexString:self.cardListArray[indexPath.row][@"card_temp_color"]];
-        imageView.layer.cornerRadius = 5;
-        imageView.layer.masksToBounds = YES;
-        imageView.layer.borderWidth = 0.5;
-        imageView.layer.borderColor = RGB(180, 180, 180).CGColor;
-        
-        [cell addSubview:imageView];
-        
-        
-        UIView *bot_view = [[UIView alloc]initWithFrame:CGRectMake(0, 40, 102, 20)];
-        bot_view.backgroundColor = [UIColor whiteColor];
-        [imageView addSubview:bot_view];
-        
-        UILabel *vipLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 102, 40)];
-        vipLab.text = [NSString stringWithFormat:@"VIP%@",self.cardListArray[indexPath.row][@"level"]];
-        vipLab.textAlignment = NSTextAlignmentCenter;
-        vipLab.textColor = [UIColor whiteColor];
-        [imageView addSubview:vipLab];
-        
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:vipLab.text];
-        
-        [attr setAttributes:@{NSForegroundColorAttributeName:RGB(253,171,65),NSFontAttributeName:[UIFont boldSystemFontOfSize:17]} range:NSMakeRange(0, 3)];
-        
-        [attr setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} range:NSMakeRange(3, vipLab.text.length-3)];
-        
-        vipLab.attributedText = attr;
-        
-        
-        //        NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCECARD stringByAppendingString:[[self.cardListArray objectAtIndex:indexPath.row] objectForKey:@"card_image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-        //        [imageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon2.png"] options:SDWebImageRetryFailed];
-        //
-        
-        UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right+10, imageView.top, SCREENWIDTH-imageView.right-70-15, imageView.height)];
-        lable.text = [NSString getTheNoNullStr:self.cardListArray[indexPath.row][@"content"] andRepalceStr:@"暂无优惠!"];
-        lable.textColor = RGB(51,51,51);
-        lable.font = [UIFont systemFontOfSize:13];
-        lable.numberOfLines=2;
-        [cell addSubview:lable];
-        
-        
-        UILabel *priceLable=[[UILabel alloc]initWithFrame:CGRectMake(0, 15, SCREENWIDTH-13, 58)];
-        priceLable.text=[NSString stringWithFormat:@"￥%@",self.cardListArray[indexPath.row][@"price"]];
-        priceLable.textAlignment=NSTextAlignmentRight;
-        priceLable.font=[UIFont systemFontOfSize:15.0f];
-        [cell addSubview:priceLable];
-        
-        
-        CGFloat price_width = [priceLable.text boundingRectWithSize:CGSizeMake(priceLable.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.width;
-
+       
         
         
         
-        
-//        CGFloat labHight = [lable.text boundingRectWithSize:CGSizeMake(SCREENWIDTH-imageView.right-10-price_width-13, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:lable.font} context:nil].size.height;
-        CGRect frame = lable.frame;
-//        frame.size.height = labHight;
-        frame.size.width = SCREENWIDTH-imageView.right-10-price_width-13;
-//        frame.origin.y =  labHight<84? (84 -labHight)/2 :5;
-        lable.frame = frame;
-        
-        
-        CGRect cellFrame = cell.frame;
-        
-//        cellFrame.size.height = labHight>84 ? lable.bottom+5 :84;
-        cellFrame.size.height = 84;
-
-        cell.frame = cellFrame;
-        
-        
-        CGRect price_frame = priceLable.frame ;
-        price_frame.origin.y = (cell.height -58)/2;
-        priceLable.frame = price_frame;
-        
-
-        
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, cell.height-1, SCREENWIDTH, 1)];
-        line.backgroundColor = RGB(234, 234, 234);
-        [cell addSubview:line];
-        
-        
-    }else if (indexPath.section==1){
+    }else if (indexPath.section==1+3){
         
         
         UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, SCREENWIDTH-30, 100)];
-        lable.text = [NSString getTheNoNullStr:self.cardListArray[_selectRow][@"content"] andRepalceStr:@"暂无优惠!"];
+        lable.text = [NSString getTheNoNullStr:self.cardList_mutab[_selectIndexPath.section][_selectIndexPath.row][@"des"] andRepalceStr:@"暂无优惠!"];
         lable.textColor = RGB(51,51,51);
         lable.font = [UIFont systemFontOfSize:13];
         lable.numberOfLines=0;
@@ -499,7 +553,7 @@
         cell.frame = cellFrame;
         
     }
-    else if (indexPath.section==2){
+    else if (indexPath.section==2+3){
         
 //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
         UIImageView *imageView_red = [[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH-18-7.5, (50-15)/2, 7.5, 15)];
@@ -595,7 +649,7 @@
             
         }
         
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==3+3){
         
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(13, 12, 30, 30)];
         UILabel *payLable=[[UILabel alloc]initWithFrame:CGRectMake(53, 12, 120, 30)];
@@ -638,21 +692,24 @@
 {
     
     
-    if (indexPath.section==0) {
-        _selectRow = indexPath.row;
-        self.moneyString=self.cardListArray[indexPath.row][@"price"];
+    if (indexPath.section<=3) {
+
+        NSArray *arr = self.cardList_mutab[indexPath.section];
+           _selectIndexPath = indexPath;
+        self.moneyString=arr[indexPath.row][@"price"];
         
         self.coup_dic = nil;
         
         [self.myTable reloadData];
         
-        self.card_dic=self.cardListArray[indexPath.row];
+        self.card_dic=arr[indexPath.row];
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         
-        appdelegate.cardInfo_dic=self.cardListArray[indexPath.row];
+        appdelegate.cardInfo_dic=arr[indexPath.row];
     }
-    if (indexPath.section==2)
+    if (indexPath.section==2+3)
     {
+        //优惠方式
         
         if(indexPath.row == 0)
         {
@@ -683,7 +740,7 @@
                     
                 }else{
                     MyCashCouponViewController *choiceView = [[MyCashCouponViewController alloc]init];
-                    choiceView.muid =  self.cardListArray[_selectRow][@"merchant"];
+                    choiceView.muid =  self.card_dic[@"muid"];
                     choiceView.moneyString = self.moneyString;
                     choiceView.useCoupon = 100;
                     choiceView.delegate = self;
@@ -735,7 +792,7 @@
                     };
                     VC.moneyString = self.moneyString;
                     VC.useCoupon = 100;
-                    VC.muid =  self.cardListArray[_selectRow][@"merchant"];
+                    VC.muid =  self.card_dic[@"muid"];
                     
                     
                     [self.navigationController pushViewController:VC animated:YES];
@@ -750,7 +807,9 @@
         }
         
     }
-    if (indexPath.section==3) {
+    if (indexPath.section==3+3) {
+        //支付方式
+        
         payKind=indexPath.row;
         [self.myTable reloadData];
     }
@@ -817,42 +876,26 @@
 
 //结算
 -(void)goJieSuan{
-    if (_selectRow==-1) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        
-        hud.label.text = NSLocalizedString(@"请选择要购买的卡", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        
-        [hud hideAnimated:YES afterDelay:3.f];
-    }else if (payKind==-2) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        
-        hud.label.text = NSLocalizedString(@"请选择结算方式 ", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        
-        [hud hideAnimated:YES afterDelay:3.f];
-        
-    }else{
-        //
+    
+    NSLog(@"_selectIndexPath------%@",_selectIndexPath);
+    
+    
         [self postIfBuyCard];
-    }
+ 
 }
 
 
--(void)postIfBuyCard
-{
+-(void)postIfBuyCard{
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/authGet",BASEURL];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
-    [params setObject:self.cardListArray[_selectRow][@"merchant"] forKey:@"muid"];
+    [params setValue:_card_dic[@"muid"] forKey:@"muid"];
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"auth_sum_get.php %@",result);
         NSArray*arr_A =   [result[@"remain"] componentsSeparatedByString:@"元"];
-        NSArray *card_price = [self.cardListArray[_selectRow][@"price"] componentsSeparatedByString:@"元"];
+        NSArray *card_price = [_card_dic[@"price"] componentsSeparatedByString:@"元"];
         
         if ([arr_A[0]doubleValue]>[card_price[0] doubleValue])
         {
@@ -886,7 +929,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
     
-    [params setObject:self.card_dic[@"merchant"] forKey:@"muid"];
+    [params setObject:self.card_dic[@"muid"] forKey:@"muid"];
     [params setObject:self.card_dic[@"code"] forKey:@"cardCode"];
     [params setObject:self.card_dic[@"level"] forKey:@"cardLevel"];
     [params setObject:self.card_dic[@"type"] forKey:@"cardType"];
@@ -895,7 +938,6 @@
         if ([result[@"result_code"] isEqualToString:@"false"])
         {
             [self choicePayType];
-            NSLog(@"%@", result);
         }else
         {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -933,7 +975,17 @@
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         appdelegate.paymentType =1;
         
-        [self postPaymentsRequest];
+        
+        //购买套餐卡
+        
+        if (_selectIndexPath.section==2) {
+            
+            [self postBuyMealCardREquest];
+        }else{
+            [self postPaymentsRequest];
+ 
+        }
+        
     }else if (payKind==2){
         
         float actMoney1 =[[self.contentLabel.text substringFromIndex:4] floatValue];//实际支付钱
@@ -964,6 +1016,83 @@
     
 }
 
+
+/*
+ 银联购买套餐卡
+ **/
+-(void)postBuyMealCardREquest{
+    
+    
+    NSString *url = @"http://101.201.100.191/unionpay/demo/api_05_app/MealCardBuy.php";
+    
+    
+    
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+
+    [params setObject:self.card_dic[@"muid"] forKey:@"muid"];
+    [params setObject:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [params setObject:_card_dic[@"code"] forKey:@"code"];
+    
+    
+    //实际支付价格.没有×100
+    
+    if (self.Type==Wares)
+    {
+        //使用商户自己的优惠券,sum为抵扣后的值,即实际支付的价格,其他不变
+        
+        [params setObject:@"cp" forKey:@"pay_type"];
+        [params setObject:self.coup_dic[@"coupon_id"] forKey:@"content"];
+    }
+    else if (self.Type == points)
+    {//使用红包
+        [params setObject:@"rp" forKey:@"pay_type"];
+        [params setObject:[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint] forKey:@"content"];
+    }else if(self.Type ==plat_Ware){
+        //使用平台优惠券
+        [params setObject:@"scp" forKey:@"pay_type"];
+        [params setObject:self.plat_coup_dic[@"id"] forKey:@"content"];
+        
+    }else
+    {
+        [params setObject:@"null" forKey:@"pay_type"];
+    }
+    //实付金额×100
+    NSInteger actMoney1 =[[self.contentLabel.text substringFromIndex:4] floatValue]*100;
+    NSString *actMoney = [[NSString alloc]initWithFormat:@"%ld",actMoney1];
+    [params setObject:actMoney forKey:@"txnAmt"];
+    
+   
+
+    
+    NSLog(@"购买套餐卡-----%@==%@",params,url);
+    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        
+        NSLog(@"银联支付===%@", result);
+        NSArray *arr = result;
+        
+#ifdef DEBUG
+        [[UPPaymentControl defaultControl] startPay:[arr objectAtIndex:0] fromScheme:@"blectShop" mode:@"01" viewController:self];
+        
+        
+#else
+        [[UPPaymentControl defaultControl] startPay:[arr objectAtIndex:0] fromScheme:@"blectShop" mode:@"00" viewController:self];
+        
+        
+#endif
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"error%@", error);
+        
+    }];
+
+    
+}
+
 /**
  使用钱包支付
  */
@@ -980,7 +1109,7 @@
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
-    [params setObject:appdelegate.cardInfo_dic[@"merchant"] forKey:@"muid"];
+    [params setObject:appdelegate.cardInfo_dic[@"muid"] forKey:@"muid"];
     [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
     [params setObject:appdelegate.cardInfo_dic[@"code"] forKey:@"code"];
     [params setObject:appdelegate.cardInfo_dic[@"level"] forKey:@"level"];
@@ -1017,7 +1146,7 @@
     NSString *actMoney = [[NSString alloc]initWithFormat:@"%ld",actMoney1];
     [params setObject:actMoney forKey:@"pay_sum"];
     
-    NSString *colorS = appdelegate.cardInfo_dic[@"card_temp_color"];
+    NSString *colorS = appdelegate.cardInfo_dic[@"template"];
     
     [params setObject:[colorS substringFromIndex:1] forKey:@"image_url"];
     
@@ -1079,7 +1208,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
-    [params setObject:appdelegate.cardInfo_dic[@"merchant"] forKey:@"muid"];
+    [params setObject:appdelegate.cardInfo_dic[@"muid"] forKey:@"muid"];
     [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
     [params setObject:appdelegate.cardInfo_dic[@"code"] forKey:@"code"];
     [params setObject:appdelegate.cardInfo_dic[@"level"] forKey:@"level"];
@@ -1116,9 +1245,12 @@
     NSString *actMoney = [[NSString alloc]initWithFormat:@"%ld",actMoney1];
     [params setObject:actMoney forKey:@"txnAmt"];
     
-    NSString *colorS = appdelegate.cardInfo_dic[@"card_temp_color"];
+    NSString *colorS = appdelegate.cardInfo_dic[@"template"];
     
     [params setObject:[colorS substringFromIndex:1] forKey:@"image_url"];
+    
+    
+ 
     
     
     NSLog(@"params-----%@",params);
@@ -1182,20 +1314,20 @@
     
        if (self.Type==Wares) {
         
-        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"cp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],[self.contentLabel.text substringFromIndex:4],self.coup_dic[@"coupon_id"]];
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"cp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"template",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"muid"],[self.contentLabel.text substringFromIndex:4],self.coup_dic[@"coupon_id"]];
         
     }else if (self.Type==plat_Ware) {
             
-            order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"scp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"],self.coup_dic[@"id"]];
+            order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"scp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"template",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"muid"],appdelegate.cardInfo_dic[@"price"],self.coup_dic[@"id"]];
             
         }else if (self.Type == points) {
         
         
-        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"rp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"],[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint]];
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@#%@",@"rp",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"template",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"muid"],appdelegate.cardInfo_dic[@"price"],[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint]];
         
     }else{
         
-        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@",@"null",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"card_temp_color",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"merchant"],appdelegate.cardInfo_dic[@"price"]];
+        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@#%@#%@#%@",@"null",@"办卡",appdelegate.cardInfo_dic[@"code"],appdelegate.cardInfo_dic[@"level"],appdelegate.cardInfo_dic[@"type"],@"template",appdelegate.userInfoDic[@"uuid"],appdelegate.cardInfo_dic[@"muid"],appdelegate.cardInfo_dic[@"price"]];
     }
     
     NSLog(@"order.body====%@",order.body);
@@ -1288,7 +1420,18 @@
                 [self initAlipayInfo];
             }else if (payKind==1){
                 
-                [self postPaymentsRequest];
+                //购买套餐卡
+                
+                if (_selectIndexPath.section==2) {
+                    
+                    [self postBuyMealCardREquest];
+                }else{
+                    [self postPaymentsRequest];
+                    
+                }
+
+                
+                
             }
             if (payKind==2) {
                 

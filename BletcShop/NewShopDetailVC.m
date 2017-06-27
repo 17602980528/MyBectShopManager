@@ -20,10 +20,10 @@
 {
     UIButton *collectBtn;
     NSDictionary *wholeInfoDic;
-    UIButton *title_old_btn;
-//    float           _webHight;
 
-//    UIWebView *web_view;
+    UIButton *title_old_btn;
+
+    NSInteger  _cardCount;//会员卡的数量
     
     SDRefreshHeaderView *_refreshheader;
     UIView *old_view;
@@ -32,7 +32,9 @@
     CGFloat scrollViewOffSet;
 }
 @property BOOL state;
-@property(nonatomic,strong)NSMutableArray *cardArray;//卡
+//@property(nonatomic,strong)NSMutableArray *cardArray;//卡
+
+@property(nonatomic,strong) NSDictionary *card_arr_dic;//包含不同类别会员卡
 @property(nonatomic,strong) UITableView *shopTableView;
 @property(nonatomic,strong)NSArray *pictureAndTextArray;
 @property(nonatomic,strong)NSArray *insureImage_A;
@@ -57,11 +59,17 @@
     }
     return _pictureAndTextArray;
 }
--(NSMutableArray *)cardArray{
-    if (!_cardArray) {
-        _cardArray = [NSMutableArray array];
+//-(NSMutableArray *)cardArray{
+//    if (!_cardArray) {
+//        _cardArray = [NSMutableArray array];
+//    }
+//    return _cardArray;
+//}
+-(NSDictionary *)card_arr_dic{
+    if (!_card_arr_dic) {
+        _card_arr_dic = [NSDictionary dictionary];
     }
-    return _cardArray;
+    return _card_arr_dic;
 }
 -(NSArray *)insureImage_A{
     if (!_insureImage_A) {
@@ -204,19 +212,6 @@
         
     }
     
-//    collectBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-//    collectBtn.frame=CGRectMake(0, 0, (SCREENWIDTH)/2, 49);
-//    [collectBtn setTitle:@"立即收藏" forState:UIControlStateNormal];
-//    [collectBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [footView addSubview:collectBtn];
-//    [collectBtn addTarget:self action:@selector(favorateAction) forControlEvents:UIControlEventTouchUpInside];
-//    UIButton *buyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-//    buyBtn.frame=CGRectMake((SCREENWIDTH)/2, 0, (SCREENWIDTH)/2, 49);
-//    buyBtn.backgroundColor=NavBackGroundColor;
-//    [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
-//    [buyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [footView addSubview:buyBtn];
-//    [buyBtn addTarget:self action:@selector(buyBtnClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -224,35 +219,34 @@
     
     if (indexPath.section==0) {
         
-        return 122;
+        return 122+10;
         
     }else
     if (indexPath.section ==1) {
         
-        if (self.cardArray.count>0)
+        if (_cardCount)
         {
-            if (indexPath.row==0) {
-                return 41;
-            }else
-            
-            return 70+1;
-        }else
-            return 40+1+41;
+                return 41+10;
+          }else
+            return 40+10+1+41;
 
-    }else if(indexPath.section==2){
+    }else if (indexPath.section==2 ||indexPath.section==3 ||indexPath.section==4 ||indexPath.section==5 ){
+        return 71;
+    }
+    else if(indexPath.section==2+4){
         NSArray *arr = wholeInfoDic[@"commodity_list"];
         if (arr.count!=0) {
-            return 150+41+5;
+            return 150+41+5+10;
         }else{
-            return 40+41+5;
+            return 40+41+5+10;
             
         }
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==3+4){
          UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         
         return cell.frame.size.height;
     }
-    else if(indexPath.section==4){
+    else if(indexPath.section==4+4){
         if (title_old_btn.tag==1) {
             
             UIView *content_View = [self initcontentView];
@@ -291,7 +285,7 @@
         }
         
         
-    }else if(indexPath.section==5)
+    }else if(indexPath.section==5+4)
     
     {
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -305,7 +299,7 @@
     else return 0.01;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 7;
+    return 7+4;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -317,10 +311,26 @@
 
     }
     if (section==1) {
-        return self.cardArray.count ?self.cardArray.count+1:1;
-    }else if (section==2 ||section==3){
         return 1;
-    }else  if(section==4){
+    }else if (section==2){
+        NSLog(@"-----%ld",[_card_arr_dic[@"value"] count]);
+        return [_card_arr_dic[@"value"] count];
+        
+        
+    }else if (section==3){
+        return [_card_arr_dic[@"count"] count];
+
+    }else if (section==4){
+        return [_card_arr_dic[@"meal"] count];
+
+    }else if (section==5){
+        return [_card_arr_dic[@"experience"] count];
+
+    }
+
+    else if (section==2+4 ||section==3+4){
+        return 1;
+    }else  if(section==4+4){
         
         if (title_old_btn.tag==1) {
             
@@ -328,12 +338,11 @@
             return 1;
         }else if (title_old_btn.tag ==2){
             return _insureImage_A.count;
-//            return 1;
         }else{
             return self.pictureAndTextArray.count? _pictureAndTextArray.count+1:1;
  
         }
-    }else if(section==5){
+    }else if(section==5+4){
         NSArray *evaluate_list = wholeInfoDic[@"evaluate_list"];
         
         return evaluate_list.count ?evaluate_list.count:1;
@@ -370,9 +379,13 @@
     
     if (indexPath.section==1) {
         
-      if (_cardArray.count!=0) {
-          if (indexPath.row==0) {
-              UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10, 71.5, 30)];
+    
+      if (_cardCount) {
+              UIView *grayView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+              grayView.backgroundColor = RGB(234, 234, 234);
+              [cell addSubview:grayView];
+
+              UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10+grayView.bottom, 71.5, 30)];
               titleimg.image = [UIImage imageNamed:@"会员卡"];
               
               [cell addSubview:titleimg];
@@ -384,20 +397,18 @@
 
               return cell;
               
-          }else{
-              NewShopCardListCell *card_cell = [self creatCardListCell:indexPath];
-              
-              
-              
-              return card_cell;
- 
-          }
+         
+       
           
         
 
         }else{
             
-            UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10, 71.5, 30)];
+            UIView *grayView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+            grayView.backgroundColor = RGB(234, 234, 234);
+            [cell addSubview:grayView];
+            
+            UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10+grayView.bottom, 71.5, 30)];
             titleimg.image = [UIImage imageNamed:@"会员卡"];
             
             [cell addSubview:titleimg];
@@ -413,14 +424,44 @@
             label.text = @"本店暂无可购买的卡";
             return cell;
         }
-    }else if(indexPath.section==2){
+    }else if (indexPath.section==2){
+        
+        NSArray *arr =_card_arr_dic[@"value"];
+        
+        
+     return    [self creatCardListCell:arr[indexPath.row]];
+        
+    }else if (indexPath.section==3){
+        NSArray *arr =_card_arr_dic[@"count"];
+        
+        
+        return    [self creatCardListCell:arr[indexPath.row]];
+    }
+    else if (indexPath.section==4){
+        NSArray *arr =_card_arr_dic[@"meal"];
+        
+        
+        return    [self creatCardListCell:arr[indexPath.row]];
+        
+    }
+    else if (indexPath.section==5){
+        NSArray *arr =_card_arr_dic[@"experience"];
+        
+        
+        return    [self creatCardListCell:arr[indexPath.row]];
+        
+    }else if(indexPath.section==2+4){
         
 //        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
 //        titlelabel.textAlignment=NSTextAlignmentCenter;
 //        titlelabel.font = [UIFont systemFontOfSize:15.0];
 //        titlelabel.text=@"全部商品";
         
-        UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, 10, 71.5, 30)];
+        UIView *grayView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+        grayView.backgroundColor = RGB(234, 234, 234);
+        [cell addSubview:grayView];
+        
+        UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, 10+grayView.bottom, 71.5, 30)];
         titleimg.image = [UIImage imageNamed:@"全部商品"];
 
         [cell addSubview:titleimg];
@@ -434,18 +475,22 @@
         UIView *productView = [self creatproductView];
         
         CGRect frame = productView.frame;
-        frame.origin.y = 41+5;
+        frame.origin.y = line3.bottom+5;
         productView.frame = frame;
         [cell addSubview:productView];
       
         return cell;
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==3+4){
         
 //        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
 //        titlelabel.textAlignment=NSTextAlignmentCenter;
 //        titlelabel.font = [UIFont systemFontOfSize:15.0];
 //        titlelabel.text=@"商家介绍";
-        UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, 10, 71.5, 30)];
+        UIView *grayView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+        grayView.backgroundColor = RGB(234, 234, 234);
+        [cell addSubview:grayView];
+        
+        UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, 10+grayView.bottom, 71.5, 30)];
         titleimg.image = [UIImage imageNamed:@"商家详情"];
 
         [cell addSubview:titleimg];
@@ -482,15 +527,22 @@
             line.frame = CGRectMake(10, label2.bottom, SCREENWIDTH, 1);
             
         }
+        
+        
+        UIView *grayView1= [[UIView alloc]initWithFrame:CGRectMake(0, line.bottom+5, SCREENWIDTH, 10)];
+        grayView1.backgroundColor = RGB(234, 234, 234);
+        [cell addSubview:grayView1];
+
+        
         CGRect frame = [cell frame];
-        frame.size.height = line.bottom+5;
+        frame.size.height = grayView1.bottom;
         cell.frame = frame;
         
         return cell;
         
     }
     
-    else if (indexPath.section==4){
+    else if (indexPath.section==4+4){
         UITableViewCell *DetailCell;
 //        [cell addSubview:web_view];
 //        web_view.hidden = YES;
@@ -538,7 +590,7 @@
         
         
         return DetailCell;
-    }else if(indexPath.section==5){
+    }else if(indexPath.section==5+4){
         {
             NSArray *evaluate_list = wholeInfoDic[@"evaluate_list"];
             if (evaluate_list.count==0)
@@ -587,6 +639,7 @@
                 frame.size.height = timeLab.bottom+3;
                 cell.frame = frame;
                 
+                
                 if (indexPath.row!=evaluate_list.count-1) {
                     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(10, timeLab.bottom+2, SCREENWIDTH, 1)];
                     line.backgroundColor = RGB(225, 225, 225);
@@ -606,150 +659,33 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    if (section>=5) {
-        
-      
-            return 0.1;
-   
-        
-    }else
-    return 10;
+    
+      return 0.01;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==0) {
-        
-        NSArray *coupon_list = wholeInfoDic[@"coupon_list"];
-        
-        return coupon_list.count ?10:0.01;
-//        return SCREENWIDTH*9/16+45+6+44+48+45-20;
-//    }else if (section==1 ||section==2||section==3||section==4){
-    }else if (section==4||section==5){
-
+    if (section==4+4) {
         return 41;
-    } else{
+    }else if(section== 5+4){
+        return 51;
+    }else{
         return 0.01;
     }
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section==0) {
-        
-//        UIView *backView = [[UIView alloc]init];
-//        backView.backgroundColor = [UIColor whiteColor];
-//        UIView *line = [[UIView alloc]init];
-//        line.backgroundColor = RGB(225, 225, 225);
-//        [backView addSubview:line];
-//        
-//        UILabel *nameLabel = [[UILabel alloc]init];
-//        nameLabel.backgroundColor = [UIColor clearColor];
-//        nameLabel.numberOfLines = 0;
-//        nameLabel.textAlignment = NSTextAlignmentLeft;
-//        nameLabel.font = [UIFont systemFontOfSize:17];
-//        nameLabel.tag = 1000;
-//        [backView addSubview:nameLabel];
-//        
-//        if ([self.videoID isEqualToString:@""]) {
-//            UIImageView *shopImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
-//            [backView addSubview:shopImageView];
-//
-//            NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_ADDIMAGE stringByAppendingString:[NSString getTheNoNullStr:[wholeInfoDic  objectForKey:@"image_url"] andRepalceStr:@""]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-//            [shopImageView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
-//            
-//           
-//        }else{
-//            UIView *playerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*9/16)];
-//            [backView addSubview:playerView];
-//
-//            NSString *url = [NSString stringWithFormat:@"%@%@",VEDIO_URL,self.videoID];
-//            NSLog(@"VEDIO_URL===%@",url);
-//            self.videoPlayer = [SRVideoPlayer playerWithVideoURL:[NSURL URLWithString:url] playerView:playerView playerSuperView:playerView.superview];
-//            _videoPlayer.videoName = @"";
-//            _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
-//            [_videoPlayer pause];
-//        }
-//        
-//        nameLabel.frame=CGRectMake(12, SCREENWIDTH*9/16+5, SCREENWIDTH-12, 40);
-//        line.frame=CGRectMake(10, nameLabel.bottom+5, SCREENWIDTH, 1);
-//        
-//        nameLabel.text = [wholeInfoDic objectForKey:@"store"];
-//        
-//       //评价星星
-//        UILabel *starLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, line.bottom+7, 110, 30)];
-//        starLabel.backgroundColor = [UIColor clearColor];
-//        starLabel.textAlignment = NSTextAlignmentLeft;
-//        starLabel.font = [UIFont systemFontOfSize:15];
-//        starLabel.tag = 1000;
-//        DLStarRatingControl* dlCtrl = [[DLStarRatingControl alloc]initWithFrame:CGRectMake(0, 7, 110, 35) andStars:5 isFractional:YES star:[UIImage imageNamed:@"result_small_star_disable_iphone"] highlightStar:[UIImage imageNamed:@"redstar"]];
-//        dlCtrl.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-//        dlCtrl.userInteractionEnabled = NO;
-//        
-//          dlCtrl.rating = [[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"stars"] andRepalceStr:@"0"] floatValue];
-//        
-//        [starLabel addSubview:dlCtrl];
-//        [backView addSubview:starLabel];
-//        
-//        
-//        UILabel *lab1=[[UILabel alloc]initWithFrame:CGRectMake(200,line.bottom+15, SCREENWIDTH-200, 14)];
-//        lab1.textAlignment=NSTextAlignmentLeft;
-//        lab1.text=[[NSString alloc]initWithFormat:@"已售:%@",[NSString getTheNoNullStr:[wholeInfoDic objectForKey:@"sold"] andRepalceStr:@"0"]];
-//        lab1.font=[UIFont systemFontOfSize:13.0f];
-//        [backView addSubview:lab1];
-//
-//        UILabel *points=[[UILabel alloc]initWithFrame:CGRectMake(150, line.bottom+7, 50, 30)];
-//        points.textColor=[UIColor redColor];
-//        points.font=[UIFont systemFontOfSize:15.0f];
-//        points.text=[NSString stringWithFormat:@"%.1f",dlCtrl.rating];
-//        [backView addSubview:points];
-//        
-//        UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(10, line.bottom+43, SCREENWIDTH, 1)];
-//        line1.backgroundColor = RGB(225, 225, 225);
-//        [backView addSubview:line1];
-//        
-//        
-//        UIImageView *addressimg = [[UIImageView alloc]initWithFrame:CGRectMake(13, line1.bottom+15, 13, 16)];
-//        addressimg.image = [UIImage imageNamed:@"location"];
-//        [backView addSubview:addressimg];
-//        
-//        UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, line1.bottom+17, SCREENWIDTH-30, 14)];
-//        addressLabel.font = [UIFont systemFontOfSize:13];
-//        addressLabel.text = [wholeInfoDic objectForKey:@"address"];
-//        addressLabel.userInteractionEnabled = YES;
-//        UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMapView)];
-//        [addressLabel addGestureRecognizer:tapGesture];
-//        [backView addSubview:addressLabel];
-//        
-//        UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(10, line1.bottom+43, SCREENWIDTH, 1)];
-//        line2.backgroundColor = RGB(225, 225, 225);
-//        [backView addSubview:line2];
-//        
-//        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, line2.bottom, SCREENWIDTH, 40)];
-//        titlelabel.textAlignment=NSTextAlignmentCenter;
-//        titlelabel.font = [UIFont systemFontOfSize:15.0];
-//        titlelabel.text=@"会员卡";
-//
-//        [backView addSubview:titlelabel];
-//        
-//        backView.frame = CGRectMake(0, 0, SCREENWIDTH, titlelabel.bottom+5);
-//        return backView;
-        return nil;
-        
-    }
-        else if(section==2||section==3 ||section==5){
+    if(section==5+4){
 
         UIView *backView = [[UIView alloc]init];
         backView.frame = CGRectMake(0, 0, SCREENWIDTH, 41);
 
         backView.backgroundColor = [UIColor whiteColor];
         
+        UIView *grayView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+        grayView.backgroundColor = RGB(234, 234, 234);
+        [backView addSubview:grayView];
         
-
-//        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
-//        titlelabel.textAlignment=NSTextAlignmentCenter;
-//        titlelabel.font = [UIFont systemFontOfSize:15.0];
-//        titlelabel.text=@"全部商品";
-//        [backView addSubview:titlelabel];
-            
-            UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, 10, 71.5, 30)];
+        
+            UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, grayView.bottom+10, 71.5, 30)];
             titleimg.image = [UIImage imageNamed:@"会员口碑"];
             [backView addSubview:titleimg];
         
@@ -758,22 +694,11 @@
         line.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
         [backView addSubview:line];
         
-        
-//        if (section==2) {
-//            titlelabel.text = @"商家详情";
-//        }
-//        if (section==4) {
-//            titlelabel.text = @"会员评价";
-//        }
-            
-            if (section==5) {
-                return backView;
-            }else{
-                return nil;
-            }
-            
+
+        return backView;
+                
     }
-    else if(section==4){
+    else if(section==4+4){
         
         UIView *backView = [[UIView alloc]init];
         backView.frame = CGRectMake(0, 0, SCREENWIDTH, 41);
@@ -950,9 +875,13 @@
 -(UIView*)creatCouponsView{
     
     
-    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 122)];
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 122+10)];
     
-    UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10, 71.5, 30)];
+    UIView *grayView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+    grayView.backgroundColor = RGB(234, 234, 234);
+    [backView addSubview:grayView];
+    
+    UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2,10+grayView.bottom, 71.5, 30)];
     titleimg.image = [UIImage imageNamed:@"优惠券"];
     
     [backView addSubview:titleimg];
@@ -967,13 +896,7 @@
     
     NSArray* coupon_list = wholeInfoDic[@"coupon_list"];
     
-//    if (commodity_list.count==0) {
-//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREENWIDTH, 40)];
-//        label.font = [UIFont systemFontOfSize:14];
-//        label.text = @"本店暂无商品";
-//        
-//        return label;
-//    }else{
+
     
         UIScrollView *scroView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, line.bottom, SCREENWIDTH, 79)];
         scroView.showsVerticalScrollIndicator = NO;
@@ -1136,8 +1059,10 @@
     
 }
 #pragma mark 会员卡列表cell
--(NewShopCardListCell*)creatCardListCell:(NSIndexPath*)indexPath
+-(NewShopCardListCell*)creatCardListCell:(NSDictionary*)dic
 {
+    
+    NSLog(@"creatCardListCell----%@",dic);
     NewShopCardListCell *card_cell = [self.shopTableView dequeueReusableCellWithIdentifier:@"NewShopCardListCell"];
     if (!card_cell) {
         card_cell = [[NewShopCardListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NewShopCardListCell"];
@@ -1145,8 +1070,7 @@
         
     }
     
-    NSDictionary  *dic = _cardArray[indexPath.row-1];
-    card_cell.cardImg.backgroundColor=[UIColor colorWithHexString:[dic objectForKey:@"card_temp_color"]];
+    card_cell.cardImg.backgroundColor=[UIColor colorWithHexString:[dic objectForKey:@"template"]];
     
     card_cell.vipLab.text = [NSString stringWithFormat:@"VIP%@",[dic objectForKey:@"level"]];
     
@@ -1157,7 +1081,7 @@
     [attr setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]} range:NSMakeRange(3, card_cell.vipLab.text.length-3)];
     
     card_cell.vipLab.attributedText = attr;
-    card_cell.content_lab.text= [NSString getTheNoNullStr:[dic objectForKey:@"content"] andRepalceStr:@"暂无优惠!"];
+    card_cell.content_lab.text= [NSString getTheNoNullStr:[dic objectForKey:@"des"] andRepalceStr:@"暂无优惠!"];
     
     
     card_cell.cardPriceLable.text = [NSString stringWithFormat:@"￥%@",[dic objectForKey:@"price"]];
@@ -1180,12 +1104,14 @@
     
     if ([[dic objectForKey:@"type"] isEqualToString:@"计次卡"]) {
         card_cell.discountLable.text=[NSString stringWithFormat:@"%@次",discounts];
-    }else{
+    }else   if ([[dic objectForKey:@"type"] isEqualToString:@"储值卡"]){
         
         if (dis==10) {
             card_cell.discountLable.text=@"无折扣";
  
         }
+    }else{
+        card_cell.discountLable.hidden = YES;
     }
     
     
@@ -1381,7 +1307,7 @@
     [self showHudInView:self.view hint:@"加载中..."];
     
     AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/infoGet",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/merchant/contentGet",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[self.infoDic objectForKey:@"muid"] forKey:@"muid"];
     
@@ -1401,9 +1327,13 @@
          [self hideHud];
          
          NSLog(@"result====%@", result);
-         self.cardArray=result[@"card_list"];
+         self.card_arr_dic=result[@"card_list"];
+         
+      _cardCount = [_card_arr_dic[@"value"] count] + [_card_arr_dic[@"count"] count]+[_card_arr_dic[@"meal"] count] + [_card_arr_dic[@"experience"] count];
+         
+         
+         
          wholeInfoDic=[result copy];
-//         [self.shopTableView reloadData];
          [self creatTableViewHeadView];
          [self postRequestGetInfo];
          
@@ -1550,26 +1480,8 @@
     [addressLabel addGestureRecognizer:tapGesture];
     [backView addSubview:addressLabel];
     
-//    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(10, line1.bottom+43, SCREENWIDTH, 1)];
-//    line2.backgroundColor = RGB(225, 225, 225);
-//    [backView addSubview:line2];
-    
-//    UIImageView *titleimg = [[UIImageView alloc]initWithFrame:CGRectMake((SCREENWIDTH-71.5)/2, line2.bottom+10, 71.5, 30)];
-////    titlelabel.textAlignment=NSTextAlignmentCenter;
-////    titlelabel.font = [UIFont systemFontOfSize:15.0];
-////    titlelabel.text=@"会员卡";
-//    titleimg.image = [UIImage imageNamed:@"会员卡"];
-//    
-//    
-//    
-//    [backView addSubview:titleimg];
-//    
-//
-//    UIView *line3 = [[UIView alloc]init];
-//    line3.backgroundColor = RGB(225, 225, 225);
-//    line3.frame= CGRectMake(10, titleimg.bottom, SCREENWIDTH, 1);
-//    [backView addSubview:line3];
 
+   
     backView.frame = CGRectMake(0, 0, SCREENWIDTH, addressLabel.bottom+7);
 
     self.shopTableView.tableHeaderView = backView;
@@ -1601,9 +1513,11 @@
         [self.navigationController pushViewController:landVc animated:YES];
     }else
     {
-        if (self.cardArray.count>0) {
+        if (_cardCount) {
             
-            [self postGetAuthStateindex:9999];
+            NSIndexPath *index = [NSIndexPath indexPathForRow:999 inSection:999];
+            [self postGetAuthStateindex:index];
+            
            
         }else{
             [self showHint:@"本店暂无卡出售"];
@@ -1842,9 +1756,8 @@ if (old_view !=tap.view) {
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==1) {
-        if (indexPath.row!=0) {
-            
+    if (indexPath.section>=2 && indexPath.section <=5) {
+        
             
             
             AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -1853,9 +1766,10 @@ if (old_view !=tap.view) {
                 [self.navigationController pushViewController:landVc animated:YES];
             }else
             {
-                if (self.cardArray.count>0) {
-                   
-                    [self postGetAuthStateindex:indexPath.row-1];
+                if (_cardCount>0) {
+                    NSIndexPath *lzdIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section-2];
+                    
+                    [self postGetAuthStateindex:lzdIndexPath];
                 }else{
                     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                     hud.mode = MBProgressHUDModeText;
@@ -1871,10 +1785,9 @@ if (old_view !=tap.view) {
             
            
         }
-    }
 }
 
--(void)postGetAuthStateindex:(NSInteger)index{
+-(void)postGetAuthStateindex:(NSIndexPath*)indexPath{
     
     NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/info/getAuthResult",BASEURL];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -1887,10 +1800,13 @@ if (old_view !=tap.view) {
          NSLog(@"result====%@", result);
          NSDictionary *dic = [result copy];
          if ([dic[@"state"] isEqualToString:@"access"]) {
+             
              NewBuyCardViewController *buyVC=[[NewBuyCardViewController alloc]init];
-             buyVC.cardListArray=self.cardArray;
+             buyVC.cardList_Dic=self.card_arr_dic;
+             
+             
              buyVC.shop_name =[wholeInfoDic objectForKey:@"store"];
-             buyVC.selectRow=index;
+             buyVC.selectIndexPath=indexPath;
              [self.navigationController pushViewController:buyVC animated:YES];
              
 

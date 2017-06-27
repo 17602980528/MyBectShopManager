@@ -1076,7 +1076,7 @@
     {
         if (self.cardArray.count>0) {
             NewBuyCardViewController *buyVC=[[NewBuyCardViewController alloc]init];
-            buyVC.cardListArray=self.cardArray;
+//            buyVC.cardListArray=self.cardArray;
             buyVC.shop_name =[wholeInfoDic objectForKey:@"store"];
             [self.navigationController pushViewController:buyVC animated:YES];
         }else{

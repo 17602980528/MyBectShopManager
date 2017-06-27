@@ -95,7 +95,7 @@
     
     
     if (tf.text.length>0) {
-        if ([tf.text floatValue]<=rule) {
+        if ([tf.text floatValue]<=rule && [tf.text floatValue]>=0) {
             [self postRequest:self.dic[@"card_remain"] disCount:tf.text];
         }else{
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
