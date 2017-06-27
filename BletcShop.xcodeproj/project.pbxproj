@@ -158,6 +158,10 @@
 		18A4B6F21D33933B00EFBCC1 /* 椭圆-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A4B6F01D33933B00EFBCC1 /* 椭圆-02.png */; };
 		18A4B6F31D33933B00EFBCC1 /* 椭圆-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A4B6F11D33933B00EFBCC1 /* 椭圆-01.png */; };
 		18A72C5B1ED563E9005FDF87 /* 线上角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A72C5A1ED563E8005FDF87 /* 线上角标.png */; };
+		18A7E3E51F0227B300C14C98 /* NewShopComeInTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A7E3E31F0227B300C14C98 /* NewShopComeInTableViewCell.xib */; };
+		18A7E3E61F0227B300C14C98 /* NewShopComeInTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7E3E41F0227B300C14C98 /* NewShopComeInTableViewCell.m */; };
+		18A7E3E91F0227C700C14C98 /* 新店入住banner1 拷贝.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18A7E3E71F0227C700C14C98 /* 新店入住banner1 拷贝.jpg */; };
+		18A7E3EA1F0227C700C14C98 /* 新店入住banner2 拷贝.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18A7E3E81F0227C700C14C98 /* 新店入住banner2 拷贝.jpg */; };
 		18BCCDCA1D3C9EE8005E145D /* back_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC41D3C9EE8005E145D /* back_04.png */; };
 		18BCCDCB1D3C9EE8005E145D /* merchant_ed1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC51D3C9EE8005E145D /* merchant_ed1.png */; };
 		18BCCDCC1D3C9EE8005E145D /* merchant_es1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BCCDC61D3C9EE8005E145D /* merchant_es1.png */; };
@@ -1473,6 +1477,11 @@
 		18A4B6F01D33933B00EFBCC1 /* 椭圆-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆-02.png"; sourceTree = "<group>"; };
 		18A4B6F11D33933B00EFBCC1 /* 椭圆-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆-01.png"; sourceTree = "<group>"; };
 		18A72C5A1ED563E8005FDF87 /* 线上角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "线上角标.png"; sourceTree = "<group>"; };
+		18A7E3E21F0227B300C14C98 /* NewShopComeInTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewShopComeInTableViewCell.h; sourceTree = "<group>"; };
+		18A7E3E31F0227B300C14C98 /* NewShopComeInTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewShopComeInTableViewCell.xib; sourceTree = "<group>"; };
+		18A7E3E41F0227B300C14C98 /* NewShopComeInTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewShopComeInTableViewCell.m; sourceTree = "<group>"; };
+		18A7E3E71F0227C700C14C98 /* 新店入住banner1 拷贝.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "新店入住banner1 拷贝.jpg"; sourceTree = "<group>"; };
+		18A7E3E81F0227C700C14C98 /* 新店入住banner2 拷贝.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "新店入住banner2 拷贝.jpg"; sourceTree = "<group>"; };
 		18BCCDC41D3C9EE8005E145D /* back_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_04.png; sourceTree = "<group>"; };
 		18BCCDC51D3C9EE8005E145D /* merchant_ed1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = merchant_ed1.png; sourceTree = "<group>"; };
 		18BCCDC61D3C9EE8005E145D /* merchant_es1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = merchant_es1.png; sourceTree = "<group>"; };
@@ -4750,6 +4759,8 @@
 			children = (
 				D9501DD11DD024450090A911 /* home首页 */,
 				D9501DD21DD04A7A0090A911 /* 广告专区 */,
+				18A7E3E71F0227C700C14C98 /* 新店入住banner1 拷贝.jpg */,
+				18A7E3E81F0227C700C14C98 /* 新店入住banner2 拷贝.jpg */,
 				189411421D8052FE00314E11 /* playvedio.jpg */,
 				18D8464D1ED591C90048F010 /* 优惠券背景线下.png */,
 				18D8464E1ED591C90048F010 /* 优惠券背景线上.png */,
@@ -5472,6 +5483,9 @@
 				D920B95C1DD05164001AC7F5 /* AdvertiseCell.xib */,
 				D9853F7C1DD477A00028BF94 /* ActivityModel.h */,
 				D9853F7D1DD477A00028BF94 /* ActivityModel.m */,
+				18A7E3E21F0227B300C14C98 /* NewShopComeInTableViewCell.h */,
+				18A7E3E41F0227B300C14C98 /* NewShopComeInTableViewCell.m */,
+				18A7E3E31F0227B300C14C98 /* NewShopComeInTableViewCell.xib */,
 			);
 			name = "广告专区";
 			sourceTree = "<group>";
@@ -7151,6 +7165,7 @@
 				D9AB253F1D88E4ED000E9288 /* VoiceSearchFeedback017@2x.png in Resources */,
 				D9ACF1AC1E24A64300BCC877 /* icon-weixin.png in Resources */,
 				D94DF2641CAE0DB8000D5B69 /* result_small_star_highlight@2x.png in Resources */,
+				18A7E3E91F0227C700C14C98 /* 新店入住banner1 拷贝.jpg in Resources */,
 				1CDA9E011C59FAB300DFE518 /* ad_safe.jpg in Resources */,
 				D94C5F401D9133700063EB27 /* bbbLL.png in Resources */,
 				1CF283941C58C48900F3952A /* index1.png in Resources */,
@@ -7221,6 +7236,7 @@
 				1C2ED1131C5B1827003EE93B /* 2.1-02@2x.png in Resources */,
 				1C9E82431C60557E0007BF02 /* 5(6)@2x.png in Resources */,
 				D93C0D5F1D251E7B001A1AC1 /* 小标-14.png in Resources */,
+				18A7E3EA1F0227C700C14C98 /* 新店入住banner2 拷贝.jpg in Resources */,
 				D97F601E1D62F770000EE794 /* 注册-09.png in Resources */,
 				D9FF0D8F1D53304C00443312 /* 图标-01new.png in Resources */,
 				1852FB091D55C962009CF1B2 /* 代金券-07.png in Resources */,
@@ -7611,6 +7627,7 @@
 				D986A1C81DE57849007B798B /* PaySuccessVc.xib in Resources */,
 				D98E5C211E51525E009D56BF /* SRVideoPlayer.bundle in Resources */,
 				D9FF0D9F1D53304C00443312 /* 图标-17new.png in Resources */,
+				18A7E3E51F0227B300C14C98 /* NewShopComeInTableViewCell.xib in Resources */,
 				D97F60171D62F770000EE794 /* 注册-02.png in Resources */,
 				D981FD131E2616080026E4B2 /* UMSocialSDKResources.bundle in Resources */,
 				D9E1D4261D642DCB0078EF02 /* custom4.jpg in Resources */,
@@ -7945,6 +7962,7 @@
 				18543E4B1ECADCDF00E0A4DA /* ChangeVipCardInfoVC.m in Sources */,
 				18D43E481ED6D4EC0077861A /* WYWebProgressLayer.m in Sources */,
 				D98ECBC91D9CC52200BEDD57 /* LZDAddVipCell.m in Sources */,
+				18A7E3E61F0227B300C14C98 /* NewShopComeInTableViewCell.m in Sources */,
 				D9ACF1AF1E24CB4200BCC877 /* thirdlogVC.m in Sources */,
 				D9345E6A1E769805006B2AC1 /* TopActiveListTableVC.m in Sources */,
 				D93C1A1E1EE95832006DA624 /* ShoperRegistVCTwo.m in Sources */,
