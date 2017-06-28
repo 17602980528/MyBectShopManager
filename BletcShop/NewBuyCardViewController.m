@@ -25,7 +25,7 @@
 #import "UPPaymentControl.h"
 #import "PaySuccessVc.h"
 
-#import "CardDetailShowProdictCell.h"
+#import "NewBuyOptionsCell.h"
 
 @interface NewBuyCardViewController ()<UITableViewDelegate,UITableViewDataSource,ViewControllerBDelegate>
 @property (nonatomic ,assign) float walletRemain;//钱包余额
@@ -327,7 +327,7 @@
         
         
     }else if (indexPath.section==1+3+1){
-        return 50;
+        return 80;
     }else if (indexPath.section==2+3+1){
         return 50;
     }else if (indexPath.section==3+3+1){
@@ -600,19 +600,21 @@
     }else if (indexPath.section==1+3+1){
         
             
-            CardDetailShowProdictCell *optionCell =[tableView dequeueReusableCellWithIdentifier:@"CardDetailShowCell"];
+            NewBuyOptionsCell *optionCell =[tableView dequeueReusableCellWithIdentifier:@"NewBuyOptionsCellID"];
             if (!optionCell) {
-                optionCell = [[[NSBundle mainBundle]loadNibNamed:@"CardDetailShowProdictCell" owner:self options:nil] firstObject];
-                optionCell.selectImg.hidden = NO;
+                optionCell = [[[NSBundle mainBundle]loadNibNamed:@"NewBuyOptionsCell" owner:self options:nil] firstObject];
             }
             
             NSDictionary *dic = self.optionsList_mutab[indexPath.row];
+        
+        
             
-            
-            optionCell.productName.text=[NSString stringWithFormat:@"%@",dic[@"name"]];
-            optionCell.productPrice.text=[NSString stringWithFormat:@"%@元/次  (可用%@次)",dic[@"price"],dic[@"option_count"]];
+            optionCell.title_lab.text=[NSString stringWithFormat:@"%@   %@元",dic[@"name"],dic[@"price"]];
+            optionCell.count_lab.text=[NSString stringWithFormat:@"可用%@次(长期有效)",dic[@"option_count"]];
+        
+        
             NSURL * nurl1=[[NSURL alloc] initWithString:[[NSString stringWithFormat:@"%@%@",PRODUCT_IMAGE,dic[@"image"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-            [optionCell.productImage sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+            [optionCell.imgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
             
             return  optionCell;
             
@@ -1831,18 +1833,17 @@
 
 -(void)getOptionsRequets{
     
-    NSString *url = [NSString stringWithFormat:@"%@UserType/MealCard/getOption",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/MealCard/showOption",BASEURL];
     
-    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
     NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
     [paramer setValue:self.card_dic[@"muid"] forKey:@"muid"];
     
-    [paramer setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
     [paramer setValue:self.card_dic[@"code"] forKey:@"code"];
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
+        NSLog(@"result-----%@",result);
         
         self.optionsList_mutab = result;
         

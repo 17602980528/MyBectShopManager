@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="allORNot" destination="mjG-Ck-6LH" id="mP0-pv-6Ag"/>
                 <outlet property="chooseORCancel" destination="7Gz-SA-zfv" id="pvX-4f-N2a"/>
+                <outlet property="selectCountLab" destination="Uiv-Xg-yFg" id="eYI-Gy-Z32"/>
                 <outlet property="tableView" destination="KVq-in-mG8" id="emp-PY-4lA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -89,7 +90,7 @@
                                 <constraint firstItem="7Gz-SA-zfv" firstAttribute="top" secondItem="mjG-Ck-6LH" secondAttribute="bottom" id="wvi-uB-7Sb"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已选2项" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uiv-Xg-yFg">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已选0项" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uiv-Xg-yFg">
                             <rect key="frame" x="20" y="40" width="355" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="7qP-MO-Naj"/>
@@ -145,7 +146,7 @@
                 <constraint firstItem="3sZ-On-I10" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wfl-6X-xHj"/>
                 <constraint firstItem="3sZ-On-I10" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xXU-5g-cry"/>
             </constraints>
-            <point key="canvasLocation" x="45.5" y="-168.5"/>
+            <point key="canvasLocation" x="-134" y="-197"/>
         </view>
     </objects>
     <resources>

@@ -135,7 +135,7 @@
                         <constraint firstAttribute="height" constant="11" id="3UH-Nz-kqx"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择卡片样式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-VY-F4s">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择板式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-VY-F4s">
                     <rect key="frame" x="12" y="11" width="103" height="49"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="103" id="0py-AZ-ekY"/>

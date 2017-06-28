@@ -14,6 +14,7 @@
 #import "CountPAYViewController.h"
 
 #import "MealCardPayVC.h"//套餐卡支付
+#import "ExperienceCardGoToPayVC.h" //体验卡支付
 
 @interface CardVipController()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,weak)UITableView *Cardtable;
@@ -226,11 +227,11 @@
     
     
     
-    UILabel *code_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, upView.width-5, 9)];
-    code_lab.textColor = RGB(255,255,255);
-    code_lab.textAlignment = NSTextAlignmentRight;
-    code_lab.font = [UIFont systemFontOfSize:9];
-    [upView addSubview:code_lab];
+//    UILabel *code_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, upView.width-5, 9)];
+//    code_lab.textColor = RGB(255,255,255);
+//    code_lab.textAlignment = NSTextAlignmentRight;
+//    code_lab.font = [UIFont systemFontOfSize:9];
+//    [upView addSubview:code_lab];
 
     
     
@@ -277,7 +278,7 @@
     
     upView.backgroundColor=[UIColor colorWithHexString:dic[@"card_temp_color"]];
 
-    code_lab.text = [NSString stringWithFormat:@"%@",dic[@"card_code"]];
+//    code_lab.text = [NSString stringWithFormat:@"%@",dic[@"card_code"]];
 
 
     shopName.text=[NSString getTheNoNullStr:dic[@"store"] andRepalceStr:@""];
@@ -287,7 +288,7 @@
     typeAndeLevel.text = [NSString stringWithFormat:@"%@(%@)",dic[@"card_type"],dic[@"card_level"]];
 
     //套餐卡 体验卡
-    if (indexPath.section==2 ||indexPath.section==3) {
+    if ([dic[@"card_type"] isEqualToString:@"套餐卡"] || [dic[@"card_type"] isEqualToString:@"体验卡"] ) {
         
         typeAndeLevel.text = [NSString stringWithFormat:@"%@",dic[@"card_type"]];
         yueLabel.text = [[NSString alloc]initWithFormat:@"余额:%@",dic[@"card_remain"]];
@@ -295,7 +296,7 @@
     }
 
     //储值卡
-    if (indexPath.section ==0) {
+    if ([dic[@"card_type"] isEqualToString:@"储值卡"]) {
         
         
         discountLab.text = [NSString stringWithFormat:@"%g折",[dic[@"rule"] floatValue]/10];
@@ -305,7 +306,7 @@
     
     
     //计次卡
-    if (indexPath.section ==1) {
+    if ([dic[@"card_type"] isEqualToString:@"计次卡"]) {
        
         
         NSString *oneString = [dic objectForKey:@"price"];//单价
@@ -323,6 +324,7 @@
         yueLabel.text = [[NSString alloc]initWithFormat:@"次数:%d",time];
 
     }
+    
     
     
     return cell;
@@ -368,11 +370,38 @@
             
         }else if (sender.section==3){
             
+            PUSH(ExperienceCardGoToPayVC)
+            vc.card_dic = dic;
+            vc.refresheDate = ^{
+                [self postRequestVipCard];
+            };
             
+
             
         }
         else if (sender.section==4){
             
+            
+            if ([dic[@"card_type"] isEqualToString:@"储值卡"]) {
+                PUSH(MoneyPAYViewController)
+                vc.refresheDate = ^{
+                    [self postRequestVipCard];
+                };
+                
+                vc.card_dic = dic;
+
+            }
+            
+            if ([dic[@"card_type"] isEqualToString:@"计次卡"]) {
+                PUSH(CountPAYViewController)
+                vc.refresheDate = ^{
+                    [self postRequestVipCard];
+                };
+                
+                vc.card_dic = dic;
+                
+            }
+
             
             
         }

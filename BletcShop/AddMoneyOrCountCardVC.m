@@ -331,7 +331,7 @@
         [self showHint:@"请输入优惠内容"];
         
     }else if (!_cardInfo_dic[@"card_temp_color"]){
-        [self showHint:@"请选择卡片样式"];
+        [self showHint:@"请选择板式"];
         
     }else{
         

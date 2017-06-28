@@ -246,7 +246,7 @@ typedef NS_ENUM(NSUInteger, SRControlType) {
     
     // Need setting the app only support portrait orientation?
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)setupUIConstraints {

@@ -992,6 +992,10 @@
 		D9A8ABF01E02959B00D4597F /* RoyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8ABEF1E02959B00D4597F /* RoyTableViewCell.m */; };
 		D9AA10B91F023BCA00F7EDE8 /* MealCardPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA10B71F023BCA00F7EDE8 /* MealCardPayVC.m */; };
 		D9AA10BA1F023BCA00F7EDE8 /* MealCardPayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9AA10B81F023BCA00F7EDE8 /* MealCardPayVC.xib */; };
+		D9AA10C11F038A7100F7EDE8 /* ExperienceCardGoToPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA10BF1F038A7100F7EDE8 /* ExperienceCardGoToPayVC.m */; };
+		D9AA10C21F038A7100F7EDE8 /* ExperienceCardGoToPayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9AA10C01F038A7100F7EDE8 /* ExperienceCardGoToPayVC.xib */; };
+		D9AA10C71F03B43400F7EDE8 /* NewBuyOptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA10C51F03B43400F7EDE8 /* NewBuyOptionsCell.m */; };
+		D9AA10C81F03B43400F7EDE8 /* NewBuyOptionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9AA10C61F03B43400F7EDE8 /* NewBuyOptionsCell.xib */; };
 		D9AB25191D88E482000E9288 /* EaseRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB25181D88E482000E9288 /* EaseRecordView.m */; };
 		D9AB252F1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AB251B1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png */; };
 		D9AB25301D88E4ED000E9288 /* VoiceSearchFeedback002@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AB251C1D88E4ED000E9288 /* VoiceSearchFeedback002@2x.png */; };
@@ -2771,6 +2775,12 @@
 		D9AA10B61F023BCA00F7EDE8 /* MealCardPayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealCardPayVC.h; sourceTree = "<group>"; };
 		D9AA10B71F023BCA00F7EDE8 /* MealCardPayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealCardPayVC.m; sourceTree = "<group>"; };
 		D9AA10B81F023BCA00F7EDE8 /* MealCardPayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MealCardPayVC.xib; sourceTree = "<group>"; };
+		D9AA10BE1F038A7100F7EDE8 /* ExperienceCardGoToPayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperienceCardGoToPayVC.h; sourceTree = "<group>"; };
+		D9AA10BF1F038A7100F7EDE8 /* ExperienceCardGoToPayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperienceCardGoToPayVC.m; sourceTree = "<group>"; };
+		D9AA10C01F038A7100F7EDE8 /* ExperienceCardGoToPayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExperienceCardGoToPayVC.xib; sourceTree = "<group>"; };
+		D9AA10C41F03B43400F7EDE8 /* NewBuyOptionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewBuyOptionsCell.h; sourceTree = "<group>"; };
+		D9AA10C51F03B43400F7EDE8 /* NewBuyOptionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewBuyOptionsCell.m; sourceTree = "<group>"; };
+		D9AA10C61F03B43400F7EDE8 /* NewBuyOptionsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewBuyOptionsCell.xib; sourceTree = "<group>"; };
 		D9AB25171D88E482000E9288 /* EaseRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseRecordView.h; sourceTree = "<group>"; };
 		D9AB25181D88E482000E9288 /* EaseRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EaseRecordView.m; sourceTree = "<group>"; };
 		D9AB251B1D88E4ED000E9288 /* VoiceSearchFeedback001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VoiceSearchFeedback001@2x.png"; sourceTree = "<group>"; };
@@ -3601,15 +3611,15 @@
 		180DC38B1EF284DE00DF9474 /* 选套餐页 */ = {
 			isa = PBXGroup;
 			children = (
+				182EF5771F00BE1300ECDD7D /* ChooseProductVC.h */,
+				182EF5761F00BE1300ECDD7D /* ChooseProductVC.m */,
+				182EF5751F00BE1300ECDD7D /* ChooseProductVC.xib */,
+				182EF5741F00BE1300ECDD7D /* PackageTableViewCell.h */,
 				182EF56F1F00BE1300ECDD7D /* PackageTableViewCell.m */,
 				182EF5701F00BE1300ECDD7D /* PackageTableViewCell.xib */,
 				182EF5711F00BE1300ECDD7D /* PackageOtherTableViewCell.h */,
 				182EF5721F00BE1300ECDD7D /* PackageOtherTableViewCell.m */,
 				182EF5731F00BE1300ECDD7D /* PackageOtherTableViewCell.xib */,
-				182EF5741F00BE1300ECDD7D /* PackageTableViewCell.h */,
-				182EF5751F00BE1300ECDD7D /* ChooseProductVC.xib */,
-				182EF5761F00BE1300ECDD7D /* ChooseProductVC.m */,
-				182EF5771F00BE1300ECDD7D /* ChooseProductVC.h */,
 			);
 			name = "选套餐页";
 			sourceTree = "<group>";
@@ -4425,16 +4435,15 @@
 				18F4CD4C1D6FD6F2008FBAD1 /* CardVipController.m */,
 				D94040391CBDEB7100EC98EA /* CardManagerViewController.h */,
 				D940403A1CBDEB7100EC98EA /* CardManagerViewController.m */,
+				D9AA10BD1F0389F200F7EDE8 /* 体验卡支付 */,
+				D9AA10BC1F0389E700F7EDE8 /* 计次卡支付 */,
+				D9AA10BB1F0389D600F7EDE8 /* 储值卡支付 */,
 				D9AA10B51F023B7400F7EDE8 /* 套餐卡支付 */,
 				D940403C1CBE156100EC98EA /* RechargeViewController.h */,
 				D940403D1CBE156100EC98EA /* RechargeViewController.m */,
 				D99C11A21DE28CF100E45B64 /* UPgradeVC.h */,
 				D99C11A31DE28CF100E45B64 /* UPgradeVC.m */,
 				D99C11A41DE28CF100E45B64 /* UPgradeVC.xib */,
-				18F4CD451D6FD6BD008FBAD1 /* MoneyPAYViewController.h */,
-				18F4CD461D6FD6BD008FBAD1 /* MoneyPAYViewController.m */,
-				18F4CD471D6FD6BD008FBAD1 /* CountPAYViewController.h */,
-				18F4CD481D6FD6BD008FBAD1 /* CountPAYViewController.m */,
 				18E3DA131D82460A0089597B /* SoundPaly.h */,
 				18E3DA141D82460A0089597B /* SoundPaly.m */,
 				182E7D421EC5604D009CAC02 /* PayCustomView.h */,
@@ -4795,6 +4804,7 @@
 				D98533301DDE9A86004E1E6F /* NewBuyCardViewController.m */,
 				18F0320F1E5EE02700ACD261 /* HolidayActivertyVC.h */,
 				18F032101E5EE02700ACD261 /* HolidayActivertyVC.m */,
+				D9AA10C31F03B3E500F7EDE8 /* 购买页面,套餐项目Cell */,
 				D9ABB19E1EC93EC800FBE080 /* 旧的.废弃 */,
 			);
 			name = Controller;
@@ -6396,6 +6406,44 @@
 			name = "套餐卡支付";
 			sourceTree = "<group>";
 		};
+		D9AA10BB1F0389D600F7EDE8 /* 储值卡支付 */ = {
+			isa = PBXGroup;
+			children = (
+				18F4CD451D6FD6BD008FBAD1 /* MoneyPAYViewController.h */,
+				18F4CD461D6FD6BD008FBAD1 /* MoneyPAYViewController.m */,
+			);
+			name = "储值卡支付";
+			sourceTree = "<group>";
+		};
+		D9AA10BC1F0389E700F7EDE8 /* 计次卡支付 */ = {
+			isa = PBXGroup;
+			children = (
+				18F4CD471D6FD6BD008FBAD1 /* CountPAYViewController.h */,
+				18F4CD481D6FD6BD008FBAD1 /* CountPAYViewController.m */,
+			);
+			name = "计次卡支付";
+			sourceTree = "<group>";
+		};
+		D9AA10BD1F0389F200F7EDE8 /* 体验卡支付 */ = {
+			isa = PBXGroup;
+			children = (
+				D9AA10BE1F038A7100F7EDE8 /* ExperienceCardGoToPayVC.h */,
+				D9AA10BF1F038A7100F7EDE8 /* ExperienceCardGoToPayVC.m */,
+				D9AA10C01F038A7100F7EDE8 /* ExperienceCardGoToPayVC.xib */,
+			);
+			name = "体验卡支付";
+			sourceTree = "<group>";
+		};
+		D9AA10C31F03B3E500F7EDE8 /* 购买页面,套餐项目Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D9AA10C41F03B43400F7EDE8 /* NewBuyOptionsCell.h */,
+				D9AA10C51F03B43400F7EDE8 /* NewBuyOptionsCell.m */,
+				D9AA10C61F03B43400F7EDE8 /* NewBuyOptionsCell.xib */,
+			);
+			name = "购买页面,套餐项目Cell";
+			sourceTree = "<group>";
+		};
 		D9AB25161D88E482000E9288 /* RecordView */ = {
 			isa = PBXGroup;
 			children = (
@@ -7193,6 +7241,7 @@
 				D981FD041E2616080026E4B2 /* UShare快速集成.html in Resources */,
 				D9699E501D348EF7001DEC06 /* 小标-22.png in Resources */,
 				1CF2839D1C58C48900F3952A /* more_default.png in Resources */,
+				D9AA10C21F038A7100F7EDE8 /* ExperienceCardGoToPayVC.xib in Resources */,
 				18543E3C1ECAD8A500E0A4DA /* quan1.png in Resources */,
 				D95F032A1DD9841500F9DC2F /* Selected.png in Resources */,
 				D93C1A1F1EE95832006DA624 /* ShoperRegistVCTwo.xib in Resources */,
@@ -7739,6 +7788,7 @@
 				D95BAE561D542FD500ED0CDC /* award_12.png in Resources */,
 				D98FDF841E601C280057C206 /* AD_ad_is@2x.png in Resources */,
 				D9EC40C11EE685AD004BEDB8 /* GeneralCell.xib in Resources */,
+				D9AA10C81F03B43400F7EDE8 /* NewBuyOptionsCell.xib in Resources */,
 				D9699E511D348EF7001DEC06 /* 小标-21.png in Resources */,
 				D9AB25381D88E4ED000E9288 /* VoiceSearchFeedback010@2x.png in Resources */,
 				1C31F8141C632A4E00CB1A9E /* tianjiavip@2x.png in Resources */,
@@ -7931,6 +7981,7 @@
 				D96503E61CE06E1D006907EF /* GCDAsyncUdpSocket.m in Sources */,
 				D9B650071E9724A0007DF5DC /* ShopManagerDataReportVC.m in Sources */,
 				1A9B3AD21D77123D00919CDC /* Message.m in Sources */,
+				D9AA10C71F03B43400F7EDE8 /* NewBuyOptionsCell.m in Sources */,
 				D9A6E46C1D4F3BB8008A3C29 /* AddVipCardViewController.m in Sources */,
 				D9EC40C71EE69564004BEDB8 /* GeneralSectionHeader.m in Sources */,
 				D9ABB1A11EC93EF900FBE080 /* NewShopDetailVC.m in Sources */,
@@ -8002,6 +8053,7 @@
 				D941135B1CE9A3D7008E231F /* MD5DataSigner.m in Sources */,
 				D9CDFB691CC47F7C0054EBE3 /* BDMapViewController.m in Sources */,
 				D9D50DB61D87DE0E00A5E469 /* ExpressionCL.m in Sources */,
+				D9AA10C11F038A7100F7EDE8 /* ExperienceCardGoToPayVC.m in Sources */,
 				18F27EC91D640C21002DD03A /* NewModelImageViewController.m in Sources */,
 				189F4CF71D508EF300461830 /* ActiveMoreRuleViewController.m in Sources */,
 				D9C3A3001E9642890062B17D /* ChouJiangVC.m in Sources */,

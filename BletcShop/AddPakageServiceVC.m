@@ -176,7 +176,7 @@
     [KKRequestDataService requestWithURL:url params:parmer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         if ([result[@"result_code"] integerValue] ==1) {
-            [self showTishi:@"上传成功" dele:self cancel:@"取消" operate:@"返回上级页面"];
+            [self showTishi:@"上传成功" dele:self cancel:@"取消" operate:@"返回"];
             
         }else if([result[@"result_code"] isEqualToString:@"image_upload_fail"]){
             [self showTishi:@"图片上传失败" dele:nil cancel:nil operate:@"确认"];

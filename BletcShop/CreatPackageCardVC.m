@@ -11,7 +11,11 @@
 #import "ChooseProductVC.h"
 #import "ChoiceCardPictureViewController.h"
 #import "UIImageView+WebCache.h"
-@interface CreatPackageCardVC ()<UITableViewDelegate,UITableViewDataSource,ChoiceCardDelegate,UITextFieldDelegate,ChooseProductVCDelegate,UIAlertViewDelegate>
+@interface CreatPackageCardVC ()<UITableViewDelegate,UITableViewDataSource,ChoiceCardDelegate,UITextFieldDelegate,ChooseProductVCDelegate,UIAlertViewDelegate,UITextViewDelegate>
+{
+    CGFloat tabelViewOffsetY;
+
+}
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *headViewXib;
 @property (strong, nonatomic) IBOutlet UITextField *cardNameTF;
@@ -25,6 +29,11 @@
 @property (strong,nonatomic)NSMutableArray *dataSourceArray;
 @property (strong,nonatomic)NSDictionary *colorDic;
 @property (nonatomic)NSInteger optionsum;
+@property (weak, nonatomic) IBOutlet UILabel *placeHoderLab;//占位字符串
+
+@property (weak, nonatomic) IBOutlet UITextView *text_View;//优惠内容
+
+
 @end
 
 @implementation CreatPackageCardVC
@@ -49,8 +58,12 @@
          [self showTishi:@"请选择具体套餐项目" dele:nil cancel:nil operate:@"确认"];
     }else if(!_colorDic){
         [self showTishi:@"请选择套餐卡样式" dele:nil cancel:nil operate:@"确认"];
+    }else if(_text_View.text.length ==0){
+        [self showTishi:@"请输入套餐说明" dele:nil cancel:nil operate:@"确认"];
+
     }else{
         [self postRequestAddPackageCard];
+
     }
     
 }
@@ -131,10 +144,8 @@
     [textField resignFirstResponder];
     return YES;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+
 -(void)weChoosedPruductDic:(NSArray *)array{
     //
     [_dataSourceArray removeAllObjects];
@@ -156,7 +167,7 @@
     [parmer setValue:[NSString stringWithFormat:@"%lu",(unsigned long)_dataSourceArray.count] forKey:@"option_num"];
 
     NSMutableArray *optionsArray=[[NSMutableArray alloc]initWithCapacity:0];
-    NSString *des=@"";
+
     for (int i=0; i<_dataSourceArray.count; i++) {
         NSDictionary *dic=[_dataSourceArray[i] allValues][0];
         
@@ -164,14 +175,11 @@
         
         NSDictionary *newDic=@{@"id":dic[@"id"],@"count":[NSString stringWithFormat:@"%ld",(long)cell.productCount]};
         [optionsArray addObject:newDic];
-        if (i==0) {
-            des=[NSString stringWithFormat:@"%@%@%@次",des,dic[@"name"],[NSString stringWithFormat:@"%ld",(long)cell.productCount]];
-        }else{
-            des=[NSString stringWithFormat:@"%@+%@%@次",des,dic[@"name"],[NSString stringWithFormat:@"%ld",(long)cell.productCount]];
-        }
+        
+
         
     }
-     [parmer setValue:des forKey:@"des"];
+     [parmer setValue:_text_View.text forKey:@"des"];
     NSString * jsonStr = [self arrayToJSONString:optionsArray];
     NSLog(@"%@",jsonStr);
      [parmer setValue:jsonStr forKey:@"options"];
@@ -234,14 +242,56 @@
     return jsonString;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    
+    CGRect frame = [textView convertRect:textView.frame toView:self.view];
+    
+    CGFloat h =SCREENHEIGHT-(frame.origin.y+frame.size.height+64);
+    tabelViewOffsetY =_tableView.contentOffset.y;
+    
+    if (h<216) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [_tableView setContentOffset:CGPointMake(0,  tabelViewOffsetY+216-h)];
+            
+        }];
+    }
+    
+    
 }
-*/
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [_tableView setContentOffset:CGPointMake(0, tabelViewOffsetY)];
+        
+    }];
+    if (textView.text.length>0) {
+        
+//        [self.cardInfo_dic setValue:textView.text forKey:@"content"];
+        
+    }
+    
+    
+    
+}
+-(void)textViewDidChange:(UITextView *)textView{
+    if (textView.text.length==0) {
+        self.placeHoderLab.hidden = NO;
+    }else{
+        self.placeHoderLab.hidden = YES;
+        
+    }
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        [textView resignFirstResponder];
+    }
+    
+    return YES;
+}
+
+
 
 @end

@@ -23,6 +23,7 @@
 
 @property (strong,nonatomic)NSMutableDictionary *recordChooseState;
 @property (strong,nonatomic)NSMutableArray *weChoosedArray;
+@property (weak, nonatomic) IBOutlet UILabel *selectCountLab;//顶部所选数目
 @end
 
 @implementation ChooseProductVC
@@ -178,6 +179,9 @@
         [_dataArray replaceObjectAtIndex:indexPath.row withObject:mutDic];
         [_recordChooseState removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
     }
+    
+    self.selectCountLab.text = [NSString stringWithFormat:@"已选%ld项",_recordChooseState.count];
+    
     [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
@@ -262,8 +266,13 @@
             [self showTishi:@"删除成功!" dele:nil cancel:nil operate:@"确认"];
             [_recordChooseState removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
             [self postRequestGetOption];
+        }else if( [result[@"result_code"] isEqualToString:@"working"]){
+            
+            [self showTishi:@"正在使用不能删除..." dele:nil cancel:nil operate:@"确认"];
+
         }else{
             [self showTishi:@"删除失败!" dele:nil cancel:nil operate:@"确认"];
+
         }
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         DebugLog(@"error-----%@",error.description);
