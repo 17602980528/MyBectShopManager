@@ -142,6 +142,7 @@
         
         
         [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,dic[@"image_url"]]] placeholderImage:[UIImage imageNamed:@"icon3"]];
+        cell.shopKind.text=[NSString stringWithFormat:@" %@   ",dic[@"trade"]];
         
     }
     return cell;
