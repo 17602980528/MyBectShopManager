@@ -49,7 +49,7 @@
     
     
     cell.productName.text=[NSString stringWithFormat:@"%@",dic[@"name"]];
-    cell.productPrice.text=[NSString stringWithFormat:@"%@元/次  (剩余%@次)",dic[@"price"],dic[@"option_count"]];
+    cell.productPrice.text=[NSString stringWithFormat:@"%@元/次  (可用%@次)",dic[@"price"],dic[@"option_count"]];
     NSURL * nurl1=[[NSURL alloc] initWithString:[[NSString stringWithFormat:@"%@%@",PRODUCT_IMAGE,dic[@"image"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     [cell.productImage sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
     

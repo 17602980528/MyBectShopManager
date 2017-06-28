@@ -20,9 +20,30 @@
 
 @implementation PaySuccessVc
 
+
+-(void)backClick{
+    
+    NSInteger vcs_count = self.navigationController.viewControllers.count;
+    
+    NSLog(@"%@",self.navigationController.viewControllers);
+    
+    [self.navigationController popToViewController:self.navigationController.viewControllers[vcs_count-3] animated:YES];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"交易结果";
+    
+    UIButton *back =[UIButton buttonWithType:UIButtonTypeCustom];
+    back.frame = CGRectMake(9, 30, 12, 20);
+    [back setImage:[UIImage imageNamed:@"leftArrow"] forState:0];
+    [back addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+ 
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:back];
+    
+    
     NSString *string = @"购买成功，获得300积分";
     NSLog(@"-----%@",self.card_dic);
     
