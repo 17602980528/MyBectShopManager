@@ -139,13 +139,14 @@
             [demoView addSubview:labelState];
             UILabel *stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, labelState.top, SCREENWIDTH-120, 44)];
             
-            if ([self.pay_type_s isEqualToString:@"计次数量"]) {
-                stateLabel.text = @"计次卡支付" ;
-                
-            }else{
-                stateLabel.text = @"储值卡支付" ;
-                
-            }
+//            if ([self.pay_type_s isEqualToString:@"计次数量"]) {
+//                stateLabel.text = @"计次卡支付" ;
+//                
+//            }else{
+//                stateLabel.text = @"储值卡支付" ;
+//                
+//            }
+            stateLabel.text = @"会员卡支付";
             stateLabel.textColor = RGB(51,51,51);
             //self.payShopName = [[infoArrayOr objectAtIndex:1] substringToIndex:range.location];
             //label.text = @"修改昵称";
@@ -257,13 +258,15 @@
         labelState.font = [UIFont systemFontOfSize:16];
         [demoView addSubview:labelState];
         UILabel *stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, labelState.top, SCREENWIDTH-120, 44)];
-        if ([self.pay_type_s isEqualToString:@"计次数量"]) {
-            stateLabel.text = @"计次卡支付" ;
+//        if ([self.pay_type_s isEqualToString:@"计次数量"]) {
+//            stateLabel.text = @"计次卡支付" ;
+//
+//        }else{
+//            stateLabel.text = @"储值卡支付" ;
+// 
+//        }
+        stateLabel.text = @"会员卡支付";
 
-        }else{
-            stateLabel.text = @"储值卡支付" ;
- 
-        }
         stateLabel.textColor = RGB(51,51,51);
         //self.payShopName = [[infoArrayOr objectAtIndex:1] substringToIndex:range.location];
         stateLabel.textAlignment = NSTextAlignmentRight;

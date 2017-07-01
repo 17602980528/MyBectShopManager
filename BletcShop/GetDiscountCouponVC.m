@@ -18,8 +18,7 @@
 @interface GetDiscountCouponVC ()<UITableViewDelegate,UITableViewDataSource,BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
     UITableView *_tableView;
-    NSArray *_dataArray;
-    
+
     BMKMapView* _mapView;
     BMKLocationService* _locService;
     BMKGeoCodeSearch* _geocodesearch;
@@ -27,12 +26,28 @@
     SDRefreshFooterView *_refreshFooter;
     SDRefreshHeaderView *_refreshheader;
 }
+@property(nonatomic)NSInteger page;
+
+@property(nonatomic,strong)NSMutableArray *dataArray;
+
 @end
 
 @implementation GetDiscountCouponVC
+
+-(NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    self.page = 1;
+    [self.dataArray removeAllObjects];
     [self postGetCouponRequest];
+    
+    
     _locService = [[BMKLocationService alloc]init];
     _geocodesearch = [[BMKGeoCodeSearch alloc]init];
     [_mapView viewWillAppear];
@@ -102,6 +117,32 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     [self.view addSubview:_tableView];
+    
+    
+    
+    _refreshheader = [SDRefreshHeaderView refreshView];
+    [_refreshheader addToScrollView:_tableView];
+    _refreshheader.isEffectedByNavigationController = NO;
+    
+    __block typeof(self)tempSelf =self;
+    _refreshheader.beginRefreshingOperation = ^{
+        tempSelf.page=1;
+        [tempSelf.dataArray removeAllObjects];
+        //请求数据
+        [tempSelf postGetCouponRequest];
+    };
+    
+    
+    _refreshFooter = [SDRefreshFooterView refreshView];
+    [_refreshFooter addToScrollView:_tableView];
+    _refreshFooter.beginRefreshingOperation =^{
+        tempSelf.page++;
+        //数据请求
+        NSLog(@"====>>>>%ld",tempSelf.page);
+        [tempSelf postGetCouponRequest];
+        
+    };
+
     
     
 }
@@ -275,23 +316,38 @@
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     if (appdelegate.IsLogin) {
         [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+        [params setValue:[NSString stringWithFormat:@"%ld",self.page] forKey:@"index"];
+        
     }else{
-        params=nil;
+        [params setValue:[NSString stringWithFormat:@"%ld",self.page] forKey:@"index"];
     }
     NSLog(@"------%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"%@",result);
+        
+        [_refreshheader endRefreshing];
+        [_refreshFooter endRefreshing];
         if ([result count]>0) {
-            _dataArray=result;
+            NSArray *arr = result;
+            
+            [self.dataArray addObjectsFromArray:arr];
+            
+            
+            
             [_tableView reloadData];
         }else{
             
-            [self initNoneActiveView];
+            if (_dataArray.count==0) {
+                [self initNoneActiveView];
+
+            }
             
         }
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [_refreshheader endRefreshing];
+        [_refreshFooter endRefreshing];
+
         NSLog(@"%@", error);
         
     }];

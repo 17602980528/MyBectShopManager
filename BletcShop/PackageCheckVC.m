@@ -111,9 +111,20 @@
         
         return view;
         
-    }else{
+    }else if(section==1){
+    
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+        view.backgroundColor = [UIColor whiteColor];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 100, view.height)];
+        lab.text = @"项目内容";
+        lab.textColor = RGB(51, 51, 51);
+        lab.font = [UIFont systemFontOfSize:15];
+        [view addSubview:lab];
+        
+        return view;
+    }else
         return nil;
-    }
+    
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -177,9 +188,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section==0) {
         return 155*(SCREENWIDTH-132)/244.0+28;
-    }else{
+    }else if(section==1){
+        return 40;
+    }else
         return 0.01;
-    }
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

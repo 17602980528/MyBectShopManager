@@ -1120,15 +1120,32 @@
     
     
     NSString *url;
-    
+    [self showHUd];
+
+#ifdef DEBUG
     if (_selectIndexPath.section==2) {
         url = @"http://101.201.100.191/unionpay/demo/api_05_app/MealCardBuy.php";
-
+        
     }
     if (_selectIndexPath.section==3) {
         url = @"http://101.201.100.191/unionpay/demo/api_05_app/ExperienceCardBuy.php";
         
     }
+    
+    
+#else
+    if (_selectIndexPath.section==2) {
+        url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/MealCardBuy.php";
+        
+    }
+    if (_selectIndexPath.section==3) {
+        url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/ExperienceCardBuy.php";
+        
+    }
+    
+    
+#endif
+    
     
     
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -1175,7 +1192,7 @@
     NSLog(@"购买套餐卡-----%@==%@",params,url);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
-        
+        [self hideHud];
         NSLog(@"银联支付===%@", result);
         NSArray *arr = result;
         if ([arr[0] isKindOfClass:[NSString class]]) {
@@ -1197,7 +1214,8 @@
         
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [self hideHud];
+
         NSLog(@"error%@", error);
         
     }];
@@ -1401,6 +1419,7 @@
  */
 -(void)postPaymentsRequest
 {
+    [self showHUd];
     
 #ifdef DEBUG
     NSString *url = @"http://101.201.100.191//unionpay/demo/api_05_app/TPConsume.php";
@@ -1466,6 +1485,7 @@
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
+        [self hideHud];
         NSLog(@"银联支付===%@", result);
         NSArray *arr = result;
         
@@ -1491,7 +1511,8 @@
         
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [self hideHud];
+
         NSLog(@"error%@", error);
         
     }];
@@ -1559,7 +1580,7 @@
     
 
 //    order.totalFee = [self.contentLabel.text substringFromIndex:4]; //商品价格
-    order.totalFee = @"0.01"; //商品价格
+//    order.totalFee = @"0.01"; //商品价格
 
     if (_selectIndexPath.section==2) {
         order.notifyURL =  @"http://101.201.100.191/alipay/meal_card_buy.php"; //回调URL

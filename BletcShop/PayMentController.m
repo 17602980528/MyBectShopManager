@@ -724,10 +724,10 @@ enum PayTypes {
     [params setObject:actMoney forKey:@"txnAmt"];
     [params setObject:appdelegate.cardInfo_dic[@"card_temp_color"] forKey:@"image_url"];
     
-    
+    [self showHUd];
     NSLog(@"params-----%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
+        [self hideHud];
         NSLog(@"result===%@", result);
         NSArray *arr = result;
         

@@ -18,6 +18,8 @@
 #import "ErrorQRViewController.h"
 #import "LandingController.h"
 
+#import "MealCardPayVC.h"
+#import "ExperienceCardGoToPayVC.h"
 @interface ScanViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
 {
     AVCaptureSession * session;//输入输出的中间桥梁
@@ -417,7 +419,7 @@
 }
 
 -(void)getCardListInfo:(NSDictionary*)dic{
-    NSString *url = [NSString stringWithFormat:@"%@UserType/card/filter",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@UserType/card/multiFilter",BASEURL];
     AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
@@ -463,7 +465,27 @@
 
             }
             
-            
+            if ([dic[@"card_type"] isEqualToString:@"套餐卡"]) {
+                
+                NSLog(@"===套餐卡===");
+                
+                PUSH(MealCardPayVC)
+                vc.card_dic = dic;
+                
+                
+                
+            }
+            if ([dic[@"card_type"] isEqualToString:@"体验卡"]) {
+                
+                NSLog(@"===体验卡===");
+                
+                PUSH(ExperienceCardGoToPayVC)
+                
+                vc.card_dic = dic;
+                
+                
+                
+            }
             
             
             

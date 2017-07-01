@@ -363,6 +363,7 @@
  */
 -(void)postPaymentsRequest
 {
+    [self showHUd];
 //    NSString *url ;
 //    url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/AdvertPay.php";
     
@@ -393,7 +394,8 @@
     
     NSLog(@"params-----%@",params);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
+        [self hideHud];
+
         NSLog(@"银联支付===%@", result);
         NSArray *arr = result;
         

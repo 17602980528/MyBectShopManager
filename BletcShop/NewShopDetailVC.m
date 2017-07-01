@@ -742,7 +742,7 @@
         title_old_btn = sender;
     }
     
-    NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:4];
+    NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:8];
     [self.shopTableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
 }
 -(UIView*)initcontentView{

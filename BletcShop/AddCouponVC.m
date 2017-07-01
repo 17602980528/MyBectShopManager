@@ -56,7 +56,7 @@
     _onlineOrNot=@"ONLINE";
     index_=-1;
     self.view.backgroundColor=RGB(234,234,234);
-    self.navigationItem.title=@"优惠券";
+    self.navigationItem.title=@"发布优惠券";
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
     _scrollView.scrollEnabled=YES;
     _scrollView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;

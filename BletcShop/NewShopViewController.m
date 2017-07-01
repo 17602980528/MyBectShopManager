@@ -39,20 +39,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    _adverImages=[NSMutableArray arrayWithArray:@[@"新店入住banner2 拷贝.jpg",@"新店入住banner1 拷贝.jpg"]];
     _page=1;
     
     table_View = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) style:UITableViewStyleGrouped];
     table_View.dataSource = self;
     table_View.delegate = self;
-    //table_View.estimatedRowHeight = 200;
     table_View.rowHeight=130;
     table_View.separatorStyle= UITableViewCellSeparatorStyleNone;
-    //    table_View.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview: table_View];
     
-    [self getDate];
-    
+    [self getTopImgList];
     
     _refreshheader = [SDRefreshHeaderView refreshView];
     [_refreshheader addToScrollView:table_View];
@@ -210,6 +206,30 @@
     [slipBackView addSubview:titileLable];
     
     return slipBackView;
+}
+
+
+-(void)getTopImgList{
+    
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/advert/settleGet",BASEURL];
+  
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        _adverImages = [NSMutableArray array];
+        
+        
+        for (int i=0; i<[result count]; i++) {
+            [_adverImages addObject:[NSString stringWithFormat:@"%@%@",NEW_SHOP_TOP_IMAGE,result[i][@"image_url"]]];
+            
+        }
+
+        
+        [self getDate];
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
 }
 
 @end

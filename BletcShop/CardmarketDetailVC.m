@@ -256,7 +256,11 @@
                 
             imageView.image = [UIImage imageNamed:@"支付宝支付L"];
             
-            selectBtn = button;
+            
+            if (!selectBtn) {
+                selectBtn = button;
+
+            }
             
         }else{
             lable.text = @"银联支付";
@@ -515,6 +519,7 @@
  */
 -(void)postPaymentsRequest
 {
+    [self showHUd];
     
 //    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/TPConsume.php";
     NSString *url ;
@@ -554,17 +559,16 @@
         
     }else{
         NSLog(@"买二手卡");
-//        url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Transfer.php";
         
-#ifdef DEBUG
-        url = @"http://101.201.100.191//unionpay/demo/api_05_app/Transfer.php";
-        
-        
-#else
+//#ifdef DEBUG
+//        url = @"http://101.201.100.191//unionpay/demo/api_05_app/Transfer.php";
+//        
+//        
+//#else
         url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Transfer.php";
         
         
-#endif
+//#endif
         [params setValue:priceString forKey:@"sum"];
         
     }
@@ -574,12 +578,13 @@
     
     NSLog(@"params-----%@===%@",params,url);
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
+        [self hideHud];
+
         NSLog(@"银联支付===%@", result);
         NSArray *arr = result;
         
 #ifdef DEBUG
-        [[UPPaymentControl defaultControl] startPay:[arr objectAtIndex:0] fromScheme:@"blectShop" mode:@"01" viewController:self];
+        [[UPPaymentControl defaultControl] startPay:[arr objectAtIndex:0] fromScheme:@"blectShop" mode:@"00" viewController:self];
         
         
 #else
@@ -593,7 +598,8 @@
         
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [self hideHud];
+
         NSLog(@"error%@", error);
         
     }];

@@ -169,6 +169,7 @@
 }
 -(void)postPaymentsRequest
 {
+    [self showHUd];
     
 //    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/TPConsume.php";
     
@@ -210,7 +211,8 @@
     
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
+        [self hideHud];
+
         NSLog(@"%@", result);
         NSArray *arr = result;
         

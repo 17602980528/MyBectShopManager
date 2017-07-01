@@ -22,23 +22,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor whiteColor];
-    self.navigationItem.title=@"金额结算";
-    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 120, 40)];
-    label.text=@"输入金额:";
-    label.textAlignment=1;
-    [self.view addSubview:label];
+    self.view.backgroundColor=RGB(234, 234, 234);
+    self.navigationItem.title=@"储值卡支付";
     
-    textTF=[[UITextField alloc]initWithFrame:CGRectMake(140, 60, SCREENWIDTH-180, 40)];
-    textTF.borderStyle=UITextBorderStyleRoundedRect;
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 50)];
+    backView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:backView];
+    
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(12, 0, 80, 50)];
+    label.text=@"输入金额:";
+    label.textAlignment=0;
+    [backView addSubview:label];
+    
+    textTF=[[UITextField alloc]initWithFrame:CGRectMake(label.right, 0, SCREENWIDTH-180, 50)];
+    textTF.borderStyle=UITextBorderStyleNone;
     textTF.keyboardType=UIKeyboardTypeNumbersAndPunctuation;
     textTF.placeholder=@"请输入消费金额";
-    [self.view addSubview:textTF];
+    [backView addSubview:textTF];
     
     UIButton *button=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame=CGRectMake(0, 160, SCREENWIDTH, 40);
+    button.frame=CGRectMake(0, SCREENHEIGHT-64-44, SCREENWIDTH, 44);
     button.backgroundColor=NavBackGroundColor;
-    //    button.layer.cornerRadius=8.0f;
     [button setTitle:@"确认支付" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];

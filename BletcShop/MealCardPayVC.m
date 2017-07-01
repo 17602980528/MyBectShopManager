@@ -11,8 +11,9 @@
 #import "PayCustomView.h"
 #import "AccessCodeVC.h"
 #import "UIImageView+WebCache.h"
+#import "ChangePayPassVC.h"
 
-@interface MealCardPayVC ()<UITableViewDelegate,UITableViewDataSource,PayCustomViewDelegate>
+@interface MealCardPayVC ()<UITableViewDelegate,UITableViewDataSource,PayCustomViewDelegate,UIAlertViewDelegate>
 {
     NSInteger selectRow;
     PayCustomView * Payview;
@@ -27,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"套餐卡支付";
+    
+    selectRow = -1;
     self.table_view.estimatedRowHeight = 100;
     self.table_view.rowHeight = UITableViewAutomaticDimension;
     
@@ -79,28 +82,35 @@
 - (IBAction)goToBuy:(id)sender {
     
     
-    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    
-    NSString *pay_passwd= [NSString getTheNoNullStr:appdelegate.userInfoDic[@"pay_passwd"] andRepalceStr:@""];
-    
-    
-    
-    if ([pay_passwd isEqualToString:@"未设置"]) {
-        
-        UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还没有设置支付密码!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去设置", nil];
-        alt.tag = 888;
-        [alt show];
-        
+    if (selectRow<0) {
+        [self showHint:@"请选择支付项目!"];
     }else{
+       
+        AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
         
-      Payview=[[PayCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-        Payview.delegate=self;
-    
-        [Payview.forgotButton addTarget:self action:@selector(forgetPayPass) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:Payview];
+        NSString *pay_passwd= [NSString getTheNoNullStr:appdelegate.userInfoDic[@"pay_passwd"] andRepalceStr:@""];
         
-    }
+        
+        
+        if ([pay_passwd isEqualToString:@"未设置"]) {
+            
+            UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还没有设置支付密码!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去设置", nil];
+            alt.tag = 888;
+            [alt show];
+            
+        }else{
+            
+            Payview=[[PayCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+            Payview.delegate=self;
+            
+            [Payview.forgotButton addTarget:self action:@selector(forgetPayPass) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:Payview];
+            
+        }
+        
 
+    }
+    
     
   
     
@@ -226,7 +236,12 @@
         
         self.data_A = result;
         
-        [self.table_view reloadData];
+        if (_data_A.count>0) {
+            selectRow = 0;
+            [self.table_view reloadData];
+
+        }
+        
         
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -238,7 +253,19 @@
 
 }
 
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag ==888) {
+        NSLog(@"去设置");
+        if (buttonIndex==1) {
+            ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        //得到输入框
+        
+    }
+    
+}
 -(NSArray *)data_A{
     if (!_data_A) {
         _data_A = [NSArray array];

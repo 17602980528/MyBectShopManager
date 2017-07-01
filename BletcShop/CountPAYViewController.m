@@ -23,9 +23,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor whiteColor];
-    self.navigationItem.title=@"按次结算";
+    self.view.backgroundColor=RGB(234, 234, 234);
+    self.navigationItem.title=@"计次卡支付";
     NSLog(@"%@",self.card_dic);
+    
+    
+//    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 50)];
+//    backView.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:backView];
     
     NSArray *array= [self.card_dic[@"price"] componentsSeparatedByString:@"元"];
     
@@ -33,6 +38,7 @@
     
     UIButton *redBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [redBtn setImage:[UIImage imageNamed:@"grey_red"] forState:UIControlStateNormal];
+    redBtn.backgroundColor = [UIColor whiteColor];
     redBtn.frame=CGRectMake(40, 75, 50, 50);
     redBtn.layer.borderWidth=1.0;
     redBtn.layer.borderColor=[[UIColor grayColor]CGColor];
@@ -45,10 +51,12 @@
     addBtn.layer.borderWidth=1.0;
     addBtn.layer.borderColor=[[UIColor grayColor]CGColor];
     [addBtn addTarget:self action:@selector(addBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    addBtn.backgroundColor = [UIColor whiteColor];
+
     [self.view addSubview:addBtn];
     //立即购买
     UIButton *buyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    buyBtn.frame=CGRectMake(0, 160, SCREENWIDTH, 40);
+    buyBtn.frame=CGRectMake(0, SCREENHEIGHT-64-44, SCREENWIDTH, 44);
     buyBtn.backgroundColor=NavBackGroundColor;
     [buyBtn setTitle:@"确认支付" forState:UIControlStateNormal];
     [buyBtn addTarget:self action:@selector(buyClick) forControlEvents:UIControlEventTouchUpInside];
@@ -76,8 +84,17 @@
     }
 }
 -(void)addBtnClick{
-    int lastPerson = [self.card_dic[@"rule"] intValue];
-    if (count<lastPerson) {
+    
+    double price = [self.card_dic[@"price"] doubleValue];
+    double card_remain = [self.card_dic[@"card_remain"] doubleValue];
+    
+    int rule =[self.card_dic[@"rule"] intValue];
+    
+    int time = (int)(card_remain/(price/rule));
+    
+    
+//    int lastPerson = [self.card_dic[@"rule"] intValue];
+    if (count<time) {
         count++;
         textTF.text=[[NSString alloc]initWithFormat:@"%ld",(long)count];
     }
@@ -124,11 +141,13 @@
         }
         
     }else{
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text = NSLocalizedString(@"可消费次数不足", @"HUD message title");
-        hud.label.font = [UIFont systemFontOfSize:13];
-        [hud hideAnimated:YES afterDelay:2.f];
+        if ([textTF.text integerValue]<=0) {
+            [self showHint:@"请添加消费次数"];
+            
+        }else{
+            [self showHint:@"可消费次数不足"];
+
+        }
         
     }
 }

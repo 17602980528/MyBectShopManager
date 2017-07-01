@@ -13,6 +13,10 @@
 
 #import "MoneyPAYViewController.h"
 #import "CountPAYViewController.h"
+
+#import "MealCardPayVC.h"
+#import "ExperienceCardGoToPayVC.h"
+
 @interface CanPayCardViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,weak)UITableView *Cardtable;
 @property(nonatomic,strong)NSArray *data;
@@ -21,21 +25,16 @@
 
 @implementation CanPayCardViewController
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBarHidden = NO;
-    [self getCardList];
-}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = RGB(240, 240, 240);
+    self.view.backgroundColor = RGB(234, 234, 234);
     
     self.navigationItem.title = @"我的会员卡";
 
-    
+    [self getCardList];
+
     
     [self _inittable];
 
@@ -58,14 +57,19 @@
     table.showsVerticalScrollIndicator = NO;
     table.rowHeight = 104;
     table.bounces = NO;
+    table.backgroundColor = RGB(234, 234, 234);
     self.Cardtable = table;
     [self.view addSubview:table];
 }
 
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return _payCardArray.count;
+    
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.payCardArray.count;
+    return [self.payCardArray[section] count];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -83,7 +87,7 @@
     // 判断为空进行初始化  --（当拉动页面显示超过主页面内容的时候就会重用之前的cell，而不会再次初始化）
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifier];
-        //cell.backgroundColor = RGB(240, 240, 240);
+        cell.backgroundColor = RGB(234, 234, 234);
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
     }
@@ -93,9 +97,8 @@
         [view removeFromSuperview];
     }
     
-    //    if (indexPath.section==0) {
     
-    NSDictionary *dic =[_payCardArray objectAtIndex:indexPath.row];
+    NSDictionary *dic =_payCardArray[indexPath.section][indexPath.row];
     
     UIView *bigView=[[UIView alloc]initWithFrame:CGRectMake(39, 10, SCREENWIDTH-78, 165)];
     bigView.backgroundColor=[UIColor whiteColor];
@@ -147,52 +150,161 @@
     payBtn.section = indexPath.section;
     [downView addSubview:payBtn];
     
-    if ([[[_payCardArray objectAtIndex:indexPath.row] objectForKey:@"card_type"] isEqualToString:@"计次卡"]) {
-        NSString *oneString = [[_payCardArray objectAtIndex:indexPath.row] objectForKey:@"price"];//单价
+    
+    
+    
+//    
+//    if ([[[_payCardArray objectAtIndex:indexPath.row] objectForKey:@"card_type"] isEqualToString:@"计次卡"]) {
+//        NSString *oneString = [[_payCardArray objectAtIndex:indexPath.row] objectForKey:@"price"];//单价
+//        //
+//        NSString *allString = [[_payCardArray objectAtIndex:indexPath.row] objectForKey:@"card_remain"];//余额
+//        
+//        
+//        double onePrice = [oneString doubleValue];
+//        double allPrice = [allString doubleValue];
+//        
+//        int cishu =[[[_payCardArray objectAtIndex:indexPath.row] objectForKey:@"rule"] intValue];
+//        
+//
+//        int time = (int)(allPrice/(onePrice/cishu));
+//        //
+//        yueLabel.text = [[NSString alloc]initWithFormat:@"次数:%d",time];
+//        
+//        
+//    }else{
+//        yueLabel.text = [[NSString alloc]initWithFormat:@"余额:%@",dic[@"card_remain"]];
+//    }
+//    
+
+    
+    
+    //套餐卡 体验卡
+    if ([dic[@"card_type"] isEqualToString:@"套餐卡"] || [dic[@"card_type"] isEqualToString:@"体验卡"] ) {
+        
+        typeAndeLevel.text = [NSString stringWithFormat:@"%@",dic[@"card_type"]];
+        if([dic[@"card_type"] isEqualToString:@"套餐卡"]){
+            
+            yueLabel.text = [[NSString alloc]initWithFormat:@"套餐总价:%@",dic[@"option_sum"]];
+            
+        }
+        if([dic[@"card_type"] isEqualToString:@"体验卡"]){
+            
+            yueLabel.text = [[NSString alloc]initWithFormat:@"价值:%@",dic[@"card_remain"]];
+            
+        }
+        
+        
+    }
+    
+    //储值卡
+    if ([dic[@"card_type"] isEqualToString:@"储值卡"]) {
+        
+        
+//        discountLab.text = [NSString stringWithFormat:@"%g折",[dic[@"rule"] floatValue]/10];
+        
+        yueLabel.text = [[NSString alloc]initWithFormat:@"余额:%@",dic[@"card_remain"]];
+    }
+    
+    
+    //计次卡
+    if ([dic[@"card_type"] isEqualToString:@"计次卡"]) {
+        
+        
+        NSString *oneString = [dic objectForKey:@"price"];//单价
         //
-        NSString *allString = [[_payCardArray objectAtIndex:indexPath.row] objectForKey:@"card_remain"];//余额
+        NSString *allString = [dic objectForKey:@"card_remain"];//余额
         
         
         double onePrice = [oneString doubleValue];
         double allPrice = [allString doubleValue];
         
-        int cishu =[[[_payCardArray objectAtIndex:indexPath.row] objectForKey:@"rule"] intValue];
+        int cishu =[[dic objectForKey:@"rule"] intValue];
         
-
         int time = (int)(allPrice/(onePrice/cishu));
         //
         yueLabel.text = [[NSString alloc]initWithFormat:@"次数:%d",time];
         
-        
-    }else{
-        yueLabel.text = [[NSString alloc]initWithFormat:@"余额:%@",dic[@"card_remain"]];
     }
     
-
     return cell;
     
 }
--(void)choiceCard:(LZDButton *)btn
+-(void)choiceCard:(LZDButton *)sender
 {
     
-    NSLog(@"=======%ld",btn.row);
-    if ([self.payCardArray[btn.row][@"card_type"] isEqualToString:@"计次卡"]) {
-        CountPAYViewController *countVC=[[CountPAYViewController alloc]init];
-        countVC.card_dic=self.payCardArray[btn.row];
-        [self.navigationController pushViewController:countVC animated:YES];
-    }else{
-        MoneyPAYViewController *moneyVC=[[MoneyPAYViewController alloc]init];
-        moneyVC.card_dic=self.payCardArray[btn.row];
-        [self.navigationController pushViewController:moneyVC animated:YES];
-    }
+    
+    NSDictionary *dic = _payCardArray[sender.section][sender.row];
 
-    
-    
+    if (sender.section==0) {
+        PUSH(MoneyPAYViewController)
+        vc.refresheDate = ^{
+            [self getCardList];
+        };
+        
+        vc.card_dic = dic;
+        
+        
+    }else if (sender.section==1){
+        
+        PUSH(CountPAYViewController)
+        vc.card_dic = dic;
+        vc.refresheDate = ^{
+            [self getCardList];
+        };
+        
+        
+    }
+    else if (sender.section==2){
+        
+        PUSH(MealCardPayVC)
+        vc.card_dic = dic;
+        vc.refresheDate = ^{
+            [self getCardList];
+        };
+        
+        
+    }else if (sender.section==3){
+        
+        PUSH(ExperienceCardGoToPayVC)
+        vc.card_dic = dic;
+        vc.refresheDate = ^{
+            [self getCardList];
+        };
+        
+        
+        
+    }
+    else if (sender.section==4){
+        
+        
+        if ([dic[@"card_type"] isEqualToString:@"储值卡"]) {
+            PUSH(MoneyPAYViewController)
+            vc.refresheDate = ^{
+                [self getCardList];
+            };
+            
+            vc.card_dic = dic;
+            
+        }
+        
+        if ([dic[@"card_type"] isEqualToString:@"计次卡"]) {
+            PUSH(CountPAYViewController)
+            vc.refresheDate = ^{
+                [self getCardList];
+            };
+            
+            vc.card_dic = dic;
+            
+        }
+        
+        
+        
+    }
     
 }
 
 -(void)getCardList{
-    NSString *url = [NSString stringWithFormat:@"%@UserType/card/filter",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@UserType/card/multiFilter",BASEURL];
     AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
@@ -205,8 +317,17 @@
         printf("result====%s",[[NSString dictionaryToJson:result] UTF8String]);
         
      if([result[@"num"] intValue]>1){
+         
+         NSArray *value_A = result[@"value"];
+         NSArray *count_A = result[@"count"];
+         NSArray *meal_A = result[@"meal"];
+         NSArray *experience_A = result[@"experience"];
+         NSArray *share_A = result[@"share"];
+         
+         
+         [self.payCardArray removeAllObjects];
+         [self.payCardArray addObjectsFromArray:@[value_A,count_A,meal_A,experience_A,share_A]];
                 
-                self.payCardArray =result[@"info"];
          
          [self.Cardtable reloadData];
          
@@ -224,7 +345,12 @@
 }
 
 
-
+-(NSMutableArray *)payCardArray{
+    if (!_payCardArray) {
+        _payCardArray = [NSMutableArray array];
+    }
+    return _payCardArray;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

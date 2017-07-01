@@ -9,11 +9,15 @@
 #import "ExperienceCardGoToPayVC.h"
 #import "PayCustomView.h"
 #import "AccessCodeVC.h"
-@interface ExperienceCardGoToPayVC ()<PayCustomViewDelegate>
+#import "ChangePayPassVC.h"
+@interface ExperienceCardGoToPayVC ()<PayCustomViewDelegate,UIAlertViewDelegate>
 {
     PayCustomView * Payview;
 
 }
+@property (weak, nonatomic) IBOutlet UIButton *sureBtn;
+@property (weak, nonatomic) IBOutlet UILabel *card_des;//价格
+
 @end
 
 @implementation ExperienceCardGoToPayVC
@@ -22,7 +26,11 @@
     [super viewDidLoad];
     self.navigationItem.title = @"体验卡支付";
     
-
+    self.card_des.text = [NSString stringWithFormat:@"%@元",_card_dic[@"price"]];
+    
+    
+//    [self goToPayClick:self.sureBtn];
+    
 
 }
 - (IBAction)goToPayClick:(id)sender {
@@ -153,5 +161,17 @@
     
     
 }
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag ==888) {
+        NSLog(@"去设置");
+        if (buttonIndex==1) {
+            ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        //得到输入框
+        
+    }
+    
+}
 @end

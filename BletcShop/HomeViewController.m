@@ -852,6 +852,7 @@
     [button1 addSubview:lab1_2];
     
     UIImageView *img_1 = [[UIImageView alloc]initWithFrame:CGRectMake((button1.width-119)/2, 87, 119, 49)];
+    img_1.contentMode = UIViewContentModeScaleAspectFit;
     [button1 addSubview:img_1];
     
     
@@ -893,6 +894,8 @@
     
     
     UIImageView *img_2 = [[UIImageView alloc]initWithFrame:CGRectMake(button2.width/2, 0, button2.height*230/124, button2.height)];
+    img_2.contentMode = UIViewContentModeScaleAspectFit;
+
 //    img_2.backgroundColor = RGB(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255));
     [button2 addSubview:img_2];
     
@@ -939,6 +942,8 @@
         [btn addSubview:lab_2];
 //btn.width-13-38, btn.height-38-2, 38, 38
         UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake( (btn.width-38*224/110)/2, btn.height-38-2, 38*224/110, 38)];
+        img.contentMode = UIViewContentModeScaleAspectFit;
+
         [btn addSubview:img];
         
               [back_view addSubview:btn];
