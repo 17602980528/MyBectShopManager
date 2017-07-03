@@ -28,7 +28,7 @@
     
     [self showHudInView:self.view hint:@"记载中..."];
     
-    
+    _progressLayer = [WYWebProgressLayer new];
     _progressLayer.frame = CGRectMake(0, 42, SCREEN_WIDTH, 2);
     [self.navigationController.navigationBar.layer addSublayer:_progressLayer];
     

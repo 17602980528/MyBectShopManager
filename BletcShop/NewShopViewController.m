@@ -78,7 +78,6 @@
 -(void)getDate{
     
     
-    [self showHUd];
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/advertActivity/getList",BASEURL];
     
     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
@@ -211,6 +210,7 @@
 
 -(void)getTopImgList{
     
+    [self showHudInView:self.view hint:@"加载中..."];
     NSString *url = [NSString stringWithFormat:@"%@MerchantType/advert/settleGet",BASEURL];
   
     [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
@@ -228,6 +228,7 @@
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        [self hideHud];
     }];
 
 }
