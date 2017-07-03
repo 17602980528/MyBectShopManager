@@ -14,7 +14,6 @@
 #import "PictureDetailViewController.h"
 #import "HKModelMarco.h"
 #import "HKImageClipperViewController.h"
-#import "VCOPViewController.h"//eric add
 #import "UploadImageVC.h"
 @interface PictureDetailViewController ()<UITableViewDelegate,UITableViewDataSource,CustomeAlertViewDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
 {
@@ -26,6 +25,7 @@
     UITableView *_tableView;
     NSInteger indexNum;
     NSInteger kind;
+    UIImage *image_eric;
 }
 @property (nonatomic, assign) ClipperType clipperType;
 @property (weak, nonatomic) UIImageView *clippedImageView; //显示结果图片
@@ -37,8 +37,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-43);
-
+    
     kind=44;
     stateNum=@"1";
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-43) style:UITableViewStyleGrouped];
@@ -81,8 +82,8 @@
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIDTH*2/3)];
         imageView.tag=100;
         UITapGestureRecognizer *recognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(editOrDelete:)];
-//        recognizer.minimumPressDuration=0.15;
-//        recognizer.numberOfTouchesRequired=1;
+        //        recognizer.minimumPressDuration=0.15;
+        //        recognizer.numberOfTouchesRequired=1;
         [cell addGestureRecognizer:recognizer];
         [cell addSubview:imageView];
         
@@ -97,21 +98,21 @@
         [cell addSubview:label];
         UIImageView *imageView2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH/2, (SCREENWIDTH/2-10)*2/3)];
         imageView2.tag=300;
-
+        
         [cell addSubview:imageView2];
         
-//        UILabel *lab=[[UILabel alloc]init];
-//        lab.frame=CGRectMake(SCREENWIDTH-105, 5, 100, 40);
-//        lab.userInteractionEnabled=YES;
-//        lab.layer.cornerRadius=8;
-//        lab.clipsToBounds=YES;
-//        lab.backgroundColor=[UIColor grayColor];
-//        lab.font=[UIFont systemFontOfSize:13.0f];
-//        lab.alpha=0.4;
-//        lab.tag=400;
-//        lab.text=@"长按上传视频";
-//        lab.textAlignment=NSTextAlignmentCenter;
-//        [cell addSubview:lab];
+        //        UILabel *lab=[[UILabel alloc]init];
+        //        lab.frame=CGRectMake(SCREENWIDTH-105, 5, 100, 40);
+        //        lab.userInteractionEnabled=YES;
+        //        lab.layer.cornerRadius=8;
+        //        lab.clipsToBounds=YES;
+        //        lab.backgroundColor=[UIColor grayColor];
+        //        lab.font=[UIFont systemFontOfSize:13.0f];
+        //        lab.alpha=0.4;
+        //        lab.tag=400;
+        //        lab.text=@"长按上传视频";
+        //        lab.textAlignment=NSTextAlignmentCenter;
+        //        [cell addSubview:lab];
     }
     UIImageView *imgView=(UIImageView*)[cell viewWithTag:100];
     
@@ -125,9 +126,14 @@
         imgView.hidden = NO;
         imgView.image=[UIImage imageNamed:@"icon3"];
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-        NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_ADDIMAGE stringByAppendingString:[appdelegate.shopInfoDic  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-        NSLog(@"+++++%@",nurl1);
-        [imgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+        if (image_eric) {
+            imgView.image=image_eric;
+        }else{
+            
+            NSURL * nurl1=[[NSURL alloc] initWithString:[[SHOPIMAGE_ADDIMAGE stringByAppendingString:[appdelegate.shopInfoDic  objectForKey:@"image_url"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+            NSLog(@"+++++%@",nurl1);
+            [imgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+        }
         NSString *newStr=appdelegate.shopInfoDic[@"store"];
         CGFloat lableHeight=[newStr getTextHeightWithShowWidth:SCREENWIDTH AndTextFont:[UIFont systemFontOfSize:13.0f] AndInsets:5];
         label.text=newStr;
@@ -136,7 +142,7 @@
         
         imgView2.contentMode = UIViewContentModeScaleAspectFit;
         imgView.contentMode = UIViewContentModeScaleAspectFit;
-
+        
         lab.hidden=YES;
         NSString *newStr=dataArr[indexPath.row-1][@"content"];
         CGFloat lableHeight=[newStr getTextHeightWithShowWidth:SCREENWIDTH AndTextFont:[UIFont systemFontOfSize:13.0f] AndInsets:5];
@@ -215,7 +221,7 @@
 //    button.frame=CGRectMake(SCREENWIDTH/2-30, 0, 60, 60);
 //    [button addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
 //    [view addSubview:button];
-//    
+//
 //    return view;
 //}
 
@@ -252,7 +258,7 @@
 //获取商家图文详情的方法
 -(void)postRequestGetInfo
 {
-
+    
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/Imgtxt/get",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -403,13 +409,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     self.alertView.hidden=YES;
-    if (actionSheet.tag==1000) {
-        if (buttonIndex==0) {
-            VCOPViewController *vco=[[VCOPViewController alloc]init];
-            [self.navigationController pushViewController:vco animated:YES];
-        }
-    }
-    else dispatch_after(0., dispatch_get_main_queue(), ^{
+    dispatch_after(0., dispatch_get_main_queue(), ^{
         if (buttonIndex == 0) {
             [self photoWithSourceType:UIImagePickerControllerSourceTypeCamera];
         }
@@ -452,7 +452,8 @@
     if (!self.isSystemType) {
         //自定义裁剪方式
         UIImage*image = [self turnImageWithInfo:info];
-        HKImageClipperViewController *clipperVC = [[HKImageClipperViewController alloc]initWithBaseImg:image resultImgSize:self.clippedImageView.frame.size clipperType:self.clipperType];
+        CGSize size=CGSizeMake(SCREENWIDTH, 9*SCREENWIDTH/16);
+        HKImageClipperViewController *clipperVC = [[HKImageClipperViewController alloc]initWithBaseImg:image resultImgSize:size clipperType:self.clipperType];
         __weakSelf(self);
         clipperVC.cancelClippedHandler = ^(){
             [picker dismissViewControllerAnimated:YES completion:nil];
@@ -460,7 +461,7 @@
         clipperVC.successClippedHandler = ^(UIImage *clippedImage){
             self.alertView.hidden=NO;
             __strongSelf(weakSelf);
-            strongSelf.clippedImageView.image = clippedImage;
+            // strongSelf.clippedImageView.image = clippedImage;
             [picker dismissViewControllerAnimated:YES completion:nil];
             
             AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -471,22 +472,18 @@
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
             
             _isFullScreen = NO;
-            [self.imageView setImage:savedImage];
             
-            NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/upload/upload",BASEURL];
+            NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/Imgtxt/modStoreImage",BASEURL];
             NSLog(@"%@",url);
-            NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
-            self.date = (long long int)time;
-            NSString *nameValue = [[NSString alloc]initWithFormat:@"%@_%@_%lld",[appdelegate.shopInfoDic objectForKey:@"name"],[appdelegate.shopInfoDic objectForKey:@"phone"],self.date ];
+            
             NSData *img_Data = [NSData dataWithContentsOfFile:fullPath];
             NSMutableDictionary *parmer = [NSMutableDictionary dictionary];
-            [parmer setValue:nameValue forKey:@"name"];
-            [parmer setValue:@"merchant_info" forKey:@"type"];
+            [parmer setValue:appdelegate.shopInfoDic[@"muid"] forKey:@"muid"];
             [parmer setObject:img_Data forKey:@"file1"];
             
             [KKRequestDataService requestWithURL:url params:parmer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
                 NSLog(@"%@",result);
-                if ([[result objectForKey:@"result_code"] isEqualToString:@"access"]) {
+                if ([result[@"result_code"]integerValue]==1) {
                     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                     hud.mode = MBProgressHUDModeText;
                     
@@ -495,9 +492,25 @@
                     hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
                     [hud hideAnimated:YES afterDelay:3.f];
                     self.isImageSuccess = YES;
+                    
+                    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+                    NSMutableDictionary *mutab_dic =[appdelegate.shopInfoDic mutableCopy];
+                    
+                    [mutab_dic setValue:result[@"image"] forKey:@"image_url"];
+                    appdelegate.shopInfoDic = mutab_dic;
+                    image_eric=[[UIImage alloc]init];
+                    image_eric=savedImage;
+                    [_tableView reloadData];
+                }else{
+                    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hud.mode = MBProgressHUDModeText;
+                    
+                    hud.label.text = NSLocalizedString(@"上传失败", @"HUD message title");
+                    hud.label.font = [UIFont systemFontOfSize:13];
+                    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                    [hud hideAnimated:YES afterDelay:3.f];
+                    self.isImageSuccess = NO;
                 }
-                NSLog(@"result===%@", result);
-                
                 
             } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
                 //                DebugLog(@"error-----%@",error.description);
@@ -507,7 +520,7 @@
                 hud.label.text = NSLocalizedString(@"图片太大,上传失败", @"HUD message title");
                 hud.label.font = [UIFont systemFontOfSize:13];
                 hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-                [hud hideAnimated:YES afterDelay:4.f];
+                [hud hideAnimated:YES afterDelay:3.f];
                 
             }];
             
@@ -655,27 +668,18 @@
 -(void)editOrDelete:(UITapGestureRecognizer *)recognizer{
     UITableViewCell *cell=(UITableViewCell *)[recognizer view];
     NSIndexPath *indexPathes=[_tableView indexPathForCell:cell];
-//    if (recognizer.state == UIGestureRecognizerStateEnded) {
-//        
-//        return;
-//        
-//    } else if (recognizer.state == UIGestureRecognizerStateBegan) {
     
-        //TODO
-        if (indexPathes.row==0) {
-//            NSLog(@"长按了第0行");
-//            UIActionSheet *sheet=[[UIActionSheet alloc]initWithTitle:@"视频上传" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"上传视频" ,nil];
-//            sheet.tag=1000;
-//            [sheet showInView:self.view];
-        }else{
-            NSLog(@"长按了%ld行",(long)indexPathes.row);
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"删除或编辑信息？" delegate:self cancelButtonTitle:@"删除" otherButtonTitles:@"编辑", @"取消",nil];
-            [alert show];
-            indexNum=indexPathes.row-1;
-            
-        }
+    if (indexPathes.row==0) {
+        [self takePhoto];
+    }else{
+        NSLog(@"长按了%ld行",(long)indexPathes.row);
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"删除或编辑信息？" delegate:self cancelButtonTitle:@"删除" otherButtonTitles:@"编辑", @"取消",nil];
+        [alert show];
+        indexNum=indexPathes.row-1;
         
-//    }
+    }
+    
+    //    }
 }
 //删除的请求
 -(void)deletePictureAndContextRequest:(NSInteger)index{
@@ -711,13 +715,14 @@
         NSDictionary *dic;
         
         if (dataArr.count!=0) {
-             dic =  dataArr[indexNum];
+            dic =  dataArr[indexNum];
             VC.infoDic = dic;
         }
         
         [self.navigationController pushViewController:VC animated:YES];
-//        [self NewAddVipAction];
+        //        [self NewAddVipAction];
     }
+    
 }
 //顶端rightbtn
 //下端设置btn
