@@ -86,7 +86,7 @@
     UILabel *brandLabel=[[UILabel alloc]initWithFrame:CGRectMake(52, 10, 24, 12)];
     brandLabel.textAlignment=1;
     brandLabel.text=@"品牌";
-    brandLabel.font=[UIFont systemFontOfSize:11.0f];
+    brandLabel.font=[UIFont systemFontOfSize:10.0f];
     [self addSubview:brandLabel];
     brandLabel.backgroundColor=[UIColor colorWithRed:255/255.0 green:210/255.0 blue:0 alpha:1];
     
@@ -125,7 +125,7 @@
     self.dlCtrl = dlCtrl;
     self.sheContent = sheContent;
     self.giveContent = giveContent;
-    
+    self.tradeLable=brandLabel;
 }
 
 @end

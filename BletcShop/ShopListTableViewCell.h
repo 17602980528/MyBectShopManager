@@ -18,4 +18,5 @@
 @property (nonatomic , strong)  UILabel *sheContent;// <#Description#>
 @property (nonatomic , strong) UILabel *giveContent;
 @property (nonatomic,strong) UILabel *couponLable;
+@property (nonatomic,strong)UILabel *tradeLable;
 @end

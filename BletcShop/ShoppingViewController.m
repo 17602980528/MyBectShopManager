@@ -693,7 +693,9 @@
         }
         
     }
-    
+    cell.tradeLable.text=dic[@"trade"];
+    CGFloat width=[self calculateRowWidth: cell.tradeLable.text];
+    cell.tradeLable.frame=CGRectMake(76-width, 10, width, 12);
     
     return cell;
     
@@ -994,5 +996,11 @@
      }];
 }
 
+- (CGFloat)calculateRowWidth:(NSString *)string {
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:10]};  //指定字号
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, 12)/*计算宽度时要确定高度*/ options:NSStringDrawingUsesLineFragmentOrigin |
+                   NSStringDrawingUsesFontLeading attributes:dic context:nil];
+    return rect.size.width;
+}
 
 @end
