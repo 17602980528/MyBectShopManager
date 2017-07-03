@@ -244,6 +244,13 @@
     
     return [regextestmobile evaluateWithObject:mobNum];
 }
+//获取label的宽度
++ (CGFloat)calculateRowWidth:(UILabel *)lable {
+    NSDictionary *dic = @{NSFontAttributeName:lable.font};  //指定字号
+    CGRect rect = [lable.text boundingRectWithSize:CGSizeMake(0,lable.height)/*计算宽度时要确定高度*/ options:NSStringDrawingUsesLineFragmentOrigin |
+                   NSStringDrawingUsesFontLeading attributes:dic context:nil];
+    return rect.size.width;
+}
 @end
 
 

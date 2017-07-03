@@ -32,6 +32,7 @@
 
 + (NSString*)dictionaryToJson:(NSDictionary *)dic;
 + (BOOL) isMobileNum:(NSString *)mobNum;
++ (CGFloat)calculateRowWidth:(UILabel *)lable;
 @end
 
 

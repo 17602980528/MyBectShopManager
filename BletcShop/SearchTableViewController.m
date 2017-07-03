@@ -164,13 +164,14 @@
     giveContent.font=[UIFont systemFontOfSize:12.0f];
     
     [cell addSubview:giveContent];
-    
+   
     UILabel *brandLabel=[[UILabel alloc]initWithFrame:CGRectMake(52, 10, 24, 12)];
     brandLabel.textAlignment=1;
     brandLabel.text=@"品牌";
-    brandLabel.font=[UIFont systemFontOfSize:11.0f];
+    brandLabel.font=[UIFont systemFontOfSize:10.0f];
     [cell addSubview:brandLabel];
     brandLabel.backgroundColor=[UIColor colorWithRed:255/255.0 green:210/255.0 blue:0 alpha:1];
+    
     
     DLStarRatingControl* dlCtrl = [[DLStarRatingControl alloc]initWithFrame:CGRectMake(-40, 0, 160, 35) andStars:5 isFractional:YES star:[UIImage imageNamed:@"result_small_star_disable_iphone"] highlightStar:[UIImage imageNamed:@"redstar"]];
     dlCtrl.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -187,6 +188,9 @@
     
     if (self.searchController.active){
         if (self.searchList.count>0) {
+            brandLabel.text=self.searchList[indexPath.row][@"trade"];
+            CGFloat width = [NSString calculateRowWidth:brandLabel];
+            brandLabel.frame=CGRectMake(76-width, 10, width, 12);
             
             nameLabel.text = @"";
             distanceLabel.text = @"";
