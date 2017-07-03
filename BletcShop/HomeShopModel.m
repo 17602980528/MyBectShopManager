@@ -41,6 +41,7 @@
     self.latitude =[NSString getTheNoNullStr:dic[@"latitude"] andRepalceStr:@""];
     self.stars =[NSString getTheNoNullStr:dic[@"stars"] andRepalceStr:@"0"];
     self.coupon_exists=dic[@"coupon"];
+    self.trade=dic[@"trade"];
     return self;
 }
 

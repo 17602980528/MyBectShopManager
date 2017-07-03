@@ -32,7 +32,7 @@
 
 @property(nonatomic,copy)NSString *long_img_url; //广告图
 @property(nonatomic,copy)NSString *coupon_exists;
-
+@property(nonatomic,copy)NSString *trade;
 
 -(HomeShopModel*)initWithDictionary:(NSDictionary*)dic;
 

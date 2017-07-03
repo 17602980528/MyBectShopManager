@@ -151,10 +151,10 @@
     self.give_Lab = giveLab_1;
     
     
-    UILabel *brandLabel=[[UILabel alloc]initWithFrame:CGRectMake(52, 10, 24, 12)];
+    UILabel *brandLabel=[[UILabel alloc]initWithFrame:CGRectMake(32, 10, 44, 12)];
     brandLabel.textAlignment=1;
     brandLabel.text=@"品牌";
-    brandLabel.font=[UIFont systemFontOfSize:11.0f];
+    brandLabel.font=[UIFont systemFontOfSize:10.0f];
     [self addSubview:brandLabel];
     brandLabel.backgroundColor=[UIColor colorWithRed:255/255.0 green:210/255.0 blue:0 alpha:1];
     self.brandLabel = brandLabel;
@@ -227,6 +227,10 @@
     }else{
         self.coupon_Lable.hidden=YES;
     }
+    CGFloat width= [self calculateRowWidth:self.model.trade];
+    self.brandLabel.frame=CGRectMake(76-width, 10, width, 12);
+    self.brandLabel.text=self.model.trade;
+    
 }
 
 -(CGFloat)cellHeightWithModel:(HomeShopModel *)model{
@@ -237,5 +241,11 @@
     
     return h;
     
+}
+- (CGFloat)calculateRowWidth:(NSString *)string {
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:10]};  //指定字号
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, 12)/*计算宽度时要确定高度*/ options:NSStringDrawingUsesLineFragmentOrigin |
+                   NSStringDrawingUsesFontLeading attributes:dic context:nil];
+    return rect.size.width;
 }
 @end
