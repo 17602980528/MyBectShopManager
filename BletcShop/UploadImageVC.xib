@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +41,6 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="3C6-Ox-70l" secondAttribute="bottom" constant="33" id="V4K-GG-xeV"/>
                         <constraint firstItem="3C6-Ox-70l" firstAttribute="top" secondItem="w42-ci-xAf" secondAttribute="top" constant="32" id="XcI-Ul-J9d"/>
-                        <constraint firstItem="3C6-Ox-70l" firstAttribute="centerY" secondItem="w42-ci-xAf" secondAttribute="centerY" id="az5-qY-fjp"/>
                         <constraint firstAttribute="height" constant="193" id="hgO-tt-CVl"/>
                         <constraint firstItem="3C6-Ox-70l" firstAttribute="centerX" secondItem="w42-ci-xAf" secondAttribute="centerX" id="p24-Z3-pBh"/>
                     </constraints>

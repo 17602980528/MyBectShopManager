@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,27 +14,32 @@
             <connections>
                 <outlet property="imgView" destination="xeR-H5-3oV" id="FpB-bc-vVs"/>
                 <outlet property="lab" destination="CIs-xo-FoZ" id="Il0-Vf-LX1"/>
+                <outlet property="videoplayerView" destination="xsB-lt-LKu" id="kBV-YJ-dNa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="xLa-BV-Mm1" id="FLI-EV-2V3"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <webView contentMode="scaleToFill" allowsInlineMediaPlayback="NO" mediaPlaybackRequiresUserAction="NO" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLa-BV-Mm1">
-                    <rect key="frame" x="37" y="30" width="246" height="197"/>
+                <webView userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xLa-BV-Mm1">
+                    <rect key="frame" x="37" y="30" width="300" height="240"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="xLa-BV-Mm1" secondAttribute="height" multiplier="3:2.4" id="MwP-0b-CDy"/>
+                        <constraint firstAttribute="width" secondItem="xLa-BV-Mm1" secondAttribute="height" multiplier="5:4" id="hC1-S8-TDa"/>
                     </constraints>
                     <connections>
                         <outlet property="delegate" destination="-1" id="bb0-bc-N29"/>
                     </connections>
                 </webView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsB-lt-LKu">
+                    <rect key="frame" x="37" y="30" width="300" height="240"/>
+                    <color key="backgroundColor" red="0.8862745098" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiaopian.png" translatesAutoresizingMaskIntoConstraints="NO" id="xeR-H5-3oV">
-                    <rect key="frame" x="37" y="30" width="246" height="197"/>
+                    <rect key="frame" x="37" y="30" width="300" height="240"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <connections>
@@ -42,10 +47,10 @@
                     </connections>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIs-xo-FoZ">
-                    <rect key="frame" x="60" y="118" width="200" height="21"/>
+                    <rect key="frame" x="87" y="139.5" width="200" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="KIl-XS-nxv"/>
-                        <constraint firstAttribute="width" constant="200" id="wNT-KH-BL1"/>
+                        <constraint firstAttribute="height" constant="21" id="FEY-b6-Iwr"/>
+                        <constraint firstAttribute="width" constant="200" id="XIB-67-Mmw"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,17 +59,25 @@
             </subviews>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="xLa-BV-Mm1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="44r-t5-mf3"/>
-                <constraint firstItem="xeR-H5-3oV" firstAttribute="centerY" secondItem="xLa-BV-Mm1" secondAttribute="centerY" id="JQ0-jT-LGn"/>
-                <constraint firstItem="xLa-BV-Mm1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="37" id="VI8-xt-Hr0"/>
-                <constraint firstItem="xeR-H5-3oV" firstAttribute="height" secondItem="xLa-BV-Mm1" secondAttribute="height" id="VRz-a7-oqo"/>
-                <constraint firstAttribute="trailing" secondItem="xLa-BV-Mm1" secondAttribute="trailing" constant="37" id="h37-5e-umd"/>
-                <constraint firstItem="xeR-H5-3oV" firstAttribute="width" secondItem="xLa-BV-Mm1" secondAttribute="width" id="kPx-p9-nQv"/>
-                <constraint firstItem="CIs-xo-FoZ" firstAttribute="centerY" secondItem="xeR-H5-3oV" secondAttribute="centerY" id="qj8-6o-jOr"/>
-                <constraint firstItem="CIs-xo-FoZ" firstAttribute="centerX" secondItem="xeR-H5-3oV" secondAttribute="centerX" id="roH-2L-37a"/>
-                <constraint firstItem="xeR-H5-3oV" firstAttribute="centerX" secondItem="xLa-BV-Mm1" secondAttribute="centerX" id="tEd-1S-60H"/>
+                <constraint firstItem="xsB-lt-LKu" firstAttribute="height" secondItem="xLa-BV-Mm1" secondAttribute="height" id="2mY-ls-WRx"/>
+                <constraint firstItem="xsB-lt-LKu" firstAttribute="centerY" secondItem="xLa-BV-Mm1" secondAttribute="centerY" id="7GC-7u-8KE"/>
+                <constraint firstItem="xLa-BV-Mm1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="ByB-dz-XdE"/>
+                <constraint firstItem="xsB-lt-LKu" firstAttribute="width" secondItem="xLa-BV-Mm1" secondAttribute="width" id="F8R-GW-3nb"/>
+                <constraint firstItem="xsB-lt-LKu" firstAttribute="centerY" secondItem="xLa-BV-Mm1" secondAttribute="centerY" id="FNw-To-dDs"/>
+                <constraint firstItem="xsB-lt-LKu" firstAttribute="centerX" secondItem="xLa-BV-Mm1" secondAttribute="centerX" id="H0m-Ji-QaB"/>
+                <constraint firstItem="xeR-H5-3oV" firstAttribute="centerX" secondItem="xLa-BV-Mm1" secondAttribute="centerX" id="IWw-a8-sW4"/>
+                <constraint firstItem="xsB-lt-LKu" firstAttribute="centerX" secondItem="xLa-BV-Mm1" secondAttribute="centerX" id="LiZ-WP-0wX"/>
+                <constraint firstItem="xeR-H5-3oV" firstAttribute="centerY" secondItem="xLa-BV-Mm1" secondAttribute="centerY" id="PxX-yJ-cDU"/>
+                <constraint firstItem="xsB-lt-LKu" firstAttribute="height" secondItem="xLa-BV-Mm1" secondAttribute="height" id="ZuN-HQ-SIv"/>
+                <constraint firstItem="xeR-H5-3oV" firstAttribute="width" secondItem="xLa-BV-Mm1" secondAttribute="width" id="hvS-wt-sL8"/>
+                <constraint firstItem="CIs-xo-FoZ" firstAttribute="centerY" secondItem="xeR-H5-3oV" secondAttribute="centerY" id="mkF-tM-pRJ"/>
+                <constraint firstItem="xeR-H5-3oV" firstAttribute="height" secondItem="xLa-BV-Mm1" secondAttribute="height" id="nSC-th-3W4"/>
+                <constraint firstItem="xLa-BV-Mm1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="37" id="oKD-aD-leT"/>
+                <constraint firstItem="xsB-lt-LKu" firstAttribute="width" secondItem="xLa-BV-Mm1" secondAttribute="width" id="xJu-fj-Ahs"/>
+                <constraint firstAttribute="trailing" secondItem="xLa-BV-Mm1" secondAttribute="trailing" constant="38" id="xx6-O8-eY8"/>
+                <constraint firstItem="CIs-xo-FoZ" firstAttribute="centerX" secondItem="xeR-H5-3oV" secondAttribute="centerX" id="zCa-Us-qHn"/>
             </constraints>
-            <point key="canvasLocation" x="-245" y="-255"/>
+            <point key="canvasLocation" x="-297" y="-310"/>
         </view>
         <tapGestureRecognizer id="Dlp-6e-6sN">
             <connections>

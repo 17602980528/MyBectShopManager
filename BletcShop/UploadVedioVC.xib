@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,6 +15,7 @@
                 <outlet property="deleteBtn" destination="fRF-oL-m7X" id="Asz-Vm-0BF"/>
                 <outlet property="imageView" destination="Fad-66-iFj" id="3u2-ol-xFH"/>
                 <outlet property="lab" destination="cMV-rA-xh5" id="YU6-9B-PuJ"/>
+                <outlet property="videoPlayerView" destination="5gh-F6-Kx4" id="gKf-Vy-xBT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="jih-Bx-B7q" id="1Wd-Xf-ykQ"/>
             </connections>
@@ -70,13 +71,17 @@
                                 <constraint firstItem="VTc-cy-G78" firstAttribute="centerY" secondItem="aJ9-xq-UWU" secondAttribute="centerY" id="lqX-1z-Cfz"/>
                             </constraints>
                         </view>
-                        <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jih-Bx-B7q">
+                        <webView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jih-Bx-B7q">
                             <rect key="frame" x="37" y="94" width="300" height="240"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="jih-Bx-B7q" secondAttribute="height" multiplier="3:2.4" id="lYN-oB-PMV"/>
                             </constraints>
                         </webView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gh-F6-Kx4">
+                            <rect key="frame" x="37" y="94" width="300" height="240"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiaopian(1).png" translatesAutoresizingMaskIntoConstraints="NO" id="Fad-66-iFj">
                             <rect key="frame" x="37" y="94" width="300" height="240"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,12 +107,16 @@
                         <constraint firstAttribute="trailing" secondItem="jih-Bx-B7q" secondAttribute="trailing" constant="38" id="1Gw-Vh-HnB"/>
                         <constraint firstItem="jih-Bx-B7q" firstAttribute="leading" secondItem="Vmd-Yq-V8O" secondAttribute="leading" constant="37" id="1tf-1V-3ef"/>
                         <constraint firstItem="Fad-66-iFj" firstAttribute="centerY" secondItem="jih-Bx-B7q" secondAttribute="centerY" id="3EF-Mq-Gtv"/>
+                        <constraint firstItem="5gh-F6-Kx4" firstAttribute="centerX" secondItem="jih-Bx-B7q" secondAttribute="centerX" id="5ls-cV-BlS"/>
                         <constraint firstItem="Fad-66-iFj" firstAttribute="height" secondItem="jih-Bx-B7q" secondAttribute="height" id="98F-bi-6HR"/>
                         <constraint firstItem="jih-Bx-B7q" firstAttribute="top" secondItem="aJ9-xq-UWU" secondAttribute="bottom" constant="30" id="F3r-iI-wGS"/>
+                        <constraint firstItem="5gh-F6-Kx4" firstAttribute="centerY" secondItem="jih-Bx-B7q" secondAttribute="centerY" id="HXo-NW-PEf"/>
+                        <constraint firstItem="5gh-F6-Kx4" firstAttribute="height" secondItem="jih-Bx-B7q" secondAttribute="height" id="J27-ax-VZF"/>
                         <constraint firstItem="cMV-rA-xh5" firstAttribute="centerY" secondItem="Fad-66-iFj" secondAttribute="centerY" id="Lhc-Yt-Xpi"/>
                         <constraint firstItem="aJ9-xq-UWU" firstAttribute="leading" secondItem="Vmd-Yq-V8O" secondAttribute="leading" id="cPb-AD-4dZ"/>
                         <constraint firstItem="aJ9-xq-UWU" firstAttribute="top" secondItem="Vmd-Yq-V8O" secondAttribute="top" constant="20" id="dvU-4B-d2j"/>
                         <constraint firstItem="Fad-66-iFj" firstAttribute="width" secondItem="jih-Bx-B7q" secondAttribute="width" id="ojR-HQ-Rkc"/>
+                        <constraint firstItem="5gh-F6-Kx4" firstAttribute="width" secondItem="jih-Bx-B7q" secondAttribute="width" id="ovv-be-gCT"/>
                         <constraint firstItem="cMV-rA-xh5" firstAttribute="centerX" secondItem="Fad-66-iFj" secondAttribute="centerX" id="vNf-cE-oz2"/>
                         <constraint firstAttribute="trailing" secondItem="aJ9-xq-UWU" secondAttribute="trailing" id="wTo-tZ-NnD"/>
                         <constraint firstAttribute="width" secondItem="Vmd-Yq-V8O" secondAttribute="height" multiplier="1:1" id="xnz-CC-fiT"/>
@@ -135,7 +144,7 @@
                 <constraint firstItem="Vmd-Yq-V8O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mxl-vR-axJ"/>
                 <constraint firstAttribute="trailing" secondItem="fRF-oL-m7X" secondAttribute="trailing" constant="12" id="vOJ-9Q-caE"/>
             </constraints>
-            <point key="canvasLocation" x="-851" y="-319"/>
+            <point key="canvasLocation" x="-903" y="-359"/>
         </view>
         <tapGestureRecognizer id="BBH-Ev-uc4">
             <connections>

@@ -93,6 +93,10 @@
 
 
 
+
+//商家介绍模板图片
+#define SHOP_INTRODUCE_IMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/imgtxtTempImage/"
+
 //type==0
 //#define SHOPCARD  @"http://101.201.100.191/VipCard/upload/MerchantImage/cardImage/"
 

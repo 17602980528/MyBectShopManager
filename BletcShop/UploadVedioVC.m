@@ -12,6 +12,9 @@
 #import "UIImageView+WebCache.h"
 #import "LZDProgressView.h"
 #import <AVFoundation/AVFoundation.h>
+#import "SRVideoPlayer.h"
+
+#import "PictureAndVeidoDetailVC.h"
 @interface UploadVedioVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 {
     LZDProgressView *progressView;
@@ -24,6 +27,8 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property(nonatomic,strong)SRVideoPlayer *videoPlayer;
+@property (weak, nonatomic) IBOutlet UIView *videoPlayerView;
 
 @end
 
@@ -43,7 +48,19 @@
 }
 
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    
+    if (![self.navigationController.viewControllers[2] isKindOfClass:[PictureAndVeidoDetailVC class]]) {
+        
+        NSLog(@"-----[_videoPlayer destroyPlayer]===%@=--%@",self,self.navigationController.viewControllers);
+        
+        [_videoPlayer destroyPlayer];
+        
+    }
 
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
@@ -623,10 +640,18 @@
                      NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,tempSelf.videoID];
                      
                      NSURL *url=[NSURL URLWithString:returnedurl];
-                     NSURLRequest *request=[NSURLRequest requestWithURL:url];
-                     [self.webView loadRequest:request];
+//                     NSURLRequest *request=[NSURLRequest requestWithURL:url];
+//                     [self.webView loadRequest:request];
+//
 
+                     self.videoPlayer = [SRVideoPlayer playerWithVideoURL:url playerView:_videoPlayerView playerSuperView:_videoPlayerView.superview andImgUrl:nil];
                      
+                     _videoPlayer.videoName = @"";
+                     
+                     
+                     _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
+                     [_videoPlayer pause];
+
                      
                  }else  if ([dic[@"state"] isEqualToString:@"false"]){
                      self.lab.text = @"审核未通过!";

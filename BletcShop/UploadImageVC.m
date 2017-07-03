@@ -36,11 +36,11 @@
     self.navigationItem.title = @"上传图片";
     NSLog(@"------%@",self.infoDic);
     if (!self.infoDic) {
-        CustomeAlertView *noticeView=[[CustomeAlertView alloc]init];
-        noticeView.delegate=self;
-        noticeView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64);
-        noticeView.backgroundColor=[UIColor whiteColor];
-        [self.view addSubview:noticeView];
+        
+        
+        [self getTheTemplate];
+        
+       
     }else{
         
         
@@ -349,18 +349,32 @@
 }
 
 
--(void)tishi:(NSString*)tishi{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.frame = CGRectMake(0, 64, 375, 667);
-    // Set the annular determinate mode to show task progress.
-    hud.mode = MBProgressHUDModeText;
+-(void)getTheTemplate{
     
-    hud.label.text = NSLocalizedString(tishi, @"HUD message title");
-    hud.label.font = [UIFont systemFontOfSize:13];
-    // Move to bottm center.
-    //    hud.offset = CGPointMake(0.f, );
-    hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-    [hud hideAnimated:YES afterDelay:4.f];
+    
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/imgtxt/getTemp",BASEURL];
+    
+    
+ 
+    
+    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        CustomeAlertView *noticeView=[[CustomeAlertView alloc]initWithArray:result];
+        noticeView.delegate=self;
+        noticeView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64);
+        noticeView.backgroundColor=[UIColor whiteColor];
+        [self.view addSubview:noticeView];
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
+}
+
+-(void)tishi:(NSString*)tishi{
+    
+    [self showHint:tishi];
+   
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

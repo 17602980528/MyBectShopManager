@@ -8,24 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomeAlertView : UIView
-@property (nonatomic,strong)UILabel *lab1;
-@property(nonatomic,strong)UILabel *lab2;
-@property(nonatomic,strong)UILabel *lab3;
-@property(nonatomic,strong) UILabel *lab4;
-
-@property(nonatomic,strong)UIView *view1;
-@property(nonatomic,strong)UIView *view2;
-@property(nonatomic,strong)UIView *view3;
-@property(nonatomic,strong)UIView *view4;
-
-@property(nonatomic,weak)id delegate;
-@property(nonatomic)NSInteger state;
--(id)init;
-@end
-
 @protocol CustomeAlertViewDelegate <NSObject>
 
 -(void)ClickBtnAtIndex:(NSInteger)index state:(NSInteger)state;
 
 @end
+
+@interface CustomeAlertView : UIView
+
+@property(nonatomic,weak)id delegate;
+@property(nonatomic)NSInteger state;
+
+-(instancetype)initWithArray:(NSArray*)array;
+
+@end
+

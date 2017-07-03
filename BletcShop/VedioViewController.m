@@ -10,15 +10,22 @@
 //#import "VCOPClient.h"
 #import "UIImageView+WebCache.h"
 #import "UploadVedioVC.h"
+#import "SRVideoPlayer.h"
+#import "PictureAndVeidoDetailVC.h"
+
 
 @interface VedioViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UILabel *lab;
+@property (weak, nonatomic) IBOutlet UIView *videoplayerView;
 
+@property(nonatomic,strong)SRVideoPlayer *videoPlayer;
 @end
 
 @implementation VedioViewController
+
+
 //- (VCOPClient *)VCOPClientInstance
 //{
 //    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -31,13 +38,33 @@
     self.view.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64-43);
 
     _webView.scrollView.bounces = NO;
+    [self ifExistsAFielID];
 
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [_videoPlayer pause];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    ;
+    
+    
+   
+    if (![self.navigationController.viewControllers[2] isKindOfClass:[PictureAndVeidoDetailVC class]]) {
+        
+        NSLog(@"-----[_videoPlayer destroyPlayer]===%@=--%@",self,self.navigationController.viewControllers);
+        
+        [_videoPlayer destroyPlayer];
+        
+    }
+}
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self ifExistsAFielID];
 }
 - (IBAction)tapClick:(id)sender {
     
@@ -70,8 +97,18 @@
                      NSString *returnedurl = [NSString stringWithFormat:@"%@%@",VEDIO_URL,videoID];
                      
                      NSURL *url=[NSURL URLWithString:returnedurl];
-                     NSURLRequest *request=[NSURLRequest requestWithURL:url];
-                     [self.webView loadRequest:request];
+//                     NSURLRequest *request=[NSURLRequest requestWithURL:url];
+//                     [self.webView loadRequest:request];
+                     
+                    
+                     self.videoPlayer = [SRVideoPlayer playerWithVideoURL:url playerView:_videoplayerView playerSuperView:_videoplayerView.superview andImgUrl:nil];
+                     
+                     _videoPlayer.videoName = @"";
+                     
+                     
+                     _videoPlayer.playerEndAction = SRVideoPlayerEndActionStop;
+                     [_videoPlayer pause];
+                    
                      NSLog(@"VEDIO_URL===%@",url);
 
                  }else  if ([dic[@"state"] isEqualToString:@"false"]){
