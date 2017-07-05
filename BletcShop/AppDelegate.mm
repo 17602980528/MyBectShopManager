@@ -16,7 +16,6 @@
 #import "Singleton.h"
 #import "CanPayCardViewController.h"
 #import "BaseNavigationController.h"
-#import "FirstViewController.h"
 #import "WelcomViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
