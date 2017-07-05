@@ -59,7 +59,7 @@
             UIImageView *image1=[[UIImageView alloc]initWithFrame:CGRectMake(100, 5, SCREENWIDTH-100-10, 70)];
             NSURL*url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOP_INTRODUCE_IMAGE,dic[@"image_url"]]];
             [image1 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon2"]];
-            
+            image1.backgroundColor=[UIColor whiteColor];
             [view addSubview:image1];
             [self addSubview:view];
 

@@ -145,9 +145,12 @@
     
    NSArray *cardTemp_A = [[NSUserDefaults standardUserDefaults]objectForKey:@"CARDIMGTEMP"];
     
+    
     for (NSDictionary *tim_dic in cardTemp_A) {
-        if ([tim_dic[@"color"] isEqualToString:dic[@"card_temp_color"]]) {
+        if ([tim_dic[@"color"] isEqualToString:[dic[@"card_temp_color"] noWhiteSpaceString]]) {
+            
             NSURL * nurl1=[[NSURL alloc] initWithString:[[SOURCECARD stringByAppendingString:tim_dic[@"image"]]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+            NSLog(@"-nurl1----%@",nurl1);
             
             [cell.cardImg sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@""] options:SDWebImageRetryFailed];
             cell.cardImg.backgroundColor = [UIColor whiteColor];

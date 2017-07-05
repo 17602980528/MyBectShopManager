@@ -104,6 +104,7 @@ static NSString *const headId = @"headId";
         NSDictionary *dic = _data_A[indexPath.row];
         
         UIImageView *rewardImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREENWIDTH/4-40, 10, 80, 80)];
+        rewardImageView.contentMode = UIViewContentModeScaleAspectFit;
         rewardImageView.userInteractionEnabled=YES;
         rewardImageView.image=[UIImage imageNamed:dic[@"image_url"]];
         [cell.contentView addSubview:rewardImageView];
@@ -156,6 +157,8 @@ static NSString *const headId = @"headId";
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
     
     CGFloat item_w = (SCREENWIDTH -3)/2;
     
