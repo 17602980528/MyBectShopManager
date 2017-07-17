@@ -448,7 +448,7 @@
         [defaults removeObjectForKey:@"remeber"];
         [defaults synchronize];
         
-        
+        self.IsLogin = NO;
         appdelegate.userInfoDic = nil;
         
         
@@ -503,7 +503,8 @@
         [defaults removeObjectForKey:@"remeberShop"];
         
         [defaults synchronize];
-        
+        self.shopIsLogin=NO;
+
         
         
         ShopLandController *shopvc = [[ShopLandController alloc]init];

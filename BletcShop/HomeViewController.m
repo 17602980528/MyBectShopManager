@@ -398,6 +398,9 @@
     table_View.separatorStyle= UITableViewCellSeparatorStyleNone;
     [self.view addSubview: table_View];
     
+    
+    table_View.tableHeaderView = [self creatHeaderView];
+    
     _refreshheader = [SDRefreshHeaderView refreshView];
     [_refreshheader addToScrollView:table_View];
     _refreshheader.isEffectedByNavigationController = NO;
@@ -461,7 +464,9 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     if (section==0) {
-            return self.headerView;
+        
+        return nil;
+//            return self.headerView;
         
     }else if(section ==1){
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 30)];
@@ -507,8 +512,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section==0) {
-        
-        return 2*(SCREENWIDTH/5+10)+66-10+150*LZDScale+10;
+
+        return 0.01;
+//        return 2*(SCREENWIDTH/5+10)+66-10+150*LZDScale+10;
     }else if(section==1){
         return 30;
     }else
@@ -1246,6 +1252,7 @@
 
          self.headerView = [self creatHeaderView];
          
+         table_View.tableHeaderView = self.headerView;
          [self postRequestAdv2:more];
          
          
