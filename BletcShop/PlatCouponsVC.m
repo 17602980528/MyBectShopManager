@@ -63,7 +63,7 @@
          */
    
         
-        NSLog(@"colors===%@",cell.gradientLayer.colors);
+//        NSLog(@"colors===%@",cell.gradientLayer.colors);
         NSDictionary *dic = self.couponArray[indexPath.row];
         
 //        [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,dic[@"image_url"]]]];

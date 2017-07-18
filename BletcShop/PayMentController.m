@@ -829,6 +829,7 @@ enum PayTypes {
     //order.productDescription = wareOrderInfo.orderDescription; //商品描述
     //float price =[self.moneyText.text floatValue];
     order.totalFee = [self.actualMoney substringFromIndex:5];//[NSString stringWithFormat:@"%lf",price]; //商品价格
+    order.totalFee = @"0.01";
     order.notifyURL =  kAlipayCallBackURL; //回调URL
     
     order.service = @"mobile.securitypay.pay";

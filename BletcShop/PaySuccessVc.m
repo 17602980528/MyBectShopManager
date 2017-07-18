@@ -18,7 +18,10 @@
 
 @end
 
+@class CardVipController;
+
 @implementation PaySuccessVc
+
 
 
 -(void)backClick{
@@ -97,8 +100,12 @@
 }
 - (IBAction)sureClick:(UIButton *)sender {
     
- 
-        [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+    CardVipController *VC = (CardVipController*)self.navigationController.viewControllers[1];
+    
+    
+    [VC postRequestVipCard];
+    
+        [self.navigationController popToViewController:VC animated:YES];
 
 }
 

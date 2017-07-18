@@ -9,4 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CardVipController : UIViewController
+
+-(void)postRequestVipCard;
+
 @end
