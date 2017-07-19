@@ -17,9 +17,23 @@
 @implementation NewUserAccessCodeVC
 - (IBAction)goNextBtnClick:(id)sender {
     
+#ifdef DEBUG
+    
+    
+    PUSH(NewUserSetPassVC)
+    vc.phoneNum=self.phoneNum;
+    
+#else
+    
+    [self validationCode];
+ 
+    
+#endif
+    
+    
+    
     
 
-      [self validationCode];
   
 }
 -(void)getProCode

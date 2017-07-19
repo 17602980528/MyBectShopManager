@@ -596,7 +596,15 @@
         if (result){
             NSMutableArray *mutable_A = [NSMutableArray arrayWithArray:result];
             
+            for (int i = 0; i <mutable_A.count; i ++) {
+                CGFloat vals = [mutable_A[i] floatValue];
+                
+                [mutable_A replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%.1f",vals]];
+                
+            }
+            
             NSArray *vule_A =  [mutable_A subarrayWithRange:NSMakeRange(0, [jiezhiDate intValue])];
+            
             
             [self initlineChartWithArray:vule_A andDateArray:nil];
             

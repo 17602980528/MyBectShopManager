@@ -70,12 +70,12 @@
 -(void)_initUI
 {
     
-    UIView *landView = [[UIView alloc]initWithFrame:CGRectMake(0, 95, SCREENHEIGHT, 150)];
+    UIView *landView = [[UIView alloc]initWithFrame:CGRectMake(0, (SCREENHEIGHT -300)/2-64, SCREENHEIGHT, 150)];
     [self.view addSubview:landView];
     
-    if (SCREENHEIGHT<667) {
-        landView.frame = CGRectMake(0, 95-30, SCREENHEIGHT, 150);
-    }
+//    if (SCREENHEIGHT<667) {
+//        landView.frame = CGRectMake(0, 95-30, SCREENHEIGHT, 150);
+//    }
     
     UserText = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, SCREENWIDTH-20, 50)];
     UserText.placeholder = @"手机号";
@@ -282,7 +282,7 @@
     
     
     UIButton *questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    questionBtn.frame = CGRectMake(0, SCREENHEIGHT-64-44, SCREENWIDTH, 30);
+    questionBtn.frame = CGRectMake(0, SCREENHEIGHT-64-30, SCREENWIDTH, 30);
     [questionBtn setTitle:@"登录遇到问题" forState:0];
     questionBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [questionBtn setTitleColor:RGB(51, 51, 51) forState:0];

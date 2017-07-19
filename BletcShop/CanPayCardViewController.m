@@ -184,7 +184,7 @@
         typeAndeLevel.text = [NSString stringWithFormat:@"%@",dic[@"card_type"]];
         if([dic[@"card_type"] isEqualToString:@"套餐卡"]){
             
-            yueLabel.text = [[NSString alloc]initWithFormat:@"套餐总价:%@",dic[@"option_sum"]];
+            yueLabel.text = @"";
             
         }
         if([dic[@"card_type"] isEqualToString:@"体验卡"]){

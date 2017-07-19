@@ -1252,7 +1252,7 @@
     [params setObject:self.card_dic[@"muid"] forKey:@"muid"];
     [params setObject:app.userInfoDic[@"uuid"] forKey:@"uuid"];
     [params setObject:_card_dic[@"code"] forKey:@"code"];
-    [params setObject:self.moneyString forKey:@"pay_sum"];
+    [params setObject:self.moneyString forKey:@"sum"];
 
     
     //实际支付价格.没有×100
@@ -1260,7 +1260,7 @@
     if (self.Type==Wares)
     {
         //使用商户自己的优惠券,sum为抵扣后的值,即实际支付的价格,其他不变
-        [params setObject:[self.contentLabel.text substringFromIndex:4] forKey:@"pay_sum"];
+        [params setObject:[self.contentLabel.text substringFromIndex:4] forKey:@"sum"];
 
         [params setObject:@"cp" forKey:@"pay_type"];
         [params setObject:self.coup_dic[@"coupon_id"] forKey:@"content"];
@@ -1278,8 +1278,9 @@
     {
         [params setObject:@"null" forKey:@"pay_type"];
     }
-    //实付金额×100
-       
+    //实付金额
+    [params setObject:[self.contentLabel.text substringFromIndex:4] forKey:@"pay_sum"];
+
     
     NSLog(@"params----%@==%@",params,url);
     
@@ -1579,8 +1580,8 @@
     NSLog(@"order.body====%@",order.body);
     
 
-    order.totalFee = [self.contentLabel.text substringFromIndex:4]; //商品价格
-//    order.totalFee = @"0.01"; //商品价格
+//    order.totalFee = [self.contentLabel.text substringFromIndex:4]; //商品价格
+    order.totalFee = @"0.01"; //商品价格
 
     if (_selectIndexPath.section==2) {
         order.notifyURL =  @"http://101.201.100.191/alipay/meal_card_buy.php"; //回调URL
@@ -1698,9 +1699,12 @@
     }
     
     NSLog(@"order.body====%@",order.body);
-    //order.productDescription = wareOrderInfo.orderDescription; //商品描述
-    //float price =[self.moneyText.text floatValue];
-    order.totalFee = [self.contentLabel.text substringFromIndex:4];//[NSString stringWithFormat:@"%lf",price]; //商品价格
+    
+//    order.totalFee = [self.contentLabel.text substringFromIndex:4];
+    
+    order.totalFee = @"0.01";
+    
+    
     order.notifyURL =  kAlipayCallBackURL; //回调URL
     
     order.service = @"mobile.securitypay.pay";

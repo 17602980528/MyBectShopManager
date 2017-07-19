@@ -35,9 +35,17 @@
 - (IBAction)nextClick:(UIButton *)sender {
     
    
+#ifdef DEBUG
     
+    
+    ShoerRegistThree *VC = [[ShoerRegistThree alloc]init];
+    VC.phone = self.phone;
+    VC.referralPhone = self.referralPhone;
+    [self presentViewController:VC animated:YES completion:nil];
+
+#else
     if ([self.array_code[0] isEqualToString:self.codeTf.text]) {
-    
+        
         ShoerRegistThree *VC = [[ShoerRegistThree alloc]init];
         VC.phone = self.phone;
         VC.referralPhone = self.referralPhone;
@@ -48,6 +56,12 @@
         
         [self showHint:@"请重新输入验证码!"];
     }
+
+    
+    
+#endif
+    
+  
     
    
 }
