@@ -649,7 +649,8 @@ enum OrderTypes{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYYMMddhhmmss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    
+    dateString = [dateString stringByReplacingOccurrencesOfString:@":" withString:@""];
+    dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     //    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
     //    NSInteger date = (long long int)time;

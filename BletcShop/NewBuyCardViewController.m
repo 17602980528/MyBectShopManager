@@ -1551,7 +1551,9 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYYMMddhhmmss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    
+    dateString = [dateString stringByReplacingOccurrencesOfString:@":" withString:@""];
+    dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@""];
+
     
     NSString *outtrade =[[NSString alloc]initWithFormat:@"%@%5d",dateString,x];
     NSLog(@"%@",outtrade);
@@ -1672,6 +1674,8 @@
     [dateFormatter setDateFormat:@"YYYYMMddhhmmss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     
+    dateString = [dateString stringByReplacingOccurrencesOfString:@":" withString:@""];
+    dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     //    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
     //    NSInteger date = (long long int)time;
@@ -1699,6 +1703,10 @@
     }
     
     NSLog(@"order.body====%@",order.body);
+  
+    /*order.body====null#u_4aca13ed4b#m_d7c116a9cc#exp_ad0472e3124#null#200
+    2017-07-19 15:16:10.049234+0800 BletcShop[3784:1211240] orderSpec = partner="2088221757537814"&seller_id="13488199837@163.com"&out_trade_no="2017071903161045352"&subject="办卡"&body="null#u_4aca13ed4b#m_d7c116a9cc#exp_ad0472e3124#null#200"&total_fee="0.01"&notify_url="http://101.201.100.191/alipay/experience_card_buy.php"&service="mobile.securitypay.pay"&payment_type="1"&_input_charset="utf-8"&it_b_pay="30m"&show_url="m.alipay.com"
+     */
     
 //    order.totalFee = [self.contentLabel.text substringFromIndex:4];
     

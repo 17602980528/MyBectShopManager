@@ -294,6 +294,10 @@
     [dateFormatter setDateFormat:@"YYYYMMddhhmmss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     
+    dateString = [dateString stringByReplacingOccurrencesOfString:@":" withString:@""];
+    dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    
     order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@",@"null",@"余额充值",appdelegate.userInfoDic[@"uuid"],moneyTextFD.text,appdelegate.userInfoDic[@"nickname"] ];
     
     NSString *outtrade =[[NSString alloc]initWithFormat:@"%@%5d",dateString,x];
