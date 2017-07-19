@@ -176,41 +176,41 @@
     
     
     
-    LZDButton *rjgmBtn = [LZDButton creatLZDButton];
-    rjgmBtn.frame = CGRectMake(15, backView.bottom+150, SCREENWIDTH-30, 44);
-    [rjgmBtn setTitle:@"申请提现" forState:UIControlStateNormal];
-    
-    rjgmBtn.backgroundColor = NavBackGroundColor;
-    rjgmBtn.layer.cornerRadius = 5;
-    rjgmBtn.clipsToBounds = YES;
-    [self.view addSubview:rjgmBtn];
-    rjgmBtn.block = ^(LZDButton*btn){
-        
-        AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-        
-        NSString *bankAccount = [NSString getTheNoNullStr:app.shopInfoDic[@"account"] andRepalceStr:@""];
-        NSString *bankName = [NSString getTheNoNullStr:app.shopInfoDic[@"name"] andRepalceStr:@""];
-        NSString *bankAddress = [NSString getTheNoNullStr:app.shopInfoDic[@"bank"] andRepalceStr:@""];
-        
-        NSLog(@"----%@--%@--%@==%@",bankAccount,bankName,bankAddress,data_dic);
-        if ( bankAccount.length!=19 || bankName.length==0 || bankAddress==0) {
-            
-            [self showTiShi:@"银行卡信息不完整，请填写" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
-        }else{
-            
-            GetMoneyVC *VC = [[GetMoneyVC alloc]init];
-            VC.sum_string= data_dic[@"remain"];
-            VC.block = ^(){
-                [self postRequestMoney];
-            };
-            
-            [self.navigationController pushViewController:VC animated:YES];
-        }
-        
-        
-        
-        
-    };
+//    LZDButton *rjgmBtn = [LZDButton creatLZDButton];
+//    rjgmBtn.frame = CGRectMake(15, backView.bottom+150, SCREENWIDTH-30, 44);
+//    [rjgmBtn setTitle:@"申请提现" forState:UIControlStateNormal];
+//    
+//    rjgmBtn.backgroundColor = NavBackGroundColor;
+//    rjgmBtn.layer.cornerRadius = 5;
+//    rjgmBtn.clipsToBounds = YES;
+//    [self.view addSubview:rjgmBtn];
+//    rjgmBtn.block = ^(LZDButton*btn){
+//        
+//        AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+//        
+//        NSString *bankAccount = [NSString getTheNoNullStr:app.shopInfoDic[@"account"] andRepalceStr:@""];
+//        NSString *bankName = [NSString getTheNoNullStr:app.shopInfoDic[@"name"] andRepalceStr:@""];
+//        NSString *bankAddress = [NSString getTheNoNullStr:app.shopInfoDic[@"bank"] andRepalceStr:@""];
+//        
+//        NSLog(@"----%@--%@--%@==%@",bankAccount,bankName,bankAddress,data_dic);
+//        if ( bankAccount.length!=19 || bankName.length==0 || bankAddress==0) {
+//            
+//            [self showTiShi:@"银行卡信息不完整，请填写" LeftBtn_s:@"取消" RightBtn_s:@"修改"];
+//        }else{
+//            
+//            GetMoneyVC *VC = [[GetMoneyVC alloc]init];
+//            VC.sum_string= data_dic[@"remain"];
+//            VC.block = ^(){
+//                [self postRequestMoney];
+//            };
+//            
+//            [self.navigationController pushViewController:VC animated:YES];
+//        }
+//        
+//        
+//        
+//        
+//    };
     
     
     
