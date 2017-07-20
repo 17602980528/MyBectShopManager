@@ -296,7 +296,7 @@
                
 
                            }else{
-                [self postReceiveConponRequest:dic];
+                [self postReceiveConponRequest:indexPath.row];
             }
     }else{
         LandingController *landVc = [[LandingController alloc]init];
@@ -354,8 +354,11 @@
     
     
 }
--(void)postReceiveConponRequest:(NSDictionary *)dic{
+-(void)postReceiveConponRequest:(NSInteger )index{
     NSString *url =[[NSString alloc]initWithFormat:@"%@MerchantType/coupon/receive",BASEURL];
+    
+    NSDictionary *dic = self.dataArray[index];
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     
@@ -367,29 +370,34 @@
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"%@",result);
         if ([result[@"result_code"] integerValue]==1) {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"领取成功", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-            [hud hideAnimated:YES afterDelay:1.f];
-            [self postGetCouponRequest];
-        }else if([result[@"result_code"] integerValue]==1062){
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"限领1份", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-            [hud hideAnimated:YES afterDelay:1.f];
-            [self postGetCouponRequest];
-        }else if([result[@"result_code"] integerValue]==0){
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"已被领取完了!", @"HUD message title");
-            hud.label.font = [UIFont systemFontOfSize:13];
-            [hud hideAnimated:YES afterDelay:1.f];
-        }
+            [self showHint:@"领取成功"];
+
             
+            
+            NSMutableDictionary *muta_dic = [NSMutableDictionary dictionaryWithDictionary:dic];
+            [muta_dic setValue:@"true" forKey:@"received"];
+            
+            [self.dataArray replaceObjectAtIndex:index withObject:muta_dic];
+            
+            
+            [_tableView reloadData];
+            
+            
+            
+          
+
+        
+        }else if([result[@"result_code"] integerValue]==1062){
+            [self showHint:@"限领1份"];
+            
+            
+            
+        }else if([result[@"result_code"] integerValue]==0){
+            [self showHint:@"已被领取完了!"];
+            
+            
+            
+        }
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"%@", error);
