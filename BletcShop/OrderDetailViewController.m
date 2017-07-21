@@ -159,16 +159,32 @@
             
             if ([result[@"result_code"] integerValue]==1) {
                 message = @"您已兑换成功,商品准备发货!";
+            }else  if ([result[@"result_code"] integerValue]==1062){
+                
+                message = @"不能重复兑换!";
+                
             }else{
-                
                 message = @"兑换失败!";
-                
+ 
             }
             
-            UIAlertView *alt = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
             
             
-            [alt show];
+            UIAlertAction* sureAaction =[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }];
+            
+            [alertController addAction:sureAaction];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            
+            
+            
+            
             
         } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
             
