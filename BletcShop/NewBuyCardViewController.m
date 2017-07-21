@@ -1582,8 +1582,8 @@
     NSLog(@"order.body====%@",order.body);
     
 
-//    order.totalFee = [self.contentLabel.text substringFromIndex:4]; //商品价格
-    order.totalFee = @"0.01"; //商品价格
+    order.totalFee = [self.contentLabel.text substringFromIndex:4]; //商品价格
+//    order.totalFee = @"0.01"; //商品价格
 
     if (_selectIndexPath.section==2) {
         order.notifyURL =  @"http://101.201.100.191/alipay/meal_card_buy.php"; //回调URL
@@ -1708,9 +1708,9 @@
     2017-07-19 15:16:10.049234+0800 BletcShop[3784:1211240] orderSpec = partner="2088221757537814"&seller_id="13488199837@163.com"&out_trade_no="2017071903161045352"&subject="办卡"&body="null#u_4aca13ed4b#m_d7c116a9cc#exp_ad0472e3124#null#200"&total_fee="0.01"&notify_url="http://101.201.100.191/alipay/experience_card_buy.php"&service="mobile.securitypay.pay"&payment_type="1"&_input_charset="utf-8"&it_b_pay="30m"&show_url="m.alipay.com"
      */
     
-//    order.totalFee = [self.contentLabel.text substringFromIndex:4];
+    order.totalFee = [self.contentLabel.text substringFromIndex:4];
     
-    order.totalFee = @"0.01";
+//    order.totalFee = @"0.01";
     
     
     order.notifyURL =  kAlipayCallBackURL; //回调URL

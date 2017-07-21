@@ -128,6 +128,7 @@
     
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
+        NSLog(@"-----%@",result);
         if ([result[@"result_code"] intValue]==1) {
             
             
