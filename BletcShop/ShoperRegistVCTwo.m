@@ -23,6 +23,11 @@
 @end
 
 @implementation ShoperRegistVCTwo
+- (IBAction)showImageCode:(id)sender {
+    imageCodeBgView.hidden=NO;
+    [self AccessImageCodeReuqst];
+}
+
 -(NSArray *)array_code{
     if (!_array_code) {
         _array_code = [NSArray array];
@@ -129,7 +134,7 @@
 
 //重新发验证码
 - (IBAction)senderCodeClick:(UIButton *)sender {
-    
+   
 }
 
 

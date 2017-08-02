@@ -66,7 +66,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8b-Ji-eOZ">
-                    <rect key="frame" x="15" y="184" width="345" height="40"/>
+                    <rect key="frame" x="15" y="194" width="345" height="40"/>
                     <color key="backgroundColor" red="0.88627450980392153" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Q3u-hd-HqQ"/>
@@ -101,16 +101,31 @@
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eoe-Wr-waf">
+                    <rect key="frame" x="15" y="154" width="100" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="WaD-PD-2Yy"/>
+                        <constraint firstAttribute="width" constant="100" id="zvi-GQ-1YH"/>
+                    </constraints>
+                    <state key="normal" title="重新获取">
+                        <color key="titleColor" red="0.95294117649999999" green="0.28627450980000002" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="showImageCode:" destination="-1" eventType="touchUpInside" id="kKO-o1-s6w"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="O8b-Ji-eOZ" firstAttribute="top" secondItem="jsr-RW-WJS" secondAttribute="bottom" constant="30" id="G8f-fo-Ole"/>
+                <constraint firstItem="O8b-Ji-eOZ" firstAttribute="top" secondItem="jsr-RW-WJS" secondAttribute="bottom" constant="40" id="G8f-fo-Ole"/>
+                <constraint firstItem="Eoe-Wr-waf" firstAttribute="top" secondItem="jsr-RW-WJS" secondAttribute="bottom" id="IkI-kb-7Tu"/>
                 <constraint firstItem="jsr-RW-WJS" firstAttribute="top" secondItem="wAh-1I-L1w" secondAttribute="bottom" constant="20" id="L1v-Qr-aEn"/>
                 <constraint firstItem="5xr-QT-ktV" firstAttribute="height" secondItem="jsr-RW-WJS" secondAttribute="height" id="NuL-lR-dvn"/>
                 <constraint firstAttribute="trailing" secondItem="jsr-RW-WJS" secondAttribute="trailing" constant="15" id="OX0-iI-8iy"/>
                 <constraint firstAttribute="trailing" secondItem="O8b-Ji-eOZ" secondAttribute="trailing" constant="15" id="See-Ni-Oxm"/>
                 <constraint firstItem="wAh-1I-L1w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="VLu-C8-lo9"/>
                 <constraint firstAttribute="trailing" secondItem="4Ph-Px-LRo" secondAttribute="trailing" id="ZE5-OV-dyb"/>
+                <constraint firstItem="Eoe-Wr-waf" firstAttribute="leading" secondItem="jsr-RW-WJS" secondAttribute="leading" id="bma-Nj-wZd"/>
                 <constraint firstItem="wAh-1I-L1w" firstAttribute="top" secondItem="4Ph-Px-LRo" secondAttribute="bottom" constant="10" id="cOw-s6-NOC"/>
                 <constraint firstItem="5xr-QT-ktV" firstAttribute="top" secondItem="jsr-RW-WJS" secondAttribute="top" id="hUa-MB-deQ"/>
                 <constraint firstItem="5xr-QT-ktV" firstAttribute="trailing" secondItem="jsr-RW-WJS" secondAttribute="trailing" id="r45-lf-SLK"/>
