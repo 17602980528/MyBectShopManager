@@ -181,6 +181,7 @@
     [codeImageView addGestureRecognizer:tap];
     
     tf=[[UITextField alloc]initWithFrame:CGRectMake(13, codeImageView.bottom+25, alert.width-26, 50)];
+    tf.returnKeyType=UIReturnKeyDone;
     tf.placeholder=@"请输入字符";
     tf.delegate=self;
     tf.borderStyle=UITextBorderStyleRoundedRect;
