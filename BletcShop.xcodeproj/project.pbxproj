@@ -96,6 +96,7 @@
 		184C72091EC305000065EE65 /* ChangeLoginOrPayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184C72071EC305000065EE65 /* ChangeLoginOrPayVC.xib */; };
 		184C720E1EC310CA0065EE65 /* ChangePayPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C720D1EC310CA0065EE65 /* ChangePayPassVC.m */; };
 		184C72131EC31A770065EE65 /* ChangePayPassLastVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C72121EC31A770065EE65 /* ChangePayPassLastVC.m */; };
+		184CB0AF1F31831000180927 /* 字符占位.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CB0AE1F31831000180927 /* 字符占位.png */; };
 		18518D571E7945A000067D95 /* s_money_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 18518D541E7945A000067D95 /* s_money_n.png */; };
 		18518D581E7945A000067D95 /* s_money_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18518D551E7945A000067D95 /* s_money_n@2x.png */; };
 		18518D591E7945A000067D95 /* s_money_n@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18518D561E7945A000067D95 /* s_money_n@3x.png */; };
@@ -1399,6 +1400,7 @@
 		184C720D1EC310CA0065EE65 /* ChangePayPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPassVC.m; sourceTree = "<group>"; };
 		184C72111EC31A770065EE65 /* ChangePayPassLastVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPassLastVC.h; sourceTree = "<group>"; };
 		184C72121EC31A770065EE65 /* ChangePayPassLastVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPassLastVC.m; sourceTree = "<group>"; };
+		184CB0AE1F31831000180927 /* 字符占位.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "字符占位.png"; sourceTree = "<group>"; };
 		18518D541E7945A000067D95 /* s_money_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s_money_n.png; sourceTree = "<group>"; };
 		18518D551E7945A000067D95 /* s_money_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s_money_n@2x.png"; sourceTree = "<group>"; };
 		18518D561E7945A000067D95 /* s_money_n@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s_money_n@3x.png"; sourceTree = "<group>"; };
@@ -3278,6 +3280,7 @@
 				189757461E9B16A400AB1D00 /* WebViewJavascriptBridge.h */,
 				189757471E9B16A400AB1D00 /* WebViewJavascriptBridge.js.txt */,
 				189757481E9B16A400AB1D00 /* WebViewJavascriptBridge.m */,
+				184CB0AE1F31831000180927 /* 字符占位.png */,
 				1894115F1D816CE600314E11 /* 密码 */,
 				1CDA9E091C5A116200DFE518 /* 用户端 */,
 				180C3D3D1E514C0900BC9177 /* New Player */,
@@ -7695,6 +7698,7 @@
 				D93C1A241EE9588C006DA624 /* ShoerRegistThree.xib in Resources */,
 				D95BAE5D1D542FD500ED0CDC /* award_19.png in Resources */,
 				D9ED52051D2A467700267729 /* grey_red.png in Resources */,
+				184CB0AF1F31831000180927 /* 字符占位.png in Resources */,
 				D9EC40BB1EE6846A004BEDB8 /* GeneralCardSeriseListVC.xib in Resources */,
 				D949EC351CE1C4A40023B6D6 /* area.plist in Resources */,
 				18F27EF41D640E84002DD03A /* 头像-12.png in Resources */,

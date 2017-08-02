@@ -55,7 +55,8 @@
 
 //头像
 #define HEADIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/headImage/"
-
+//图文码
+#define CODEIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/verifyCode/"
 //一级广告位图片
 #define ADVERTIMAGE @"http://101.201.100.191/cnconsum/Public/Uploads/advertImage/"
 
