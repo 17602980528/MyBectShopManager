@@ -80,6 +80,7 @@
 		182FAAA61D502FAD0018F872 /* custom3.png in Resources */ = {isa = PBXBuildFile; fileRef = 182FAAA51D502FAD0018F872 /* custom3.png */; };
 		18302A2A1DAC8AE200E6EF8C /* ShopRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */; };
 		18302A2D1DAC8B0E00E6EF8C /* CanPayCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18302A2C1DAC8B0E00E6EF8C /* CanPayCardViewController.m */; };
+		1834EC961F32D2AB00578A2A /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834EC951F32D2AB00578A2A /* Base64.m */; };
 		183577411EC40AFF00F321F1 /* CheckOldPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 183577401EC40AFF00F321F1 /* CheckOldPassVC.m */; };
 		183577451EC430AE00F321F1 /* RealChooseChangePayPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 183577431EC430AE00F321F1 /* RealChooseChangePayPassVC.m */; };
 		183577461EC430AE00F321F1 /* RealChooseChangePayPassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183577441EC430AE00F321F1 /* RealChooseChangePayPassVC.xib */; };
@@ -1376,6 +1377,8 @@
 		18302A291DAC8AE200E6EF8C /* ShopRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopRegisterController.m; sourceTree = "<group>"; };
 		18302A2B1DAC8B0E00E6EF8C /* CanPayCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanPayCardViewController.h; sourceTree = "<group>"; };
 		18302A2C1DAC8B0E00E6EF8C /* CanPayCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanPayCardViewController.m; sourceTree = "<group>"; };
+		1834EC941F32D2AB00578A2A /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		1834EC951F32D2AB00578A2A /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		1835773F1EC40AFF00F321F1 /* CheckOldPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOldPassVC.h; sourceTree = "<group>"; };
 		183577401EC40AFF00F321F1 /* CheckOldPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOldPassVC.m; sourceTree = "<group>"; };
 		183577421EC430AE00F321F1 /* RealChooseChangePayPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealChooseChangePayPassVC.h; sourceTree = "<group>"; };
@@ -3265,6 +3268,8 @@
 		0793867E1C55B5CA0021B385 /* BletcShop */ = {
 			isa = PBXGroup;
 			children = (
+				1834EC941F32D2AB00578A2A /* Base64.h */,
+				1834EC951F32D2AB00578A2A /* Base64.m */,
 				189ED03D1E8CD50900A762C7 /* BletcShop.entitlements */,
 				D969815A1ED57CFD00A44142 /* imgS */,
 				079386821C55B5CA0021B385 /* AppDelegate.h */,
@@ -8372,6 +8377,7 @@
 				182EF56B1F00BDC400ECDD7D /* PublishPackageCardTableViewCell.m in Sources */,
 				D947E4841D7D710200F9FEE8 /* FMDatabaseAdditions.m in Sources */,
 				185ABD851D80227900BD8097 /* QYPlayBackView.m in Sources */,
+				1834EC961F32D2AB00578A2A /* Base64.m in Sources */,
 				D947E4751D7D4CB000F9FEE8 /* SDRefreshView.m in Sources */,
 				D96643741E0B821E0048EFDB /* BonusCashViewController.m in Sources */,
 				18F032111E5EE02700ACD261 /* HolidayActivertyVC.m in Sources */,

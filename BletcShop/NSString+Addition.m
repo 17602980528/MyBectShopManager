@@ -7,7 +7,7 @@
 //
 
 #import "NSString+Addition.h"
-
+#import "Base64.h"
 @implementation NSString (Addition)
 //获取一个没有空格的字符串
 - (NSString *)noWhiteSpaceString
@@ -251,6 +251,72 @@
                    NSStringDrawingUsesFontLeading attributes:dic context:nil];
     return rect.size.width;
 }
+- (NSString *)stringByReversed
+{
+    NSMutableString *s = [NSMutableString string];
+    for (NSUInteger i=self.length; i>0; i--) {
+        [s appendString:[self substringWithRange:NSMakeRange(i-1, 1)]];
+    }
+    return s;
+}
+//获取当前时间的时间戳
++(NSString*)getCurrentTimestamp{
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString*timeString = [NSString stringWithFormat:@"%0.f", a];//转为字符型
+    return timeString;
+}
++(NSString *)getSecretStringWithPhone:(NSString *)phone{
+    NSString *sss= @"123456789";
+    
+    NSString *time=[NSString getCurrentTimestamp];
+    NSString *sign=@"xyzabc";
+    NSLog(@"time====%@",time);
+    NSString *content=[NSString stringWithFormat:@"%@&%@",sign,time];
+    
+    NSString *phon = phone;
+    
+    
+    NSMutableString *muta_s = [NSMutableString stringWithString:content];
+    
+    for (int i =0; i <phon.length; i ++) {
+        
+        char rr = [phon characterAtIndex:i];
+        
+        NSString *str =  [NSString stringWithFormat:@"%c",rr];
+        
+        [muta_s insertString:str atIndex:i*2+1];
+        
+    }
+    
+    NSString *new_str=[muta_s stringByReversed];
+    
+    NSLog(@"解密代码===%@",new_str);
+    
+    char a[100];
+    
+    memcpy(a, [new_str cStringUsingEncoding:NSASCIIStringEncoding], 2*[new_str length]);
+    
+    NSLog(@"a====%s ",a);
+    
+    //char a[]= "524527812035210&0c9b2a6z7y1x";        /*要加密的密码*/
+    char b[]="cnconsum";     /*密钥*/
+    int k;
+    
+    /*加密代码*/
+    for(k=0;b[k]!='\0';k++)
+        a[k]=a[k]^b[k];
+    
+    printf("You Password encrypted: %s\n",a);
+    
+    sss = [NSString stringWithCString:a encoding:NSUTF8StringEncoding];
+    NSString *data_ =[sss base64EncodedString];
+    
+    NSLog(@"-----%@",data_);
+    
+    return data_;
+}
+
 @end
 
 

@@ -61,17 +61,31 @@
     
 }
 -(void)getCodeNumber{
-    NSString *url  = @"http://101.201.100.191/smsVertify/Demo/SendTemplateSMS.php";
+    NSString *url  = @"http://101.201.100.191/cnconsum/App/Extra/VerifyCode/sendSignMsg";
     
-    NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.phone.text forKey:@"phone"];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:[NSString getSecretStringWithPhone:self.phone.text] forKey:@"base_str"];
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"-result---%@",result);
-        [self TimeNumAction];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _array_code = result;
-            
-        });
+        if (result) {
+            if ([result[@"state"] isEqualToString:@"access"]) {
+                
+                [self TimeNumAction];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _array_code = result[@"sms_code"];
+                });
+            }else if ([result[@"state"] isEqualToString:@"sign_check_fail"]){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"验签失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alertView show];
+            }else if([result[@"state"] isEqualToString:@"time_out"]){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"时间超时" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alertView show];
+            }else if([result[@"state"] isEqualToString:@"num_invalidate"]){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"手机号格式错误" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alertView show];
+            }
+        }
+
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

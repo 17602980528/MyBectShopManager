@@ -242,20 +242,21 @@
 }
 
 -(void)assignImageCodeReuqst{
-    NSString *url  = @"http://101.201.100.191/cnconsum/App/Extra/VerifyCode/check";
+    NSString *url  = @"http://101.201.100.191/cnconsum/App/Extra/VerifyCode/checkV2";
     
-    NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.phone forKey:@"phone"];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:[NSString getSecretStringWithPhone:self.phone] forKey:@"base_str"];
     [paramer setObject:tf.text forKey:@"code"];
     NSLog(@"paramer============%@",paramer);
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         NSLog(@"result============%@",result);
         if (result) {
-            if ([result[@"result_code"] isEqualToString:@"true"]) {
+            if ([result[@"state"] isEqualToString:@"access"]) {
+                [self TimeNumAction];
                 imageCodeBgView.hidden=YES;
                 codeImageView.image=[UIImage imageNamed:@"字符占位"];
                 tf.text=@"";
                 [tf resignFirstResponder];
-                [self TimeNumAction];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _array_code = result[@"sms_code"];
                     NSLog(@"----%@",_array_code);
@@ -264,8 +265,7 @@
             }else{
                 [self AccessImageCodeReuqst];
             }
-        }
-        
+        }        
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
