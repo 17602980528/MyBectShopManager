@@ -84,8 +84,8 @@
     [tf addTarget:self  action:@selector(valueChanged:)  forControlEvents:UIControlEventAllEditingEvents];
     
     
-    UIWindow *window=[UIApplication sharedApplication].keyWindow;
-    [window addSubview:imageCodeBgView];
+//    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+    [self.view addSubview:imageCodeBgView];
     
     [self AccessImageCodeReuqst];
 
