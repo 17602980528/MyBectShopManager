@@ -12,7 +12,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *codeTF;
 @property (strong, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) IBOutlet UILabel *phone;
-@property(nonatomic,strong)NSArray *array_code;
+@property(nonatomic,copy)NSString *array_code;
 @end
 
 @implementation AccessCodeVC
@@ -20,8 +20,8 @@
     
     [self.codeTF resignFirstResponder];
        if (![self.codeTF.text isEqualToString:@""]) {
-           if (self.array_code&&self.array_code.count>0) {
-               if ([self.codeTF.text isEqualToString:self.array_code[0]]) {
+           if (self.array_code) {
+               if ([self.codeTF.text isEqualToString:self.array_code]) {
                    ChangePayPassVC *vc=[[ChangePayPassVC alloc]init];
                    [self.navigationController pushViewController:vc animated:YES];
                }else{
@@ -47,9 +47,9 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self getCodeNumber];
 }
--(NSArray *)array_code{
+-(NSString *)array_code{
     if (!_array_code) {
-        _array_code = [[NSArray alloc]init];
+        _array_code = [[NSString alloc]init];
     }
     return _array_code;
 }
@@ -72,7 +72,7 @@
                 [self TimeNumAction];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _array_code = result[@"sms_code"];
+                    self.array_code = result[@"sms_code"];
                 });
             }else if ([result[@"state"] isEqualToString:@"sign_check_fail"]){
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"验签失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
