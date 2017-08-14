@@ -28,12 +28,12 @@
     [self AccessImageCodeReuqst];
 }
 
-//-(NSArray *)array_code{
-//    if (!_array_code) {
-//        _array_code = [NSArray array];
-//    }
-//    return _array_code;
-//}
+-(NSString *)array_code{
+    if (!_array_code) {
+        _array_code = [[NSString alloc]init];
+    }
+    return _array_code;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -255,7 +255,7 @@
                 [tf resignFirstResponder];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.array_code = result[@"sms_code"];
+                    self.array_code = [NSString stringWithFormat:@"%@",result[@"sms_code"]];
                     NSLog(@"----%@",_array_code);
                     
                 });

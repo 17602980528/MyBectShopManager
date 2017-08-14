@@ -17,11 +17,17 @@
 }
 @property (strong, nonatomic) IBOutlet UITextField *proCodeTF;
 @property (strong, nonatomic) IBOutlet UIButton *getCodeBtn;
-@property(nonatomic,strong)NSArray *array_code;
+@property(nonatomic,copy)NSString *array_code;
 @end
 
 @implementation NewUserAccessCodeVC
 //
+-(NSString *)array_code{
+    if (!_array_code) {
+        _array_code = [[NSString alloc]init];
+    }
+    return _array_code;
+}
 - (IBAction)showImageCode:(id)sender {
     
     imageCodeBgView.hidden=NO;
@@ -44,27 +50,27 @@
 #endif
 
 }
--(void)getProCode
-{
-
-        [self TimeNumAction];
-        NSString *url  = @"http://101.201.100.191/smsVertify/Demo/SendTemplateSMS.php";
-        
-        NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.phoneNum forKey:@"phone"];
-        [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                _array_code = result;
-                NSLog(@"----%@",_array_code);
-                
-            });
-            
-        } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"获取验证码失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alertView show];
-            
-        }];
-}
+//-(void)getProCode
+//{
+//
+//        [self TimeNumAction];
+//        NSString *url  = @"http://101.201.100.191/smsVertify/Demo/SendTemplateSMS.php";
+//        
+//        NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.phoneNum forKey:@"phone"];
+//        [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                _array_code = result;
+//                NSLog(@"----%@",_array_code);
+//                
+//            });
+//            
+//        } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"获取验证码失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//            [alertView show];
+//            
+//        }];
+//}
 -(void)TimeNumAction
 {               __block int timeout = 59; //倒计时时间
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -102,7 +108,7 @@
     // 校验验证码
     NSLog(@"=%@==%@",_array_code,_proCodeTF.text);
     if (_proCodeTF.text&&_proCodeTF.text.length>0) {
-        if (_array_code[0] == _proCodeTF.text) {
+        if ([self.array_code isEqualToString:_proCodeTF.text] ) {
             NewUserSetPassVC *vc=[[NewUserSetPassVC alloc]init];
             vc.phoneNum=self.phoneNum;
             [self.navigationController pushViewController:vc animated:YES];
@@ -248,7 +254,7 @@
                 [tf resignFirstResponder];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _array_code = result[@"sms_code"];
+                    self.array_code = [NSString stringWithFormat:@"%@",result[@"sms_code"]];
                     NSLog(@"----%@",_array_code);
                     
                 });

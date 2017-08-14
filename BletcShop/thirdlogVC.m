@@ -582,7 +582,7 @@
                 if ([result[@"state"] isEqualToString:@"access"]) {
                     [self TimeNumAction];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        self.array_code = result[@"sms_code"];
+                        self.array_code = [NSString stringWithFormat:@"%@",result[@"sms_code"]];
                     });
                 }else if ([result[@"state"] isEqualToString:@"sign_check_fail"]){
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"验签失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
