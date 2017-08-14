@@ -17,7 +17,7 @@
     UITextField *tf;
 }
 
-@property(nonatomic,strong)NSArray *array_code;
+@property(nonatomic,copy)NSString *array_code;
 @property (weak, nonatomic) IBOutlet UIButton *senderBtn;
 
 @end
@@ -28,12 +28,12 @@
     [self AccessImageCodeReuqst];
 }
 
--(NSArray *)array_code{
-    if (!_array_code) {
-        _array_code = [NSArray array];
-    }
-    return _array_code;
-}
+//-(NSArray *)array_code{
+//    if (!_array_code) {
+//        _array_code = [NSArray array];
+//    }
+//    return _array_code;
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -101,31 +101,28 @@
 - (IBAction)nextClick:(UIButton *)sender {
     
    
-#ifdef DEBUG
+//#ifdef DEBUG
     
     
-    ShoerRegistThree *VC = [[ShoerRegistThree alloc]init];
-    VC.phone = self.phone;
-    VC.referralPhone = self.referralPhone;
-    [self presentViewController:VC animated:YES completion:nil];
+//    ShoerRegistThree *VC = [[ShoerRegistThree alloc]init];
+//    VC.phone = self.phone;
+//    VC.referralPhone = self.referralPhone;
+//    [self presentViewController:VC animated:YES completion:nil];
 
-#else
-    if ([self.array_code[0] isEqualToString:self.codeTf.text]) {
-        
+//#else
+    if ([[NSString getTheNoNullStr:self.array_code andRepalceStr:@""] isEqualToString:self.codeTf.text]) {
         ShoerRegistThree *VC = [[ShoerRegistThree alloc]init];
         VC.phone = self.phone;
         VC.referralPhone = self.referralPhone;
         [self presentViewController:VC animated:YES completion:nil];
         
     }else{
-        
-        
         [self showHint:@"请重新输入验证码!"];
     }
 
     
     
-#endif
+//#endif
     
   
     
@@ -138,29 +135,29 @@
 }
 
 
--(void)getCodeNumber{
-    NSString *url  = @"http://101.201.100.191/smsVertify/Demo/SendTemplateSMS.php";
-    
-    NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.phone forKey:@"phone"];
-    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        NSLog(@"-result---%@",result);
-        [self TimeNumAction];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _array_code = result;
-            
-        });
-        
-    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
-        
-    }];
-    
-    
-    
-    
-}
+//-(void)getCodeNumber{
+//    NSString *url  = @"http://101.201.100.191/smsVertify/Demo/SendTemplateSMS.php";
+//    
+//    NSMutableDictionary *paramer = [NSMutableDictionary dictionaryWithObject:self.phone forKey:@"phone"];
+//    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+//        NSLog(@"-result---%@",result);
+//        [self TimeNumAction];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.array_code = result;
+//            
+//        });
+//        
+//    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alertView show];
+//        
+//    }];
+//    
+//    
+//    
+//    
+//}
 
 
 -(void)TimeNumAction
@@ -258,7 +255,7 @@
                 [tf resignFirstResponder];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _array_code = result[@"sms_code"];
+                    self.array_code = result[@"sms_code"];
                     NSLog(@"----%@",_array_code);
                     
                 });

@@ -15,7 +15,7 @@
     UITextField *cardTF;
     UITextField *certifyTF;
 }
-@property(nonatomic,strong)NSArray *array_code;
+@property(nonatomic,copy)NSString *array_code;
 @end
 
 @implementation ChangePasswordViewController
@@ -106,7 +106,7 @@
                 if ([result[@"state"] isEqualToString:@"access"]) {
                     [self TimeNumAction];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        _array_code = result[@"sms_code"];
+                        self.array_code = result[@"sms_code"];
                     });
                 }else if ([result[@"state"] isEqualToString:@"sign_check_fail"]){
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"验签失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -181,8 +181,8 @@
     [self postRequest];
 
 #else
-  
-    if (![phoneTF.text isEqualToString:@""]&&![nameTF.text isEqualToString:@""]&&![certifyTF.text isEqualToString:@""]&&![cardTF.text isEqualToString:@""]&&phoneTF.text.length==11&&cardTF.text.length==18&&[_array_code[0] isEqualToString:certifyTF.text]) {
+    
+    if (![phoneTF.text isEqualToString:@""]&&![nameTF.text isEqualToString:@""]&&![certifyTF.text isEqualToString:@""]&&![cardTF.text isEqualToString:@""]&&phoneTF.text.length==11&&cardTF.text.length==18&&[self.array_code isEqualToString:certifyTF.text]) {
         [self postRequest];
     }else if (phoneTF.text.length!=11){
         UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码格式有误" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
@@ -190,7 +190,7 @@
     }else if (cardTF.text.length!=18){
         UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"身份证号码有误" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
         [alertView show];
-    }else if (![_array_code[0] isEqualToString:certifyTF.text]){
+    }else if (![self.array_code isEqualToString:certifyTF.text]){
         UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"验证码有误" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
         [alertView show];
     }else if ([nameTF.text isEqualToString:@""]){

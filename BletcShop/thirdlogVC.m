@@ -19,7 +19,7 @@
 @interface thirdlogVC ()<UITextFieldDelegate,UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CustomIOSAlertViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIAlertViewDelegate>
 
 @property(nonatomic,strong)UIButton *getCodeBtn;
-@property(nonatomic,strong)NSArray *array_code;
+@property(nonatomic,copy)NSString *array_code;
 @property (nonatomic,strong)UIView *demoView;
 @property(nonatomic,strong)UILabel *cityLabel1;
 @property (nonatomic,retain)UIToolbar *toolbarCancelDone;
@@ -27,9 +27,9 @@
 @end
 
 @implementation thirdlogVC
--(NSArray *)array_code{
+-(NSString *)array_code{
     if (!_array_code) {
-        _array_code = [[NSArray alloc]init];
+        _array_code = [[NSString alloc]init];
     }
     return _array_code;
 }
@@ -420,7 +420,7 @@
            
         }else
         {
-            if (_phoneCode.text.length==0 || _array_code[0] != _phoneCode.text ) {
+            if (_phoneCode.text.length==0 || [NSString getTheNoNullStr:self.array_code andRepalceStr:@""] != _phoneCode.text ) {
  
                 [self tishi:@"请输入验证码"];
 
@@ -582,7 +582,7 @@
                 if ([result[@"state"] isEqualToString:@"access"]) {
                     [self TimeNumAction];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        _array_code = result[@"sms_code"];
+                        self.array_code = result[@"sms_code"];
                     });
                 }else if ([result[@"state"] isEqualToString:@"sign_check_fail"]){
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"验签失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
