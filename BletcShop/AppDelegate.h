@@ -137,7 +137,7 @@
 @property(nonnull,retain)NSString *city;
 
 @property int paymentType;
-@property(nonatomic,strong)NSArray *  superAccoutArray;
+
 
 /**
  *  退出登录

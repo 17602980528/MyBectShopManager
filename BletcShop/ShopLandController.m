@@ -24,7 +24,7 @@
 @property(nonatomic,weak)UITextField *userText;
 @property(nonatomic,weak)UITextField *passText;
 @property(nonatomic,weak)UIButton *stateBtn;
-@property(nonatomic,strong)NSArray *array_test;//测试号码
+
 @end
 
 @implementation ShopLandController
@@ -58,8 +58,7 @@
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
     [self.view addGestureRecognizer:singleTap];
     
-    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    _array_test=app.superAccoutArray;
+   
     
     [self _initUI];
 }
@@ -694,12 +693,7 @@
 }
 
 -(BOOL)checkPhoneNumIfExistsInTestList{
-    for (int i=0; i<_array_test.count; i++) {
-        NSDictionary *dic=_array_test[i];
-        if ([self.userText.text isEqualToString:dic[@"phone"]]) {
-            return YES;
-        }
-    }
+   
     return NO;
 }
 

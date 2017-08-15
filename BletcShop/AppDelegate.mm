@@ -117,8 +117,8 @@
         NSLog(@"数据库存在");
     }
     //    [NSThread sleepForTimeInterval:5];
-    _superAccoutArray=[NSArray array];
-    [self superAccountTextListGet];
+
+    
     self.whoPay = 0;
     self.payMoney = 0.0;
     self.paymentType = 0;
@@ -2887,19 +2887,4 @@
     }
 }
 
--(void)superAccountTextListGet{
-    
-    
-    NSString *url = [NSString stringWithFormat:@"%@Extra/source/superAccount",BASEURL];
-    
-    [KKRequestDataService requestWithURL:url params:nil httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        NSLog(@"===--%@",result);
-        if (result) {
-            _superAccoutArray=result;
-        }
-    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
-    
-}
 @end

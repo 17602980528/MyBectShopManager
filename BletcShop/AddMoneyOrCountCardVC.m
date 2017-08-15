@@ -179,7 +179,13 @@
         }
         /*********************** 根据数据赋值 **********************/
 
-        
+       
+        if (indexPath.row==2) {
+            cell.textTF.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        }else{
+            cell.textTF.keyboardType = UIKeyboardTypeNumberPad;
+
+        }
        
         
         if (indexPath.row==0) {

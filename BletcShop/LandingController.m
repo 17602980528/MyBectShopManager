@@ -23,7 +23,7 @@
 @property(nonatomic,weak)UITextField *passText;
 @property(nonatomic,weak)UIButton *stateBtn;
 @property(nonatomic,strong)NSArray *array_code;
-@property(nonatomic,strong)NSArray *array_test;//测试号码
+
 @end
 
 @implementation LandingController
@@ -59,8 +59,7 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     
-    AppDelegate *app=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    _array_test=app.superAccoutArray;
+    
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
     [self.view addGestureRecognizer:singleTap];
@@ -443,12 +442,8 @@
     
 }
 -(BOOL)checkPhoneNumIfExistsInTestList{
-    for (int i=0; i<_array_test.count; i++) {
-        NSDictionary *dic=_array_test[i];
-        if ([self.userText.text isEqualToString:dic[@"phone"]]) {
-            return YES;
-        }
-    }
+   
+    
     return NO;
 }
 //手机号登录
