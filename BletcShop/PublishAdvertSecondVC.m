@@ -372,7 +372,13 @@
         NSLog(@"result===%@",result);
         if (result) {
             for (int i=0; i<[result count]; i++) {
-                NSString *title = result[i][@"title"];
+                NSString *title=@"";
+                if(model.advertIndex==2){
+                    title = result[i][@"theme"];
+                }else{
+                    title = result[i][@"title"];
+                }
+                
                 //NSString *newTitle=[NSString stringWithFormat:@"%@&%@",title,result[i][@"id"]];
                 [activatyKindsArr addObject:title];
                 [activatyIds addObject:result[i][@"id"]];
