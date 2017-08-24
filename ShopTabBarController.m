@@ -23,12 +23,13 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [self addchildVc];
     
     
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
 
-   // NSLog(@"tgtgtgtgtg%@",appdelegate.shopInfoDic);
+    NSLog(@"tgtgtgtgtg%@",self.childViewControllers);
     
     if ([appdelegate.shopInfoDic[@"privi"]  isEqualToString:@"shopAs"]) {
         self.selectedIndex = 2;
