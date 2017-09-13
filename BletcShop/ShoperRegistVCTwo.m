@@ -78,6 +78,7 @@
     tf.returnKeyType=UIReturnKeyDone;
     tf.placeholder=@"请输入字符";
     tf.delegate=self;
+    tf.keyboardType=UIKeyboardTypeAlphabet;
     tf.borderStyle=UITextBorderStyleRoundedRect;
     [alert addSubview:tf];
     
@@ -261,6 +262,7 @@
                 });
             }else{
                 [self AccessImageCodeReuqst];
+                [self showHint:@"验证码错误"];
             }
         }        
         
@@ -273,13 +275,16 @@
 
 -(void)valueChanged:(UITextField *)textFeild{
     NSLog(@"????????%@",textFeild.text);
-    if (textFeild.text.length==5) {
-        //http://101.201.100.191/cnconsum/App/Extra/VerifyCode/check
-        [self assignImageCodeReuqst];
-    }
+
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
+    if (textField.text.length==5) {
+        //http://101.201.100.191/cnconsum/App/Extra/VerifyCode/check
+        [self assignImageCodeReuqst];
+    }else{
+        [self showHint:@"验证码长度不对"];
+    }
     return YES;
 }
 
